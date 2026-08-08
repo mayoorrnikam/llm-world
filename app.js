@@ -794,9 +794,14 @@ const RECHECK_AFTER_MS = 6 * 60 * 60 * 1000;
 let lastCheck = Date.now();
 let refreshing = false;
 
+/** Whole calendar days between `iso` (a date-only stamp) and today, so a file
+ *  stamped yesterday reads "yesterday" rather than "2 days ago". */
 const daysSince = (iso) => {
   const then = Date.parse(`${iso}T00:00:00Z`);
-  return Number.isNaN(then) ? null : (Date.now() - then) / 86400000;
+  if (Number.isNaN(then)) return null;
+  const now = new Date();
+  const todayUTC = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  return Math.round((todayUTC - then) / 86400000);
 };
 
 /** "yesterday" / "3 days ago" — falls back to the raw date if unparseable. */
@@ -804,7 +809,7 @@ function relativeDay(iso) {
   const days = daysSince(iso);
   if (days === null) return iso;
   const rtf = new Intl.RelativeTimeFormat(undefined, { numeric: 'auto' });
-  const d = Math.round(days);
+  const d = days;
   if (d < 1) return 'today';
   if (d < 30) return rtf.format(-d, 'day');
   if (d < 365) return rtf.format(-Math.round(d / 30), 'month');
@@ -824,7 +829,7 @@ function renderStatus(note) {
 
   let text = `${state.releases.length} releases`;
   if (state.updated) text += ` · updated ${relativeDay(state.updated)}`;
-  if (stale) text += ' · may be out of date';
+  if (stale) text += ' · source may be stale';
   if (note) text += ` · ${note}`;
 
   els.dataStatus.textContent = text;
@@ -862,7 +867,10 @@ async function refreshData(silent = false) {
   const added = state.releases.filter((r) => !previous.has(r.id)).length;
   const delta = state.releases.length - before;
 
-  renderStatus(silent ? '' : added ? `${added} new` : 'up to date');
+  // "no changes" describes this fetch; "source may be stale" describes the
+  // file's own date. Both can be true, so keep them from reading as a
+  // contradiction ("may be out of date · up to date").
+  renderStatus(silent ? '' : added ? `${added} new` : 'no changes');
   if (!silent) {
     announce(added
       ? `${added} new release${added === 1 ? '' : 's'} loaded.`
