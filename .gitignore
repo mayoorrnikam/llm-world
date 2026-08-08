@@ -9,3 +9,8 @@ __pycache__/
 
 # Project briefs — working notes, not site content (repo root is served publicly)
 Build the definitive*.txt
+
+# Bulk export artifacts — generated only with --export, never committed
+api/
+llm-releases.csv
+.build-check/

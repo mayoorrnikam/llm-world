@@ -1097,14 +1097,13 @@ code, kbd {
   gap: 10px;
 }
 
-.modal-dot {
-  width: 10px;
-  height: 10px;
+.modal-mark {
+  display: grid;
+  place-items: center;
   flex: none;
-  margin-top: 6px;
-  border-radius: 50%;
-  background: var(--c);
+  margin-top: 2px;
 }
+.modal-mark .glyph { width: 22px; height: 22px; }
 
 .modal-heading { min-width: 0; margin-right: auto; }
 
@@ -1343,4 +1342,160 @@ code, kbd {
 @media print {
   .site-header, .filterbar, .cadence, .site-footer, .skip-link { display: none; }
   .card { break-inside: avoid; box-shadow: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Generated document pages (/models, /companies, /timeline)
+
+   Static, indexable, and readable with JavaScript off. They share the app's
+   tokens so the two never drift apart visually.
+   -------------------------------------------------------------------------- */
+
+.doc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 860px;
+  margin-inline: auto;
+  padding: 16px var(--pad);
+  border-bottom: 1px solid var(--line);
+}
+
+.doc-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 750;
+  letter-spacing: 0.2em;
+  color: var(--text);
+  text-decoration: none;
+}
+.doc-brand .brand-mark { width: 26px; height: 26px; }
+
+.doc-back { font-size: 12.5px; color: var(--accent); text-decoration: none; }
+.doc-back:hover { text-decoration: underline; }
+
+.doc-main {
+  max-width: 860px;
+  margin-inline: auto;
+  padding: 26px var(--pad) 60px;
+}
+
+.crumbs {
+  margin-bottom: 20px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.crumbs a { color: var(--text-dim); }
+
+.doc-hero {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.doc-mark { display: grid; place-items: center; flex: none; }
+.doc-mark .glyph { width: 34px; height: 34px; }
+.doc-mark.sm .glyph { width: 15px; height: 15px; }
+
+.doc-hero h1 {
+  margin: 0;
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.doc-sub {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.doc-note {
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-dim);
+  text-wrap: pretty;
+}
+
+.doc-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+
+.doc-main h2 {
+  margin: 32px 0 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.doc-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.doc-table th, .doc-table td {
+  padding: 9px 12px 9px 0;
+  text-align: left;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: top;
+}
+.doc-table th { width: 180px; font-weight: 600; color: var(--muted); }
+.doc-table td { color: var(--text); font-variant-numeric: tabular-nums; }
+
+.doc-prov { margin: 0 0 12px; font-size: 12.5px; color: var(--muted); }
+
+.doc-sources, .doc-list, .doc-lineage { margin: 0; padding: 0; list-style: none; }
+
+.doc-sources li, .doc-list li, .doc-lineage li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  font-size: 13.5px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.doc-sources li span, .doc-list li span, .doc-lineage li span {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.doc-list li span + span { margin-left: 14px; }
+.doc-lineage li[aria-current="true"] { color: var(--accent); }
+
+.doc-main a { color: var(--accent); text-underline-offset: 3px; }
+
+.doc-cta { margin: 28px 0 0; font-size: 13.5px; }
+
+.doc-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 13px;
+}
+
+.doc-foot {
+  max-width: 860px;
+  margin-inline: auto;
+  padding: 18px var(--pad) 40px;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.doc-foot p { margin: 0; }
+
+@media (max-width: 620px) {
+  .doc-table th { width: 130px; }
+  .doc-list li { flex-wrap: wrap; gap: 4px 10px; }
+  .doc-list li span { margin-left: 0; }
 }

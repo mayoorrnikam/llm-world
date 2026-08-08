@@ -45,6 +45,35 @@ A date corroborated only by news reporting is `partially_verified`, not verified
 Undisclosed numbers stay `null` and render as "Not disclosed". They are never
 estimated or inferred (§7).
 
+## Generated pages
+
+The single-page app can't provide indexable URLs, so `scripts/build.mjs`
+generates static, no-JavaScript-required pages from the same dataset:
+
+```
+/models/<id>/        70 pages — facts table, sources, family lineage, cadence
+/companies/<slug>/   16 pages — every release by that lab, median release gap
+/timeline/<year>/     5 pages — that year's releases by month
+/sitemap.xml         92 URLs
+```
+
+Each model page carries `schema.org/SoftwareApplication` JSON-LD and links
+back into the interactive timeline. Output is **committed** so GitHub Pages
+serves it with no build step in the deploy path; CI rebuilds into a temp
+directory and diffs, so the pages can't drift from `data/llm-releases.json`.
+
+```bash
+node scripts/build.mjs            # pages + sitemap
+node scripts/build.mjs --check    # build to .build-check/ and diff (CI)
+```
+
+### Bulk export is off
+
+`--export` writes `api/models.json`, `api/companies.json` and a CSV. It is
+**not enabled**, and nothing machine-readable beyond the site's own
+`data/llm-releases.json` is published. Turning it on is a deliberate call,
+not a build side effect.
+
 ## Validation
 
 ```bash

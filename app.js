@@ -105,7 +105,7 @@ let transitioning = false;
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
-  for (const id of ['search', 'search-clear', 'year-selector', 'ribbon', 'ribbon-axis',
+  for (const id of ['search', 'search-clear', 'year-selector', 'ribbon', 'ribbon-axis', 'modal-mark',
     'cadence-facts', 'legend', 'tagbar', 'reset-btn', 'lanes', 'empty-state', 'empty-sub',
     'empty-action', 'data-status', 'modal', 'modal-close', 'modal-title', 'modal-company',
     'modal-date', 'modal-family', 'modal-era', 'modal-cadence', 'modal-tags',
@@ -817,6 +817,7 @@ function openModal(r) {
   state.openId = r.id;
 
   els.modal.style.setProperty('--c', colorFor(r.company));
+  els.modalMark.replaceChildren(iconFor(r.company));
   els.modalTitle.textContent = r.model;
   els.modalCompany.textContent = r.company;
   els.modalDate.textContent = fullDate(r);

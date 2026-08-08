@@ -2,7 +2,7 @@ name: Validate data
 
 on:
   push:
-    paths: ['data/**', 'scripts/**', '.github/workflows/validate.yml']
+    paths: ["data/**", "scripts/**", "index.html", ".github/workflows/validate.yml"]
   pull_request:
     paths: ['data/**', 'scripts/**']
   # Weekly link rot check — sources decay even when the data doesn't change.
@@ -26,6 +26,17 @@ jobs:
       # Schema, dates, duplicate ids, provenance. Fails the build on any error.
       - name: Validate dataset
         run: node scripts/validate-data.mjs
+
+      # Generated pages are committed so Pages needs no build step. Rebuild
+      # into a temp dir and diff, so they can never drift from the dataset.
+      - name: Check generated pages are current
+        run: |
+          node scripts/build.mjs --check
+          for f in models companies timeline sitemap.xml robots.txt; do
+            diff -rq ".build-check/$f" "$f" || {
+              echo "::error::$f is stale — run 'node scripts/build.mjs' and commit"; exit 1; }
+          done
+          rm -rf .build-check
 
       # Link rot only reports warnings, so a flaky host can't fail a push.
       - name: Check source links
