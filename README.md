@@ -22,6 +22,38 @@ python3 -m http.server 8777
 Opened directly from disk the page still renders, falling back to a small
 inline sample and saying so in the footer.
 
+## Keeping the data current
+
+Updates are **manual by design** — there is no reliable public API for "notable
+LLM releases" (Hugging Face indexes repos, not releases, and the largest labs
+don't publish weights there at all), so a curated JSON beats a noisy feed.
+
+To add a release: append an object to `data/llm-releases.json`, bump `updated`
+to today, then click **Refresh** in the header (or press <kbd>R</kbd>). The page
+re-fetches and rebuilds in place — no reload — and reports what changed:
+
+```
+70 releases · updated yesterday          →  71 releases · updated today · 1 new
+```
+
+The site nudges you when it drifts. Past 10 days the footer turns amber and
+adds `source may be stale`, and a tab left open re-checks quietly when it
+regains focus (throttled to once every 6 hours).
+
+If you later want this automated, the two viable routes are a scheduled agent
+that researches releases and opens a PR, or a GitHub Action polling Hugging
+Face for a whitelist of official orgs — the latter is free but structurally
+blind to OpenAI, Anthropic and xAI.
+
+## Deploying
+
+The repo is a plain static site, so GitHub Pages serves it from the root with
+no build step. In **Settings → Pages**, set source to `main` / `/ (root)`.
+`.nojekyll` is present so Pages skips Jekyll processing entirely.
+
+All asset paths are relative, so the site works unchanged whether it's served
+from a domain root or a project subpath (`<user>.github.io/llm-world/`).
+
 ## Data contract
 
 ```jsonc
