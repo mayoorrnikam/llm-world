@@ -190,16 +190,23 @@
     <nav class="yearbar" aria-label="Timeline period">
       <div class="yearbar-inner">
         <div class="year-selector" id="year-selector" role="tablist" aria-label="Select year"></div>
-        <div class="spark" id="spark" hidden>
-          <span class="spark-label">per month</span>
-          <div class="spark-track" id="spark-track" role="img" aria-label="Releases per month"></div>
-        </div>
       </div>
     </nav>
   </header>
 
-  <section class="statbar" aria-label="Summary statistics">
-    <div class="statbar-inner" id="statbar"></div>
+  <!-- The thesis of the page: every release in the dataset, one column per
+       month, so the acceleration is the first thing you see. Doubles as a
+       year picker. Keyboard users get the same navigation from the year
+       tabs above, and every release from the cards below. -->
+  <section class="cadence" aria-labelledby="cadence-title">
+    <div class="cadence-inner">
+      <div class="cadence-head">
+        <h2 class="cadence-title" id="cadence-title">Release cadence</h2>
+        <p class="cadence-facts" id="cadence-facts"></p>
+      </div>
+      <div class="ribbon" id="ribbon" role="img"></div>
+      <div class="ribbon-axis" id="ribbon-axis"></div>
+    </div>
   </section>
 
   <section class="filterbar" aria-label="Filters">
@@ -256,6 +263,8 @@
 
       <div class="modal-tags" id="modal-tags"></div>
       <p class="modal-note" id="modal-note"></p>
+
+      <p class="modal-source" id="modal-source"></p>
 
       <footer class="modal-foot">
         <button type="button" class="ghost-btn" id="modal-prev">

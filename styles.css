@@ -33,8 +33,6 @@
   --warn: #9a6400;
 
   /* ambient wash */
-  --glow-1: rgba(47, 111, 224, 0.10);
-  --glow-2: rgba(0, 150, 130, 0.07);
   --grid-line: rgba(15, 23, 42, 0.035);
   --card-sheen: rgba(15, 23, 42, 0.02);
   --shadow-card: 0 10px 24px rgba(15, 23, 42, 0.10);
@@ -94,8 +92,6 @@
     --accent-line: rgba(106, 165, 255, 0.45);
     --warn: #f2c879;
 
-    --glow-1: rgba(56, 130, 246, 0.10);
-    --glow-2: rgba(0, 179, 155, 0.06);
     --grid-line: rgba(148, 163, 184, 0.032);
     --card-sheen: rgba(255, 255, 255, 0.028);
     --shadow-card: 0 10px 26px rgba(0, 0, 0, 0.45);
@@ -142,8 +138,6 @@
   --accent-line: rgba(106, 165, 255, 0.45);
   --warn: #f2c879;
 
-  --glow-1: rgba(56, 130, 246, 0.10);
-  --glow-2: rgba(0, 179, 155, 0.06);
   --grid-line: rgba(148, 163, 184, 0.032);
   --card-sheen: rgba(255, 255, 255, 0.028);
   --shadow-card: 0 10px 26px rgba(0, 0, 0, 0.45);
@@ -169,13 +163,6 @@
   --c-other:      #94a3b8;
 }
 
-/* animatable gradient angle for the brand mark */
-@property --mark-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 135deg;
-}
-
 * { box-sizing: border-box; }
 
 /* Components below set explicit `display`, which would otherwise beat the UA
@@ -199,7 +186,9 @@ body {
   overflow-wrap: break-word;
 }
 
-/* ambient texture: soft glow + faint blueprint grid */
+/* Chart paper, not atmosphere. The two ambient radial glows that used to sit
+   here were generic "AI product" wash; a plain ruled grid actually suits a
+   timeline, so the grid stays and the glows are gone. */
 body::before {
   content: "";
   position: fixed;
@@ -207,11 +196,9 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(1100px 480px at 50% -12%, var(--glow-1), transparent 62%),
-    radial-gradient(820px 420px at 88% 112%, var(--glow-2), transparent 60%),
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: auto, auto, 46px 46px, 46px 46px;
+  background-size: 46px 46px, 46px 46px;
 }
 
 ::selection { background: var(--accent-soft); }
@@ -311,21 +298,15 @@ code, kbd {
   border-radius: 9px;
   background:
     radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.4), transparent 42%),
-    linear-gradient(var(--mark-angle), #00b39b 0%, #2f6fe0 55%, #7c5ce0 100%);
-  box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 32%, transparent),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.18);
-  animation: markSpin 14s linear infinite;
-}
-
-@keyframes markSpin {
-  to { --mark-angle: 495deg; }
+    linear-gradient(135deg, #00b39b 0%, #2f6fe0 55%, #7c5ce0 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
 }
 
 .brand-text h1 {
   margin: 0;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 750;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.24em;
   line-height: 1.1;
 }
 
@@ -529,82 +510,125 @@ code, kbd {
   opacity: 0.65;
 }
 
-/* sparkline: releases per month — single series, magnitude over time,
-   so it takes ONE hue (sequential), never a categorical palette. */
-.spark {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-left: auto;
-}
-
-.spark-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.spark-track {
-  display: flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 26px;
-}
-
-.spark-bar {
-  width: 7px;
-  min-height: 2px;
-  border-radius: 2px 2px 1px 1px;
-  background: color-mix(in srgb, var(--accent) 32%, transparent);
-  transition: background 0.18s var(--ease), height 0.3s var(--ease);
-}
-.spark-bar[data-hot="true"] { background: var(--accent); }
-.spark-bar[data-zero="true"] { background: var(--line); }
-
 /* --------------------------------------------------------------------------
-   Stat tiles — headline numbers, no chart needed
+   Cadence ribbon — the page's thesis.
+
+   One column per month across the entire dataset, stacked by release. The
+   read is the SHAPE: a sparse 2022 giving way to a crowded 2026. Height
+   carries the signal; company hue is texture the cards already decode.
    -------------------------------------------------------------------------- */
 
-.statbar-inner {
+.cadence-inner {
   max-width: var(--shell);
   margin-inline: auto;
-  padding: 16px var(--pad) 4px;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  padding: 22px var(--pad) 6px;
 }
 
-.stat {
-  padding: 11px 14px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+.cadence-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
-.stat-label {
+.cadence-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.cadence-facts {
   margin: 0;
   font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
 
-.stat-value {
-  margin: 5px 0 0;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  color: var(--text);
+.ribbon {
+  --unit: 7px;              /* one release */
+  --unit-gap: 2px;          /* surface gap between stacked units */
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  align-items: end;
+  height: calc((var(--unit) + var(--unit-gap)) * var(--peak, 4) + 4px);
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--line);
 }
 
-.stat-sub {
-  margin: 3px 0 0;
-  font-size: 11.5px;
-  color: var(--text-dim);
+.ribbon-col {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--unit-gap);
+  height: 100%;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: background 0.15s var(--ease);
+}
+
+.ribbon-col:hover { background: var(--accent-soft); }
+.ribbon-col[data-current="true"] { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+
+.ribbon-seg {
+  width: min(11px, 74%);
+  height: var(--unit);
+  flex: none;
+  border-radius: 1.5px;
+  background: var(--c);
+  transition: opacity 0.18s var(--ease);
+}
+.ribbon-seg[data-dim="true"] { opacity: 0.16; }
+
+.ribbon-axis {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 1px;
+  margin-top: 7px;
+}
+
+.ribbon-yr {
+  min-width: 0;
+  padding-right: 8px;
+  border-left: 1px solid var(--line-soft);
+  padding-left: 8px;
+}
+.ribbon-yr[data-current="true"] { border-left-color: var(--accent-line); }
+
+.ribbon-yr-num {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.ribbon-yr[data-current="true"] .ribbon-yr-num { color: var(--accent); }
+
+/* The era name says what that year was actually about — structure that
+   encodes the content rather than decorating it. */
+.ribbon-yr-era {
+  display: block;
+  margin-top: 1px;
+  font-size: 10.5px;
+  line-height: 1.25;
+  color: var(--muted);
+  opacity: 0.72;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* --------------------------------------------------------------------------
@@ -907,9 +931,12 @@ code, kbd {
 /* Keep the mark readable when the row is pressed or hovered. */
 .chip[aria-pressed="true"] .glyph { color: var(--c); }
 
+/* Model names are the proper nouns of this subject — given weight and tight
+   tracking so they read as names, not list items. */
 .card-name {
   font-size: 13.5px;
-  font-weight: 680;
+  font-weight: 700;
+  letter-spacing: -0.012em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -931,12 +958,16 @@ code, kbd {
   margin-top: 3px;
 }
 
+/* Dates and counts are data — mono and tabular so columns line up. */
 .card-date {
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
+
+.lane-count, .chip-count, .year-btn, .data-status { font-variant-numeric: tabular-nums; }
 
 .card mark,
 .modal-note mark {
@@ -1130,11 +1161,26 @@ code, kbd {
   text-wrap: pretty;
 }
 
+.modal-source {
+  margin: 14px 0 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+
+.modal-source a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.modal-source a:hover { text-decoration-color: currentColor; }
+
 .modal-foot {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 20px;
+  margin-top: 18px;
   padding-top: 14px;
   border-top: 1px solid var(--line-soft);
 }
@@ -1199,7 +1245,12 @@ code, kbd {
   .header-tools { width: 100%; }
   .search-field { flex: 1 1 160px; }
   .search-input { width: 100%; }
-  .spark { display: none; }
+
+  /* The ribbon stays — it is the point of the page — but the era captions
+     don't survive a narrow column, so only the years remain. */
+  .ribbon { height: 34px; }
+  .ribbon-yr-era { display: none; }
+  .ribbon-yr { padding-inline: 5px; }
 
   .lane { grid-template-columns: 1fr; }
 
@@ -1220,7 +1271,6 @@ code, kbd {
 }
 
 @media (max-width: 420px) {
-  .statbar-inner { grid-template-columns: repeat(2, 1fr); }
   .modal-foot { flex-wrap: wrap; }
   #modal-copy { order: 3; width: 100%; margin-inline: 0; }
 }
@@ -1246,11 +1296,11 @@ code, kbd {
   /* Hue is stripped here by design — the glyph shape still tells companies
      apart, which is the whole point of the second channel. */
   .glyph { color: CanvasText; }
-  .chip-dot, .spark-bar { forced-color-adjust: none; }
+  .chip-dot { forced-color-adjust: none; }
   .chip[aria-pressed="true"] { outline: 2px solid Highlight; }
 }
 
 @media print {
-  .site-header, .filterbar, .statbar, .site-footer, .skip-link { display: none; }
+  .site-header, .filterbar, .cadence, .site-footer, .skip-link { display: none; }
   .card { break-inside: avoid; box-shadow: none; }
 }

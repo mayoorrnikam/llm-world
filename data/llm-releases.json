@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-07",
+  "updated": "2026-08-08",
   "releases": [
     {
       "id": "palm",
@@ -8,8 +8,11 @@
       "year": 2022,
       "month": 4,
       "day": 4,
-      "tags": ["flagship"],
-      "note": "Google's 540-billion-parameter model that demonstrated breakthrough few-shot scaling."
+      "tags": [
+        "flagship"
+      ],
+      "note": "Google's 540-billion-parameter model that demonstrated breakthrough few-shot scaling.",
+      "source": "https://research.google/blog/pathways-language-model-palm-scaling-to-540-billion-parameters-for-breakthrough-performance/"
     },
     {
       "id": "opt-175b",
@@ -18,8 +21,11 @@
       "year": 2022,
       "month": 5,
       "day": 5,
-      "tags": ["open-weights"],
-      "note": "Meta's open 175-billion-parameter model released to democratize access to large language models."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "Meta's open 175-billion-parameter model released to democratize access to large language models.",
+      "source": "https://arxiv.org/abs/2205.01068"
     },
     {
       "id": "bloom",
@@ -28,8 +34,11 @@
       "year": 2022,
       "month": 7,
       "day": 12,
-      "tags": ["open-weights"],
-      "note": "The 176-billion-parameter multilingual open model built by over a thousand volunteer researchers."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "The 176-billion-parameter multilingual open model built by over a thousand volunteer researchers.",
+      "source": "https://huggingface.co/bigscience/bloom"
     },
     {
       "id": "glm-130b",
@@ -38,8 +47,11 @@
       "year": 2022,
       "month": 8,
       "day": 1,
-      "tags": ["open-weights"],
-      "note": "China's landmark open bilingual 130-billion-parameter model released in August 2022."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "China's landmark open bilingual 130-billion-parameter model released in August 2022.",
+      "source": "https://github.com/zai-org/GLM-130B"
     },
     {
       "id": "chatgpt",
@@ -48,8 +60,11 @@
       "year": 2022,
       "month": 11,
       "day": 30,
-      "tags": ["flagship"],
-      "note": "The public chatbot built on GPT-3.5 that brought large language models to the mainstream."
+      "tags": [
+        "flagship"
+      ],
+      "note": "The public chatbot built on GPT-3.5 that brought large language models to the mainstream.",
+      "source": "https://openai.com/index/chatgpt/"
     },
     {
       "id": "llama-1",
@@ -58,8 +73,11 @@
       "year": 2023,
       "month": 2,
       "day": 24,
-      "tags": ["open-weights"],
-      "note": "Open foundation models from 7B to 65B parameters that ignited the open-source LLM ecosystem."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "Open foundation models from 7B to 65B parameters that ignited the open-source LLM ecosystem.",
+      "source": "https://ai.meta.com/blog/large-language-model-llama-meta-ai/"
     },
     {
       "id": "claude-1",
@@ -68,8 +86,11 @@
       "year": 2023,
       "month": 3,
       "day": 14,
-      "tags": ["flagship"],
-      "note": "Anthropic's debut Claude model focused on helpfulness, harmlessness, and long-context dialogue."
+      "tags": [
+        "flagship"
+      ],
+      "note": "Anthropic's debut Claude model focused on helpfulness, harmlessness, and long-context dialogue.",
+      "source": "https://www.anthropic.com/news/introducing-claude"
     },
     {
       "id": "gpt-4",
@@ -78,8 +99,12 @@
       "year": 2023,
       "month": 3,
       "day": 14,
-      "tags": ["flagship", "multimodal"],
-      "note": "OpenAI's first multimodal flagship that set new standards across professional and academic benchmarks."
+      "tags": [
+        "flagship",
+        "multimodal"
+      ],
+      "note": "OpenAI's first multimodal flagship that set new standards across professional and academic benchmarks.",
+      "source": "https://openai.com/index/gpt-4-research/"
     },
     {
       "id": "bard",
@@ -88,8 +113,11 @@
       "year": 2023,
       "month": 3,
       "day": 21,
-      "tags": ["flagship"],
-      "note": "Google's ChatGPT rival chatbot that brought the company into the consumer AI race."
+      "tags": [
+        "flagship"
+      ],
+      "note": "Google's ChatGPT rival chatbot that brought the company into the consumer AI race.",
+      "source": "https://blog.google/technology/ai/try-bard/"
     },
     {
       "id": "palm-2",
@@ -98,8 +126,11 @@
       "year": 2023,
       "month": 5,
       "day": 10,
-      "tags": ["flagship"],
-      "note": "Google's next-generation model family that powered Bard and more than 25 other products."
+      "tags": [
+        "flagship"
+      ],
+      "note": "Google's next-generation model family that powered Bard and more than 25 other products.",
+      "source": "https://blog.google/technology/ai/google-palm-2-ai-large-language-model/"
     },
     {
       "id": "claude-2",
@@ -108,8 +139,11 @@
       "year": 2023,
       "month": 7,
       "day": 11,
-      "tags": ["flagship"],
-      "note": "Doubled Claude's context window to 100K tokens with stronger coding and writing abilities."
+      "tags": [
+        "flagship"
+      ],
+      "note": "Doubled Claude's context window to 100K tokens with stronger coding and writing abilities.",
+      "source": "https://www.anthropic.com/news/claude-2"
     },
     {
       "id": "llama-2",
@@ -118,8 +152,11 @@
       "year": 2023,
       "month": 7,
       "day": 18,
-      "tags": ["open-weights"],
-      "note": "The first major open model with commercial licensing, defining open-source AI for a year."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "The first major open model with commercial licensing, defining open-source AI for a year.",
+      "source": "https://ai.meta.com/blog/llama-2/"
     },
     {
       "id": "mistral-7b",
@@ -128,8 +165,12 @@
       "year": 2023,
       "month": 9,
       "day": 27,
-      "tags": ["open-weights", "small-efficient"],
-      "note": "A 7-billion-parameter model outperforming much larger models and putting European open AI on the map."
+      "tags": [
+        "open-weights",
+        "small-efficient"
+      ],
+      "note": "A 7-billion-parameter model outperforming much larger models and putting European open AI on the map.",
+      "source": "https://mistral.ai/news/announcing-mistral-7b/"
     },
     {
       "id": "grok-1",
@@ -138,8 +179,11 @@
       "year": 2023,
       "month": 11,
       "day": 4,
-      "tags": ["flagship"],
-      "note": "xAI's debut model with real-time knowledge of the X platform, released to Premium+ subscribers."
+      "tags": [
+        "flagship"
+      ],
+      "note": "xAI's debut model with real-time knowledge of the X platform, released to Premium+ subscribers.",
+      "source": "https://x.ai/news/grok"
     },
     {
       "id": "gemini-1",
@@ -148,8 +192,12 @@
       "year": 2023,
       "month": 12,
       "day": 6,
-      "tags": ["flagship", "multimodal"],
-      "note": "Google's first natively multimodal model family with Ultra, Pro, and Nano tiers."
+      "tags": [
+        "flagship",
+        "multimodal"
+      ],
+      "note": "Google's first natively multimodal model family with Ultra, Pro, and Nano tiers.",
+      "source": "https://blog.google/technology/ai/google-gemini-ai/"
     },
     {
       "id": "mixtral",
@@ -158,8 +206,11 @@
       "year": 2023,
       "month": 12,
       "day": 11,
-      "tags": ["open-weights"],
-      "note": "The first open mixture-of-experts model to rival much larger dense models."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "The first open mixture-of-experts model to rival much larger dense models.",
+      "source": "https://mistral.ai/news/mixtral-of-experts/"
     },
     {
       "id": "phi-2",
@@ -168,8 +219,11 @@
       "year": 2023,
       "month": 12,
       "day": 12,
-      "tags": ["small-efficient"],
-      "note": "A 2.7-billion-parameter model showing that small models can compete through high-quality curated data."
+      "tags": [
+        "small-efficient"
+      ],
+      "note": "A 2.7-billion-parameter model showing that small models can compete through high-quality curated data.",
+      "source": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/"
     },
     {
       "id": "glm-4",
@@ -178,8 +232,11 @@
       "year": 2024,
       "month": 1,
       "day": 16,
-      "tags": ["flagship"],
-      "note": "Zhipu's flagship series launched with GPT-4-class capabilities and a one-million-token context variant."
+      "tags": [
+        "flagship"
+      ],
+      "note": "Zhipu's flagship series launched with GPT-4-class capabilities and a one-million-token context variant.",
+      "source": "https://github.com/zai-org/GLM-4"
     },
     {
       "id": "gemini-1-5-pro",
@@ -188,8 +245,11 @@
       "year": 2024,
       "month": 2,
       "day": 15,
-      "tags": ["flagship"],
-      "note": "Google's long-context MoE flagship that extended the context window to one million tokens."
+      "tags": [
+        "flagship"
+      ],
+      "note": "Google's long-context MoE flagship that extended the context window to one million tokens.",
+      "source": "https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/"
     },
     {
       "id": "gemma",
@@ -198,8 +258,12 @@
       "year": 2024,
       "month": 2,
       "day": 21,
-      "tags": ["open-weights", "small-efficient"],
-      "note": "Google's first open-weight model family built from Gemini research for developers."
+      "tags": [
+        "open-weights",
+        "small-efficient"
+      ],
+      "note": "Google's first open-weight model family built from Gemini research for developers.",
+      "source": "https://blog.google/technology/developers/gemma-open-models/"
     },
     {
       "id": "claude-3-opus",
@@ -208,8 +272,12 @@
       "year": 2024,
       "month": 3,
       "day": 4,
-      "tags": ["flagship", "multimodal"],
-      "note": "Anthropic's first vision-capable flagship that topped GPT-4 across most benchmarks."
+      "tags": [
+        "flagship",
+        "multimodal"
+      ],
+      "note": "Anthropic's first vision-capable flagship that topped GPT-4 across most benchmarks.",
+      "source": "https://www.anthropic.com/news/claude-3-family"
     },
     {
       "id": "command-r",
@@ -218,18 +286,24 @@
       "year": 2024,
       "month": 3,
       "day": 11,
-      "tags": ["open-weights"],
-      "note": "Cohere's RAG-focused enterprise model family with 128K context and open weights."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "Cohere's RAG-focused enterprise model family with 128K context and open weights.",
+      "source": "https://cohere.com/blog/command-r"
     },
     {
       "id": "grok-1-open",
-      "model": "Grok-1",
+      "model": "Grok-1 (open weights)",
       "company": "xAI",
       "year": 2024,
       "month": 3,
       "day": 17,
-      "tags": ["open-weights"],
-      "note": "xAI open-sourced its 314-billion-parameter base model in a landmark open-weights release."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "xAI open-sourced its 314-billion-parameter base model in a landmark open-weights release.",
+      "source": "https://x.ai/news/grok-os"
     },
     {
       "id": "llama-3",
@@ -238,8 +312,11 @@
       "year": 2024,
       "month": 4,
       "day": 18,
-      "tags": ["open-weights"],
-      "note": "8B and 70B models with dramatically stronger reasoning that powered Meta's AI assistant."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "8B and 70B models with dramatically stronger reasoning that powered Meta's AI assistant.",
+      "source": "https://ai.meta.com/blog/meta-llama-3/"
     },
     {
       "id": "phi-3",
@@ -248,8 +325,11 @@
       "year": 2024,
       "month": 4,
       "day": 23,
-      "tags": ["small-efficient"],
-      "note": "A 3.8-billion-parameter small language model family that runs locally on phones."
+      "tags": [
+        "small-efficient"
+      ],
+      "note": "A 3.8-billion-parameter small language model family that runs locally on phones.",
+      "source": "https://azure.microsoft.com/en-us/blog/introducing-phi-3-redefining-whats-possible-with-slms/"
     },
     {
       "id": "deepseek-v2",
@@ -258,8 +338,11 @@
       "year": 2024,
       "month": 5,
       "day": 6,
-      "tags": ["open-weights"],
-      "note": "An efficient 236B MoE with 21B active parameters that made DeepSeek a global open-model force."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "An efficient 236B MoE with 21B active parameters that made DeepSeek a global open-model force.",
+      "source": "https://arxiv.org/abs/2405.04434"
     },
     {
       "id": "gpt-4o",
@@ -268,8 +351,12 @@
       "year": 2024,
       "month": 5,
       "day": 13,
-      "tags": ["flagship", "multimodal"],
-      "note": "OpenAI's natively multimodal real-time model with voice conversation, free in ChatGPT."
+      "tags": [
+        "flagship",
+        "multimodal"
+      ],
+      "note": "OpenAI's natively multimodal real-time model with voice conversation, free in ChatGPT.",
+      "source": "https://openai.com/index/hello-gpt-4o/"
     },
     {
       "id": "qwen2",
@@ -278,8 +365,11 @@
       "year": 2024,
       "month": 6,
       "day": 7,
-      "tags": ["open-weights"],
-      "note": "Alibaba's flagship open series spanning 0.5B to 72B parameters with strong multilingual ability."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "Alibaba's flagship open series spanning 0.5B to 72B parameters with strong multilingual ability.",
+      "source": "https://qwenlm.github.io/blog/qwen2/"
     },
     {
       "id": "claude-3-5-sonnet",
@@ -288,8 +378,11 @@
       "year": 2024,
       "month": 6,
       "day": 20,
-      "tags": ["flagship"],
-      "note": "The mid-tier model that became 2024's favorite for coding and agentic workflows."
+      "tags": [
+        "flagship"
+      ],
+      "note": "The mid-tier model that became 2024's favorite for coding and agentic workflows.",
+      "source": "https://www.anthropic.com/news/claude-3-5-sonnet"
     },
     {
       "id": "llama-3-1",
@@ -298,8 +391,11 @@
       "year": 2024,
       "month": 7,
       "day": 23,
-      "tags": ["open-weights"],
-      "note": "The 405B open flagship with 128K context, the first open model at frontier scale."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "The 405B open flagship with 128K context, the first open model at frontier scale.",
+      "source": "https://ai.meta.com/blog/meta-llama-3-1/"
     },
     {
       "id": "mistral-large-2",
@@ -308,8 +404,11 @@
       "year": 2024,
       "month": 7,
       "day": 24,
-      "tags": ["flagship"],
-      "note": "Mistral's 123-billion-parameter model rivaling closed frontier models in multilingual tasks."
+      "tags": [
+        "flagship"
+      ],
+      "note": "Mistral's 123-billion-parameter model rivaling closed frontier models in multilingual tasks.",
+      "source": "https://mistral.ai/news/mistral-large-2407/"
     },
     {
       "id": "jamba-1-5",
@@ -318,8 +417,11 @@
       "year": 2024,
       "month": 8,
       "day": 22,
-      "tags": ["open-weights"],
-      "note": "AI21's hybrid SSM-Transformer models with a 256K context window for long-document work."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "AI21's hybrid SSM-Transformer models with a 256K context window for long-document work.",
+      "source": "https://www.ai21.com/blog/announcing-jamba-model-family/"
     },
     {
       "id": "o1",
@@ -328,8 +430,11 @@
       "year": 2024,
       "month": 9,
       "day": 12,
-      "tags": ["reasoning"],
-      "note": "OpenAI's first reasoning model that thinks before answering, launching the reasoning-model era."
+      "tags": [
+        "reasoning"
+      ],
+      "note": "OpenAI's first reasoning model that thinks before answering, launching the reasoning-model era.",
+      "source": "https://openai.com/index/learning-to-reason-with-llms/"
     },
     {
       "id": "qwen2-5",
@@ -338,8 +443,11 @@
       "year": 2024,
       "month": 9,
       "day": 19,
-      "tags": ["open-weights"],
-      "note": "A massive family of open models that became a default choice across the open ecosystem."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "A massive family of open models that became a default choice across the open ecosystem.",
+      "source": "https://qwenlm.github.io/blog/qwen2.5/"
     },
     {
       "id": "llama-3-2",
@@ -348,8 +456,12 @@
       "year": 2024,
       "month": 9,
       "day": 25,
-      "tags": ["open-weights", "multimodal"],
-      "note": "The first vision-capable Llama plus 1B and 3B models for edge devices."
+      "tags": [
+        "open-weights",
+        "multimodal"
+      ],
+      "note": "The first vision-capable Llama plus 1B and 3B models for edge devices.",
+      "source": "https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/"
     },
     {
       "id": "nova",
@@ -358,8 +470,12 @@
       "year": 2024,
       "month": 12,
       "day": 3,
-      "tags": ["flagship", "multimodal"],
-      "note": "Amazon's new foundation model family spanning text, image, and video generation at re:Invent."
+      "tags": [
+        "flagship",
+        "multimodal"
+      ],
+      "note": "Amazon's new foundation model family spanning text, image, and video generation at re:Invent.",
+      "source": "https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws"
     },
     {
       "id": "gemini-2-flash",
@@ -368,8 +484,12 @@
       "year": 2024,
       "month": 12,
       "day": 11,
-      "tags": ["flagship", "agentic"],
-      "note": "Google's agentic-era model with native tool use and real-time multimodal understanding."
+      "tags": [
+        "flagship",
+        "agentic"
+      ],
+      "note": "Google's agentic-era model with native tool use and real-time multimodal understanding.",
+      "source": "https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/"
     },
     {
       "id": "deepseek-v3",
@@ -378,8 +498,11 @@
       "year": 2024,
       "month": 12,
       "day": 26,
-      "tags": ["open-weights"],
-      "note": "A 671B MoE open model whose near-frontier performance at minimal cost stunned the industry."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "A 671B MoE open model whose near-frontier performance at minimal cost stunned the industry.",
+      "source": "https://arxiv.org/abs/2412.19437"
     },
     {
       "id": "deepseek-r1",
@@ -388,8 +511,12 @@
       "year": 2025,
       "month": 1,
       "day": 20,
-      "tags": ["reasoning", "open-weights"],
-      "note": "The open reasoning model that matched o1-class performance and triggered a global tech selloff."
+      "tags": [
+        "reasoning",
+        "open-weights"
+      ],
+      "note": "The open reasoning model that matched o1-class performance and triggered a global tech selloff.",
+      "source": "https://arxiv.org/abs/2501.12948"
     },
     {
       "id": "mistral-small-3",
@@ -398,8 +525,12 @@
       "year": 2025,
       "month": 1,
       "day": 30,
-      "tags": ["open-weights", "small-efficient"],
-      "note": "A fast 24B Apache-licensed model designed for on-device and low-latency deployment."
+      "tags": [
+        "open-weights",
+        "small-efficient"
+      ],
+      "note": "A fast 24B Apache-licensed model designed for on-device and low-latency deployment.",
+      "source": "https://mistral.ai/news/mistral-small-3/"
     },
     {
       "id": "grok-3",
@@ -408,8 +539,12 @@
       "year": 2025,
       "month": 2,
       "day": 17,
-      "tags": ["flagship", "reasoning"],
-      "note": "Trained on 200K GPUs with DeepSearch integration, briefly topping public leaderboards."
+      "tags": [
+        "flagship",
+        "reasoning"
+      ],
+      "note": "Trained on 200K GPUs with DeepSearch integration, briefly topping public leaderboards.",
+      "source": "https://x.ai/news/grok-3"
     },
     {
       "id": "claude-3-7-sonnet",
@@ -418,8 +553,12 @@
       "year": 2025,
       "month": 2,
       "day": 24,
-      "tags": ["flagship", "reasoning"],
-      "note": "The first hybrid reasoning model with a user-controlled extended thinking mode."
+      "tags": [
+        "flagship",
+        "reasoning"
+      ],
+      "note": "The first hybrid reasoning model with a user-controlled extended thinking mode.",
+      "source": "https://www.anthropic.com/news/claude-3-7-sonnet"
     },
     {
       "id": "gpt-4-5",
@@ -428,8 +567,11 @@
       "year": 2025,
       "month": 2,
       "day": 27,
-      "tags": ["flagship"],
-      "note": "OpenAI's final GPT-4-generation model, strongest at natural conversation and world knowledge."
+      "tags": [
+        "flagship"
+      ],
+      "note": "OpenAI's final GPT-4-generation model, strongest at natural conversation and world knowledge.",
+      "source": "https://openai.com/index/introducing-gpt-4-5/"
     },
     {
       "id": "gemma-3",
@@ -438,8 +580,12 @@
       "year": 2025,
       "month": 3,
       "day": 12,
-      "tags": ["open-weights", "multimodal"],
-      "note": "Google's open family adding vision, 128K context, and support for 140 languages."
+      "tags": [
+        "open-weights",
+        "multimodal"
+      ],
+      "note": "Google's open family adding vision, 128K context, and support for 140 languages.",
+      "source": "https://blog.google/technology/developers/gemma-3/"
     },
     {
       "id": "command-a",
@@ -448,8 +594,11 @@
       "year": 2025,
       "month": 3,
       "day": 13,
-      "tags": ["flagship"],
-      "note": "Cohere's 111B dense flagship for enterprise RAG and agent workloads with 256K context."
+      "tags": [
+        "flagship"
+      ],
+      "note": "Cohere's 111B dense flagship for enterprise RAG and agent workloads with 256K context.",
+      "source": "https://cohere.com/blog/command-a"
     },
     {
       "id": "gemini-2-5-pro",
@@ -458,8 +607,12 @@
       "year": 2025,
       "month": 3,
       "day": 25,
-      "tags": ["flagship", "reasoning"],
-      "note": "The thinking model that led LMArena for months with a one-million-token context."
+      "tags": [
+        "flagship",
+        "reasoning"
+      ],
+      "note": "The thinking model that led LMArena for months with a one-million-token context.",
+      "source": "https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/"
     },
     {
       "id": "llama-4",
@@ -468,8 +621,12 @@
       "year": 2025,
       "month": 4,
       "day": 5,
-      "tags": ["open-weights", "multimodal"],
-      "note": "Meta's first mixture-of-experts family with Scout, Maverick, and Behemoth tiers."
+      "tags": [
+        "open-weights",
+        "multimodal"
+      ],
+      "note": "Meta's first mixture-of-experts family with Scout, Maverick, and Behemoth tiers.",
+      "source": "https://ai.meta.com/blog/llama-4-multimodal-intelligence/"
     },
     {
       "id": "qwen3",
@@ -478,28 +635,26 @@
       "year": 2025,
       "month": 4,
       "day": 29,
-      "tags": ["open-weights", "reasoning"],
-      "note": "Open MoE models with hybrid thinking modes that topped open-model benchmarks."
+      "tags": [
+        "open-weights",
+        "reasoning"
+      ],
+      "note": "Open MoE models with hybrid thinking modes that topped open-model benchmarks.",
+      "source": "https://qwenlm.github.io/blog/qwen3/"
     },
     {
       "id": "claude-4-opus",
-      "model": "Claude 4 Opus",
+      "model": "Claude Opus 4",
       "company": "Anthropic",
       "year": 2025,
       "month": 5,
-      "day": 21,
-      "tags": ["flagship", "agentic"],
-      "note": "Anthropic's agentic flagship with computer use and tight Claude Code integration."
-    },
-    {
-      "id": "glm-4-5",
-      "model": "GLM-4.5",
-      "company": "Zhipu AI",
-      "year": 2025,
-      "month": 7,
-      "day": 8,
-      "tags": ["open-weights"],
-      "note": "A 355B MoE open model that became the first Chinese open model to rival closed frontier models."
+      "day": 22,
+      "tags": [
+        "flagship",
+        "agentic"
+      ],
+      "note": "Anthropic's agentic flagship with computer use and tight Claude Code integration.",
+      "source": "https://www.anthropic.com/news/claude-4"
     },
     {
       "id": "kimi-k2",
@@ -508,8 +663,24 @@
       "year": 2025,
       "month": 7,
       "day": 11,
-      "tags": ["open-weights"],
-      "note": "A trillion-parameter open MoE with 32B active parameters excelling at code and agents."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "A trillion-parameter open MoE with 32B active parameters excelling at code and agents.",
+      "source": "https://moonshotai.github.io/Kimi-K2/"
+    },
+    {
+      "id": "glm-4-5",
+      "model": "GLM-4.5",
+      "company": "Zhipu AI",
+      "year": 2025,
+      "month": 7,
+      "day": 28,
+      "tags": [
+        "open-weights"
+      ],
+      "note": "A 355B MoE open model that became the first Chinese open model to rival closed frontier models.",
+      "source": "https://z.ai/blog/glm-4.5"
     },
     {
       "id": "gpt-oss",
@@ -518,8 +689,11 @@
       "year": 2025,
       "month": 8,
       "day": 5,
-      "tags": ["open-weights"],
-      "note": "OpenAI's first open-weight release since GPT-2, with 120B and 20B variants."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "OpenAI's first open-weight release since GPT-2, with 120B and 20B variants.",
+      "source": "https://openai.com/index/introducing-gpt-oss/"
     },
     {
       "id": "gpt-5",
@@ -528,8 +702,12 @@
       "year": 2025,
       "month": 8,
       "day": 7,
-      "tags": ["flagship", "multimodal"],
-      "note": "OpenAI's unified flagship with integrated reasoning across ChatGPT and the API."
+      "tags": [
+        "flagship",
+        "multimodal"
+      ],
+      "note": "OpenAI's unified flagship with integrated reasoning across ChatGPT and the API.",
+      "source": "https://openai.com/index/introducing-gpt-5/"
     },
     {
       "id": "deepseek-v3-1",
@@ -538,8 +716,11 @@
       "year": 2025,
       "month": 8,
       "day": 21,
-      "tags": ["open-weights"],
-      "note": "A hybrid think-and-non-think update doubling context to 128K for the agent era."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "A hybrid think-and-non-think update doubling context to 128K for the agent era.",
+      "source": "https://api-docs.deepseek.com/news/news250821"
     },
     {
       "id": "claude-sonnet-4-5",
@@ -548,8 +729,12 @@
       "year": 2025,
       "month": 9,
       "day": 29,
-      "tags": ["flagship", "agentic"],
-      "note": "The best coding model of its time, capable of running agents for 30-plus hours."
+      "tags": [
+        "flagship",
+        "agentic"
+      ],
+      "note": "The best coding model of its time, capable of running agents for 30-plus hours.",
+      "source": "https://www.anthropic.com/news/claude-sonnet-4-5"
     },
     {
       "id": "gemini-3-pro",
@@ -558,8 +743,12 @@
       "year": 2025,
       "month": 11,
       "day": 18,
-      "tags": ["flagship", "multimodal"],
-      "note": "Google's natively multimodal reasoning flagship with DeepThink and 1M context."
+      "tags": [
+        "flagship",
+        "multimodal"
+      ],
+      "note": "Google's natively multimodal reasoning flagship with DeepThink and 1M context.",
+      "source": "https://blog.google/products/gemini/gemini-3/"
     },
     {
       "id": "claude-opus-4-5",
@@ -568,8 +757,12 @@
       "year": 2025,
       "month": 11,
       "day": 24,
-      "tags": ["flagship", "agentic"],
-      "note": "Anthropic's most capable model for coding, agents, and computer use."
+      "tags": [
+        "flagship",
+        "agentic"
+      ],
+      "note": "Anthropic's most capable model for coding, agents, and computer use.",
+      "source": "https://www.anthropic.com/news/claude-opus-4-5"
     },
     {
       "id": "mistral-3",
@@ -577,9 +770,13 @@
       "company": "Mistral AI",
       "year": 2025,
       "month": 12,
-      "day": 3,
-      "tags": ["open-weights", "multimodal"],
-      "note": "An open multimodal family including Mistral Large 3 and Ministral variants under Apache 2.0."
+      "day": 2,
+      "tags": [
+        "open-weights",
+        "multimodal"
+      ],
+      "note": "An open multimodal family including Mistral Large 3 and Ministral variants under Apache 2.0.",
+      "source": "https://techcrunch.com/2025/12/02/mistral-closes-in-on-big-ai-rivals-with-mistral-3-open-weight-frontier-and-small-models/"
     },
     {
       "id": "qwen-3-5",
@@ -588,8 +785,12 @@
       "year": 2026,
       "month": 2,
       "day": 16,
-      "tags": ["flagship", "agentic"],
-      "note": "Alibaba's agentic-era flagship claimed to outperform GPT-5 with desktop and mobile operation."
+      "tags": [
+        "flagship",
+        "agentic"
+      ],
+      "note": "Alibaba's agentic-era flagship claimed to outperform GPT-5 with desktop and mobile operation.",
+      "source": "https://en.wikipedia.org/wiki/Qwen"
     },
     {
       "id": "gpt-5-4",
@@ -598,8 +799,11 @@
       "year": 2026,
       "month": 3,
       "day": 5,
-      "tags": ["flagship"],
-      "note": "OpenAI's frontier model with 1M context and state-of-the-art coding and computer use."
+      "tags": [
+        "flagship"
+      ],
+      "note": "OpenAI's frontier model with 1M context and state-of-the-art coding and computer use.",
+      "source": "https://techcrunch.com/2026/03/05/openai-launches-gpt-5-4-with-pro-and-thinking-versions/"
     },
     {
       "id": "mistral-small-4",
@@ -608,8 +812,12 @@
       "year": 2026,
       "month": 3,
       "day": 16,
-      "tags": ["open-weights", "multimodal"],
-      "note": "A 119B open mixture-of-experts model unifying chat, coding, and agentic tasks."
+      "tags": [
+        "open-weights",
+        "multimodal"
+      ],
+      "note": "A 119B open mixture-of-experts model unifying chat, coding, and agentic tasks.",
+      "source": "https://mistral.ai/news/mistral-small-4/"
     },
     {
       "id": "llama-5",
@@ -618,8 +826,12 @@
       "year": 2026,
       "month": 4,
       "day": 8,
-      "tags": ["flagship", "open-weights"],
-      "note": "Meta's first MoE flagship, marking a major architecture shift for the open family."
+      "tags": [
+        "flagship",
+        "open-weights"
+      ],
+      "note": "Meta's first MoE flagship, marking a major architecture shift for the open family.",
+      "source": "https://en.wikipedia.org/wiki/Llama_(language_model)"
     },
     {
       "id": "claude-opus-4-7",
@@ -628,8 +840,12 @@
       "year": 2026,
       "month": 4,
       "day": 16,
-      "tags": ["flagship", "agentic"],
-      "note": "Anthropic's most capable general model with 87.6% on SWE-bench Verified."
+      "tags": [
+        "flagship",
+        "agentic"
+      ],
+      "note": "Anthropic's most capable general model with 87.6% on SWE-bench Verified.",
+      "source": "https://www.anthropic.com/news/claude-opus-4-7"
     },
     {
       "id": "deepseek-v4-flash",
@@ -638,8 +854,11 @@
       "year": 2026,
       "month": 4,
       "day": 24,
-      "tags": ["open-weights"],
-      "note": "A 284B MoE with 13B active parameters and 1M context, MIT-licensed alongside V4-Pro."
+      "tags": [
+        "open-weights"
+      ],
+      "note": "A 284B MoE with 13B active parameters and 1M context, MIT-licensed alongside V4-Pro.",
+      "source": "https://api-docs.deepseek.com/news/news260424"
     },
     {
       "id": "gemini-3-5-flash",
@@ -648,8 +867,12 @@
       "year": 2026,
       "month": 5,
       "day": 19,
-      "tags": ["agentic", "small-efficient"],
-      "note": "Google's agent-optimized workhorse model launched at I/O with 1M-token context."
+      "tags": [
+        "agentic",
+        "small-efficient"
+      ],
+      "note": "Google's agent-optimized workhorse model launched at I/O with 1M-token context.",
+      "source": "https://en.wikipedia.org/wiki/Gemini_(language_model)"
     },
     {
       "id": "nemotron-3-ultra",
@@ -658,18 +881,25 @@
       "year": 2026,
       "month": 6,
       "day": 4,
-      "tags": ["open-weights", "agentic"],
-      "note": "A 550B open MoE hybrid Mamba-Transformer model built for long-running agents."
+      "tags": [
+        "open-weights",
+        "agentic"
+      ],
+      "note": "A 550B open MoE hybrid Mamba-Transformer model built for long-running agents.",
+      "source": "https://research.nvidia.com/labs/nemotron/Nemotron-3-Ultra/"
     },
     {
       "id": "glm-5-2",
       "model": "GLM-5.2",
       "company": "Zhipu AI",
       "year": 2026,
-      "month": 7,
-      "day": 8,
-      "tags": ["open-weights"],
-      "note": "A 744B MIT-licensed open model, the first open model to top closed frontiers on agentic coding."
+      "month": 6,
+      "day": 13,
+      "tags": [
+        "open-weights"
+      ],
+      "note": "A 744B MIT-licensed open model, the first open model to top closed frontiers on agentic coding.",
+      "source": "https://z.ai/blog/glm-5.2"
     },
     {
       "id": "grok-4-5",
@@ -678,8 +908,11 @@
       "year": 2026,
       "month": 7,
       "day": 8,
-      "tags": ["flagship"],
-      "note": "xAI's smartest model, its first release after going public and acquiring Cursor."
+      "tags": [
+        "flagship"
+      ],
+      "note": "xAI's smartest model, its first release after going public and acquiring Cursor.",
+      "source": "https://x.ai/news/grok-4-5"
     },
     {
       "id": "kimi-k3",
@@ -688,8 +921,12 @@
       "year": 2026,
       "month": 7,
       "day": 16,
-      "tags": ["open-weights", "multimodal"],
-      "note": "A 2.8-trillion-parameter open MoE, the largest open-weight model ever published."
+      "tags": [
+        "open-weights",
+        "multimodal"
+      ],
+      "note": "A 2.8-trillion-parameter open MoE, the largest open-weight model ever published.",
+      "source": "https://simonwillison.net/2026/Jul/16/kimi-k3/"
     },
     {
       "id": "gemini-3-6-flash",
@@ -698,8 +935,12 @@
       "year": 2026,
       "month": 7,
       "day": 21,
-      "tags": ["agentic", "small-efficient"],
-      "note": "Google's token-efficient workhorse update with better coding and multimodal performance."
+      "tags": [
+        "agentic",
+        "small-efficient"
+      ],
+      "note": "Google's token-efficient workhorse update with better coding and multimodal performance.",
+      "source": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/"
     }
   ]
 }

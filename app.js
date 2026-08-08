@@ -105,10 +105,11 @@ let transitioning = false;
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
-  for (const id of ['search', 'search-clear', 'year-selector', 'spark', 'spark-track',
-    'statbar', 'legend', 'tagbar', 'reset-btn', 'lanes', 'empty-state', 'empty-sub',
+  for (const id of ['search', 'search-clear', 'year-selector', 'ribbon', 'ribbon-axis',
+    'cadence-facts', 'legend', 'tagbar', 'reset-btn', 'lanes', 'empty-state', 'empty-sub',
     'empty-action', 'data-status', 'modal', 'modal-close', 'modal-title', 'modal-company',
-    'modal-date', 'modal-era', 'modal-tags', 'modal-note', 'modal-prev', 'modal-next',
+    'modal-date', 'modal-era', 'modal-tags', 'modal-note', 'modal-source',
+    'modal-prev', 'modal-next',
     'modal-copy', 'help', 'help-btn', 'help-close', 'theme-toggle', 'refresh-btn',
     'live']) {
     els[camel(id)] = el(id);
@@ -174,6 +175,9 @@ function normalize(json) {
       day: Number(r.day) || 0,
       tags: Array.isArray(r.tags) ? r.tags.map(String) : [],
       note: typeof r.note === 'string' ? r.note : '',
+      // Only http(s) sources are kept, so a bad data edit can't smuggle in a
+      // javascript: URL that would run when the link is clicked.
+      source: /^https?:\/\//i.test(r.source || '') ? r.source : '',
     }))
     .filter((r) => Number.isFinite(r.year) && r.month >= 1 && r.month <= 12)
     .sort((a, b) => a.year - b.year || a.month - b.month || a.day - b.day
@@ -291,8 +295,8 @@ function render() {
 
   const paint = () => {
     renderLanes();
-    renderStats();
-    renderSpark();
+    renderFacts();
+    renderCadence();
     renderYearCounts();
     syncChips();
   };
@@ -482,73 +486,88 @@ const isoDate = (r) => `${r.year}-${pad2(r.month)}${r.day ? `-${pad2(r.day)}` : 
 const shortDate = (r) => `${MONTHS[r.month - 1].slice(0, 3)}${r.day ? ` ${r.day}` : ''}`;
 const fullDate = (r) => `${MONTHS[r.month - 1]}${r.day ? ` ${r.day}` : ''}, ${r.year}`;
 
-/* ------------------------------------------------------- stats & sparkline */
+/* --------------------------------------------------- facts & cadence ribbon */
 
-function renderStats() {
+/** One quiet line of facts under the title. Deliberately not a row of
+ *  big-number tiles — the ribbon is the headline here, not a KPI strip. */
+function renderFacts() {
   const v = state.visible;
-  const companies = new Set(v.map((r) => r.company));
+  const labs = new Set(v.map((r) => r.company)).size;
   const open = v.filter((r) => r.tags.includes('open-weights')).length;
   const scope = state.year === 'all' ? 'all years' : String(state.year);
 
-  const busiest = (() => {
-    if (!v.length) return '—';
-    const counts = new Map();
-    for (const r of v) counts.set(r.month, (counts.get(r.month) || 0) + 1);
-    const [m, n] = [...counts].sort((a, b) => b[1] - a[1] || a[0] - b[0])[0];
-    return `${MONTHS[m - 1].slice(0, 3)} · ${n}`;
-  })();
-
-  const tiles = [
-    ['Releases', String(v.length), scope],
-    ['Companies', String(companies.size), companies.size === 1 ? [...companies][0] : 'shipping models'],
-    ['Open weights', v.length ? `${Math.round((open / v.length) * 100)}%` : '—', `${open} of ${v.length}`],
-    ['Busiest month', busiest, 'by release count'],
+  const parts = [
+    `${v.length} release${v.length === 1 ? '' : 's'}`,
+    `${labs} lab${labs === 1 ? '' : 's'}`,
   ];
+  if (v.length) parts.push(`${Math.round((open / v.length) * 100)}% open weights`);
+  parts.push(scope);
 
-  els.statbar.replaceChildren(...tiles.map(([label, value, sub]) => {
-    const box = document.createElement('div');
-    box.className = 'stat';
-
-    const l = document.createElement('p');
-    l.className = 'stat-label';
-    l.textContent = label;
-
-    const val = document.createElement('p');
-    val.className = 'stat-value';
-    val.textContent = value;
-
-    const s = document.createElement('p');
-    s.className = 'stat-sub';
-    s.textContent = sub;
-
-    box.append(l, val, s);
-    return box;
-  }));
-
+  els.cadenceFacts.textContent = parts.join('  ·  ');
   announce(`${v.length} release${v.length === 1 ? '' : 's'} shown for ${scope}.`);
 }
 
-/** Releases per month for the selected year — one series, so one hue. */
-function renderSpark() {
-  if (state.year === 'all') { els.spark.hidden = true; return; }
+/** The cadence ribbon: one column per month across the whole dataset, each
+ *  column stacked from that month's releases. Height is the signal (how many
+ *  shipped); the company hue is texture, already legible from the cards. */
+function renderCadence() {
+  const years = state.years;
+  const months = years.flatMap((y) => Array.from({ length: 12 }, (_, i) => ({ y, m: i + 1 })));
 
-  const counts = Array.from({ length: 12 }, (_, i) =>
-    state.visible.filter((r) => r.month === i + 1).length);
-  const max = Math.max(...counts, 1);
+  const byMonth = new Map();
+  for (const r of state.releases) {
+    const k = `${r.year}-${r.month}`;
+    (byMonth.get(k) ?? byMonth.set(k, []).get(k)).push(r);
+  }
+  const peak = Math.max(1, ...[...byMonth.values()].map((v) => v.length));
+  const matches = new Set(filteredAllYears().map((r) => r.id));
 
-  els.spark.hidden = false;
-  els.sparkTrack.setAttribute('aria-label',
-    `Releases per month in ${state.year}: ` +
-    counts.map((n, i) => `${MONTHS[i].slice(0, 3)} ${n}`).join(', '));
+  // A unit chart: one tile is always exactly one release, so the ribbon's
+  // height is set by the busiest month rather than the tiles being stretched
+  // to fill a fixed band (which made a quiet peak look chunky).
+  els.ribbon.style.setProperty('--peak', String(peak));
 
-  els.sparkTrack.replaceChildren(...counts.map((n, i) => {
-    const bar = document.createElement('span');
-    bar.className = 'spark-bar';
-    bar.style.height = `${Math.max(2, Math.round((n / max) * 26))}px`;
-    bar.title = `${MONTHS[i]}: ${n} release${n === 1 ? '' : 's'}`;
-    if (n === max && n > 0) bar.dataset.hot = 'true';
-    if (n === 0) bar.dataset.zero = 'true';
-    return bar;
+  els.ribbon.setAttribute('aria-label',
+    `${state.releases.length} releases from ${years[0]} to ${years.at(-1)}, by month. ` +
+    `Busiest month has ${peak}.`);
+
+  els.ribbon.replaceChildren(...months.map(({ y, m }) => {
+    const col = document.createElement('button');
+    col.type = 'button';
+    col.className = 'ribbon-col';
+    col.tabIndex = -1;               // year tabs already cover keyboard navigation
+    col.setAttribute('aria-hidden', 'true');
+    if (y === state.year) col.dataset.current = 'true';
+
+    const list = byMonth.get(`${y}-${m}`) ?? [];
+    col.title = `${MONTHS[m - 1]} ${y} — ${list.length} release${list.length === 1 ? '' : 's'}`;
+    col.addEventListener('click', () => selectYear(y));
+
+    for (const r of list) {
+      const seg = document.createElement('span');
+      seg.className = 'ribbon-seg';
+      seg.style.setProperty('--c', colorFor(r.company));
+      if (!matches.has(r.id)) seg.dataset.dim = 'true';
+      col.appendChild(seg);
+    }
+    return col;
+  }));
+
+  els.ribbonAxis.replaceChildren(...years.map((y) => {
+    const cell = document.createElement('div');
+    cell.className = 'ribbon-yr';
+    if (y === state.year) cell.dataset.current = 'true';
+
+    const label = document.createElement('span');
+    label.className = 'ribbon-yr-num';
+    label.textContent = String(y);
+
+    const era = document.createElement('span');
+    era.className = 'ribbon-yr-era';
+    era.textContent = eraFor(y);
+
+    cell.append(label, era);
+    return cell;
   }));
 }
 
@@ -752,6 +771,18 @@ function openModal(r) {
 
   els.modalNote.replaceChildren();
   highlight(els.modalNote, r.note || 'No note recorded for this release.');
+
+  els.modalSource.replaceChildren();
+  if (r.source) {
+    const a = document.createElement('a');
+    a.href = r.source;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.textContent = new URL(r.source).hostname.replace(/^www\./, '');
+    els.modalSource.append('Source: ', a);
+  } else {
+    els.modalSource.textContent = 'No source recorded.';
+  }
 
   const i = state.visible.findIndex((x) => x.id === r.id);
   els.modalPrev.disabled = i <= 0;

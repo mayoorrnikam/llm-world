@@ -22,6 +22,32 @@ python3 -m http.server 8777
 Opened directly from disk the page still renders, falling back to a small
 inline sample and saying so in the footer.
 
+## Provenance
+
+Every release carries a `source` URL, surfaced as a link in its dialog. All 70
+were machine-checked for reachability; the handful that 404'd were replaced,
+and `openai.com`, `x.ai` and `ai.meta.com` block automated fetches, so those
+were corroborated against search listings instead.
+
+The 2026 entries were checked against contemporaneous reporting, which turned
+up four date errors now fixed:
+
+| Release | Was | Corrected to |
+|---|---|---|
+| GLM-5.2 | 8 Jul 2026 | **13 Jun 2026** |
+| GLM-4.5 | 8 Jul 2025 | **28 Jul 2025** |
+| Claude Opus 4 (was "Claude 4 Opus") | 21 May 2025 | **22 May 2025** |
+| Mistral 3 | 3 Dec 2025 | **2 Dec 2025** |
+
+The March 2024 Grok entry is now "Grok-1 (open weights)" to distinguish it from
+the November 2023 announcement of the same model.
+
+**Known limits.** Two 2022 dates — OPT-175B (5 May) and GLM-130B (1 Aug) — are
+approximate; the paper, announcement and repo dates differ by a few days and no
+single one is clearly canonical. Dates for well-documented 2022–2025 releases
+were not each individually re-verified, though every one carries an official
+announcement link you can check.
+
 ## Keeping the data current
 
 Updates are **manual by design** — there is no reliable public API for "notable
@@ -77,6 +103,15 @@ dropped at load rather than rendered broken. Adding a release is a JSON edit —
 no code change. A company with no assigned hue falls back to a neutral swatch.
 
 ## Features
+
+**The cadence ribbon**
+- The page opens on the whole dataset: one column per month since 2022, one
+  tile per release. It's a unit chart, so a tile is always exactly one model —
+  the shape you see is the field accelerating, not a rescaled axis
+- Each year is captioned with what that year actually was (reasoning models,
+  agentic systems), so the structure carries content rather than decorating it
+- Click any month to jump to that year. Keyboard users get the same navigation
+  from the year tabs, and every release from the cards below
 
 **Navigation**
 - Year tabs, plus an **All** view that stacks every year and skips empty months
