@@ -108,7 +108,8 @@ async function init() {
   for (const id of ['search', 'search-clear', 'year-selector', 'ribbon', 'ribbon-axis',
     'cadence-facts', 'legend', 'tagbar', 'reset-btn', 'lanes', 'empty-state', 'empty-sub',
     'empty-action', 'data-status', 'modal', 'modal-close', 'modal-title', 'modal-company',
-    'modal-date', 'modal-era', 'modal-tags', 'modal-note', 'modal-source',
+    'modal-date', 'modal-family', 'modal-era', 'modal-cadence', 'modal-tags',
+    'modal-note', 'modal-source',
     'modal-prev', 'modal-next',
     'modal-copy', 'help', 'help-btn', 'help-close', 'theme-toggle', 'refresh-btn',
     'live']) {
@@ -175,9 +176,22 @@ function normalize(json) {
       day: Number(r.day) || 0,
       tags: Array.isArray(r.tags) ? r.tags.map(String) : [],
       note: typeof r.note === 'string' ? r.note : '',
-      // Only http(s) sources are kept, so a bad data edit can't smuggle in a
+      family: String(r.family || r.model).trim(),
+      kind: r.kind === 'product' || r.kind === 'milestone' ? r.kind : 'model',
+      access: { open_weights: Boolean(r.access?.open_weights), license: r.access?.license ?? null },
+      technical: {
+        context_window: Number.isFinite(r.technical?.context_window) ? r.technical.context_window : null,
+        parameter_count: Number.isFinite(r.technical?.parameter_count) ? r.technical.parameter_count : null,
+      },
+      provenance: {
+        status: r.provenance?.status || 'unverified',
+        confidence: Number(r.provenance?.confidence) || 0,
+      },
+      // Only http(s) sources survive, so a bad data edit can't smuggle in a
       // javascript: URL that would run when the link is clicked.
-      source: /^https?:\/\//i.test(r.source || '') ? r.source : '',
+      sources: (Array.isArray(r.sources) ? r.sources : [])
+        .filter((s) => /^https?:\/\//i.test(s?.url || ''))
+        .map((s) => ({ url: s.url, type: String(s.type || 'secondary') })),
     }))
     .filter((r) => Number.isFinite(r.year) && r.month >= 1 && r.month <= 12)
     .sort((a, b) => a.year - b.year || a.month - b.month || a.day - b.day
@@ -208,7 +222,7 @@ const colorFor = (company) => `var(${varFor(company)})`;
 function iconFor(company) {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('class', 'glyph');
-  svg.setAttribute('viewBox', '0 0 16 16');
+  svg.setAttribute('viewBox', '0 0 24 24');
   svg.setAttribute('aria-hidden', 'true');
   svg.setAttribute('focusable', 'false');
 
@@ -751,6 +765,52 @@ function cycleTheme() {
   applyTheme(order[(order.indexOf(now) + 1) % order.length]);
 }
 
+const SOURCE_LABEL = {
+  official_announcement: 'Official announcement',
+  paper: 'Research paper',
+  repository: 'Code repository',
+  model_card: 'Model card',
+  documentation: 'Official documentation',
+  secondary: 'Secondary reporting',
+};
+
+const PROV_LABEL = {
+  verified: 'verified',
+  partially_verified: 'partly verified',
+  unverified: 'unverified',
+  conflicting: 'conflicting',
+  estimated: 'approximate date',
+};
+
+/** Days between two releases, using day-1 when a release has no exact day. */
+const daysBetween = (a, b) =>
+  Math.round((Date.UTC(b.year, b.month - 1, b.day || 1)
+            - Date.UTC(a.year, a.month - 1, a.day || 1)) / 86400000);
+
+/** "97 days after Claude Sonnet 4.5" — cadence for the lab that shipped it.
+ *  Computed from the dataset rather than stored, so it can never go stale. */
+function renderCadenceLine(r) {
+  const prior = state.releases
+    .filter((x) => x.company === r.company && x.id !== r.id)
+    .filter((x) => daysBetween(x, r) > 0)
+    .at(-1);   // releases are date-sorted, so the last one is the closest
+
+  els.modalCadence.replaceChildren();
+  if (!prior) {
+    els.modalCadence.textContent = `First tracked release from ${r.company}.`;
+    return;
+  }
+  const gap = daysBetween(prior, r);
+  els.modalCadence.append(`${gap} day${gap === 1 ? '' : 's'} after `);
+
+  const link = document.createElement('button');
+  link.type = 'button';
+  link.className = 'cadence-link';
+  link.textContent = prior.model;
+  link.addEventListener('click', () => openModal(prior));
+  els.modalCadence.append(link);
+}
+
 /* ------------------------------------------------------------------ dialog */
 
 function openModal(r) {
@@ -772,14 +832,27 @@ function openModal(r) {
   els.modalNote.replaceChildren();
   highlight(els.modalNote, r.note || 'No note recorded for this release.');
 
+  els.modalFamily.textContent = r.family;
+  renderCadenceLine(r);
+
   els.modalSource.replaceChildren();
-  if (r.source) {
-    const a = document.createElement('a');
-    a.href = r.source;
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    a.textContent = new URL(r.source).hostname.replace(/^www\./, '');
-    els.modalSource.append('Source: ', a);
+  if (r.sources.length) {
+    els.modalSource.append(r.sources.length === 1 ? 'Source: ' : 'Sources: ');
+    r.sources.forEach((s, i) => {
+      if (i) els.modalSource.append(' · ');
+      const a = document.createElement('a');
+      a.href = s.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = new URL(s.url).hostname.replace(/^www\./, '');
+      a.title = SOURCE_LABEL[s.type] ?? s.type;
+      els.modalSource.append(a);
+    });
+    const badge = document.createElement('span');
+    badge.className = 'prov-badge';
+    badge.dataset.status = r.provenance.status;
+    badge.textContent = PROV_LABEL[r.provenance.status] ?? r.provenance.status;
+    els.modalSource.append(' ', badge);
   } else {
     els.modalSource.textContent = 'No source recorded.';
   }

@@ -1,0 +1,33 @@
+name: Validate data
+
+on:
+  push:
+    paths: ['data/**', 'scripts/**', '.github/workflows/validate.yml']
+  pull_request:
+    paths: ['data/**', 'scripts/**']
+  # Weekly link rot check — sources decay even when the data doesn't change.
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Schema, dates, duplicate ids, provenance. Fails the build on any error.
+      - name: Validate dataset
+        run: node scripts/validate-data.mjs
+
+      # Link rot only reports warnings, so a flaky host can't fail a push.
+      - name: Check source links
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: node scripts/validate-data.mjs --links

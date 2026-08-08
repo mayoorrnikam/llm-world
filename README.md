@@ -22,6 +22,45 @@ python3 -m http.server 8777
 Opened directly from disk the page still renders, falling back to a small
 inline sample and saying so in the footer.
 
+## Data model (schema 1.5)
+
+Each release carries, beyond the timeline basics:
+
+```jsonc
+{
+  "family": "Claude",            // the model line (§11) — Claude, GPT, Llama…
+  "kind": "model",               // "model" | "product" — ChatGPT is a product, GPT-4 is a model (§25)
+  "access":    { "open_weights": true, "license": null },
+  "technical": { "context_window": null, "parameter_count": null },  // null until researched, never guessed
+  "sources":   [{ "url": "…", "type": "official_announcement" }],
+  "provenance": { "status": "verified", "confidence": 90 }
+}
+```
+
+`status` is one of `verified` · `partially_verified` · `unverified` · `conflicting`
+· `estimated`, shown as a badge in each dialog. **`verified` requires a primary
+source** — an official announcement, paper, repo, model card or documentation.
+A date corroborated only by news reporting is `partially_verified`, not verified.
+
+Undisclosed numbers stay `null` and render as "Not disclosed". They are never
+estimated or inferred (§7).
+
+## Validation
+
+```bash
+node scripts/validate-data.mjs           # schema, dates, ids, provenance
+node scripts/validate-data.mjs --links   # also check every source URL resolves
+```
+
+This runs in CI on every push to `data/` or `scripts/`, and weekly on a schedule
+to catch link rot. It enforces: unique ids, real calendar dates, no future dates
+unless marked estimated, at least one source per release, `verified` implies a
+primary source, numeric fields numeric-or-null, and agreement between
+`access.open_weights` and the open-weights tag.
+
+It earns its place — its first run caught six releases marked `verified` that
+were backed only by secondary reporting.
+
 ## Provenance
 
 Every release carries a `source` URL, surfaced as a link in its dialog. All 70
@@ -167,13 +206,17 @@ CVD, `forced-colors` mode, and greyscale print. The company name is also
 always rendered next to the mark, so identity never rests on either channel
 alone. Glyphs are `aria-hidden`, being decorative.
 
-The glyphs are **simplified brand-derived marks drawn to read at ~13px, not
-official brand assets.** Some are close to the real thing (Microsoft's four
-squares, xAI's X, Meta's infinity, Moonshot's crescent); others are evocations
-where the real logo doesn't survive at glyph scale (DeepSeek's whale) or where
-the brand has no strongly iconic mark (AI21, Zhipu). Swapping in official
-artwork means replacing one `<g>` in the sprite — the id (`ic-<slug>`) is
-derived from the company's hue token, so nothing else changes.
+The marks are the labs' real logos, from
+[lobe-icons](https://github.com/lobehub/lobe-icons) (MIT) — an icon set built
+specifically for AI/LLM brands. They're monochrome and painted with
+`currentColor`, so each one picks up its company's hue and the two channels stay
+independent. Trademarks remain their owners'; using them to identify the
+companies whose releases are listed is nominative use.
+
+15 of our 16 labs are covered. BigScience has no mark in the set, so a neutral
+bloom stands in for BLOOM. (Simple Icons was the other candidate but is missing
+OpenAI, Microsoft and Amazon — brands that have asked to be removed from icon
+sets.)
 
 The palette itself was also measurably broken, and that was worth fixing
 independently:

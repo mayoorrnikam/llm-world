@@ -1145,6 +1145,46 @@ code, kbd {
   color: var(--text);
 }
 
+/* Release cadence for the lab — the page's theme, restated per model. */
+.modal-cadence {
+  margin: 12px 0 0;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-dim);
+}
+
+.cadence-link {
+  padding: 0;
+  font: inherit;
+  color: var(--accent);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  cursor: pointer;
+}
+.cadence-link:hover { border-bottom-color: currentColor; }
+
+.prov-badge {
+  display: inline-block;
+  margin-left: 2px;
+  padding: 1px 6px;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px solid var(--line-soft);
+}
+.prov-badge[data-status="verified"] {
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+  border-color: var(--accent-line);
+}
+.prov-badge[data-status="estimated"] { color: var(--warn); }
+
 .modal-tags {
   display: flex;
   flex-wrap: wrap;
