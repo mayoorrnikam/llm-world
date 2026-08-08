@@ -1,4 +1,7 @@
 .DS_Store
+
+# Local Claude Code settings — machine-specific, not shared
+.claude/settings.local.json
 *.log
 node_modules/
 .venv/
