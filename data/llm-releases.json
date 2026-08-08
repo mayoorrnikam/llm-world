@@ -1782,6 +1782,39 @@
       }
     },
     {
+      "id": "gpt-5-1",
+      "model": "GPT-5.1",
+      "company": "OpenAI",
+      "year": 2025,
+      "month": 11,
+      "day": 12,
+      "tags": [
+        "flagship",
+        "reasoning"
+      ],
+      "note": "A five-model refresh of the GPT-5 line, shipped in two waves in November 2025.",
+      "family": "GPT",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/GPT-5.1",
+          "type": "secondary"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
       "id": "gemini-3-pro",
       "model": "Gemini 3 Pro",
       "company": "Google DeepMind",
@@ -1881,6 +1914,104 @@
       }
     },
     {
+      "id": "gpt-5-2",
+      "model": "GPT-5.2",
+      "company": "OpenAI",
+      "year": 2025,
+      "month": 12,
+      "day": 11,
+      "tags": [
+        "flagship",
+        "reasoning"
+      ],
+      "note": "Instant, Thinking and Pro modes, plus a GPT-5.2-Codex variant for coding.",
+      "family": "GPT",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/GPT-5.2",
+          "type": "secondary"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
+      "id": "claude-opus-4-6",
+      "model": "Claude Opus 4.6",
+      "company": "Anthropic",
+      "year": 2026,
+      "month": 2,
+      "day": 5,
+      "tags": [
+        "flagship",
+        "agentic"
+      ],
+      "note": "The first Opus release of 2026 and the baseline Opus 4.7 was measured against.",
+      "family": "Claude",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://www.anthropic.com/news/claude-opus-4-6",
+          "type": "official_announcement"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
+      "id": "gpt-5-3-codex",
+      "model": "GPT-5.3-Codex",
+      "company": "OpenAI",
+      "year": 2026,
+      "month": 2,
+      "day": 5,
+      "tags": [
+        "agentic"
+      ],
+      "note": "A coding-specialised model able to search repositories, run terminal commands and debug, positioned against Claude Opus 4.6.",
+      "family": "GPT",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/GPT-5.3-Codex",
+          "type": "secondary"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
       "id": "qwen-3-5",
       "model": "Qwen 3.5",
       "company": "Alibaba Qwen",
@@ -1903,6 +2034,38 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
+      "id": "claude-sonnet-4-6",
+      "model": "Claude Sonnet 4.6",
+      "company": "Anthropic",
+      "year": 2026,
+      "month": 2,
+      "day": 17,
+      "tags": [
+        "agentic"
+      ],
+      "note": "The Sonnet-tier counterpart to Opus 4.6.",
+      "family": "Claude",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://www.anthropic.com/news/claude-sonnet-4-6",
+          "type": "official_announcement"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       },
       "access": {
         "open_weights": false,
@@ -2012,6 +2175,43 @@
       }
     },
     {
+      "id": "muse-spark",
+      "model": "Muse Spark",
+      "company": "Meta AI",
+      "year": 2026,
+      "month": 4,
+      "day": 8,
+      "tags": [
+        "flagship",
+        "multimodal"
+      ],
+      "note": "Meta's first closed frontier model, from Meta Superintelligence Labs, shipped alongside the open-weights Llama 5.",
+      "family": "Muse",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
+          "type": "official_announcement"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Muse_Spark",
+          "type": "secondary"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
       "id": "claude-opus-4-7",
       "model": "Claude Opus 4.7",
       "company": "Anthropic",
@@ -2029,6 +2229,43 @@
         {
           "url": "https://www.anthropic.com/news/claude-opus-4-7",
           "type": "official_announcement"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
+      "id": "gpt-5-5",
+      "model": "GPT-5.5",
+      "company": "OpenAI",
+      "year": 2026,
+      "month": 4,
+      "day": 23,
+      "tags": [
+        "flagship",
+        "reasoning"
+      ],
+      "note": "Codenamed Spud; the mid-cycle step between GPT-5.4 and the GPT-5.6 family.",
+      "family": "GPT",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://openai.com/index/introducing-gpt-5-5/",
+          "type": "official_announcement"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/GPT-5.5",
+          "type": "secondary"
         }
       ],
       "provenance": {
@@ -2110,6 +2347,39 @@
       }
     },
     {
+      "id": "claude-opus-4-8",
+      "model": "Claude Opus 4.8",
+      "company": "Anthropic",
+      "year": 2026,
+      "month": 5,
+      "day": 28,
+      "tags": [
+        "flagship",
+        "agentic"
+      ],
+      "note": "The final Opus 4.x release before the Claude 5 generation.",
+      "family": "Claude",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://www.anthropic.com/news/claude-opus-4-8",
+          "type": "official_announcement"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
       "id": "nemotron-3-ultra",
       "model": "Nemotron 3 Ultra",
       "company": "NVIDIA",
@@ -2135,6 +2405,72 @@
       },
       "access": {
         "open_weights": true,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
+      "id": "claude-fable-5",
+      "model": "Claude Fable 5",
+      "company": "Anthropic",
+      "year": 2026,
+      "month": 6,
+      "day": 9,
+      "tags": [
+        "flagship",
+        "reasoning"
+      ],
+      "note": "Opens the Claude 5 generation. Shares its underlying model with Mythos 5, with additional safeguards for biology, cybersecurity and LLM R&D.",
+      "family": "Claude",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Claude_(language_model)",
+          "type": "secondary"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
+      "id": "claude-mythos-5",
+      "model": "Claude Mythos 5",
+      "company": "Anthropic",
+      "year": 2026,
+      "month": 6,
+      "day": 9,
+      "tags": [
+        "flagship",
+        "reasoning"
+      ],
+      "note": "Released the same day as Fable 5 with limited availability through Project Glasswing.",
+      "family": "Claude",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Claude_(language_model)",
+          "type": "secondary"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
+      },
+      "access": {
+        "open_weights": false,
         "license": null
       },
       "technical": {
@@ -2175,6 +2511,38 @@
       }
     },
     {
+      "id": "claude-sonnet-5",
+      "model": "Claude Sonnet 5",
+      "company": "Anthropic",
+      "year": 2026,
+      "month": 6,
+      "day": 30,
+      "tags": [
+        "agentic"
+      ],
+      "note": "The most agentic Sonnet to date, approaching Opus-class performance at a lower price.",
+      "family": "Claude",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://www.anthropic.com/news/claude-sonnet-5",
+          "type": "official_announcement"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
       "id": "grok-4-5",
       "model": "Grok 4.5",
       "company": "xAI",
@@ -2196,6 +2564,40 @@
       "provenance": {
         "status": "verified",
         "confidence": 90
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
+      "id": "gpt-5-6",
+      "model": "GPT-5.6",
+      "company": "OpenAI",
+      "year": 2026,
+      "month": 7,
+      "day": 9,
+      "tags": [
+        "flagship",
+        "reasoning",
+        "agentic"
+      ],
+      "note": "A three-variant family — Luna, Terra and Sol — after a limited partner preview in June.",
+      "family": "GPT",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/GPT-5.6",
+          "type": "secondary"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       },
       "access": {
         "open_weights": false,
@@ -2262,6 +2664,106 @@
       "provenance": {
         "status": "verified",
         "confidence": 90
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
+      "id": "claude-opus-5",
+      "model": "Claude Opus 5",
+      "company": "Anthropic",
+      "year": 2026,
+      "month": 7,
+      "day": 24,
+      "tags": [
+        "flagship",
+        "agentic",
+        "multimodal"
+      ],
+      "note": "A step change over Opus 4.8, with a one-million-token context window and 3D rendering.",
+      "family": "Claude",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://www.anthropic.com/news/claude-opus-5",
+          "type": "official_announcement"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
+      "id": "qwen-3-8-max",
+      "model": "Qwen3.8-Max",
+      "company": "Alibaba Qwen",
+      "year": 2026,
+      "month": 8,
+      "day": 3,
+      "tags": [
+        "flagship",
+        "reasoning"
+      ],
+      "note": "A 2.4-trillion-parameter MoE with a one-million-token context, Alibaba's largest model to date.",
+      "family": "Qwen",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://www.marktechpost.com/2026/08/03/alibaba-qwen-releases-qwen3-8-max/",
+          "type": "secondary"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "technical": {
+        "context_window": null,
+        "parameter_count": null
+      }
+    },
+    {
+      "id": "muse-spark-1-2",
+      "model": "Muse Spark 1.2",
+      "company": "Meta AI",
+      "year": 2026,
+      "month": 8,
+      "day": 5,
+      "tags": [
+        "flagship",
+        "agentic"
+      ],
+      "note": "Shipped with Muse Code, Meta's first terminal coding agent.",
+      "family": "Muse",
+      "kind": "model",
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Muse_Spark",
+          "type": "secondary"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       },
       "access": {
         "open_weights": false,

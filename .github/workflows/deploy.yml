@@ -1,0 +1,53 @@
+name: Build and deploy
+
+# Editing data/llm-releases.json and pushing is the whole workflow. The pages
+# are generated here, so there is nothing to remember to run locally and the
+# generated output can never be stale relative to the data.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a run finish rather than cancelling it — a half-deployed site is worse
+# than a slightly out-of-date one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # The data gate runs before the build, so a bad edit fails here and
+      # never reaches the published site.
+      - name: Validate dataset
+        run: node scripts/validate-data.mjs
+
+      - name: Generate pages
+        run: node scripts/build.mjs
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

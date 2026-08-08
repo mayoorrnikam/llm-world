@@ -232,6 +232,24 @@ function iconFor(company) {
   return svg;
 }
 
+/** Capability icon (Lucide). Returns null for a tag with no icon, so callers
+ *  can fall back rather than render an empty box. */
+const TAG_ICONS = new Set(['open-weights', 'flagship', 'multimodal', 'agentic',
+  'small-efficient', 'reasoning']);
+
+function tagIcon(tag) {
+  if (!TAG_ICONS.has(tag)) return null;
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'glyph tag-glyph');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use.setAttribute('href', `#tag-${tag}`);
+  svg.appendChild(use);
+  return svg;
+}
+
 const eraFor = (year) => {
   let label = ERAS[0][1];
   for (const [y, name] of ERAS) if (year >= y) label = name;
@@ -673,7 +691,7 @@ function buildTagBar() {
   const sorted = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 
   els.tagbar.replaceChildren(...sorted.map(([tag, n]) => {
-    const chip = mkChip(tag, n, null);
+    const chip = mkChip(tag, n, null, tagIcon(tag));
     chip.classList.add('chip-tag');
     chip.dataset.tag = tag;
     chip.addEventListener('click', () => toggleSet(state.tags, tag));

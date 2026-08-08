@@ -58,13 +58,13 @@ generates static, no-JavaScript-required pages from the same dataset:
 ```
 
 Each model page carries `schema.org/SoftwareApplication` JSON-LD and links
-back into the interactive timeline. Output is **committed** so GitHub Pages
-serves it with no build step in the deploy path; CI rebuilds into a temp
-directory and diffs, so the pages can't drift from `data/llm-releases.json`.
+back into the interactive timeline. Pages are **built in CI on every push** and deployed straight to GitHub Pages,
+so generated output is never committed and can never be stale. Editing
+`data/llm-releases.json` and pushing is the entire workflow — nothing to run
+locally, nothing to remember.
 
 ```bash
-node scripts/build.mjs            # pages + sitemap
-node scripts/build.mjs --check    # build to .build-check/ and diff (CI)
+node scripts/build.mjs            # optional: preview the pages locally
 ```
 
 ### Bulk export is off
@@ -123,8 +123,9 @@ LLM releases" (Hugging Face indexes repos, not releases, and the largest labs
 don't publish weights there at all), so a curated JSON beats a noisy feed.
 
 To add a release: append an object to `data/llm-releases.json`, bump `updated`
-to today, then click **Refresh** in the header (or press <kbd>R</kbd>). The page
-re-fetches and rebuilds in place — no reload — and reports what changed:
+to today, and push. CI validates the data, regenerates every page and deploys.
+While editing locally, click **Refresh** in the header (or press <kbd>R</kbd>) —
+the page re-fetches in place, no reload, and reports what changed:
 
 ```
 70 releases · updated yesterday          →  71 releases · updated today · 1 new
@@ -234,6 +235,23 @@ independent channel, so companies stay distinguishable when colour fails —
 CVD, `forced-colors` mode, and greyscale print. The company name is also
 always rendered next to the mark, so identity never rests on either channel
 alone. Glyphs are `aria-hidden`, being decorative.
+
+### Icon sources — reuse these
+
+| Need | Source | Licence | Notes |
+|---|---|---|---|
+| **AI / LLM company logos** | [lobe-icons](https://github.com/lobehub/lobe-icons) | MIT | `packages/static-svg/icons/<slug>.svg`. 900+ AI brands. Monochrome, `currentColor`, 24×24. Covers OpenAI, xAI, Zhipu, Cohere, AI21, Microsoft. |
+| **UI / capability icons** | [Lucide](https://lucide.dev) | ISC | `icons/<name>.svg` on GitHub. Stroke icons, 24×24. |
+
+Checked and rejected: **Simple Icons** (CC0) is the usual general-purpose brand
+set, but it has no OpenAI, Microsoft or Amazon — brands that asked to be
+removed from icon sets. It covers only 11 of our 16 labs.
+
+Both sets are inlined into the sprite in `index.html`; nothing is fetched at
+runtime. Capability icons are deliberately *stroke* marks while company logos
+are *filled*, so the two never read as the same kind of thing.
+
+### Company marks
 
 The marks are the labs' real logos, from
 [lobe-icons](https://github.com/lobehub/lobe-icons) (MIT) — an icon set built
