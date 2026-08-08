@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//private/tmp/**)",
+      "Bash(sed -i '' \"s/const CMIN=0.09;/const CMIN=0.125;/\" opt.mjs)",
+      "Bash(sed -i '' \"s/\\\\['AI21 Labs',27,18\\\\],\\\\['Anthropic',44,14\\\\],\\\\['Mistral AI',56,14\\\\],\\\\['Alibaba Qwen',72,16\\\\],/['AI21 Labs',27,10],['Anthropic',45,9],['Mistral AI',58,9],['Alibaba Qwen',74,9],/\" opt.mjs)",
+      "Bash(sed -i '' \"s/\\\\['Amazon',80,20\\\\],\\\\['NVIDIA',132,22\\\\],\\\\['BigScience',155,45\\\\],\\\\['OpenAI',168,12\\\\],/['Amazon',92,10],['NVIDIA',130,10],['BigScience',158,30],['OpenAI',170,9],/\" opt.mjs)",
+      "Bash(sed -i '' \"s/\\\\['Microsoft',215,16\\\\],\\\\['xAI',240,55\\\\],\\\\['Google DeepMind',258,12\\\\],\\\\['DeepSeek',272,25\\\\],/['Microsoft',210,10],['xAI',232,14],['Google DeepMind',258,8],['DeepSeek',278,12],/\" opt.mjs)",
+      "Bash(python3 -)",
+      "Bash(node opt.mjs dark \"#0e131c\")",
+      "Bash(node opt.mjs light \"#f7f8fa\")",
+      "Bash(node /tmp/eval.mjs \"#ed6862,#e2855c,#e07b0a,#c48e22,#bda800,#8abf4a,#26ac69,#03ae98,#00a0b3,#00a7df,#389bfd,#9780f7,#a16ace,#bc81cd,#d064b5,#dd6e98\" dark \"#0e131c\")",
+      "Bash(node /tmp/eval.mjs \"#a73737,#d26143,#af6200,#864d00,#8a7a08,#4e7e27,#029c4c,#04826c,#12979e,#0083c3,#3b82f6,#4971f9,#8560de,#ab4db9,#c663a5,#ae5274\" light \"#f7f8fa\")",
+      "Bash(node /tmp/eval.mjs '#e05c56,#f0a07c,#d06d00,#c9922e,#a89a00,#8abf4a,#22b070,#00b39b,#0098b8,#37b6ef,#4d9bff,#7c5ce0,#a86ad6,#c98fd8,#dc5cb0,#f07d9e' dark '#0e131c')",
+      "Bash(node --input-type=module --check)",
+      "Bash(python3 *)",
+      "Bash(pkill -f \"http.server 8777\")",
+      "Bash(rm -f /tmp/opt.mjs /tmp/genpal.mjs /tmp/eval.mjs)",
+      "Bash(git --version)",
+      "Bash(gh auth *)",
+      "Bash(git config *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git -c user.name=foxy -c user.email=mayurnikaam@gmail.com commit -q -m ' *)"
+    ]
+  }
+}

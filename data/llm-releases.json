@@ -1,0 +1,705 @@
+{
+  "updated": "2026-08-07",
+  "releases": [
+    {
+      "id": "palm",
+      "model": "PaLM",
+      "company": "Google DeepMind",
+      "year": 2022,
+      "month": 4,
+      "day": 4,
+      "tags": ["flagship"],
+      "note": "Google's 540-billion-parameter model that demonstrated breakthrough few-shot scaling."
+    },
+    {
+      "id": "opt-175b",
+      "model": "OPT-175B",
+      "company": "Meta AI",
+      "year": 2022,
+      "month": 5,
+      "day": 5,
+      "tags": ["open-weights"],
+      "note": "Meta's open 175-billion-parameter model released to democratize access to large language models."
+    },
+    {
+      "id": "bloom",
+      "model": "BLOOM",
+      "company": "BigScience",
+      "year": 2022,
+      "month": 7,
+      "day": 12,
+      "tags": ["open-weights"],
+      "note": "The 176-billion-parameter multilingual open model built by over a thousand volunteer researchers."
+    },
+    {
+      "id": "glm-130b",
+      "model": "GLM-130B",
+      "company": "Zhipu AI",
+      "year": 2022,
+      "month": 8,
+      "day": 1,
+      "tags": ["open-weights"],
+      "note": "China's landmark open bilingual 130-billion-parameter model released in August 2022."
+    },
+    {
+      "id": "chatgpt",
+      "model": "ChatGPT",
+      "company": "OpenAI",
+      "year": 2022,
+      "month": 11,
+      "day": 30,
+      "tags": ["flagship"],
+      "note": "The public chatbot built on GPT-3.5 that brought large language models to the mainstream."
+    },
+    {
+      "id": "llama-1",
+      "model": "Llama 1",
+      "company": "Meta AI",
+      "year": 2023,
+      "month": 2,
+      "day": 24,
+      "tags": ["open-weights"],
+      "note": "Open foundation models from 7B to 65B parameters that ignited the open-source LLM ecosystem."
+    },
+    {
+      "id": "claude-1",
+      "model": "Claude 1",
+      "company": "Anthropic",
+      "year": 2023,
+      "month": 3,
+      "day": 14,
+      "tags": ["flagship"],
+      "note": "Anthropic's debut Claude model focused on helpfulness, harmlessness, and long-context dialogue."
+    },
+    {
+      "id": "gpt-4",
+      "model": "GPT-4",
+      "company": "OpenAI",
+      "year": 2023,
+      "month": 3,
+      "day": 14,
+      "tags": ["flagship", "multimodal"],
+      "note": "OpenAI's first multimodal flagship that set new standards across professional and academic benchmarks."
+    },
+    {
+      "id": "bard",
+      "model": "Bard",
+      "company": "Google DeepMind",
+      "year": 2023,
+      "month": 3,
+      "day": 21,
+      "tags": ["flagship"],
+      "note": "Google's ChatGPT rival chatbot that brought the company into the consumer AI race."
+    },
+    {
+      "id": "palm-2",
+      "model": "PaLM 2",
+      "company": "Google DeepMind",
+      "year": 2023,
+      "month": 5,
+      "day": 10,
+      "tags": ["flagship"],
+      "note": "Google's next-generation model family that powered Bard and more than 25 other products."
+    },
+    {
+      "id": "claude-2",
+      "model": "Claude 2",
+      "company": "Anthropic",
+      "year": 2023,
+      "month": 7,
+      "day": 11,
+      "tags": ["flagship"],
+      "note": "Doubled Claude's context window to 100K tokens with stronger coding and writing abilities."
+    },
+    {
+      "id": "llama-2",
+      "model": "Llama 2",
+      "company": "Meta AI",
+      "year": 2023,
+      "month": 7,
+      "day": 18,
+      "tags": ["open-weights"],
+      "note": "The first major open model with commercial licensing, defining open-source AI for a year."
+    },
+    {
+      "id": "mistral-7b",
+      "model": "Mistral 7B",
+      "company": "Mistral AI",
+      "year": 2023,
+      "month": 9,
+      "day": 27,
+      "tags": ["open-weights", "small-efficient"],
+      "note": "A 7-billion-parameter model outperforming much larger models and putting European open AI on the map."
+    },
+    {
+      "id": "grok-1",
+      "model": "Grok-1",
+      "company": "xAI",
+      "year": 2023,
+      "month": 11,
+      "day": 4,
+      "tags": ["flagship"],
+      "note": "xAI's debut model with real-time knowledge of the X platform, released to Premium+ subscribers."
+    },
+    {
+      "id": "gemini-1",
+      "model": "Gemini 1.0",
+      "company": "Google DeepMind",
+      "year": 2023,
+      "month": 12,
+      "day": 6,
+      "tags": ["flagship", "multimodal"],
+      "note": "Google's first natively multimodal model family with Ultra, Pro, and Nano tiers."
+    },
+    {
+      "id": "mixtral",
+      "model": "Mixtral 8x7B",
+      "company": "Mistral AI",
+      "year": 2023,
+      "month": 12,
+      "day": 11,
+      "tags": ["open-weights"],
+      "note": "The first open mixture-of-experts model to rival much larger dense models."
+    },
+    {
+      "id": "phi-2",
+      "model": "Phi-2",
+      "company": "Microsoft",
+      "year": 2023,
+      "month": 12,
+      "day": 12,
+      "tags": ["small-efficient"],
+      "note": "A 2.7-billion-parameter model showing that small models can compete through high-quality curated data."
+    },
+    {
+      "id": "glm-4",
+      "model": "GLM-4",
+      "company": "Zhipu AI",
+      "year": 2024,
+      "month": 1,
+      "day": 16,
+      "tags": ["flagship"],
+      "note": "Zhipu's flagship series launched with GPT-4-class capabilities and a one-million-token context variant."
+    },
+    {
+      "id": "gemini-1-5-pro",
+      "model": "Gemini 1.5 Pro",
+      "company": "Google DeepMind",
+      "year": 2024,
+      "month": 2,
+      "day": 15,
+      "tags": ["flagship"],
+      "note": "Google's long-context MoE flagship that extended the context window to one million tokens."
+    },
+    {
+      "id": "gemma",
+      "model": "Gemma",
+      "company": "Google DeepMind",
+      "year": 2024,
+      "month": 2,
+      "day": 21,
+      "tags": ["open-weights", "small-efficient"],
+      "note": "Google's first open-weight model family built from Gemini research for developers."
+    },
+    {
+      "id": "claude-3-opus",
+      "model": "Claude 3 Opus",
+      "company": "Anthropic",
+      "year": 2024,
+      "month": 3,
+      "day": 4,
+      "tags": ["flagship", "multimodal"],
+      "note": "Anthropic's first vision-capable flagship that topped GPT-4 across most benchmarks."
+    },
+    {
+      "id": "command-r",
+      "model": "Command R",
+      "company": "Cohere",
+      "year": 2024,
+      "month": 3,
+      "day": 11,
+      "tags": ["open-weights"],
+      "note": "Cohere's RAG-focused enterprise model family with 128K context and open weights."
+    },
+    {
+      "id": "grok-1-open",
+      "model": "Grok-1",
+      "company": "xAI",
+      "year": 2024,
+      "month": 3,
+      "day": 17,
+      "tags": ["open-weights"],
+      "note": "xAI open-sourced its 314-billion-parameter base model in a landmark open-weights release."
+    },
+    {
+      "id": "llama-3",
+      "model": "Llama 3",
+      "company": "Meta AI",
+      "year": 2024,
+      "month": 4,
+      "day": 18,
+      "tags": ["open-weights"],
+      "note": "8B and 70B models with dramatically stronger reasoning that powered Meta's AI assistant."
+    },
+    {
+      "id": "phi-3",
+      "model": "Phi-3",
+      "company": "Microsoft",
+      "year": 2024,
+      "month": 4,
+      "day": 23,
+      "tags": ["small-efficient"],
+      "note": "A 3.8-billion-parameter small language model family that runs locally on phones."
+    },
+    {
+      "id": "deepseek-v2",
+      "model": "DeepSeek-V2",
+      "company": "DeepSeek",
+      "year": 2024,
+      "month": 5,
+      "day": 6,
+      "tags": ["open-weights"],
+      "note": "An efficient 236B MoE with 21B active parameters that made DeepSeek a global open-model force."
+    },
+    {
+      "id": "gpt-4o",
+      "model": "GPT-4o",
+      "company": "OpenAI",
+      "year": 2024,
+      "month": 5,
+      "day": 13,
+      "tags": ["flagship", "multimodal"],
+      "note": "OpenAI's natively multimodal real-time model with voice conversation, free in ChatGPT."
+    },
+    {
+      "id": "qwen2",
+      "model": "Qwen2",
+      "company": "Alibaba Qwen",
+      "year": 2024,
+      "month": 6,
+      "day": 7,
+      "tags": ["open-weights"],
+      "note": "Alibaba's flagship open series spanning 0.5B to 72B parameters with strong multilingual ability."
+    },
+    {
+      "id": "claude-3-5-sonnet",
+      "model": "Claude 3.5 Sonnet",
+      "company": "Anthropic",
+      "year": 2024,
+      "month": 6,
+      "day": 20,
+      "tags": ["flagship"],
+      "note": "The mid-tier model that became 2024's favorite for coding and agentic workflows."
+    },
+    {
+      "id": "llama-3-1",
+      "model": "Llama 3.1",
+      "company": "Meta AI",
+      "year": 2024,
+      "month": 7,
+      "day": 23,
+      "tags": ["open-weights"],
+      "note": "The 405B open flagship with 128K context, the first open model at frontier scale."
+    },
+    {
+      "id": "mistral-large-2",
+      "model": "Mistral Large 2",
+      "company": "Mistral AI",
+      "year": 2024,
+      "month": 7,
+      "day": 24,
+      "tags": ["flagship"],
+      "note": "Mistral's 123-billion-parameter model rivaling closed frontier models in multilingual tasks."
+    },
+    {
+      "id": "jamba-1-5",
+      "model": "Jamba 1.5",
+      "company": "AI21 Labs",
+      "year": 2024,
+      "month": 8,
+      "day": 22,
+      "tags": ["open-weights"],
+      "note": "AI21's hybrid SSM-Transformer models with a 256K context window for long-document work."
+    },
+    {
+      "id": "o1",
+      "model": "o1",
+      "company": "OpenAI",
+      "year": 2024,
+      "month": 9,
+      "day": 12,
+      "tags": ["reasoning"],
+      "note": "OpenAI's first reasoning model that thinks before answering, launching the reasoning-model era."
+    },
+    {
+      "id": "qwen2-5",
+      "model": "Qwen2.5",
+      "company": "Alibaba Qwen",
+      "year": 2024,
+      "month": 9,
+      "day": 19,
+      "tags": ["open-weights"],
+      "note": "A massive family of open models that became a default choice across the open ecosystem."
+    },
+    {
+      "id": "llama-3-2",
+      "model": "Llama 3.2",
+      "company": "Meta AI",
+      "year": 2024,
+      "month": 9,
+      "day": 25,
+      "tags": ["open-weights", "multimodal"],
+      "note": "The first vision-capable Llama plus 1B and 3B models for edge devices."
+    },
+    {
+      "id": "nova",
+      "model": "Nova",
+      "company": "Amazon",
+      "year": 2024,
+      "month": 12,
+      "day": 3,
+      "tags": ["flagship", "multimodal"],
+      "note": "Amazon's new foundation model family spanning text, image, and video generation at re:Invent."
+    },
+    {
+      "id": "gemini-2-flash",
+      "model": "Gemini 2.0 Flash",
+      "company": "Google DeepMind",
+      "year": 2024,
+      "month": 12,
+      "day": 11,
+      "tags": ["flagship", "agentic"],
+      "note": "Google's agentic-era model with native tool use and real-time multimodal understanding."
+    },
+    {
+      "id": "deepseek-v3",
+      "model": "DeepSeek-V3",
+      "company": "DeepSeek",
+      "year": 2024,
+      "month": 12,
+      "day": 26,
+      "tags": ["open-weights"],
+      "note": "A 671B MoE open model whose near-frontier performance at minimal cost stunned the industry."
+    },
+    {
+      "id": "deepseek-r1",
+      "model": "DeepSeek-R1",
+      "company": "DeepSeek",
+      "year": 2025,
+      "month": 1,
+      "day": 20,
+      "tags": ["reasoning", "open-weights"],
+      "note": "The open reasoning model that matched o1-class performance and triggered a global tech selloff."
+    },
+    {
+      "id": "mistral-small-3",
+      "model": "Mistral Small 3",
+      "company": "Mistral AI",
+      "year": 2025,
+      "month": 1,
+      "day": 30,
+      "tags": ["open-weights", "small-efficient"],
+      "note": "A fast 24B Apache-licensed model designed for on-device and low-latency deployment."
+    },
+    {
+      "id": "grok-3",
+      "model": "Grok 3",
+      "company": "xAI",
+      "year": 2025,
+      "month": 2,
+      "day": 17,
+      "tags": ["flagship", "reasoning"],
+      "note": "Trained on 200K GPUs with DeepSearch integration, briefly topping public leaderboards."
+    },
+    {
+      "id": "claude-3-7-sonnet",
+      "model": "Claude 3.7 Sonnet",
+      "company": "Anthropic",
+      "year": 2025,
+      "month": 2,
+      "day": 24,
+      "tags": ["flagship", "reasoning"],
+      "note": "The first hybrid reasoning model with a user-controlled extended thinking mode."
+    },
+    {
+      "id": "gpt-4-5",
+      "model": "GPT-4.5",
+      "company": "OpenAI",
+      "year": 2025,
+      "month": 2,
+      "day": 27,
+      "tags": ["flagship"],
+      "note": "OpenAI's final GPT-4-generation model, strongest at natural conversation and world knowledge."
+    },
+    {
+      "id": "gemma-3",
+      "model": "Gemma 3",
+      "company": "Google DeepMind",
+      "year": 2025,
+      "month": 3,
+      "day": 12,
+      "tags": ["open-weights", "multimodal"],
+      "note": "Google's open family adding vision, 128K context, and support for 140 languages."
+    },
+    {
+      "id": "command-a",
+      "model": "Command A",
+      "company": "Cohere",
+      "year": 2025,
+      "month": 3,
+      "day": 13,
+      "tags": ["flagship"],
+      "note": "Cohere's 111B dense flagship for enterprise RAG and agent workloads with 256K context."
+    },
+    {
+      "id": "gemini-2-5-pro",
+      "model": "Gemini 2.5 Pro",
+      "company": "Google DeepMind",
+      "year": 2025,
+      "month": 3,
+      "day": 25,
+      "tags": ["flagship", "reasoning"],
+      "note": "The thinking model that led LMArena for months with a one-million-token context."
+    },
+    {
+      "id": "llama-4",
+      "model": "Llama 4",
+      "company": "Meta AI",
+      "year": 2025,
+      "month": 4,
+      "day": 5,
+      "tags": ["open-weights", "multimodal"],
+      "note": "Meta's first mixture-of-experts family with Scout, Maverick, and Behemoth tiers."
+    },
+    {
+      "id": "qwen3",
+      "model": "Qwen3",
+      "company": "Alibaba Qwen",
+      "year": 2025,
+      "month": 4,
+      "day": 29,
+      "tags": ["open-weights", "reasoning"],
+      "note": "Open MoE models with hybrid thinking modes that topped open-model benchmarks."
+    },
+    {
+      "id": "claude-4-opus",
+      "model": "Claude 4 Opus",
+      "company": "Anthropic",
+      "year": 2025,
+      "month": 5,
+      "day": 21,
+      "tags": ["flagship", "agentic"],
+      "note": "Anthropic's agentic flagship with computer use and tight Claude Code integration."
+    },
+    {
+      "id": "glm-4-5",
+      "model": "GLM-4.5",
+      "company": "Zhipu AI",
+      "year": 2025,
+      "month": 7,
+      "day": 8,
+      "tags": ["open-weights"],
+      "note": "A 355B MoE open model that became the first Chinese open model to rival closed frontier models."
+    },
+    {
+      "id": "kimi-k2",
+      "model": "Kimi K2",
+      "company": "Moonshot AI",
+      "year": 2025,
+      "month": 7,
+      "day": 11,
+      "tags": ["open-weights"],
+      "note": "A trillion-parameter open MoE with 32B active parameters excelling at code and agents."
+    },
+    {
+      "id": "gpt-oss",
+      "model": "GPT-OSS",
+      "company": "OpenAI",
+      "year": 2025,
+      "month": 8,
+      "day": 5,
+      "tags": ["open-weights"],
+      "note": "OpenAI's first open-weight release since GPT-2, with 120B and 20B variants."
+    },
+    {
+      "id": "gpt-5",
+      "model": "GPT-5",
+      "company": "OpenAI",
+      "year": 2025,
+      "month": 8,
+      "day": 7,
+      "tags": ["flagship", "multimodal"],
+      "note": "OpenAI's unified flagship with integrated reasoning across ChatGPT and the API."
+    },
+    {
+      "id": "deepseek-v3-1",
+      "model": "DeepSeek-V3.1",
+      "company": "DeepSeek",
+      "year": 2025,
+      "month": 8,
+      "day": 21,
+      "tags": ["open-weights"],
+      "note": "A hybrid think-and-non-think update doubling context to 128K for the agent era."
+    },
+    {
+      "id": "claude-sonnet-4-5",
+      "model": "Claude Sonnet 4.5",
+      "company": "Anthropic",
+      "year": 2025,
+      "month": 9,
+      "day": 29,
+      "tags": ["flagship", "agentic"],
+      "note": "The best coding model of its time, capable of running agents for 30-plus hours."
+    },
+    {
+      "id": "gemini-3-pro",
+      "model": "Gemini 3 Pro",
+      "company": "Google DeepMind",
+      "year": 2025,
+      "month": 11,
+      "day": 18,
+      "tags": ["flagship", "multimodal"],
+      "note": "Google's natively multimodal reasoning flagship with DeepThink and 1M context."
+    },
+    {
+      "id": "claude-opus-4-5",
+      "model": "Claude Opus 4.5",
+      "company": "Anthropic",
+      "year": 2025,
+      "month": 11,
+      "day": 24,
+      "tags": ["flagship", "agentic"],
+      "note": "Anthropic's most capable model for coding, agents, and computer use."
+    },
+    {
+      "id": "mistral-3",
+      "model": "Mistral 3",
+      "company": "Mistral AI",
+      "year": 2025,
+      "month": 12,
+      "day": 3,
+      "tags": ["open-weights", "multimodal"],
+      "note": "An open multimodal family including Mistral Large 3 and Ministral variants under Apache 2.0."
+    },
+    {
+      "id": "qwen-3-5",
+      "model": "Qwen 3.5",
+      "company": "Alibaba Qwen",
+      "year": 2026,
+      "month": 2,
+      "day": 16,
+      "tags": ["flagship", "agentic"],
+      "note": "Alibaba's agentic-era flagship claimed to outperform GPT-5 with desktop and mobile operation."
+    },
+    {
+      "id": "gpt-5-4",
+      "model": "GPT-5.4",
+      "company": "OpenAI",
+      "year": 2026,
+      "month": 3,
+      "day": 5,
+      "tags": ["flagship"],
+      "note": "OpenAI's frontier model with 1M context and state-of-the-art coding and computer use."
+    },
+    {
+      "id": "mistral-small-4",
+      "model": "Mistral Small 4",
+      "company": "Mistral AI",
+      "year": 2026,
+      "month": 3,
+      "day": 16,
+      "tags": ["open-weights", "multimodal"],
+      "note": "A 119B open mixture-of-experts model unifying chat, coding, and agentic tasks."
+    },
+    {
+      "id": "llama-5",
+      "model": "Llama 5",
+      "company": "Meta AI",
+      "year": 2026,
+      "month": 4,
+      "day": 8,
+      "tags": ["flagship", "open-weights"],
+      "note": "Meta's first MoE flagship, marking a major architecture shift for the open family."
+    },
+    {
+      "id": "claude-opus-4-7",
+      "model": "Claude Opus 4.7",
+      "company": "Anthropic",
+      "year": 2026,
+      "month": 4,
+      "day": 16,
+      "tags": ["flagship", "agentic"],
+      "note": "Anthropic's most capable general model with 87.6% on SWE-bench Verified."
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "model": "DeepSeek V4 Flash",
+      "company": "DeepSeek",
+      "year": 2026,
+      "month": 4,
+      "day": 24,
+      "tags": ["open-weights"],
+      "note": "A 284B MoE with 13B active parameters and 1M context, MIT-licensed alongside V4-Pro."
+    },
+    {
+      "id": "gemini-3-5-flash",
+      "model": "Gemini 3.5 Flash",
+      "company": "Google DeepMind",
+      "year": 2026,
+      "month": 5,
+      "day": 19,
+      "tags": ["agentic", "small-efficient"],
+      "note": "Google's agent-optimized workhorse model launched at I/O with 1M-token context."
+    },
+    {
+      "id": "nemotron-3-ultra",
+      "model": "Nemotron 3 Ultra",
+      "company": "NVIDIA",
+      "year": 2026,
+      "month": 6,
+      "day": 4,
+      "tags": ["open-weights", "agentic"],
+      "note": "A 550B open MoE hybrid Mamba-Transformer model built for long-running agents."
+    },
+    {
+      "id": "glm-5-2",
+      "model": "GLM-5.2",
+      "company": "Zhipu AI",
+      "year": 2026,
+      "month": 7,
+      "day": 8,
+      "tags": ["open-weights"],
+      "note": "A 744B MIT-licensed open model, the first open model to top closed frontiers on agentic coding."
+    },
+    {
+      "id": "grok-4-5",
+      "model": "Grok 4.5",
+      "company": "xAI",
+      "year": 2026,
+      "month": 7,
+      "day": 8,
+      "tags": ["flagship"],
+      "note": "xAI's smartest model, its first release after going public and acquiring Cursor."
+    },
+    {
+      "id": "kimi-k3",
+      "model": "Kimi K3",
+      "company": "Moonshot AI",
+      "year": 2026,
+      "month": 7,
+      "day": 16,
+      "tags": ["open-weights", "multimodal"],
+      "note": "A 2.8-trillion-parameter open MoE, the largest open-weight model ever published."
+    },
+    {
+      "id": "gemini-3-6-flash",
+      "model": "Gemini 3.6 Flash",
+      "company": "Google DeepMind",
+      "year": 2026,
+      "month": 7,
+      "day": 21,
+      "tags": ["agentic", "small-efficient"],
+      "note": "Google's token-efficient workhorse update with better coding and multimodal performance."
+    }
+  ]
+}
