@@ -109,7 +109,7 @@ async function init() {
     'cadence-facts', 'legend', 'tagbar', 'reset-btn', 'lanes', 'empty-state', 'empty-sub',
     'empty-action', 'data-status', 'modal', 'modal-close', 'modal-title', 'modal-company',
     'modal-date', 'modal-family', 'modal-era', 'modal-cadence', 'modal-tags',
-    'modal-note', 'modal-source',
+    'modal-note', 'modal-source', 'modal-detail-link',
     'modal-prev', 'modal-next',
     'modal-copy', 'help', 'help-btn', 'help-close', 'theme-toggle', 'refresh-btn',
     'live']) {
@@ -852,6 +852,7 @@ function openModal(r) {
   highlight(els.modalNote, r.note || 'No note recorded for this release.');
 
   els.modalFamily.textContent = r.family;
+  els.modalDetailLink.href = `models/${encodeURIComponent(r.id)}/`;
   renderCadenceLine(r);
 
   els.modalSource.replaceChildren();

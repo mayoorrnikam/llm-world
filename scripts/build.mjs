@@ -21,6 +21,7 @@ import { join } from 'node:path';
 const EXPORT = process.argv.includes('--export');
 const CHECK = process.argv.includes('--check');
 const OUT = CHECK ? '.build-check' : '.';
+const BASE_URL = 'https://mayoorrnikam.github.io/llm-world';
 
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
 const releases = data.releases;
@@ -110,7 +111,12 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script
 ${spriteFor(sprites)}
 <header class="doc-head">
   <a class="doc-brand" href="${up}"><span class="brand-mark" aria-hidden="true"></span><span>LLM&nbsp;WORLD</span></a>
-  <a class="doc-back" href="${up}">Interactive timeline →</a>
+  <nav class="doc-nav-top" aria-label="Sections">
+    <a href="${up}">Timeline</a>
+    <a href="${up}models/">Models</a>
+    <a href="${up}companies/">Companies</a>
+    <a href="${up}latest/">Latest</a>
+  </nav>
 </header>
 <main class="doc-main">
 ${body}
@@ -270,6 +276,83 @@ ${[...byMonth.keys()].sort((a, b) => a - b).map((m) => `
   });
 }
 
+/** Index of every tracked model, newest first, grouped by year. */
+function modelsIndexPage() {
+  const byYear = new Map();
+  for (const r of [...releases].reverse()) {
+    (byYear.get(r.year) ?? byYear.set(r.year, []).get(r.year)).push(r);
+  }
+  const body = `
+<nav class="crumbs"><a href="../">Home</a> › <span>Models</span></nav>
+<div class="doc-hero"><div>
+  <h1>All tracked models</h1>
+  <p class="doc-sub">${releases.length} releases from ${new Set(releases.map((r) => r.company)).size} labs, newest first</p>
+</div></div>
+${[...byYear.keys()].sort((a, b) => b - a).map((y) => `
+<h2><a href="../timeline/${y}/">${y}</a> — ${byYear.get(y).length} releases</h2>
+<ol class="doc-list">${byYear.get(y).map((r) =>
+  `<li><span class="doc-mark sm">${glyph(r.company)}</span><a href="${esc(r.id)}/">${esc(r.model)}</a><span>${esc(r.company)}</span><span>${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
+`;
+  return page({
+    title: 'All tracked LLM releases | LLM World',
+    description: `An index of ${releases.length} tracked large language model releases, newest first, each with dates and sources.`,
+    canonical: `${BASE_URL}/models/`,
+    depth: 1,
+    sprites: [...new Set(releases.map((r) => slugFor(r.company)))],
+    body,
+  });
+}
+
+/** Index of every lab, by release count. */
+function companiesIndexPage(byCompany) {
+  const rows = [...byCompany].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+  const body = `
+<nav class="crumbs"><a href="../">Home</a> › <span>Companies</span></nav>
+<div class="doc-hero"><div>
+  <h1>Labs</h1>
+  <p class="doc-sub">${rows.length} organisations, ranked by tracked releases</p>
+</div></div>
+<ol class="doc-list">${rows.map(([name, list]) => {
+  const latest = [...list].sort((a, b) => b.year - a.year || b.month - a.month || (b.day || 0) - (a.day || 0))[0];
+  return `<li><span class="doc-mark sm">${glyph(name)}</span><a href="${companySlug(name)}/">${esc(name)}</a><span>${list.length} release${list.length === 1 ? '' : 's'}</span><span>latest ${fullDate(latest)}</span></li>`;
+}).join('')}</ol>
+`;
+  return page({
+    title: 'Labs tracked | LLM World',
+    description: `The ${rows.length} organisations whose large language model releases are tracked, ranked by release count.`,
+    canonical: `${BASE_URL}/companies/`,
+    depth: 1,
+    sprites: [...byCompany.keys()].map(slugFor),
+    body,
+  });
+}
+
+/** The 20 most recent releases — the "what shipped lately" view. */
+function latestPage() {
+  const recent = [...releases].reverse().slice(0, 20);
+  const body = `
+<nav class="crumbs"><a href="../">Home</a> › <span>Latest</span></nav>
+<div class="doc-hero"><div>
+  <h1>Latest releases</h1>
+  <p class="doc-sub">The 20 most recent tracked releases · data updated ${esc(data.updated)}</p>
+</div></div>
+<ol class="doc-list">${recent.map((r) => {
+  const prev = predecessorOf(r);
+  return `<li><span class="doc-mark sm">${glyph(r.company)}</span><a href="../models/${esc(r.id)}/">${esc(r.model)}</a><span>${esc(r.company)}</span><span>${fullDate(r)}${
+    prev ? ` · +${daysBetween(prev, r)}d` : ''}</span></li>`;
+}).join('')}</ol>
+<p class="doc-cta"><a href="../models/">Browse all ${releases.length} releases →</a></p>
+`;
+  return page({
+    title: 'Latest LLM releases | LLM World',
+    description: 'The most recent large language model releases, with dates, labs and sources.',
+    canonical: `${BASE_URL}/latest/`,
+    depth: 1,
+    sprites: [...new Set(recent.map((r) => slugFor(r.company)))],
+    body,
+  });
+}
+
 /* ------------------------------------------------------------------- build */
 
 if (CHECK && existsSync(OUT)) rmSync(OUT, { recursive: true });
@@ -284,8 +367,13 @@ const byYear = new Map();
 for (const r of releases) (byYear.get(r.year) ?? byYear.set(r.year, []).get(r.year)).push(r);
 for (const [y, list] of byYear) write(`timeline/${y}`, yearPage(y, list));
 
-const BASE = 'https://mayoorrnikam.github.io/llm-world';
+write('models', modelsIndexPage());
+write('companies', companiesIndexPage(byCompany));
+write('latest', latestPage());
+
+const BASE = BASE_URL;
 const urls = [
+  `${BASE}/models/`, `${BASE}/companies/`, `${BASE}/latest/`,
   `${BASE}/`,
   ...releases.map((r) => `${BASE}/models/${r.id}/`),
   ...[...byCompany.keys()].map((c) => `${BASE}/companies/${companySlug(c)}/`),

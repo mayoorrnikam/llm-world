@@ -1461,14 +1461,19 @@ code, kbd {
   font-size: 13.5px;
   border-bottom: 1px solid var(--line-soft);
 }
-.doc-sources li span, .doc-list li span, .doc-lineage li span {
+/* Only trailing metadata is pushed right — the leading glyph is a span too,
+   so it must be excluded or the whole row drifts to the centre. */
+.doc-sources li span:not(.doc-mark),
+.doc-list li span:not(.doc-mark),
+.doc-lineage li span:not(.doc-mark) {
   margin-left: auto;
   font-family: var(--mono);
   font-size: 11px;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
-.doc-list li span + span { margin-left: 14px; }
+.doc-list li span:not(.doc-mark) + span { margin-left: 14px; }
+.doc-mark.sm { width: 16px; }
 .doc-lineage li[aria-current="true"] { color: var(--accent); }
 
 .doc-main a { color: var(--accent); text-underline-offset: 3px; }
@@ -1500,4 +1505,47 @@ code, kbd {
   .doc-table th { width: 130px; }
   .doc-list li { flex-wrap: wrap; gap: 4px 10px; }
   .doc-list li span { margin-left: 0; }
+}
+
+/* Route out of the app into the generated pages. Without these the static
+   pages exist but are unreachable, which defeats the point of building them. */
+.modal-detail {
+  margin: 16px 0 0;
+  font-size: 12.5px;
+}
+.modal-detail a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-bottom: 14px;
+  font-size: 12.5px;
+}
+.site-nav a {
+  color: var(--text-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1px;
+}
+.site-nav a:hover { color: var(--accent); border-bottom-color: var(--accent-line); }
+
+.doc-nav-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  font-size: 12.5px;
+}
+.doc-nav-top a {
+  color: var(--text-dim);
+  text-decoration: none;
+}
+.doc-nav-top a:hover { color: var(--accent); }
+
+@media (max-width: 560px) {
+  .doc-head { flex-wrap: wrap; gap: 10px; }
+  .doc-nav-top { gap: 4px 14px; }
 }

@@ -1,0 +1,13 @@
+#!/bin/sh
+# Validates the dataset and regenerates pages before anything leaves the machine.
+# Enable once with:  npm run setup
+#
+# A failure here blocks the push, which is the point: bad data should never
+# reach the published site. Bypass in an emergency with `git push --no-verify`.
+
+set -e
+echo "pre-push: validating dataset…"
+node scripts/validate-data.mjs
+echo "pre-push: building pages…"
+node scripts/build.mjs
+echo "pre-push: ok"

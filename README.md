@@ -51,11 +51,19 @@ The single-page app can't provide indexable URLs, so `scripts/build.mjs`
 generates static, no-JavaScript-required pages from the same dataset:
 
 ```
-/models/<id>/        70 pages — facts table, sources, family lineage, cadence
-/companies/<slug>/   16 pages — every release by that lab, median release gap
+/latest/             the 20 most recent releases
+/models/             index of everything, newest first, grouped by year
+/models/<id>/        85 pages — facts, sources, family lineage, cadence
+/companies/          index of labs, ranked by release count
+/companies/<slug>/   16 pages — a lab's releases and its median release gap
 /timeline/<year>/     5 pages — that year's releases by month
-/sitemap.xml         92 URLs
+/sitemap.xml        110 URLs
 ```
+
+Every one is reachable from the UI: the app's footer links to Latest, Models,
+Labs and each year; each release dialog links to its own detail page; and the
+generated pages carry a shared nav across Timeline · Models · Companies ·
+Latest.
 
 Each model page carries `schema.org/SoftwareApplication` JSON-LD and links
 back into the interactive timeline. Pages are **built in CI on every push** and deployed straight to GitHub Pages,
@@ -64,8 +72,27 @@ so generated output is never committed and can never be stale. Editing
 locally, nothing to remember.
 
 ```bash
-node scripts/build.mjs            # optional: preview the pages locally
+npm run check      # validate + build — what the pre-push hook runs
+npm run preview    # build, then serve at localhost:8777
+npm run clean      # remove all generated output
 ```
+
+### Building locally instead of in CI
+
+`npm run setup` points git at `.githooks/`, so **every push first validates the
+data and regenerates the pages**, and a failure blocks the push. Any local
+runner or agent can do the same with one command:
+
+```bash
+npm run check
+```
+
+Note that **GitHub Actions is free with unlimited minutes on public
+repositories** (standard runners), so the CI build costs nothing here. The
+local hook is for fast feedback and offline work, not to avoid a bill. If you
+ever do want to drop CI: delete `.github/workflows/deploy.yml`, remove the
+generated paths from `.gitignore`, commit the build output, and set
+**Settings → Pages** back to `main` / `/ (root)`.
 
 ### Bulk export is off
 

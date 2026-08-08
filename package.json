@@ -1,0 +1,20 @@
+{
+  "name": "llm-world",
+  "version": "1.5.0",
+  "private": true,
+  "description": "An interactive timeline of large language model releases, month by month.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "validate": "node scripts/validate-data.mjs",
+    "validate:links": "node scripts/validate-data.mjs --links",
+    "build": "node scripts/build.mjs",
+    "build:export": "node scripts/build.mjs --export",
+    "check": "npm run validate && npm run build",
+    "preview": "npm run build && node scripts/serve.mjs",
+    "clean": "rm -rf models companies timeline sitemap.xml robots.txt api llm-releases.csv .build-check",
+    "setup": "git config core.hooksPath .githooks && echo 'git hooks enabled — pre-push now runs npm run check'"
+  }
+}
