@@ -1,0 +1,25 @@
+LLM World — what is covered by which licence
+============================================
+
+CODE — MIT (see LICENSE)
+  index.html, app.js, styles.css, scripts/
+
+DATASET — CC BY 4.0 (see LICENSE-DATA)
+  data/llm-releases.json, and the api/*.json and llm-releases.csv exports
+  generated from it. Reuse freely, including commercially, with credit:
+
+      Release dates and metadata from LLM World
+      https://mayoorrnikam.github.io/llm-world/ — CC BY 4.0
+
+BUNDLED THIRD-PARTY ASSETS
+  Company logos    lobe-icons, MIT — github.com/lobehub/lobe-icons
+  Capability icons Lucide, ISC — lucide.dev
+
+TRADEMARKS
+  Company names, logos and model names are trademarks of their respective
+  owners, used here to identify the releases catalogued. No affiliation or
+  endorsement is implied.
+
+LINKED SOURCES
+  Each record cites the provider's own announcement, paper or model card.
+  Those pages belong to their publishers and are linked, never reproduced.
