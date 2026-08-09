@@ -742,16 +742,72 @@ writeFileSync(join(OUT, 'robots.txt'),
 
 if (EXPORT) {
   mkdirSync(join(OUT, 'api'), { recursive: true });
-  writeFileSync(join(OUT, 'api/models.json'), JSON.stringify(data, null, 2));
-  writeFileSync(join(OUT, 'api/companies.json'), JSON.stringify(
-    [...byCompany].map(([name, l]) => ({ name, releases: l.length })), null, 2));
-  const cols = ['id', 'model', 'company', 'family', 'kind', 'date', 'tags', 'open_weights', 'status', 'source'];
+
+  // Every payload carries its own licence and attribution, so the terms
+  // travel with the data rather than living only in the README.
+  const META = {
+    name: 'LLM World — tracked large language model releases',
+    homepage: `${BASE_URL}/`,
+    schema_version: data.schema_version ?? '1.5',
+    updated: data.updated,
+    count: releases.length,
+    license: 'CC-BY-4.0',
+    license_url: 'https://creativecommons.org/licenses/by/4.0/',
+    attribution: `Release dates and metadata from LLM World — ${BASE_URL}/ — CC BY 4.0`,
+    notice: 'Undisclosed figures are null, never estimated. Check each record\'s '
+          + 'sources[] before relying on a figure; provenance.status records how '
+          + 'well it was verified.',
+  };
+
+  const writeJson = (path, obj) =>
+    writeFileSync(join(OUT, path), JSON.stringify(obj, null, 2) + '\n');
+
+  // Discovery document, so /api/ is not a dead end.
+  writeJson('api/index.json', {
+    ...META,
+    endpoints: {
+      models: `${BASE_URL}/api/models.json`,
+      companies: `${BASE_URL}/api/companies.json`,
+      csv: `${BASE_URL}/llm-releases.csv`,
+    },
+  });
+
+  writeJson('api/models.json', { ...META, releases });
+
+  writeJson('api/companies.json', {
+    ...META,
+    companies: [...byCompany]
+      .map(([name, list]) => {
+        const asc = [...list].sort((a, b) => a.year - b.year || a.month - b.month || (a.day || 0) - (b.day || 0));
+        return {
+          name,
+          slug: companySlug(name),
+          releases: list.length,
+          open_weights: list.filter((r) => r.access.open_weights).length,
+          first_release: isoDate(asc[0]),
+          latest_release: isoDate(asc.at(-1)),
+          url: `${BASE_URL}/companies/${companySlug(name)}/`,
+        };
+      })
+      .sort((a, b) => b.releases - a.releases || a.name.localeCompare(b.name)),
+  });
+
+  // CSV for spreadsheets: pure data, no comment line. CSV has no comment
+  // convention, so a trailing licence row just parses as a bogus 86th record.
+  // Terms live in api/index.json, LICENSE-DATA and the README instead.
+  const cols = ['id', 'model', 'company', 'family', 'kind', 'date', 'tags',
+    'open_weights', 'context_window', 'parameter_count', 'provenance_status',
+    'confidence', 'sources', 'url'];
+  const cell = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
   const csv = [cols.join(',')].concat(releases.map((r) => [
     r.id, r.model, r.company, r.family, r.kind, isoDate(r), r.tags.join('|'),
-    r.access.open_weights, r.provenance.status, r.sources[0]?.url ?? '',
-  ].map((v) => `"${String(v).replace(/"/g, '""')}"`).join(',')));
+    r.access.open_weights, r.technical.context_window ?? '', r.technical.parameter_count ?? '',
+    r.provenance.status, r.provenance.confidence,
+    r.sources.map((x) => x.url).join('|'), `${BASE_URL}/models/${r.id}/`,
+  ].map(cell).join(',')));
   writeFileSync(join(OUT, 'llm-releases.csv'), csv.join('\n') + '\n');
-  console.log('  + bulk export written (api/, csv)');
+
+  console.log('  + export: api/index.json, api/models.json, api/companies.json, llm-releases.csv');
 }
 
 console.log(`built ${releases.length} model pages · ${byCompany.size} company pages · ` +

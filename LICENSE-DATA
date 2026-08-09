@@ -1,0 +1,37 @@
+LLM World release dataset
+Copyright (c) 2026 LLM World
+
+Licensed under the Creative Commons Attribution 4.0 International Licence
+(CC BY 4.0): https://creativecommons.org/licenses/by/4.0/
+
+You are free to share and adapt this dataset, including commercially,
+provided you give appropriate credit, link to the licence, and indicate if
+changes were made.
+
+Suggested attribution:
+
+    Release dates and metadata from LLM World
+    https://mayoorrnikam.github.io/llm-world/ — CC BY 4.0
+
+WHAT THIS COVERS
+
+  data/llm-releases.json, and the api/*.json and llm-releases.csv exports
+  generated from it.
+
+WHAT THIS DOES NOT COVER
+
+  The linked sources themselves. Each record cites the provider's own
+  announcement, paper or model card; those pages belong to their publishers
+  and are linked, not reproduced.
+
+  Company names, logos and model names are trademarks of their respective
+  owners and are used here to identify the releases being catalogued.
+
+ACCURACY
+
+  Records carry a provenance status (verified, partially_verified,
+  unverified, conflicting, estimated) and a confidence score. "Verified"
+  means a primary source was checked. Undisclosed figures are recorded as
+  null rather than estimated. The dataset is offered as-is, with no warranty
+  of accuracy or completeness — check the cited source before relying on any
+  individual figure.

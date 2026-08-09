@@ -113,12 +113,42 @@ estimates:
 node scripts/apply-specs.mjs specs.json   # merge researched values + sources
 ```
 
-### Bulk export is off
+## Open data
 
-`--export` writes `api/models.json`, `api/companies.json` and a CSV. It is
-**not enabled**, and nothing machine-readable beyond the site's own
-`data/llm-releases.json` is published. Turning it on is a deliberate call,
-not a build side effect.
+The dataset is published for reuse under **CC BY 4.0** — use it, adapt it,
+even commercially, provided you credit LLM World and link back.
+
+| Endpoint | What it is |
+|---|---|
+| [`/api/index.json`](https://mayoorrnikam.github.io/llm-world/api/index.json) | Discovery document: licence, counts, endpoint list |
+| [`/api/models.json`](https://mayoorrnikam.github.io/llm-world/api/models.json) | Every release with full schema, sources and provenance |
+| [`/api/companies.json`](https://mayoorrnikam.github.io/llm-world/api/companies.json) | Per-lab counts, open-weights share, first/latest release |
+| [`/llm-releases.csv`](https://mayoorrnikam.github.io/llm-world/llm-releases.csv) | Flat table for spreadsheets |
+
+Every JSON payload carries its own `license`, `attribution` and
+`schema_version`, so the terms travel with the data. **A breaking schema
+change bumps `schema_version`** — pin against it if you depend on the shape.
+
+```
+Release dates and metadata from LLM World
+https://mayoorrnikam.github.io/llm-world/ — CC BY 4.0
+```
+
+Undisclosed figures are `null`, never estimated. Check a record's `sources[]`
+and `provenance.status` before relying on any individual figure.
+
+## Licensing
+
+| Part | Licence |
+|---|---|
+| Code (`index.html`, `app.js`, `styles.css`, `scripts/`) | MIT — `LICENSE` |
+| Dataset (`data/`, and the API/CSV built from it) | CC BY 4.0 — `LICENSE-DATA` |
+| Company logos | [lobe-icons](https://github.com/lobehub/lobe-icons), MIT |
+| Capability icons | [Lucide](https://lucide.dev), ISC |
+
+Company names, logos and model names are trademarks of their owners, used to
+identify the releases catalogued here. Linked sources belong to their
+publishers and are linked, never reproduced.
 
 ## Validation
 
