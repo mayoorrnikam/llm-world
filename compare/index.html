@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0e131c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
+<title>Compare LLM releases side by side | LLM World</title>
+<meta name="description" content="Compare up to five large language model releases on date, lab, family, weights, context window and parameters.">
+<link rel="canonical" href="https://mayoorrnikam.github.io/llm-world/compare/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compare LLM releases side by side | LLM World">
+<meta property="og:description" content="Compare up to five large language model releases on date, lab, family, weights, context window and parameters.">
+<link rel="icon" href="../favicon.svg">
+<link rel="stylesheet" href="../styles.css">
+<script>try{var t=localStorage.getItem('llm-world-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+
+</head>
+<body class="doc">
+<svg class="sprite" aria-hidden="true" focusable="false"><defs></defs></svg>
+<header class="doc-head">
+  <a class="doc-brand" href="../"><span class="brand-mark" aria-hidden="true"></span><span>LLM&nbsp;WORLD</span></a>
+  <nav class="doc-nav-top" aria-label="Sections">
+    <a href="../">Timeline</a>
+    <a href="../models/">Models</a>
+    <a href="../companies/">Companies</a>
+    <a href="../latest/">Latest</a>
+    <a href="../analytics/">Analytics</a>
+    <a href="../compare/">Compare</a>
+  </nav>
+</header>
+<main class="doc-main">
+
+<nav class="crumbs"><a href="../">Home</a> › <span>Compare</span></nav>
+<div class="doc-hero"><div>
+  <h1>Compare models</h1>
+  <p class="doc-sub">Pick two to five releases and read them side by side</p>
+</div></div>
+
+<div class="cmp-pickers" id="cmp-pickers"></div>
+<p class="chart-note" id="cmp-hint">Add a model to begin.</p>
+
+<div class="cmp-scroll"><table class="cmp-table" id="cmp-table"></table></div>
+
+<noscript><p class="doc-note">The comparison picker needs JavaScript. Every model's
+figures are also on its own page — start from <a href="../models/">the model index</a>.</p></noscript>
+
+<p class="doc-cta"><a href="../analytics/">See release analytics →</a></p>
+
+<script type="module">
+const RES = await fetch('../data/llm-releases.json', { cache: 'no-store' })
+  .then((r) => r.json()).then((d) => d.releases).catch(() => []);
+const byId = new Map(RES.map((r) => [r.id, r]));
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const date = (r) => `${MONTHS[r.month - 1]} ${r.day || ''}, ${r.year}`.replace(' ,', ',');
+const params = (n) => n == null ? 'Not disclosed'
+  : n >= 1e12 ? `${+(n / 1e12).toFixed(2)}T`
+  : n >= 1e9 ? `${+(n / 1e9).toFixed(n < 1e10 ? 1 : 0)}B`
+  : n >= 1e6 ? `${Math.round(n / 1e6)}M` : String(n);
+const tokens = (n) => n == null ? 'Not disclosed'
+  : n >= 1e6 ? `${+(n / 1e6).toFixed(2)}M` : `${Math.round(n / 1000)}K`;
+
+const params = new URLSearchParams(location.search);
+let picked = (params.get('m') || '').split(',').filter((id) => byId.has(id)).slice(0, 5);
+if (!picked.length) picked = RES.slice(-2).map((r) => r.id);
+
+const ROWS = [
+  ['Company',        (r) => r.company],
+  ['Released',       (r) => date(r)],
+  ['Family',         (r) => r.family],
+  ['Weights',        (r) => r.access.open_weights ? 'Open weights' : 'Proprietary'],
+  ['Licence',        (r) => r.access.license ?? 'Not recorded'],
+  ['Context window', (r) => r.technical.context_window ? tokens(r.technical.context_window) + ' tokens' : 'Not disclosed'],
+  ['Parameters',     (r) => params(r.technical.parameter_count)],
+  ['Capabilities',   (r) => r.tags.join(', ') || '—'],
+  ['Record status',  (r) => r.provenance.status.replace(/_/g, ' ')],
+];
+
+function sync() {
+  const p = new URLSearchParams(location.search);
+  p.set('m', picked.join(','));
+  history.replaceState(null, '', location.pathname + '?' + p);
+}
+
+function render() {
+  const models = picked.map((id) => byId.get(id)).filter(Boolean);
+
+  document.getElementById('cmp-pickers').replaceChildren(
+    ...models.map((r, i) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'cmp-pick';
+      const sel = document.createElement('select');
+      sel.setAttribute('aria-label', `Model ${i + 1}`);
+      for (const o of [...RES].reverse()) {
+        const opt = document.createElement('option');
+        opt.value = o.id;
+        opt.textContent = `${o.model} — ${o.company}`;
+        if (o.id === r.id) opt.selected = true;
+        sel.appendChild(opt);
+      }
+      sel.addEventListener('change', () => { picked[i] = sel.value; sync(); render(); });
+      const del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'cmp-remove';
+      del.textContent = '✕';
+      del.setAttribute('aria-label', `Remove ${r.model}`);
+      del.disabled = models.length <= 2;
+      del.addEventListener('click', () => { picked.splice(i, 1); sync(); render(); });
+      wrap.append(sel, del);
+      return wrap;
+    }),
+    ...(models.length < 5 ? [(() => {
+      const add = document.createElement('button');
+      add.type = 'button';
+      add.className = 'cmp-add';
+      add.textContent = '+ Add model';
+      add.addEventListener('click', () => {
+        const next = RES.slice().reverse().find((r) => !picked.includes(r.id));
+        if (next) { picked.push(next.id); sync(); render(); }
+      });
+      return add;
+    })()] : []),
+  );
+
+  document.getElementById('cmp-hint').textContent =
+    `Comparing ${models.length} of ${RES.length} tracked releases. Up to five at a time.`;
+
+  const t = document.getElementById('cmp-table');
+  t.replaceChildren();
+  const head = t.insertRow();
+  head.insertCell().outerHTML = '<th scope="col"></th>';
+  for (const r of models) {
+    const th = document.createElement('th');
+    th.scope = 'col';
+    const a = document.createElement('a');
+    a.href = `../models/${r.id}/`;
+    a.textContent = r.model;
+    th.appendChild(a);
+    head.appendChild(th);
+  }
+  for (const [label, get] of ROWS) {
+    const tr = t.insertRow();
+    const th = document.createElement('th');
+    th.scope = 'row';
+    th.textContent = label;
+    tr.appendChild(th);
+    // Highlight a row only when the values actually differ.
+    const vals = models.map(get);
+    const same = vals.every((v) => v === vals[0]);
+    for (const v of vals) {
+      const td = tr.insertCell();
+      td.textContent = v;
+      if (!same) td.dataset.differs = 'true';
+    }
+  }
+}
+
+render();
+</script>
+
+</main>
+<footer class="doc-foot">
+  <p>Data: <a href="../">LLM World</a> · 85 tracked releases · updated 2026-08-08</p>
+</footer>
+</body>
+</html>

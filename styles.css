@@ -1034,7 +1034,51 @@ code, kbd {
 .site-footer {
   max-width: var(--shell);
   margin-inline: auto;
-  padding: 26px var(--pad) 46px;
+  margin-top: 40px;
+  padding: 30px var(--pad) 52px;
+  border-top: 1px solid var(--line);
+}
+
+.foot-grid {
+  display: grid;
+  gap: 26px 40px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  align-items: start;
+}
+
+.foot-col { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+
+.foot-title {
+  margin: 0 0 3px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.foot-col a {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-decoration: none;
+  width: fit-content;
+}
+.foot-col a:hover { color: var(--accent); }
+
+.foot-yearlinks { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.foot-yearlinks a {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.foot-note {
+  margin: 2px 0 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 30ch;
 }
 
 .data-status {
@@ -1401,7 +1445,8 @@ code, kbd {
 }
 .doc-mark { display: grid; place-items: center; flex: none; }
 .doc-mark .glyph { width: 34px; height: 34px; }
-.doc-mark.sm .glyph { width: 15px; height: 15px; }
+.doc-mark.sm { width: 20px; }
+.doc-mark.sm .glyph { width: 17px; height: 17px; }
 
 .doc-hero h1 {
   margin: 0;
@@ -1453,27 +1498,67 @@ code, kbd {
 
 .doc-sources, .doc-list, .doc-lineage { margin: 0; padding: 0; list-style: none; }
 
-.doc-sources li, .doc-list li, .doc-lineage li {
-  display: flex;
+/* Real columns. These were flex rows with `margin-left:auto` on the trailing
+   spans, which right-aligned them as a group and left the middle column
+   ragged — every row's company name ended at a different x. A grid with
+   declared tracks makes the columns actually line up. */
+.doc-list li {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) minmax(0, 168px) 132px;
   align-items: center;
-  gap: 10px;
-  padding: 9px 0;
+  gap: 14px;
+  padding: 9px 2px;
   font-size: 13.5px;
   border-bottom: 1px solid var(--line-soft);
 }
-/* Only trailing metadata is pushed right — the leading glyph is a span too,
-   so it must be excluded or the whole row drifts to the centre. */
-.doc-sources li span:not(.doc-mark),
-.doc-list li span:not(.doc-mark),
-.doc-lineage li span:not(.doc-mark) {
-  margin-left: auto;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
+.doc-list li:hover { background: color-mix(in srgb, var(--accent) 4%, transparent); }
+
+/* Two-metadata variant (companies index: count + latest date). */
+.doc-list.cols-3 li { grid-template-columns: 20px minmax(0, 1fr) 120px 168px; }
+
+.cell-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
 }
-.doc-list li span:not(.doc-mark) + span { margin-left: 14px; }
-.doc-mark.sm { width: 16px; }
+
+.cell-meta {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12.5px;
+  color: var(--text-dim);
+}
+
+.cell-num {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Sources and lineage are two-column: label left, note right. */
+.doc-sources li, .doc-lineage li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 2px;
+  font-size: 13.5px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.doc-sources li span, .doc-lineage li span {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  text-align: right;
+}
 .doc-lineage li[aria-current="true"] { color: var(--accent); }
 
 .doc-main a { color: var(--accent); text-underline-offset: 3px; }
@@ -1502,9 +1587,13 @@ code, kbd {
 .doc-foot p { margin: 0; }
 
 @media (max-width: 620px) {
-  .doc-table th { width: 130px; }
-  .doc-list li { flex-wrap: wrap; gap: 4px 10px; }
-  .doc-list li span { margin-left: 0; }
+  .doc-table th { width: 118px; }
+  .doc-list li, .doc-list.cols-3 li {
+    grid-template-columns: 20px minmax(0, 1fr) auto;
+    gap: 4px 12px;
+  }
+  .cell-meta { grid-column: 2 / 3; font-size: 12px; }
+  .cell-num  { grid-column: 3 / 4; grid-row: 1; }
 }
 
 /* Route out of the app into the generated pages. Without these the static
@@ -1518,20 +1607,6 @@ code, kbd {
   text-underline-offset: 3px;
 }
 
-.site-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 16px;
-  margin-bottom: 14px;
-  font-size: 12.5px;
-}
-.site-nav a {
-  color: var(--text-dim);
-  text-decoration: none;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 1px;
-}
-.site-nav a:hover { color: var(--accent); border-bottom-color: var(--accent-line); }
 
 .doc-nav-top {
   display: flex;
@@ -1548,4 +1623,176 @@ code, kbd {
 @media (max-width: 560px) {
   .doc-head { flex-wrap: wrap; gap: 10px; }
   .doc-nav-top { gap: 4px 14px; }
+}
+
+/* --------------------------------------------------------------------------
+   Charts (analytics)
+
+   Every chart here encodes magnitude, so each takes ONE hue rather than a
+   categorical palette. The only two-class chart — open weights vs
+   proprietary — carries a legend and a direct percentage label, so it never
+   depends on colour alone.
+   -------------------------------------------------------------------------- */
+
+.chart-note {
+  /* Prose by default. Flex here split inline <strong> onto its own line,
+     fragmenting the sentence. The legend variant opts back in below. */
+  margin: 0 0 14px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+.chart-note:has(.key) { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.key { display: inline-flex; align-items: center; gap: 6px; }
+.key-swatch { width: 11px; height: 11px; border-radius: 3px; }
+.key-swatch.open { background: var(--accent); }
+.key-swatch.closed { background: color-mix(in srgb, var(--muted) 45%, transparent); }
+
+.chart-rows { display: flex; flex-direction: column; gap: 3px; margin-bottom: 8px; }
+
+.chart-row {
+  display: grid;
+  grid-template-columns: minmax(0, 190px) minmax(0, 1fr) 84px;
+  align-items: center;
+  gap: 14px;
+  padding: 4px 2px;
+}
+
+.chart-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.chart-label a { color: inherit; text-decoration: none; }
+.chart-label a:hover { color: var(--accent); }
+
+.chart-track {
+  display: flex;
+  height: 15px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--muted) 12%, transparent);
+  overflow: hidden;
+}
+
+.chart-bar {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+  min-width: 3px;
+}
+/* 2px surface gap between the two stacked classes */
+.chart-track.split .chart-bar.open { border-radius: 4px 0 0 4px; margin-right: 2px; }
+.chart-bar.closed {
+  border-radius: 0 4px 4px 0;
+  background: color-mix(in srgb, var(--muted) 45%, transparent);
+}
+
+.chart-value {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-dim);
+}
+
+.chart-cols {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(8px, 3vw, 28px);
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+  overflow-x: auto;
+}
+
+.chart-col { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1 1 0; min-width: 44px; }
+
+.chart-colvalue {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.chart-colbar {
+  width: 100%;
+  max-width: 76px;
+  border-radius: 4px 4px 2px 2px;
+  background: var(--accent);
+}
+
+.chart-collabel {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   Compare
+   -------------------------------------------------------------------------- */
+
+.cmp-pickers { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+
+.cmp-pick { display: inline-flex; align-items: center; gap: 4px; }
+
+.cmp-pick select {
+  max-width: 260px;
+  padding: 7px 10px;
+  font-family: inherit;
+  font-size: 12.5px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+
+.cmp-remove, .cmp-add {
+  padding: 7px 11px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  cursor: pointer;
+}
+.cmp-remove:hover:not(:disabled), .cmp-add:hover { color: var(--text); background: var(--panel-3); }
+.cmp-remove:disabled { opacity: 0.35; cursor: default; }
+.cmp-add { color: var(--accent); border-color: var(--accent-line); background: transparent; }
+
+.cmp-scroll { overflow-x: auto; }
+
+.cmp-table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.cmp-table th, .cmp-table td {
+  padding: 10px 14px 10px 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line-soft);
+}
+.cmp-table tr:first-child th { font-size: 14px; padding-bottom: 12px; }
+.cmp-table th[scope="row"] {
+  width: 150px;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.cmp-table td { color: var(--text-dim); font-variant-numeric: tabular-nums; }
+/* Only rows where the models actually differ get emphasis. */
+.cmp-table td[data-differs="true"] { color: var(--text); font-weight: 600; }
+
+@media (max-width: 620px) {
+  .chart-row { grid-template-columns: minmax(0, 120px) minmax(0, 1fr) 62px; gap: 10px; }
+  .chart-label { font-size: 12px; }
 }

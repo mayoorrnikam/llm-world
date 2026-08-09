@@ -197,15 +197,31 @@
   </main>
 
   <footer class="site-footer">
-    <nav class="site-nav" aria-label="Browse">
-      <a href="latest/">Latest releases</a>
-      <a href="models/">All models</a>
-      <a href="companies/">Labs</a>
-      <a href="timeline/2026/">2026</a>
-      <a href="timeline/2025/">2025</a>
-      <a href="timeline/2024/">2024</a>
-    </nav>
-    <p class="data-status" id="data-status">loading <code>data/llm-releases.json</code>…</p>
+    <div class="foot-grid">
+      <nav class="foot-col" aria-labelledby="foot-browse">
+        <h2 class="foot-title" id="foot-browse">Browse</h2>
+        <a href="latest/">Latest releases</a>
+        <a href="models/">All models</a>
+        <a href="companies/">Labs</a>
+      </nav>
+
+      <nav class="foot-col" aria-labelledby="foot-analyse">
+        <h2 class="foot-title" id="foot-analyse">Analyse</h2>
+        <a href="analytics/">Analytics</a>
+        <a href="compare/">Compare models</a>
+      </nav>
+
+      <nav class="foot-col foot-years" aria-labelledby="foot-years">
+        <h2 class="foot-title" id="foot-years">By year</h2>
+        <div class="foot-yearlinks" id="foot-yearlinks"></div>
+      </nav>
+
+      <div class="foot-col">
+        <h2 class="foot-title">Data</h2>
+        <p class="data-status" id="data-status">loading <code>data/llm-releases.json</code>…</p>
+        <p class="foot-note">Curated from primary sources. Every release links to its own.</p>
+      </div>
+    </div>
   </footer>
 
   <dialog class="modal" id="modal" aria-labelledby="modal-title">

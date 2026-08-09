@@ -112,7 +112,7 @@ async function init() {
     'modal-note', 'modal-source', 'modal-detail-link',
     'modal-prev', 'modal-next',
     'modal-copy', 'help', 'help-btn', 'help-close', 'theme-toggle', 'refresh-btn',
-    'live']) {
+    'foot-yearlinks', 'live']) {
     els[camel(id)] = el(id);
   }
 
@@ -133,6 +133,7 @@ async function init() {
   }
 
   buildYearSelector();
+  buildFooterYears();
   buildLegend();
   buildTagBar();
   render();
@@ -639,6 +640,16 @@ function buildYearSelector() {
 
 const yearOrder = () => [...state.years, 'all'];
 
+/** Footer year links, generated so a new year in the data appears here too. */
+function buildFooterYears() {
+  els.footYearlinks.replaceChildren(...[...state.years].reverse().map((y) => {
+    const a = document.createElement('a');
+    a.href = `timeline/${y}/`;
+    a.textContent = String(y);
+    return a;
+  }));
+}
+
 function stepYear(delta, focus = false) {
   const order = yearOrder();
   const i = order.indexOf(state.year);
@@ -984,6 +995,7 @@ async function refreshData(silent = false) {
   if (state.year !== 'all' && !state.years.includes(state.year)) state.year = defaultYear();
 
   buildYearSelector();
+  buildFooterYears();
   buildLegend();
   buildTagBar();
   render();

@@ -77,6 +77,16 @@ const glyph = (company) =>
   `<svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false" ` +
   `style="--c:var(--c-${slugFor(company)})"><use href="#ic-${slugFor(company)}"></use></svg>`;
 
+/** 405000000000 -> "405B". Raw digits are unreadable at a glance. */
+const params = (n) => n == null ? 'Not disclosed'
+  : n >= 1e12 ? `${+(n / 1e12).toFixed(2)}T`
+  : n >= 1e9 ? `${+(n / 1e9).toFixed(n < 1e10 ? 1 : 0)}B`
+  : n >= 1e6 ? `${Math.round(n / 1e6)}M` : String(n);
+
+const tokens = (n) => n == null ? 'Not disclosed'
+  : n >= 1e6 ? `${+(n / 1e6).toFixed(2)}M tokens`
+  : `${Math.round(n / 1000)}K tokens`;
+
 const daysBetween = (a, b) => Math.round(
   (Date.UTC(b.year, b.month - 1, b.day || 1) - Date.UTC(a.year, a.month - 1, a.day || 1)) / 86400000);
 
@@ -116,6 +126,8 @@ ${spriteFor(sprites)}
     <a href="${up}models/">Models</a>
     <a href="${up}companies/">Companies</a>
     <a href="${up}latest/">Latest</a>
+    <a href="${up}analytics/">Analytics</a>
+    <a href="${up}compare/">Compare</a>
   </nav>
 </header>
 <main class="doc-main">
@@ -150,8 +162,8 @@ function modelPage(r) {
     ['Type', r.kind === 'product' ? 'Product' : 'Model'],
     ['Weights', r.access.open_weights ? 'Open weights' : 'Proprietary'],
     ['Licence', r.access.license ?? 'Not recorded'],
-    ['Context window', r.technical.context_window ? `${r.technical.context_window.toLocaleString()} tokens` : 'Not disclosed'],
-    ['Parameters', r.technical.parameter_count ? r.technical.parameter_count.toLocaleString() : 'Not disclosed'],
+    ['Context window', tokens(r.technical.context_window)],
+    ['Parameters', params(r.technical.parameter_count)],
   ];
 
   const body = `
@@ -235,8 +247,8 @@ function companyPage(name, list) {
 </div>
 
 <h2>Releases</h2>
-<ol class="doc-list">${sorted.map((r) =>
-  `<li><a href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span>${fullDate(r)}</span></li>`).join('')}</ol>
+<ol class="doc-list cols-3">${sorted.map((r) =>
+  `<li><span class="doc-mark sm">${glyph(r.company)}</span><a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.family)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>
 
 <p class="doc-cta"><a href="../../?company=${encodeURIComponent(name)}&year=all">Filter the timeline to ${esc(name)} →</a></p>
 `;
@@ -263,7 +275,7 @@ function yearPage(year, list) {
 ${[...byMonth.keys()].sort((a, b) => a - b).map((m) => `
 <h2>${MONTHS[m - 1]} ${year}</h2>
 <ol class="doc-list">${byMonth.get(m).map((r) =>
-  `<li><span class="doc-mark sm">${glyph(r.company)}</span><a href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span>${esc(r.company)}</span><span>${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
+  `<li><span class="doc-mark sm">${glyph(r.company)}</span><a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
 <p class="doc-cta"><a href="../../?year=${year}">See ${year} on the interactive timeline →</a></p>
 `;
   return page({
@@ -291,7 +303,7 @@ function modelsIndexPage() {
 ${[...byYear.keys()].sort((a, b) => b - a).map((y) => `
 <h2><a href="../timeline/${y}/">${y}</a> — ${byYear.get(y).length} releases</h2>
 <ol class="doc-list">${byYear.get(y).map((r) =>
-  `<li><span class="doc-mark sm">${glyph(r.company)}</span><a href="${esc(r.id)}/">${esc(r.model)}</a><span>${esc(r.company)}</span><span>${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
+  `<li><span class="doc-mark sm">${glyph(r.company)}</span><a class="cell-name" href="${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
 `;
   return page({
     title: 'All tracked LLM releases | LLM World',
@@ -312,9 +324,9 @@ function companiesIndexPage(byCompany) {
   <h1>Labs</h1>
   <p class="doc-sub">${rows.length} organisations, ranked by tracked releases</p>
 </div></div>
-<ol class="doc-list">${rows.map(([name, list]) => {
+<ol class="doc-list cols-3">${rows.map(([name, list]) => {
   const latest = [...list].sort((a, b) => b.year - a.year || b.month - a.month || (b.day || 0) - (a.day || 0))[0];
-  return `<li><span class="doc-mark sm">${glyph(name)}</span><a href="${companySlug(name)}/">${esc(name)}</a><span>${list.length} release${list.length === 1 ? '' : 's'}</span><span>latest ${fullDate(latest)}</span></li>`;
+  return `<li><span class="doc-mark sm">${glyph(name)}</span><a class="cell-name" href="${companySlug(name)}/">${esc(name)}</a><span class="cell-meta">${list.length} release${list.length === 1 ? '' : 's'}</span><span class="cell-num">${fullDate(latest)}</span></li>`;
 }).join('')}</ol>
 `;
   return page({
@@ -338,7 +350,7 @@ function latestPage() {
 </div></div>
 <ol class="doc-list">${recent.map((r) => {
   const prev = predecessorOf(r);
-  return `<li><span class="doc-mark sm">${glyph(r.company)}</span><a href="../models/${esc(r.id)}/">${esc(r.model)}</a><span>${esc(r.company)}</span><span>${fullDate(r)}${
+  return `<li><span class="doc-mark sm">${glyph(r.company)}</span><a class="cell-name" href="../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}${
     prev ? ` · +${daysBetween(prev, r)}d` : ''}</span></li>`;
 }).join('')}</ol>
 <p class="doc-cta"><a href="../models/">Browse all ${releases.length} releases →</a></p>
@@ -349,6 +361,297 @@ function latestPage() {
     canonical: `${BASE_URL}/latest/`,
     depth: 1,
     sprites: [...new Set(recent.map((r) => slugFor(r.company)))],
+    body,
+  });
+}
+
+
+/* ---------------------------------------------------------------- charts */
+
+/** Horizontal bar row. One hue: these all encode magnitude, not identity. */
+function barRows(rows, { unit = '', width = 560 } = {}) {
+  const max = Math.max(1, ...rows.map((r) => r.value));
+  return `<div class="chart-rows">${rows.map((r) => `
+    <div class="chart-row">
+      <span class="chart-label">${r.href ? `<a href="${r.href}">${esc(r.name)}</a>` : esc(r.name)}</span>
+      <span class="chart-track"><span class="chart-bar" style="width:${(r.value / max * 100).toFixed(1)}%"></span></span>
+      <span class="chart-value">${r.display ?? r.value}${unit}</span>
+    </div>`).join('')}</div>`;
+}
+
+/** Column chart for a time series. Values are labelled directly, so the
+ *  chart needs no axis furniture. */
+function columns(series) {
+  const max = Math.max(1, ...series.map((s) => s.value));
+  return `<div class="chart-cols">${series.map((s) => `
+    <div class="chart-col">
+      <span class="chart-colvalue">${s.value}</span>
+      <span class="chart-colbar" style="height:${Math.max(3, s.value / max * 150)}px"></span>
+      <span class="chart-collabel">${esc(s.label)}</span>
+    </div>`).join('')}</div>`;
+}
+
+/** Two-series stacked bar: open weights vs proprietary. Exactly two classes,
+ *  both direct-labelled, with a legend — identity never rests on colour. */
+function openShare(byYear) {
+  return `<div class="chart-rows">${[...byYear.keys()].sort((a, b) => a - b).map((y) => {
+    const list = byYear.get(y);
+    const open = list.filter((r) => r.access.open_weights).length;
+    const pct = Math.round(open / list.length * 100);
+    return `
+    <div class="chart-row">
+      <span class="chart-label"><a href="../timeline/${y}/">${y}</a></span>
+      <span class="chart-track split">
+        <span class="chart-bar open" style="width:${pct}%"></span>
+        <span class="chart-bar closed" style="width:${100 - pct}%"></span>
+      </span>
+      <span class="chart-value">${pct}% open</span>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+/** Peak disclosed context window per year. Log-scaled because 2K→1.05M on a
+ *  linear axis would flatten everything before 2024 to nothing. */
+function contextGrowth(byYear) {
+  const rows = [...byYear.keys()].sort((a, b) => a - b).map((y) => {
+    const vals = byYear.get(y).map((r) => r.technical.context_window).filter(Boolean);
+    if (!vals.length) return null;
+    const max = Math.max(...vals);
+    const top = byYear.get(y).find((r) => r.technical.context_window === max);
+    return { year: y, max, model: top.model, id: top.id };
+  }).filter(Boolean);
+  if (!rows.length) return '';
+
+  const lo = Math.log10(Math.min(...rows.map((r) => r.max)));
+  const hi = Math.log10(Math.max(...rows.map((r) => r.max)));
+  const fmt = (n) => n >= 1e6 ? `${(n / 1e6).toFixed(2)}M` : n >= 1000 ? `${Math.round(n / 1000)}K` : String(n);
+
+  return `<div class="chart-rows">${rows.map((r) => `
+    <div class="chart-row">
+      <span class="chart-label"><a href="../models/${esc(r.id)}/">${r.year} · ${esc(r.model)}</a></span>
+      <span class="chart-track"><span class="chart-bar" style="width:${
+        (5 + ((Math.log10(r.max) - lo) / Math.max(0.001, hi - lo)) * 95).toFixed(1)}%"></span></span>
+      <span class="chart-value">${fmt(r.max)}</span>
+    </div>`).join('')}</div>`;
+}
+
+function analyticsPage(byCompany, byYear) {
+  const years = [...byYear.keys()].sort((a, b) => a - b);
+
+  const perYear = years.map((y) => ({ label: String(y), value: byYear.get(y).length }));
+
+  const perCompany = [...byCompany]
+    .map(([name, l]) => ({ name, value: l.length, href: `../companies/${companySlug(name)}/` }))
+    .sort((a, b) => b.value - a.value);
+
+  // Median gap between consecutive releases, for labs with enough history
+  // for a median to mean anything.
+  const cadence = [...byCompany]
+    .map(([name, l]) => {
+      const asc = [...l].sort((a, b) => a.year - b.year || a.month - b.month || (a.day || 0) - (b.day || 0));
+      const gaps = asc.slice(1).map((r, i) => daysBetween(asc[i], r));
+      if (gaps.length < 2) return null;
+      const sorted = [...gaps].sort((a, b) => a - b);
+      const med = sorted.length % 2
+        ? sorted[(sorted.length - 1) / 2]
+        : Math.round((sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2);
+      return { name, value: med, display: med, href: `../companies/${companySlug(name)}/` };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.value - b.value);
+
+  const tagCounts = new Map();
+  for (const r of releases) for (const t of r.tags) tagCounts.set(t, (tagCounts.get(t) || 0) + 1);
+  const perTag = [...tagCounts].map(([name, value]) => ({ name, value }))
+    .sort((a, b) => b.value - a.value);
+
+  const body = `
+<nav class="crumbs"><a href="../">Home</a> › <span>Analytics</span></nav>
+<div class="doc-hero"><div>
+  <h1>Analytics</h1>
+  <p class="doc-sub">${releases.length} tracked releases · ${byCompany.size} labs · ${years[0]}–${years.at(-1)}</p>
+</div></div>
+
+<h2>Releases per year</h2>
+<p class="chart-note">How many tracked releases landed each year. ${years.at(-1)} is still in progress.</p>
+${columns(perYear)}
+
+<h2>Releases per lab</h2>
+<p class="chart-note">Tracked releases by organisation, most active first.</p>
+${barRows(perCompany)}
+
+<h2>Open weights over time</h2>
+<p class="chart-note">
+  <span class="key"><span class="key-swatch open"></span>Open weights</span>
+  <span class="key"><span class="key-swatch closed"></span>Proprietary</span>
+</p>
+${openShare(byYear)}
+
+<h2>Median days between releases</h2>
+<p class="chart-note">Typical gap between consecutive releases from the same lab. Only labs with three or more tracked releases appear, since a median needs at least two gaps.</p>
+${barRows(cadence, { unit: 'd' })}
+
+<h2>Largest context window by year</h2>
+<p class="chart-note">The biggest disclosed context window among that year's tracked releases.
+Bars are on a <strong>log scale</strong> — the range spans three orders of magnitude, so a
+linear axis would render the early years invisible. Read the labels, not the widths.</p>
+${contextGrowth(byYear)}
+
+<h2>Capabilities</h2>
+<p class="chart-note">How often each capability is tagged across all tracked releases.</p>
+${barRows(perTag)}
+
+<p class="doc-cta"><a href="../compare/">Compare models side by side →</a></p>
+`;
+  return page({
+    title: 'LLM release analytics — cadence, labs, open weights | LLM World',
+    description: `Release frequency, lab activity, open-weights share and release cadence across ${releases.length} tracked large language model releases.`,
+    canonical: `${BASE_URL}/analytics/`,
+    depth: 1,
+    sprites: [],
+    body,
+  });
+}
+
+
+/** Side-by-side comparison. The picker runs in the browser against the same
+ *  JSON the app uses; with JavaScript off the page still explains itself and
+ *  links into the model index. */
+function comparePage() {
+  const body = `
+<nav class="crumbs"><a href="../">Home</a> › <span>Compare</span></nav>
+<div class="doc-hero"><div>
+  <h1>Compare models</h1>
+  <p class="doc-sub">Pick two to five releases and read them side by side</p>
+</div></div>
+
+<div class="cmp-pickers" id="cmp-pickers"></div>
+<p class="chart-note" id="cmp-hint">Add a model to begin.</p>
+
+<div class="cmp-scroll"><table class="cmp-table" id="cmp-table"></table></div>
+
+<noscript><p class="doc-note">The comparison picker needs JavaScript. Every model's
+figures are also on its own page — start from <a href="../models/">the model index</a>.</p></noscript>
+
+<p class="doc-cta"><a href="../analytics/">See release analytics →</a></p>
+
+<script type="module">
+const RES = await fetch('../data/llm-releases.json', { cache: 'no-store' })
+  .then((r) => r.json()).then((d) => d.releases).catch(() => []);
+const byId = new Map(RES.map((r) => [r.id, r]));
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const date = (r) => \`\${MONTHS[r.month - 1]} \${r.day || ''}, \${r.year}\`.replace(' ,', ',');
+const params = (n) => n == null ? 'Not disclosed'
+  : n >= 1e12 ? \`\${+(n / 1e12).toFixed(2)}T\`
+  : n >= 1e9 ? \`\${+(n / 1e9).toFixed(n < 1e10 ? 1 : 0)}B\`
+  : n >= 1e6 ? \`\${Math.round(n / 1e6)}M\` : String(n);
+const tokens = (n) => n == null ? 'Not disclosed'
+  : n >= 1e6 ? \`\${+(n / 1e6).toFixed(2)}M\` : \`\${Math.round(n / 1000)}K\`;
+
+const params = new URLSearchParams(location.search);
+let picked = (params.get('m') || '').split(',').filter((id) => byId.has(id)).slice(0, 5);
+if (!picked.length) picked = RES.slice(-2).map((r) => r.id);
+
+const ROWS = [
+  ['Company',        (r) => r.company],
+  ['Released',       (r) => date(r)],
+  ['Family',         (r) => r.family],
+  ['Weights',        (r) => r.access.open_weights ? 'Open weights' : 'Proprietary'],
+  ['Licence',        (r) => r.access.license ?? 'Not recorded'],
+  ['Context window', (r) => r.technical.context_window ? tokens(r.technical.context_window) + ' tokens' : 'Not disclosed'],
+  ['Parameters',     (r) => params(r.technical.parameter_count)],
+  ['Capabilities',   (r) => r.tags.join(', ') || '—'],
+  ['Record status',  (r) => r.provenance.status.replace(/_/g, ' ')],
+];
+
+function sync() {
+  const p = new URLSearchParams(location.search);
+  p.set('m', picked.join(','));
+  history.replaceState(null, '', location.pathname + '?' + p);
+}
+
+function render() {
+  const models = picked.map((id) => byId.get(id)).filter(Boolean);
+
+  document.getElementById('cmp-pickers').replaceChildren(
+    ...models.map((r, i) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'cmp-pick';
+      const sel = document.createElement('select');
+      sel.setAttribute('aria-label', \`Model \${i + 1}\`);
+      for (const o of [...RES].reverse()) {
+        const opt = document.createElement('option');
+        opt.value = o.id;
+        opt.textContent = \`\${o.model} — \${o.company}\`;
+        if (o.id === r.id) opt.selected = true;
+        sel.appendChild(opt);
+      }
+      sel.addEventListener('change', () => { picked[i] = sel.value; sync(); render(); });
+      const del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'cmp-remove';
+      del.textContent = '✕';
+      del.setAttribute('aria-label', \`Remove \${r.model}\`);
+      del.disabled = models.length <= 2;
+      del.addEventListener('click', () => { picked.splice(i, 1); sync(); render(); });
+      wrap.append(sel, del);
+      return wrap;
+    }),
+    ...(models.length < 5 ? [(() => {
+      const add = document.createElement('button');
+      add.type = 'button';
+      add.className = 'cmp-add';
+      add.textContent = '+ Add model';
+      add.addEventListener('click', () => {
+        const next = RES.slice().reverse().find((r) => !picked.includes(r.id));
+        if (next) { picked.push(next.id); sync(); render(); }
+      });
+      return add;
+    })()] : []),
+  );
+
+  document.getElementById('cmp-hint').textContent =
+    \`Comparing \${models.length} of \${RES.length} tracked releases. Up to five at a time.\`;
+
+  const t = document.getElementById('cmp-table');
+  t.replaceChildren();
+  const head = t.insertRow();
+  head.insertCell().outerHTML = '<th scope="col"></th>';
+  for (const r of models) {
+    const th = document.createElement('th');
+    th.scope = 'col';
+    const a = document.createElement('a');
+    a.href = \`../models/\${r.id}/\`;
+    a.textContent = r.model;
+    th.appendChild(a);
+    head.appendChild(th);
+  }
+  for (const [label, get] of ROWS) {
+    const tr = t.insertRow();
+    const th = document.createElement('th');
+    th.scope = 'row';
+    th.textContent = label;
+    tr.appendChild(th);
+    // Highlight a row only when the values actually differ.
+    const vals = models.map(get);
+    const same = vals.every((v) => v === vals[0]);
+    for (const v of vals) {
+      const td = tr.insertCell();
+      td.textContent = v;
+      if (!same) td.dataset.differs = 'true';
+    }
+  }
+}
+
+render();
+</script>
+`;
+  return page({
+    title: 'Compare LLM releases side by side | LLM World',
+    description: 'Compare up to five large language model releases on date, lab, family, weights, context window and parameters.',
+    canonical: `${BASE_URL}/compare/`,
+    depth: 1,
+    sprites: [],
     body,
   });
 }
@@ -370,10 +673,13 @@ for (const [y, list] of byYear) write(`timeline/${y}`, yearPage(y, list));
 write('models', modelsIndexPage());
 write('companies', companiesIndexPage(byCompany));
 write('latest', latestPage());
+write('analytics', analyticsPage(byCompany, byYear));
+write('compare', comparePage());
 
 const BASE = BASE_URL;
 const urls = [
   `${BASE}/models/`, `${BASE}/companies/`, `${BASE}/latest/`,
+  `${BASE}/analytics/`, `${BASE}/compare/`,
   `${BASE}/`,
   ...releases.map((r) => `${BASE}/models/${r.id}/`),
   ...[...byCompany.keys()].map((c) => `${BASE}/companies/${companySlug(c)}/`),

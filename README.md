@@ -52,6 +52,9 @@ generates static, no-JavaScript-required pages from the same dataset:
 
 ```
 /latest/             the 20 most recent releases
+/analytics/          release frequency, lab activity, open-weights share,
+                     cadence, context-window growth, capability mix
+/compare/            pick 2-5 releases and read them side by side
 /models/             index of everything, newest first, grouped by year
 /models/<id>/        85 pages — facts, sources, family lineage, cadence
 /companies/          index of labs, ranked by release count
@@ -93,6 +96,17 @@ local hook is for fast feedback and offline work, not to avoid a bill. If you
 ever do want to drop CI: delete `.github/workflows/deploy.yml`, remove the
 generated paths from `.gitignore`, commit the build output, and set
 **Settings → Pages** back to `main` / `/ (root)`.
+
+### Technical fields
+
+`context_window` and `parameter_count` are researched per release and left
+`null` when the provider has not disclosed them — which is most proprietary
+models. Coverage is deliberately partial and honest rather than filled with
+estimates:
+
+```bash
+node scripts/apply-specs.mjs specs.json   # merge researched values + sources
+```
 
 ### Bulk export is off
 
