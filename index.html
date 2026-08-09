@@ -75,6 +75,8 @@
   <a class="skip-link" href="#timeline">Skip to timeline</a>
 
   <header class="site-header">
+    <!-- shared:header-start — build.mjs copies this verbatim into every
+         generated page, so the two can never drift apart again. -->
     <div class="header-inner">
       <a class="brand" href="./">
         <span class="brand-mark" aria-hidden="true"></span>
@@ -95,14 +97,6 @@
       </nav>
 
       <div class="header-icons">
-        <button type="button" class="icon-btn" id="refresh-btn" aria-label="Refresh release data" title="Refresh data (R)">
-          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor"
-               stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 8a6 6 0 1 1-1.8-4.3"></path>
-            <path d="M14.2 1.9v3.4h-3.4"></path>
-          </svg>
-        </button>
-
         <button type="button" class="icon-btn" id="theme-toggle" aria-label="Colour theme: system"
                 title="Colour theme (T)" data-theme-state="system">
           <svg class="i-system" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -117,17 +111,12 @@
           </svg>
         </button>
 
-        <button type="button" class="icon-btn" id="help-btn" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)">
-          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <path d="M5.9 5.8a2.2 2.2 0 1 1 2.9 2.1c-.5.2-.8.7-.8 1.2v.4"></path>
-            <circle cx="8" cy="12.2" r=".9" fill="currentColor" stroke="none"></circle>
-          </svg>
-        </button>
       </div>
     </div>
+    <!-- shared:header-end -->
 
-    <!-- Content controls sit with the content: period on the left, the tools
-         that filter and reshape it on the right. -->
+    <!-- Timeline-only controls: these reshape the timeline, so they do not
+         belong on the static document pages. -->
     <div class="controlbar">
       <div class="controlbar-inner">
         <nav class="year-selector" id="year-selector" role="tablist" aria-label="Select year"></nav>
@@ -161,6 +150,21 @@
               </svg><span>Grid</span>
             </button>
           </div>
+
+          <button type="button" class="icon-btn" id="refresh-btn" aria-label="Refresh release data" title="Refresh data (R)">
+            <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor"
+                 stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 8a6 6 0 1 1-1.8-4.3"></path>
+              <path d="M14.2 1.9v3.4h-3.4"></path>
+            </svg>
+          </button>
+
+          <button type="button" class="icon-btn" id="help-btn" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)">
+            <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M5.9 5.8a2.2 2.2 0 1 1 2.9 2.1c-.5.2-.8.7-.8 1.2v.4"></path>
+              <circle cx="8" cy="12.2" r=".9" fill="currentColor" stroke="none"></circle>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -209,6 +213,7 @@
     </div>
   </main>
 
+  <!-- shared:footer-start -->
   <footer class="site-footer">
     <div class="foot-grid">
       <nav class="foot-col foot-years" aria-labelledby="foot-years">
@@ -223,6 +228,7 @@
       </div>
     </div>
   </footer>
+  <!-- shared:footer-end -->
 
   <dialog class="modal" id="modal" aria-labelledby="modal-title">
     <article class="modal-body">

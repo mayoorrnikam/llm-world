@@ -69,6 +69,36 @@ const SPRITE = Object.fromEntries(
   [...indexHtml.matchAll(/<g id="(ic-[a-z0-9]+)"[\s\S]*?<\/g>/g)]
     .map((m) => [m[1], m[0]]));
 
+/* Shared chrome, lifted verbatim out of index.html between the
+   shared:header / shared:footer markers. Extracting it rather than keeping a
+   second copy here is the whole point: the app and the generated pages cannot
+   drift apart, which is exactly what went wrong before. */
+const slice = (name) => {
+  const a = indexHtml.indexOf(`<!-- shared:${name}-start`);
+  const b = indexHtml.indexOf(`<!-- shared:${name}-end -->`);
+  if (a < 0 || b < 0) throw new Error(`missing shared:${name} markers in index.html`);
+  return indexHtml.slice(indexHtml.indexOf('-->', a) + 3, b).trim();
+};
+const SHARED_HEADER = slice('header');
+const YEAR_LINKS = (up) => [...new Set(releases.map((r) => r.year))]
+  .sort((a, b) => b - a)
+  .map((y) => `<a href="${up}timeline/${y}/">${y}</a>`).join('');
+const SHARED_FOOTER = slice('footer');
+
+/** Re-point the shared chrome's root-relative links for a nested page, and
+ *  mark the section this page belongs to as current. */
+function chrome(html, up, section = '') {
+  let out = html.replace(/href="(?!https?:|#|mailto:)([^"]*)"/g,
+    (_, href) => `href="${up}${href === './' ? '' : href}"`);
+  out = out.replace(/ aria-current="page"/g, '');
+  // Scoped to the nav on purpose: the brand link resolves to the same href as
+  // Timeline, so an unscoped match marks the logo instead of the section.
+  return out.replace(/<nav class="main-nav"[\s\S]*?<\/nav>/, (nav) => {
+    const target = `href="${up}${section}"`;
+    return nav.includes(target) ? nav.replace(target, `${target} aria-current="page"`) : nav;
+  });
+}
+
 /** Inline only the logos a page actually uses — keeps each page ~2KB, not 20KB. */
 const spriteFor = (slugs) => `<svg class="sprite" aria-hidden="true" focusable="false"><defs>${
   [...new Set(slugs)].map((s) => SPRITE[`ic-${s}`] ?? SPRITE['ic-other']).join('')}</defs></svg>`;
@@ -96,7 +126,7 @@ const predecessorOf = (r) => releases
 
 /* -------------------------------------------------------------------- shell */
 
-function page({ title, description, canonical, depth, sprites, body, jsonld }) {
+function page({ title, description, canonical, depth, sprites, body, jsonld, section }) {
   const up = '../'.repeat(depth);
   return `<!DOCTYPE html>
 <html lang="en">
@@ -115,27 +145,35 @@ function page({ title, description, canonical, depth, sprites, body, jsonld }) {
 <link rel="icon" href="${up}favicon.svg">
 <link rel="stylesheet" href="${up}styles.css">
 <script>try{var t=localStorage.getItem('llm-world-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script defer>
+addEventListener('DOMContentLoaded',function(){
+  var b=document.getElementById('theme-toggle');if(!b)return;
+  var order=['system','light','dark'];
+  var now=localStorage.getItem('llm-world-theme');
+  now=(now==='light'||now==='dark')?now:'system';
+  function set(m){
+    if(m==='system'){document.documentElement.removeAttribute('data-theme');localStorage.removeItem('llm-world-theme');}
+    else{document.documentElement.dataset.theme=m;localStorage.setItem('llm-world-theme',m);}
+    b.dataset.themeState=m;b.setAttribute('aria-label','Colour theme: '+m);now=m;
+  }
+  set(now);
+  b.addEventListener('click',function(){set(order[(order.indexOf(now)+1)%3]);});
+});
+</script>
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ''}
 </head>
 <body class="doc">
 ${spriteFor(sprites)}
-<header class="doc-head">
-  <a class="doc-brand" href="${up}"><span class="brand-mark" aria-hidden="true"></span><span>LLM&nbsp;WORLD</span></a>
-  <nav class="doc-nav-top" aria-label="Sections">
-    <a href="${up}">Timeline</a>
-    <a href="${up}models/">Models</a>
-    <a href="${up}companies/">Companies</a>
-    <a href="${up}latest/">Latest</a>
-    <a href="${up}analytics/">Analytics</a>
-    <a href="${up}compare/">Compare</a>
-  </nav>
+<header class="site-header">
+${chrome(SHARED_HEADER, up, section)}
 </header>
 <main class="doc-main">
 ${body}
 </main>
-<footer class="doc-foot">
-  <p>Data: <a href="${up}">LLM World</a> · ${releases.length} tracked releases · updated ${esc(data.updated)}</p>
-</footer>
+${chrome(SHARED_FOOTER, up, '').replace('id="foot-yearlinks"></div>',
+  `id="foot-yearlinks">${YEAR_LINKS(up)}</div>`).replace(
+  'loading <code>data/llm-releases.json</code>…',
+  `${releases.length} releases · updated ${esc(data.updated)}`)}
 </body>
 </html>
 `;
@@ -207,7 +245,8 @@ ${idx > 0 || idx < fam.length - 1 ? `<nav class="doc-nav">${
   return page({
     title: `${r.model} — release date, company & sources | LLM World`,
     description: `${r.model} was released by ${r.company} on ${fullDate(r)}. ${r.note}`.slice(0, 300),
-    canonical: `https://mayoorrnikam.github.io/llm-world/models/${r.id}/`,
+    canonical: `${BASE_URL}/models/${r.id}/`,
+    section: 'models/',
     depth: 2,
     sprites: [slugFor(r.company)],
     jsonld: {
@@ -255,7 +294,8 @@ function companyPage(name, list) {
   return page({
     title: `${name} — every tracked LLM release | LLM World`,
     description: `All ${list.length} tracked large language model releases from ${name}, with dates and sources.`,
-    canonical: `https://mayoorrnikam.github.io/llm-world/companies/${companySlug(name)}/`,
+    canonical: `${BASE_URL}/companies/${companySlug(name)}/`,
+    section: 'companies/',
     depth: 2,
     sprites: [slugFor(name)],
     body,
@@ -281,7 +321,8 @@ ${[...byMonth.keys()].sort((a, b) => a - b).map((m) => `
   return page({
     title: `LLM releases in ${year} — full timeline | LLM World`,
     description: `Every tracked large language model released in ${year}, by month, with companies, dates and sources.`,
-    canonical: `https://mayoorrnikam.github.io/llm-world/timeline/${year}/`,
+    canonical: `${BASE_URL}/timeline/${year}/`,
+    section: '',
     depth: 2,
     sprites: [...new Set(list.map((r) => slugFor(r.company)))],
     body,
@@ -309,6 +350,7 @@ ${[...byYear.keys()].sort((a, b) => b - a).map((y) => `
     title: 'All tracked LLM releases | LLM World',
     description: `An index of ${releases.length} tracked large language model releases, newest first, each with dates and sources.`,
     canonical: `${BASE_URL}/models/`,
+    section: 'models/',
     depth: 1,
     sprites: [...new Set(releases.map((r) => slugFor(r.company)))],
     body,
@@ -333,6 +375,7 @@ function companiesIndexPage(byCompany) {
     title: 'Labs tracked | LLM World',
     description: `The ${rows.length} organisations whose large language model releases are tracked, ranked by release count.`,
     canonical: `${BASE_URL}/companies/`,
+    section: 'companies/',
     depth: 1,
     sprites: [...byCompany.keys()].map(slugFor),
     body,
@@ -359,6 +402,7 @@ function latestPage() {
     title: 'Latest LLM releases | LLM World',
     description: 'The most recent large language model releases, with dates, labs and sources.',
     canonical: `${BASE_URL}/latest/`,
+    section: 'latest/',
     depth: 1,
     sprites: [...new Set(recent.map((r) => slugFor(r.company)))],
     body,
@@ -507,6 +551,7 @@ ${barRows(perTag)}
     title: 'LLM release analytics — cadence, labs, open weights | LLM World',
     description: `Release frequency, lab activity, open-weights share and release cadence across ${releases.length} tracked large language model releases.`,
     canonical: `${BASE_URL}/analytics/`,
+    section: 'analytics/',
     depth: 1,
     sprites: [],
     body,
@@ -650,6 +695,7 @@ render();
     title: 'Compare LLM releases side by side | LLM World',
     description: 'Compare up to five large language model releases on date, lab, family, weights, context window and parameters.',
     canonical: `${BASE_URL}/compare/`,
+    section: 'compare/',
     depth: 1,
     sprites: [],
     body,

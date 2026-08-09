@@ -63,10 +63,15 @@ generates static, no-JavaScript-required pages from the same dataset:
 /sitemap.xml        110 URLs
 ```
 
-Every one is reachable from the UI: the app's footer links to Latest, Models,
-Labs and each year; each release dialog links to its own detail page; and the
-generated pages carry a shared nav across Timeline · Models · Companies ·
-Latest.
+**Header and footer are shared, not duplicated.** `build.mjs` lifts them
+verbatim out of `index.html` between `<!-- shared:header -->` and
+`<!-- shared:footer -->` markers, rewrites relative links for the page's
+depth, and marks that page's nav item with `aria-current="page"`. There is one
+copy of the chrome, so the app and the generated pages cannot drift apart.
+
+Page-specific controls stay page-specific: the year selector, search, view
+toggle, refresh and help live in the timeline's own control row, because they
+reshape the timeline and mean nothing on a static document page.
 
 Each model page carries `schema.org/SoftwareApplication` JSON-LD and links
 back into the interactive timeline. Pages are **built in CI on every push** and deployed straight to GitHub Pages,
