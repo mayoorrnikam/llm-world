@@ -54,6 +54,10 @@
         {
           "url": "https://arxiv.org/abs/2205.01068",
           "type": "paper"
+        },
+        {
+          "url": "https://github.com/facebookresearch/metaseq",
+          "type": "repository"
         }
       ],
       "provenance": {
@@ -62,7 +66,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "OPT-175B License Agreement"
       },
       "technical": {
         "context_window": 2048,
@@ -94,7 +98,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "BigScience BLOOM RAIL 1.0"
       },
       "technical": {
         "context_window": 2048,
@@ -126,11 +130,11 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "The GLM-130B License"
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 2048,
+        "parameter_count": 130000000000
       }
     },
     {
@@ -395,7 +399,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Llama 2 Community License"
       },
       "technical": {
         "context_window": 4096,
@@ -424,6 +428,10 @@
         {
           "url": "https://mistral.ai/news/announcing-mistral-7b",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://huggingface.co/mistralai/Mistral-7B-v0.1",
+          "type": "model_card"
         }
       ],
       "provenance": {
@@ -432,7 +440,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Apache-2.0"
       },
       "technical": {
         "context_window": 8192,
@@ -541,7 +549,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Apache-2.0"
       },
       "technical": {
         "context_window": 32768,
@@ -565,6 +573,10 @@
         {
           "url": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://huggingface.co/microsoft/phi-2",
+          "type": "model_card"
         }
       ],
       "provenance": {
@@ -576,8 +588,8 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 2048,
+        "parameter_count": 2700000000
       }
     },
     {
@@ -597,6 +609,10 @@
         {
           "url": "https://github.com/zai-org/GLM-4",
           "type": "repository"
+        },
+        {
+          "url": "https://arxiv.org/abs/2406.12793",
+          "type": "paper"
         }
       ],
       "provenance": {
@@ -608,7 +624,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 128000,
         "parameter_count": null
       }
     },
@@ -739,6 +755,10 @@
         {
           "url": "https://cohere.com/blog/command-r",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://huggingface.co/CohereLabs/c4ai-command-r-v01",
+          "type": "model_card"
         }
       ],
       "provenance": {
@@ -747,11 +767,11 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "CC-BY-NC-4.0"
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 128000,
+        "parameter_count": 35000000000
       }
     },
     {
@@ -807,6 +827,10 @@
         {
           "url": "https://ai.meta.com/blog/meta-llama-3/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://huggingface.co/meta-llama/Meta-Llama-3-70B",
+          "type": "model_card"
         }
       ],
       "provenance": {
@@ -815,7 +839,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Meta Llama 3 Community License"
       },
       "technical": {
         "context_window": 8192,
@@ -839,6 +863,10 @@
         {
           "url": "https://azure.microsoft.com/en-us/blog/introducing-phi-3-redefining-whats-possible-with-slms/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://huggingface.co/microsoft/Phi-3-medium-128k-instruct",
+          "type": "model_card"
         }
       ],
       "provenance": {
@@ -850,8 +878,8 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 131072,
+        "parameter_count": 14000000000
       }
     },
     {
@@ -883,7 +911,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "DeepSeek License Agreement 1.0"
       },
       "technical": {
         "context_window": 128000,
@@ -944,6 +972,10 @@
         {
           "url": "https://qwenlm.github.io/blog/qwen2/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://huggingface.co/Qwen/Qwen2-72B-Instruct",
+          "type": "model_card"
         }
       ],
       "provenance": {
@@ -952,11 +984,11 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Tongyi Qianwen License Agreement"
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 131072,
+        "parameter_count": 72000000000
       }
     },
     {
@@ -1008,6 +1040,10 @@
         {
           "url": "https://ai.meta.com/blog/meta-llama-3-1/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://huggingface.co/meta-llama/Llama-3.1-405B",
+          "type": "model_card"
         }
       ],
       "provenance": {
@@ -1016,7 +1052,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Llama 3.1 Community License"
       },
       "technical": {
         "context_window": 128000,
@@ -1076,6 +1112,10 @@
         {
           "url": "https://www.ai21.com/blog/announcing-jamba-model-family/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://huggingface.co/ai21labs/AI21-Jamba-1.5-Large",
+          "type": "model_card"
         }
       ],
       "provenance": {
@@ -1084,11 +1124,11 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Jamba Open Model License"
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 256000,
+        "parameter_count": 398000000000
       }
     },
     {
@@ -1156,7 +1196,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Qwen License Agreement"
       },
       "technical": {
         "context_window": 131072,
@@ -1218,6 +1258,10 @@
         {
           "url": "https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
+          "type": "official_announcement"
         }
       ],
       "provenance": {
@@ -1229,7 +1273,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 300000,
         "parameter_count": null
       }
     },
@@ -1299,7 +1343,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "DeepSeek License Agreement 1.0"
       },
       "technical": {
         "context_window": 128000,
@@ -1336,7 +1380,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "technical": {
         "context_window": 128000,
@@ -1373,7 +1417,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Apache-2.0"
       },
       "technical": {
         "context_window": 32768,
@@ -1539,7 +1583,8 @@
       "month": 3,
       "day": 13,
       "tags": [
-        "flagship"
+        "flagship",
+        "open-weights"
       ],
       "note": "Cohere's 111B dense flagship for enterprise RAG and agent workloads with 256K context.",
       "family": "Command",
@@ -1548,6 +1593,10 @@
         {
           "url": "https://cohere.com/blog/command-a",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://huggingface.co/CohereLabs/c4ai-command-a-03-2025",
+          "type": "model_card"
         }
       ],
       "provenance": {
@@ -1555,12 +1604,12 @@
         "confidence": 75
       },
       "access": {
-        "open_weights": false,
-        "license": null
+        "open_weights": true,
+        "license": "CC-BY-NC-4.0"
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 256000,
+        "parameter_count": 111000000000
       }
     },
     {
@@ -1630,7 +1679,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Llama 4 Community License"
       },
       "technical": {
         "context_window": 1000000,
@@ -1667,7 +1716,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Apache-2.0"
       },
       "technical": {
         "context_window": 131072,
@@ -1740,7 +1789,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Modified MIT License"
       },
       "technical": {
         "context_window": 128000,
@@ -1776,7 +1825,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "technical": {
         "context_window": 128000,
@@ -1808,6 +1857,10 @@
         {
           "url": "https://arxiv.org/html/2508.10925v1",
           "type": "paper"
+        },
+        {
+          "url": "https://huggingface.co/openai/gpt-oss-120b",
+          "type": "model_card"
         }
       ],
       "provenance": {
@@ -1816,7 +1869,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Apache-2.0"
       },
       "technical": {
         "context_window": 131072,
@@ -1889,7 +1942,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "technical": {
         "context_window": 128000,
@@ -2074,7 +2127,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Apache-2.0"
       },
       "technical": {
         "context_window": 256000,
@@ -2326,7 +2379,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Apache-2.0"
       },
       "technical": {
         "context_window": 256000,
@@ -2514,7 +2567,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "technical": {
         "context_window": 1000000,
@@ -2613,6 +2666,10 @@
         {
           "url": "https://research.nvidia.com/labs/nemotron/Nemotron-3-Ultra/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://openmdw.ai/license/1-1/",
+          "type": "official_announcement"
         }
       ],
       "provenance": {
@@ -2621,7 +2678,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "OpenMDW License 1.1"
       },
       "technical": {
         "context_window": 1000000,
@@ -2731,7 +2788,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "technical": {
         "context_window": 1000000,
@@ -2878,7 +2935,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Kimi K3 License"
       },
       "technical": {
         "context_window": 1048576,

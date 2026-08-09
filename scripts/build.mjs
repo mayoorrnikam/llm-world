@@ -482,6 +482,19 @@ function contextGrowth(byYear) {
     </div>`).join('')}</div>`;
 }
 
+/** Licence mix across open-weights releases. */
+function licenceRows() {
+  const counts = new Map();
+  for (const r of releases) {
+    if (!r.access.open_weights) continue;
+    const key = r.access.license ?? 'Not recorded';
+    counts.set(key, (counts.get(key) || 0) + 1);
+  }
+  return [...counts]
+    .map(([name, value]) => ({ name, value }))
+    .sort((a, b) => b.value - a.value || a.name.localeCompare(b.name));
+}
+
 function analyticsPage(byCompany, byYear) {
   const years = [...byYear.keys()].sort((a, b) => a - b);
 
@@ -543,6 +556,12 @@ ${barRows(cadence, { unit: 'd' })}
 Bars are on a <strong>log scale</strong> — the range spans three orders of magnitude, so a
 linear axis would render the early years invisible. Read the labels, not the widths.</p>
 ${contextGrowth(byYear)}
+
+<h2>Open-weights licences</h2>
+<p class="chart-note">How the ${releases.filter((r) => r.access.open_weights).length} open-weights
+releases are licensed. Permissive licences (Apache-2.0, MIT) sit alongside bespoke
+community terms that carry their own restrictions — check the licence before assuming reuse is free.</p>
+${barRows(licenceRows())}
 
 <h2>Capabilities</h2>
 <p class="chart-note">How often each capability is tagged across all tracked releases.</p>

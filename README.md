@@ -104,10 +104,17 @@ generated paths from `.gitignore`, commit the build output, and set
 
 ### Technical fields
 
-`context_window` and `parameter_count` are researched per release and left
-`null` when the provider has not disclosed them — which is most proprietary
-models. Coverage is deliberately partial and honest rather than filled with
-estimates:
+`context_window`, `parameter_count` and `license` are researched per release
+and left `null` when the provider has not disclosed them. Coverage:
+
+| Field | Coverage | Why the gap |
+|---|---|---|
+| Context window | **81/85** | The 4 missing are two *products* (ChatGPT, Bard), which have no context window, plus PaLM 2 and Llama 5, undisclosed |
+| Parameter count | **40/85** | Most proprietary labs — OpenAI, Anthropic, Google, xAI — do not publish them. `null` is the correct answer, not a gap to fill |
+| Licence | **34/35** open-weights | Only open-weights releases carry one |
+
+Values are never estimated or inferred. Every figure adds its source to the
+record's `sources[]`.
 
 ```bash
 node scripts/apply-specs.mjs specs.json   # merge researched values + sources
