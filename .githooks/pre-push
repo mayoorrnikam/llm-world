@@ -10,4 +10,6 @@ echo "pre-push: validating dataset…"
 node scripts/validate-data.mjs
 echo "pre-push: building pages…"
 node scripts/build.mjs
+echo "pre-push: smoke testing…"
+node scripts/smoke-test.mjs
 echo "pre-push: ok"

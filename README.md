@@ -150,6 +150,26 @@ Company names, logos and model names are trademarks of their owners, used to
 identify the releases catalogued here. Linked sources belong to their
 publishers and are linked, never reproduced.
 
+## Smoke test
+
+```bash
+npm run smoke     # after a build; also runs inside `npm run check`
+```
+
+Structural, dependency-free, no browser. It exists because three classes of
+bug reached the live site, so it checks for exactly those:
+
+| Check | The bug it would have caught |
+|---|---|
+| Every inline `<script>` passes `node --check` | A `params` helper shadowed `URLSearchParams`, killing the compare page with a syntax error and rendering an empty shell |
+| No `href="#"` or empty `href` | A dialog link left on its placeholder, which did nothing when clicked |
+| Every internal link resolves to a real file | Renamed or mistyped page paths |
+| Exactly one `main-nav` and one `aria-current`, inside the nav | Nav drift between the app and generated pages; the active marker landing on the brand logo |
+| JSON-LD blocks parse | Malformed structured data |
+
+Runs in CI **before** the artifact is uploaded, so a broken page fails the
+build instead of going live, and in the pre-push hook.
+
 ## Validation
 
 ```bash

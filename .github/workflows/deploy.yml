@@ -37,6 +37,12 @@ jobs:
       - name: Generate pages
         run: node scripts/build.mjs --export
 
+      # Structural smoke test on the built output: inline scripts parse,
+      # internal links resolve, shared chrome is consistent. A broken page
+      # fails here instead of going live.
+      - name: Smoke test build
+        run: node scripts/smoke-test.mjs
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
