@@ -19,5 +19,8 @@ llm-releases.csv
 models/
 companies/
 timeline/
+analytics/
+compare/
+latest/
 sitemap.xml
 robots.txt
