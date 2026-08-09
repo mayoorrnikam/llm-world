@@ -18,6 +18,10 @@
         {
           "url": "https://research.google/blog/pathways-language-model-palm-scaling-to-540-billion-parameters-for-breakthrough-performance/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://arxiv.org/abs/2204.02311",
+          "type": "paper"
         }
       ],
       "provenance": {
@@ -29,8 +33,8 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 2048,
+        "parameter_count": 540000000000
       }
     },
     {
@@ -186,11 +190,11 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "LLaMA Non-Commercial Research License"
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 2048,
+        "parameter_count": 65000000000
       }
     },
     {
@@ -452,6 +456,10 @@
         {
           "url": "https://x.ai/news/grok",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://github.com/xai-org/grok-1",
+          "type": "repository"
         }
       ],
       "provenance": {
@@ -463,7 +471,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 8192,
         "parameter_count": null
       }
     },
@@ -485,6 +493,10 @@
         {
           "url": "https://blog.google/technology/ai/google-gemini-ai/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf",
+          "type": "official_announcement"
         }
       ],
       "provenance": {
@@ -496,7 +508,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 32768,
         "parameter_count": null
       }
     },
@@ -617,6 +629,10 @@
         {
           "url": "https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://developers.googleblog.com/en/new-features-for-the-gemini-api-and-google-ai-studio/",
+          "type": "documentation"
         }
       ],
       "provenance": {
@@ -628,7 +644,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 2097152,
         "parameter_count": null
       }
     },
@@ -650,6 +666,14 @@
         {
           "url": "https://blog.google/technology/developers/gemma-open-models/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://huggingface.co/google/gemma-7b",
+          "type": "model_card"
+        },
+        {
+          "url": "https://ai.google.dev/gemma/terms",
+          "type": "official_announcement"
         }
       ],
       "provenance": {
@@ -658,11 +682,11 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Gemma Terms of Use"
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 8192,
+        "parameter_count": 7000000000
       }
     },
     {
@@ -747,6 +771,10 @@
         {
           "url": "https://x.ai/news/grok-os",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://github.com/xai-org/grok-1",
+          "type": "repository"
         }
       ],
       "provenance": {
@@ -755,11 +783,11 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Apache-2.0"
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 8192,
+        "parameter_count": 314000000000
       }
     },
     {
@@ -1153,6 +1181,10 @@
         {
           "url": "https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://huggingface.co/meta-llama/Llama-3.2-90B-Vision-Instruct",
+          "type": "model_card"
         }
       ],
       "provenance": {
@@ -1161,11 +1193,11 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Llama 3.2 Community License"
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 128000,
+        "parameter_count": 90000000000
       }
     },
     {
@@ -1219,6 +1251,10 @@
         {
           "url": "https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash",
+          "type": "documentation"
         }
       ],
       "provenance": {
@@ -1230,7 +1266,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 1048576,
         "parameter_count": null
       }
     },
@@ -1362,6 +1398,10 @@
         {
           "url": "https://x.ai/news/grok-3",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://artificialanalysis.ai/models/grok-3",
+          "type": "secondary"
         }
       ],
       "provenance": {
@@ -1373,7 +1413,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 1000000,
         "parameter_count": null
       }
     },
@@ -1468,6 +1508,14 @@
         {
           "url": "https://blog.google/technology/developers/gemma-3/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://huggingface.co/google/gemma-3-27b-it",
+          "type": "model_card"
+        },
+        {
+          "url": "https://ai.google.dev/gemma/terms",
+          "type": "official_announcement"
         }
       ],
       "provenance": {
@@ -1476,11 +1524,11 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Gemma Terms of Use"
       },
       "technical": {
-        "context_window": null,
-        "parameter_count": null
+        "context_window": 131072,
+        "parameter_count": 27000000000
       }
     },
     {
@@ -1533,6 +1581,10 @@
         {
           "url": "https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro",
+          "type": "documentation"
         }
       ],
       "provenance": {
@@ -1544,7 +1596,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 1048576,
         "parameter_count": null
       }
     },
@@ -1936,6 +1988,10 @@
         {
           "url": "https://blog.google/products/gemini/gemini-3/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-3-Pro-Model-Card.pdf",
+          "type": "official_announcement"
         }
       ],
       "provenance": {
@@ -1947,7 +2003,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 1048576,
         "parameter_count": null
       }
     },
@@ -2080,6 +2136,10 @@
         {
           "url": "https://www.anthropic.com/news/claude-opus-4-6",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "documentation"
         }
       ],
       "provenance": {
@@ -2091,7 +2151,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 1000000,
         "parameter_count": null
       }
     },
@@ -2112,6 +2172,10 @@
         {
           "url": "https://en.wikipedia.org/wiki/GPT-5.3-Codex",
           "type": "secondary"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.3-codex",
+          "type": "documentation"
         }
       ],
       "provenance": {
@@ -2123,7 +2187,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 400000,
         "parameter_count": null
       }
     },
@@ -2181,6 +2245,10 @@
         {
           "url": "https://www.anthropic.com/news/claude-sonnet-4-6",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "documentation"
         }
       ],
       "provenance": {
@@ -2192,7 +2260,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 1000000,
         "parameter_count": null
       }
     },
@@ -2320,6 +2388,10 @@
         {
           "url": "https://en.wikipedia.org/wiki/Muse_Spark",
           "type": "secondary"
+        },
+        {
+          "url": "https://artificialanalysis.ai/models/muse-spark",
+          "type": "secondary"
         }
       ],
       "provenance": {
@@ -2331,7 +2403,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 262144,
         "parameter_count": null
       }
     },
@@ -2467,6 +2539,10 @@
         {
           "url": "https://en.wikipedia.org/wiki/Gemini_(language_model)",
           "type": "secondary"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash",
+          "type": "documentation"
         }
       ],
       "provenance": {
@@ -2478,7 +2554,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 1048576,
         "parameter_count": null
       }
     },
@@ -2500,6 +2576,10 @@
         {
           "url": "https://www.anthropic.com/news/claude-opus-4-8",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "documentation"
         }
       ],
       "provenance": {
@@ -2511,7 +2591,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 1000000,
         "parameter_count": null
       }
     },
@@ -2566,6 +2646,10 @@
         {
           "url": "https://en.wikipedia.org/wiki/Claude_(language_model)",
           "type": "secondary"
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "documentation"
         }
       ],
       "provenance": {
@@ -2577,7 +2661,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 1000000,
         "parameter_count": null
       }
     },
@@ -2599,6 +2683,10 @@
         {
           "url": "https://en.wikipedia.org/wiki/Claude_(language_model)",
           "type": "secondary"
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "documentation"
         }
       ],
       "provenance": {
@@ -2610,7 +2698,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 1000000,
         "parameter_count": null
       }
     },
@@ -2703,6 +2791,10 @@
         {
           "url": "https://x.ai/news/grok-4-5",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://docs.x.ai/docs/models",
+          "type": "documentation"
         }
       ],
       "provenance": {
@@ -2714,7 +2806,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 500000,
         "parameter_count": null
       }
     },
@@ -2811,6 +2903,10 @@
         {
           "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/",
           "type": "official_announcement"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+          "type": "documentation"
         }
       ],
       "provenance": {
@@ -2822,7 +2918,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 1048576,
         "parameter_count": null
       }
     },
@@ -2915,6 +3011,10 @@
         {
           "url": "https://en.wikipedia.org/wiki/Muse_Spark",
           "type": "secondary"
+        },
+        {
+          "url": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "type": "secondary"
         }
       ],
       "provenance": {
@@ -2926,7 +3026,7 @@
         "license": null
       },
       "technical": {
-        "context_window": null,
+        "context_window": 1000000,
         "parameter_count": null
       }
     }

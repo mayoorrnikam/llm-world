@@ -26,7 +26,8 @@ const typeFor = (url) =>
   : /artificialanalysis\.ai|wikipedia\.org/.test(url) ? 'secondary'
   : 'official_announcement';
 
-let ctx = 0, par = 0, srcs = 0, missing = [];
+let ctx = 0, par = 0, lic = 0, srcs = 0;
+const missing = [], skippedLicense = [];
 
 for (const file of process.argv.slice(2)) {
   for (const row of JSON.parse(readFileSync(file, 'utf8')).results ?? []) {
@@ -38,6 +39,12 @@ for (const file of process.argv.slice(2)) {
     }
     if (Number.isFinite(row.parameter_count) && row.parameter_count > 0) {
       r.technical.parameter_count = row.parameter_count; par++;
+    }
+    // Only open-weights models carry a licence; a licence on a proprietary
+    // record would be a category error, so it is ignored rather than stored.
+    if (typeof row.license === 'string' && row.license.trim()) {
+      if (r.access.open_weights) { r.access.license = row.license.trim(); lic++; }
+      else skippedLicense.push(row.id);
     }
     for (const s of row.sources ?? []) {
       if (!/^https?:\/\//.test(s.url ?? '')) continue;
@@ -51,6 +58,9 @@ for (const file of process.argv.slice(2)) {
 writeFileSync(DATA, JSON.stringify(data, null, 2) + '\n');
 const withCtx = data.releases.filter((r) => r.technical.context_window).length;
 const withPar = data.releases.filter((r) => r.technical.parameter_count).length;
-console.log(`applied: ${ctx} context windows, ${par} parameter counts, ${srcs} new sources`);
-console.log(`coverage: ${withCtx}/${data.releases.length} context · ${withPar}/${data.releases.length} parameters`);
+const withLic = data.releases.filter((r) => r.access.license).length;
+const openW = data.releases.filter((r) => r.access.open_weights).length;
+console.log(`applied: ${ctx} context windows, ${par} parameter counts, ${lic} licences, ${srcs} new sources`);
+console.log(`coverage: ${withCtx}/${data.releases.length} context · ${withPar}/${data.releases.length} parameters · ${withLic}/${openW} licences (open-weights only)`);
 if (missing.length) console.log(`unknown ids skipped: ${missing.join(', ')}`);
+if (skippedLicense.length) console.log(`licence ignored on proprietary records: ${skippedLicense.join(', ')}`);
