@@ -288,7 +288,8 @@ code, kbd {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-right: auto;
+  text-decoration: none;
+  color: inherit;
 }
 
 .brand-mark {
@@ -315,11 +316,52 @@ code, kbd {
   color: var(--muted);
 }
 
-.header-tools {
+/* Primary sections. These were in the footer, which is the wrong place for
+   the things people come here to reach. */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-inline: auto;
+  flex-wrap: wrap;
+}
+
+.main-nav a {
+  padding: 6px 11px;
+  font-size: 13px;
+  font-weight: 550;
+  color: var(--text-dim);
+  text-decoration: none;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: color 0.15s var(--ease), background 0.15s var(--ease);
+}
+.main-nav a:hover { color: var(--text); background: var(--panel-2); }
+.main-nav a[aria-current="page"] {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.header-icons { display: flex; align-items: center; gap: 6px; }
+
+/* Content controls: period on the left, tools that reshape it on the right. */
+.controlbar { border-top: 1px solid var(--line-soft); }
+
+.controlbar-inner {
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding: 9px var(--pad);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.control-tools {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
+  margin-left: auto;
 }
 
 /* search ---------------------------------------------------------------- */
@@ -455,17 +497,6 @@ code, kbd {
 
 /* year bar --------------------------------------------------------------- */
 
-.yearbar { border-top: 1px solid var(--line-soft); }
-
-.yearbar-inner {
-  max-width: var(--shell);
-  margin-inline: auto;
-  padding: 9px var(--pad);
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
-}
 
 .year-selector {
   display: inline-flex;
@@ -1041,8 +1072,9 @@ code, kbd {
 
 .foot-grid {
   display: grid;
-  gap: 26px 40px;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 24px 48px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  justify-content: start;
   align-items: start;
 }
 
@@ -1795,4 +1827,31 @@ code, kbd {
 @media (max-width: 620px) {
   .chart-row { grid-template-columns: minmax(0, 120px) minmax(0, 1fr) 62px; gap: 10px; }
   .chart-label { font-size: 12px; }
+}
+
+/* Header responsiveness: the nav is the first thing to compress, then the
+   search field, then the segmented control's labels. */
+@media (max-width: 1080px) {
+  .brand-sub { display: none; }
+  .main-nav a { padding: 6px 9px; font-size: 12.5px; }
+  .search-input { width: clamp(150px, 22vw, 230px); }
+}
+
+@media (max-width: 860px) {
+  .header-inner { gap: 10px; }
+  .main-nav {
+    order: 3;
+    width: 100%;
+    margin-inline: 0;
+    gap: 0 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .main-nav::-webkit-scrollbar { display: none; }
+  .header-icons { margin-left: auto; }
+  .controlbar-inner { gap: 10px; }
+  .control-tools { width: 100%; margin-left: 0; }
+  .search-field { flex: 1 1 160px; }
+  .search-input { width: 100%; }
 }

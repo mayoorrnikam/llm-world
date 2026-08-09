@@ -76,45 +76,25 @@
 
   <header class="site-header">
     <div class="header-inner">
-
-      <div class="brand">
+      <a class="brand" href="./">
         <span class="brand-mark" aria-hidden="true"></span>
         <div class="brand-text">
           <h1>LLM&nbsp;WORLD</h1>
           <p class="brand-sub">language model releases, month by month</p>
         </div>
-      </div>
+      </a>
 
-      <div class="header-tools">
-        <div class="search-field">
-          <svg class="search-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none"
-               stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-            <circle cx="7" cy="7" r="4.4"></circle><path d="M10.4 10.4 14 14"></path>
-          </svg>
-          <input type="search" id="search" class="search-input" autocomplete="off" spellcheck="false"
-                 placeholder="Search models, companies, tags…" aria-label="Search releases">
-          <kbd class="search-kbd" aria-hidden="true">/</kbd>
-          <button type="button" class="search-clear" id="search-clear" aria-label="Clear search" hidden>✕</button>
-        </div>
+      <!-- Primary sections belong here, not buried in the footer. -->
+      <nav class="main-nav" aria-label="Sections">
+        <a href="./" aria-current="page">Timeline</a>
+        <a href="latest/">Latest</a>
+        <a href="models/">Models</a>
+        <a href="companies/">Labs</a>
+        <a href="analytics/">Analytics</a>
+        <a href="compare/">Compare</a>
+      </nav>
 
-        <div class="seg" role="group" aria-label="View mode">
-          <button type="button" class="seg-btn" data-view="lanes" aria-pressed="true" title="Month lanes (V)">
-            <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
-              <rect x="1" y="2.5" width="14" height="2.4" rx="1.2"></rect>
-              <rect x="1" y="6.8" width="10" height="2.4" rx="1.2"></rect>
-              <rect x="1" y="11.1" width="12" height="2.4" rx="1.2"></rect>
-            </svg><span>Lanes</span>
-          </button>
-          <button type="button" class="seg-btn" data-view="grid" aria-pressed="false" title="Compact grid (V)">
-            <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
-              <rect x="1.5" y="1.5" width="5.6" height="5.6" rx="1.6"></rect>
-              <rect x="8.9" y="1.5" width="5.6" height="5.6" rx="1.6"></rect>
-              <rect x="1.5" y="8.9" width="5.6" height="5.6" rx="1.6"></rect>
-              <rect x="8.9" y="8.9" width="5.6" height="5.6" rx="1.6"></rect>
-            </svg><span>Grid</span>
-          </button>
-        </div>
-
+      <div class="header-icons">
         <button type="button" class="icon-btn" id="refresh-btn" aria-label="Refresh release data" title="Refresh data (R)">
           <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor"
                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -146,11 +126,44 @@
       </div>
     </div>
 
-    <nav class="yearbar" aria-label="Timeline period">
-      <div class="yearbar-inner">
-        <div class="year-selector" id="year-selector" role="tablist" aria-label="Select year"></div>
+    <!-- Content controls sit with the content: period on the left, the tools
+         that filter and reshape it on the right. -->
+    <div class="controlbar">
+      <div class="controlbar-inner">
+        <nav class="year-selector" id="year-selector" role="tablist" aria-label="Select year"></nav>
+
+        <div class="control-tools">
+          <div class="search-field">
+            <svg class="search-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none"
+                 stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+              <circle cx="7" cy="7" r="4.4"></circle><path d="M10.4 10.4 14 14"></path>
+            </svg>
+            <input type="search" id="search" class="search-input" autocomplete="off" spellcheck="false"
+                   placeholder="Search models, companies, tags…" aria-label="Search releases">
+            <kbd class="search-kbd" aria-hidden="true">/</kbd>
+            <button type="button" class="search-clear" id="search-clear" aria-label="Clear search" hidden>✕</button>
+          </div>
+
+          <div class="seg" role="group" aria-label="View mode">
+            <button type="button" class="seg-btn" data-view="lanes" aria-pressed="true" title="Month lanes (V)">
+              <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
+                <rect x="1" y="2.5" width="14" height="2.4" rx="1.2"></rect>
+                <rect x="1" y="6.8" width="10" height="2.4" rx="1.2"></rect>
+                <rect x="1" y="11.1" width="12" height="2.4" rx="1.2"></rect>
+              </svg><span>Lanes</span>
+            </button>
+            <button type="button" class="seg-btn" data-view="grid" aria-pressed="false" title="Compact grid (V)">
+              <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
+                <rect x="1.5" y="1.5" width="5.6" height="5.6" rx="1.6"></rect>
+                <rect x="8.9" y="1.5" width="5.6" height="5.6" rx="1.6"></rect>
+                <rect x="1.5" y="8.9" width="5.6" height="5.6" rx="1.6"></rect>
+                <rect x="8.9" y="8.9" width="5.6" height="5.6" rx="1.6"></rect>
+              </svg><span>Grid</span>
+            </button>
+          </div>
+        </div>
       </div>
-    </nav>
+    </div>
   </header>
 
   <!-- The thesis of the page: every release in the dataset, one column per
@@ -198,21 +211,8 @@
 
   <footer class="site-footer">
     <div class="foot-grid">
-      <nav class="foot-col" aria-labelledby="foot-browse">
-        <h2 class="foot-title" id="foot-browse">Browse</h2>
-        <a href="latest/">Latest releases</a>
-        <a href="models/">All models</a>
-        <a href="companies/">Labs</a>
-      </nav>
-
-      <nav class="foot-col" aria-labelledby="foot-analyse">
-        <h2 class="foot-title" id="foot-analyse">Analyse</h2>
-        <a href="analytics/">Analytics</a>
-        <a href="compare/">Compare models</a>
-      </nav>
-
       <nav class="foot-col foot-years" aria-labelledby="foot-years">
-        <h2 class="foot-title" id="foot-years">By year</h2>
+        <h2 class="foot-title" id="foot-years">Browse by year</h2>
         <div class="foot-yearlinks" id="foot-yearlinks"></div>
       </nav>
 
@@ -252,7 +252,9 @@
 
       <p class="modal-source" id="modal-source"></p>
 
-      <p class="modal-detail"><a id="modal-detail-link" href="#">Full details, sources &amp; family lineage →</a></p>
+      <!-- Falls back to the model index rather than "#": if a stale cached
+           app.js never fills this in, the link still goes somewhere real. -->
+      <p class="modal-detail"><a id="modal-detail-link" href="models/">Full details, sources &amp; family lineage →</a></p>
 
       <footer class="modal-foot">
         <button type="button" class="ghost-btn" id="modal-prev">
