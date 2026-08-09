@@ -236,7 +236,10 @@ ${r.tags.length ? `<div class="doc-tags">${r.tags.map((t) => `<span class="tag">
   x.id === r.id ? `<strong>${esc(x.model)}</strong>` : `<a href="../${esc(x.id)}/">${esc(x.model)}</a>`
 } <span>${fullDate(x)}</span></li>`).join('')}</ol>
 
-<p class="doc-cta"><a href="../../?year=${r.year}#${esc(r.id)}">See ${esc(r.model)} on the interactive timeline →</a></p>
+<p class="doc-cta">
+  <a href="../../compare/?m=${esc(r.id)}">Compare ${esc(r.model)} with another model →</a><br>
+  <a href="../../?year=${r.year}#${esc(r.id)}">See ${esc(r.model)} on the interactive timeline →</a>
+</p>
 ${idx > 0 || idx < fam.length - 1 ? `<nav class="doc-nav">${
   idx > 0 ? `<a href="../${esc(fam[idx - 1].id)}/">← ${esc(fam[idx - 1].model)}</a>` : '<span></span>'}${
   idx < fam.length - 1 ? `<a href="../${esc(fam[idx + 1].id)}/">${esc(fam[idx + 1].model)} →</a>` : '<span></span>'}</nav>` : ''}
@@ -586,7 +589,7 @@ const RES = await fetch('../data/llm-releases.json', { cache: 'no-store' })
 const byId = new Map(RES.map((r) => [r.id, r]));
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const date = (r) => \`\${MONTHS[r.month - 1]} \${r.day || ''}, \${r.year}\`.replace(' ,', ',');
-const params = (n) => n == null ? 'Not disclosed'
+const fmtParams = (n) => n == null ? 'Not disclosed'
   : n >= 1e12 ? \`\${+(n / 1e12).toFixed(2)}T\`
   : n >= 1e9 ? \`\${+(n / 1e9).toFixed(n < 1e10 ? 1 : 0)}B\`
   : n >= 1e6 ? \`\${Math.round(n / 1e6)}M\` : String(n);
@@ -596,6 +599,15 @@ const tokens = (n) => n == null ? 'Not disclosed'
 const params = new URLSearchParams(location.search);
 let picked = (params.get('m') || '').split(',').filter((id) => byId.has(id)).slice(0, 5);
 if (!picked.length) picked = RES.slice(-2).map((r) => r.id);
+// Arriving from a single model, pair it with that lab's previous release —
+// the comparison people almost always want. A lone column isn't a comparison.
+if (picked.length === 1) {
+  const a = byId.get(picked[0]);
+  const stamp = (r) => Date.UTC(r.year, r.month - 1, r.day || 1);
+  const prior = RES.filter((r) => r.company === a.company && r.id !== a.id && stamp(r) < stamp(a));
+  const other = prior.at(-1) ?? RES.filter((r) => r.id !== a.id).at(-1);
+  if (other) picked.push(other.id);
+}
 
 const ROWS = [
   ['Company',        (r) => r.company],
@@ -604,7 +616,7 @@ const ROWS = [
   ['Weights',        (r) => r.access.open_weights ? 'Open weights' : 'Proprietary'],
   ['Licence',        (r) => r.access.license ?? 'Not recorded'],
   ['Context window', (r) => r.technical.context_window ? tokens(r.technical.context_window) + ' tokens' : 'Not disclosed'],
-  ['Parameters',     (r) => params(r.technical.parameter_count)],
+  ['Parameters',     (r) => fmtParams(r.technical.parameter_count)],
   ['Capabilities',   (r) => r.tags.join(', ') || '—'],
   ['Record status',  (r) => r.provenance.status.replace(/_/g, ' ')],
 ];

@@ -1631,6 +1631,9 @@ code, kbd {
 /* Route out of the app into the generated pages. Without these the static
    pages exist but are unreachable, which defeats the point of building them. */
 .modal-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
   margin: 16px 0 0;
   font-size: 12.5px;
 }
