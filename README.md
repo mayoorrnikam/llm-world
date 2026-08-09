@@ -238,10 +238,33 @@ The site nudges you when it drifts. Past 10 days the footer turns amber and
 adds `source may be stale`, and a tab left open re-checks quietly when it
 regains focus (throttled to once every 6 hours).
 
-If you later want this automated, the two viable routes are a scheduled agent
-that researches releases and opens a PR, or a GitHub Action polling Hugging
-Face for a whitelist of official orgs — the latter is free but structurally
-blind to OpenAI, Anthropic and xAI.
+### The weekly freshness check
+
+Silence was the failure mode: the dataset drifted 15 releases in three months
+with nobody watching. A weekly Action now turns that into a nudge.
+
+```bash
+npm run freshness     # run the same check locally
+```
+
+It reports two things and keeps **one** open issue up to date — never a new
+issue each week, because a weekly pile of near-identical issues is what gets
+muted:
+
+1. **Age** — how long since `updated` moved. Past 14 days it is flagged stale.
+2. **Candidates** — new repos from a whitelist of 14 official lab accounts on
+   Hugging Face, diffed against what is already tracked, with quantisations,
+   format conversions and non-LLM artefacts (speech, music, benchmarks,
+   embeddings) filtered out.
+
+Hugging Face is a **discovery source, never a source of truth** — every
+candidate still has to be verified against the lab's own announcement before
+it is added.
+
+It is also **structurally blind to the labs that never publish weights**:
+OpenAI's frontier line, Anthropic, Gemini, xAI and Meta's Muse models. The
+report says so every time, because a quiet week does not mean nothing shipped.
+Those still need a manual look.
 
 ## Deploying
 

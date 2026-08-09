@@ -1,0 +1,62 @@
+name: Freshness check
+
+# The dataset drifted 15 releases in three months with nobody watching, so
+# silence is the failure mode this guards against. Runs weekly and keeps a
+# single open issue up to date — never a new issue each week.
+
+on:
+  schedule:
+    - cron: '23 7 * * 1'   # Mondays, 07:23 UTC
+  workflow_dispatch:        # run on demand from the Actions tab
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build report
+        id: report
+        run: |
+          node scripts/check-freshness.mjs --quiet > report.md
+          # --quiet prints a one-liner when there is nothing to do; the report
+          # always starts with the bold "Dataset last updated" heading.
+          if head -1 report.md | grep -q '^fresh:'; then
+            echo "due=false" >> "$GITHUB_OUTPUT"
+            cat report.md
+          else
+            echo "due=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open or update the tracking issue
+        if: steps.report.outputs.due == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          TITLE="Data freshness: releases may be missing"
+          BODY="$(cat report.md)"
+
+          # One issue, reused. A weekly pile of near-identical issues is noise,
+          # and noise is what gets muted.
+          EXISTING=$(gh issue list --repo "$REPO" --state open \
+                       --label freshness --limit 1 --json number --jq '.[0].number // empty')
+
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --repo "$REPO" --body "$BODY"
+            gh issue comment "$EXISTING" --repo "$REPO" \
+              --body "Re-checked $(date -u +%Y-%m-%d) — report above refreshed."
+            echo "updated issue #$EXISTING"
+          else
+            gh label create freshness --repo "$REPO" \
+              --description "Dataset may be out of date" --color FBCA04 2>/dev/null || true
+            gh issue create --repo "$REPO" --title "$TITLE" \
+              --label freshness --body "$BODY"
+          fi

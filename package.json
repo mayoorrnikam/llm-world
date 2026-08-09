@@ -16,6 +16,7 @@
     "preview": "npm run build && node scripts/serve.mjs",
     "clean": "rm -rf models companies timeline sitemap.xml robots.txt api llm-releases.csv .build-check",
     "setup": "git config core.hooksPath .githooks && echo 'git hooks enabled \u2014 pre-push now runs npm run check'",
-    "smoke": "node scripts/smoke-test.mjs"
+    "smoke": "node scripts/smoke-test.mjs",
+    "freshness": "node scripts/check-freshness.mjs"
   }
 }
