@@ -7,7 +7,6 @@
       "model": "PaLM",
       "company": "Google DeepMind",
       "family": "PaLM",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -74,7 +73,6 @@
       "model": "OPT-175B",
       "company": "Meta AI",
       "family": "OPT",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -139,7 +137,6 @@
       "model": "BLOOM",
       "company": "BigScience",
       "family": "BLOOM",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -195,7 +192,6 @@
       "model": "GLM-130B",
       "company": "Zhipu AI",
       "family": "GLM",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -247,66 +243,10 @@
       }
     },
     {
-      "id": "chatgpt",
-      "model": "ChatGPT",
-      "company": "OpenAI",
-      "family": "GPT",
-      "kind": "product",
-      "classification": {
-        "primary_type": "language",
-        "subtype": "llm"
-      },
-      "modalities": null,
-      "capabilities": [],
-      "tags": [
-        "flagship"
-      ],
-      "note": "The public chatbot built on GPT-3.5 that brought large language models to the mainstream.",
-      "events": [
-        {
-          "type": "announcement",
-          "date": "2022-11-30",
-          "sources": [
-            "chatgpt-s1"
-          ]
-        }
-      ],
-      "specifications": {
-        "language": {
-          "context_window": null,
-          "parameter_count": null
-        }
-      },
-      "access": {
-        "open_weights": false,
-        "license": null
-      },
-      "sources": [
-        {
-          "id": "chatgpt-s1",
-          "url": "https://openai.com/index/chatgpt/",
-          "type": "official_announcement",
-          "authority": "primary",
-          "archived_url": "https://web.archive.org/web/20240502090536/https://openai.com/index/chatgpt",
-          "retrieved": "2024-05-02"
-        }
-      ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90,
-        "reason": "Every value this record asserts — date (November 30, 2022) — was found in an archived primary source, checked 2026-08-10. Context window and parameter count are not recorded, so nothing is claimed about them."
-      },
-      "undisclosed": [
-        "context_window",
-        "parameter_count"
-      ]
-    },
-    {
       "id": "llama-1",
       "model": "Llama 1",
       "company": "Meta AI",
       "family": "Llama",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -362,7 +302,6 @@
       "model": "Claude 1",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -432,7 +371,6 @@
       "model": "GPT-4",
       "company": "OpenAI",
       "family": "GPT",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -501,73 +439,10 @@
       ]
     },
     {
-      "id": "bard",
-      "model": "Bard",
-      "company": "Google DeepMind",
-      "family": "Gemini",
-      "kind": "product",
-      "classification": {
-        "primary_type": "language",
-        "subtype": "llm"
-      },
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "capabilities": [],
-      "tags": [
-        "flagship"
-      ],
-      "note": "Google's ChatGPT rival chatbot that brought the company into the consumer AI race.",
-      "events": [
-        {
-          "type": "announcement",
-          "date": "2023-03-21",
-          "sources": [
-            "bard-s1"
-          ]
-        }
-      ],
-      "specifications": {
-        "language": {
-          "context_window": null,
-          "parameter_count": null
-        }
-      },
-      "access": {
-        "open_weights": false,
-        "license": null
-      },
-      "sources": [
-        {
-          "id": "bard-s1",
-          "url": "https://blog.google/technology/ai/try-bard/",
-          "type": "official_announcement",
-          "authority": "primary",
-          "archived_url": "https://web.archive.org/web/20230321140848/https://blog.google/technology/ai/try-bard/",
-          "retrieved": "2023-03-21"
-        }
-      ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90,
-        "reason": "Every value this record asserts — date (Mar 21, 2023) — was found in an archived primary source, checked 2026-08-10. Context window and parameter count are not recorded, so nothing is claimed about them."
-      },
-      "undisclosed": [
-        "context_window",
-        "parameter_count"
-      ]
-    },
-    {
       "id": "palm-2",
       "model": "PaLM 2",
       "company": "Google DeepMind",
       "family": "PaLM",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -629,7 +504,6 @@
       "model": "Claude 2",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -690,7 +564,6 @@
       "model": "Llama 2",
       "company": "Meta AI",
       "family": "Llama",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -755,7 +628,6 @@
       "model": "Mistral 7B",
       "company": "Mistral AI",
       "family": "Mistral",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "slm"
@@ -831,7 +703,6 @@
       "model": "Grok-1",
       "company": "xAI",
       "family": "Grok",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -917,7 +788,6 @@
       "model": "Gemini 1.0",
       "company": "Google DeepMind",
       "family": "Gemini",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -993,7 +863,6 @@
       "model": "Mixtral 8x7B",
       "company": "Mistral AI",
       "family": "Mixtral",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -1058,7 +927,6 @@
       "model": "Phi-2",
       "company": "Microsoft",
       "family": "Phi",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "slm"
@@ -1125,7 +993,6 @@
       "model": "GLM-4",
       "company": "Zhipu AI",
       "family": "GLM",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -1188,7 +1055,6 @@
       "model": "Gemini 1.5 Pro",
       "company": "Google DeepMind",
       "family": "Gemini",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -1263,7 +1129,6 @@
       "model": "Gemma",
       "company": "Google DeepMind",
       "family": "Gemma",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "slm"
@@ -1332,7 +1197,6 @@
       "model": "Claude 3 Opus",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -1397,7 +1261,6 @@
       "model": "Command R",
       "company": "Cohere",
       "family": "Command",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -1462,7 +1325,6 @@
       "model": "Llama 3",
       "company": "Meta AI",
       "family": "Llama",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -1527,7 +1389,6 @@
       "model": "Phi-3",
       "company": "Microsoft",
       "family": "Phi",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "slm"
@@ -1587,7 +1448,6 @@
       "model": "DeepSeek-V2",
       "company": "DeepSeek",
       "family": "DeepSeek",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -1652,7 +1512,6 @@
       "model": "GPT-4o",
       "company": "OpenAI",
       "family": "GPT",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -1731,7 +1590,6 @@
       "model": "Qwen2",
       "company": "Alibaba Qwen",
       "family": "Qwen",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -1789,7 +1647,6 @@
       "model": "Claude 3.5 Sonnet",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -1843,7 +1700,6 @@
       "model": "Llama 3.1",
       "company": "Meta AI",
       "family": "Llama",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -1908,7 +1764,6 @@
       "model": "Mistral Large 2",
       "company": "Mistral AI",
       "family": "Mistral",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -1975,7 +1830,6 @@
       "model": "Jamba 1.5",
       "company": "AI21 Labs",
       "family": "Jamba",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2033,7 +1887,6 @@
       "model": "o1",
       "company": "OpenAI",
       "family": "o-series",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2104,7 +1957,6 @@
       "model": "Qwen2.5",
       "company": "Alibaba Qwen",
       "family": "Qwen",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2162,7 +2014,6 @@
       "model": "Llama 3.2",
       "company": "Meta AI",
       "family": "Llama",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2230,7 +2081,6 @@
       "model": "Nova",
       "company": "Amazon",
       "family": "Nova",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2309,7 +2159,6 @@
       "model": "Gemini 2.0 Flash",
       "company": "Google DeepMind",
       "family": "Gemini",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2374,7 +2223,6 @@
       "model": "DeepSeek-V3",
       "company": "DeepSeek",
       "family": "DeepSeek",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2439,7 +2287,6 @@
       "model": "DeepSeek-R1",
       "company": "DeepSeek",
       "family": "DeepSeek",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2506,7 +2353,6 @@
       "model": "Mistral Small 3",
       "company": "Mistral AI",
       "family": "Mistral",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "slm"
@@ -2566,7 +2412,6 @@
       "model": "Grok 3",
       "company": "xAI",
       "family": "Grok",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2631,7 +2476,6 @@
       "model": "Claude 3.7 Sonnet",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2696,7 +2540,6 @@
       "model": "GPT-4.5",
       "company": "OpenAI",
       "family": "GPT",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2769,7 +2612,6 @@
       "model": "Gemma 3",
       "company": "Google DeepMind",
       "family": "Gemma",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2848,7 +2690,6 @@
       "model": "Command A",
       "company": "Cohere",
       "family": "Command",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2915,7 +2756,6 @@
       "model": "Gemini 2.5 Pro",
       "company": "Google DeepMind",
       "family": "Gemini",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -2980,7 +2820,6 @@
       "model": "Llama 4",
       "company": "Meta AI",
       "family": "Llama",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3048,7 +2887,6 @@
       "model": "Qwen3",
       "company": "Alibaba Qwen",
       "family": "Qwen",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3115,7 +2953,6 @@
       "model": "Claude Opus 4",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3179,7 +3016,6 @@
       "model": "Kimi K2",
       "company": "Moonshot AI",
       "family": "Kimi",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3244,7 +3080,6 @@
       "model": "GLM-4.5",
       "company": "Zhipu AI",
       "family": "GLM",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3309,7 +3144,6 @@
       "model": "GPT-OSS",
       "company": "OpenAI",
       "family": "GPT-OSS",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3392,7 +3226,6 @@
       "model": "GPT-5",
       "company": "OpenAI",
       "family": "GPT",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3466,7 +3299,6 @@
       "model": "DeepSeek-V3.1",
       "company": "DeepSeek",
       "family": "DeepSeek",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3531,7 +3363,6 @@
       "model": "Claude Sonnet 4.5",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3606,7 +3437,6 @@
       "model": "GPT-5.1",
       "company": "OpenAI",
       "family": "GPT",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3679,7 +3509,6 @@
       "model": "Gemini 3 Pro",
       "company": "Google DeepMind",
       "family": "Gemini",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3743,7 +3572,6 @@
       "model": "Claude Opus 4.5",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3818,7 +3646,6 @@
       "model": "Mistral 3",
       "company": "Mistral AI",
       "family": "Mistral",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3887,7 +3714,6 @@
       "model": "GPT-5.2",
       "company": "OpenAI",
       "family": "GPT",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -3960,7 +3786,6 @@
       "model": "Claude Opus 4.6",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4035,7 +3860,6 @@
       "model": "GPT-5.3-Codex",
       "company": "OpenAI",
       "family": "GPT",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4098,7 +3922,6 @@
       "model": "Qwen 3.5",
       "company": "Alibaba Qwen",
       "family": "Qwen",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4167,7 +3990,6 @@
       "model": "Claude Sonnet 4.6",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4240,7 +4062,6 @@
       "model": "GPT-5.4",
       "company": "OpenAI",
       "family": "GPT",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4311,7 +4132,6 @@
       "model": "Mistral Small 4",
       "company": "Mistral AI",
       "family": "Mistral",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4372,7 +4192,6 @@
       "model": "Llama 5",
       "company": "Meta AI",
       "family": "Llama",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4423,7 +4242,6 @@
       "model": "Muse Spark",
       "company": "Meta AI",
       "family": "Muse",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4507,7 +4325,6 @@
       "model": "Claude Opus 4.7",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4582,7 +4399,6 @@
       "model": "GPT-5.5",
       "company": "OpenAI",
       "family": "GPT",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4664,7 +4480,6 @@
       "model": "DeepSeek V4 Flash",
       "company": "DeepSeek",
       "family": "DeepSeek",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4729,7 +4544,6 @@
       "model": "Gemini 3.5 Flash",
       "company": "Google DeepMind",
       "family": "Gemini",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "slm"
@@ -4794,7 +4608,6 @@
       "model": "Claude Opus 4.8",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4869,7 +4682,6 @@
       "model": "Nemotron 3 Ultra",
       "company": "NVIDIA",
       "family": "Nemotron",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -4936,7 +4748,6 @@
       "model": "Claude Fable 5",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -5011,7 +4822,6 @@
       "model": "Claude Mythos 5",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -5086,7 +4896,6 @@
       "model": "GLM-5.2",
       "company": "Zhipu AI",
       "family": "GLM",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -5143,7 +4952,6 @@
       "model": "Claude Sonnet 5",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -5216,7 +5024,6 @@
       "model": "Grok 4.5",
       "company": "xAI",
       "family": "Grok",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -5278,7 +5085,6 @@
       "model": "GPT-5.6",
       "company": "OpenAI",
       "family": "GPT",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -5341,7 +5147,6 @@
       "model": "Kimi K3",
       "company": "Moonshot AI",
       "family": "Kimi",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -5401,7 +5206,6 @@
       "model": "Gemini 3.6 Flash",
       "company": "Google DeepMind",
       "family": "Gemini",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "slm"
@@ -5466,7 +5270,6 @@
       "model": "Claude Opus 5",
       "company": "Anthropic",
       "family": "Claude",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -5541,7 +5344,6 @@
       "model": "Qwen3.8-Max",
       "company": "Alibaba Qwen",
       "family": "Qwen",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
@@ -5594,7 +5396,6 @@
       "model": "Muse Spark 1.2",
       "company": "Meta AI",
       "family": "Muse",
-      "kind": "model",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"

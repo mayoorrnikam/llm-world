@@ -30,7 +30,7 @@ inline sample and saying so in the footer.
   "model": "Grok-1",
   "company": "xAI",
   "family": "Grok",                // the model line — Claude, GPT, Llama…
-  "kind": "model",                 // ChatGPT is a product, GPT-4 is a model
+  
 
   // What kind of model this is. The discriminator every other field hangs off.
   "classification": { "primary_type": "language", "subtype": "llm" },
@@ -104,15 +104,17 @@ generates static, no-JavaScript-required pages from the same dataset:
                      cadence, context-window growth, capability mix
 /compare/            pick 2-5 releases and read them side by side
 /data-quality/       verification, source authority, coverage and what's missing
+/milestones/         dated events that were not model releases
+/milestones/<id>/    2 pages — what happened, and why it is not a model record
 /families/           index of the 23 tracked model lines
 /families/<slug>/    23 pages — lineage, context growth, and what changed
                      between each pair of generations
 /models/             index of everything, newest first, grouped by year
-/models/<id>/        84 pages (+1 retired-id redirect) — facts, sources, family lineage, cadence
+/models/<id>/        82 pages (+3 retired-id redirects) — facts, sources, family lineage, cadence
 /companies/          index of labs, ranked by release count
 /companies/<slug>/   16 pages — a lab's releases and its median release gap
 /timeline/<year>/     5 pages — that year's releases by month
-/sitemap.xml        136 URLs
+/sitemap.xml        137 URLs
 ```
 
 **Header and footer are shared, not duplicated.** `build.mjs` lifts them
@@ -166,10 +168,10 @@ nobody has checked yet.
 
 | Field | Recorded | Not disclosed | Not researched |
 |---|---|---|---|
-| Context window | 80/84 | 3 | 1 |
-| Parameter count | 40/84 | 41 | 3 |
+| Context window | 80/82 | 1 | 1 |
+| Parameter count | 40/82 | 39 | 3 |
 | Licence (open weights only) | 34/35 | 0 | 1 |
-| Modalities | 59/84 | 0 | 25 |
+| Modalities | 58/82 | 0 | 24 |
 
 Most proprietary labs never publish parameter counts, which is why 41 of those
 nulls are correct answers rather than holes. Modalities are new in schema 1.6:

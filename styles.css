@@ -1724,6 +1724,46 @@ code, kbd {
   color: var(--muted);
 }
 
+/* A milestone is not a release. It sits in the same lane so the chronology
+   reads correctly, but it is deliberately a different shape — dashed, wider,
+   no company swatch bar — so it can never be mistaken for a model card or
+   counted as one by eye. */
+.milestone {
+  /* The lane is flex in one view and grid in the other; span the row in both. */
+  flex: 1 1 100%;
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding: 10px 13px;
+  border: 1px dashed var(--line);
+  border-left: 3px solid var(--c, var(--accent));
+  border-radius: 8px;
+  background: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+.milestone:hover { border-color: var(--c, var(--accent)); }
+.milestone:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.milestone-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+.milestone-title { font-size: 13.5px; font-weight: 600; }
+.milestone-note {
+  flex: 1 1 100%;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 /* Family lineage — one generation per row, dates on the right. */
 .family-lineage li { padding: 10px 2px; }
 

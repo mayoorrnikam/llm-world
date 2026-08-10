@@ -32,6 +32,12 @@ const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
 /** The dataset as authored (schema 1.6). What --export publishes. */
 const rawReleases = data.releases;
 
+/** Dated events that were not model releases (TAXONOMY §7). Optional file. */
+let milestones = [];
+try {
+  milestones = JSON.parse(readFileSync('data/milestones.json', 'utf8')).milestones ?? [];
+} catch { /* no milestones yet — the site renders without them */ }
+
 /**
  * The dataset as these templates read it: the 1.6 record plus the facts derived
  * from it — canonical date, display tags, flattened language specs.
@@ -468,12 +474,23 @@ function yearPage(year, list) {
   const byMonth = new Map();
   for (const r of list) (byMonth.get(r.month) ?? byMonth.set(r.month, []).get(r.month)).push(r);
 
+  // Milestones belong on the timeline even though they are not releases —
+  // 2022 without ChatGPT would be a strange year to read.
+  const yearMilestones = milestones
+    .filter((m) => m.date.startsWith(String(year)))
+    .sort((a, b) => a.date.localeCompare(b.date));
+
   const body = `
 <nav class="crumbs"><a href="../../">Home</a> › <span>${year}</span></nav>
 <div class="doc-hero"><div>
   <h1>LLM releases in ${year}</h1>
-  <p class="doc-sub">${list.length} tracked release${list.length === 1 ? '' : 's'} · ${eraFor(year)}</p>
+  <p class="doc-sub">${list.length} tracked release${list.length === 1 ? '' : 's'}${
+    yearMilestones.length ? ` · ${yearMilestones.length} milestone${yearMilestones.length === 1 ? '' : 's'}` : ''} · ${eraFor(year)}</p>
 </div></div>
+${yearMilestones.length ? `<h2>Milestones</h2>
+<p class="chart-note">Dated events that mattered without being model releases.</p>
+<ol class="doc-list">${yearMilestones.map((m) =>
+    `<li><span class="doc-mark sm">${glyph(m.company)}</span><a class="cell-name" href="../../milestones/${esc(m.id)}/">${esc(m.title)}</a><span class="cell-meta">${esc(m.company)}</span><span class="cell-num">${esc(eventDate(m.date))}</span></li>`).join('')}</ol>` : ''}
 ${[...byMonth.keys()].sort((a, b) => a - b).map((m) => `
 <h2>${MONTHS[m - 1]} ${year}</h2>
 <ol class="doc-list">${byMonth.get(m).map((r) =>
@@ -571,6 +588,101 @@ function latestPage() {
   });
 }
 
+
+const MILESTONE_LABEL = {
+  product_launch: 'Product launch', architecture: 'Architecture',
+  context: 'Context length', multimodal: 'Multimodal', open_weights: 'Open weights',
+  research: 'Research', policy: 'Policy',
+};
+
+/**
+ * Milestones: dated events that mattered, whether or not they were a model
+ * release. ChatGPT is the reason this exists — it is a product served by
+ * GPT-3.5, not a set of weights, so filing it as a model gave it a row where
+ * every specification was null (TAXONOMY §7). Deleting it would be worse: its
+ * launch is the most consequential date in this timeline.
+ */
+function milestonePage(m) {
+  const body = `
+<nav class="crumbs"><a href="../../">Home</a> › <a href="../">Milestones</a> › <span>${esc(m.title)}</span></nav>
+
+<div class="doc-hero">
+  <span class="doc-mark">${glyph(m.company)}</span>
+  <div>
+    <h1>${esc(m.title)}</h1>
+    <p class="doc-sub">${esc(m.company)} · <time datetime="${esc(m.date)}">${esc(eventDate(m.date))}</time> ·
+    ${esc(MILESTONE_LABEL[m.type] ?? m.type)}</p>
+  </div>
+</div>
+
+<p class="doc-lede">${esc(m.note)}</p>
+${m.significance ? `<p class="doc-note">${esc(m.significance)}</p>` : ''}
+
+<h2>Why this is not a model record</h2>
+<p class="doc-note">This dataset's model records describe sets of weights — parameters,
+a context window, a licence. ${esc(m.title.replace(/ launches$/, ''))} is a product built on
+a model, so it has none of those. Recording it as a model would mean a row where every
+specification is empty, and would count it as a release that never happened.
+${m.related_family ? `The model line behind it is tracked as
+<a href="../../families/${familySlug(m.related_family)}/">${esc(m.related_family)}</a>.` : ''}</p>
+
+<h2>Sources</h2>
+<p class="doc-prov">Record status: <span class="prov-badge" data-status="${esc(m.provenance.status)}">${
+  esc(PROV_LABEL[m.provenance.status] ?? m.provenance.status)}</span> · confidence ${m.provenance.confidence}/100</p>
+${m.provenance.reason ? `<p class="doc-reason">${esc(m.provenance.reason)}</p>` : ''}
+<ul class="doc-sources">${m.sources.map((s) =>
+  `<li><a href="${esc(s.url)}" rel="noopener noreferrer nofollow">${esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a> <span>${esc(SOURCE_LABEL[s.type] ?? s.type)}</span> <span class="src-authority" data-authority="${esc(s.authority)}">${esc(AUTHORITY_LABEL[s.authority] ?? s.authority)}</span>${
+    s.archived_url ? ` <a class="src-archive" href="${esc(s.archived_url)}" rel="noopener noreferrer nofollow">archived</a>` : ''}</li>`).join('')}</ul>
+
+<p class="doc-cta"><a href="../../timeline/${m.date.slice(0, 4)}/">See what else happened in ${m.date.slice(0, 4)} →</a></p>
+`;
+
+  return page({
+    title: `${m.title} — ${eventDate(m.date)} | LLM World`,
+    description: `${m.title} on ${eventDate(m.date)}. ${m.note}`.slice(0, 300),
+    canonical: `${BASE_URL}/milestones/${m.id}/`,
+    // Milestones are timeline events, so they mark Timeline. Two records do not
+    // justify a nav slot of their own — revisit when there are more.
+    section: '',
+    depth: 2,
+    sprites: [slugFor(m.company)],
+    body,
+  });
+}
+
+function milestonesIndexPage(list) {
+  const sorted = [...list].sort((a, b) => a.date.localeCompare(b.date));
+  const body = `
+<nav class="crumbs"><a href="../">Home</a> › <span>Milestones</span></nav>
+
+<h1>Milestones</h1>
+<p class="doc-sub">${sorted.length} dated event${sorted.length === 1 ? '' : 's'} that mattered but were not model releases</p>
+
+<p class="doc-note">Not everything that shaped this history was a set of weights.
+A milestone records a dated event — a product launch, an architectural shift — that
+belongs on the timeline but has no parameters, context window or licence.
+Every milestone needs a primary source, exactly like a model record.</p>
+
+<ol class="doc-list">${sorted.map((m) => `<li>
+<span class="doc-mark sm">${glyph(m.company)}</span>
+<a class="cell-name" href="${esc(m.id)}/">${esc(m.title)}</a>
+<span class="cell-meta">${esc(MILESTONE_LABEL[m.type] ?? m.type)} · ${esc(m.company)}</span>
+<span class="cell-num">${esc(eventDate(m.date))}</span>
+</li>`).join('')}</ol>
+
+<p class="doc-cta"><a href="../models/">Browse tracked model releases →</a></p>
+`;
+
+  return page({
+    title: 'Milestones — dated events that were not model releases | LLM World',
+    description: 'Dated events that shaped large language model history without being model releases, each with a primary source.',
+    canonical: `${BASE_URL}/milestones/`,
+    section: '',
+    depth: 1,
+    sprites: [...new Set(list.map((m) => slugFor(m.company)))],
+    body,
+  });
+}
 
 /**
  * A family page: one model line, generation by generation.
@@ -1322,12 +1434,35 @@ const byFamily = new Map();
 for (const r of releases) (byFamily.get(r.family) ?? byFamily.set(r.family, []).get(r.family)).push(r);
 for (const [name, list] of byFamily) write(`families/${familySlug(name)}`, familyPage(name, list));
 write('families', familiesIndexPage(byFamily));
+
+for (const m of milestones) write(`milestones/${m.id}`, milestonePage(m));
+if (milestones.length) write('milestones', milestonesIndexPage(milestones));
+
+// These were model URLs before the products moved out. They were public, so
+// they keep resolving rather than 404ing.
+for (const m of milestones) {
+  write(`models/${m.id}`, page({
+    title: `${m.title} — ${eventDate(m.date)} | LLM World`,
+    description: `${m.id} is recorded as a milestone, not a model.`,
+    canonical: `${BASE_URL}/milestones/${m.id}/`,
+    section: 'models/',
+    depth: 2,
+    sprites: [slugFor(m.company)],
+    head: `<meta http-equiv="refresh" content="0; url=../../milestones/${esc(m.id)}/">`,
+    body: `<h1>Moved</h1>
+<p class="doc-sub">${esc(m.title.replace(/ launches$/, ''))} is a product, not a model, so it is
+recorded as a <a href="../../milestones/${esc(m.id)}/">milestone</a>.</p>
+<p class="doc-cta"><a href="../../milestones/${esc(m.id)}/">Continue →</a></p>`,
+  }));
+}
 write('compare', comparePage());
 
 const BASE = BASE_URL;
 const urls = [
   `${BASE}/models/`, `${BASE}/companies/`, `${BASE}/latest/`,
   `${BASE}/analytics/`, `${BASE}/compare/`, `${BASE}/data-quality/`, `${BASE}/families/`,
+  ...(milestones.length ? [`${BASE}/milestones/`] : []),
+  ...milestones.map((m) => `${BASE}/milestones/${m.id}/`),
   ...[...new Set(releases.map((r) => r.family))].map((f) => `${BASE}/families/${familySlug(f)}/`),
   `${BASE}/`,
   ...releases.map((r) => `${BASE}/models/${r.id}/`),
@@ -1423,6 +1558,6 @@ if (EXPORT) {
   console.log('  + export: api/index.json, api/models.json, api/companies.json, llm-releases.csv');
 }
 
-console.log(`built ${releases.length} model pages · ${byFamily.size} family pages · ${byCompany.size} company pages · ` +
+console.log(`built ${releases.length} model pages · ${byFamily.size} family pages · ${milestones.length} milestones · ${byCompany.size} company pages · ` +
   `${byYear.size} year pages · sitemap (${urls.length} urls)`);
 if (!EXPORT) console.log('  bulk export skipped — pass --export to enable');

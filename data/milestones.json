@@ -1,0 +1,56 @@
+{
+  "updated": "2026-08-08",
+  "schema_version": "1.6",
+  "milestones": [
+    {
+      "id": "chatgpt",
+      "title": "ChatGPT launches",
+      "date": "2022-11-30",
+      "type": "product_launch",
+      "company": "OpenAI",
+      "note": "The public chatbot built on GPT-3.5 that brought large language models to the mainstream.",
+      "significance": "The moment large language models reached the general public. Everything in this timeline after November 2022 happens in a market ChatGPT created.",
+      "related_family": "GPT",
+      "sources": [
+        {
+          "id": "chatgpt-s1",
+          "url": "https://openai.com/index/chatgpt/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20240502090536/https://openai.com/index/chatgpt",
+          "retrieved": "2024-05-02"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Date confirmed in an archived primary source. A milestone records a dated event, so it carries no specifications."
+      }
+    },
+    {
+      "id": "bard",
+      "title": "Bard launches",
+      "date": "2023-03-21",
+      "type": "product_launch",
+      "company": "Google DeepMind",
+      "note": "Google's ChatGPT rival chatbot that brought the company into the consumer AI race.",
+      "significance": "Google's first consumer answer to ChatGPT, and the start of the assistant race between the two largest labs.",
+      "related_family": "Gemini",
+      "sources": [
+        {
+          "id": "bard-s1",
+          "url": "https://blog.google/technology/ai/try-bard/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20230321140848/https://blog.google/technology/ai/try-bard/",
+          "retrieved": "2023-03-21"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Date confirmed in an archived primary source. A milestone records a dated event, so it carries no specifications."
+      }
+    }
+  ]
+}

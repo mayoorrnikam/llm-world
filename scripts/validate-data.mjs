@@ -24,7 +24,6 @@ const err = (id, msg) => errors.push(`${id}: ${msg}`);
 const warn = (id, msg) => warnings.push(`${id}: ${msg}`);
 
 const VALID_STATUS = new Set(['verified', 'partially_verified', 'unverified', 'conflicting', 'estimated']);
-const VALID_KIND = new Set(['model', 'product', 'milestone']);
 
 // Schema 1.6 vocabularies — defined in docs/TAXONOMY.md.
 const VALID_PRIMARY_TYPE = new Set([
@@ -252,7 +251,9 @@ for (const r of releases) {
     }
   }
 
-  if (!VALID_KIND.has(r.kind)) err(id, `unknown kind "${r.kind}"`);
+  // `kind` is gone: every record in this file is a model, and products live in
+  // data/milestones.json (TAXONOMY §7). A leftover kind means a stale record.
+  if ('kind' in r) err(id, 'remove "kind" — this file holds models only; products are milestones');
   if (!r.family?.trim()) err(id, 'missing family');
 
   // specifications (S5) — numbers are null until researched, never a guess (§1).
@@ -290,6 +291,77 @@ for (const [prev, owner] of retiredIds) {
   if (seenIds.has(prev)) err(owner, `previous_id "${prev}" collides with a live record`);
 }
 
+/* ------------------------------------------------------------- milestones */
+
+/**
+ * Milestones are dated events that mattered, model release or not. They are a
+ * separate file because they are a different kind of thing — no parameters, no
+ * context window, no family lineage — and giving them a row in the model table
+ * meant a record where every specification was null (TAXONOMY §7).
+ */
+const VALID_MILESTONE_TYPE = new Set([
+  'product_launch', 'architecture', 'context', 'multimodal',
+  'open_weights', 'research', 'policy',
+]);
+
+let milestones = [];
+try {
+  milestones = JSON.parse(readFileSync('data/milestones.json', 'utf8')).milestones ?? [];
+} catch (e) {
+  if (e.code !== 'ENOENT') err('<milestones>', `cannot parse data/milestones.json — ${e.message}`);
+}
+
+const seenMilestoneIds = new Set();
+for (const m of milestones) {
+  const id = m.id || `<missing id: ${m.title ?? '?'}>`;
+
+  if (!m.id) err(id, 'milestone missing id');
+  else if (seenMilestoneIds.has(m.id)) err(id, 'duplicate milestone id');
+  else seenMilestoneIds.add(m.id);
+
+  // A milestone id must not collide with a model id — they share a URL space
+  // in the reader's mind even though they sit in different directories.
+  if (seenIds.has(m.id)) {
+    warn(id, `milestone id also used by a model record — check this is intentional`);
+  }
+
+  if (!m.title?.trim()) err(id, 'milestone missing title');
+  if (!VALID_MILESTONE_TYPE.has(m.type)) err(id, `unknown milestone type "${m.type}"`);
+
+  const d = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(m.date ?? '');
+  if (!d) err(id, `milestone date must be YYYY-MM-DD, got ${JSON.stringify(m.date)}`);
+  else {
+    const [, yy, mm, dd] = d.map(Number);
+    const stamp = Date.UTC(yy, mm - 1, dd || 1);
+    if (dd) {
+      const back = new Date(stamp);
+      if (back.getUTCMonth() !== mm - 1 || back.getUTCDate() !== dd) {
+        err(id, `not a real date: ${m.date}`);
+      }
+    }
+    if (stamp > endOfToday && m.provenance?.status !== 'estimated') {
+      err(id, 'milestone date is in the future');
+    }
+  }
+
+  // Every milestone requires evidence — charter §40, and the same rule the
+  // model records live under.
+  if (!Array.isArray(m.sources) || !m.sources.length) {
+    err(id, 'milestone has no sources — every milestone requires evidence');
+  } else for (const s of m.sources) {
+    if (!/^https?:\/\//.test(s.url ?? '')) err(id, `source url must be http(s): ${s.url}`);
+    if (!VALID_SOURCE_TYPE.has(s.type)) err(id, `unknown source type "${s.type}"`);
+    if (!VALID_AUTHORITY.has(s.authority)) err(id, `unknown source authority "${s.authority}"`);
+  }
+
+  if (!VALID_STATUS.has(m.provenance?.status)) {
+    err(id, `unknown provenance.status "${m.provenance?.status}"`);
+  }
+  if (m.provenance?.status === 'verified' && !m.sources?.some((s) => s.authority === 'primary')) {
+    err(id, 'milestone marked verified but has no primary source');
+  }
+}
+
 /* ------------------------------------------------------------ link check */
 
 if (CHECK_LINKS) {
@@ -319,13 +391,14 @@ if (CHECK_LINKS) {
 
 const stats = {
   releases: releases.length,
+  milestones: milestones.length,
   companies: new Set(releases.map((r) => r.company)).size,
   families: new Set(releases.map((r) => r.family)).size,
   verified: releases.filter((r) => r.provenance?.status === 'verified').length,
 };
 console.log(
-  `${stats.releases} releases · ${stats.companies} companies · ${stats.families} families · ` +
-  `${stats.verified} verified`,
+  `${stats.releases} releases · ${stats.milestones} milestones · ${stats.companies} companies · ` +
+  `${stats.families} families · ${stats.verified} verified`,
 );
 
 for (const w of warnings) console.log(`  WARN  ${w}`);

@@ -101,6 +101,7 @@ const FALLBACK_DATA = {
 
 const state = {
   releases: [],
+  milestones: [],
   updated: null,
   usingFallback: false,
   years: [],
@@ -181,6 +182,30 @@ async function loadData() {
   } catch {
     Object.assign(state, normalize(FALLBACK_DATA), { usingFallback: true });
   }
+
+  // Milestones are a separate file and a separate concept, so a failure to load
+  // them must not take the timeline down with it.
+  try {
+    const res = await fetch('data/milestones.json', { cache: 'no-store' });
+    if (res.ok) state.milestones = normalizeMilestones(await res.json());
+  } catch { /* timeline renders without them */ }
+}
+
+/** Dated events that were not model releases (TAXONOMY §7). */
+function normalizeMilestones(json) {
+  return (Array.isArray(json?.milestones) ? json.milestones : [])
+    .filter((m) => m && typeof m.date === 'string' && typeof m.title === 'string')
+    .map((m) => {
+      const [year, month, day] = m.date.split('-').map(Number);
+      return {
+        id: String(m.id || slug(m.title)),
+        title: String(m.title),
+        company: String(m.company || 'Unknown'),
+        note: typeof m.note === 'string' ? m.note : '',
+        year, month, day: day || 0,
+      };
+    })
+    .filter((m) => Number.isFinite(m.year) && m.month >= 1 && m.month <= 12);
 }
 
 function normalize(json) {
@@ -423,9 +448,14 @@ function renderLanes() {
     if (state.year === 'all') frag.appendChild(buildYearHead(y));
     for (let m = 1; m <= 12; m++) {
       const inMonth = state.visible.filter((r) => r.year === y && r.month === m);
+      // Milestones ride the same lanes as releases, but only when no filter is
+      // active: they have no company, capability or search text to match, so
+      // showing them inside a filtered view would misrepresent the result.
+      const marks = hasFilters() ? []
+        : state.milestones.filter((x) => x.year === y && x.month === m);
       // In the all-years view, empty months are noise — skip them.
-      if (state.year === 'all' && !inMonth.length) continue;
-      frag.appendChild(buildLane(m, inMonth));
+      if (state.year === 'all' && !inMonth.length && !marks.length) continue;
+      frag.appendChild(buildLane(m, inMonth, marks));
     }
   }
   lanes.appendChild(frag);
@@ -448,10 +478,11 @@ function buildYearHead(year) {
   return head;
 }
 
-function buildLane(month, releases) {
+function buildLane(month, releases, marks = []) {
   const lane = document.createElement('section');
   lane.className = 'lane';
-  lane.setAttribute('aria-label', `${MONTHS[month - 1]}, ${releases.length} releases`);
+  lane.setAttribute('aria-label', `${MONTHS[month - 1]}, ${releases.length} releases`
+    + (marks.length ? `, ${marks.length} milestone${marks.length === 1 ? '' : 's'}` : ''));
 
   const label = document.createElement('div');
   label.className = 'lane-label';
@@ -474,7 +505,9 @@ function buildLane(month, releases) {
   const cards = document.createElement('div');
   cards.className = 'lane-cards';
 
-  if (!releases.length) {
+  for (const m of marks) cards.appendChild(buildMilestone(m));
+
+  if (!releases.length && !marks.length) {
     const empty = document.createElement('p');
     empty.className = 'lane-empty';
     empty.textContent = 'no releases';
@@ -485,6 +518,31 @@ function buildLane(month, releases) {
 
   lane.append(label, cards);
   return lane;
+}
+
+/** A milestone reads as a note on the timeline, not as a release card — it is
+ *  a different kind of thing and must not be counted as a model. */
+function buildMilestone(m) {
+  const a = document.createElement('a');
+  a.className = 'milestone';
+  a.href = `milestones/${encodeURIComponent(m.id)}/`;
+  a.style.setProperty('--c', colorFor(m.company));
+  a.setAttribute('aria-label', `Milestone: ${m.title}, ${m.company}. Read more.`);
+
+  const tag = document.createElement('span');
+  tag.className = 'milestone-tag';
+  tag.textContent = 'milestone';
+
+  const title = document.createElement('span');
+  title.className = 'milestone-title';
+  title.textContent = m.title;
+
+  const note = document.createElement('span');
+  note.className = 'milestone-note';
+  note.textContent = m.note;
+
+  a.append(tag, title, note);
+  return a;
 }
 
 function buildCard(r) {
