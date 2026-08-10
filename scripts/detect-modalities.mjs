@@ -68,8 +68,17 @@ const MULTIMODAL_HINTS = [
 // A looser bound lets the match run past the declaration into whatever follows
 // — Gemini's page reads "Output Text token_auto", and a letters-based capture
 // swallows "token", which then fails to parse and the whole declaration is lost.
-const TERM = '(?:Text|Image|Images|Audio|Video|Speech|PDF|PDFs)';
-const LIST = `(${TERM}(?:\\s*(?:,|and|or|,\\s*and)\\s*${TERM})*)`;
+// Declarations capitalise the FIRST item and often lowercase the rest —
+// "Inputs Audio, images, video, text, and PDF". So the first term must be
+// capitalised and later ones need not be.
+//
+// The first term stays case-sensitive on purpose. Relaxing it would let
+// ordinary prose — "the input text and output text" — parse as a text-only
+// declaration, which is the one error this must never make: publishing a
+// multimodal model as text-only.
+const TERM_CAP = '(?:Text|Image|Images|Audio|Video|Speech|PDF|PDFs)';
+const TERM_ANY = '(?:[Tt]ext|[Ii]mages?|[Aa]udio|[Vv]ideo|[Ss]peech|PDFs?)';
+const LIST = `(${TERM_CAP}(?:\\s*(?:,|and|or|,\\s*and)\\s*${TERM_ANY})*)`;
 const DECLARATION = [
   new RegExp(`\\bInputs?\\s+modalities?\\s*:?\\s*${LIST}\\s+Outputs?\\s+modalities?\\s*:?\\s*${LIST}`, 'g'),
   new RegExp(`\\bInputs?\\b\\s*:?\\s*${LIST}\\s+Outputs?\\b\\s*:?\\s*${LIST}`, 'g'),

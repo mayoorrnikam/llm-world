@@ -65,7 +65,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the technical paper. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement and the technical paper. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "release_date": [
@@ -148,7 +148,7 @@
       "provenance": {
         "status": "estimated",
         "confidence": 50,
-        "reason": "Cited to the technical paper and the official repository. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Cited to the technical paper and the official repository. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {
         "parameter_count": [
@@ -214,7 +214,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "context_window": [
@@ -287,7 +287,7 @@
       "provenance": {
         "status": "estimated",
         "confidence": 50,
-        "reason": "Cited to the official repository. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the official repository. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "context_window": [
@@ -360,7 +360,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "release_date": [
@@ -783,7 +783,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
         "release_date": [
@@ -987,7 +987,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official repository. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement and the official repository. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "previous_ids": [
         "grok-1-open"
@@ -1073,7 +1073,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
         "parameter_count"
@@ -1141,7 +1141,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Cited to the lab's own announcement. Not verified because the context window and the parameter count could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {
         "release_date": [
@@ -1304,7 +1304,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the official repository and the technical paper. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the official repository and the technical paper. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
         "parameter_count"
@@ -1389,7 +1389,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
         "parameter_count"
@@ -1414,7 +1414,14 @@
         "primary_type": "language",
         "subtype": "slm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "small-efficient"
@@ -1470,7 +1477,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "release_date": [
@@ -1768,7 +1775,14 @@
         "primary_type": "language",
         "subtype": "slm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "small-efficient"
@@ -1815,7 +1829,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "release_date": [
@@ -2049,7 +2063,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Alibaba's flagship open series spanning 0.5B to 72B parameters with strong multilingual ability.",
@@ -2171,7 +2192,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
         "parameter_count"
@@ -2631,7 +2652,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the parameter count could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "release_date": [
@@ -2851,7 +2872,17 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "audio",
+          "image",
+          "video",
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "agentic"
       ],
@@ -2900,7 +2931,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Dec 11, 2024) and context window (1,048,576) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Dec 11, 2024) and context window (1,048,576) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Inputs Audio, images, video, and text Output Text\"."
       },
       "undisclosed": [
         "parameter_count"
@@ -2985,7 +3016,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Cited to the technical paper and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {
         "release_date": [
@@ -3069,7 +3100,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Cited to the technical paper and the official model card. Not verified because the context window and the parameter count could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {
         "release_date": [
@@ -3138,7 +3169,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "release_date": [
@@ -3219,7 +3250,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
         "parameter_count"
@@ -3293,7 +3324,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
         "parameter_count"
@@ -3503,7 +3534,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card, and every recorded field has a value, but the individual facts have not yet been checked against the source one by one."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "release_date": [
@@ -3627,7 +3658,17 @@
         "primary_type": "language",
         "subtype": "reasoning"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "audio",
+          "image",
+          "video",
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "reasoning"
       ],
@@ -3676,7 +3717,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Mar 25, 2025) and context window (1 million) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Mar 25, 2025) and context window (1 million) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Inputs Audio, images, video, text, and PDF Output Text\"."
       },
       "undisclosed": [
         "parameter_count"
@@ -4602,7 +4643,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
       },
       "undisclosed": [
         "parameter_count"
@@ -4872,7 +4913,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to the lab's own announcement, and every recorded field has a value, but the individual facts have not yet been checked against the source one by one."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "parameter_count": [
@@ -5138,7 +5179,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
         "parameter_count"
@@ -5974,7 +6015,17 @@
         "primary_type": "language",
         "subtype": "slm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "agentic"
       ],
@@ -6023,7 +6074,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities taken from the documentation's own declaration: \"Inputs Text, Image, Video, Audio, and PDF Output Text\"."
       },
       "undisclosed": [
         "parameter_count"
@@ -6297,7 +6348,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
         "parameter_count"
@@ -6381,7 +6432,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
         "parameter_count"
@@ -6719,7 +6770,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       }
     },
     {
@@ -6778,7 +6829,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the official model card. Not verified because the release date, the context window and the parameter count could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       }
     },
     {
@@ -6790,7 +6841,17 @@
         "primary_type": "language",
         "subtype": "slm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "agentic"
       ],
@@ -6839,7 +6900,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Jul 21, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Jul 21, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Inputs Text, Image, Video, Audio, and PDF Output Text\"."
       },
       "undisclosed": [
         "parameter_count"

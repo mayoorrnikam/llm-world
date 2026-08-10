@@ -20,7 +20,9 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
-import { contextWindow, parameterCount } from '../lib/record.mjs';
+import {
+  assertedValue, evidenceFor, EVIDENCED_FIELDS,
+} from '../lib/record.mjs';
 
 const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
@@ -42,16 +44,25 @@ const SOURCE_PHRASE = {
 const list = (items) => items.length <= 1 ? (items[0] ?? '')
   : `${items.slice(0, -1).join(', ')} and ${items.at(-1)}`;
 
+const FIELD_PHRASE = {
+  release_date: 'the release date',
+  context_window: 'the context window',
+  parameter_count: 'the parameter count',
+};
+
+/**
+ * Why this record is not verified — stated as the fact that is actually
+ * unproven, using the evidence recorded in Stage 5.
+ *
+ * The first version of this reasoned from which fields were null, and said
+ * things like "not verified because modalities are not recorded". That
+ * contradicted the bar settled in Stage 2: a record is verified when every
+ * value it ASSERTS is found in a primary source, and a null asserts nothing.
+ * An unrecorded modality is a coverage gap, never a verification blocker.
+ */
 function reasonFor(r) {
   const primary = r.sources.filter((s) => s.authority === 'primary');
   const secondary = r.sources.filter((s) => s.authority !== 'primary');
-
-  // What the lab has not disclosed. Absence here is a fact about the record.
-  const undisclosed = [];
-  if (parameterCount(r) == null) undisclosed.push('parameter count');
-  if (contextWindow(r) == null) undisclosed.push('context window');
-  if (r.access.open_weights && !r.access.license) undisclosed.push('licence');
-  if (r.modalities == null) undisclosed.push('modalities');
 
   if (!primary.length) {
     const kinds = [...new Set(secondary.map((s) => SOURCE_PHRASE[s.type] ?? s.type))];
@@ -62,15 +73,18 @@ function reasonFor(r) {
   const kinds = [...new Set(primary.map((s) => SOURCE_PHRASE[s.type] ?? s.type))];
   const cited = `Cited to ${list(kinds)}`;
 
-  if (undisclosed.length) {
-    // "modalities" is plural even when it is the only item in the list.
-    const plural = undisclosed.length > 1 || undisclosed[0] === 'modalities';
-    return `${cited}. Not verified because ${list(undisclosed)} `
-      + `${plural ? 'are' : 'is'} not recorded — `
-      + `either undisclosed by the lab or not yet researched.`;
+  const asserted = EVIDENCED_FIELDS.filter((f) => assertedValue(r, f) != null);
+  const unproven = asserted.filter((f) => !evidenceFor(r, f).sources.length);
+
+  if (!asserted.length) {
+    return `${cited}, but this record asserts no figure that could be traced to it.`;
   }
-  return `${cited}, and every recorded field has a value, but the individual `
-    + `facts have not yet been checked against the source one by one.`;
+  if (!unproven.length) {
+    return `${cited}, and every value it asserts was found there.`;
+  }
+  return `${cited}. Not verified because ${list(unproven.map((f) => FIELD_PHRASE[f] ?? f))} `
+    + `could not be found in any cited primary source — the value may be correct, `
+    + `but this dataset cannot yet show where it came from.`;
 }
 
 let written = 0, skipped = 0;
@@ -79,7 +93,17 @@ const preview = [];
 for (const r of data.releases) {
   if (r.provenance.status === 'verified') continue;
   if (r.provenance.reason && !FORCE) { skipped++; continue; }
-  const reason = reasonFor(r);
+  // detect-modalities.mjs appends how a record's modalities were established.
+  // That is provenance a regeneration must not throw away, so it is carried
+  // across rather than overwritten.
+  // Everything from the first "Modalities …" sentence to the end, not just that
+  // sentence: the explanation of HOW the modalities were established follows it
+  // and is the part worth keeping.
+  const prior = r.provenance.reason ?? '';
+  const at = prior.search(/(?:^|\s)Modalities /);
+  const carried = at >= 0 ? prior.slice(at).trim() : '';
+
+  const reason = [reasonFor(r), carried].filter(Boolean).join(' ');
   preview.push(`${r.id.padEnd(20)} ${reason}`);
   if (WRITE) r.provenance.reason = reason;
   written++;
