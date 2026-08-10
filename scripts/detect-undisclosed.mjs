@@ -14,16 +14,24 @@
  * record's archived primary sources and looks for ANY statement of that kind of
  * figure — any parameter count, any context window, any licence name. Then:
  *
- *   sources readable, no such figure anywhere  → undisclosed. The lab's own
+ *   ALL sources read, no such figure anywhere  → undisclosed. The lab's own
  *                                                announcement and docs do not
  *                                                state it.
- *   sources readable, a figure IS present      → NOT undisclosed. We are simply
+ *   a figure IS present                        → NOT undisclosed. We are simply
  *                                                missing a value that exists —
  *                                                reported so it can be filled.
+ *   some source unread                         → partial. Left alone.
  *   no readable source                         → unknown. Left alone.
  *
  * The middle case is the useful one: it finds gaps we can close, rather than
  * excusing them.
+ *
+ * "All" is load-bearing, and was not always required. "Undisclosed" is a claim
+ * about the LAB — that it publishes no such figure — so it cannot be drawn from
+ * a subset of that lab's own sources. Gemma 4 12B was marked as having an
+ * undisclosed context window on the strength of its announcement alone, while
+ * its model card, the obvious place to publish one, sat unarchived and unread.
+ * A source with no snapshot is unread exactly like one that will not parse.
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -78,15 +86,19 @@ const candidates = data.releases
 
 console.log(`${candidates.length} records have at least one unresearched field\n`);
 
-const undisclosed = [], fillable = [], unknown = [];
+const undisclosed = [], fillable = [], unknown = [], partial = [];
 let done = 0;
 
 async function examine(c) {
-  const archived = c.record.sources.filter((s) => s.archived_url && s.authority === 'primary');
+  const primary = c.record.sources.filter((s) => s.authority === 'primary');
+  const archived = primary.filter((s) => s.archived_url);
   const texts = [];
+  // A primary source with no snapshot is a source nobody read, exactly like one
+  // whose snapshot will not parse. Both count against inferring from silence.
+  let unread = primary.length - archived.length;
   for (const s of archived) {
     const t = await sourceText(s.archived_url);
-    if (t) texts.push(t);
+    if (t) texts.push(t); else unread++;
   }
 
   done++;
@@ -100,7 +112,16 @@ async function examine(c) {
   for (const f of c.fields) {
     const stated = texts.some((t) => PATTERNS[f].some((p) => p.test(t)));
     if (stated) fillable.push(`${c.record.id}: ${f} IS stated in a primary source — value missing from our record`);
-    else {
+    // "Undisclosed" is a claim about the LAB — that it publishes no such
+    // figure — so it cannot be drawn from a subset of the lab's own sources.
+    // detect-modalities.mjs has required a complete read since it was written;
+    // this script did not, and it showed: Gemma 4 12B was marked as having an
+    // undisclosed context window while its model card sat unarchived and
+    // unread. A positive finding above needs only one source and is exempt;
+    // an inference from absence is not.
+    else if (unread) {
+      partial.push(`${c.record.id}: ${f} (${unread} of ${primary.length} primary sources unread)`);
+    } else {
       undisclosed.push({ id: c.record.id, field: f });
       if (WRITE) {
         (c.record.undisclosed ??= []).push(f);
@@ -122,6 +143,11 @@ for (const [f, ids] of Object.entries(byField)) console.log(`  ${f}: ${ids.lengt
 
 console.log(`\nGAPS WE CAN CLOSE — the source states it, our record does not (${fillable.length}):`);
 for (const x of fillable) console.log(`  ${x}`);
+
+if (partial.length) {
+  console.log(`\nPARTIAL READ — not every primary source was read, so silence proves nothing (${partial.length}):`);
+  for (const x of partial) console.log(`  ${x}`);
+}
 
 if (unknown.length) {
   console.log(`\nLEFT UNKNOWN — nothing readable to judge from (${unknown.length}):`);

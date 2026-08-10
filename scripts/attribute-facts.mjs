@@ -55,8 +55,15 @@ function formsFor(field, v) {
     const [y, m, d] = String(v).split('-').map(Number);
     const month = MONTHS[m - 1];
     if (!d) return [String(v), `${month} ${y}`];
+    // Zero-padded day as well as bare. blog.google datelines read "Jun 03,
+    // 2026", so Gemma 4 12B's date sat in its own archived announcement
+    // unmatched, and the record stayed partially_verified for a formatting
+    // difference rather than a missing fact.
+    const dd = String(d).padStart(2, '0');
     return [...new Set([String(v), `${month} ${d}, ${y}`, `${month} ${d} ${y}`,
-      `${d} ${month} ${y}`, `${month.slice(0, 3)} ${d}, ${y}`])];
+      `${d} ${month} ${y}`, `${month.slice(0, 3)} ${d}, ${y}`,
+      `${month} ${dd}, ${y}`, `${month.slice(0, 3)} ${dd}, ${y}`,
+      `${dd} ${month} ${y}`])];
   }
   const forms = [String(v), v.toLocaleString('en-US')];
   if (field === 'context_window') {
@@ -77,7 +84,18 @@ function formsFor(field, v) {
 
 
 // Resumable: anything already attributed is left alone.
-const pending = data.releases.filter((r) => !r.evidence);
+//
+// --redo also revisits records whose attribution is incomplete — a field the
+// record asserts but has traced to nothing. Without it, "has any evidence at
+// all" means done forever, so improving the matcher cannot help the records it
+// was improved for. Gemma 4 12B is the case: it traced its parameter count,
+// which retired it, and its release date went untraced because blog.google
+// writes "Jun 03, 2026" and the padded form was missing. Fixing the form
+// changed nothing until this flag existed.
+const REDO = process.argv.includes('--redo');
+const incomplete = (r) => EVIDENCED_FIELDS
+  .some((f) => assertedValue(r, f) != null && !r.evidence?.[f]?.length);
+const pending = data.releases.filter((r) => !r.evidence || (REDO && incomplete(r)));
 console.log(`${data.releases.length} records · ${data.releases.length - pending.length} already attributed`
   + ` · ${Math.min(pending.length, LIMIT)} to do now\n`);
 

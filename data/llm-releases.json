@@ -1076,6 +1076,14 @@
         "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Ultra — our largest and most capable model for highly complex tasks.\""
       },
       "evidence": {
+        "release_date": [
+          {
+            "value": "2023-12-06",
+            "sources": [
+              "gemini-1-s1"
+            ]
+          }
+        ],
         "context_window": [
           {
             "value": 32768,
@@ -1161,6 +1169,14 @@
         "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Pro — our best model for scaling across a wide range of tasks. The 32,768-token context is carried from the former family record; the announcement does not state per-model context windows, so it is recorded here only and will show as untraceable until a source states it.\""
       },
       "evidence": {
+        "release_date": [
+          {
+            "value": "2023-12-06",
+            "sources": [
+              "gemini-1-s1"
+            ]
+          }
+        ],
         "context_window": [
           {
             "value": 32768,
@@ -1246,6 +1262,14 @@
         "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Nano, our most efficient model for on-device tasks, via AICore, a new system capability available in Android 14, starting on Pixel 8 Pro devices.\""
       },
       "evidence": {
+        "release_date": [
+          {
+            "value": "2023-12-06",
+            "sources": [
+              "gemini-1-s1"
+            ]
+          }
+        ],
         "context_window": [
           {
             "value": 32768,
@@ -4031,6 +4055,14 @@
               "claude-3-7-sonnet-s1"
             ]
           }
+        ],
+        "context_window": [
+          {
+            "value": 200000,
+            "sources": [
+              "claude-3-7-sonnet-s3"
+            ]
+          }
         ]
       },
       "pricing": [
@@ -4806,6 +4838,14 @@
             "value": "2025-05-22",
             "sources": [
               "claude-4-opus-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 200000,
+            "sources": [
+              "claude-4-opus-s3"
             ]
           }
         ]
@@ -6561,7 +6601,16 @@
       "undisclosed": [
         "parameter_count"
       ],
-      "evidence": {}
+      "evidence": {
+        "context_window": [
+          {
+            "value": 400000,
+            "sources": [
+              "gpt-5-3-codex-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "qwen-3-5",
@@ -7818,6 +7867,94 @@
       ]
     },
     {
+      "id": "gemma-4-12b",
+      "model": "Gemma 4 12B",
+      "company": "Google DeepMind",
+      "family": "Gemma",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "reasoning",
+        "agentic",
+        "vision"
+      ],
+      "tags": [],
+      "note": "Sits between Gemma 4 E4B and the 26B MoE, and is Google's first mid-sized Gemma with native audio input. Drops the separate multimodal encoders: vision goes through a lightweight embedding module and raw audio is projected straight into the text token space, so both flow into the LLM backbone directly.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-06-03",
+          "sources": [
+            "gemma-4-12b-s1",
+            "gemma-4-12b-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 12000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "gemma-4-12b-s1",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260603163709/https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/",
+          "retrieved": "2026-06-03"
+        },
+        {
+          "id": "gemma-4-12b-s2",
+          "url": "https://huggingface.co/google/gemma-4-12B-it",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from the launch announcement, which states: “Novel unified architecture: No multimodal encoders. The vision and audio inputs flow directly into the LLM backbone,” and describes each path separately — vision through a lightweight embedding module, raw audio projected into the same dimensional space as text tokens. Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06-03",
+            "sources": [
+              "gemma-4-12b-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 12000000000,
+            "sources": [
+              "gemma-4-12b-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "nemotron-3-ultra",
       "model": "Nemotron 3 Ultra",
       "company": "NVIDIA",
@@ -7883,6 +8020,14 @@
         "reason": "Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06-04",
+            "sources": [
+              "nemotron-3-ultra-s1"
+            ]
+          }
+        ],
         "context_window": [
           {
             "value": 1000000,
