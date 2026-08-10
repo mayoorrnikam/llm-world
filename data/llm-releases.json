@@ -1,3092 +1,4950 @@
 {
   "updated": "2026-08-08",
+  "schema_version": "1.6",
   "releases": [
     {
       "id": "palm",
       "model": "PaLM",
       "company": "Google DeepMind",
-      "year": 2022,
-      "month": 4,
-      "day": 4,
+      "family": "PaLM",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "Google's 540-billion-parameter model that demonstrated breakthrough few-shot scaling.",
-      "family": "PaLM",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://research.google/blog/pathways-language-model-palm-scaling-to-540-billion-parameters-for-breakthrough-performance/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://arxiv.org/abs/2204.02311",
-          "type": "paper"
+          "type": "announcement",
+          "date": "2022-04-04",
+          "sources": [
+            "palm-s1",
+            "palm-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 2048,
+          "parameter_count": 540000000000
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 2048,
-        "parameter_count": 540000000000
+      "sources": [
+        {
+          "id": "palm-s1",
+          "url": "https://research.google/blog/pathways-language-model-palm-scaling-to-540-billion-parameters-for-breakthrough-performance/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "palm-s2",
+          "url": "https://arxiv.org/abs/2204.02311",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "opt-175b",
       "model": "OPT-175B",
       "company": "Meta AI",
-      "year": 2022,
-      "month": 5,
-      "day": 5,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "Meta's open 175-billion-parameter model released to democratize access to large language models.",
       "family": "OPT",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Meta's open 175-billion-parameter model released to democratize access to large language models.",
+      "events": [
         {
-          "url": "https://arxiv.org/abs/2205.01068",
-          "type": "paper"
-        },
-        {
-          "url": "https://github.com/facebookresearch/metaseq",
-          "type": "repository"
+          "type": "announcement",
+          "date": "2022-05-05",
+          "sources": [
+            "opt-175b-s1",
+            "opt-175b-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "estimated",
-        "confidence": 50
+      "specifications": {
+        "language": {
+          "context_window": 2048,
+          "parameter_count": 175000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "OPT-175B License Agreement"
       },
-      "technical": {
-        "context_window": 2048,
-        "parameter_count": 175000000000
+      "sources": [
+        {
+          "id": "opt-175b-s1",
+          "url": "https://arxiv.org/abs/2205.01068",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "opt-175b-s2",
+          "url": "https://github.com/facebookresearch/metaseq",
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "estimated",
+        "confidence": 50
       }
     },
     {
       "id": "bloom",
       "model": "BLOOM",
       "company": "BigScience",
-      "year": 2022,
-      "month": 7,
-      "day": 12,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "The 176-billion-parameter multilingual open model built by over a thousand volunteer researchers.",
       "family": "BLOOM",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The 176-billion-parameter multilingual open model built by over a thousand volunteer researchers.",
+      "events": [
         {
-          "url": "https://huggingface.co/bigscience/bloom",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2022-07-12",
+          "sources": [
+            "bloom-s1"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 2048,
+          "parameter_count": 176247271424
+        }
       },
       "access": {
         "open_weights": true,
         "license": "BigScience BLOOM RAIL 1.0"
       },
-      "technical": {
-        "context_window": 2048,
-        "parameter_count": 176247271424
+      "sources": [
+        {
+          "id": "bloom-s1",
+          "url": "https://huggingface.co/bigscience/bloom",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "glm-130b",
       "model": "GLM-130B",
       "company": "Zhipu AI",
-      "year": 2022,
-      "month": 8,
-      "day": 1,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "China's landmark open bilingual 130-billion-parameter model released in August 2022.",
       "family": "GLM",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "China's landmark open bilingual 130-billion-parameter model released in August 2022.",
+      "events": [
         {
-          "url": "https://github.com/zai-org/GLM-130B",
-          "type": "repository"
+          "type": "announcement",
+          "date": "2022-08-01",
+          "sources": [
+            "glm-130b-s1"
+          ]
         }
       ],
-      "provenance": {
-        "status": "estimated",
-        "confidence": 50
+      "specifications": {
+        "language": {
+          "context_window": 2048,
+          "parameter_count": 130000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "The GLM-130B License"
       },
-      "technical": {
-        "context_window": 2048,
-        "parameter_count": 130000000000
+      "sources": [
+        {
+          "id": "glm-130b-s1",
+          "url": "https://github.com/zai-org/GLM-130B",
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "estimated",
+        "confidence": 50
       }
     },
     {
       "id": "chatgpt",
       "model": "ChatGPT",
       "company": "OpenAI",
-      "year": 2022,
-      "month": 11,
-      "day": 30,
+      "family": "GPT",
+      "kind": "product",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "The public chatbot built on GPT-3.5 that brought large language models to the mainstream.",
-      "family": "GPT",
-      "kind": "product",
-      "sources": [
+      "events": [
         {
-          "url": "https://openai.com/index/chatgpt/",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2022-11-30",
+          "sources": [
+            "chatgpt-s1"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": null,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "chatgpt-s1",
+          "url": "https://openai.com/index/chatgpt/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "llama-1",
       "model": "Llama 1",
       "company": "Meta AI",
-      "year": 2023,
-      "month": 2,
-      "day": 24,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "Open foundation models from 7B to 65B parameters that ignited the open-source LLM ecosystem.",
       "family": "Llama",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Open foundation models from 7B to 65B parameters that ignited the open-source LLM ecosystem.",
+      "events": [
         {
-          "url": "https://ai.meta.com/blog/large-language-model-llama-meta-ai/",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2023-02-24",
+          "sources": [
+            "llama-1-s1"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 2048,
+          "parameter_count": 65000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "LLaMA Non-Commercial Research License"
       },
-      "technical": {
-        "context_window": 2048,
-        "parameter_count": 65000000000
+      "sources": [
+        {
+          "id": "llama-1-s1",
+          "url": "https://ai.meta.com/blog/large-language-model-llama-meta-ai/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "claude-1",
       "model": "Claude 1",
       "company": "Anthropic",
-      "year": 2023,
-      "month": 3,
-      "day": 14,
+      "family": "Claude",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "Anthropic's debut Claude model focused on helpfulness, harmlessness, and long-context dialogue.",
-      "family": "Claude",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/introducing-claude",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://www.anthropic.com/news/100k-context-windows",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2023-03-14",
+          "sources": [
+            "claude-1-s1",
+            "claude-1-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 9000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 9000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-1-s1",
+          "url": "https://www.anthropic.com/news/introducing-claude",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-1-s2",
+          "url": "https://www.anthropic.com/news/100k-context-windows",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "gpt-4",
       "model": "GPT-4",
       "company": "OpenAI",
-      "year": 2023,
-      "month": 3,
-      "day": 14,
+      "family": "GPT",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship",
         "multimodal"
       ],
       "note": "OpenAI's first multimodal flagship that set new standards across professional and academic benchmarks.",
-      "family": "GPT",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://openai.com/index/gpt-4-research/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/models/gpt-4",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2023-03-14",
+          "sources": [
+            "gpt-4-s1",
+            "gpt-4-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 8192,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 8192,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gpt-4-s1",
+          "url": "https://openai.com/index/gpt-4-research/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-4-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-4",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "bard",
       "model": "Bard",
       "company": "Google DeepMind",
-      "year": 2023,
-      "month": 3,
-      "day": 21,
+      "family": "Gemini",
+      "kind": "product",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "Google's ChatGPT rival chatbot that brought the company into the consumer AI race.",
-      "family": "Gemini",
-      "kind": "product",
-      "sources": [
+      "events": [
         {
-          "url": "https://blog.google/technology/ai/try-bard/",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2023-03-21",
+          "sources": [
+            "bard-s1"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": null,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "bard-s1",
+          "url": "https://blog.google/technology/ai/try-bard/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "palm-2",
       "model": "PaLM 2",
       "company": "Google DeepMind",
-      "year": 2023,
-      "month": 5,
-      "day": 10,
+      "family": "PaLM",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "Google's next-generation model family that powered Bard and more than 25 other products.",
-      "family": "PaLM",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://blog.google/technology/ai/google-palm-2-ai-large-language-model/",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2023-05-10",
+          "sources": [
+            "palm-2-s1"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": null,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "palm-2-s1",
+          "url": "https://blog.google/technology/ai/google-palm-2-ai-large-language-model/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "claude-2",
       "model": "Claude 2",
       "company": "Anthropic",
-      "year": 2023,
-      "month": 7,
-      "day": 11,
+      "family": "Claude",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "Doubled Claude's context window to 100K tokens with stronger coding and writing abilities.",
-      "family": "Claude",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-2",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2023-07-11",
+          "sources": [
+            "claude-2-s1"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 100000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 100000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-2-s1",
+          "url": "https://www.anthropic.com/news/claude-2",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "llama-2",
       "model": "Llama 2",
       "company": "Meta AI",
-      "year": 2023,
-      "month": 7,
-      "day": 18,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "The first major open model with commercial licensing, defining open-source AI for a year.",
       "family": "Llama",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The first major open model with commercial licensing, defining open-source AI for a year.",
+      "events": [
         {
-          "url": "https://ai.meta.com/blog/llama-2/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/meta-llama/Llama-2-70b-hf",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2023-07-18",
+          "sources": [
+            "llama-2-s1",
+            "llama-2-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 4096,
+          "parameter_count": 70000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Llama 2 Community License"
       },
-      "technical": {
-        "context_window": 4096,
-        "parameter_count": 70000000000
+      "sources": [
+        {
+          "id": "llama-2-s1",
+          "url": "https://ai.meta.com/blog/llama-2/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "llama-2-s2",
+          "url": "https://huggingface.co/meta-llama/Llama-2-70b-hf",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "mistral-7b",
       "model": "Mistral 7B",
       "company": "Mistral AI",
-      "year": 2023,
-      "month": 9,
-      "day": 27,
+      "family": "Mistral",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "slm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
-        "open-weights",
         "small-efficient"
       ],
       "note": "A 7-billion-parameter model outperforming much larger models and putting European open AI on the map.",
-      "family": "Mistral",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://mistral.ai/news/announcing-mistral-7b/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://mistral.ai/news/announcing-mistral-7b",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/mistralai/Mistral-7B-v0.1",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2023-09-27",
+          "sources": [
+            "mistral-7b-s1",
+            "mistral-7b-s2",
+            "mistral-7b-s3"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 8192,
+          "parameter_count": 7300000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Apache-2.0"
       },
-      "technical": {
-        "context_window": 8192,
-        "parameter_count": 7300000000
+      "sources": [
+        {
+          "id": "mistral-7b-s1",
+          "url": "https://mistral.ai/news/announcing-mistral-7b/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "mistral-7b-s2",
+          "url": "https://mistral.ai/news/announcing-mistral-7b",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "mistral-7b-s3",
+          "url": "https://huggingface.co/mistralai/Mistral-7B-v0.1",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "grok-1",
       "model": "Grok-1",
       "company": "xAI",
-      "year": 2023,
-      "month": 11,
-      "day": 4,
+      "family": "Grok",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "xAI's debut model with real-time knowledge of the X platform, released to Premium+ subscribers.",
-      "family": "Grok",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://x.ai/news/grok",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2023-11-04",
+          "sources": [
+            "grok-1-s1",
+            "grok-1-s2"
+          ]
         },
         {
+          "type": "weights_availability",
+          "date": "2024-03-17",
+          "sources": [
+            "grok-1-open-s1",
+            "grok-1-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 8192,
+          "parameter_count": 314000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "grok-1-s1",
+          "url": "https://x.ai/news/grok",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "grok-1-s2",
           "url": "https://github.com/xai-org/grok-1",
-          "type": "repository"
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "grok-1-open-s1",
+          "url": "https://x.ai/news/grok-os",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 75
       },
-      "access": {
-        "open_weights": false,
-        "license": null
-      },
-      "technical": {
-        "context_window": 8192,
-        "parameter_count": null
-      }
+      "previous_ids": [
+        "grok-1-open"
+      ]
     },
     {
       "id": "gemini-1",
       "model": "Gemini 1.0",
       "company": "Google DeepMind",
-      "year": 2023,
-      "month": 12,
-      "day": 6,
+      "family": "Gemini",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship",
         "multimodal"
       ],
       "note": "Google's first natively multimodal model family with Ultra, Pro, and Nano tiers.",
-      "family": "Gemini",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://blog.google/technology/ai/google-gemini-ai/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2023-12-06",
+          "sources": [
+            "gemini-1-s1",
+            "gemini-1-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 32768,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 32768,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gemini-1-s1",
+          "url": "https://blog.google/technology/ai/google-gemini-ai/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-1-s2",
+          "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "mixtral",
       "model": "Mixtral 8x7B",
       "company": "Mistral AI",
-      "year": 2023,
-      "month": 12,
-      "day": 11,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "The first open mixture-of-experts model to rival much larger dense models.",
       "family": "Mixtral",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The first open mixture-of-experts model to rival much larger dense models.",
+      "events": [
         {
-          "url": "https://mistral.ai/news/mixtral-of-experts/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://mistral.ai/news/mixtral-of-experts",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2023-12-11",
+          "sources": [
+            "mixtral-s1",
+            "mixtral-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 32768,
+          "parameter_count": 46700000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Apache-2.0"
       },
-      "technical": {
-        "context_window": 32768,
-        "parameter_count": 46700000000
+      "sources": [
+        {
+          "id": "mixtral-s1",
+          "url": "https://mistral.ai/news/mixtral-of-experts/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "mixtral-s2",
+          "url": "https://mistral.ai/news/mixtral-of-experts",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "phi-2",
       "model": "Phi-2",
       "company": "Microsoft",
-      "year": 2023,
-      "month": 12,
-      "day": 12,
+      "family": "Phi",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "slm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "small-efficient"
       ],
       "note": "A 2.7-billion-parameter model showing that small models can compete through high-quality curated data.",
-      "family": "Phi",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/microsoft/phi-2",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2023-12-12",
+          "sources": [
+            "phi-2-s1",
+            "phi-2-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 2048,
+          "parameter_count": 2700000000
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 2048,
-        "parameter_count": 2700000000
+      "sources": [
+        {
+          "id": "phi-2-s1",
+          "url": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "phi-2-s2",
+          "url": "https://huggingface.co/microsoft/phi-2",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "glm-4",
       "model": "GLM-4",
       "company": "Zhipu AI",
-      "year": 2024,
-      "month": 1,
-      "day": 16,
+      "family": "GLM",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "Zhipu's flagship series launched with GPT-4-class capabilities and a one-million-token context variant.",
-      "family": "GLM",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://github.com/zai-org/GLM-4",
-          "type": "repository"
-        },
-        {
-          "url": "https://arxiv.org/abs/2406.12793",
-          "type": "paper"
+          "type": "announcement",
+          "date": "2024-01-16",
+          "sources": [
+            "glm-4-s1",
+            "glm-4-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "glm-4-s1",
+          "url": "https://github.com/zai-org/GLM-4",
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-4-s2",
+          "url": "https://arxiv.org/abs/2406.12793",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "gemini-1-5-pro",
       "model": "Gemini 1.5 Pro",
       "company": "Google DeepMind",
-      "year": 2024,
-      "month": 2,
-      "day": 15,
+      "family": "Gemini",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "Google's long-context MoE flagship that extended the context window to one million tokens.",
-      "family": "Gemini",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://developers.googleblog.com/en/new-features-for-the-gemini-api-and-google-ai-studio/",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2024-02-15",
+          "sources": [
+            "gemini-1-5-pro-s1",
+            "gemini-1-5-pro-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 2097152,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 2097152,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gemini-1-5-pro-s1",
+          "url": "https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-1-5-pro-s2",
+          "url": "https://developers.googleblog.com/en/new-features-for-the-gemini-api-and-google-ai-studio/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "gemma",
       "model": "Gemma",
       "company": "Google DeepMind",
-      "year": 2024,
-      "month": 2,
-      "day": 21,
+      "family": "Gemma",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "slm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
-        "open-weights",
         "small-efficient"
       ],
       "note": "Google's first open-weight model family built from Gemini research for developers.",
-      "family": "Gemma",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://blog.google/technology/developers/gemma-open-models/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/google/gemma-7b",
-          "type": "model_card"
-        },
-        {
-          "url": "https://ai.google.dev/gemma/terms",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2024-02-21",
+          "sources": [
+            "gemma-s1",
+            "gemma-s2",
+            "gemma-s3"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 8192,
+          "parameter_count": 7000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Gemma Terms of Use"
       },
-      "technical": {
-        "context_window": 8192,
-        "parameter_count": 7000000000
+      "sources": [
+        {
+          "id": "gemma-s1",
+          "url": "https://blog.google/technology/developers/gemma-open-models/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemma-s2",
+          "url": "https://huggingface.co/google/gemma-7b",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemma-s3",
+          "url": "https://ai.google.dev/gemma/terms",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "claude-3-opus",
       "model": "Claude 3 Opus",
       "company": "Anthropic",
-      "year": 2024,
-      "month": 3,
-      "day": 4,
+      "family": "Claude",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship",
         "multimodal"
       ],
       "note": "Anthropic's first vision-capable flagship that topped GPT-4 across most benchmarks.",
-      "family": "Claude",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-3-family",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2024-03-04",
+          "sources": [
+            "claude-3-opus-s1"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 200000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 200000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-3-opus-s1",
+          "url": "https://www.anthropic.com/news/claude-3-family",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "command-r",
       "model": "Command R",
       "company": "Cohere",
-      "year": 2024,
-      "month": 3,
-      "day": 11,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "Cohere's RAG-focused enterprise model family with 128K context and open weights.",
       "family": "Command",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Cohere's RAG-focused enterprise model family with 128K context and open weights.",
+      "events": [
         {
-          "url": "https://cohere.com/blog/command-r",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/CohereLabs/c4ai-command-r-v01",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2024-03-11",
+          "sources": [
+            "command-r-s1",
+            "command-r-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": 35000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "CC-BY-NC-4.0"
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": 35000000000
-      }
-    },
-    {
-      "id": "grok-1-open",
-      "model": "Grok-1 (open weights)",
-      "company": "xAI",
-      "year": 2024,
-      "month": 3,
-      "day": 17,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "xAI open-sourced its 314-billion-parameter base model in a landmark open-weights release.",
-      "family": "Grok",
-      "kind": "model",
       "sources": [
         {
-          "url": "https://x.ai/news/grok-os",
-          "type": "official_announcement"
+          "id": "command-r-s1",
+          "url": "https://cohere.com/blog/command-r",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         },
         {
-          "url": "https://github.com/xai-org/grok-1",
-          "type": "repository"
+          "id": "command-r-s2",
+          "url": "https://huggingface.co/CohereLabs/c4ai-command-r-v01",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 75
-      },
-      "access": {
-        "open_weights": true,
-        "license": "Apache-2.0"
-      },
-      "technical": {
-        "context_window": 8192,
-        "parameter_count": 314000000000
       }
     },
     {
       "id": "llama-3",
       "model": "Llama 3",
       "company": "Meta AI",
-      "year": 2024,
-      "month": 4,
-      "day": 18,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "8B and 70B models with dramatically stronger reasoning that powered Meta's AI assistant.",
       "family": "Llama",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "8B and 70B models with dramatically stronger reasoning that powered Meta's AI assistant.",
+      "events": [
         {
-          "url": "https://ai.meta.com/blog/meta-llama-3/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/meta-llama/Meta-Llama-3-70B",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2024-04-18",
+          "sources": [
+            "llama-3-s1",
+            "llama-3-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 8192,
+          "parameter_count": 70000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Meta Llama 3 Community License"
       },
-      "technical": {
-        "context_window": 8192,
-        "parameter_count": 70000000000
+      "sources": [
+        {
+          "id": "llama-3-s1",
+          "url": "https://ai.meta.com/blog/meta-llama-3/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "llama-3-s2",
+          "url": "https://huggingface.co/meta-llama/Meta-Llama-3-70B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "phi-3",
       "model": "Phi-3",
       "company": "Microsoft",
-      "year": 2024,
-      "month": 4,
-      "day": 23,
+      "family": "Phi",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "slm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "small-efficient"
       ],
       "note": "A 3.8-billion-parameter small language model family that runs locally on phones.",
-      "family": "Phi",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://azure.microsoft.com/en-us/blog/introducing-phi-3-redefining-whats-possible-with-slms/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/microsoft/Phi-3-medium-128k-instruct",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2024-04-23",
+          "sources": [
+            "phi-3-s1",
+            "phi-3-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 131072,
+          "parameter_count": 14000000000
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 131072,
-        "parameter_count": 14000000000
+      "sources": [
+        {
+          "id": "phi-3-s1",
+          "url": "https://azure.microsoft.com/en-us/blog/introducing-phi-3-redefining-whats-possible-with-slms/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "phi-3-s2",
+          "url": "https://huggingface.co/microsoft/Phi-3-medium-128k-instruct",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "deepseek-v2",
       "model": "DeepSeek-V2",
       "company": "DeepSeek",
-      "year": 2024,
-      "month": 5,
-      "day": 6,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "An efficient 236B MoE with 21B active parameters that made DeepSeek a global open-model force.",
       "family": "DeepSeek",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "An efficient 236B MoE with 21B active parameters that made DeepSeek a global open-model force.",
+      "events": [
         {
-          "url": "https://arxiv.org/abs/2405.04434",
-          "type": "paper"
-        },
-        {
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V2",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2024-05-06",
+          "sources": [
+            "deepseek-v2-s1",
+            "deepseek-v2-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": 236000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "DeepSeek License Agreement 1.0"
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": 236000000000
+      "sources": [
+        {
+          "id": "deepseek-v2-s1",
+          "url": "https://arxiv.org/abs/2405.04434",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "deepseek-v2-s2",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V2",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "gpt-4o",
       "model": "GPT-4o",
       "company": "OpenAI",
-      "year": 2024,
-      "month": 5,
-      "day": 13,
+      "family": "GPT",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship",
         "multimodal"
       ],
       "note": "OpenAI's natively multimodal real-time model with voice conversation, free in ChatGPT.",
-      "family": "GPT",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://openai.com/index/hello-gpt-4o/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/models/gpt-4o",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2024-05-13",
+          "sources": [
+            "gpt-4o-s1",
+            "gpt-4o-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gpt-4o-s1",
+          "url": "https://openai.com/index/hello-gpt-4o/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-4o-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-4o",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "qwen2",
       "model": "Qwen2",
       "company": "Alibaba Qwen",
-      "year": 2024,
-      "month": 6,
-      "day": 7,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "Alibaba's flagship open series spanning 0.5B to 72B parameters with strong multilingual ability.",
       "family": "Qwen",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Alibaba's flagship open series spanning 0.5B to 72B parameters with strong multilingual ability.",
+      "events": [
         {
-          "url": "https://qwenlm.github.io/blog/qwen2/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/Qwen/Qwen2-72B-Instruct",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2024-06-07",
+          "sources": [
+            "qwen2-s1",
+            "qwen2-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 131072,
+          "parameter_count": 72000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Tongyi Qianwen License Agreement"
       },
-      "technical": {
-        "context_window": 131072,
-        "parameter_count": 72000000000
+      "sources": [
+        {
+          "id": "qwen2-s1",
+          "url": "https://qwenlm.github.io/blog/qwen2/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "qwen2-s2",
+          "url": "https://huggingface.co/Qwen/Qwen2-72B-Instruct",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "claude-3-5-sonnet",
       "model": "Claude 3.5 Sonnet",
       "company": "Anthropic",
-      "year": 2024,
-      "month": 6,
-      "day": 20,
+      "family": "Claude",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "The mid-tier model that became 2024's favorite for coding and agentic workflows.",
-      "family": "Claude",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2024-06-20",
+          "sources": [
+            "claude-3-5-sonnet-s1"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 200000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 200000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-3-5-sonnet-s1",
+          "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "llama-3-1",
       "model": "Llama 3.1",
       "company": "Meta AI",
-      "year": 2024,
-      "month": 7,
-      "day": 23,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "The 405B open flagship with 128K context, the first open model at frontier scale.",
       "family": "Llama",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The 405B open flagship with 128K context, the first open model at frontier scale.",
+      "events": [
         {
-          "url": "https://ai.meta.com/blog/meta-llama-3-1/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/meta-llama/Llama-3.1-405B",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2024-07-23",
+          "sources": [
+            "llama-3-1-s1",
+            "llama-3-1-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": 405000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Llama 3.1 Community License"
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": 405000000000
+      "sources": [
+        {
+          "id": "llama-3-1-s1",
+          "url": "https://ai.meta.com/blog/meta-llama-3-1/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "llama-3-1-s2",
+          "url": "https://huggingface.co/meta-llama/Llama-3.1-405B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "mistral-large-2",
       "model": "Mistral Large 2",
       "company": "Mistral AI",
-      "year": 2024,
-      "month": 7,
-      "day": 24,
+      "family": "Mistral",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "Mistral's 123-billion-parameter model rivaling closed frontier models in multilingual tasks.",
-      "family": "Mistral",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://mistral.ai/news/mistral-large-2407/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/mistralai/Mistral-Large-Instruct-2407",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2024-07-24",
+          "sources": [
+            "mistral-large-2-s1",
+            "mistral-large-2-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": 123000000000
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": 123000000000
+      "sources": [
+        {
+          "id": "mistral-large-2-s1",
+          "url": "https://mistral.ai/news/mistral-large-2407/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "mistral-large-2-s2",
+          "url": "https://huggingface.co/mistralai/Mistral-Large-Instruct-2407",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "jamba-1-5",
       "model": "Jamba 1.5",
       "company": "AI21 Labs",
-      "year": 2024,
-      "month": 8,
-      "day": 22,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "AI21's hybrid SSM-Transformer models with a 256K context window for long-document work.",
       "family": "Jamba",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "AI21's hybrid SSM-Transformer models with a 256K context window for long-document work.",
+      "events": [
         {
-          "url": "https://www.ai21.com/blog/announcing-jamba-model-family/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/ai21labs/AI21-Jamba-1.5-Large",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2024-08-22",
+          "sources": [
+            "jamba-1-5-s1",
+            "jamba-1-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 256000,
+          "parameter_count": 398000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Jamba Open Model License"
       },
-      "technical": {
-        "context_window": 256000,
-        "parameter_count": 398000000000
+      "sources": [
+        {
+          "id": "jamba-1-5-s1",
+          "url": "https://www.ai21.com/blog/announcing-jamba-model-family/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "jamba-1-5-s2",
+          "url": "https://huggingface.co/ai21labs/AI21-Jamba-1.5-Large",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "o1",
       "model": "o1",
       "company": "OpenAI",
-      "year": 2024,
-      "month": 9,
-      "day": 12,
-      "tags": [
-        "reasoning"
-      ],
-      "note": "OpenAI's first reasoning model that thinks before answering, launching the reasoning-model era.",
       "family": "o-series",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "OpenAI's first reasoning model that thinks before answering, launching the reasoning-model era.",
+      "events": [
         {
-          "url": "https://openai.com/index/learning-to-reason-with-llms/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/models/o1",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2024-09-12",
+          "sources": [
+            "o1-s1",
+            "o1-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 200000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 200000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "o1-s1",
+          "url": "https://openai.com/index/learning-to-reason-with-llms/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "o1-s2",
+          "url": "https://developers.openai.com/api/docs/models/o1",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "qwen2-5",
       "model": "Qwen2.5",
       "company": "Alibaba Qwen",
-      "year": 2024,
-      "month": 9,
-      "day": 19,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "A massive family of open models that became a default choice across the open ecosystem.",
       "family": "Qwen",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A massive family of open models that became a default choice across the open ecosystem.",
+      "events": [
         {
-          "url": "https://qwenlm.github.io/blog/qwen2.5/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/Qwen/Qwen2.5-72B-Instruct",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2024-09-19",
+          "sources": [
+            "qwen2-5-s1",
+            "qwen2-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 131072,
+          "parameter_count": 72700000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Qwen License Agreement"
       },
-      "technical": {
-        "context_window": 131072,
-        "parameter_count": 72700000000
+      "sources": [
+        {
+          "id": "qwen2-5-s1",
+          "url": "https://qwenlm.github.io/blog/qwen2.5/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "qwen2-5-s2",
+          "url": "https://huggingface.co/Qwen/Qwen2.5-72B-Instruct",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "llama-3-2",
       "model": "Llama 3.2",
       "company": "Meta AI",
-      "year": 2024,
-      "month": 9,
-      "day": 25,
+      "family": "Llama",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
-        "open-weights",
         "multimodal"
       ],
       "note": "The first vision-capable Llama plus 1B and 3B models for edge devices.",
-      "family": "Llama",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/meta-llama/Llama-3.2-90B-Vision-Instruct",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2024-09-25",
+          "sources": [
+            "llama-3-2-s1",
+            "llama-3-2-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": 90000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Llama 3.2 Community License"
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": 90000000000
+      "sources": [
+        {
+          "id": "llama-3-2-s1",
+          "url": "https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "llama-3-2-s2",
+          "url": "https://huggingface.co/meta-llama/Llama-3.2-90B-Vision-Instruct",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "nova",
       "model": "Nova",
       "company": "Amazon",
-      "year": 2024,
-      "month": 12,
-      "day": 3,
+      "family": "Nova",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship",
         "multimodal"
       ],
       "note": "Amazon's new foundation model family spanning text, image, and video generation at re:Invent.",
-      "family": "Nova",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2024-12-03",
+          "sources": [
+            "nova-s1",
+            "nova-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 300000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 300000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "nova-s1",
+          "url": "https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "nova-s2",
+          "url": "https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "gemini-2-flash",
       "model": "Gemini 2.0 Flash",
       "company": "Google DeepMind",
-      "year": 2024,
-      "month": 12,
-      "day": 11,
-      "tags": [
-        "flagship",
-        "agentic"
-      ],
-      "note": "Google's agentic-era model with native tool use and real-time multimodal understanding.",
       "family": "Gemini",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Google's agentic-era model with native tool use and real-time multimodal understanding.",
+      "events": [
         {
-          "url": "https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2024-12-11",
+          "sources": [
+            "gemini-2-flash-s1",
+            "gemini-2-flash-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1048576,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gemini-2-flash-s1",
+          "url": "https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-2-flash-s2",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "deepseek-v3",
       "model": "DeepSeek-V3",
       "company": "DeepSeek",
-      "year": 2024,
-      "month": 12,
-      "day": 26,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "A 671B MoE open model whose near-frontier performance at minimal cost stunned the industry.",
       "family": "DeepSeek",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A 671B MoE open model whose near-frontier performance at minimal cost stunned the industry.",
+      "events": [
         {
-          "url": "https://arxiv.org/abs/2412.19437",
-          "type": "paper"
-        },
-        {
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2024-12-26",
+          "sources": [
+            "deepseek-v3-s1",
+            "deepseek-v3-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": 671000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "DeepSeek License Agreement 1.0"
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": 671000000000
+      "sources": [
+        {
+          "id": "deepseek-v3-s1",
+          "url": "https://arxiv.org/abs/2412.19437",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "deepseek-v3-s2",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "deepseek-r1",
       "model": "DeepSeek-R1",
       "company": "DeepSeek",
-      "year": 2025,
-      "month": 1,
-      "day": 20,
-      "tags": [
-        "reasoning",
-        "open-weights"
-      ],
-      "note": "The open reasoning model that matched o1-class performance and triggered a global tech selloff.",
       "family": "DeepSeek",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "The open reasoning model that matched o1-class performance and triggered a global tech selloff.",
+      "events": [
         {
-          "url": "https://arxiv.org/abs/2501.12948",
-          "type": "paper"
-        },
-        {
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2025-01-20",
+          "sources": [
+            "deepseek-r1-s1",
+            "deepseek-r1-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": 671000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "MIT"
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": 671000000000
+      "sources": [
+        {
+          "id": "deepseek-r1-s1",
+          "url": "https://arxiv.org/abs/2501.12948",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "deepseek-r1-s2",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "mistral-small-3",
       "model": "Mistral Small 3",
       "company": "Mistral AI",
-      "year": 2025,
-      "month": 1,
-      "day": 30,
+      "family": "Mistral",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "slm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
-        "open-weights",
         "small-efficient"
       ],
       "note": "A fast 24B Apache-licensed model designed for on-device and low-latency deployment.",
-      "family": "Mistral",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://mistral.ai/news/mistral-small-3/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/mistralai/Mistral-Small-24B-Instruct-2501",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2025-01-30",
+          "sources": [
+            "mistral-small-3-s1",
+            "mistral-small-3-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 32768,
+          "parameter_count": 24000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Apache-2.0"
       },
-      "technical": {
-        "context_window": 32768,
-        "parameter_count": 24000000000
+      "sources": [
+        {
+          "id": "mistral-small-3-s1",
+          "url": "https://mistral.ai/news/mistral-small-3/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "mistral-small-3-s2",
+          "url": "https://huggingface.co/mistralai/Mistral-Small-24B-Instruct-2501",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "grok-3",
       "model": "Grok 3",
       "company": "xAI",
-      "year": 2025,
-      "month": 2,
-      "day": 17,
-      "tags": [
-        "flagship",
-        "reasoning"
-      ],
-      "note": "Trained on 200K GPUs with DeepSearch integration, briefly topping public leaderboards.",
       "family": "Grok",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Trained on 200K GPUs with DeepSearch integration, briefly topping public leaderboards.",
+      "events": [
         {
-          "url": "https://x.ai/news/grok-3",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://artificialanalysis.ai/models/grok-3",
-          "type": "secondary"
+          "type": "announcement",
+          "date": "2025-02-17",
+          "sources": [
+            "grok-3-s1",
+            "grok-3-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "grok-3-s1",
+          "url": "https://x.ai/news/grok-3",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "grok-3-s2",
+          "url": "https://artificialanalysis.ai/models/grok-3",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "claude-3-7-sonnet",
       "model": "Claude 3.7 Sonnet",
       "company": "Anthropic",
-      "year": 2025,
-      "month": 2,
-      "day": 24,
-      "tags": [
-        "flagship",
-        "reasoning"
-      ],
-      "note": "The first hybrid reasoning model with a user-controlled extended thinking mode.",
       "family": "Claude",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "The first hybrid reasoning model with a user-controlled extended thinking mode.",
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://artificialanalysis.ai/models/claude-3-7-sonnet",
-          "type": "secondary"
+          "type": "announcement",
+          "date": "2025-02-24",
+          "sources": [
+            "claude-3-7-sonnet-s1",
+            "claude-3-7-sonnet-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 200000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 200000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-3-7-sonnet-s1",
+          "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-3-7-sonnet-s2",
+          "url": "https://artificialanalysis.ai/models/claude-3-7-sonnet",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "gpt-4-5",
       "model": "GPT-4.5",
       "company": "OpenAI",
-      "year": 2025,
-      "month": 2,
-      "day": 27,
+      "family": "GPT",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "OpenAI's final GPT-4-generation model, strongest at natural conversation and world knowledge.",
-      "family": "GPT",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://openai.com/index/introducing-gpt-4-5/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/models/gpt-4.5-preview",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2025-02-27",
+          "sources": [
+            "gpt-4-5-s1",
+            "gpt-4-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gpt-4-5-s1",
+          "url": "https://openai.com/index/introducing-gpt-4-5/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-4-5-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-4.5-preview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "gemma-3",
       "model": "Gemma 3",
       "company": "Google DeepMind",
-      "year": 2025,
-      "month": 3,
-      "day": 12,
+      "family": "Gemma",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
-        "open-weights",
         "multimodal"
       ],
       "note": "Google's open family adding vision, 128K context, and support for 140 languages.",
-      "family": "Gemma",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://blog.google/technology/developers/gemma-3/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/google/gemma-3-27b-it",
-          "type": "model_card"
-        },
-        {
-          "url": "https://ai.google.dev/gemma/terms",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2025-03-12",
+          "sources": [
+            "gemma-3-s1",
+            "gemma-3-s2",
+            "gemma-3-s3"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 131072,
+          "parameter_count": 27000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Gemma Terms of Use"
       },
-      "technical": {
-        "context_window": 131072,
-        "parameter_count": 27000000000
+      "sources": [
+        {
+          "id": "gemma-3-s1",
+          "url": "https://blog.google/technology/developers/gemma-3/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemma-3-s2",
+          "url": "https://huggingface.co/google/gemma-3-27b-it",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemma-3-s3",
+          "url": "https://ai.google.dev/gemma/terms",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "command-a",
       "model": "Command A",
       "company": "Cohere",
-      "year": 2025,
-      "month": 3,
-      "day": 13,
-      "tags": [
-        "flagship",
-        "open-weights"
-      ],
-      "note": "Cohere's 111B dense flagship for enterprise RAG and agent workloads with 256K context.",
       "family": "Command",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Cohere's 111B dense flagship for enterprise RAG and agent workloads with 256K context.",
+      "events": [
         {
-          "url": "https://cohere.com/blog/command-a",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/CohereLabs/c4ai-command-a-03-2025",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2025-03-13",
+          "sources": [
+            "command-a-s1",
+            "command-a-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 256000,
+          "parameter_count": 111000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "CC-BY-NC-4.0"
       },
-      "technical": {
-        "context_window": 256000,
-        "parameter_count": 111000000000
+      "sources": [
+        {
+          "id": "command-a-s1",
+          "url": "https://cohere.com/blog/command-a",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "command-a-s2",
+          "url": "https://huggingface.co/CohereLabs/c4ai-command-a-03-2025",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "gemini-2-5-pro",
       "model": "Gemini 2.5 Pro",
       "company": "Google DeepMind",
-      "year": 2025,
-      "month": 3,
-      "day": 25,
-      "tags": [
-        "flagship",
-        "reasoning"
-      ],
-      "note": "The thinking model that led LMArena for months with a one-million-token context.",
       "family": "Gemini",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "The thinking model that led LMArena for months with a one-million-token context.",
+      "events": [
         {
-          "url": "https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2025-03-25",
+          "sources": [
+            "gemini-2-5-pro-s1",
+            "gemini-2-5-pro-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1048576,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gemini-2-5-pro-s1",
+          "url": "https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-2-5-pro-s2",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "llama-4",
       "model": "Llama 4",
       "company": "Meta AI",
-      "year": 2025,
-      "month": 4,
-      "day": 5,
+      "family": "Llama",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
-        "open-weights",
         "multimodal"
       ],
       "note": "Meta's first mixture-of-experts family with Scout, Maverick, and Behemoth tiers.",
-      "family": "Llama",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2025-04-05",
+          "sources": [
+            "llama-4-s1",
+            "llama-4-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": 400000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Llama 4 Community License"
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": 400000000000
+      "sources": [
+        {
+          "id": "llama-4-s1",
+          "url": "https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "llama-4-s2",
+          "url": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "qwen3",
       "model": "Qwen3",
       "company": "Alibaba Qwen",
-      "year": 2025,
-      "month": 4,
-      "day": 29,
-      "tags": [
-        "open-weights",
-        "reasoning"
-      ],
-      "note": "Open MoE models with hybrid thinking modes that topped open-model benchmarks.",
       "family": "Qwen",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "Open MoE models with hybrid thinking modes that topped open-model benchmarks.",
+      "events": [
         {
-          "url": "https://qwenlm.github.io/blog/qwen3/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2025-04-29",
+          "sources": [
+            "qwen3-s1",
+            "qwen3-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 131072,
+          "parameter_count": 235000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Apache-2.0"
       },
-      "technical": {
-        "context_window": 131072,
-        "parameter_count": 235000000000
+      "sources": [
+        {
+          "id": "qwen3-s1",
+          "url": "https://qwenlm.github.io/blog/qwen3/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "qwen3-s2",
+          "url": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "claude-4-opus",
       "model": "Claude Opus 4",
       "company": "Anthropic",
-      "year": 2025,
-      "month": 5,
-      "day": 22,
-      "tags": [
-        "flagship",
-        "agentic"
-      ],
-      "note": "Anthropic's agentic flagship with computer use and tight Claude Code integration.",
       "family": "Claude",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Anthropic's agentic flagship with computer use and tight Claude Code integration.",
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-4",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://artificialanalysis.ai/models/claude-4-opus",
-          "type": "secondary"
+          "type": "announcement",
+          "date": "2025-05-22",
+          "sources": [
+            "claude-4-opus-s1",
+            "claude-4-opus-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 200000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 200000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-4-opus-s1",
+          "url": "https://www.anthropic.com/news/claude-4",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-4-opus-s2",
+          "url": "https://artificialanalysis.ai/models/claude-4-opus",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "kimi-k2",
       "model": "Kimi K2",
       "company": "Moonshot AI",
-      "year": 2025,
-      "month": 7,
-      "day": 11,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "A trillion-parameter open MoE with 32B active parameters excelling at code and agents.",
       "family": "Kimi",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A trillion-parameter open MoE with 32B active parameters excelling at code and agents.",
+      "events": [
         {
-          "url": "https://moonshotai.github.io/Kimi-K2/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/moonshotai/Kimi-K2-Instruct",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2025-07-11",
+          "sources": [
+            "kimi-k2-s1",
+            "kimi-k2-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": 1000000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Modified MIT License"
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": 1000000000000
+      "sources": [
+        {
+          "id": "kimi-k2-s1",
+          "url": "https://moonshotai.github.io/Kimi-K2/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "kimi-k2-s2",
+          "url": "https://huggingface.co/moonshotai/Kimi-K2-Instruct",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "glm-4-5",
       "model": "GLM-4.5",
       "company": "Zhipu AI",
-      "year": 2025,
-      "month": 7,
-      "day": 28,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "A 355B MoE open model that became the first Chinese open model to rival closed frontier models.",
       "family": "GLM",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A 355B MoE open model that became the first Chinese open model to rival closed frontier models.",
+      "events": [
         {
-          "url": "https://z.ai/blog/glm-4.5",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/zai-org/GLM-4.5",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2025-07-28",
+          "sources": [
+            "glm-4-5-s1",
+            "glm-4-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": 355000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "MIT"
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": 355000000000
+      "sources": [
+        {
+          "id": "glm-4-5-s1",
+          "url": "https://z.ai/blog/glm-4.5",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-4-5-s2",
+          "url": "https://huggingface.co/zai-org/GLM-4.5",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "gpt-oss",
       "model": "GPT-OSS",
       "company": "OpenAI",
-      "year": 2025,
-      "month": 8,
-      "day": 5,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "OpenAI's first open-weight release since GPT-2, with 120B and 20B variants.",
       "family": "GPT-OSS",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "OpenAI's first open-weight release since GPT-2, with 120B and 20B variants.",
+      "events": [
         {
-          "url": "https://openai.com/index/introducing-gpt-oss/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
-          "type": "documentation"
-        },
-        {
-          "url": "https://arxiv.org/html/2508.10925v1",
-          "type": "paper"
-        },
-        {
-          "url": "https://huggingface.co/openai/gpt-oss-120b",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2025-08-05",
+          "sources": [
+            "gpt-oss-s1",
+            "gpt-oss-s2",
+            "gpt-oss-s3",
+            "gpt-oss-s4"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 131072,
+          "parameter_count": 116830000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Apache-2.0"
       },
-      "technical": {
-        "context_window": 131072,
-        "parameter_count": 116830000000
+      "sources": [
+        {
+          "id": "gpt-oss-s1",
+          "url": "https://openai.com/index/introducing-gpt-oss/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-oss-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-oss-s3",
+          "url": "https://arxiv.org/html/2508.10925v1",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-oss-s4",
+          "url": "https://huggingface.co/openai/gpt-oss-120b",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "gpt-5",
       "model": "GPT-5",
       "company": "OpenAI",
-      "year": 2025,
-      "month": 8,
-      "day": 7,
+      "family": "GPT",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship",
         "multimodal"
       ],
       "note": "OpenAI's unified flagship with integrated reasoning across ChatGPT and the API.",
-      "family": "GPT",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://openai.com/index/introducing-gpt-5/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/models/gpt-5",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2025-08-07",
+          "sources": [
+            "gpt-5-s1",
+            "gpt-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 400000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 400000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gpt-5-s1",
+          "url": "https://openai.com/index/introducing-gpt-5/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-5-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-5",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "deepseek-v3-1",
       "model": "DeepSeek-V3.1",
       "company": "DeepSeek",
-      "year": 2025,
-      "month": 8,
-      "day": 21,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "A hybrid think-and-non-think update doubling context to 128K for the agent era.",
       "family": "DeepSeek",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A hybrid think-and-non-think update doubling context to 128K for the agent era.",
+      "events": [
         {
-          "url": "https://api-docs.deepseek.com/news/news250821",
-          "type": "documentation"
-        },
-        {
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2025-08-21",
+          "sources": [
+            "deepseek-v3-1-s1",
+            "deepseek-v3-1-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": 671000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "MIT"
       },
-      "technical": {
-        "context_window": 128000,
-        "parameter_count": 671000000000
+      "sources": [
+        {
+          "id": "deepseek-v3-1-s1",
+          "url": "https://api-docs.deepseek.com/news/news250821",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "deepseek-v3-1-s2",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "claude-sonnet-4-5",
       "model": "Claude Sonnet 4.5",
       "company": "Anthropic",
-      "year": 2025,
-      "month": 9,
-      "day": 29,
-      "tags": [
-        "flagship",
-        "agentic"
-      ],
-      "note": "The best coding model of its time, capable of running agents for 30-plus hours.",
       "family": "Claude",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "The best coding model of its time, capable of running agents for 30-plus hours.",
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2025-09-29",
+          "sources": [
+            "claude-sonnet-4-5-s1",
+            "claude-sonnet-4-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 200000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 200000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-sonnet-4-5-s1",
+          "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-sonnet-4-5-s2",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "gpt-5-1",
       "model": "GPT-5.1",
       "company": "OpenAI",
-      "year": 2025,
-      "month": 11,
-      "day": 12,
-      "tags": [
-        "flagship",
-        "reasoning"
-      ],
-      "note": "A five-model refresh of the GPT-5 line, shipped in two waves in November 2025.",
       "family": "GPT",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "A five-model refresh of the GPT-5 line, shipped in two waves in November 2025.",
+      "events": [
         {
-          "url": "https://en.wikipedia.org/wiki/GPT-5.1",
-          "type": "secondary"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/models/gpt-5.1",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2025-11-12",
+          "sources": [
+            "gpt-5-1-s1",
+            "gpt-5-1-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 400000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 400000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gpt-5-1-s1",
+          "url": "https://en.wikipedia.org/wiki/GPT-5.1",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-5-1-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.1",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "gemini-3-pro",
       "model": "Gemini 3 Pro",
       "company": "Google DeepMind",
-      "year": 2025,
-      "month": 11,
-      "day": 18,
+      "family": "Gemini",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship",
         "multimodal"
       ],
       "note": "Google's natively multimodal reasoning flagship with DeepThink and 1M context.",
-      "family": "Gemini",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://blog.google/products/gemini/gemini-3/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-3-Pro-Model-Card.pdf",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2025-11-18",
+          "sources": [
+            "gemini-3-pro-s1",
+            "gemini-3-pro-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1048576,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gemini-3-pro-s1",
+          "url": "https://blog.google/products/gemini/gemini-3/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-3-pro-s2",
+          "url": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-3-Pro-Model-Card.pdf",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "claude-opus-4-5",
       "model": "Claude Opus 4.5",
       "company": "Anthropic",
-      "year": 2025,
-      "month": 11,
-      "day": 24,
-      "tags": [
-        "flagship",
-        "agentic"
-      ],
-      "note": "Anthropic's most capable model for coding, agents, and computer use.",
       "family": "Claude",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Anthropic's most capable model for coding, agents, and computer use.",
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-opus-4-5",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2025-11-24",
+          "sources": [
+            "claude-opus-4-5-s1",
+            "claude-opus-4-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 75
+      "specifications": {
+        "language": {
+          "context_window": 200000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 200000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-opus-4-5-s1",
+          "url": "https://www.anthropic.com/news/claude-opus-4-5",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-opus-4-5-s2",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75
       }
     },
     {
       "id": "mistral-3",
       "model": "Mistral 3",
       "company": "Mistral AI",
-      "year": 2025,
-      "month": 12,
-      "day": 2,
+      "family": "Mistral",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
-        "open-weights",
         "multimodal"
       ],
       "note": "An open multimodal family including Mistral Large 3 and Ministral variants under Apache 2.0.",
-      "family": "Mistral",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://techcrunch.com/2025/12/02/mistral-closes-in-on-big-ai-rivals-with-mistral-3-open-weight-frontier-and-small-models/",
-          "type": "secondary"
-        },
-        {
-          "url": "https://mistral.ai/news/mistral-3/",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2025-12-02",
+          "sources": [
+            "mistral-3-s1",
+            "mistral-3-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 256000,
+          "parameter_count": 675000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Apache-2.0"
       },
-      "technical": {
-        "context_window": 256000,
-        "parameter_count": 675000000000
+      "sources": [
+        {
+          "id": "mistral-3-s1",
+          "url": "https://techcrunch.com/2025/12/02/mistral-closes-in-on-big-ai-rivals-with-mistral-3-open-weight-frontier-and-small-models/",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "mistral-3-s2",
+          "url": "https://mistral.ai/news/mistral-3/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "gpt-5-2",
       "model": "GPT-5.2",
       "company": "OpenAI",
-      "year": 2025,
-      "month": 12,
-      "day": 11,
-      "tags": [
-        "flagship",
-        "reasoning"
-      ],
-      "note": "Instant, Thinking and Pro modes, plus a GPT-5.2-Codex variant for coding.",
       "family": "GPT",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Instant, Thinking and Pro modes, plus a GPT-5.2-Codex variant for coding.",
+      "events": [
         {
-          "url": "https://en.wikipedia.org/wiki/GPT-5.2",
-          "type": "secondary"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/models/gpt-5.2",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2025-12-11",
+          "sources": [
+            "gpt-5-2-s1",
+            "gpt-5-2-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 400000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 400000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gpt-5-2-s1",
+          "url": "https://en.wikipedia.org/wiki/GPT-5.2",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-5-2-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.2",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "claude-opus-4-6",
       "model": "Claude Opus 4.6",
       "company": "Anthropic",
-      "year": 2026,
-      "month": 2,
-      "day": 5,
-      "tags": [
-        "flagship",
-        "agentic"
-      ],
-      "note": "The first Opus release of 2026 and the baseline Opus 4.7 was measured against.",
       "family": "Claude",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "The first Opus release of 2026 and the baseline Opus 4.7 was measured against.",
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-opus-4-6",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-02-05",
+          "sources": [
+            "claude-opus-4-6-s1",
+            "claude-opus-4-6-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-opus-4-6-s1",
+          "url": "https://www.anthropic.com/news/claude-opus-4-6",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-opus-4-6-s2",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "gpt-5-3-codex",
       "model": "GPT-5.3-Codex",
       "company": "OpenAI",
-      "year": 2026,
-      "month": 2,
-      "day": 5,
-      "tags": [
-        "agentic"
-      ],
-      "note": "A coding-specialised model able to search repositories, run terminal commands and debug, positioned against Claude Opus 4.6.",
       "family": "GPT",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "A coding-specialised model able to search repositories, run terminal commands and debug, positioned against Claude Opus 4.6.",
+      "events": [
         {
-          "url": "https://en.wikipedia.org/wiki/GPT-5.3-Codex",
-          "type": "secondary"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/models/gpt-5.3-codex",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-02-05",
+          "sources": [
+            "gpt-5-3-codex-s1",
+            "gpt-5-3-codex-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 400000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 400000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gpt-5-3-codex-s1",
+          "url": "https://en.wikipedia.org/wiki/GPT-5.3-Codex",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-5-3-codex-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.3-codex",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "qwen-3-5",
       "model": "Qwen 3.5",
       "company": "Alibaba Qwen",
-      "year": 2026,
-      "month": 2,
-      "day": 16,
-      "tags": [
-        "flagship",
-        "agentic"
-      ],
-      "note": "Alibaba's agentic-era flagship claimed to outperform GPT-5 with desktop and mobile operation.",
       "family": "Qwen",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Alibaba's agentic-era flagship claimed to outperform GPT-5 with desktop and mobile operation.",
+      "events": [
         {
-          "url": "https://en.wikipedia.org/wiki/Qwen",
-          "type": "secondary"
-        },
-        {
-          "url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2026-02-16",
+          "sources": [
+            "qwen-3-5-s1",
+            "qwen-3-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 262144,
+          "parameter_count": 397000000000
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 262144,
-        "parameter_count": 397000000000
+      "sources": [
+        {
+          "id": "qwen-3-5-s1",
+          "url": "https://en.wikipedia.org/wiki/Qwen",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "qwen-3-5-s2",
+          "url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "claude-sonnet-4-6",
       "model": "Claude Sonnet 4.6",
       "company": "Anthropic",
-      "year": 2026,
-      "month": 2,
-      "day": 17,
-      "tags": [
-        "agentic"
-      ],
-      "note": "The Sonnet-tier counterpart to Opus 4.6.",
       "family": "Claude",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "The Sonnet-tier counterpart to Opus 4.6.",
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-sonnet-4-6",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-02-17",
+          "sources": [
+            "claude-sonnet-4-6-s1",
+            "claude-sonnet-4-6-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-sonnet-4-6-s1",
+          "url": "https://www.anthropic.com/news/claude-sonnet-4-6",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-sonnet-4-6-s2",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "gpt-5-4",
       "model": "GPT-5.4",
       "company": "OpenAI",
-      "year": 2026,
-      "month": 3,
-      "day": 5,
+      "family": "GPT",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "OpenAI's frontier model with 1M context and state-of-the-art coding and computer use.",
-      "family": "GPT",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://techcrunch.com/2026/03/05/openai-launches-gpt-5-4-with-pro-and-thinking-versions/",
-          "type": "secondary"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/models/gpt-5.4",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-03-05",
+          "sources": [
+            "gpt-5-4-s1",
+            "gpt-5-4-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 1050000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1050000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gpt-5-4-s1",
+          "url": "https://techcrunch.com/2026/03/05/openai-launches-gpt-5-4-with-pro-and-thinking-versions/",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-5-4-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.4",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "mistral-small-4",
       "model": "Mistral Small 4",
       "company": "Mistral AI",
-      "year": 2026,
-      "month": 3,
-      "day": 16,
+      "family": "Mistral",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
-        "open-weights",
         "multimodal"
       ],
       "note": "A 119B open mixture-of-experts model unifying chat, coding, and agentic tasks.",
-      "family": "Mistral",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://mistral.ai/news/mistral-small-4/",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2026-03-16",
+          "sources": [
+            "mistral-small-4-s1"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 256000,
+          "parameter_count": 119000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Apache-2.0"
       },
-      "technical": {
-        "context_window": 256000,
-        "parameter_count": 119000000000
+      "sources": [
+        {
+          "id": "mistral-small-4-s1",
+          "url": "https://mistral.ai/news/mistral-small-4/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "llama-5",
       "model": "Llama 5",
       "company": "Meta AI",
-      "year": 2026,
-      "month": 4,
-      "day": 8,
-      "tags": [
-        "flagship",
-        "open-weights"
-      ],
-      "note": "Meta's first MoE flagship, marking a major architecture shift for the open family.",
       "family": "Llama",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Meta's first MoE flagship, marking a major architecture shift for the open family.",
+      "events": [
         {
-          "url": "https://en.wikipedia.org/wiki/Llama_(language_model)",
-          "type": "secondary"
+          "type": "announcement",
+          "date": "2026-04-08",
+          "sources": [
+            "llama-5-s1"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": true,
         "license": null
       },
-      "technical": {
-        "context_window": null,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "llama-5-s1",
+          "url": "https://en.wikipedia.org/wiki/Llama_(language_model)",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "muse-spark",
       "model": "Muse Spark",
       "company": "Meta AI",
-      "year": 2026,
-      "month": 4,
-      "day": 8,
+      "family": "Muse",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship",
         "multimodal"
       ],
       "note": "Meta's first closed frontier model, from Meta Superintelligence Labs, shipped alongside the open-weights Llama 5.",
-      "family": "Muse",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://en.wikipedia.org/wiki/Muse_Spark",
-          "type": "secondary"
-        },
-        {
-          "url": "https://artificialanalysis.ai/models/muse-spark",
-          "type": "secondary"
+          "type": "announcement",
+          "date": "2026-04-08",
+          "sources": [
+            "muse-spark-s1",
+            "muse-spark-s2",
+            "muse-spark-s3"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 262144,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 262144,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "muse-spark-s1",
+          "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "muse-spark-s2",
+          "url": "https://en.wikipedia.org/wiki/Muse_Spark",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "muse-spark-s3",
+          "url": "https://artificialanalysis.ai/models/muse-spark",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "claude-opus-4-7",
       "model": "Claude Opus 4.7",
       "company": "Anthropic",
-      "year": 2026,
-      "month": 4,
-      "day": 16,
-      "tags": [
-        "flagship",
-        "agentic"
-      ],
-      "note": "Anthropic's most capable general model with 87.6% on SWE-bench Verified.",
       "family": "Claude",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Anthropic's most capable general model with 87.6% on SWE-bench Verified.",
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-opus-4-7",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-04-16",
+          "sources": [
+            "claude-opus-4-7-s1",
+            "claude-opus-4-7-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-opus-4-7-s1",
+          "url": "https://www.anthropic.com/news/claude-opus-4-7",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-opus-4-7-s2",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "gpt-5-5",
       "model": "GPT-5.5",
       "company": "OpenAI",
-      "year": 2026,
-      "month": 4,
-      "day": 23,
-      "tags": [
-        "flagship",
-        "reasoning"
-      ],
-      "note": "Codenamed Spud; the mid-cycle step between GPT-5.4 and the GPT-5.6 family.",
       "family": "GPT",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Codenamed Spud; the mid-cycle step between GPT-5.4 and the GPT-5.6 family.",
+      "events": [
         {
-          "url": "https://openai.com/index/introducing-gpt-5-5/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://en.wikipedia.org/wiki/GPT-5.5",
-          "type": "secondary"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/models/gpt-5.5",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-04-23",
+          "sources": [
+            "gpt-5-5-s1",
+            "gpt-5-5-s2",
+            "gpt-5-5-s3"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 1050000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1050000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gpt-5-5-s1",
+          "url": "https://openai.com/index/introducing-gpt-5-5/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-5-5-s2",
+          "url": "https://en.wikipedia.org/wiki/GPT-5.5",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-5-5-s3",
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.5",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "deepseek-v4-flash",
       "model": "DeepSeek V4 Flash",
       "company": "DeepSeek",
-      "year": 2026,
-      "month": 4,
-      "day": 24,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "A 284B MoE with 13B active parameters and 1M context, MIT-licensed alongside V4-Pro.",
       "family": "DeepSeek",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A 284B MoE with 13B active parameters and 1M context, MIT-licensed alongside V4-Pro.",
+      "events": [
         {
-          "url": "https://api-docs.deepseek.com/news/news260424",
-          "type": "documentation"
-        },
-        {
-          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2026-04-24",
+          "sources": [
+            "deepseek-v4-flash-s1",
+            "deepseek-v4-flash-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": 284000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "MIT"
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": 284000000000
+      "sources": [
+        {
+          "id": "deepseek-v4-flash-s1",
+          "url": "https://api-docs.deepseek.com/news/news260424",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "deepseek-v4-flash-s2",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "gemini-3-5-flash",
       "model": "Gemini 3.5 Flash",
       "company": "Google DeepMind",
-      "year": 2026,
-      "month": 5,
-      "day": 19,
+      "family": "Gemini",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "slm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
       "tags": [
-        "agentic",
         "small-efficient"
       ],
       "note": "Google's agent-optimized workhorse model launched at I/O with 1M-token context.",
-      "family": "Gemini",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://en.wikipedia.org/wiki/Gemini_(language_model)",
-          "type": "secondary"
-        },
-        {
-          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-05-19",
+          "sources": [
+            "gemini-3-5-flash-s1",
+            "gemini-3-5-flash-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1048576,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gemini-3-5-flash-s1",
+          "url": "https://en.wikipedia.org/wiki/Gemini_(language_model)",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-3-5-flash-s2",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "claude-opus-4-8",
       "model": "Claude Opus 4.8",
       "company": "Anthropic",
-      "year": 2026,
-      "month": 5,
-      "day": 28,
-      "tags": [
-        "flagship",
-        "agentic"
-      ],
-      "note": "The final Opus 4.x release before the Claude 5 generation.",
       "family": "Claude",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "The final Opus 4.x release before the Claude 5 generation.",
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-opus-4-8",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-05-28",
+          "sources": [
+            "claude-opus-4-8-s1",
+            "claude-opus-4-8-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-opus-4-8-s1",
+          "url": "https://www.anthropic.com/news/claude-opus-4-8",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-opus-4-8-s2",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "nemotron-3-ultra",
       "model": "Nemotron 3 Ultra",
       "company": "NVIDIA",
-      "year": 2026,
-      "month": 6,
-      "day": 4,
-      "tags": [
-        "open-weights",
-        "agentic"
-      ],
-      "note": "A 550B open MoE hybrid Mamba-Transformer model built for long-running agents.",
       "family": "Nemotron",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "A 550B open MoE hybrid Mamba-Transformer model built for long-running agents.",
+      "events": [
         {
-          "url": "https://research.nvidia.com/labs/nemotron/Nemotron-3-Ultra/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://openmdw.ai/license/1-1/",
-          "type": "official_announcement"
+          "type": "announcement",
+          "date": "2026-06-04",
+          "sources": [
+            "nemotron-3-ultra-s1",
+            "nemotron-3-ultra-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": 550000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "OpenMDW License 1.1"
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": 550000000000
+      "sources": [
+        {
+          "id": "nemotron-3-ultra-s1",
+          "url": "https://research.nvidia.com/labs/nemotron/Nemotron-3-Ultra/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "nemotron-3-ultra-s2",
+          "url": "https://openmdw.ai/license/1-1/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "claude-fable-5",
       "model": "Claude Fable 5",
       "company": "Anthropic",
-      "year": 2026,
-      "month": 6,
-      "day": 9,
-      "tags": [
-        "flagship",
-        "reasoning"
-      ],
-      "note": "Opens the Claude 5 generation. Shares its underlying model with Mythos 5, with additional safeguards for biology, cybersecurity and LLM R&D.",
       "family": "Claude",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Opens the Claude 5 generation. Shares its underlying model with Mythos 5, with additional safeguards for biology, cybersecurity and LLM R&D.",
+      "events": [
         {
-          "url": "https://en.wikipedia.org/wiki/Claude_(language_model)",
-          "type": "secondary"
-        },
-        {
-          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-06-09",
+          "sources": [
+            "claude-fable-5-s1",
+            "claude-fable-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-fable-5-s1",
+          "url": "https://en.wikipedia.org/wiki/Claude_(language_model)",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-fable-5-s2",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "claude-mythos-5",
       "model": "Claude Mythos 5",
       "company": "Anthropic",
-      "year": 2026,
-      "month": 6,
-      "day": 9,
-      "tags": [
-        "flagship",
-        "reasoning"
-      ],
-      "note": "Released the same day as Fable 5 with limited availability through Project Glasswing.",
       "family": "Claude",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Released the same day as Fable 5 with limited availability through Project Glasswing.",
+      "events": [
         {
-          "url": "https://en.wikipedia.org/wiki/Claude_(language_model)",
-          "type": "secondary"
-        },
-        {
-          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-06-09",
+          "sources": [
+            "claude-mythos-5-s1",
+            "claude-mythos-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-mythos-5-s1",
+          "url": "https://en.wikipedia.org/wiki/Claude_(language_model)",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-mythos-5-s2",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "glm-5-2",
       "model": "GLM-5.2",
       "company": "Zhipu AI",
-      "year": 2026,
-      "month": 6,
-      "day": 13,
-      "tags": [
-        "open-weights"
-      ],
-      "note": "A 744B MIT-licensed open model, the first open model to top closed frontiers on agentic coding.",
       "family": "GLM",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A 744B MIT-licensed open model, the first open model to top closed frontiers on agentic coding.",
+      "events": [
         {
-          "url": "https://z.ai/blog/glm-5.2",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://huggingface.co/zai-org/GLM-5.2",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2026-06-13",
+          "sources": [
+            "glm-5-2-s1",
+            "glm-5-2-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": 753000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "MIT"
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": 753000000000
+      "sources": [
+        {
+          "id": "glm-5-2-s1",
+          "url": "https://z.ai/blog/glm-5.2",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-5-2-s2",
+          "url": "https://huggingface.co/zai-org/GLM-5.2",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "claude-sonnet-5",
       "model": "Claude Sonnet 5",
       "company": "Anthropic",
-      "year": 2026,
-      "month": 6,
-      "day": 30,
-      "tags": [
-        "agentic"
-      ],
-      "note": "The most agentic Sonnet to date, approaching Opus-class performance at a lower price.",
       "family": "Claude",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "The most agentic Sonnet to date, approaching Opus-class performance at a lower price.",
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-sonnet-5",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-06-30",
+          "sources": [
+            "claude-sonnet-5-s1",
+            "claude-sonnet-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-sonnet-5-s1",
+          "url": "https://www.anthropic.com/news/claude-sonnet-5",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-sonnet-5-s2",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "grok-4-5",
       "model": "Grok 4.5",
       "company": "xAI",
-      "year": 2026,
-      "month": 7,
-      "day": 8,
+      "family": "Grok",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
       "note": "xAI's smartest model, its first release after going public and acquiring Cursor.",
-      "family": "Grok",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://x.ai/news/grok-4-5",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://docs.x.ai/docs/models",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-07-08",
+          "sources": [
+            "grok-4-5-s1",
+            "grok-4-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 500000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 500000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "grok-4-5-s1",
+          "url": "https://x.ai/news/grok-4-5",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "grok-4-5-s2",
+          "url": "https://docs.x.ai/docs/models",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "gpt-5-6",
       "model": "GPT-5.6",
       "company": "OpenAI",
-      "year": 2026,
-      "month": 7,
-      "day": 9,
-      "tags": [
-        "flagship",
+      "family": "GPT",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
         "reasoning",
         "agentic"
       ],
+      "tags": [
+        "flagship"
+      ],
       "note": "A three-variant family — Luna, Terra and Sol — after a limited partner preview in June.",
-      "family": "GPT",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://en.wikipedia.org/wiki/GPT-5.6",
-          "type": "secondary"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/models/gpt-5.6",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-07-09",
+          "sources": [
+            "gpt-5-6-s1",
+            "gpt-5-6-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 1050000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1050000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gpt-5-6-s1",
+          "url": "https://en.wikipedia.org/wiki/GPT-5.6",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-5-6-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.6",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "kimi-k3",
       "model": "Kimi K3",
       "company": "Moonshot AI",
-      "year": 2026,
-      "month": 7,
-      "day": 16,
+      "family": "Kimi",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
       "tags": [
-        "open-weights",
         "multimodal"
       ],
       "note": "A 2.8-trillion-parameter open MoE, the largest open-weight model ever published.",
-      "family": "Kimi",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://simonwillison.net/2026/Jul/16/kimi-k3/",
-          "type": "secondary"
-        },
-        {
-          "url": "https://huggingface.co/moonshotai/Kimi-K3",
-          "type": "model_card"
+          "type": "announcement",
+          "date": "2026-07-16",
+          "sources": [
+            "kimi-k3-s1",
+            "kimi-k3-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": 2800000000000
+        }
       },
       "access": {
         "open_weights": true,
         "license": "Kimi K3 License"
       },
-      "technical": {
-        "context_window": 1048576,
-        "parameter_count": 2800000000000
+      "sources": [
+        {
+          "id": "kimi-k3-s1",
+          "url": "https://simonwillison.net/2026/Jul/16/kimi-k3/",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "kimi-k3-s2",
+          "url": "https://huggingface.co/moonshotai/Kimi-K3",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "gemini-3-6-flash",
       "model": "Gemini 3.6 Flash",
       "company": "Google DeepMind",
-      "year": 2026,
-      "month": 7,
-      "day": 21,
+      "family": "Gemini",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "slm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
       "tags": [
-        "agentic",
         "small-efficient"
       ],
       "note": "Google's token-efficient workhorse update with better coding and multimodal performance.",
-      "family": "Gemini",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-07-21",
+          "sources": [
+            "gemini-3-6-flash-s1",
+            "gemini-3-6-flash-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1048576,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "gemini-3-6-flash-s1",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-3-6-flash-s2",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "claude-opus-5",
       "model": "Claude Opus 5",
       "company": "Anthropic",
-      "year": 2026,
-      "month": 7,
-      "day": 24,
+      "family": "Claude",
+      "kind": "model",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
       "tags": [
         "flagship",
-        "agentic",
         "multimodal"
       ],
       "note": "A step change over Opus 4.8, with a one-million-token context window and 3D rendering.",
-      "family": "Claude",
-      "kind": "model",
-      "sources": [
+      "events": [
         {
-          "url": "https://www.anthropic.com/news/claude-opus-5",
-          "type": "official_announcement"
-        },
-        {
-          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "type": "documentation"
+          "type": "announcement",
+          "date": "2026-07-24",
+          "sources": [
+            "claude-opus-5-s1",
+            "claude-opus-5-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "verified",
-        "confidence": 90
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "claude-opus-5-s1",
+          "url": "https://www.anthropic.com/news/claude-opus-5",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-opus-5-s2",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90
       }
     },
     {
       "id": "qwen-3-8-max",
       "model": "Qwen3.8-Max",
       "company": "Alibaba Qwen",
-      "year": 2026,
-      "month": 8,
-      "day": 3,
-      "tags": [
-        "flagship",
-        "reasoning"
-      ],
-      "note": "A 2.4-trillion-parameter MoE with a one-million-token context, Alibaba's largest model to date.",
       "family": "Qwen",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "A 2.4-trillion-parameter MoE with a one-million-token context, Alibaba's largest model to date.",
+      "events": [
         {
-          "url": "https://www.marktechpost.com/2026/08/03/alibaba-qwen-releases-qwen3-8-max/",
-          "type": "secondary"
+          "type": "announcement",
+          "date": "2026-08-03",
+          "sources": [
+            "qwen-3-8-max-s1"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": 2400000000000
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": 2400000000000
+      "sources": [
+        {
+          "id": "qwen-3-8-max-s1",
+          "url": "https://www.marktechpost.com/2026/08/03/alibaba-qwen-releases-qwen3-8-max/",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     },
     {
       "id": "muse-spark-1-2",
       "model": "Muse Spark 1.2",
       "company": "Meta AI",
-      "year": 2026,
-      "month": 8,
-      "day": 5,
-      "tags": [
-        "flagship",
-        "agentic"
-      ],
-      "note": "Shipped with Muse Code, Meta's first terminal coding agent.",
       "family": "Muse",
       "kind": "model",
-      "sources": [
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Shipped with Muse Code, Meta's first terminal coding agent.",
+      "events": [
         {
-          "url": "https://en.wikipedia.org/wiki/Muse_Spark",
-          "type": "secondary"
-        },
-        {
-          "url": "https://artificialanalysis.ai/models/muse-spark-1-2",
-          "type": "secondary"
+          "type": "announcement",
+          "date": "2026-08-05",
+          "sources": [
+            "muse-spark-1-2-s1",
+            "muse-spark-1-2-s2"
+          ]
         }
       ],
-      "provenance": {
-        "status": "partially_verified",
-        "confidence": 60
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
       },
       "access": {
         "open_weights": false,
         "license": null
       },
-      "technical": {
-        "context_window": 1000000,
-        "parameter_count": null
+      "sources": [
+        {
+          "id": "muse-spark-1-2-s1",
+          "url": "https://en.wikipedia.org/wiki/Muse_Spark",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "muse-spark-1-2-s2",
+          "url": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60
       }
     }
-  ],
-  "schema_version": "1.5"
+  ]
 }

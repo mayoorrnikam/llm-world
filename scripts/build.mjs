@@ -17,6 +17,10 @@
 
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import {
+  dateParts, displayTags, contextWindow, parameterCount, tagLabel,
+  SOURCE_LABEL, AUTHORITY_LABEL,
+} from '../lib/record.mjs';
 
 const EXPORT = process.argv.includes('--export');
 const CHECK = process.argv.includes('--check');
@@ -24,7 +28,28 @@ const OUT = CHECK ? '.build-check' : '.';
 const BASE_URL = 'https://mayoorrnikam.github.io/llm-world';
 
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
-const releases = data.releases;
+
+/** The dataset as authored (schema 1.6). What --export publishes. */
+const rawReleases = data.releases;
+
+/**
+ * The dataset as these templates read it: the 1.6 record plus the facts derived
+ * from it — canonical date, display tags, flattened language specs.
+ *
+ * Derived here rather than stored in the JSON so there is exactly one
+ * definition of each (docs/METHODOLOGY.md §4), shared with the browser app
+ * through lib/record.mjs.
+ */
+const releases = rawReleases.map((r) => ({
+  ...r,
+  ...dateParts(r),
+  // `tags` is the composed display list (capabilities + derived + editorial),
+  // which is what the chips and filters read. `editorial` keeps our own
+  // judgements addressable on their own, so exports can separate them.
+  tags: displayTags(r),
+  editorial: [...(r.tags ?? [])],
+  technical: { context_window: contextWindow(r), parameter_count: parameterCount(r) },
+}));
 
 /* ------------------------------------------------------------------ shared */
 
@@ -52,11 +77,8 @@ const fullDate = (r) => `${MONTHS[r.month - 1]}${r.day ? ` ${r.day}` : ''}, ${r.
 const isoDate = (r) => `${r.year}-${String(r.month).padStart(2, '0')}` +
   (r.day ? `-${String(r.day).padStart(2, '0')}` : '');
 
-const SOURCE_LABEL = {
-  official_announcement: 'Official announcement', paper: 'Research paper',
-  repository: 'Code repository', model_card: 'Model card',
-  documentation: 'Official documentation', secondary: 'Secondary reporting',
-};
+// SOURCE_LABEL is imported from lib/record.mjs so the static pages and the
+// browser app cannot describe the same source differently.
 const PROV_LABEL = {
   verified: 'verified', partially_verified: 'partly verified',
   unverified: 'unverified', conflicting: 'conflicting', estimated: 'approximate date',
@@ -120,13 +142,46 @@ const tokens = (n) => n == null ? 'Not disclosed'
 const daysBetween = (a, b) => Math.round(
   (Date.UTC(b.year, b.month - 1, b.day || 1) - Date.UTC(a.year, a.month - 1, a.day || 1)) / 86400000);
 
+/* ------------------------------------------------- schema 1.6 presentation */
+
+const sentence = (s) => String(s).replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase());
+const capLabel = (c) => sentence(c);
+
+/** "Language model · LLM" — the classification, spelled out. */
+const TYPE_LABEL = (c) => {
+  if (!c || c.primary_type === 'unknown') return 'Not classified';
+  const primary = c.primary_type === 'language' ? 'Language model' : sentence(c.primary_type);
+  const sub = { llm: 'LLM', slm: 'Small language model', reasoning: 'Reasoning model',
+    embedding: 'Embedding model', reranker: 'Reranker' }[c.subtype];
+  return sub ? `${primary} · ${sub}` : primary;
+};
+
+/** null modalities mean "not researched" — never render that as "text only". */
+const modalityText = (r) => {
+  const m = r.modalities;
+  if (!m) return 'Not recorded';
+  return `${m.input.map(sentence).join(' + ')} → ${m.output.map(sentence).join(' + ')}`;
+};
+
+const EVENT_LABEL = {
+  announcement: 'Announced', paper: 'Paper published',
+  public_availability: 'Publicly available', api_availability: 'Available via API',
+  weights_availability: 'Weights published', major_update: 'Major update',
+  retirement: 'Retired',
+};
+
+const eventDate = (iso) => {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${MONTHS[m - 1]}${d ? ` ${d}` : ''}, ${y}`;
+};
+
 /** Previous release from the same lab. */
 const predecessorOf = (r) => releases
   .filter((x) => x.company === r.company && x.id !== r.id && daysBetween(x, r) > 0).at(-1);
 
 /* -------------------------------------------------------------------- shell */
 
-function page({ title, description, canonical, depth, sprites, body, jsonld, section }) {
+function page({ title, description, canonical, depth, sprites, body, jsonld, section, head = '' }) {
   const up = '../'.repeat(depth);
   return `<!DOCTYPE html>
 <html lang="en">
@@ -161,6 +216,7 @@ addEventListener('DOMContentLoaded',function(){
 });
 </script>
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ''}
+${head}
 </head>
 <body class="doc">
 ${spriteFor(sprites)}
@@ -197,7 +253,9 @@ function modelPage(r) {
     ['Company', r.company],
     ['Family', r.family],
     ['Era', eraFor(r.year)],
-    ['Type', r.kind === 'product' ? 'Product' : 'Model'],
+    ['Type', r.kind === 'product' ? 'Product' : TYPE_LABEL(r.classification)],
+    ['Modalities', modalityText(r)],
+    ['Capabilities', r.capabilities.length ? r.capabilities.map(capLabel).join(', ') : 'Not recorded'],
     ['Weights', r.access.open_weights ? 'Open weights' : 'Proprietary'],
     ['Licence', r.access.license ?? 'Not recorded'],
     ['Context window', tokens(r.technical.context_window)],
@@ -218,18 +276,35 @@ function modelPage(r) {
 
 ${r.note ? `<p class="doc-note">${esc(r.note)}</p>` : ''}
 
-${r.tags.length ? `<div class="doc-tags">${r.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}
+${r.tags.length ? `<div class="doc-tags">${r.tags.map((t) => `<span class="tag">${esc(tagLabel(t))}</span>`).join('')}</div>` : ''}
 
 <h2>Details</h2>
 <table class="doc-table">
 <tbody>${facts.map(([k, v]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</tbody>
 </table>
 
+${r.events.length > 1 ? `<h2>Release timeline</h2>
+<p class="doc-note">A model has more than one date. The timeline above positions it
+at its announcement; these are every recorded lifecycle event, each with the
+source that evidences it.</p>
+<ol class="doc-events">${r.events.map((e) => {
+  const cited = r.sources.filter((s) => e.sources.includes(s.id));
+  return `<li><span class="event-date"><time datetime="${esc(e.date)}">${esc(eventDate(e.date))}</time></span>
+<span class="event-type">${esc(EVENT_LABEL[e.type] ?? sentence(e.type))}</span>
+<span class="event-src">${cited.map((s) =>
+    `<a href="${esc(s.url)}" rel="noopener noreferrer nofollow">${esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a>`).join(', ') || '—'}</span></li>`;
+}).join('')}</ol>` : ''}
+
 <h2>Sources</h2>
 <p class="doc-prov">Record status: <span class="prov-badge" data-status="${esc(r.provenance.status)}">${
-  esc(PROV_LABEL[r.provenance.status] ?? r.provenance.status)}</span> · confidence ${r.provenance.confidence}/100</p>
+  esc(PROV_LABEL[r.provenance.status] ?? r.provenance.status)}</span> · confidence ${r.provenance.confidence}/100 ·
+${r.sources.filter((s) => s.authority === 'primary').length} of ${r.sources.length} primary</p>
+${r.provenance.reason ? `<p class="doc-reason">${esc(r.provenance.reason)}</p>` : ''}
 <ul class="doc-sources">${r.sources.map((s) =>
-  `<li><a href="${esc(s.url)}" rel="noopener noreferrer nofollow">${esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a> <span>${esc(SOURCE_LABEL[s.type] ?? s.type)}</span></li>`).join('')}</ul>
+  `<li><a href="${esc(s.url)}" rel="noopener noreferrer nofollow">${esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a> <span>${esc(SOURCE_LABEL[s.type] ?? s.type)}</span> <span class="src-authority" data-authority="${esc(s.authority)}">${esc(AUTHORITY_LABEL[s.authority] ?? s.authority)}</span>${
+    s.archived_url ? ` <a class="src-archive" href="${esc(s.archived_url)}" rel="noopener noreferrer nofollow">archived</a>` : ''}</li>`).join('')}</ul>
+<p class="doc-note">Primary means published by the organisation that made the model.
+<strong>Verified</strong> records require at least one.</p>
 
 <h2>${esc(r.family)} family</h2>
 <ol class="doc-lineage">${fam.map((x, i) => `<li${x.id === r.id ? ' aria-current="true"' : ''}>${
@@ -603,8 +678,17 @@ figures are also on its own page — start from <a href="../models/">the model i
 <p class="doc-cta"><a href="../analytics/">See release analytics →</a></p>
 
 <script type="module">
-const RES = await fetch('../data/llm-releases.json', { cache: 'no-store' })
-  .then((r) => r.json()).then((d) => d.releases).catch(() => []);
+// Same derivation the static pages use, from the same module — this page reads
+// the raw dataset at runtime, so without it the canonical date would be
+// computed twice by two different rules.
+import { dateParts, contextWindow, parameterCount } from '../lib/record.mjs';
+const RES = (await fetch('../data/llm-releases.json', { cache: 'no-store' })
+  .then((r) => r.json()).then((d) => d.releases).catch(() => []))
+  .map((r) => ({
+    ...r,
+    ...dateParts(r),
+    technical: { context_window: contextWindow(r), parameter_count: parameterCount(r) },
+  }));
 const byId = new Map(RES.map((r) => [r.id, r]));
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const date = (r) => \`\${MONTHS[r.month - 1]} \${r.day || ''}, \${r.year}\`.replace(' ,', ',');
@@ -636,7 +720,9 @@ const ROWS = [
   ['Licence',        (r) => r.access.license ?? 'Not recorded'],
   ['Context window', (r) => r.technical.context_window ? tokens(r.technical.context_window) + ' tokens' : 'Not disclosed'],
   ['Parameters',     (r) => fmtParams(r.technical.parameter_count)],
-  ['Capabilities',   (r) => r.tags.join(', ') || '—'],
+  // Evidenced capabilities only — editorial tags like "flagship" are our
+  // judgement and do not belong in a specification comparison (TAXONOMY §5).
+  ['Capabilities',   (r) => r.capabilities.join(', ') || 'Not recorded'],
   ['Record status',  (r) => r.provenance.status.replace(/_/g, ' ')],
 ];
 
@@ -739,6 +825,27 @@ if (CHECK && existsSync(OUT)) rmSync(OUT, { recursive: true });
 
 for (const r of releases) write(`models/${r.id}`, modelPage(r));
 
+// Records merged under METHODOLOGY §2 leave their old URLs behind. Those pages
+// were public, so they keep resolving rather than 404ing — the canonical tag
+// tells crawlers where the record went, the meta refresh moves readers.
+for (const r of releases) {
+  for (const prev of r.previous_ids ?? []) {
+    write(prev === r.id ? `models/${prev}-alias` : `models/${prev}`, page({
+      title: `${r.model} — release date, company & sources | LLM World`,
+      description: `${prev} is now recorded as ${r.model}.`,
+      canonical: `${BASE_URL}/models/${r.id}/`,
+      section: 'models/',
+      depth: 2,
+      sprites: [slugFor(r.company)],
+      head: `<meta http-equiv="refresh" content="0; url=../${esc(r.id)}/">`,
+      body: `<h1>Moved</h1>
+<p class="doc-sub">This record was merged into <a href="../${esc(r.id)}/">${esc(r.model)}</a>,
+which now carries both its release and its later lifecycle events.</p>
+<p class="doc-cta"><a href="../${esc(r.id)}/">Continue to ${esc(r.model)} →</a></p>`,
+    }));
+  }
+}
+
 const byCompany = new Map();
 for (const r of releases) (byCompany.get(r.company) ?? byCompany.set(r.company, []).get(r.company)).push(r);
 for (const [name, list] of byCompany) write(`companies/${companySlug(name)}`, companyPage(name, list));
@@ -803,7 +910,9 @@ if (EXPORT) {
     },
   });
 
-  writeJson('api/models.json', { ...META, releases });
+  // The dataset as authored, not the view model — consumers pin against
+  // schema_version and should get the real shape, derived fields excluded.
+  writeJson('api/models.json', { ...META, releases: rawReleases });
 
   writeJson('api/companies.json', {
     ...META,
@@ -826,14 +935,22 @@ if (EXPORT) {
   // CSV for spreadsheets: pure data, no comment line. CSV has no comment
   // convention, so a trailing licence row just parses as a bogus 86th record.
   // Terms live in api/index.json, LICENSE-DATA and the README instead.
-  const cols = ['id', 'model', 'company', 'family', 'kind', 'date', 'tags',
-    'open_weights', 'context_window', 'parameter_count', 'provenance_status',
-    'confidence', 'sources', 'url'];
+  // Flat convenience format: the derived canonical date rather than events[],
+  // and the schema's three axes as separate columns so a spreadsheet can filter
+  // on evidenced facts without our editorial tags mixed in.
+  const cols = ['id', 'model', 'company', 'family', 'kind', 'date',
+    'primary_type', 'subtype', 'capabilities', 'tags',
+    'open_weights', 'license', 'context_window', 'parameter_count',
+    'provenance_status', 'confidence', 'primary_sources', 'sources', 'url'];
   const cell = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
   const csv = [cols.join(',')].concat(releases.map((r) => [
-    r.id, r.model, r.company, r.family, r.kind, isoDate(r), r.tags.join('|'),
-    r.access.open_weights, r.technical.context_window ?? '', r.technical.parameter_count ?? '',
+    r.id, r.model, r.company, r.family, r.kind, isoDate(r),
+    r.classification.primary_type, r.classification.subtype ?? '',
+    r.capabilities.join('|'), r.editorial.join('|'),
+    r.access.open_weights, r.access.license ?? '',
+    r.technical.context_window ?? '', r.technical.parameter_count ?? '',
     r.provenance.status, r.provenance.confidence,
+    r.sources.filter((x) => x.authority === 'primary').length,
     r.sources.map((x) => x.url).join('|'), `${BASE_URL}/models/${r.id}/`,
   ].map(cell).join(',')));
   writeFileSync(join(OUT, 'llm-releases.csv'), csv.join('\n') + '\n');

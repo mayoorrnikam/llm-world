@@ -1593,6 +1593,101 @@ code, kbd {
 }
 .doc-lineage li[aria-current="true"] { color: var(--accent); }
 
+/* Sources carry a third column from schema 1.6: who published them. Authority
+   is the trust signal, so it reads as a word, never as colour alone. */
+.doc-sources li { grid-template-columns: minmax(0, 1fr) auto auto; }
+.src-authority {
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.src-authority[data-authority="primary"] {
+  color: var(--accent);
+  border-color: currentColor;
+}
+.src-archive { font-family: var(--mono); font-size: 11.5px; }
+
+/* Lifecycle events: date, what happened, and the source that evidences it. */
+.doc-events { margin: 0 0 18px; padding: 0; list-style: none; }
+.doc-events li {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr) minmax(0, auto);
+  align-items: baseline;
+  gap: 14px;
+  padding: 9px 2px;
+  font-size: 13.5px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.doc-events .event-date {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.doc-events .event-type { font-weight: 500; }
+.doc-events .event-src {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  .doc-sources li { grid-template-columns: minmax(0, 1fr) auto; }
+  .doc-sources li .src-authority { grid-column: 2; }
+  .doc-events li { grid-template-columns: minmax(0, 1fr) auto; }
+  .doc-events .event-src { grid-column: 1 / -1; text-align: left; }
+}
+
+/* Dialog lifecycle events — the interactive twin of .doc-events. */
+.modal-events {
+  margin: 0 0 14px;
+  padding: 10px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--line-soft);
+}
+.modal-events li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 4px 0;
+  font-size: 12.5px;
+}
+.modal-events time {
+  flex: 0 0 auto;
+  min-width: 8.5em;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.modal-source .source-count {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+/* A primary source is the lab's own word. Marked with weight, not colour
+   alone — the tooltip always spells the authority out. */
+.modal-source a[data-authority="primary"] { font-weight: 500; }
+
+/* Why a record is not verified. The badge states the grade; this states the
+   cause, which is the part a reader can actually act on. */
+.doc-reason {
+  margin: -6px 0 18px;
+  max-width: 62ch;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.prov-reason {
+  display: block;
+  margin-top: 6px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 .doc-main a { color: var(--accent); text-underline-offset: 3px; }
 
 .doc-cta { margin: 28px 0 0; font-size: 13.5px; }

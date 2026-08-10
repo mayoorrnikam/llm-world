@@ -22,28 +22,71 @@ python3 -m http.server 8777
 Opened directly from disk the page still renders, falling back to a small
 inline sample and saying so in the footer.
 
-## Data model (schema 1.5)
-
-Each release carries, beyond the timeline basics:
+## Data model (schema 1.6)
 
 ```jsonc
 {
-  "family": "Claude",            // the model line (§11) — Claude, GPT, Llama…
-  "kind": "model",               // "model" | "product" — ChatGPT is a product, GPT-4 is a model (§25)
-  "access":    { "open_weights": true, "license": null },
-  "technical": { "context_window": null, "parameter_count": null },  // null until researched, never guessed
-  "sources":   [{ "url": "…", "type": "official_announcement" }],
-  "provenance": { "status": "verified", "confidence": 90 }
+  "id": "grok-1",
+  "model": "Grok-1",
+  "company": "xAI",
+  "family": "Grok",                // the model line — Claude, GPT, Llama…
+  "kind": "model",                 // ChatGPT is a product, GPT-4 is a model
+
+  // What kind of model this is. The discriminator every other field hangs off.
+  "classification": { "primary_type": "language", "subtype": "llm" },
+
+  // What goes in and what comes out. null means "not yet researched" —
+  // it never means "text only".
+  "modalities": null,              // { "input": ["text","image"], "output": ["text"] }
+
+  // Evidenced claims about what the model can do.
+  "capabilities": ["reasoning", "tool_use"],
+
+  // OUR judgement, not a source's. Kept apart from the three fields above
+  // so the boundary is visible rather than blurred into one list.
+  "tags": ["flagship"],
+
+  // A model has many dates; the timeline needs one. The canonical date is the
+  // announcement event, derived at build time — never stored twice.
+  "events": [
+    { "type": "announcement",         "date": "2023-11-04", "sources": ["grok-1-s1"] },
+    { "type": "weights_availability", "date": "2024-03-17", "sources": ["grok-1-s2"] }
+  ],
+
+  // Namespaced by model type, so image/video/audio specs can be added later
+  // without reshaping what is already here.
+  "specifications": { "language": { "context_window": 8192, "parameter_count": 314000000000 } },
+
+  // access describes CURRENT state; events[] record when it changed.
+  "access": { "open_weights": true, "license": "Apache-2.0" },
+
+  // Ids so individual facts can cite individual sources. archived_url pins a
+  // page that would otherwise change under the citation.
+  "sources": [
+    { "id": "grok-1-s1", "url": "…", "type": "official_announcement",
+      "authority": "primary", "archived_url": null, "retrieved": null }
+  ],
+
+  "provenance": { "status": "partially_verified", "confidence": 75 }
 }
 ```
 
-`status` is one of `verified` · `partially_verified` · `unverified` · `conflicting`
-· `estimated`, shown as a badge in each dialog. **`verified` requires a primary
-source** — an official announcement, paper, repo, model card or documentation.
-A date corroborated only by news reporting is `partially_verified`, not verified.
+`status` is one of `verified` · `partially_verified` · `unverified` ·
+`conflicting` · `estimated`, shown as a badge in each dialog. **`verified`
+requires a source with `authority: "primary"`** — published by the organisation
+that made the model. A date corroborated only by news reporting is
+`partially_verified`, not verified.
 
 Undisclosed numbers stay `null` and render as "Not disclosed". They are never
-estimated or inferred (§7).
+estimated or inferred.
+
+**Derived facts are computed, never stored.** The canonical date, whether a model
+is multimodal, and whether its context counts as long all come from
+[`lib/record.mjs`](lib/record.mjs), which the browser app and the build script
+both import. A fact stored twice eventually disagrees with itself.
+
+Schema 1.5 records are converted by `node scripts/migrate-1.6.mjs`, kept in the
+repo so every field's move is auditable.
 
 ## Generated pages
 
@@ -56,11 +99,11 @@ generates static, no-JavaScript-required pages from the same dataset:
                      cadence, context-window growth, capability mix
 /compare/            pick 2-5 releases and read them side by side
 /models/             index of everything, newest first, grouped by year
-/models/<id>/        85 pages — facts, sources, family lineage, cadence
+/models/<id>/        84 pages (+1 retired-id redirect) — facts, sources, family lineage, cadence
 /companies/          index of labs, ranked by release count
 /companies/<slug>/   16 pages — a lab's releases and its median release gap
 /timeline/<year>/     5 pages — that year's releases by month
-/sitemap.xml        110 URLs
+/sitemap.xml        111 URLs
 ```
 
 **Header and footer are shared, not duplicated.** `build.mjs` lifts them
@@ -109,9 +152,10 @@ and left `null` when the provider has not disclosed them. Coverage:
 
 | Field | Coverage | Why the gap |
 |---|---|---|
-| Context window | **81/85** | The 4 missing are two *products* (ChatGPT, Bard), which have no context window, plus PaLM 2 and Llama 5, undisclosed |
-| Parameter count | **40/85** | Most proprietary labs — OpenAI, Anthropic, Google, xAI — do not publish them. `null` is the correct answer, not a gap to fill |
+| Context window | **80/84** | The 4 missing are two *products* (ChatGPT, Bard), which have no context window, plus PaLM 2 and Llama 5, undisclosed |
+| Parameter count | **40/84** | Most proprietary labs — OpenAI, Anthropic, Google, xAI — do not publish them. `null` is the correct answer, not a gap to fill |
 | Licence | **34/35** open-weights | Only open-weights releases carry one |
+| Modalities | **0/84** | New in 1.6. Schema 1.5 recorded *that* a model was multimodal, never *which* modalities — so these are `null` pending research rather than back-filled with guesses |
 
 Values are never estimated or inferred. Every figure adds its source to the
 record's `sources[]`.

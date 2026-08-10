@@ -32,7 +32,18 @@ is a strong reason — dependency-free is a deliberate property of this project.
 
 `data/llm-releases.json` drives everything: the app, all ~112 generated pages,
 the analytics charts, the JSON/CSV export. Adding a release is a JSON edit, never
-a code change. Schema is documented in README under "Data model (schema 1.5)".
+a code change. Schema is documented in README under "Data model (schema 1.6)".
+
+**Derived facts live in `lib/record.mjs`, not in the JSON.** The canonical date
+(from `events[]`), multimodality (from `modalities`), long-context (from
+`context_window`) and the display tag list are all computed there, and both
+`app.js` and `scripts/build.mjs` import it. If you are about to add a field to
+the dataset that could be computed from another field, compute it there instead
+— a fact stored twice eventually disagrees with itself.
+
+The dataset separates **evidenced facts** (`capabilities`, `modalities`,
+`access`) from **this project's judgements** (`tags`: only `flagship`,
+`small-efficient`, `multimodal`). The validator rejects anything else in `tags`.
 
 ### Two renderers over one dataset
 

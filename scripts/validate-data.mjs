@@ -13,6 +13,7 @@
  */
 
 import { readFileSync } from 'node:fs';
+import { canonicalDate } from '../lib/record.mjs';
 
 const FILE = 'data/llm-releases.json';
 const CHECK_LINKS = process.argv.includes('--links');
@@ -24,8 +25,32 @@ const warn = (id, msg) => warnings.push(`${id}: ${msg}`);
 
 const VALID_STATUS = new Set(['verified', 'partially_verified', 'unverified', 'conflicting', 'estimated']);
 const VALID_KIND = new Set(['model', 'product', 'milestone']);
+
+// Schema 1.6 vocabularies — defined in docs/TAXONOMY.md.
+const VALID_PRIMARY_TYPE = new Set([
+  'language', 'vision', 'image_generation', 'video_generation', 'audio',
+  'multimodal', '3d', 'world_model', 'unknown',
+]);
+const VALID_SUBTYPE = new Set(['llm', 'slm', 'reasoning', 'embedding', 'reranker']);
+const VALID_MODALITY = new Set(['text', 'image', 'audio', 'video', '3d', 'sensor', 'environment']);
+const VALID_CAPABILITY = new Set([
+  'reasoning', 'coding', 'vision', 'audio', 'video', 'tool_use', 'function_calling',
+  'structured_output', 'agentic', 'long_context', 'multilingual',
+  'image_generation', 'video_generation', 'speech_generation',
+  'world_prediction', 'planning',
+]);
+// tags[] holds this project's own judgements only. Anything evidenced belongs
+// in capabilities, modalities or access (TAXONOMY §5).
+const VALID_TAG = new Set(['flagship', 'small-efficient', 'multimodal']);
+const VALID_EVENT_TYPE = new Set([
+  'announcement', 'paper', 'public_availability', 'api_availability',
+  'weights_availability', 'major_update', 'retirement',
+]);
+const VALID_AUTHORITY = new Set(['primary', 'secondary', 'discovery']);
 const VALID_SOURCE_TYPE = new Set([
-  'official_announcement', 'paper', 'repository', 'model_card', 'documentation', 'secondary',
+  'official_announcement', 'official_documentation', 'official_model_card',
+  'official_repository', 'technical_paper', 'independent_benchmark',
+  'independent_analysis', 'news',
 ]);
 
 let data;
@@ -50,6 +75,8 @@ if (!/^\d{4}-\d{2}-\d{2}$/.test(data.updated ?? '')) {
 
 const seenIds = new Map();
 const seenNameDate = new Map();
+/** Retired ids that must keep resolving → the record that absorbed them. */
+const retiredIds = new Map();
 // Compare against the end of today in UTC so a release published today passes.
 const today = new Date();
 const endOfToday = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate(), 23, 59, 59);
@@ -66,36 +93,133 @@ for (const r of releases) {
   if (!r.model?.trim()) err(id, 'missing model name');
   if (!r.company?.trim()) err(id, 'missing company');
 
-  // dates
-  const { year, month, day } = r;
-  if (!Number.isInteger(year) || year < 2015 || year > 2100) err(id, `implausible year ${year}`);
-  if (!Number.isInteger(month) || month < 1 || month > 12) err(id, `month out of range: ${month}`);
-  if (day != null && (!Number.isInteger(day) || day < 0 || day > 31)) err(id, `day out of range: ${day}`);
+  // classification (S1) — the discriminator every other model type depends on
+  const cls = r.classification;
+  if (!cls) err(id, 'missing classification block');
+  else {
+    if (!VALID_PRIMARY_TYPE.has(cls.primary_type)) {
+      err(id, `unknown classification.primary_type "${cls.primary_type}"`);
+    }
+    if (cls.primary_type === 'language') {
+      if (!VALID_SUBTYPE.has(cls.subtype)) err(id, `unknown language subtype "${cls.subtype}"`);
+    } else if (cls.subtype != null && !VALID_SUBTYPE.has(cls.subtype)) {
+      err(id, `unknown subtype "${cls.subtype}"`);
+    }
+    // A reasoning subtype without the capability is a contradiction (TAXONOMY §2).
+    if (cls.subtype === 'reasoning' && !r.capabilities?.includes('reasoning')) {
+      err(id, 'subtype "reasoning" but capabilities[] does not include reasoning');
+    }
+  }
 
-  if (Number.isInteger(year) && Number.isInteger(month)) {
-    const stamp = Date.UTC(year, month - 1, day || 1);
-    // A real calendar date: Feb 30 would silently roll over to March otherwise.
-    if (day) {
-      const back = new Date(stamp);
-      if (back.getUTCMonth() !== month - 1 || back.getUTCDate() !== day) {
-        err(id, `not a real date: ${year}-${month}-${day}`);
+  // modalities (S2) — null means "not yet researched", never "text only"
+  if (r.modalities !== null) {
+    const m = r.modalities;
+    if (!m || !Array.isArray(m.input) || !Array.isArray(m.output)) {
+      err(id, 'modalities must be null or { input: [], output: [] }');
+    } else {
+      for (const v of [...m.input, ...m.output]) {
+        if (!VALID_MODALITY.has(v)) err(id, `unknown modality "${v}"`);
+      }
+      if (!m.input.length || !m.output.length) err(id, 'modalities.input and .output cannot be empty');
+    }
+  }
+
+  // capabilities (S2) — evidenced claims only
+  if (!Array.isArray(r.capabilities)) err(id, 'capabilities must be an array');
+  else for (const c of r.capabilities) {
+    if (!VALID_CAPABILITY.has(c)) err(id, `unknown capability "${c}"`);
+  }
+
+  // tags (S2) — editorial judgements only; evidenced facts live elsewhere
+  if (!Array.isArray(r.tags)) err(id, 'tags must be an array');
+  else for (const t of r.tags) {
+    if (!VALID_TAG.has(t)) {
+      err(id, `"${t}" is not an editorial tag — it belongs in capabilities, modalities or access`);
+    }
+  }
+
+  // `multimodal` is a placeholder for unresearched modalities. Once modalities
+  // are recorded it becomes derivable, and keeping the tag would store the same
+  // fact twice (METHODOLOGY §4).
+  if (r.modalities && r.tags?.includes('multimodal')) {
+    err(id, 'modalities are recorded, so the "multimodal" tag is now derived — remove it');
+  }
+
+  // events (S4) — the canonical date is derived from these, so they carry the
+  // load that year/month/day used to.
+  const events = r.events;
+  if (!Array.isArray(events) || !events.length) err(id, 'no events — every model needs at least one');
+  else {
+    const sourceIds = new Set((r.sources ?? []).map((s) => s.id));
+    let sawAnnouncement = false;
+
+    for (const e of events) {
+      if (!VALID_EVENT_TYPE.has(e.type)) err(id, `unknown event type "${e.type}"`);
+      if (e.type === 'announcement') sawAnnouncement = true;
+
+      const m = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(e.date ?? '');
+      if (!m) {
+        err(id, `event date must be YYYY-MM-DD or YYYY-MM, got ${JSON.stringify(e.date)}`);
+        continue;
+      }
+      const [, yy, mm, dd] = m.map(Number);
+      if (yy < 2015 || yy > 2100) err(id, `implausible year ${yy} on ${e.type}`);
+      if (mm < 1 || mm > 12) err(id, `month out of range on ${e.type}: ${mm}`);
+
+      const stamp = Date.UTC(yy, mm - 1, dd || 1);
+      // A real calendar date: Feb 30 would silently roll over to March otherwise.
+      if (dd) {
+        const back = new Date(stamp);
+        if (back.getUTCMonth() !== mm - 1 || back.getUTCDate() !== dd) {
+          err(id, `not a real date: ${e.date}`);
+        }
+      }
+      if (stamp > endOfToday && r.provenance?.status !== 'estimated') {
+        err(id, `${e.type} date is in the future — mark provenance.status "estimated" if intended`);
+      }
+
+      // Referential integrity: an event citing a source that isn't there is a
+      // claim with no evidence behind it.
+      if (!Array.isArray(e.sources) || !e.sources.length) {
+        err(id, `event "${e.type}" has no sources`);
+      } else for (const sid of e.sources) {
+        if (!sourceIds.has(sid)) err(id, `event "${e.type}" cites unknown source "${sid}"`);
       }
     }
-    if (stamp > endOfToday && r.provenance?.status !== 'estimated') {
-      err(id, `release date is in the future — mark provenance.status "estimated" if intended`);
-    }
-    const key = `${r.model?.toLowerCase()}|${year}-${month}`;
+
+    if (!sawAnnouncement) warn(id, 'no announcement event — canonical date falls back to earliest');
+
+    const key = `${r.model?.toLowerCase()}|${canonicalDate(r)?.slice(0, 7)}`;
     if (seenNameDate.has(key)) warn(id, `same model name and month as "${seenNameDate.get(key)}"`);
     else seenNameDate.set(key, r.id);
   }
 
-  // provenance — every release must be traceable (§7)
+  // sources (S3) — every value must trace to something a reader can open
   if (!Array.isArray(r.sources) || r.sources.length === 0) {
     err(id, 'no sources — every release must cite at least one');
   } else {
+    const seenSourceIds = new Set();
+    const seenUrls = new Set();
     for (const s of r.sources) {
+      if (!s.id) err(id, `source missing id: ${s.url}`);
+      else if (seenSourceIds.has(s.id)) err(id, `duplicate source id "${s.id}"`);
+      else seenSourceIds.add(s.id);
+
       if (!/^https?:\/\//.test(s.url ?? '')) err(id, `source url must be http(s): ${s.url}`);
+      else if (seenUrls.has(s.url)) {
+        // Two ids for one URL would read as two independent corroborations.
+        err(id, `same URL cited twice under different ids: ${s.url}`);
+      } else seenUrls.add(s.url);
+
       if (!VALID_SOURCE_TYPE.has(s.type)) err(id, `unknown source type "${s.type}"`);
+      if (!VALID_AUTHORITY.has(s.authority)) err(id, `unknown source authority "${s.authority}"`);
+      if (s.authority === 'discovery') {
+        err(id, `source "${s.id}" is discovery-only and cannot be cited as evidence (METHODOLOGY §5)`);
+      }
+      // R1 — a live docs URL does not prove a past fact. Warn now, error at Stage 7.
+      if (s.type === 'official_documentation' && !s.archived_url) {
+        warn(id, `documentation source "${s.id}" has no archived_url (R1)`);
+      }
     }
   }
 
@@ -106,25 +230,48 @@ for (const r of releases) {
     if (!Number.isInteger(p.confidence) || p.confidence < 0 || p.confidence > 100) {
       err(id, `confidence must be 0-100, got ${p.confidence}`);
     }
-    if (p.status === 'verified' && !r.sources?.some((s) => s.type !== 'secondary')) {
+    if (p.status === 'verified' && !r.sources?.some((s) => s.authority === 'primary')) {
       err(id, 'marked verified but has no primary source');
+    }
+    if (p.status === 'unverified') err(id, 'unverified records are not publishable (METHODOLOGY §9)');
+
+    // Anything short of verified must say WHY, in the record, in public. A bare
+    // "partially_verified" tells a reader nothing about which fact is weak.
+    // Warning now, error once every record has been through Stage 2.
+    if (p.status !== 'verified' && !String(p.reason ?? '').trim()) {
+      warn(id, `status "${p.status}" with no provenance.reason — say which fact is unproven`);
+    }
+    if (p.reason != null && typeof p.reason !== 'string') {
+      err(id, 'provenance.reason must be a string');
+    }
+    // The bands are defined by evidence, not by feel (METHODOLOGY §9).
+    if (p.status === 'verified' && p.confidence < 90) {
+      warn(id, `verified but confidence ${p.confidence} — verified records sit in the 90–100 band`);
     }
   }
 
   if (!VALID_KIND.has(r.kind)) err(id, `unknown kind "${r.kind}"`);
   if (!r.family?.trim()) err(id, 'missing family');
 
-  // Numeric fields are null until researched — never a guess, never a string (§7).
+  // specifications (S5) — numbers are null until researched, never a guess (§1).
   for (const f of ['context_window', 'parameter_count']) {
-    const v = r.technical?.[f];
-    if (v != null && (typeof v !== 'number' || v <= 0)) err(id, `technical.${f} must be a positive number or null`);
+    const v = r.specifications?.language?.[f];
+    if (v != null && (typeof v !== 'number' || v <= 0)) {
+      err(id, `specifications.language.${f} must be a positive number or null`);
+    }
   }
   if (typeof r.access?.open_weights !== 'boolean') err(id, 'access.open_weights must be true or false');
 
-  // Cross-check the two places open-weights status is recorded.
-  if (r.access?.open_weights !== r.tags?.includes('open-weights')) {
-    err(id, 'access.open_weights disagrees with the open-weights tag');
+  // Retired ids must keep resolving and must not collide with a live record.
+  for (const prev of r.previous_ids ?? []) {
+    if (retiredIds.has(prev)) err(id, `previous_id "${prev}" also claimed by "${retiredIds.get(prev)}"`);
+    else retiredIds.set(prev, r.id);
   }
+}
+
+// Checked after the loop so a retired id colliding with any live record is caught.
+for (const [prev, owner] of retiredIds) {
+  if (seenIds.has(prev)) err(owner, `previous_id "${prev}" collides with a live record`);
 }
 
 /* ------------------------------------------------------------ link check */

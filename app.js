@@ -1,9 +1,15 @@
 /* ==========================================================================
    LLM WORLD — swim-lane LLM release timeline
 
-   Data contract: data/llm-releases.json
-     { "updated": "YYYY-MM-DD",
-       "releases": [ { id, model, company, year, month, day, tags[], note } ] }
+   Data contract: data/llm-releases.json — schema 1.6
+     { "updated": "YYYY-MM-DD", "schema_version": "1.6",
+       "releases": [ { id, model, company, family, classification, modalities,
+                       capabilities[], tags[], events[], specifications,
+                       access, sources[], provenance, note } ] }
+
+   The dataset keeps evidenced facts (capabilities, modalities, access) apart
+   from this project's own judgements (tags). normalize() composes them into
+   one display list, so `?tag=` links written against schema 1.5 keep working.
 
    All state lives in the URL, so any view is linkable:
      ?year=2025&company=OpenAI,Anthropic&tag=reasoning&q=gpt&view=grid#gpt-5
@@ -12,6 +18,11 @@
    opened via file:// (where fetch is blocked) it falls back to a small
    inline sample so the page still renders.
    ========================================================================== */
+
+import {
+  dateParts, displayTags, contextWindow, parameterCount, tagLabel,
+  SOURCE_LABEL, AUTHORITY_LABEL,
+} from './lib/record.mjs';
 
 /* ------------------------------------------------------------------ config */
 
@@ -60,21 +71,28 @@ const ERAS = [
   [2026, 'Agentic systems'],
 ];
 
-/** Used only when data/llm-releases.json cannot be fetched (e.g. file://). */
+/** Used only when data/llm-releases.json cannot be fetched (e.g. file://).
+ *  Schema 1.6, so it exercises the same normalize() path as the real data. */
+const at = (date) => [{ type: 'announcement', date, sources: [] }];
 const FALLBACK_DATA = {
   updated: null,
+  schema_version: '1.6',
   releases: [
-    { id: 'gpt-4', model: 'GPT-4', company: 'OpenAI', year: 2023, month: 3, day: 14,
-      tags: ['flagship', 'multimodal'],
+    { id: 'gpt-4', model: 'GPT-4', company: 'OpenAI', family: 'GPT',
+      events: at('2023-03-14'), tags: ['flagship', 'multimodal'],
+      access: { open_weights: false },
       note: "OpenAI's flagship multimodal model — the first widely used system to accept both text and image inputs." },
-    { id: 'claude-2', model: 'Claude 2', company: 'Anthropic', year: 2023, month: 7, day: 11,
-      tags: ['flagship'],
+    { id: 'claude-2', model: 'Claude 2', company: 'Anthropic', family: 'Claude',
+      events: at('2023-07-11'), tags: ['flagship'],
+      access: { open_weights: false },
       note: "Anthropic's second-generation assistant, shipping with a 100K-token context window at launch." },
-    { id: 'llama-2', model: 'Llama 2', company: 'Meta AI', year: 2023, month: 7, day: 18,
-      tags: ['open-weights'],
+    { id: 'llama-2', model: 'Llama 2', company: 'Meta AI', family: 'Llama',
+      events: at('2023-07-18'), tags: [],
+      access: { open_weights: true },
       note: "Meta's open-weights family (7B–70B), released for commercial use." },
-    { id: 'gpt-4o', model: 'GPT-4o', company: 'OpenAI', year: 2024, month: 5, day: 13,
-      tags: ['flagship', 'multimodal'],
+    { id: 'gpt-4o', model: 'GPT-4o', company: 'OpenAI', family: 'GPT',
+      events: at('2024-05-13'), tags: ['flagship', 'multimodal'],
+      access: { open_weights: false },
       note: '"Omni" model with native audio, vision and text.' },
   ],
 };
@@ -108,7 +126,8 @@ async function init() {
   for (const id of ['search', 'search-clear', 'year-selector', 'ribbon', 'ribbon-axis', 'modal-mark',
     'cadence-facts', 'legend', 'tagbar', 'reset-btn', 'lanes', 'empty-state', 'empty-sub',
     'empty-action', 'data-status', 'modal', 'modal-close', 'modal-title', 'modal-company',
-    'modal-date', 'modal-family', 'modal-era', 'modal-cadence', 'modal-tags',
+    'modal-date', 'modal-family', 'modal-type', 'modal-era', 'modal-cadence',
+    'modal-events', 'modal-tags',
     'modal-note', 'modal-source', 'modal-detail-link', 'modal-compare-link',
     'modal-prev', 'modal-next',
     'modal-copy', 'help', 'help-btn', 'help-close', 'theme-toggle', 'refresh-btn',
@@ -168,32 +187,53 @@ function normalize(json) {
   const list = Array.isArray(json?.releases) ? json.releases : [];
   const releases = list
     .filter((r) => r && typeof r.model === 'string' && r.model.trim())
-    .map((r) => ({
-      id: String(r.id || slug(r.model)),
-      model: String(r.model).trim(),
-      company: String(r.company || 'Unknown').trim(),
-      year: Number(r.year),
-      month: Number(r.month),
-      day: Number(r.day) || 0,
-      tags: Array.isArray(r.tags) ? r.tags.map(String) : [],
-      note: typeof r.note === 'string' ? r.note : '',
-      family: String(r.family || r.model).trim(),
-      kind: r.kind === 'product' || r.kind === 'milestone' ? r.kind : 'model',
-      access: { open_weights: Boolean(r.access?.open_weights), license: r.access?.license ?? null },
-      technical: {
-        context_window: Number.isFinite(r.technical?.context_window) ? r.technical.context_window : null,
-        parameter_count: Number.isFinite(r.technical?.parameter_count) ? r.technical.parameter_count : null,
-      },
-      provenance: {
-        status: r.provenance?.status || 'unverified',
-        confidence: Number(r.provenance?.confidence) || 0,
-      },
-      // Only http(s) sources survive, so a bad data edit can't smuggle in a
-      // javascript: URL that would run when the link is clicked.
-      sources: (Array.isArray(r.sources) ? r.sources : [])
-        .filter((s) => /^https?:\/\//i.test(s?.url || ''))
-        .map((s) => ({ url: s.url, type: String(s.type || 'secondary') })),
-    }))
+    .map((r) => {
+      // The timeline is positioned by the canonical date, which is derived from
+      // events[] by one shared rule (lib/record.mjs), never stored.
+      const { year, month, day } = dateParts(r);
+      return {
+        id: String(r.id || slug(r.model)),
+        model: String(r.model).trim(),
+        company: String(r.company || 'Unknown').trim(),
+        year,
+        month,
+        day,
+        // Display-only composition of capabilities + modalities + access +
+        // editorial tags. The dataset stores each separately (TAXONOMY §5).
+        tags: displayTags(r),
+        capabilities: Array.isArray(r.capabilities) ? r.capabilities.map(String) : [],
+        modalities: r.modalities ?? null,
+        classification: {
+          primary_type: r.classification?.primary_type ?? 'unknown',
+          subtype: r.classification?.subtype ?? null,
+        },
+        events: Array.isArray(r.events) ? r.events : [],
+        note: typeof r.note === 'string' ? r.note : '',
+        family: String(r.family || r.model).trim(),
+        kind: r.kind === 'product' || r.kind === 'milestone' ? r.kind : 'model',
+        access: { open_weights: Boolean(r.access?.open_weights), license: r.access?.license ?? null },
+        specs: {
+          context_window: contextWindow(r),
+          parameter_count: parameterCount(r),
+        },
+        provenance: {
+          status: r.provenance?.status || 'unverified',
+          confidence: Number(r.provenance?.confidence) || 0,
+          reason: typeof r.provenance?.reason === 'string' ? r.provenance.reason : '',
+        },
+        // Only http(s) sources survive, so a bad data edit can't smuggle in a
+        // javascript: URL that would run when the link is clicked.
+        // (provenance.reason is carried through below.)
+        sources: (Array.isArray(r.sources) ? r.sources : [])
+          .filter((s) => /^https?:\/\//i.test(s?.url || ''))
+          .map((s) => ({
+            url: s.url,
+            type: String(s.type || 'news'),
+            authority: String(s.authority || ''),
+            archived_url: /^https?:\/\//i.test(s.archived_url || '') ? s.archived_url : null,
+          })),
+      };
+    })
     .filter((r) => Number.isFinite(r.year) && r.month >= 1 && r.month <= 12)
     .sort((a, b) => a.year - b.year || a.month - b.month || a.day - b.day
       || a.model.localeCompare(b.model));
@@ -481,7 +521,7 @@ function buildCard(r) {
   for (const t of r.tags.slice(0, 3)) {
     const chip = document.createElement('span');
     chip.className = 'tag';
-    chip.textContent = t;
+    chip.textContent = tagLabel(t);
     meta.appendChild(chip);
   }
 
@@ -702,7 +742,9 @@ function buildTagBar() {
   const sorted = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 
   els.tagbar.replaceChildren(...sorted.map(([tag, n]) => {
-    const chip = mkChip(tag, n, null, tagIcon(tag));
+    // Label is humanised; dataset.tag keeps the raw value, which is what the
+    // ?tag= URL and the filter compare against.
+    const chip = mkChip(tagLabel(tag), n, null, tagIcon(tag));
     chip.classList.add('chip-tag');
     chip.dataset.tag = tag;
     chip.addEventListener('click', () => toggleSet(state.tags, tag));
@@ -794,14 +836,31 @@ function cycleTheme() {
   applyTheme(order[(order.indexOf(now) + 1) % order.length]);
 }
 
-const SOURCE_LABEL = {
-  official_announcement: 'Official announcement',
-  paper: 'Research paper',
-  repository: 'Code repository',
-  model_card: 'Model card',
-  documentation: 'Official documentation',
-  secondary: 'Secondary reporting',
+// SOURCE_LABEL lives in lib/record.mjs so the app and the static pages cannot
+// describe the same source differently.
+
+const EVENT_LABEL = {
+  announcement: 'Announced', paper: 'Paper published',
+  public_availability: 'Publicly available', api_availability: 'Available via API',
+  weights_availability: 'Weights published', major_update: 'Major update',
+  retirement: 'Retired',
 };
+
+const eventDate = (iso) => {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${MONTHS[m - 1]}${d ? ` ${d}` : ''}, ${y}`;
+};
+
+/** "Language model · LLM". Mirrors the label on the static model pages. */
+function typeLabel(c) {
+  if (!c || c.primary_type === 'unknown') return 'Not classified';
+  const primary = c.primary_type === 'language'
+    ? 'Language model'
+    : c.primary_type.replace(/_/g, ' ').replace(/^./, (ch) => ch.toUpperCase());
+  const sub = { llm: 'LLM', slm: 'Small language model', reasoning: 'Reasoning model',
+    embedding: 'Embedding model', reranker: 'Reranker' }[c.subtype];
+  return sub ? `${primary} · ${sub}` : primary;
+}
 
 const PROV_LABEL = {
   verified: 'verified',
@@ -855,7 +914,7 @@ function openModal(r) {
   els.modalTags.replaceChildren(...r.tags.map((t) => {
     const chip = document.createElement('span');
     chip.className = 'tag';
-    chip.textContent = t;
+    chip.textContent = tagLabel(t);
     return chip;
   }));
 
@@ -863,6 +922,25 @@ function openModal(r) {
   highlight(els.modalNote, r.note || 'No note recorded for this release.');
 
   els.modalFamily.textContent = r.family;
+  els.modalType.textContent = typeLabel(r.classification);
+
+  // Only models with a lifecycle beyond their announcement get this section —
+  // a one-event list would just repeat the date shown above.
+  const lifecycle = r.events.filter((e) => e.date);
+  els.modalEvents.replaceChildren();
+  els.modalEvents.hidden = lifecycle.length < 2;
+  if (lifecycle.length > 1) {
+    for (const e of lifecycle) {
+      const li = document.createElement('li');
+      const when = document.createElement('time');
+      when.dateTime = e.date;
+      when.textContent = eventDate(e.date);
+      const what = document.createElement('span');
+      what.textContent = EVENT_LABEL[e.type] ?? e.type.replace(/_/g, ' ');
+      li.append(when, what);
+      els.modalEvents.append(li);
+    }
+  }
   els.modalDetailLink.href = `models/${encodeURIComponent(r.id)}/`;
   els.modalCompareLink.href = `compare/?m=${encodeURIComponent(r.id)}`;
   renderCadenceLine(r);
@@ -877,14 +955,33 @@ function openModal(r) {
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
       a.textContent = new URL(s.url).hostname.replace(/^www\./, '');
-      a.title = SOURCE_LABEL[s.type] ?? s.type;
+      // Authority is the trust signal, so it is spelled out in the tooltip
+      // rather than left implicit in the source type.
+      a.title = `${SOURCE_LABEL[s.type] ?? s.type} · ${AUTHORITY_LABEL[s.authority] ?? 'authority unrecorded'}`;
+      if (s.authority) a.dataset.authority = s.authority;
       els.modalSource.append(a);
     });
+    const primary = r.sources.filter((s) => s.authority === 'primary').length;
+    if (r.sources.length > 1) {
+      const count = document.createElement('span');
+      count.className = 'source-count';
+      count.textContent = ` ${primary}/${r.sources.length} primary`;
+      els.modalSource.append(count);
+    }
     const badge = document.createElement('span');
     badge.className = 'prov-badge';
     badge.dataset.status = r.provenance.status;
     badge.textContent = PROV_LABEL[r.provenance.status] ?? r.provenance.status;
     els.modalSource.append(' ', badge);
+
+    // A bare badge says a record is unproven without saying which fact is
+    // unproven. The reason is the part a reader can act on.
+    if (r.provenance.reason) {
+      const why = document.createElement('span');
+      why.className = 'prov-reason';
+      why.textContent = r.provenance.reason;
+      els.modalSource.append(why);
+    }
   } else {
     els.modalSource.textContent = 'No source recorded.';
   }

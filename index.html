@@ -255,10 +255,15 @@
       <dl class="modal-facts">
         <div><dt>Released</dt><dd id="modal-date"></dd></div>
         <div><dt>Family</dt><dd id="modal-family"></dd></div>
+        <div><dt>Type</dt><dd id="modal-type"></dd></div>
         <div><dt>Era</dt><dd id="modal-era"></dd></div>
       </dl>
 
       <p class="modal-cadence" id="modal-cadence"></p>
+
+      <!-- Filled only when a model has more than one recorded lifecycle event,
+           so the usual single-date release doesn't grow an empty section. -->
+      <ol class="modal-events" id="modal-events" hidden></ol>
 
       <div class="modal-tags" id="modal-tags"></div>
       <p class="modal-note" id="modal-note"></p>
