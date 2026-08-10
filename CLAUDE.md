@@ -15,6 +15,7 @@ npm run build              # regenerate all static pages
 npm run build:export       # ...and api/*.json + llm-releases.csv
 npm run smoke              # structural test of the built output (run a build first)
 npm run freshness          # weekly staleness + Hugging Face candidate report
+npm run feeds              # labs' own newsroom feeds — the only signal for closed labs
 npm run clean              # delete all generated output
 ```
 
