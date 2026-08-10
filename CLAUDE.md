@@ -139,7 +139,14 @@ These are enforced by `scripts/validate-data.mjs` and will fail the build:
 - Dates must be real calendar dates and not in the future unless
   `provenance.status` is `"estimated"`.
 
-Third-party trackers (aireleasetracker.com, llm-timeline.com, llmgateway.io) are
+**Epoch AI is the one third-party source that is legally clean to use.** Its
+notable-models database is CC BY 4.0 — the same licence as this dataset — so it
+may be used and quoted with attribution. It is still SECONDARY under
+METHODOLOGY §5 and can never back a value; its worth is the `Link` column,
+which points at each model's own paper or announcement. Run
+`node scripts/discover-epoch.mjs` to list labs and models we are missing.
+
+Other third-party trackers (aireleasetracker.com, llm-timeline.com, llmgateway.io) are
 **discovery sources only** — use them to find what is missing, then verify against
 the provider's own announcement and cite that. Two of them are also legally
 constrained: llmgateway's catalogue is AGPL, and aireleasetracker is an EU
