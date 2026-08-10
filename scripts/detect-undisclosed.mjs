@@ -27,6 +27,9 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+// One reader for every script: HTML, PDF and client-rendered pages, cached on
+// disk so a full pass fetches each source once rather than five times.
+import { sourceText, FAILED } from '../lib/source-text.mjs';
 import { fieldState } from '../lib/record.mjs';
 
 const FILE = 'data/llm-releases.json';
@@ -55,28 +58,7 @@ const PATTERNS = {
   ],
 };
 
-function textOf(html) {
-  return html
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<[^>]*>/g, ' ')
-    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
-    .replace(/\s+/g, ' ');
-}
 
-async function fetchText(url) {
-  try {
-    const res = await fetch(url, {
-      redirect: 'follow',
-      signal: AbortSignal.timeout(120000),
-      headers: { 'user-agent': 'Mozilla/5.0 (compatible; llm-world undisclosed-check)' },
-    });
-    if (!res.ok) return null;
-    return textOf(await res.text());
-  } catch {
-    return null;
-  }
-}
 
 /** Only fields that are currently unresearched are candidates. */
 const candidates = data.releases
@@ -100,7 +82,7 @@ async function examine(c) {
   const archived = c.record.sources.filter((s) => s.archived_url && s.authority === 'primary');
   const texts = [];
   for (const s of archived) {
-    const t = await fetchText(s.archived_url);
+    const t = await sourceText(s.archived_url);
     if (t) texts.push(t);
   }
 

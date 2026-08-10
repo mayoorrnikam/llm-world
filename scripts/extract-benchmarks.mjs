@@ -34,8 +34,9 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
-import { inflateSync } from 'node:zlib';
-import { pdfText } from '../lib/record.mjs';
+// One reader for every script: HTML, PDF and client-rendered pages, cached on
+// disk so a full pass fetches each source once rather than five times.
+import { sourceText, FAILED } from '../lib/source-text.mjs';
 
 const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
@@ -43,7 +44,6 @@ const LIMIT = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('
 
 const data = JSON.parse(readFileSync(FILE, 'utf8'));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const FAILED = Symbol('failed');
 
 /**
  * Benchmarks worth recording, with the capability each one evidences.
@@ -76,33 +76,7 @@ const BENCHMARKS = [
   { name: 'MMLU', re: /\bMMLU\b(?!-)/, cap: null },
 ];
 
-const textOf = (html) => html
-  .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-  .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-  .replace(/<[^>]*>/g, ' ')
-  .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
-  .replace(/\s+/g, ' ');
 
-async function fetchText(url, attempts = 3) {
-  for (let i = 0; i < attempts; i++) {
-    try {
-      const res = await fetch(url, {
-        redirect: 'follow',
-        signal: AbortSignal.timeout(90000),
-        headers: { 'user-agent': 'Mozilla/5.0 (compatible; llm-world benchmarks)' },
-      });
-      if (res.status === 429 || res.status >= 500) { await sleep(4000 * (i + 1)); continue; }
-      if (!res.ok) return FAILED;
-      const type = res.headers.get('content-type') ?? '';
-      if (/pdf/i.test(type) || /\.pdf(\?|$)/i.test(url)) {
-        const buf = new Uint8Array(await res.arrayBuffer());
-        return pdfText(buf, (b) => new Uint8Array(inflateSync(Buffer.from(b))));
-      }
-      return textOf(await res.text());
-    } catch { await sleep(4000 * (i + 1)); }
-  }
-  return FAILED;
-}
 
 /**
  * A score stated near the benchmark's name.
@@ -139,7 +113,7 @@ for (const r of pending.slice(0, LIMIT)) {
   const corpus = [];
   let failed = false;
   for (const s of archived) {
-    const t = await fetchText(s.archived_url);
+    const t = await sourceText(s.archived_url);
     if (t === FAILED) { failed = true; break; }
     corpus.push({ id: s.id, text: t });
     await sleep(1000);

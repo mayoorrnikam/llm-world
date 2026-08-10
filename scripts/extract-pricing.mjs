@@ -21,6 +21,9 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+// One reader for every script: HTML, PDF and client-rendered pages, cached on
+// disk so a full pass fetches each source once rather than five times.
+import { sourceText, FAILED } from '../lib/source-text.mjs';
 
 
 const FILE = 'data/llm-releases.json';
@@ -29,7 +32,6 @@ const LIMIT = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('
 
 const data = JSON.parse(readFileSync(FILE, 'utf8'));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const FAILED = Symbol('failed');
 
 /**
  * Each pattern must yield an input rate and an output rate, in that order.
@@ -45,28 +47,7 @@ const PRICE_PATTERNS = [
   /\bInput\s*\$\s*([\d.]+)\s*(?:\/\s*1M\s*tokens?)?\s*(?:•|·|\|)?\s*Output\s*\$\s*([\d.]+)/i,
 ];
 
-const textOf = (html) => html
-  .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-  .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-  .replace(/<[^>]*>/g, ' ')
-  .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
-  .replace(/\s+/g, ' ');
 
-async function fetchText(url, attempts = 4) {
-  for (let i = 0; i < attempts; i++) {
-    try {
-      const res = await fetch(url, {
-        redirect: 'follow',
-        signal: AbortSignal.timeout(90000),
-        headers: { 'user-agent': 'Mozilla/5.0 (compatible; llm-world pricing)' },
-      });
-      if (res.status === 429 || res.status >= 500) { await sleep(4000 * (i + 1)); continue; }
-      if (!res.ok) return FAILED;
-      return textOf(await res.text());
-    } catch { await sleep(4000 * (i + 1)); }
-  }
-  return FAILED;
-}
 
 const pending = data.releases.filter((r) => !r.pricing);
 console.log(`${pending.length} records without pricing · trying ${Math.min(pending.length, LIMIT)}\n`);
@@ -82,7 +63,7 @@ for (const r of pending.slice(0, LIMIT)) {
   let failed = false;
 
   for (const s of archived) {
-    const text = await fetchText(s.archived_url);
+    const text = await sourceText(s.archived_url);
     if (text === FAILED) { failed = true; break; }
     for (const p of PRICE_PATTERNS) {
       const m = p.exec(text);

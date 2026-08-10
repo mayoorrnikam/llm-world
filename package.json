@@ -20,7 +20,8 @@
     "freshness": "node scripts/check-freshness.mjs",
     "feeds": "node scripts/check-feeds.mjs",
     "add": "node scripts/add-model.mjs",
-    "enrich": "node scripts/archive-sources.mjs --save --write && node scripts/attribute-facts.mjs --write && node scripts/detect-modalities.mjs --write && node scripts/detect-undisclosed.mjs --write && node scripts/state-reasons.mjs --write",
-    "benchmarks": "node scripts/extract-benchmarks.mjs"
+    "enrich": "node scripts/archive-sources.mjs --save --write && node scripts/hf-metadata.mjs --write && node scripts/attribute-facts.mjs --write && node scripts/detect-modalities.mjs --write && node scripts/detect-undisclosed.mjs --write && node scripts/state-reasons.mjs --write",
+    "benchmarks": "node scripts/extract-benchmarks.mjs",
+    "hf": "node scripts/hf-metadata.mjs"
   }
 }
