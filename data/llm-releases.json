@@ -6500,9 +6500,18 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "vision"
       ],
       "tags": [],
       "note": "A coding-specialised model able to search repositories, run terminal commands and debug, positioned against Claude Opus 4.6.",
@@ -6540,14 +6549,14 @@
           "url": "https://developers.openai.com/api/docs/models/gpt-5.3-codex",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": "https://web.archive.org/web/20260216061110/https://developers.openai.com/api/docs/models/gpt-5.3-codex",
-          "retrieved": "2026-02-16"
+          "archived_url": "https://web.archive.org/web/20260226193922/https://developers.openai.com/api/docs/models/gpt-5.3-codex",
+          "retrieved": "2026-02-26"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from OpenAI's own model documentation, which states: “Modalities Text Input and output Image Input only Audio Not supported Video Not supported.” The snapshot cited was moved from 2026-02-16 to 2026-02-26: the earlier capture caught only the page shell before its content rendered, so it evidenced nothing it was cited for."
       },
       "undisclosed": [
         "parameter_count"
