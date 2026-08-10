@@ -21,7 +21,7 @@
 
 import {
   dateParts, displayTags, contextWindow, parameterCount, tagLabel,
-  SOURCE_LABEL, AUTHORITY_LABEL,
+  fieldState, evidenceFor, MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL,
 } from './lib/record.mjs';
 
 /* ------------------------------------------------------------------ config */
@@ -128,6 +128,7 @@ async function init() {
     'cadence-facts', 'legend', 'tagbar', 'reset-btn', 'lanes', 'empty-state', 'empty-sub',
     'empty-action', 'data-status', 'modal', 'modal-close', 'modal-title', 'modal-company',
     'modal-date', 'modal-family', 'modal-type', 'modal-era', 'modal-cadence',
+    'modal-context', 'modal-params', 'modal-modalities',
     'modal-events', 'modal-tags',
     'modal-note', 'modal-source', 'modal-detail-link', 'modal-compare-link',
     'modal-prev', 'modal-next',
@@ -241,6 +242,10 @@ function normalize(json) {
           context_window: contextWindow(r),
           parameter_count: parameterCount(r),
         },
+        // Kept so the dialog can answer "which source says so" and tell an
+        // undisclosed figure from an unresearched one, exactly as the model
+        // pages do. Derived helpers read the record, not the view model.
+        raw: r,
         provenance: {
           status: r.provenance?.status || 'unverified',
           confidence: Number(r.provenance?.confidence) || 0,
@@ -434,6 +439,14 @@ function renderLanes() {
 
   if (state.view === 'grid') {
     const frag = document.createDocumentFragment();
+    // Milestones belong in both views. Showing them only in lanes meant
+    // switching to grid silently dropped ChatGPT's launch off the timeline.
+    if (!hasFilters()) {
+      const shown = state.milestones
+        .filter((m) => state.year === 'all' || m.year === state.year)
+        .sort((a, b) => a.year - b.year || a.month - b.month);
+      for (const m of shown) frag.appendChild(buildMilestone(m));
+    }
     for (const r of state.visible) frag.appendChild(buildCard(r));
     lanes.appendChild(frag);
     return;
@@ -909,6 +922,11 @@ const eventDate = (iso) => {
   return `${MONTHS[m - 1]}${d ? ` ${d}` : ''}, ${y}`;
 };
 
+const tokensText = (n) => n >= 1e6 ? `${+(n / 1e6).toFixed(2)}M tokens` : `${Math.round(n / 1000)}K tokens`;
+const paramsText = (n) => n >= 1e12 ? `${+(n / 1e12).toFixed(2)}T`
+  : n >= 1e9 ? `${+(n / 1e9).toFixed(n < 1e10 ? 1 : 0)}B`
+  : `${Math.round(n / 1e6)}M`;
+
 /** "Language model · LLM". Mirrors the label on the static model pages. */
 function typeLabel(c) {
   if (!c || c.primary_type === 'unknown') return 'Not classified';
@@ -981,6 +999,22 @@ function openModal(r) {
 
   els.modalFamily.textContent = r.family;
   els.modalType.textContent = typeLabel(r.classification);
+
+  // "Not disclosed" is a claim about the lab; only make it where we looked.
+  const spec = (field, format) => {
+    const v = r.specs[field === 'context_window' ? 'context_window' : 'parameter_count'];
+    if (v == null) return MISSING_LABEL[fieldState(r.raw, field)] ?? 'Not recorded';
+    const e = evidenceFor(r.raw, field);
+    const from = e.sources.length
+      ? ` · ${e.sources.map((s) => new URL(s.url).hostname.replace(/^www\./, '')).join(', ')}`
+      : '';
+    return format(v) + from;
+  };
+  els.modalContext.textContent = spec('context_window', tokensText);
+  els.modalParams.textContent = spec('parameter_count', paramsText);
+  els.modalModalities.textContent = r.modalities
+    ? `${r.modalities.input.join(' + ')} → ${r.modalities.output.join(' + ')}`
+    : 'Not recorded';
 
   // Only models with a lifecycle beyond their announcement get this section —
   // a one-event list would just repeat the date shown above.
