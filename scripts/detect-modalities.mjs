@@ -39,6 +39,10 @@ const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
 const LIMIT = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('=')[1] ?? Infinity);
 
+// Print the sentences behind a flag, for the records the detector refuses to
+// decide on its own.
+const CONTEXT = process.argv.includes('--context');
+
 const CONCURRENCY = 6;
 
 const data = JSON.parse(readFileSync(FILE, 'utf8'));
@@ -125,6 +129,26 @@ function declaredModalities(texts) {
   return null;
 }
 
+/**
+ * Senses of a hint word that cannot denote a modality.
+ *
+ * Running the detector across every lab showed the same two records blocked by
+ * the same sentence shape: AI21 Jamba 1.5 and Mistral Small 3 were both flagged
+ * for /image/ by their model cards' install instructions — "use the docker
+ * image supplied by them", "a ready-to-go docker image". Neither model card
+ * mentions a visual modality anywhere.
+ *
+ * Only exclusions this narrow are safe. Suppressing a hint risks publishing a
+ * multimodal model as text-only, which is the one error this script must never
+ * make, so the bar is that the phrase CANNOT refer to a modality in any
+ * context. "docker image" clears it. A benchmark name like MMMU does not — a
+ * lab that benchmarks on MMMU usually does take images, so those stay flagged.
+ */
+const NOT_A_MODALITY = [
+  /\bdocker\s+image\b/gi, /\bcontainer\s+image\b/gi, /\bimage\s+supplied\b/gi,
+  /\bdocker\s+hub\b/gi, /\bimage\s+registry\b/gi, /\bdisk\s+image\b/gi,
+];
+
 /** An explicit denial is stronger than silence, and worth recording as such. */
 const EXPLICIT_TEXT_ONLY = [
   /\bgenerate[s]? text only\b/i,
@@ -179,9 +203,27 @@ async function examine(r) {
   }
 
   const explicit = texts.some((t) => EXPLICIT_TEXT_ONLY.some((p) => p.test(t)));
-  const hint = MULTIMODAL_HINTS.find((p) => texts.some((t) => p.test(t)));
+  // Blank the senses that cannot be a modality before looking for hints.
+  const scanned = texts.map((t) => NOT_A_MODALITY.reduce((s, p) => s.replace(p, ' '), t));
+  const hint = MULTIMODAL_HINTS.find((p) => scanned.some((t) => p.test(t)));
 
   if (hint && !explicit) {
+    // --context prints the sentences that tripped the filter. "Left for a
+    // person" is only actionable if the person can see what the source says;
+    // without it the next step is re-fetching every page by hand, which is how
+    // these records came to sit unresolved. PaLM 2 is the case to keep in mind:
+    // the sentences show the multimodality discussed is Gemini's, not its own.
+    if (CONTEXT) {
+      const seen = new Set();
+      for (const t of scanned) {
+        for (const m of t.matchAll(new RegExp(`[^.]{0,110}${hint.source}[^.]{0,110}\\.`, 'gi'))) {
+          const line = m[0].replace(/\s+/g, ' ').trim();
+          if (!seen.has(line) && seen.size < 3) { seen.add(line); }
+        }
+      }
+      flagged.push(`${r.id} (matched ${hint})\n${[...seen].map((l) => `      “${l}”`).join('\n')}`);
+      return;
+    }
     flagged.push(`${r.id} (matched ${hint})`);
     return;
   }
