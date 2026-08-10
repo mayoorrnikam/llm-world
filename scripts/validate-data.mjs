@@ -28,9 +28,14 @@ const warn = (id, msg) => warnings.push(`${id}: ${msg}`);
 const VALID_STATUS = new Set(['verified', 'partially_verified', 'unverified', 'conflicting', 'estimated']);
 
 // Schema 1.6 vocabularies — defined in docs/TAXONOMY.md.
+// `multimodal` was removed after the Stage 8 evaluation. All 24 records that
+// derive as multimodal are correctly `language` — text-first models that also
+// accept images. Multimodality is a property of `modalities`, which the schema
+// already states exactly, so a type for it would say the same thing twice
+// (TAXONOMY §2). Re-add it only if a model appears that no other type fits.
 const VALID_PRIMARY_TYPE = new Set([
   'language', 'vision', 'image_generation', 'video_generation', 'audio',
-  'multimodal', '3d', 'world_model', 'unknown',
+  '3d', 'world_model', 'unknown',
 ]);
 const VALID_SUBTYPE = new Set(['llm', 'slm', 'reasoning', 'embedding', 'reranker']);
 const VALID_MODALITY = new Set(['text', 'image', 'audio', 'video', '3d', 'sensor', 'environment']);
