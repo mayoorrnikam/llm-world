@@ -50,6 +50,13 @@ const VALID_EVENT_TYPE = new Set([
 const VALID_AUTHORITY = new Set(['primary', 'secondary', 'discovery']);
 /** Fields a lab can decline to publish, and that we can evidence as withheld. */
 const UNDISCLOSABLE = new Set(['parameter_count', 'context_window', 'license']);
+/** Pricing units. Extensible on purpose: image and video models are not priced
+ *  per token, and the charter asks for pricing that survives that (§25). */
+const VALID_PRICING_UNIT = new Set([
+  'per_million_tokens', 'per_image', 'per_second_of_video', 'per_minute_of_audio', 'per_request',
+]);
+/** Who ran the evaluation — more informative than the score itself. */
+const VALID_EVALUATION_TYPE = new Set(['vendor_reported', 'independent', 'community']);
 const VALID_SOURCE_TYPE = new Set([
   'official_announcement', 'official_documentation', 'official_model_card',
   'official_repository', 'technical_paper', 'independent_benchmark',
@@ -318,6 +325,73 @@ for (const r of releases) {
         if (claims.length > 1 && p?.status !== 'conflicting') {
           err(id, `evidence.${field} records ${claims.length} competing values — `
             + `set provenance.status to "conflicting"`);
+        }
+      }
+    }
+  }
+
+  // pricing (Stage 7) — historical, and only from a page that cannot change
+  // under the citation.
+  if (r.pricing != null) {
+    if (!Array.isArray(r.pricing)) err(id, 'pricing must be an array');
+    else {
+      const byId = new Map((r.sources ?? []).map((s) => [s.id, s]));
+      for (const p of r.pricing) {
+        if (!VALID_PRICING_UNIT.has(p.unit)) {
+          err(id, `unknown pricing unit "${p.unit}" — expected one of ${[...VALID_PRICING_UNIT].join(', ')}`);
+        }
+        if (!p.rates || typeof p.rates !== 'object' || !Object.keys(p.rates).length) {
+          err(id, 'pricing entry has no rates');
+        } else for (const [k, v] of Object.entries(p.rates)) {
+          if (typeof v !== 'number' || v < 0) err(id, `pricing rate "${k}" must be a non-negative number`);
+        }
+        if (!/^[A-Z]{3}$/.test(p.currency ?? '')) err(id, `pricing currency must be a 3-letter code, got ${JSON.stringify(p.currency)}`);
+        // observed_on, not effective_from: a snapshot proves what a page said
+        // on the day it was captured, never when that price started.
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(p.observed_on ?? '')) {
+          err(id, `pricing observed_on must be YYYY-MM-DD, got ${JSON.stringify(p.observed_on)}`);
+        }
+        if ('effective_from' in p) {
+          err(id, 'pricing uses observed_on — effective_from claims a start date no snapshot can prove');
+        }
+
+        if (!Array.isArray(p.sources) || !p.sources.length) err(id, 'pricing entry has no sources');
+        else for (const sid of p.sources) {
+          const s = byId.get(sid);
+          if (!s) { err(id, `pricing cites unknown source "${sid}"`); continue; }
+          // R1, enforced rather than warned from Stage 7: a live pricing page
+          // proves today's price, never the price on effective_from.
+          if (!s.archived_url) {
+            err(id, `pricing cites "${sid}" which has no archived_url — a live pricing `
+              + `page cannot evidence a past price (METHODOLOGY §6)`);
+          }
+        }
+      }
+    }
+  }
+
+  // benchmarks (Stage 7) — dated assertions by a named party, not properties
+  // of the model (METHODOLOGY §7).
+  if (r.benchmarks != null) {
+    if (!Array.isArray(r.benchmarks)) err(id, 'benchmarks must be an array');
+    else {
+      const sourceIds = new Set((r.sources ?? []).map((s) => s.id));
+      for (const b of r.benchmarks) {
+        if (!b.name?.trim()) err(id, 'benchmark has no name');
+        if (typeof b.score !== 'number') err(id, `benchmark "${b.name}" score must be a number`);
+        if (!VALID_EVALUATION_TYPE.has(b.evaluation_type)) {
+          err(id, `benchmark "${b.name}" needs evaluation_type — who ran it matters more than the score`);
+        }
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(b.reported_on ?? '')) {
+          err(id, `benchmark "${b.name}" reported_on must be YYYY-MM-DD`);
+        }
+        if (!Array.isArray(b.sources) || !b.sources.length) err(id, `benchmark "${b.name}" has no sources`);
+        else for (const sid of b.sources) {
+          if (!sourceIds.has(sid)) err(id, `benchmark "${b.name}" cites unknown source "${sid}"`);
+        }
+        // Charter §26: no single number that claims to rank models overall.
+        if (/^(overall|composite|average|aggregate|index|intelligence)\b/i.test(b.name ?? '')) {
+          err(id, `"${b.name}" looks like a composite score — this project does not publish one`);
         }
       }
     }

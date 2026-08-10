@@ -72,6 +72,24 @@ inline sample and saying so in the footer.
       "authority": "primary", "archived_url": null, "retrieved": null }
   ],
 
+  // Which source states which published number, so a figure can be traced
+  // without taking the record's status badge on trust. Two claims for one
+  // field means sources disagree, and both are published.
+  "evidence": {
+    "release_date":   [{ "value": "2023-11-04", "sources": ["grok-1-s1"] }],
+    "context_window": [{ "value": 8192,         "sources": ["grok-1-s2"] }]
+  },
+
+  // observed_on, not effective_from: a snapshot proves what a page said on the
+  // day it was captured, never when that price started.
+  "pricing": [{
+    "unit": "per_million_tokens",
+    "rates": { "input": 2, "output": 6 },
+    "currency": "USD",
+    "observed_on": "2026-07-08",
+    "sources": ["grok-1-s1"]
+  }],
+
   "provenance": { "status": "partially_verified", "confidence": 75 }
 }
 ```

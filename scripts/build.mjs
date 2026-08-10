@@ -331,6 +331,34 @@ ${r.tags.length ? `<div class="doc-tags">${r.tags.map((t) => `<span class="tag">
   `<tr><th scope="row">${esc(k)}</th><td>${esc(v)}${cited ?? ''}</td></tr>`).join('')}</tbody>
 </table>
 
+${r.pricing?.length ? `<h2>Pricing</h2>
+<p class="chart-note">The price a lab's own page showed <strong>on the day that page was
+captured</strong>. That is what a snapshot can prove; it is not necessarily the launch
+price, and prices are often cut later. Citing the live pricing page instead would give a
+number with no date at all.</p>
+<table class="doc-table">
+<tbody>${r.pricing.map((p) => {
+  const cited = r.sources.filter((s) => p.sources.includes(s.id));
+  return Object.entries(p.rates).map(([k, v]) => `<tr>
+<th scope="row">${esc(sentence(k))}</th>
+<td>$${v} per million tokens
+<span class="fact-cite">observed ${esc(eventDate(p.observed_on))} · ${cited.map((s) =>
+    `<a href="${esc(s.archived_url)}" rel="noopener noreferrer nofollow">archived snapshot${
+      s.retrieved ? ` (${esc(s.retrieved)})` : ''}</a>`).join(', ')}</span></td>
+</tr>`).join('');
+}).join('')}</tbody></table>` : ''}
+
+${r.benchmarks?.length ? `<h2>Benchmarks</h2>
+<p class="chart-note">Each row is a dated claim by a named party, not a property of the
+model. A later revision adds a row rather than replacing one. This project publishes no
+composite or overall score.</p>
+<table class="doc-table">
+<thead><tr><th>Benchmark</th><th>Score</th><th>Reported by</th><th>Date</th></tr></thead>
+<tbody>${r.benchmarks.map((b) => `<tr>
+<th scope="row">${esc(b.name)}</th><td>${esc(String(b.score))}</td>
+<td>${esc(sentence(b.evaluation_type))}</td><td>${esc(eventDate(b.reported_on))}</td>
+</tr>`).join('')}</tbody></table>` : ''}
+
 ${r.events.length > 1 ? `<h2>Release timeline</h2>
 <p class="doc-note">A model has more than one date. The timeline above positions it
 at its announcement; these are every recorded lifecycle event, each with the
@@ -915,6 +943,8 @@ function dataQualityPage() {
 
   const modalities = releases.filter((r) => r.modalities).length;
   const conflicts = releases.filter((r) => r.provenance.status === 'conflicting');
+  const withPricing = releases.filter((r) => r.pricing?.length).length;
+  const withBenchmarks = releases.filter((r) => r.benchmarks?.length).length;
 
   const byLab = new Map();
   for (const r of releases) {
@@ -1013,6 +1043,23 @@ ${conflicts.length ? `<p class="doc-note"><strong>${conflicts.length} record${
 published rather than resolved silently: ${conflicts.map((r) =>
   `<a href="../models/${esc(r.id)}/">${esc(r.model)}</a>`).join(', ')}.</p>`
   : '<p class="doc-note">No record currently has sources that disagree with each other. Where that happens, both values are published rather than one being chosen silently.</p>'}
+
+<h2>Pricing and benchmarks</h2>
+<p class="chart-note">Both were nearly left out of this project, on the grounds that a
+price changes silently and a citation to a live page rots. The answer was to cite dated
+snapshots instead: a pricing entry whose source has no archive is <strong>rejected by the
+build</strong>, so every price here is evidenced as of a specific capture.</p>
+<table class="doc-table quality-table">
+<thead><tr><th>Field</th><th>Recorded</th><th>Note</th></tr></thead>
+<tbody>
+<tr><th scope="row">Token pricing</th><td>${withPricing}/${total}</td>
+<td class="cell-note">only where the lab stated a price in a source we hold a snapshot of</td></tr>
+<tr><th scope="row">Benchmarks</th><td>${withBenchmarks}/${total}</td>
+<td class="cell-note">recorded as dated claims; no composite score is published</td></tr>
+</tbody></table>
+<p class="doc-note">Most labs do not state a price in the announcement itself, and this
+dataset does not chase the current price on a live pricing page — that would be a number
+without a date, which is the thing it is trying not to publish.</p>
 
 <h2>Verification by lab</h2>
 <p class="chart-note">Share of each lab's tracked releases that are fully verified.
