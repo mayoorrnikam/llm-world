@@ -43,8 +43,18 @@
     </nav>
 
     <div class="header-icons">
-      <button type="button" class="icon-btn" id="theme-toggle" aria-label="Colour theme: system" data-theme-state="system">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8"/></svg>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Colour theme: system"
+              title="Colour theme (T)" data-theme-state="system">
+        <svg class="i-system" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="1.8" y="2.6" width="12.4" height="8.6" rx="1.8"></rect><path d="M5.4 13.6h5.2" stroke-linecap="round"></path>
+        </svg>
+        <svg class="i-light" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="8" cy="8" r="3.2"></circle>
+          <path d="M8 1.2v1.6M8 13.2v1.6M1.2 8h1.6M13.2 8h1.6M3.2 3.2l1.1 1.1M11.7 11.7l1.1 1.1M12.8 3.2l-1.1 1.1M4.3 11.7l-1.1 1.1" stroke-linecap="round"></path>
+        </svg>
+        <svg class="i-dark" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
+          <path d="M13.2 9.6A5.8 5.8 0 0 1 6.4 2.8a5.8 5.8 0 1 0 6.8 6.8Z"></path>
+        </svg>
       </button>
     </div>
   </div>
@@ -58,7 +68,7 @@
     <p class="ask-sub">Every answer comes from records with sources attached — not from a language model.</p>
 
     <form class="ask-form" id="ask-form" role="search">
-      <label class="visually-hidden" for="ask-input">Ask a question about model releases</label>
+      <label class="sr-only" for="ask-input">Ask a question about model releases</label>
       <input type="search" id="ask-input" class="ask-input" autocomplete="off" spellcheck="false"
         placeholder="open weights with 1M context">
       <button type="submit" class="ask-go">Ask</button>
@@ -77,6 +87,9 @@
     </ul>
   </section>
 
+  <!-- What the dataset shows before a question is asked. Hidden once one is. -->
+  <section class="ask-pulse" id="ask-pulse" aria-label="Dataset at a glance"></section>
+
   <section class="ask-results" id="ask-results" aria-live="polite"></section>
 
   <p class="ask-foot">
@@ -87,26 +100,27 @@
 </main>
 
 <!-- shared:footer-start — build.mjs lifts this verbatim; edit here only -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <p class="footer-note">
-      A source-backed record of language model releases. Every figure cites where it came from;
-      the gaps are published too — see <a href="data-quality/">data quality</a>.
-    </p>
-    <nav class="footer-nav" aria-label="More">
-      <a href="models/">All models</a>
-      <a href="families/">Families</a>
-      <a href="companies/">Labs</a>
-      <a href="milestones/">Milestones</a>
-      <a href="analytics/">Analytics</a>
-      <a href="data-quality/">Data quality</a>
-      <a href="api/models.json">JSON API</a>
-      <a href="llm-releases.csv">CSV download</a>
-      <a href="https://github.com/mayoorrnikam/llm-world" rel="noopener">Source</a>
-    </nav>
-    <p class="footer-meta">Data CC BY 4.0 · code MIT</p>
-  </div>
-</footer>
+  <footer class="site-footer">
+    <div class="foot-grid">
+      <nav class="foot-col foot-years" aria-labelledby="foot-years">
+        <h2 class="foot-title" id="foot-years">Browse by year</h2>
+        <div class="foot-yearlinks" id="foot-yearlinks"></div>
+      </nav>
+
+      <nav class="foot-col" aria-labelledby="foot-data">
+        <h2 class="foot-title" id="foot-data">Open data</h2>
+        <a href="api/models.json">JSON API</a>
+        <a href="llm-releases.csv">CSV download</a>
+        <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener">CC BY 4.0</a>
+      </nav>
+
+      <div class="foot-col">
+        <h2 class="foot-title">Data</h2>
+        <p class="data-status" id="data-status">loading <code>data/llm-releases.json</code>…</p>
+        <p class="foot-note">Curated from primary sources. Every release links to its own. Free to reuse with credit.</p>
+      </div>
+    </div>
+  </footer>
 <!-- shared:footer-end -->
 
 <script src="search.js" type="module"></script>

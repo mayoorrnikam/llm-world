@@ -2226,3 +2226,52 @@ code, kbd {
   .ask-list li { grid-template-columns: minmax(0, 1fr); }
   .ask-meta { text-align: left; }
 }
+
+.read-ignored { color: var(--warn); }
+/* The logo sits with the name, never instead of it — colour is a secondary
+   channel and identity rests on mark plus name together. */
+.ask-name { display: inline-flex; align-items: center; gap: 7px; }
+.ask-name .glyph { width: 17px; height: 17px; flex: 0 0 auto; color: var(--c, currentColor); }
+
+/* Screen-reader-only. styles.css had no such utility, so a label marked
+   "visually-hidden" rendered and stretched the ask form to 101px tall. */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.ask-form { align-items: stretch; }
+.ask-go { line-height: 1; }
+
+/* Dataset at a glance — computed from the records, so it cannot go stale. */
+.pulse-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 34px 0 0;
+}
+.pulse-card {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 13px 14px;
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  text-decoration: none; color: inherit;
+}
+.pulse-card:hover { border-color: var(--accent); }
+.pulse-k {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--muted);
+}
+.pulse-v { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
+.pulse-s { font-size: 11.5px; color: var(--muted); }
+
+@media (max-width: 560px) {
+  .home-main { padding-left: 14px; padding-right: 14px; }
+  .ask-form { flex-wrap: wrap; }
+  .ask-input { flex: 1 1 100%; }
+  .ask-go { flex: 1 1 100%; padding: 12px; }
+  .pulse-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .pulse-v { font-size: 17px; }
+  .ask-examples { gap: 6px; }
+  .ask-examples button { font-size: 12px; }
+}

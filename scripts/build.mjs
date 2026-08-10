@@ -104,8 +104,11 @@ const PROV_LABEL = {
 // that renders every company at once. Neither is duplicated.
 const indexHtml = readFileSync('index.html', 'utf8');
 const timelineHtml = readFileSync('timeline.html', 'utf8');
+// One copy of the logos, in sprite.svg. Both the generated pages and the
+// landing page read it from there; nothing inlines a second copy.
+const spriteSvg = readFileSync('sprite.svg', 'utf8');
 const SPRITE = Object.fromEntries(
-  [...timelineHtml.matchAll(/<g id="(ic-[a-z0-9]+)"[\s\S]*?<\/g>/g)]
+  [...spriteSvg.matchAll(/<g id="(ic-[a-z0-9]+)"[\s\S]*?<\/g>/g)]
     .map((m) => [m[1], m[0]]));
 
 /* Shared chrome, lifted verbatim out of index.html between the
@@ -1579,6 +1582,7 @@ for (const rd of data.redirects ?? []) {
     if (a < 0 || b < 0) throw new Error(`timeline.html is missing shared:${name} markers`);
     page = page.slice(0, page.indexOf('-->', a) + 3) + '\n' + shared + '\n' + page.slice(b);
   };
+  page = page.replace('<!-- sprite -->', spriteSvg.trim());
   swap('header', chrome(SHARED_HEADER, '../', 'timeline/'));
   swap('footer', chrome(SHARED_FOOTER, '../'));
 
