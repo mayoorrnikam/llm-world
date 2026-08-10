@@ -28,6 +28,8 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
+const LIMIT = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('=')[1] ?? Infinity);
+
 
 const data = JSON.parse(readFileSync(FILE, 'utf8'));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -66,7 +68,8 @@ const targets = data.releases
   .filter((t) => t.repo)
   // Only where something is actually missing.
   .filter((t) => t.r.modalities == null
-    || (t.r.access.open_weights && !t.r.access.license));
+    || (t.r.access.open_weights && !t.r.access.license))
+  .slice(0, LIMIT);
 
 console.log(`${targets.length} records cite a model card and are missing licence or modalities\n`);
 
@@ -85,10 +88,20 @@ for (const { r, repo } of targets) {
 
   const found = [];
 
-  const license = meta?.cardData?.license;
-  // "other" and "unknown" are Hugging Face's slugs for a custom or unstated
-  // licence. Recording either as the licence name says less than null does,
+  const slug = meta?.cardData?.license;
+  // "other" and "unknown" are Hugging Face's slugs for a licence outside its
+  // fixed list. Recording either as the licence name says less than null does,
   // and reads on the page as though we found something.
+  //
+  // But "other" does not mean undeclared: a lab shipping its own licence puts
+  // the real name in cardData.license_name and the text in license_link. That
+  // is the lab's own declaration on its own model card — the same standing as
+  // any slug, and better evidence than the null it was being left as. Testing
+  // this against MiniMax is what found it: M3 and H3 are both `license: other`
+  // with `license_name: minimax-community` sitting unread beside it. Every lab
+  // that writes its own community licence lands here.
+  const named = String(slug ?? '').toLowerCase() === 'other' ? meta?.cardData?.license_name : null;
+  const license = named || slug;
   const usable = license && !['other', 'unknown', 'unlicense'].includes(String(license).toLowerCase());
   if (usable && r.access.open_weights && !r.access.license) {
     // Hugging Face writes slugs; the dataset uses the licence's own name.
@@ -98,8 +111,12 @@ for (const { r, repo } of targets) {
       'llama3.1': 'Llama 3.1 Community License', 'llama3.2': 'Llama 3.2 Community License',
       'llama4': 'Llama 4 Community License', 'openrail': 'OpenRAIL',
     }[String(license).toLowerCase()] ?? String(license);
-    if (WRITE) r.access.license = name;
-    found.push(`licence ${name}`);
+    if (WRITE) {
+      r.access.license = name;
+      r.provenance.reason = `${(r.provenance.reason ?? '').trim()} Licence from the model `
+        + `card's own ${named ? 'license_name' : 'license'} field on ${repo}.`.trim();
+    }
+    found.push(`licence ${name}${named ? ' (via license_name)' : ''}`);
     lic++;
   }
 
@@ -118,11 +135,28 @@ for (const { r, repo } of targets) {
     found.push(`pipeline_tag "${tag}" carries no modality claim — left for the detector`);
   }
 
-  if (found.length) console.log(`  ${r.id.padEnd(22)} ${found.join('  ·  ')}`);
+  // Every target gets a line, including the ones that yield nothing. Silence
+  // used to mean either "checked, the card says nothing" or "never reached",
+  // and there was no way to tell which from the output — mistral-small-3 and
+  // both MiniMax records all printed nothing for three different reasons.
+  console.log(found.length
+    ? `  ${r.id.padEnd(22)} ${found.join('  ·  ')}`
+    : `  ${r.id.padEnd(22)} nothing to take from ${repo}`);
   await sleep(200);
 }
 
 console.log(`\nlicences recorded:  ${lic}`);
 console.log(`modalities recorded: ${mods}`);
 if (failed) console.log(`could not read:      ${failed}`);
-console.log(WRITE ? `\nwrote ${FILE}` : `\ndry run — pass --write to record`);
+
+if (WRITE) {
+  // This call was missing. The script mutated the in-memory records, counted
+  // them, and printed "wrote data/llm-releases.json" — then exited without
+  // touching the file. `npm run enrich` runs it with --write, so every licence
+  // and modality it claimed to record was discarded, and the report said
+  // otherwise. A script that lies about writing is worse than one that cannot.
+  writeFileSync(FILE, JSON.stringify(data, null, 2) + '\n');
+  console.log(`\nwrote ${FILE}`);
+} else {
+  console.log(`\ndry run — pass --write to record`);
+}

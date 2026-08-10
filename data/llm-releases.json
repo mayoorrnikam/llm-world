@@ -7050,7 +7050,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Cited to the official model card and the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
         "release_date": [
@@ -7238,7 +7238,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Cited to the official model card and the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
         "release_date": [
@@ -7696,7 +7696,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "minimax-community"
       },
       "sources": [
         {
@@ -7719,7 +7719,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the official model card and the lab's own announcement, and every value it asserts was found there. Licence from the model card's own license_name field on MiniMaxAI/MiniMax-M3."
       },
       "evidence": {
         "release_date": [
@@ -8615,7 +8615,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "minimax-h3-community-license-agreement"
       },
       "sources": [
         {
@@ -8638,7 +8638,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the official model card and the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Licence from the model card's own license_name field on MiniMaxAI/MiniMax-H3."
       },
       "evidence": {}
     },

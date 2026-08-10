@@ -121,6 +121,173 @@ function checkChrome(page, html) {
 
 /* -------------------------------------------------------------- 5. sources */
 
+/**
+ * Blanks out comments and string literals, leaving code positions intact.
+ *
+ * A scanner rather than a regex chain, because the regex version was wrong in a
+ * way worth remembering: `const API = 'https://archive.org/…'` contains `//`,
+ * so a line-comment pattern deleted the rest of the line — including the
+ * closing quote. Every quote after that paired up shifted by one, and whole
+ * declarations vanished from what the check believed was the code. It reported
+ * archive-sources.mjs as using an unimported `FAILED` that is declared on line
+ * 62. Splitting code from strings needs state, not pattern matching.
+ *
+ * Regex literals have to be skipped too, and for the same reason as strings
+ * rather than a different one: detect-modalities.mjs matches contractions with
+ * /does\s?n[o']?t have other senses/i. That apostrophe reads as an opening
+ * quote, and everything to the next quote — most of the file, including its
+ * writeFileSync — disappears. Telling a regex from division needs the previous
+ * token, which is the one piece of context a scanner can cheaply keep.
+ */
+function stripNonCode(src) {
+  let out = '', i = 0;
+  const at = (s) => src.startsWith(s, i);
+  // Last significant code character emitted; decides `/` = regex vs division.
+  let prev = '';
+  const REGEX_OK = new Set(['', '(', ',', '=', ':', '[', '!', '&', '|', '?', '{', '}', ';', '+', '-', '*', '%', '<', '>', '~', '^']);
+  while (i < src.length) {
+    if (src[i] === '/' && !at('//') && !at('/*')
+        && (REGEX_OK.has(prev) || /\b(?:return|typeof|case|in|of|new|delete|void|do|else)$/.test(out.trimEnd()))) {
+      // Walk the literal, honouring escapes and character classes (where an
+      // unescaped `/` is legal and must not end it).
+      let j = i + 1, klass = false, closed = false;
+      for (; j < src.length && src[j] !== '\n'; j++) {
+        if (src[j] === '\\') { j++; continue; }
+        if (src[j] === '[') klass = true;
+        else if (src[j] === ']') klass = false;
+        else if (src[j] === '/' && !klass) { closed = true; break; }
+      }
+      if (closed) {
+        while (j + 1 < src.length && /[dgimsuvy]/.test(src[j + 1])) j++;
+        out += src.slice(i, j + 1).replace(/[^\n]/g, ' ');
+        i = j + 1;
+        prev = 'x'; // a value, so a following `/` is division
+        continue;
+      }
+      // Not a literal after all — fall through and treat it as an operator.
+    }
+    if (at('/*')) {
+      const end = src.indexOf('*/', i + 2);
+      const stop = end === -1 ? src.length : end + 2;
+      // Keep newlines so line-anchored patterns still behave.
+      out += src.slice(i, stop).replace(/[^\n]/g, ' ');
+      i = stop;
+    } else if (at('//')) {
+      const end = src.indexOf('\n', i);
+      const stop = end === -1 ? src.length : end;
+      out += ' '.repeat(stop - i);
+      i = stop;
+    } else if (src[i] === '"' || src[i] === "'" || src[i] === '`') {
+      const quote = src[i];
+      let j = i + 1;
+      while (j < src.length && src[j] !== quote) j += src[j] === '\\' ? 2 : 1;
+      out += src.slice(i, Math.min(j + 1, src.length)).replace(/[^\n]/g, ' ');
+      i = j + 1;
+      prev = 'x'; // a string is a value: a following `/` divides
+    } else {
+      if (!/\s/.test(src[i])) prev = src[i];
+      out += src[i++];
+    }
+  }
+  return out;
+}
+
+/**
+ * Names a script uses from lib/ must actually be imported.
+ *
+ * This is the check that would have caught the real bug. Rewiring the
+ * extractors deleted attribute-facts.mjs's import line; the file still parsed,
+ * and running it with --limit=0 still passed, because the loop body that uses
+ * those names never executed. Only a caller with real work to do would have
+ * hit it — in other words, production.
+ *
+ * So this looks for shared helpers used in a file and asserts each is imported.
+ * Cheap, and it fails on exactly the mistake that was made.
+ */
+function checkLibImports() {
+  const exported = new Set(
+    [...readFileSync('lib/record.mjs', 'utf8').matchAll(/export (?:function|const) (\w+)/g)].map((m) => m[1])
+      .concat([...readFileSync('lib/source-text.mjs', 'utf8').matchAll(/export (?:function|const) (\w+)/g)].map((m) => m[1]))
+      .concat(['FAILED', 'sourceText']),
+  );
+
+  for (const file of readdirSync('scripts').filter((f) => f.endsWith('.mjs')).map((f) => `scripts/${f}`)) {
+    const src = readFileSync(file, 'utf8');
+    const imported = new Set(
+      [...src.matchAll(/import\s*\{([^}]*)\}\s*from\s*'[^']*lib\/[^']*'/g)]
+        .flatMap((m) => m[1].split(',').map((x) => x.trim().split(/\s+as\s+/)[0]).filter(Boolean)),
+    );
+    const code = stripNonCode(src);
+
+    for (const name of exported) {
+      if (imported.has(name)) continue;
+      // Declared locally under the same name is fine.
+      if (new RegExp(`(?:function|const|let|var)\\s+${name}\\b`).test(code)) continue;
+      if (new RegExp(`\\b${name}\\s*\\(`).test(code) || new RegExp(`\\b${name}\\b`).test(code)) {
+        fail(file, `uses "${name}" from lib/ but never imports it — this parses, and fails at runtime`);
+      }
+    }
+  }
+}
+
+/**
+ * A script that accepts --write must contain a write.
+ *
+ * hf-metadata.mjs read --write, mutated the records, counted them and printed
+ * "wrote data/llm-releases.json" — with no writeFileSync anywhere in the file.
+ * It ran clean, reported success, and changed nothing; `npm run enrich` called
+ * it that way for weeks. Nothing else could catch this: the exit code is 0, the
+ * output is a success report, and the dataset it claims to have edited is
+ * simply unchanged. The only observable is the missing call itself.
+ */
+function checkWriteScripts() {
+  for (const file of readdirSync('scripts').filter((f) => f.endsWith('.mjs')).map((f) => `scripts/${f}`)) {
+    const code = stripNonCode(readFileSync(file, 'utf8'));
+    if (!/--write/.test(readFileSync(file, 'utf8'))) continue;
+    if (!/\bwriteFileSync\s*\(/.test(code)) {
+      fail(file, 'takes --write but never calls writeFileSync — it reports a write it does not perform');
+    }
+  }
+}
+
+/**
+ * Every data script must actually RUN, not merely parse.
+ *
+ * Rewiring the extractors once deleted the entire top of attribute-facts.mjs —
+ * imports, constants and a helper — and `node --check` passed, because what
+ * remained was still valid JavaScript. A syntax check cannot see a missing
+ * import or an undefined constant; only executing the file can.
+ *
+ * `--limit=0` exercises every module-level line and then does no work: no
+ * network, no writes, no dependence on what is in the dataset today. A script
+ * that has been gutted fails here in under a second.
+ */
+function checkScriptsRun() {
+  const scripts = [
+    'attribute-facts', 'detect-modalities', 'detect-undisclosed',
+    'extract-pricing', 'extract-benchmarks', 'hf-metadata', 'archive-sources',
+    'state-reasons', 'discover-epoch', 'add-model', 'split-record',
+  ];
+  for (const name of scripts) {
+    const file = `scripts/${name}.mjs`;
+    if (!existsSync(file)) { fail(file, 'missing'); continue; }
+    try {
+      execFileSync(process.execPath, [file, '--limit=0'], {
+        stdio: 'pipe',
+        timeout: 30000,
+        env: { ...process.env, NO_COLOR: '1' },
+      });
+    } catch (e) {
+      // add-model and split-record need a spec and exit 1 without one; that is
+      // them working. Anything else is a script that cannot start.
+      const err = (e.stderr?.toString() || '').trim();
+      if (/^usage:/m.test(err) || /missing epoch-notable-models\.csv/.test(err)) continue;
+      const first = err.split('\n').find((l) => /Error|error/.test(l)) ?? `exit ${e.status}`;
+      fail(file, `does not run — ${first.trim().slice(0, 120)}`);
+    }
+  }
+}
+
 function checkStandaloneScripts() {
   for (const f of ['app.js', 'scripts/build.mjs', 'scripts/validate-data.mjs', 'scripts/serve.mjs']) {
     if (!existsSync(f)) { fail(f, 'missing'); continue; }
@@ -142,6 +309,9 @@ for (const page of pages) {
   checkChrome(page, html);
 }
 checkStandaloneScripts();
+checkScriptsRun();
+checkLibImports();
+checkWriteScripts();
 
 const shown = fails.slice(0, 25);
 for (const f of shown) console.error(`  FAIL  ${f}`);

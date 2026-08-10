@@ -90,18 +90,32 @@ function reasonFor(r) {
 let written = 0, skipped = 0;
 const preview = [];
 
+/**
+ * The placeholder add-model.mjs seeds on a brand-new record.
+ *
+ * It is true when written and false the moment enrichment runs, and nothing
+ * was clearing it — reasons are never overwritten, so a seeded record kept
+ * saying its sources were unarchived. MiniMax M3 shipped that sentence next to
+ * two archived links and a licence traced to one of them. A record that
+ * contradicts its own evidence is worse than one with no reason at all.
+ */
+const PLACEHOLDER = /Newly added\.\s*Sources are not archived and no value has been traced to one yet[^.]*\./;
+
 for (const r of data.releases) {
   if (r.provenance.status === 'verified') continue;
-  if (r.provenance.reason && !FORCE) { skipped++; continue; }
+  const stale = PLACEHOLDER.test(r.provenance.reason ?? '') && r.sources.some((s) => s.archived_url);
+  if (r.provenance.reason && !FORCE && !stale) { skipped++; continue; }
   // detect-modalities.mjs appends how a record's modalities were established.
   // That is provenance a regeneration must not throw away, so it is carried
   // across rather than overwritten.
   // Everything from the first "Modalities …" sentence to the end, not just that
   // sentence: the explanation of HOW the modalities were established follows it
   // and is the part worth keeping.
-  const prior = r.provenance.reason ?? '';
+  // Drop the placeholder but keep whatever enrichment appended after it —
+  // those sentences say where a value came from, which is the reason itself.
+  const prior = (r.provenance.reason ?? '').replace(PLACEHOLDER, '').trim();
   const at = prior.search(/(?:^|\s)Modalities /);
-  const carried = at >= 0 ? prior.slice(at).trim() : '';
+  const carried = at >= 0 ? prior.slice(at).trim() : (stale ? prior : '');
 
   const reason = [reasonFor(r), carried].filter(Boolean).join(' ');
   preview.push(`${r.id.padEnd(20)} ${reason}`);

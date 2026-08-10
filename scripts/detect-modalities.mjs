@@ -37,6 +37,8 @@ import { sourceText, FAILED } from '../lib/source-text.mjs';
 
 const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
+const LIMIT = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('=')[1] ?? Infinity);
+
 const CONCURRENCY = 6;
 
 const data = JSON.parse(readFileSync(FILE, 'utf8'));
@@ -133,7 +135,7 @@ const EXPLICIT_TEXT_ONLY = [
 
 
 
-const targets = data.releases.filter((r) => r.modalities == null);
+const targets = data.releases.filter((r) => r.modalities == null).slice(0, LIMIT);
 console.log(`${targets.length} records without modalities\n`);
 
 const textOnly = [], flagged = [], unreadable = [], declaredHits = [], partial = [];

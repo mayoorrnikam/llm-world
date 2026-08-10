@@ -34,6 +34,8 @@ import { fieldState } from '../lib/record.mjs';
 
 const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
+const LIMIT = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('=')[1] ?? Infinity);
+
 const CONCURRENCY = 5;
 
 const data = JSON.parse(readFileSync(FILE, 'utf8'));
@@ -71,7 +73,8 @@ const candidates = data.releases
       return fieldState(r, f) === 'unresearched';
     }),
   }))
-  .filter((c) => c.fields.length);
+  .filter((c) => c.fields.length)
+  .slice(0, LIMIT);
 
 console.log(`${candidates.length} records have at least one unresearched field\n`);
 

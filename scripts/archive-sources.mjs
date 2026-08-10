@@ -34,6 +34,8 @@ import { canonicalDate } from '../lib/record.mjs';
 
 const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
+const LIMIT = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('=')[1] ?? Infinity);
+
 const SAVE = process.argv.includes('--save');
 const ONLY_DOCS = process.argv.includes('--only=docs');
 const API = 'https://archive.org/wayback/available';
@@ -98,6 +100,7 @@ for (const r of data.releases) {
   }
 }
 
+jobs.length = Math.min(jobs.length, LIMIT);
 console.log(`checking ${jobs.length} sources against the Wayback Machine…\n`);
 
 let found = 0, absent = 0, failed = 0, early = 0;
