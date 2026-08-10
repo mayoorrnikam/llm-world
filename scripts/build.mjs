@@ -51,6 +51,12 @@ const releases = rawReleases.map((r) => ({
   technical: { context_window: contextWindow(r), parameter_count: parameterCount(r) },
 }));
 
+/** Releases grouped by lab, so a lab page can say how it compares to the field. */
+const byCompanyIndex = new Map();
+for (const r of releases) {
+  (byCompanyIndex.get(r.company) ?? byCompanyIndex.set(r.company, []).get(r.company)).push(r);
+}
+
 /* ------------------------------------------------------------------ shared */
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -361,8 +367,35 @@ function companyPage(name, list) {
     ? [...gaps].sort((a, b) => a - b)[Math.floor(gaps.length / 2)] : null;
   const open = list.filter((r) => r.access.open_weights).length;
 
+  const first = asc[0], latest = asc.at(-1);
+  const verified = list.filter((r) => r.provenance.status === 'verified').length;
+  const families = [...new Set(list.map((r) => r.family))].sort();
+
+  // How this lab's cadence compares to everyone else's, so the number means
+  // something. A 90-day median is fast or slow only relative to the field.
+  const allMedians = [];
+  for (const [, peers] of byCompanyIndex) {
+    const p = [...peers].sort((a, b) => a.year - b.year || a.month - b.month);
+    const g = [];
+    for (let i = 1; i < p.length; i++) g.push(daysBetween(p[i - 1], p[i]));
+    if (g.length >= 2) allMedians.push([...g].sort((a, b) => a - b)[Math.floor(g.length / 2)]);
+  }
+  const fieldMedian = allMedians.length
+    ? [...allMedians].sort((a, b) => a - b)[Math.floor(allMedians.length / 2)] : null;
+
+  const perYear = new Map();
+  for (const r of list) perYear.set(r.year, (perYear.get(r.year) ?? 0) + 1);
+  const years = [...perYear.keys()].sort((a, b) => a - b);
+
+  // Only capabilities that have actually been evidenced on this lab's records.
+  const capCounts = new Map();
+  for (const r of list) for (const c of r.capabilities) capCounts.set(c, (capCounts.get(c) ?? 0) + 1);
+  const caps = [...capCounts.entries()].sort((a, b) => b[1] - a[1]);
+
+  const ctxPoints = asc.filter((r) => r.technical.context_window != null);
+
   const body = `
-<nav class="crumbs"><a href="../../">Home</a> › <span>${esc(name)}</span></nav>
+<nav class="crumbs"><a href="../../">Home</a> › <a href="../">Labs</a> › <span>${esc(name)}</span></nav>
 
 <div class="doc-hero">
   <span class="doc-mark">${glyph(name)}</span>
@@ -373,11 +406,52 @@ function companyPage(name, list) {
   </div>
 </div>
 
+<h2>At a glance</h2>
+<table class="doc-table">
+<tbody>
+<tr><th scope="row">Releases tracked</th><td>${list.length}</td></tr>
+<tr><th scope="row">Families</th><td>${families.map((f) =>
+    `<a href="../../families/${familySlug(f)}/">${esc(f)}</a>`).join(' · ')}</td></tr>
+<tr><th scope="row">First tracked</th><td>${fullDate(first)} — <a href="../../models/${esc(first.id)}/">${esc(first.model)}</a></td></tr>
+<tr><th scope="row">Latest</th><td>${fullDate(latest)} — <a href="../../models/${esc(latest.id)}/">${esc(latest.model)}</a></td></tr>
+${median != null ? `<tr><th scope="row">Median gap</th><td>${median} days${
+    fieldMedian != null ? ` · ${median < fieldMedian ? 'faster' : median > fieldMedian ? 'slower' : 'level'} than the ${fieldMedian}-day median across tracked labs` : ''}</td></tr>` : ''}
+<tr><th scope="row">Weights</th><td>${open === list.length ? 'Open throughout'
+    : open === 0 ? 'Proprietary throughout'
+    : `${open} of ${list.length} open (${Math.round(open / list.length * 100)}%)`}</td></tr>
+<tr><th scope="row">Record quality</th><td>${verified} of ${list.length} verified · <a href="../../data-quality/">how this is judged</a></td></tr>
+</tbody></table>
+
+${years.length > 1 ? `<h2>Releases per year</h2>
+<p class="chart-note">Tracked releases only — a quiet year here may mean this dataset
+is thin for that year rather than that the lab was quiet.</p>
+${barRows(years.map((y) => ({
+    name: String(y), value: perYear.get(y), href: `../../timeline/${y}/`,
+  })))}` : ''}
+
+${ctxPoints.length > 1 ? `<h2>Context window over time</h2>
+<p class="chart-note">Releases with a disclosed context window${
+  ctxPoints.length < list.length ? ` — ${list.length - ctxPoints.length} of ${list.length} not shown` : ''}.</p>
+${barRows(ctxPoints.map((r) => ({
+    name: `${r.model} · ${r.year}`,
+    value: r.technical.context_window,
+    display: tokens(r.technical.context_window),
+    href: `../../models/${esc(r.id)}/`,
+  })))}` : ''}
+
+${caps.length ? `<h2>Evidenced capabilities</h2>
+<p class="chart-note">How often each capability is cited across this lab's releases.
+Absence means not evidenced, never absent — see <a href="../../data-quality/">data quality</a>.</p>
+${barRows(caps.map(([c, n]) => ({ name: tagLabel(c), value: n })))}` : ''}
+
 <h2>Releases</h2>
 <ol class="doc-list cols-3">${sorted.map((r) =>
   `<li><span class="doc-mark sm">${glyph(r.company)}</span><a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.family)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>
 
-<p class="doc-cta"><a href="../../?company=${encodeURIComponent(name)}&year=all">Filter the timeline to ${esc(name)} →</a></p>
+<p class="doc-cta">
+  <a href="../../?company=${encodeURIComponent(name)}&year=all">Filter the timeline to ${esc(name)} →</a><br>
+  <a href="../">Compare with the other ${byCompanyIndex.size - 1} tracked labs →</a>
+</p>
 `;
   return page({
     title: `${name} — every tracked LLM release | LLM World`,
@@ -896,8 +970,46 @@ function licenceRows() {
     .sort((a, b) => b.value - a.value || a.name.localeCompare(b.name));
 }
 
+/**
+ * Multimodality over time, from researched modalities only.
+ *
+ * This is the question the modality research existed to answer. Records with
+ * null modalities are excluded from BOTH sides of the fraction rather than
+ * counted as text-only — otherwise unresearched years would render as a
+ * confident "100% text-only" and the chart would describe our coverage instead
+ * of the models.
+ */
+function modalityEvolution() {
+  const known = releases.filter((r) => r.modalities);
+  const byYear = new Map();
+  for (const r of known) {
+    const e = byYear.get(r.year) ?? { n: 0, multi: 0 };
+    e.n++;
+    if (r.modalities.input.length > 1 || r.modalities.output.length > 1) e.multi++;
+    byYear.set(r.year, e);
+  }
+
+  const inputCounts = new Map();
+  for (const r of known) for (const m of r.modalities.input) {
+    inputCounts.set(m, (inputCounts.get(m) ?? 0) + 1);
+  }
+
+  return {
+    researched: known.length,
+    rows: [...byYear.entries()].sort((a, b) => a[0] - b[0]).map(([y, e]) => ({
+      name: String(y),
+      value: Math.round(e.multi / e.n * 100),
+      display: `${e.multi}/${e.n}`,
+      href: `../timeline/${y}/`,
+    })),
+    inputs: [...inputCounts.entries()].sort((a, b) => b[1] - a[1])
+      .map(([m, n]) => ({ name: sentence(m), value: n })),
+  };
+}
+
 function analyticsPage(byCompany, byYear) {
   const years = [...byYear.keys()].sort((a, b) => a - b);
+  const modalityYears = modalityEvolution();
 
   const perYear = years.map((y) => ({ label: String(y), value: byYear.get(y).length }));
 
@@ -968,7 +1080,23 @@ ${barRows(licenceRows())}
 <p class="chart-note">How often each capability is tagged across all tracked releases.</p>
 ${barRows(perTag)}
 
-<p class="doc-cta"><a href="../compare/">Compare models side by side →</a></p>
+<h2>When models stopped being text-only</h2>
+<p class="chart-note">Share of each year's releases that accept or produce more than
+text, counting only releases whose modalities have been researched. The denominator is
+small in early years, so read the counts rather than the percentages.
+${modalityYears.researched} of ${releases.length} records have modalities recorded —
+see <a href="../data-quality/">data quality</a>.</p>
+${barRows(modalityYears.rows)}
+
+<h2>Input modalities in use</h2>
+<p class="chart-note">Across every release with researched modalities. A model
+counts once per modality it accepts.</p>
+${barRows(modalityYears.inputs)}
+
+<p class="doc-cta">
+  <a href="../compare/">Compare models side by side →</a><br>
+  <a href="../families/">Follow a family through its generations →</a>
+</p>
 `;
   return page({
     title: 'LLM release analytics — cadence, labs, open weights | LLM World',
