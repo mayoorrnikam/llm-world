@@ -264,9 +264,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because parameter count, context window and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (November 30, 2022) — was found in an archived primary source, checked 2026-08-10. Context window and parameter count are not recorded, so nothing is claimed about them."
       }
     },
     {
@@ -373,9 +373,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Mar 14, 2023) and context window (9K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -443,9 +443,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (March 14, 2023) and context window (8,192) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -494,9 +494,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because parameter count, context window and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Mar 21, 2023) — was found in an archived primary source, checked 2026-08-10. Context window and parameter count are not recorded, so nothing is claimed about them."
       }
     },
     {
@@ -545,9 +545,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because parameter count, context window and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (May 10, 2023) — was found in an archived primary source, checked 2026-08-10. Context window and parameter count are not recorded, so nothing is claimed about them."
       }
     },
     {
@@ -596,9 +596,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Jul 11, 2023) and context window (100K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -723,9 +723,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (September 27, 2023), context window (8192) and parameter count (7.3B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -993,9 +993,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (December 12, 2023), context window (2048) and parameter count (2.7B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -1244,9 +1244,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Mar 4, 2024) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -1302,9 +1302,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Mar 11, 2024), context window (128K) and parameter count (35B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -1360,9 +1360,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (April 18, 2024), context window (8,192) and parameter count (70B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -1478,9 +1478,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (2024-05-06), context window (128K) and parameter count (236B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -1554,9 +1554,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (May 13, 2024) and context window (128,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -1612,9 +1612,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (June 7, 2024), context window (131,072) and parameter count (72B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -1721,9 +1721,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (July 23, 2024), context window (128K) and parameter count (405B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -1781,9 +1781,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (July 24, 2024), context window (128k) and parameter count (123 billion) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -1839,9 +1839,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (August 22, 2024), context window (256K) and parameter count (398B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -1899,9 +1899,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (September 12, 2024) and context window (200,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -2025,9 +2025,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card, and every recorded field has a value, but the individual facts have not yet been checked against the source one by one."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (2024-09-25), context window (128k) and parameter count (90B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -2101,9 +2101,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (December 3, 2024) and context window (300K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -2163,9 +2163,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Dec 11, 2024) and context window (1,048,576) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -2525,9 +2525,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (February 27, 2025) and context window (128,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -2664,9 +2664,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Mar 13, 2025), context window (256K) and parameter count (111B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -2726,9 +2726,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Mar 25, 2025) and context window (1 million) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -2794,9 +2794,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card, and every recorded field has a value, but the individual facts have not yet been checked against the source one by one."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (April 5, 2025), context window (1M) and parameter count (400B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -2854,9 +2854,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (April 29, 2025), context window (131072) and parameter count (235B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -2973,9 +2973,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (2025-07-11), context window (128K) and parameter count (1T) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -3106,9 +3106,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement, official documentation, the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (August 5, 2025), context window (131,072) and parameter count (117B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -3177,9 +3177,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (August 7, 2025) and context window (400,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -3235,9 +3235,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to official documentation and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (2025-08-21), context window (128K) and parameter count (671B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -3297,9 +3297,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Sep 29, 2025) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -3420,9 +3420,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Nov 18, 2025) and context window (1 million) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -3482,9 +3482,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
-        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Nov 24, 2025) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -3613,9 +3613,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (2025-12-11) and context window (400,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -3676,7 +3676,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Feb 5, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -3796,9 +3797,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
-        "reason": "Cited to the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (2026-02-16), context window (262144) and parameter count (397B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -3857,7 +3858,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Feb 17, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -3915,9 +3917,9 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (2026-03-05) and context window (1,050,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -4159,7 +4161,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Apr 16, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -4229,7 +4232,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (April 23, 2026) and context window (1,050,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -4286,7 +4290,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (2026-04-24), context window (1M) and parameter count (284B) — was found in an archived primary source, checked 2026-08-10."
       }
     },
     {
@@ -4409,7 +4414,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (May 28, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -4708,7 +4714,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Jun 30, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -4951,7 +4958,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Jul 21, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
@@ -5022,7 +5030,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Every value this record asserts — date (Jul 24, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
       }
     },
     {
