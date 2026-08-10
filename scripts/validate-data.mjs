@@ -279,6 +279,23 @@ for (const r of releases) {
   }
   if (typeof r.access?.open_weights !== 'boolean') err(id, 'access.open_weights must be true or false');
 
+  // A note is prose we write; parameter_count is a figure with sources behind
+  // it. When the note states a different number, the record contradicts itself
+  // in the two places a reader is most likely to look — Phi-3 described "a
+  // 3.8-billion-parameter model" while recording 14B, evidenced twice.
+  const noteParams = /(\d[\d.]*)[\s-](billion|trillion|million)[\s-]parameter/i.exec(r.note ?? '');
+  if (noteParams) {
+    const scale = { million: 1e6, billion: 1e9, trillion: 1e12 }[noteParams[2].toLowerCase()];
+    const stated = Number(noteParams[1]) * scale;
+    const recorded = r.specifications?.language?.parameter_count;
+    // 10% tolerance. Labs name models by a rounded figure — Mistral 7B really
+    // holds 7.3B parameters — and flagging that would be pedantry. The gap this
+    // catches is the wrong-model kind: Phi-3's note was off by 3.7x.
+    if (recorded != null && Math.abs(stated - recorded) / recorded > 0.10) {
+      err(id, `note says ${noteParams[0]} but parameter_count is ${recorded.toLocaleString('en-US')}`);
+    }
+  }
+
   // undisclosed[] is a positive claim: we read the primary sources and the lab
   // does not publish this. It is only meaningful about a field that is null —
   // claiming a value is undisclosed while also recording it is a contradiction.

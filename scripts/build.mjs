@@ -19,7 +19,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync
 import { join } from 'node:path';
 import {
   dateParts, displayTags, contextWindow, parameterCount, tagLabel, diffRecords,
-  fieldState, evidenceFor, assertedValue, EVIDENCED_FIELDS,
+  fieldState, appliesTo, evidenceFor, assertedValue, EVIDENCED_FIELDS,
   MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL,
 } from '../lib/record.mjs';
 
@@ -301,12 +301,16 @@ function modelPage(r) {
     ['Licence', r.access.open_weights
       ? (r.access.license ?? MISSING_LABEL[fieldState(r, 'license')])
       : 'Not applicable — proprietary'],
-    ['Context window', r.technical.context_window != null
-      ? tokens(r.technical.context_window)
-      : MISSING_LABEL[fieldState(r, 'context_window')], cite('context_window')],
-    ['Parameters', r.technical.parameter_count != null
-      ? params(r.technical.parameter_count)
-      : MISSING_LABEL[fieldState(r, 'parameter_count')], cite('parameter_count')],
+    // Language-only rows are omitted for other model types. An image model does
+    // not have an undisclosed context window; it has no context window.
+    ...(appliesTo(r, 'context_window') ? [
+      ['Context window', r.technical.context_window != null
+        ? tokens(r.technical.context_window)
+        : MISSING_LABEL[fieldState(r, 'context_window')], cite('context_window')],
+      ['Parameters', r.technical.parameter_count != null
+        ? params(r.technical.parameter_count)
+        : MISSING_LABEL[fieldState(r, 'parameter_count')], cite('parameter_count')],
+    ] : []),
   ];
 
   const body = `
@@ -851,9 +855,15 @@ recorded on both sides of any step. That is a gap in this dataset, not a stateme
 the models. <a href="../../data-quality/">See data quality</a>.</p>` : ''}
 ${pairs.map(({ prev, next, changes, incomparable }) => {
     const local = incomparable.filter((g) => !universal.includes(g.label));
-    return `<div class="changeset">
-<h3><a href="../../models/${esc(prev.id)}/">${esc(prev.model)}</a> → <a href="../../models/${esc(next.id)}/">${esc(next.model)}</a>
-<span class="changeset-gap">${daysBetween(prev, next).toLocaleString('en-US')} days</span></h3>
+    // Two models released the same day are tiers, not generations. Calling the
+    // difference between them a "change" would claim a lab revised something it
+    // shipped simultaneously — Amazon's five Nova models are one launch.
+    const gap = daysBetween(prev, next);
+    const sameDay = gap === 0;
+    return `<div class="changeset"${sameDay ? ' data-siblings="true"' : ''}>
+<h3><a href="../../models/${esc(prev.id)}/">${esc(prev.model)}</a> ${sameDay ? 'vs' : '→'} <a href="../../models/${esc(next.id)}/">${esc(next.model)}</a>
+<span class="changeset-gap">${sameDay ? 'shipped together' : `${gap.toLocaleString('en-US')} days`}</span></h3>
+${sameDay ? '<p class="doc-note">Released on the same day, so these are differences between tiers rather than changes over time.</p>' : ''}
 ${changes.length ? `<dl class="change-list">${changes.map((c) => {
       if (c.gained || c.lost) {
         return `<div><dt>${esc(c.label)}</dt><dd>${
@@ -935,7 +945,9 @@ function dataQualityPage() {
   // Three-way, because "the lab does not publish it" and "nobody has looked"
   // are different facts and only one of them is a gap.
   const coverage = ['context_window', 'parameter_count', 'license'].map((f) => {
-    const scope = f === 'license' ? releases.filter((r) => r.access.open_weights) : releases;
+    const scope = f === 'license'
+      ? releases.filter((r) => r.access.open_weights)
+      : releases.filter((r) => appliesTo(r, f));
     const c = { recorded: 0, undisclosed: 0, unresearched: 0 };
     for (const r of scope) c[fieldState(r, f)]++;
     return { field: f, scope: scope.length, ...c };
@@ -1529,6 +1541,24 @@ const byFamily = new Map();
 for (const r of releases) (byFamily.get(r.family) ?? byFamily.set(r.family, []).get(r.family)).push(r);
 for (const [name, list] of byFamily) write(`families/${familySlug(name)}`, familyPage(name, list));
 write('families', familiesIndexPage(byFamily));
+
+// Dataset-declared redirects: URLs that were public before a record changed
+// shape. Kept in the data rather than hardcoded here.
+for (const rd of data.redirects ?? []) {
+  const depth = rd.from.split('/').length;
+  write(rd.from, page({
+    title: 'Moved | LLM World',
+    description: rd.reason,
+    canonical: `${BASE_URL}/${rd.to}/`,
+    section: 'models/',
+    depth,
+    sprites: [],
+    head: `<meta http-equiv="refresh" content="0; url=${'../'.repeat(depth)}${esc(rd.to)}/">`,
+    body: `<h1>Moved</h1>
+<p class="doc-sub">${esc(rd.reason)}</p>
+<p class="doc-cta"><a href="${'../'.repeat(depth)}${esc(rd.to)}/">Continue →</a></p>`,
+  }));
+}
 
 for (const m of milestones) write(`milestones/${m.id}`, milestonePage(m));
 if (milestones.length) write('milestones', milestonesIndexPage(milestones));

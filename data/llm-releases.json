@@ -1787,7 +1787,7 @@
       "tags": [
         "small-efficient"
       ],
-      "note": "A 3.8-billion-parameter small language model family that runs locally on phones.",
+      "note": "A small language model family that runs locally on phones, spanning mini to medium sizes.",
       "events": [
         {
           "type": "announcement",
@@ -2768,8 +2768,75 @@
       }
     },
     {
-      "id": "nova",
-      "model": "Nova",
+      "id": "nova-micro",
+      "model": "Nova Micro",
+      "company": "Amazon",
+      "family": "Nova",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "Amazon's lowest-latency Nova model, text in and text out.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2024-12-03",
+          "sources": [
+            "nova-s1",
+            "nova-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "nova-s1",
+          "url": "https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20241203175425/https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
+          "retrieved": "2024-12-03"
+        },
+        {
+          "id": "nova-s2",
+          "url": "https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20241203181439/https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
+          "retrieved": "2024-12-03"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Micro – A text-only model that delivers the lowest latency responses in the Amazon Nova family of models at a very low cost.\""
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
+    },
+    {
+      "id": "nova-lite",
+      "model": "Nova Lite",
       "company": "Amazon",
       "family": "Nova",
       "classification": {
@@ -2783,21 +2850,89 @@
           "video"
         ],
         "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "video"
+      ],
+      "tags": [],
+      "note": "Amazon's low-cost multimodal Nova model, reading images and video to produce text.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2024-12-03",
+          "sources": [
+            "nova-s1",
+            "nova-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "nova-s1",
+          "url": "https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20241203175425/https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
+          "retrieved": "2024-12-03"
+        },
+        {
+          "id": "nova-s2",
+          "url": "https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20241203181439/https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
+          "retrieved": "2024-12-03"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Lite – A very low-cost multimodal model that is lightning fast for processing image, video, and text inputs to generate text output.\""
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
+    },
+    {
+      "id": "nova-pro",
+      "model": "Nova Pro",
+      "company": "Amazon",
+      "family": "Nova",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
           "text",
           "image",
           "video"
+        ],
+        "output": [
+          "text"
         ]
       },
       "capabilities": [
         "vision",
         "video",
-        "image_generation",
-        "video_generation"
+        "agentic",
+        "tool_use"
       ],
-      "tags": [
-        "flagship"
-      ],
-      "note": "Amazon's new foundation model family spanning text, image, and video generation at re:Invent.",
+      "tags": [],
+      "note": "Amazon's most capable shipped Nova understanding model, with a 300K-token context window.",
       "events": [
         {
           "type": "announcement",
@@ -2839,28 +2974,134 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (December 3, 2024) and context window (300K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Pro is capable of processing up to 300K input tokens and sets new standards in multimodal intelligence and agentic workflows.\""
       },
       "undisclosed": [
         "parameter_count"
-      ],
-      "evidence": {
-        "release_date": [
-          {
-            "value": "2024-12-03",
-            "sources": [
-              "nova-s1"
-            ]
-          }
+      ]
+    },
+    {
+      "id": "nova-canvas",
+      "model": "Nova Canvas",
+      "company": "Amazon",
+      "family": "Nova",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
         ],
-        "context_window": [
-          {
-            "value": 300000,
-            "sources": [
-              "nova-s2"
-            ]
-          }
+        "output": [
+          "image"
         ]
+      },
+      "capabilities": [
+        "image_generation"
+      ],
+      "tags": [],
+      "note": "Amazon's image generation model, with inpainting, outpainting and background editing.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2024-12-03",
+          "sources": [
+            "nova-s1",
+            "nova-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "nova-s1",
+          "url": "https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20241203175425/https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
+          "retrieved": "2024-12-03"
+        },
+        {
+          "id": "nova-s2",
+          "url": "https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20241203181439/https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
+          "retrieved": "2024-12-03"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Canvas – A state-of-the-art image generation model producing studio-quality images with precise control over style and content, including rich editing features such as inpainting, outpainting, and background removal.\""
+      }
+    },
+    {
+      "id": "nova-reel",
+      "model": "Nova Reel",
+      "company": "Amazon",
+      "family": "Nova",
+      "classification": {
+        "primary_type": "video_generation",
+        "subtype": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "video"
+        ]
+      },
+      "capabilities": [
+        "video_generation"
+      ],
+      "tags": [],
+      "note": "Amazon's video generation model, producing short videos from text prompts and images.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2024-12-03",
+          "sources": [
+            "nova-s1",
+            "nova-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "nova-s1",
+          "url": "https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20241203175425/https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
+          "retrieved": "2024-12-03"
+        },
+        {
+          "id": "nova-s2",
+          "url": "https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20241203181439/https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
+          "retrieved": "2024-12-03"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Reel – A state-of-the-art video generation model. With Amazon Nova Reel, you can produce short videos through text prompts and images.\""
       }
     },
     {
@@ -7144,6 +7385,13 @@
         "confidence": 60,
         "reason": "No primary source. The release is recorded from news reporting only, so it cannot be verified until the lab's own announcement is cited."
       }
+    }
+  ],
+  "redirects": [
+    {
+      "from": "models/nova",
+      "to": "families/nova",
+      "reason": "The \"Nova\" record described a family, not a model, and was split into its five shipped models. The family page lists them all."
     }
   ]
 }
