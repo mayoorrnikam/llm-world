@@ -19,7 +19,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync
 import { join } from 'node:path';
 import {
   dateParts, displayTags, contextWindow, parameterCount, tagLabel,
-  SOURCE_LABEL, AUTHORITY_LABEL,
+  fieldState, MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL,
 } from '../lib/record.mjs';
 
 const EXPORT = process.argv.includes('--export');
@@ -257,9 +257,17 @@ function modelPage(r) {
     ['Modalities', modalityText(r)],
     ['Capabilities', r.capabilities.length ? r.capabilities.map(capLabel).join(', ') : 'Not recorded'],
     ['Weights', r.access.open_weights ? 'Open weights' : 'Proprietary'],
-    ['Licence', r.access.license ?? 'Not recorded'],
-    ['Context window', tokens(r.technical.context_window)],
-    ['Parameters', params(r.technical.parameter_count)],
+    // "Not disclosed" is a claim about the lab. Only make it where we looked
+    // and the primary sources genuinely say nothing (METHODOLOGY §1).
+    ['Licence', r.access.open_weights
+      ? (r.access.license ?? MISSING_LABEL[fieldState(r, 'license')])
+      : 'Not applicable — proprietary'],
+    ['Context window', r.technical.context_window != null
+      ? tokens(r.technical.context_window)
+      : MISSING_LABEL[fieldState(r, 'context_window')]],
+    ['Parameters', r.technical.parameter_count != null
+      ? params(r.technical.parameter_count)
+      : MISSING_LABEL[fieldState(r, 'parameter_count')]],
   ];
 
   const body = `
@@ -488,6 +496,147 @@ function latestPage() {
 }
 
 
+/**
+ * The Data Quality page.
+ *
+ * This publishes the dataset's own weaknesses. That is the point: a reader who
+ * can see exactly what is unproven can calibrate everything else, and a number
+ * that implies completeness where there is none is worth less than an honest
+ * gap. Nothing here is computed specially for display — every figure is read
+ * back out of the same records the rest of the site renders.
+ */
+function dataQualityPage() {
+  const total = releases.length;
+  const byStatus = {};
+  for (const r of releases) byStatus[r.provenance.status] = (byStatus[r.provenance.status] ?? 0) + 1;
+
+  const sources = releases.flatMap((r) => r.sources);
+  const primary = sources.filter((s) => s.authority === 'primary').length;
+  const archived = sources.filter((s) => s.archived_url).length;
+  const noPrimary = releases.filter((r) => !r.sources.some((s) => s.authority === 'primary'));
+
+  // Three-way, because "the lab does not publish it" and "nobody has looked"
+  // are different facts and only one of them is a gap.
+  const coverage = ['context_window', 'parameter_count', 'license'].map((f) => {
+    const scope = f === 'license' ? releases.filter((r) => r.access.open_weights) : releases;
+    const c = { recorded: 0, undisclosed: 0, unresearched: 0 };
+    for (const r of scope) c[fieldState(r, f)]++;
+    return { field: f, scope: scope.length, ...c };
+  });
+
+  const modalities = releases.filter((r) => r.modalities).length;
+
+  const byLab = new Map();
+  for (const r of releases) {
+    const e = byLab.get(r.company) ?? { n: 0, v: 0 };
+    e.n++; if (r.provenance.status === 'verified') e.v++;
+    byLab.set(r.company, e);
+  }
+  const labRows = [...byLab.entries()]
+    .sort((a, b) => (b[1].v / b[1].n) - (a[1].v / a[1].n) || b[1].n - a[1].n)
+    .map(([name, e]) => ({
+      name, value: Math.round(e.v / e.n * 100),
+      display: `${e.v}/${e.n}`, href: `../companies/${companySlug(name)}/`,
+    }));
+
+  const unproven = releases.filter((r) => r.provenance.status !== 'verified')
+    .sort((a, b) => b.year - a.year || b.month - a.month);
+
+  const pct = (n, d) => d ? Math.round(n / d * 100) : 0;
+  const FIELD_LABEL = {
+    context_window: 'Context window', parameter_count: 'Parameter count', license: 'Licence',
+  };
+
+  const body = `
+<nav class="crumbs"><a href="../">Home</a> › <span>Data quality</span></nav>
+
+<h1>Data quality</h1>
+<p class="doc-sub">What this dataset can prove, and what it cannot · ${total} records · updated ${esc(data.updated)}</p>
+
+<p class="doc-note">Every figure on this page is read back out of the dataset itself.
+Where a record cannot support a claim, it says so here rather than quietly rounding up.</p>
+
+<h2>Verification</h2>
+<p class="chart-note">A record is <strong>verified</strong> when every value it asserts was found in a
+primary source — one published by the organisation that made the model. A <code>null</code>
+asserts nothing, so an undisclosed figure does not block verification.</p>
+${barRows([
+  { name: 'Verified', value: byStatus.verified ?? 0, display: `${byStatus.verified ?? 0} (${pct(byStatus.verified ?? 0, total)}%)` },
+  { name: 'Partly verified', value: byStatus.partially_verified ?? 0, display: String(byStatus.partially_verified ?? 0) },
+  { name: 'Approximate date', value: byStatus.estimated ?? 0, display: String(byStatus.estimated ?? 0) },
+  { name: 'Conflicting', value: byStatus.conflicting ?? 0, display: String(byStatus.conflicting ?? 0) },
+].filter((r) => r.value > 0))}
+
+<h2>Sources</h2>
+<p class="chart-note">${sources.length} citations across ${total} records.
+<strong>${primary}</strong> are primary. <strong>${archived}</strong> carry a dated
+archive snapshot, so they still prove the claim after the live page changes.</p>
+${barRows([
+  { name: 'Primary', value: primary, display: `${primary} (${pct(primary, sources.length)}%)` },
+  { name: 'Secondary', value: sources.length - primary, display: String(sources.length - primary) },
+  { name: 'Archived', value: archived, display: `${archived} (${pct(archived, sources.length)}%)` },
+])}
+<p class="doc-note">Every source URL is re-checked weekly in CI.
+${noPrimary.length
+    ? `<strong>${noPrimary.length} record${noPrimary.length === 1 ? '' : 's'} cite no primary source at all</strong>
+and cannot be verified until the lab's own announcement is found: ${
+  noPrimary.map((r) => `<a href="../models/${esc(r.id)}/">${esc(r.model)}</a>`).join(', ')}.`
+    : 'Every record cites at least one primary source.'}</p>
+
+<h2>Specification coverage</h2>
+<p class="chart-note">A missing value is only a gap if someone could have recorded it.
+<strong>Not disclosed</strong> means we read the primary sources and the lab does not publish
+it — the record is complete. <strong>Not researched</strong> means nobody has checked yet.
+Most proprietary labs never publish parameter counts, so those nulls are correct answers,
+not holes.</p>
+<table class="doc-table quality-table">
+<thead><tr><th>Field</th><th>Recorded</th><th>Not disclosed</th><th>Not researched</th></tr></thead>
+<tbody>${coverage.map((c) => `<tr>
+<th scope="row">${FIELD_LABEL[c.field]}${c.field === 'license' ? ' <span class="cell-note">open weights only</span>' : ''}</th>
+<td>${c.recorded}/${c.scope}</td>
+<td>${c.undisclosed}</td>
+<td${c.unresearched ? ' class="cell-gap"' : ''}>${c.unresearched}</td>
+</tr>`).join('')}
+<tr><th scope="row">Modalities</th><td>${modalities}/${total}</td><td>0</td><td class="cell-gap">${total - modalities}</td></tr>
+</tbody></table>
+<p class="doc-note">Modalities are new to schema 1.6. The earlier schema recorded
+<em>that</em> a model was multimodal but never <em>which</em> modalities, so these are
+being researched from primary sources rather than back-filled with assumptions.</p>
+
+<h2>Verification by lab</h2>
+<p class="chart-note">Share of each lab's tracked releases that are fully verified.
+Labs that publish detailed model cards verify faster; that is a fact about them, not about their models.</p>
+${barRows(labRows, { unit: '%' })}
+
+<h2>What is not covered</h2>
+<p class="doc-note">This dataset tracks <strong>${total} releases from ${byLab.size} labs</strong>.
+It is not a complete census and does not imply one. Notable absences include Ai2 (OLMo),
+TII (Falcon), Baidu, ByteDance, Reka and Stability, along with most fine-tunes,
+quantisations and community derivatives, which are out of scope by design.
+Naming the gaps is more useful than a number that implies there are none.</p>
+
+<h2>Records not yet verified</h2>
+<p class="chart-note">${unproven.length} of ${total}. Each says which fact is unproven.</p>
+<ol class="doc-list quality-list">${unproven.map((r) => `<li>
+<span class="doc-mark sm">${glyph(r.company)}</span>
+<a class="cell-name" href="../models/${esc(r.id)}/">${esc(r.model)}</a>
+<span class="cell-meta">${esc(r.provenance.reason ?? '')}</span>
+</li>`).join('')}</ol>
+
+<p class="doc-cta"><a href="../analytics/">See release analytics →</a></p>
+`;
+
+  return page({
+    title: 'Data quality — what this dataset can prove | LLM World',
+    description: `Verification status, source authority and specification coverage across ${total} tracked LLM releases, including what is missing and why.`,
+    canonical: `${BASE_URL}/data-quality/`,
+    section: 'data-quality/',
+    depth: 1,
+    sprites: [...new Set(releases.map((r) => slugFor(r.company)))],
+    body,
+  });
+}
+
 /* ---------------------------------------------------------------- charts */
 
 /** Horizontal bar row. One hue: these all encode magnitude, not identity. */
@@ -681,7 +830,7 @@ figures are also on its own page — start from <a href="../models/">the model i
 // Same derivation the static pages use, from the same module — this page reads
 // the raw dataset at runtime, so without it the canonical date would be
 // computed twice by two different rules.
-import { dateParts, contextWindow, parameterCount } from '../lib/record.mjs';
+import { dateParts, contextWindow, parameterCount, fieldState, MISSING_LABEL } from '../lib/record.mjs';
 const RES = (await fetch('../data/llm-releases.json', { cache: 'no-store' })
   .then((r) => r.json()).then((d) => d.releases).catch(() => []))
   .map((r) => ({
@@ -718,8 +867,12 @@ const ROWS = [
   ['Family',         (r) => r.family],
   ['Weights',        (r) => r.access.open_weights ? 'Open weights' : 'Proprietary'],
   ['Licence',        (r) => r.access.license ?? 'Not recorded'],
-  ['Context window', (r) => r.technical.context_window ? tokens(r.technical.context_window) + ' tokens' : 'Not disclosed'],
-  ['Parameters',     (r) => fmtParams(r.technical.parameter_count)],
+  ['Context window', (r) => r.technical.context_window
+    ? tokens(r.technical.context_window) + ' tokens'
+    : MISSING_LABEL[fieldState(r, 'context_window')]],
+  ['Parameters',     (r) => r.technical.parameter_count != null
+    ? fmtParams(r.technical.parameter_count)
+    : MISSING_LABEL[fieldState(r, 'parameter_count')]],
   // Evidenced capabilities only — editorial tags like "flagship" are our
   // judgement and do not belong in a specification comparison (TAXONOMY §5).
   ['Capabilities',   (r) => r.capabilities.join(', ') || 'Not recorded'],
@@ -858,12 +1011,13 @@ write('models', modelsIndexPage());
 write('companies', companiesIndexPage(byCompany));
 write('latest', latestPage());
 write('analytics', analyticsPage(byCompany, byYear));
+write('data-quality', dataQualityPage());
 write('compare', comparePage());
 
 const BASE = BASE_URL;
 const urls = [
   `${BASE}/models/`, `${BASE}/companies/`, `${BASE}/latest/`,
-  `${BASE}/analytics/`, `${BASE}/compare/`,
+  `${BASE}/analytics/`, `${BASE}/compare/`, `${BASE}/data-quality/`,
   `${BASE}/`,
   ...releases.map((r) => `${BASE}/models/${r.id}/`),
   ...[...byCompany.keys()].map((c) => `${BASE}/companies/${companySlug(c)}/`),

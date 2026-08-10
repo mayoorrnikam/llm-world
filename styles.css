@@ -1688,6 +1688,42 @@ code, kbd {
   color: var(--muted);
 }
 
+/* Data quality: a three-way coverage table. The "not researched" column is the
+   only real gap, so it is the only one marked. */
+.quality-table { width: 100%; border-collapse: collapse; margin: 0 0 10px; }
+.quality-table th, .quality-table td {
+  padding: 9px 10px;
+  text-align: left;
+  font-size: 13.5px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.quality-table thead th {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.quality-table td { font-variant-numeric: tabular-nums; }
+.quality-table tbody th { font-weight: 500; }
+.quality-table .cell-note {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 400;
+  color: var(--muted);
+}
+/* Weight, not colour alone — the column header already names the meaning. */
+.quality-table .cell-gap { font-weight: 600; color: var(--warn); }
+
+.quality-list li { align-items: start; }
+.quality-list .cell-meta {
+  grid-column: 1 / -1;
+  max-width: 74ch;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 .doc-main a { color: var(--accent); text-underline-offset: 3px; }
 
 .doc-cta { margin: 28px 0 0; font-size: 13.5px; }

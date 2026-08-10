@@ -60,6 +60,11 @@ inline sample and saying so in the footer.
   // access describes CURRENT state; events[] record when it changed.
   "access": { "open_weights": true, "license": "Apache-2.0" },
 
+  // Fields the lab is EVIDENCED not to publish — we read the primary sources
+  // and they state no such figure. Distinguishes "not disclosed" (the record is
+  // complete) from a plain null meaning "nobody has looked yet".
+  "undisclosed": ["parameter_count"],
+
   // Ids so individual facts can cite individual sources. archived_url pins a
   // page that would otherwise change under the citation.
   "sources": [
@@ -98,12 +103,13 @@ generates static, no-JavaScript-required pages from the same dataset:
 /analytics/          release frequency, lab activity, open-weights share,
                      cadence, context-window growth, capability mix
 /compare/            pick 2-5 releases and read them side by side
+/data-quality/       verification, source authority, coverage and what's missing
 /models/             index of everything, newest first, grouped by year
 /models/<id>/        84 pages (+1 retired-id redirect) — facts, sources, family lineage, cadence
 /companies/          index of labs, ranked by release count
 /companies/<slug>/   16 pages — a lab's releases and its median release gap
 /timeline/<year>/     5 pages — that year's releases by month
-/sitemap.xml        111 URLs
+/sitemap.xml        112 URLs
 ```
 
 **Header and footer are shared, not duplicated.** `build.mjs` lifts them
@@ -150,12 +156,25 @@ generated paths from `.gitignore`, commit the build output, and set
 `context_window`, `parameter_count` and `license` are researched per release
 and left `null` when the provider has not disclosed them. Coverage:
 
-| Field | Coverage | Why the gap |
-|---|---|---|
-| Context window | **80/84** | The 4 missing are two *products* (ChatGPT, Bard), which have no context window, plus PaLM 2 and Llama 5, undisclosed |
-| Parameter count | **40/84** | Most proprietary labs — OpenAI, Anthropic, Google, xAI — do not publish them. `null` is the correct answer, not a gap to fill |
-| Licence | **34/35** open-weights | Only open-weights releases carry one |
-| Modalities | **0/84** | New in 1.6. Schema 1.5 recorded *that* a model was multimodal, never *which* modalities — so these are `null` pending research rather than back-filled with guesses |
+A missing value is only a gap if someone could have recorded it, so coverage is
+reported three ways. **Not disclosed** means we read the primary sources and the
+lab publishes no such figure — the record is complete. **Not researched** means
+nobody has checked yet.
+
+| Field | Recorded | Not disclosed | Not researched |
+|---|---|---|---|
+| Context window | 80/84 | 3 | 1 |
+| Parameter count | 40/84 | 41 | 3 |
+| Licence (open weights only) | 34/35 | 0 | 1 |
+| Modalities | 12/84 | 0 | 72 |
+
+Most proprietary labs never publish parameter counts, which is why 41 of those
+nulls are correct answers rather than holes. Modalities are new in schema 1.6:
+1.5 recorded *that* a model was multimodal but never *which* modalities, so they
+are researched from primary sources rather than back-filled with guesses.
+
+The live breakdown, including source authority and per-lab verification, is at
+[`/data-quality/`](https://mayoorrnikam.github.io/llm-world/data-quality/).
 
 Values are never estimated or inferred. Every figure adds its source to the
 record's `sources[]`.

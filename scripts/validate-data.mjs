@@ -13,7 +13,7 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { canonicalDate } from '../lib/record.mjs';
+import { canonicalDate, fieldState } from '../lib/record.mjs';
 
 const FILE = 'data/llm-releases.json';
 const CHECK_LINKS = process.argv.includes('--links');
@@ -47,6 +47,8 @@ const VALID_EVENT_TYPE = new Set([
   'weights_availability', 'major_update', 'retirement',
 ]);
 const VALID_AUTHORITY = new Set(['primary', 'secondary', 'discovery']);
+/** Fields a lab can decline to publish, and that we can evidence as withheld. */
+const UNDISCLOSABLE = new Set(['parameter_count', 'context_window', 'license']);
 const VALID_SOURCE_TYPE = new Set([
   'official_announcement', 'official_documentation', 'official_model_card',
   'official_repository', 'technical_paper', 'independent_benchmark',
@@ -261,6 +263,20 @@ for (const r of releases) {
     }
   }
   if (typeof r.access?.open_weights !== 'boolean') err(id, 'access.open_weights must be true or false');
+
+  // undisclosed[] is a positive claim: we read the primary sources and the lab
+  // does not publish this. It is only meaningful about a field that is null —
+  // claiming a value is undisclosed while also recording it is a contradiction.
+  if (r.undisclosed != null) {
+    if (!Array.isArray(r.undisclosed)) err(id, 'undisclosed must be an array');
+    else for (const f of r.undisclosed) {
+      if (!UNDISCLOSABLE.has(f)) {
+        err(id, `"${f}" cannot be marked undisclosed — expected one of ${[...UNDISCLOSABLE].join(', ')}`);
+      } else if (fieldState(r, f) !== 'undisclosed') {
+        err(id, `"${f}" is marked undisclosed but has a recorded value`);
+      }
+    }
+  }
 
   // Retired ids must keep resolving and must not collide with a live record.
   for (const prev of r.previous_ids ?? []) {

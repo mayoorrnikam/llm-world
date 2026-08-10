@@ -45,6 +45,14 @@ The dataset separates **evidenced facts** (`capabilities`, `modalities`,
 `access`) from **this project's judgements** (`tags`: only `flagship`,
 `small-efficient`, `multimodal`). The validator rejects anything else in `tags`.
 
+**`null` is ambiguous, so `undisclosed[]` disambiguates it.** A field listed
+there is one we read the primary sources for and the lab publishes no such
+figure — the record is complete. A plain `null` means nobody has looked. Use
+`fieldState()` from `lib/record.mjs` rather than testing for null directly:
+rendering an unresearched field as "Not disclosed" claims something about the
+lab that nobody established. `node scripts/detect-undisclosed.mjs` works this
+out from the sources.
+
 ### Two renderers over one dataset
 
 1. **`index.html` + `app.js` + `styles.css`** — the interactive timeline. A single

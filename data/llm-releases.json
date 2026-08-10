@@ -267,7 +267,11 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (November 30, 2022) — was found in an archived primary source, checked 2026-08-10. Context window and parameter count are not recorded, so nothing is claimed about them."
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "llama-1",
@@ -376,7 +380,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Mar 14, 2023) and context window (9K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gpt-4",
@@ -446,7 +453,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (March 14, 2023) and context window (8,192) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "bard",
@@ -497,7 +507,11 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Mar 21, 2023) — was found in an archived primary source, checked 2026-08-10. Context window and parameter count are not recorded, so nothing is claimed about them."
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "palm-2",
@@ -548,7 +562,11 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (May 10, 2023) — was found in an archived primary source, checked 2026-08-10. Context window and parameter count are not recorded, so nothing is claimed about them."
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "claude-2",
@@ -599,7 +617,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Jul 11, 2023) and context window (100K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "llama-2",
@@ -878,7 +899,10 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "mixtral",
@@ -1056,7 +1080,10 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the official repository and the technical paper. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gemini-1-5-pro",
@@ -1116,7 +1143,10 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gemma",
@@ -1247,7 +1277,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Mar 4, 2024) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "command-r",
@@ -1557,7 +1590,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (May 13, 2024) and context window (128,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "qwen2",
@@ -1666,7 +1702,10 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "llama-3-1",
@@ -1902,7 +1941,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (September 12, 2024) and context window (200,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "qwen2-5",
@@ -2104,7 +2146,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (December 3, 2024) and context window (300K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gemini-2-flash",
@@ -2166,7 +2211,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Dec 11, 2024) and context window (1,048,576) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "deepseek-v3",
@@ -2406,7 +2454,10 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "claude-3-7-sonnet",
@@ -2468,7 +2519,10 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gpt-4-5",
@@ -2528,7 +2582,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (February 27, 2025) and context window (128,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gemma-3",
@@ -2729,7 +2786,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Mar 25, 2025) and context window (1 million) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "llama-4",
@@ -2918,7 +2978,10 @@
       "provenance": {
         "status": "verified",
         "confidence": 90
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "kimi-k2",
@@ -3180,7 +3243,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (August 7, 2025) and context window (400,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "deepseek-v3-1",
@@ -3300,7 +3366,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Sep 29, 2025) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gpt-5-1",
@@ -3362,7 +3431,10 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gemini-3-pro",
@@ -3423,7 +3495,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Nov 18, 2025) and context window (1 million) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "claude-opus-4-5",
@@ -3485,7 +3560,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Nov 24, 2025) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "mistral-3",
@@ -3616,7 +3694,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (2025-12-11) and context window (400,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "claude-opus-4-6",
@@ -3678,7 +3759,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Feb 5, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gpt-5-3-codex",
@@ -3738,7 +3822,10 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "qwen-3-5",
@@ -3860,7 +3947,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Feb 17, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gpt-5-4",
@@ -3920,7 +4010,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (2026-03-05) and context window (1,050,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "mistral-small-4",
@@ -4101,7 +4194,10 @@
       "provenance": {
         "status": "verified",
         "confidence": 90
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "claude-opus-4-7",
@@ -4163,7 +4259,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Apr 16, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gpt-5-5",
@@ -4234,7 +4333,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (April 23, 2026) and context window (1,050,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "deepseek-v4-flash",
@@ -4354,7 +4456,10 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "claude-opus-4-8",
@@ -4416,7 +4521,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (May 28, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "nemotron-3-ultra",
@@ -4537,7 +4645,10 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "claude-mythos-5",
@@ -4599,7 +4710,10 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "glm-5-2",
@@ -4716,7 +4830,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Jun 30, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "grok-4-5",
@@ -4775,7 +4892,10 @@
       "provenance": {
         "status": "verified",
         "confidence": 90
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gpt-5-6",
@@ -4960,7 +5080,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Jul 21, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "claude-opus-5",
@@ -5032,7 +5155,10 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Jul 24, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "qwen-3-8-max",
