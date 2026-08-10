@@ -66,6 +66,25 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement and the technical paper. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2022-04-04",
+            "sources": [
+              "palm-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 540000000000,
+            "sources": [
+              "palm-s1",
+              "palm-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -130,6 +149,17 @@
         "status": "estimated",
         "confidence": 50,
         "reason": "Cited to the technical paper and the official repository. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "parameter_count": [
+          {
+            "value": 175000000000,
+            "sources": [
+              "opt-175b-s1",
+              "opt-175b-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -185,6 +215,24 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 2048,
+            "sources": [
+              "bloom-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 176247271424,
+            "sources": [
+              "bloom-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -240,6 +288,24 @@
         "status": "estimated",
         "confidence": 50,
         "reason": "Cited to the official repository. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 2048,
+            "sources": [
+              "glm-130b-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 130000000000,
+            "sources": [
+              "glm-130b-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -295,6 +361,24 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2023-02-24",
+            "sources": [
+              "llama-1-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 65000000000,
+            "sources": [
+              "llama-1-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -364,7 +448,25 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2023-03-14",
+            "sources": [
+              "claude-1-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 9000,
+            "sources": [
+              "claude-1-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gpt-4",
@@ -436,7 +538,26 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2023-03-14",
+            "sources": [
+              "gpt-4-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 8192,
+            "sources": [
+              "gpt-4-s1",
+              "gpt-4-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "palm-2",
@@ -497,7 +618,17 @@
       "undisclosed": [
         "context_window",
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2023-05-10",
+            "sources": [
+              "palm-2-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "claude-2",
@@ -557,7 +688,25 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2023-07-11",
+            "sources": [
+              "claude-2-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 100000,
+            "sources": [
+              "claude-2-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "llama-2",
@@ -621,6 +770,24 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2023-07-18",
+            "sources": [
+              "llama-2-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 70000000000,
+            "sources": [
+              "llama-2-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -696,6 +863,35 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (September 27, 2023), context window (8192) and parameter count (7.3B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2023-09-27",
+            "sources": [
+              "mistral-7b-s1",
+              "mistral-7b-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 8192,
+            "sources": [
+              "mistral-7b-s1",
+              "mistral-7b-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 7300000000,
+            "sources": [
+              "mistral-7b-s1",
+              "mistral-7b-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -781,7 +977,18 @@
       },
       "previous_ids": [
         "grok-1-open"
-      ]
+      ],
+      "evidence": {
+        "parameter_count": [
+          {
+            "value": 314000000000,
+            "sources": [
+              "grok-1-s2",
+              "grok-1-open-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gemini-1",
@@ -856,7 +1063,8 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {}
     },
     {
       "id": "mixtral",
@@ -920,6 +1128,17 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2023-12-11",
+            "sources": [
+              "mixtral-s1",
+              "mixtral-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -986,6 +1205,33 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (December 12, 2023), context window (2048) and parameter count (2.7B) — was found in an archived primary source, checked 2026-08-10."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2023-12-12",
+            "sources": [
+              "phi-2-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 2048,
+            "sources": [
+              "phi-2-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 2700000000,
+            "sources": [
+              "phi-2-s1",
+              "phi-2-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1048,7 +1294,18 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "glm-4-s1",
+              "glm-4-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gemini-1-5-pro",
@@ -1122,7 +1379,17 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-02-15",
+            "sources": [
+              "gemini-1-5-pro-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gemma",
@@ -1190,6 +1457,27 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-02-21",
+            "sources": [
+              "gemma-s1",
+              "gemma-s2",
+              "gemma-s3"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 7000000000,
+            "sources": [
+              "gemma-s1",
+              "gemma-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1254,7 +1542,25 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-03-04",
+            "sources": [
+              "claude-3-opus-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 200000,
+            "sources": [
+              "claude-3-opus-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "command-r",
@@ -1318,6 +1624,33 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Mar 11, 2024), context window (128K) and parameter count (35B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-03-11",
+            "sources": [
+              "command-r-s1",
+              "command-r-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "command-r-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 35000000000,
+            "sources": [
+              "command-r-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1382,6 +1715,34 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (April 18, 2024), context window (8,192) and parameter count (70B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-04-18",
+            "sources": [
+              "llama-3-s1",
+              "llama-3-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 8192,
+            "sources": [
+              "llama-3-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 70000000000,
+            "sources": [
+              "llama-3-s1",
+              "llama-3-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1441,6 +1802,25 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-04-23",
+            "sources": [
+              "phi-3-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 14000000000,
+            "sources": [
+              "phi-3-s1",
+              "phi-3-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1505,6 +1885,34 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (2024-05-06), context window (128K) and parameter count (236B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-05-06",
+            "sources": [
+              "deepseek-v2-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "deepseek-v2-s1",
+              "deepseek-v2-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 236000000000,
+            "sources": [
+              "deepseek-v2-s1",
+              "deepseek-v2-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1583,7 +1991,26 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-05-13",
+            "sources": [
+              "gpt-4o-s1",
+              "gpt-4o-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "gpt-4o-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "qwen2",
@@ -1640,6 +2067,33 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (June 7, 2024), context window (131,072) and parameter count (72B) — was found in an archived primary source, checked 2026-08-10."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-06-07",
+            "sources": [
+              "qwen2-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 131072,
+            "sources": [
+              "qwen2-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 72000000000,
+            "sources": [
+              "qwen2-s1",
+              "qwen2-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1693,7 +2147,17 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "context_window": [
+          {
+            "value": 200000,
+            "sources": [
+              "claude-3-5-sonnet-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "llama-3-1",
@@ -1757,6 +2221,35 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (July 23, 2024), context window (128K) and parameter count (405B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-07-23",
+            "sources": [
+              "llama-3-1-s1",
+              "llama-3-1-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "llama-3-1-s1",
+              "llama-3-1-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 405000000000,
+            "sources": [
+              "llama-3-1-s1",
+              "llama-3-1-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1823,6 +2316,35 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (July 24, 2024), context window (128k) and parameter count (123 billion) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-07-24",
+            "sources": [
+              "mistral-large-2-s1",
+              "mistral-large-2-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "mistral-large-2-s1",
+              "mistral-large-2-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 123000000000,
+            "sources": [
+              "mistral-large-2-s1",
+              "mistral-large-2-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1880,6 +2402,34 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (August 22, 2024), context window (256K) and parameter count (398B) — was found in an archived primary source, checked 2026-08-10."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-08-22",
+            "sources": [
+              "jamba-1-5-s1",
+              "jamba-1-5-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 256000,
+            "sources": [
+              "jamba-1-5-s1",
+              "jamba-1-5-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 398000000000,
+            "sources": [
+              "jamba-1-5-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1950,7 +2500,26 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-09-12",
+            "sources": [
+              "o1-s1",
+              "o1-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 200000,
+            "sources": [
+              "o1-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "qwen2-5",
@@ -2007,6 +2576,25 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-09-19",
+            "sources": [
+              "qwen2-5-s1",
+              "qwen2-5-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 131072,
+            "sources": [
+              "qwen2-5-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2074,6 +2662,32 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (2024-09-25), context window (128k) and parameter count (90B) — was found in an archived primary source, checked 2026-08-10."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-09-25",
+            "sources": [
+              "llama-3-2-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "llama-3-2-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 90000000000,
+            "sources": [
+              "llama-3-2-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2152,7 +2766,25 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-12-03",
+            "sources": [
+              "nova-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 300000,
+            "sources": [
+              "nova-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gemini-2-flash",
@@ -2216,7 +2848,25 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-12-11",
+            "sources": [
+              "gemini-2-flash-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "gemini-2-flash-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "deepseek-v3",
@@ -2280,6 +2930,24 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-12-26",
+            "sources": [
+              "deepseek-v3-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 671000000000,
+            "sources": [
+              "deepseek-v3-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2346,6 +3014,16 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-01-20",
+            "sources": [
+              "deepseek-r1-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2405,6 +3083,26 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-01-30",
+            "sources": [
+              "mistral-small-3-s1",
+              "mistral-small-3-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 24000000000,
+            "sources": [
+              "mistral-small-3-s1",
+              "mistral-small-3-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2469,7 +3167,17 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "grok-3-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "claude-3-7-sonnet",
@@ -2533,7 +3241,17 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-02-24",
+            "sources": [
+              "claude-3-7-sonnet-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gpt-4-5",
@@ -2605,7 +3323,26 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-02-27",
+            "sources": [
+              "gpt-4-5-s1",
+              "gpt-4-5-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "gpt-4-5-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gemma-3",
@@ -2683,6 +3420,26 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Cited to the lab's own announcement and the official model card, and every recorded field has a value, but the individual facts have not yet been checked against the source one by one."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-03-12",
+            "sources": [
+              "gemma-3-s1",
+              "gemma-3-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 27000000000,
+            "sources": [
+              "gemma-3-s1",
+              "gemma-3-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2749,6 +3506,32 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (Mar 13, 2025), context window (256K) and parameter count (111B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-03-13",
+            "sources": [
+              "command-a-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 256000,
+            "sources": [
+              "command-a-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 111000000000,
+            "sources": [
+              "command-a-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2813,7 +3596,26 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-03-25",
+            "sources": [
+              "gemini-2-5-pro-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "gemini-2-5-pro-s1",
+              "gemini-2-5-pro-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "llama-4",
@@ -2880,6 +3682,34 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (April 5, 2025), context window (1M) and parameter count (400B) — was found in an archived primary source, checked 2026-08-10."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-04-05",
+            "sources": [
+              "llama-4-s1",
+              "llama-4-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "llama-4-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 400000000000,
+            "sources": [
+              "llama-4-s1",
+              "llama-4-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2946,6 +3776,33 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (April 29, 2025), context window (131072) and parameter count (235B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-04-29",
+            "sources": [
+              "qwen3-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 131072,
+            "sources": [
+              "qwen3-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 235000000000,
+            "sources": [
+              "qwen3-s1",
+              "qwen3-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -3009,7 +3866,17 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-05-22",
+            "sources": [
+              "claude-4-opus-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "kimi-k2",
@@ -3073,6 +3940,32 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (2025-07-11), context window (128K) and parameter count (1T) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-07-11",
+            "sources": [
+              "kimi-k2-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "kimi-k2-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 1000000000000,
+            "sources": [
+              "kimi-k2-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -3137,6 +4030,24 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-07-28",
+            "sources": [
+              "glm-4-5-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 355000000000,
+            "sources": [
+              "glm-4-5-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -3219,6 +4130,36 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (August 5, 2025), context window (131,072) and parameter count (117B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-08-05",
+            "sources": [
+              "gpt-oss-s1",
+              "gpt-oss-s3",
+              "gpt-oss-s4"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 131072,
+            "sources": [
+              "gpt-oss-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 116830000000,
+            "sources": [
+              "gpt-oss-s1",
+              "gpt-oss-s2",
+              "gpt-oss-s4"
+            ]
+          }
+        ]
       }
     },
     {
@@ -3292,7 +4233,26 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-08-07",
+            "sources": [
+              "gpt-5-s1",
+              "gpt-5-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 400000,
+            "sources": [
+              "gpt-5-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "deepseek-v3-1",
@@ -3356,6 +4316,33 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (2025-08-21), context window (128K) and parameter count (671B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-08-21",
+            "sources": [
+              "deepseek-v3-1-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "deepseek-v3-1-s1",
+              "deepseek-v3-1-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 671000000000,
+            "sources": [
+              "deepseek-v3-1-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -3430,7 +4417,26 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-09-29",
+            "sources": [
+              "claude-sonnet-4-5-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 200000,
+            "sources": [
+              "claude-sonnet-4-5-s1",
+              "claude-sonnet-4-5-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gpt-5-1",
@@ -3502,7 +4508,17 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "context_window": [
+          {
+            "value": 400000,
+            "sources": [
+              "gpt-5-1-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gemini-3-pro",
@@ -3565,7 +4581,26 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-11-18",
+            "sources": [
+              "gemini-3-pro-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "gemini-3-pro-s1",
+              "gemini-3-pro-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "claude-opus-4-5",
@@ -3639,7 +4674,26 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-11-24",
+            "sources": [
+              "claude-opus-4-5-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 200000,
+            "sources": [
+              "claude-opus-4-5-s1",
+              "claude-opus-4-5-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "mistral-3",
@@ -3707,6 +4761,16 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Cited to the lab's own announcement, and every recorded field has a value, but the individual facts have not yet been checked against the source one by one."
+      },
+      "evidence": {
+        "parameter_count": [
+          {
+            "value": 675000000000,
+            "sources": [
+              "mistral-3-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -3779,7 +4843,25 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-12-11",
+            "sources": [
+              "gpt-5-2-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 400000,
+            "sources": [
+              "gpt-5-2-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "claude-opus-4-6",
@@ -3853,7 +4935,26 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-02-05",
+            "sources": [
+              "claude-opus-4-6-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "claude-opus-4-6-s1",
+              "claude-opus-4-6-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gpt-5-3-codex",
@@ -3915,7 +5016,8 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {}
     },
     {
       "id": "qwen-3-5",
@@ -3983,6 +5085,32 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (2026-02-16), context window (262144) and parameter count (397B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-02-16",
+            "sources": [
+              "qwen-3-5-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 262144,
+            "sources": [
+              "qwen-3-5-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 397000000000,
+            "sources": [
+              "qwen-3-5-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -4055,7 +5183,26 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-02-17",
+            "sources": [
+              "claude-sonnet-4-6-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "claude-sonnet-4-6-s1",
+              "claude-sonnet-4-6-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gpt-5-4",
@@ -4125,7 +5272,25 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-03-05",
+            "sources": [
+              "gpt-5-4-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1050000,
+            "sources": [
+              "gpt-5-4-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "mistral-small-4",
@@ -4185,6 +5350,24 @@
       "provenance": {
         "status": "verified",
         "confidence": 90
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 256000,
+            "sources": [
+              "mistral-small-4-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 119000000000,
+            "sources": [
+              "mistral-small-4-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -4318,7 +5501,17 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-04-08",
+            "sources": [
+              "muse-spark-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "claude-opus-4-7",
@@ -4392,7 +5585,25 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-04-16",
+            "sources": [
+              "claude-opus-4-7-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "claude-opus-4-7-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gpt-5-5",
@@ -4473,7 +5684,26 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-04-23",
+            "sources": [
+              "gpt-5-5-s1",
+              "gpt-5-5-s3"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1050000,
+            "sources": [
+              "gpt-5-5-s3"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "deepseek-v4-flash",
@@ -4537,6 +5767,34 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Every value this record asserts — date (2026-04-24), context window (1M) and parameter count (284B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-04-24",
+            "sources": [
+              "deepseek-v4-flash-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "deepseek-v4-flash-s1",
+              "deepseek-v4-flash-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 284000000000,
+            "sources": [
+              "deepseek-v4-flash-s1",
+              "deepseek-v4-flash-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -4601,7 +5859,17 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "gemini-3-5-flash-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "claude-opus-4-8",
@@ -4675,7 +5943,25 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-05-28",
+            "sources": [
+              "claude-opus-4-8-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "claude-opus-4-8-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "nemotron-3-ultra",
@@ -4741,6 +6027,24 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "nemotron-3-ultra-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 550000000000,
+            "sources": [
+              "nemotron-3-ultra-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -4815,7 +6119,17 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "claude-fable-5-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "claude-mythos-5",
@@ -4889,7 +6203,17 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "claude-mythos-5-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "glm-5-2",
@@ -4945,6 +6269,24 @@
       "provenance": {
         "status": "verified",
         "confidence": 90
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "glm-5-2-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 753000000000,
+            "sources": [
+              "glm-5-2-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -5017,7 +6359,25 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06-30",
+            "sources": [
+              "claude-sonnet-5-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "claude-sonnet-5-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "grok-4-5",
@@ -5078,7 +6438,17 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-07-08",
+            "sources": [
+              "grok-4-5-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gpt-5-6",
@@ -5263,7 +6633,27 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-07-21",
+            "sources": [
+              "gemini-3-6-flash-s1",
+              "gemini-3-6-flash-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "gemini-3-6-flash-s1",
+              "gemini-3-6-flash-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "claude-opus-5",
@@ -5337,7 +6727,25 @@
       },
       "undisclosed": [
         "parameter_count"
-      ]
+      ],
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-07-24",
+            "sources": [
+              "claude-opus-5-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "claude-opus-5-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "qwen-3-8-max",

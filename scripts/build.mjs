@@ -19,7 +19,8 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync
 import { join } from 'node:path';
 import {
   dateParts, displayTags, contextWindow, parameterCount, tagLabel, diffRecords,
-  fieldState, MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL,
+  fieldState, evidenceFor, assertedValue, EVIDENCED_FIELDS,
+  MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL,
 } from '../lib/record.mjs';
 
 const EXPORT = process.argv.includes('--export');
@@ -262,8 +263,32 @@ function modelPage(r) {
   const fam = releases.filter((x) => x.family === r.family).sort((a, b) => a.year - b.year || a.month - b.month || (a.day || 0) - (b.day || 0));
   const idx = fam.findIndex((x) => x.id === r.id);
 
+  /**
+   * The source behind one published number, rendered next to it.
+   *
+   * This is the whole point of Stage 5: a reader should not have to take a
+   * figure on trust, or scroll to a source list and guess which entry backs
+   * which value. Where sources disagree, both values are shown — resolving it
+   * silently would be invisible (METHODOLOGY §8).
+   */
+  const cite = (field) => {
+    const e = evidenceFor(r, field);
+    if (!e.claims.length) return '';
+    if (!e.agreed) {
+      return `<span class="fact-conflict">sources disagree: ${e.claims.map((c) =>
+        `${esc(String(c.value))} (${c.sources.map((s) =>
+          `<a href="${esc(s.archived_url || s.url)}" rel="noopener noreferrer nofollow">${
+            esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a>`).join(', ')})`).join(' · ')}</span>`;
+    }
+    if (!e.sources.length) return '';
+    return `<span class="fact-cite">stated in ${e.sources.map((s) =>
+      `<a href="${esc(s.archived_url || s.url)}" rel="noopener noreferrer nofollow" title="${
+        esc(SOURCE_LABEL[s.type] ?? s.type)}">${esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a>`
+    ).join(', ')}</span>`;
+  };
+
   const facts = [
-    ['Released', fullDate(r)],
+    ['Released', fullDate(r), cite('release_date')],
     ['Company', r.company],
     ['Family', r.family],
     ['Era', eraFor(r.year)],
@@ -278,10 +303,10 @@ function modelPage(r) {
       : 'Not applicable — proprietary'],
     ['Context window', r.technical.context_window != null
       ? tokens(r.technical.context_window)
-      : MISSING_LABEL[fieldState(r, 'context_window')]],
+      : MISSING_LABEL[fieldState(r, 'context_window')], cite('context_window')],
     ['Parameters', r.technical.parameter_count != null
       ? params(r.technical.parameter_count)
-      : MISSING_LABEL[fieldState(r, 'parameter_count')]],
+      : MISSING_LABEL[fieldState(r, 'parameter_count')], cite('parameter_count')],
   ];
 
   const body = `
@@ -302,7 +327,8 @@ ${r.tags.length ? `<div class="doc-tags">${r.tags.map((t) => `<span class="tag">
 
 <h2>Details</h2>
 <table class="doc-table">
-<tbody>${facts.map(([k, v]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</tbody>
+<tbody>${facts.map(([k, v, cited]) =>
+  `<tr><th scope="row">${esc(k)}</th><td>${esc(v)}${cited ?? ''}</td></tr>`).join('')}</tbody>
 </table>
 
 ${r.events.length > 1 ? `<h2>Release timeline</h2>
@@ -888,6 +914,7 @@ function dataQualityPage() {
   });
 
   const modalities = releases.filter((r) => r.modalities).length;
+  const conflicts = releases.filter((r) => r.provenance.status === 'conflicting');
 
   const byLab = new Map();
   for (const r of releases) {
@@ -907,7 +934,8 @@ function dataQualityPage() {
 
   const pct = (n, d) => d ? Math.round(n / d * 100) : 0;
   const FIELD_LABEL = {
-    context_window: 'Context window', parameter_count: 'Parameter count', license: 'Licence',
+    context_window: 'Context window', parameter_count: 'Parameter count',
+    license: 'Licence', release_date: 'Release date',
   };
 
   const body = `
@@ -966,6 +994,26 @@ not holes.</p>
 <em>that</em> a model was multimodal but never <em>which</em> modalities, so these are
 being researched from primary sources rather than back-filled with assumptions.</p>
 
+<h2>Fact-level evidence</h2>
+<p class="chart-note">A record-level status says the record was checked. This says
+<em>which source states which number</em>, so a figure can be traced without taking
+the badge on trust. Three fields carry it so far — doing every field at once is what
+makes this kind of work never ship.</p>
+${barRows(EVIDENCED_FIELDS.map((f) => {
+  const applicable = releases.filter((r) => assertedValue(r, f) != null);
+  const backed = applicable.filter((r) => evidenceFor(r, f).sources.length);
+  return {
+    name: FIELD_LABEL[f] ?? f,
+    value: pct(backed.length, applicable.length),
+    display: `${backed.length}/${applicable.length}`,
+  };
+}))}
+${conflicts.length ? `<p class="doc-note"><strong>${conflicts.length} record${
+  conflicts.length === 1 ? ' has' : 's have'} sources that disagree.</strong> Both values are
+published rather than resolved silently: ${conflicts.map((r) =>
+  `<a href="../models/${esc(r.id)}/">${esc(r.model)}</a>`).join(', ')}.</p>`
+  : '<p class="doc-note">No record currently has sources that disagree with each other. Where that happens, both values are published rather than one being chosen silently.</p>'}
+
 <h2>Verification by lab</h2>
 <p class="chart-note">Share of each lab's tracked releases that are fully verified.
 Labs that publish detailed model cards verify faster; that is a fact about them, not about their models.</p>
@@ -1009,7 +1057,7 @@ function barRows(rows, { unit = '', width = 560 } = {}) {
     <div class="chart-row">
       <span class="chart-label">${r.href ? `<a href="${r.href}">${esc(r.name)}</a>` : esc(r.name)}</span>
       <span class="chart-track"><span class="chart-bar" style="width:${(r.value / max * 100).toFixed(1)}%"></span></span>
-      <span class="chart-value">${r.display ?? r.value}${unit}</span>
+      <span class="chart-value">${r.display ?? `${r.value}${unit}`}</span>
     </div>`).join('')}</div>`;
 }
 

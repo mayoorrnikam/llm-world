@@ -1724,6 +1724,30 @@ code, kbd {
   color: var(--muted);
 }
 
+/* Fact-level evidence: the source behind one published number, sitting beside
+   it rather than in a list at the bottom of the page. Quiet by default — it
+   should be there when questioned, not compete with the value. */
+.fact-cite {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--muted);
+}
+.fact-cite a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.fact-cite a:hover { color: var(--accent); }
+
+/* Disagreement is louder than agreement, because it is the thing a reader
+   most needs to know and the thing a lesser dataset would hide. */
+.fact-conflict {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--warn);
+}
+.fact-conflict a { color: inherit; }
+
 /* A milestone is not a release. It sits in the same lane so the chronology
    reads correctly, but it is deliberately a different shape — dashed, wider,
    no company swatch bar — so it can never be mistaken for a model card or

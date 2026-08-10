@@ -64,9 +64,15 @@ const MULTIMODAL_HINTS = [
 // Global, because a docs page mentions "input"/"output" many times before the
 // real declaration — in navigation, pricing and prose. Every candidate is tried
 // and parseModalities decides which one is actually a declaration.
+// The list is bounded to modality words themselves rather than "any letters".
+// A looser bound lets the match run past the declaration into whatever follows
+// — Gemini's page reads "Output Text token_auto", and a letters-based capture
+// swallows "token", which then fails to parse and the whole declaration is lost.
+const TERM = '(?:Text|Image|Images|Audio|Video|Speech|PDF|PDFs)';
+const LIST = `(${TERM}(?:\\s*(?:,|and|or|,\\s*and)\\s*${TERM})*)`;
 const DECLARATION = [
-  /\bInputs?\s+modalities?\s*:?\s*([A-Za-z,\s]{3,90}?)\s+Outputs?\s+modalities?\s*:?\s*([A-Za-z,\s]{3,60}?)(?=\s+[A-Z][a-z]|\s*$)/g,
-  /\bInputs?\b\s*:?\s*([A-Za-z,\s]{3,90}?)\s+Outputs?\b\s*:?\s*([A-Za-z,\s]{3,60}?)(?=\s+[A-Z][a-z]|\s*$)/g,
+  new RegExp(`\\bInputs?\\s+modalities?\\s*:?\\s*${LIST}\\s+Outputs?\\s+modalities?\\s*:?\\s*${LIST}`, 'g'),
+  new RegExp(`\\bInputs?\\b\\s*:?\\s*${LIST}\\s+Outputs?\\b\\s*:?\\s*${LIST}`, 'g'),
 ];
 
 const MODALITY_WORD = { text: 'text', image: 'image', images: 'image', audio: 'audio', video: 'video' };

@@ -13,7 +13,9 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { canonicalDate, fieldState } from '../lib/record.mjs';
+import {
+  canonicalDate, fieldState, assertedValue, EVIDENCED_FIELDS,
+} from '../lib/record.mjs';
 
 const FILE = 'data/llm-releases.json';
 const CHECK_LINKS = process.argv.includes('--links');
@@ -275,6 +277,48 @@ for (const r of releases) {
         err(id, `"${f}" cannot be marked undisclosed — expected one of ${[...UNDISCLOSABLE].join(', ')}`);
       } else if (fieldState(r, f) !== 'undisclosed') {
         err(id, `"${f}" is marked undisclosed but has a recorded value`);
+      }
+    }
+  }
+
+  // evidence (Stage 5) — which source states each published fact.
+  if (r.evidence != null) {
+    if (typeof r.evidence !== 'object' || Array.isArray(r.evidence)) {
+      err(id, 'evidence must be an object keyed by field');
+    } else {
+      const sourceIds = new Set((r.sources ?? []).map((s) => s.id));
+      for (const [field, claims] of Object.entries(r.evidence)) {
+        if (!EVIDENCED_FIELDS.includes(field)) {
+          err(id, `evidence for unknown field "${field}"`);
+          continue;
+        }
+        if (!Array.isArray(claims) || !claims.length) {
+          err(id, `evidence.${field} must be a non-empty array of claims`);
+          continue;
+        }
+        for (const c of claims) {
+          if (!('value' in c)) err(id, `evidence.${field} claim has no value`);
+          if (!Array.isArray(c.sources) || !c.sources.length) {
+            err(id, `evidence.${field} claim has no sources`);
+          } else for (const sid of c.sources) {
+            if (!sourceIds.has(sid)) err(id, `evidence.${field} cites unknown source "${sid}"`);
+          }
+        }
+
+        // The record must not contradict its own evidence: whatever value it
+        // publishes has to be one of the values its sources are said to state.
+        const asserted = assertedValue(r, field);
+        if (asserted != null && !claims.some((c) => c.value === asserted)) {
+          err(id, `evidence.${field} backs ${claims.map((c) => JSON.stringify(c.value)).join(', ')} `
+            + `but the record publishes ${JSON.stringify(asserted)}`);
+        }
+
+        // Two claims means the sources disagree. That is publishable, but it
+        // has to be declared rather than left looking settled (R4).
+        if (claims.length > 1 && p?.status !== 'conflicting') {
+          err(id, `evidence.${field} records ${claims.length} competing values — `
+            + `set provenance.status to "conflicting"`);
+        }
       }
     }
   }
