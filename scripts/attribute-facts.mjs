@@ -34,7 +34,8 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
-import { canonicalDate, assertedValue, EVIDENCED_FIELDS } from '../lib/record.mjs';
+import { inflateSync } from 'node:zlib';
+import { canonicalDate, assertedValue, EVIDENCED_FIELDS, pdfText } from '../lib/record.mjs';
 
 const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
@@ -90,6 +91,14 @@ async function fetchText(url, attempts = 4) {
       });
       if (res.status === 429 || res.status >= 500) { await sleep(4000 * (i + 1)); continue; }
       if (!res.ok) return FAILED;
+      // Technical papers are PDFs. Reading them as HTML found nothing and
+      // reported it as "no evidence", which is the failure this project keeps
+      // guarding against — in a new disguise.
+      const type = res.headers.get('content-type') ?? '';
+      if (/pdf/i.test(type) || /\.pdf(\?|$)/i.test(url)) {
+        const buf = new Uint8Array(await res.arrayBuffer());
+        return pdfText(buf, (b) => new Uint8Array(inflateSync(Buffer.from(b))));
+      }
       return textOf(await res.text());
     } catch { await sleep(4000 * (i + 1)); }
   }

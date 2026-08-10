@@ -1005,8 +1005,8 @@
       }
     },
     {
-      "id": "gemini-1",
-      "model": "Gemini 1.0",
+      "id": "gemini-1-ultra",
+      "model": "Gemini 1.0 Ultra",
       "company": "Google DeepMind",
       "family": "Gemini",
       "classification": {
@@ -1031,7 +1031,7 @@
       "tags": [
         "flagship"
       ],
-      "note": "Google's first natively multimodal model family with Ultra, Pro, and Nano tiers.",
+      "note": "Google's largest first-generation Gemini model, for highly complex tasks.",
       "events": [
         {
           "type": "announcement",
@@ -1064,7 +1064,7 @@
         {
           "id": "gemini-1-s2",
           "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf",
-          "type": "official_announcement",
+          "type": "technical_paper",
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20231206151650/https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf",
           "retrieved": "2023-12-06"
@@ -1073,12 +1073,182 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Ultra — our largest and most capable model for highly complex tasks.\""
       },
-      "undisclosed": [
-        "parameter_count"
+      "evidence": {
+        "context_window": [
+          {
+            "value": 32768,
+            "sources": [
+              "gemini-1-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gemini-1-pro",
+      "model": "Gemini 1.0 Pro",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "audio"
       ],
-      "evidence": {}
+      "tags": [
+        "flagship"
+      ],
+      "note": "The first-generation Gemini model that shipped across Google products and the Gemini API.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2023-12-06",
+          "sources": [
+            "gemini-1-s1",
+            "gemini-1-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 32768,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-1-s1",
+          "url": "https://blog.google/technology/ai/google-gemini-ai/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20231206150851/https://blog.google/technology/ai/google-gemini-ai/",
+          "retrieved": "2023-12-06"
+        },
+        {
+          "id": "gemini-1-s2",
+          "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20231206151650/https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf",
+          "retrieved": "2023-12-06"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75,
+        "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Pro — our best model for scaling across a wide range of tasks. The 32,768-token context is carried from the former family record; the announcement does not state per-model context windows, so it is recorded here only and will show as untraceable until a source states it.\""
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 32768,
+            "sources": [
+              "gemini-1-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gemini-1-nano",
+      "model": "Gemini 1.0 Nano",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "audio"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Google's on-device Gemini model, trained in 1.8B and 3.25B versions for low- and high-memory devices.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2023-12-06",
+          "sources": [
+            "gemini-1-s1",
+            "gemini-1-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 32768,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-1-s1",
+          "url": "https://blog.google/technology/ai/google-gemini-ai/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20231206150851/https://blog.google/technology/ai/google-gemini-ai/",
+          "retrieved": "2023-12-06"
+        },
+        {
+          "id": "gemini-1-s2",
+          "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20231206151650/https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf",
+          "retrieved": "2023-12-06"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75,
+        "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Nano, our most efficient model for on-device tasks, via AICore, a new system capability available in Android 14, starting on Pixel 8 Pro devices.\""
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 32768,
+            "sources": [
+              "gemini-1-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "mixtral",
@@ -4212,8 +4382,8 @@
       }
     },
     {
-      "id": "llama-4",
-      "model": "Llama 4",
+      "id": "llama-4-scout",
+      "model": "Llama 4 Scout",
       "company": "Meta AI",
       "family": "Llama",
       "classification": {
@@ -4233,7 +4403,103 @@
         "vision"
       ],
       "tags": [],
-      "note": "Meta's first mixture-of-experts family with Scout, Maverick, and Behemoth tiers.",
+      "note": "Meta's smaller Llama 4 mixture-of-experts model, with a 10-million-token context window.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-04-05",
+          "sources": [
+            "llama-4-s1",
+            "llama-4-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 10000000,
+          "parameter_count": 109000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Llama 4 Community License"
+      },
+      "sources": [
+        {
+          "id": "llama-4-s1",
+          "url": "https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250405185132/https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
+          "retrieved": "2025-04-05"
+        },
+        {
+          "id": "llama-4-s2",
+          "url": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250405191842/https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+          "retrieved": "2025-04-05"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 90,
+        "reason": "Split from the former \"llama-4\" record, which was named for the family while holding one variant's figures. Evidence: \"Llama 4 Scout, is a general purpose model with 17 billion active parameters, 16 experts, and 109 billion total parameters... Llama 4 Scout dramatically increases the supported context length from 128K in Llama 3 to an industry leading 10 million tokens.\""
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-04-05",
+            "sources": [
+              "llama-4-s1",
+              "llama-4-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 10000000,
+            "sources": [
+              "llama-4-s1",
+              "llama-4-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 109000000000,
+            "sources": [
+              "llama-4-s1",
+              "llama-4-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "llama-4-maverick",
+      "model": "Llama 4 Maverick",
+      "company": "Meta AI",
+      "family": "Llama",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision"
+      ],
+      "tags": [],
+      "note": "Meta's flagship Llama 4 mixture-of-experts model, with 128 experts and 400 billion total parameters.",
       "events": [
         {
           "type": "announcement",
@@ -4273,9 +4539,9 @@
         }
       ],
       "provenance": {
-        "status": "verified",
+        "status": "partially_verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (April 5, 2025), context window (1M) and parameter count (400B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Split from the former \"llama-4\" record, which was named for the family while holding one variant's figures. Evidence: \"Llama 4 Maverick contains 17 billion active parameters, 128 experts, and 400 billion total parameters.\""
       },
       "evidence": {
         "release_date": [
@@ -4645,8 +4911,8 @@
       }
     },
     {
-      "id": "gpt-oss",
-      "model": "GPT-OSS",
+      "id": "gpt-oss-120b",
+      "model": "gpt-oss-120b",
       "company": "OpenAI",
       "family": "GPT-OSS",
       "classification": {
@@ -4663,7 +4929,7 @@
       },
       "capabilities": [],
       "tags": [],
-      "note": "OpenAI's first open-weight release since GPT-2, with 120B and 20B variants.",
+      "note": "OpenAI's larger open-weight model, fitting on a single 80GB GPU.",
       "events": [
         {
           "type": "announcement",
@@ -4721,9 +4987,9 @@
         }
       ],
       "provenance": {
-        "status": "verified",
+        "status": "partially_verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (August 5, 2025), context window (131,072) and parameter count (117B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Split from the former \"gpt-oss\" record, which was named for the family while holding one variant's figures. Evidence: \"gpt-oss-120b is our most powerful open-weight model, which fits into a single H100 GPU (117B parameters with 5.1B active parameters).\""
       },
       "evidence": {
         "release_date": [
@@ -4750,6 +5016,117 @@
             "sources": [
               "gpt-oss-s1",
               "gpt-oss-s2",
+              "gpt-oss-s4"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gpt-oss-20b",
+      "model": "gpt-oss-20b",
+      "company": "OpenAI",
+      "family": "GPT-OSS",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "OpenAI's smaller open-weight model, running in 16GB of memory.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-08-05",
+          "sources": [
+            "gpt-oss-s1",
+            "gpt-oss-s2",
+            "gpt-oss-s3",
+            "gpt-oss-s4"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 131072,
+          "parameter_count": 21000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "gpt-oss-s1",
+          "url": "https://openai.com/index/introducing-gpt-oss/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250805170537/https://openai.com/index/introducing-gpt-oss/",
+          "retrieved": "2025-08-05"
+        },
+        {
+          "id": "gpt-oss-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260213072021/https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "retrieved": "2026-02-13"
+        },
+        {
+          "id": "gpt-oss-s3",
+          "url": "https://arxiv.org/html/2508.10925v1",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250818033250/https://arxiv.org/html/2508.10925v1",
+          "retrieved": "2025-08-18"
+        },
+        {
+          "id": "gpt-oss-s4",
+          "url": "https://huggingface.co/openai/gpt-oss-120b",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250805170129/https://huggingface.co/openai/gpt-oss-120b",
+          "retrieved": "2025-08-05"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 90,
+        "reason": "Split from the former \"gpt-oss\" record, which was named for the family while holding one variant's figures. Evidence: \"gpt-oss-20b ... 21B [total parameters] 3.6B [active]; gpt-oss-20b only requires 16GB.\""
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-08-05",
+            "sources": [
+              "gpt-oss-s1",
+              "gpt-oss-s3",
+              "gpt-oss-s4"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 131072,
+            "sources": [
+              "gpt-oss-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 21000000000,
+            "sources": [
+              "gpt-oss-s1",
               "gpt-oss-s4"
             ]
           }
@@ -5318,8 +5695,8 @@
       }
     },
     {
-      "id": "mistral-3",
-      "model": "Mistral 3",
+      "id": "mistral-large-3",
+      "model": "Mistral Large 3",
       "company": "Mistral AI",
       "family": "Mistral",
       "classification": {
@@ -5340,7 +5717,7 @@
         "multilingual"
       ],
       "tags": [],
-      "note": "An open multimodal family including Mistral Large 3 and Ministral variants under Apache 2.0.",
+      "note": "Mistral's most capable model, a sparse mixture-of-experts under Apache 2.0.",
       "events": [
         {
           "type": "announcement",
@@ -5382,12 +5759,246 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Split from the former \"mistral-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Mistral Large 3 – our most capable model to date – a sparse mixture-of-experts trained with 41B active and 675B total parameters.\""
       },
       "evidence": {
         "parameter_count": [
           {
             "value": 675000000000,
+            "sources": [
+              "mistral-3-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "ministral-3-3b",
+      "model": "Ministral 3 3B",
+      "company": "Mistral AI",
+      "family": "Mistral",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "multilingual"
+      ],
+      "tags": [],
+      "note": "The smallest Ministral 3 model, for cost-sensitive and edge deployment.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-12-02",
+          "sources": [
+            "mistral-3-s1",
+            "mistral-3-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 256000,
+          "parameter_count": 3000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "mistral-3-s1",
+          "url": "https://techcrunch.com/2025/12/02/mistral-closes-in-on-big-ai-rivals-with-mistral-3-open-weight-frontier-and-small-models/",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": "https://web.archive.org/web/20251202155302/https://techcrunch.com/2025/12/02/mistral-closes-in-on-big-ai-rivals-with-mistral-3-open-weight-frontier-and-small-models/",
+          "retrieved": "2025-12-02"
+        },
+        {
+          "id": "mistral-3-s2",
+          "url": "https://mistral.ai/news/mistral-3/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251202152420/https://mistral.ai/news/mistral-3",
+          "retrieved": "2025-12-02"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Split from the former \"mistral-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Ministral 3 series, available in three model sizes: 3B, 8B, and 14B parameters.\""
+      },
+      "evidence": {
+        "parameter_count": [
+          {
+            "value": 3000000000,
+            "sources": [
+              "mistral-3-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "ministral-3-8b",
+      "model": "Ministral 3 8B",
+      "company": "Mistral AI",
+      "family": "Mistral",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "multilingual"
+      ],
+      "tags": [],
+      "note": "The mid-size Ministral 3 model.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-12-02",
+          "sources": [
+            "mistral-3-s1",
+            "mistral-3-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 256000,
+          "parameter_count": 8000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "mistral-3-s1",
+          "url": "https://techcrunch.com/2025/12/02/mistral-closes-in-on-big-ai-rivals-with-mistral-3-open-weight-frontier-and-small-models/",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": "https://web.archive.org/web/20251202155302/https://techcrunch.com/2025/12/02/mistral-closes-in-on-big-ai-rivals-with-mistral-3-open-weight-frontier-and-small-models/",
+          "retrieved": "2025-12-02"
+        },
+        {
+          "id": "mistral-3-s2",
+          "url": "https://mistral.ai/news/mistral-3/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251202152420/https://mistral.ai/news/mistral-3",
+          "retrieved": "2025-12-02"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Split from the former \"mistral-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Ministral 3 series, available in three model sizes: 3B, 8B, and 14B parameters.\""
+      },
+      "evidence": {
+        "parameter_count": [
+          {
+            "value": 8000000000,
+            "sources": [
+              "mistral-3-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "ministral-3-14b",
+      "model": "Ministral 3 14B",
+      "company": "Mistral AI",
+      "family": "Mistral",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "multilingual"
+      ],
+      "tags": [],
+      "note": "The largest Ministral 3 model.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-12-02",
+          "sources": [
+            "mistral-3-s1",
+            "mistral-3-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 256000,
+          "parameter_count": 14000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "mistral-3-s1",
+          "url": "https://techcrunch.com/2025/12/02/mistral-closes-in-on-big-ai-rivals-with-mistral-3-open-weight-frontier-and-small-models/",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": "https://web.archive.org/web/20251202155302/https://techcrunch.com/2025/12/02/mistral-closes-in-on-big-ai-rivals-with-mistral-3-open-weight-frontier-and-small-models/",
+          "retrieved": "2025-12-02"
+        },
+        {
+          "id": "mistral-3-s2",
+          "url": "https://mistral.ai/news/mistral-3/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251202152420/https://mistral.ai/news/mistral-3",
+          "retrieved": "2025-12-02"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Split from the former \"mistral-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Ministral 3 series, available in three model sizes: 3B, 8B, and 14B parameters.\""
+      },
+      "evidence": {
+        "parameter_count": [
+          {
+            "value": 14000000000,
             "sources": [
               "mistral-3-s2"
             ]
@@ -7625,6 +8236,26 @@
       "from": "models/phi-3",
       "to": "families/phi",
       "reason": "The \"Phi-3\" record was named for the family while holding Phi-3-medium's 14B parameters. It was split into the three sizes Microsoft shipped."
+    },
+    {
+      "from": "models/gemini-1",
+      "to": "families/gemini",
+      "reason": "The \"Gemini 1.0\" record described a family. It was split into the Ultra, Pro and Nano models Google announced."
+    },
+    {
+      "from": "models/llama-4",
+      "to": "families/llama",
+      "reason": "The \"Llama 4\" record described a family. It was split into Scout and Maverick, the two models Meta released that day."
+    },
+    {
+      "from": "models/gpt-oss",
+      "to": "families/gpt-oss",
+      "reason": "The \"GPT-OSS\" record described a pair of models. It was split into gpt-oss-120b and gpt-oss-20b."
+    },
+    {
+      "from": "models/mistral-3",
+      "to": "families/mistral",
+      "reason": "The \"Mistral 3\" record described a family. It was split into Mistral Large 3 and the three Ministral 3 sizes."
     }
   ]
 }
