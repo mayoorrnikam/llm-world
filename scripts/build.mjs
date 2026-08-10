@@ -20,7 +20,7 @@ import { join } from 'node:path';
 import {
   dateParts, displayTags, contextWindow, parameterCount, tagLabel, diffRecords,
   fieldState, appliesTo, evidenceFor, assertedValue, EVIDENCED_FIELDS,
-  MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL, logoSlug,
+  MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL, logoSlug, monogram,
 } from '../lib/record.mjs';
 
 const EXPORT = process.argv.includes('--export');
@@ -140,9 +140,21 @@ function chrome(html, up, section = '') {
 const spriteFor = (slugs) => `<svg class="sprite" aria-hidden="true" focusable="false"><defs>${
   [...new Set(slugs)].map((s) => SPRITE[`ic-${s}`] ?? SPRITE['ic-other']).join('')}</defs></svg>`;
 
-const glyph = (company) =>
-  `<svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false" ` +
-  `style="--c:var(--c-${slugFor(company)})"><use href="#ic-${slugFor(company)}"></use></svg>`;
+const glyph = (company) => {
+  const slug = slugFor(company);
+  // No logo → initials, never a generic grey mark. See monogram() in
+  // lib/record.mjs. In practice smoke fails the build before a dataset company
+  // can reach here, so this is the safety net rather than the usual path.
+  return slug === 'other'
+    ? `<span class="mark-mono">${esc(monogram(company))}</span>`
+    : `<svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false">`
+      + `<use href="#ic-${slug}"></use></svg>`;
+};
+
+/** The framed mark: the hue sits on the container so the tint can mix from it. */
+const companyMark = (company, cls = '') =>
+  `<span class="doc-mark${cls ? ` ${cls}` : ''}" style="--c:var(--c-${slugFor(company)})">`
+  + `${glyph(company)}</span>`;
 
 /** 405000000000 -> "405B". Raw digits are unreadable at a glance. */
 const params = (n) => n == null ? 'Not disclosed'
@@ -317,7 +329,7 @@ function modelPage(r) {
 <nav class="crumbs"><a href="../../">Home</a> › <a href="../../companies/${companySlug(r.company)}/">${esc(r.company)}</a> › <span>${esc(r.model)}</span></nav>
 
 <div class="doc-hero">
-  <span class="doc-mark">${glyph(r.company)}</span>
+  ${companyMark(r.company)}
   <div>
     <h1>${esc(r.model)}</h1>
     <p class="doc-sub">${esc(r.company)} · <time datetime="${isoDate(r)}">${fullDate(r)}</time>${
@@ -462,7 +474,7 @@ function companyPage(name, list) {
 <nav class="crumbs"><a href="../../">Home</a> › <a href="../">Labs</a> › <span>${esc(name)}</span></nav>
 
 <div class="doc-hero">
-  <span class="doc-mark">${glyph(name)}</span>
+  ${companyMark(name)}
   <div>
     <h1>${esc(name)}</h1>
     <p class="doc-sub">${list.length} tracked release${list.length === 1 ? '' : 's'} · ${open} open weights${
@@ -510,7 +522,7 @@ ${barRows(caps.map(([c, n]) => ({ name: tagLabel(c), value: n })))}` : ''}
 
 <h2>Releases</h2>
 <ol class="doc-list cols-3">${sorted.map((r) =>
-  `<li><span class="doc-mark sm">${glyph(r.company)}</span><a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.family)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>
+  `<li>${companyMark(r.company, 'sm')}<a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.family)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>
 
 <p class="doc-cta">
   <a href="../../?company=${encodeURIComponent(name)}&year=all">Filter the timeline to ${esc(name)} →</a><br>
@@ -548,11 +560,11 @@ function yearPage(year, list) {
 ${yearMilestones.length ? `<h2>Milestones</h2>
 <p class="chart-note">Dated events that mattered without being model releases.</p>
 <ol class="doc-list">${yearMilestones.map((m) =>
-    `<li><span class="doc-mark sm">${glyph(m.company)}</span><a class="cell-name" href="../../milestones/${esc(m.id)}/">${esc(m.title)}</a><span class="cell-meta">${esc(m.company)}</span><span class="cell-num">${esc(eventDate(m.date))}</span></li>`).join('')}</ol>` : ''}
+    `<li>${companyMark(m.company, 'sm')}<a class="cell-name" href="../../milestones/${esc(m.id)}/">${esc(m.title)}</a><span class="cell-meta">${esc(m.company)}</span><span class="cell-num">${esc(eventDate(m.date))}</span></li>`).join('')}</ol>` : ''}
 ${[...byMonth.keys()].sort((a, b) => a - b).map((m) => `
 <h2>${MONTHS[m - 1]} ${year}</h2>
 <ol class="doc-list">${byMonth.get(m).map((r) =>
-  `<li><span class="doc-mark sm">${glyph(r.company)}</span><a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
+  `<li>${companyMark(r.company, 'sm')}<a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
 <p class="doc-cta"><a href="../../?year=${year}">See ${year} on the interactive timeline →</a></p>
 `;
   return page({
@@ -581,7 +593,7 @@ function modelsIndexPage() {
 ${[...byYear.keys()].sort((a, b) => b - a).map((y) => `
 <h2><a href="../timeline/${y}/">${y}</a> — ${byYear.get(y).length} releases</h2>
 <ol class="doc-list">${byYear.get(y).map((r) =>
-  `<li><span class="doc-mark sm">${glyph(r.company)}</span><a class="cell-name" href="${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
+  `<li>${companyMark(r.company, 'sm')}<a class="cell-name" href="${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
 `;
   return page({
     title: 'All tracked LLM releases | LLM World',
@@ -605,7 +617,7 @@ function companiesIndexPage(byCompany) {
 </div></div>
 <ol class="doc-list cols-3">${rows.map(([name, list]) => {
   const latest = [...list].sort((a, b) => b.year - a.year || b.month - a.month || (b.day || 0) - (a.day || 0))[0];
-  return `<li><span class="doc-mark sm">${glyph(name)}</span><a class="cell-name" href="${companySlug(name)}/">${esc(name)}</a><span class="cell-meta">${list.length} release${list.length === 1 ? '' : 's'}</span><span class="cell-num">${fullDate(latest)}</span></li>`;
+  return `<li>${companyMark(name, 'sm')}<a class="cell-name" href="${companySlug(name)}/">${esc(name)}</a><span class="cell-meta">${list.length} release${list.length === 1 ? '' : 's'}</span><span class="cell-num">${fullDate(latest)}</span></li>`;
 }).join('')}</ol>
 `;
   return page({
@@ -630,7 +642,7 @@ function latestPage() {
 </div></div>
 <ol class="doc-list">${recent.map((r) => {
   const prev = predecessorOf(r);
-  return `<li><span class="doc-mark sm">${glyph(r.company)}</span><a class="cell-name" href="../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}${
+  return `<li>${companyMark(r.company, 'sm')}<a class="cell-name" href="../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}${
     prev ? ` · +${daysBetween(prev, r)}d` : ''}</span></li>`;
 }).join('')}</ol>
 <p class="doc-cta"><a href="../models/">Browse all ${releases.length} releases →</a></p>
@@ -665,7 +677,7 @@ function milestonePage(m) {
 <nav class="crumbs"><a href="../../">Home</a> › <a href="../">Milestones</a> › <span>${esc(m.title)}</span></nav>
 
 <div class="doc-hero">
-  <span class="doc-mark">${glyph(m.company)}</span>
+  ${companyMark(m.company)}
   <div>
     <h1>${esc(m.title)}</h1>
     <p class="doc-sub">${esc(m.company)} · <time datetime="${esc(m.date)}">${esc(eventDate(m.date))}</time> ·
@@ -722,7 +734,7 @@ belongs on the timeline but has no parameters, context window or licence.
 Every milestone needs a primary source, exactly like a model record.</p>
 
 <ol class="doc-list">${sorted.map((m) => `<li>
-<span class="doc-mark sm">${glyph(m.company)}</span>
+${companyMark(m.company, 'sm')}
 <a class="cell-name" href="${esc(m.id)}/">${esc(m.title)}</a>
 <span class="cell-meta">${esc(MILESTONE_LABEL[m.type] ?? m.type)} · ${esc(m.company)}</span>
 <span class="cell-num">${esc(eventDate(m.date))}</span>
@@ -767,7 +779,7 @@ function familyPage(name, list) {
 <nav class="crumbs"><a href="../../">Home</a> › <a href="../">Families</a> › <span>${esc(name)}</span></nav>
 
 <div class="doc-hero">
-  <span class="doc-mark">${glyph(first.company)}</span>
+  ${companyMark(first.company)}
   <div>
     <h1>${esc(name)}</h1>
     <p class="doc-sub">${esc(labs.join(' · '))} · ${gens.length} tracked release${gens.length === 1 ? '' : 's'}${
@@ -903,7 +915,7 @@ It is never inferred from names alone — <a href="../models/gpt-oss/">GPT-OSS</
 the GPT family merely for sharing a prefix.</p>
 
 <ol class="doc-list">${rows.map((r) => `<li>
-<span class="doc-mark sm">${glyph(r.first.company)}</span>
+${companyMark(r.first.company, 'sm')}
 <a class="cell-name" href="${familySlug(r.name)}/">${esc(r.name)}</a>
 <span class="cell-meta">${esc(r.first.company)}</span>
 <span class="cell-num">${r.gens.length} release${r.gens.length === 1 ? '' : 's'}</span>
@@ -1088,7 +1100,7 @@ Naming the gaps is more useful than a number that implies there are none.</p>
 <h2>Records not yet verified</h2>
 <p class="chart-note">${unproven.length} of ${total}. Each says which fact is unproven.</p>
 <ol class="doc-list quality-list">${unproven.map((r) => `<li>
-<span class="doc-mark sm">${glyph(r.company)}</span>
+${companyMark(r.company, 'sm')}
 <a class="cell-name" href="../models/${esc(r.id)}/">${esc(r.model)}</a>
 <span class="cell-meta">${esc(r.provenance.reason ?? '')}</span>
 </li>`).join('')}</ol>

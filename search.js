@@ -14,22 +14,37 @@
    ========================================================================== */
 
 import { parse, run } from './lib/query.mjs';
-import { canonicalDate, contextWindow, parameterCount, displayTags, logoSlug } from './lib/record.mjs';
+import { canonicalDate, contextWindow, parameterCount, displayTags, logoSlug, monogram } from './lib/record.mjs';
 
 const DATA_URL = new URL('data/llm-releases.json', import.meta.url);
 const SPRITE_URL = new URL('sprite.svg', import.meta.url);
 
 const logoFor = (company) => {
   const slug = logoSlug(company);
+  // Framed mark, same contract as the timeline and the static pages: hue on
+  // the container, initials when there is no logo.
+  if (slug === 'other') {
+    const box = document.createElement('span');
+    box.className = 'ask-mark mark-mono';
+    box.style.setProperty('--c', 'var(--c-other)');
+    box.setAttribute('aria-hidden', 'true');
+    box.textContent = monogram(company);
+    return box;
+  }
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('class', 'glyph');
   svg.setAttribute('viewBox', '0 0 24 24');
   svg.setAttribute('aria-hidden', 'true');
-  svg.style.setProperty('--c', `var(--c-${slug})`);
   const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
   use.setAttribute('href', `#ic-${slug}`);
   svg.appendChild(use);
-  return svg;
+
+  const box = document.createElement('span');
+  box.className = 'ask-mark';
+  box.style.setProperty('--c', `var(--c-${slug})`);
+  box.setAttribute('aria-hidden', 'true');
+  box.appendChild(svg);
+  return box;
 };
 
 /* The theme button is part of the shared header, so it exists on this page —

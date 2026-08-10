@@ -22,7 +22,7 @@
 import {
   dateParts, displayTags, contextWindow, parameterCount, tagLabel,
   fieldState, evidenceFor, MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL,
-  logoSlug,
+  logoSlug, monogram,
 } from './lib/record.mjs';
 
 /* ------------------------------------------------------------------ config */
@@ -278,6 +278,24 @@ function iconFor(company) {
   use.setAttribute('href', `#ic-${varFor(company).slice(4)}`);
   svg.appendChild(use);
   return svg;
+}
+
+/** The framed mark. The hue goes on the container so its tint can mix from it,
+ *  and an unknown company gets initials rather than a generic grey square —
+ *  same contract as companyMark() in scripts/build.mjs. */
+function fillMark(box, company) {
+  box.style.setProperty('--c', colorFor(company));
+  box.setAttribute('aria-hidden', 'true');
+  box.classList.toggle('mark-mono', logoSlug(company) === 'other');
+  if (logoSlug(company) === 'other') box.textContent = monogram(company);
+  else box.replaceChildren(iconFor(company));
+  return box;
+}
+
+function markFor(company, cls = 'doc-mark sm') {
+  const box = document.createElement('span');
+  box.className = cls;
+  return fillMark(box, company);
 }
 
 /** Capability icon (Lucide). Returns null for a tag with no icon, so callers
@@ -551,7 +569,7 @@ function buildCard(r) {
   name.className = 'card-name';
   highlight(name, r.model);
 
-  top.append(iconFor(r.company), name);
+  top.append(markFor(r.company), name);
 
   const company = document.createElement('span');
   company.className = 'card-company';
@@ -961,7 +979,7 @@ function openModal(r) {
   state.openId = r.id;
 
   els.modal.style.setProperty('--c', colorFor(r.company));
-  els.modalMark.replaceChildren(iconFor(r.company));
+  fillMark(els.modalMark, r.company);
   els.modalTitle.textContent = r.model;
   els.modalCompany.textContent = r.company;
   els.modalDate.textContent = fullDate(r);

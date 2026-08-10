@@ -1481,10 +1481,70 @@ code, kbd {
   gap: 14px;
   margin-bottom: 20px;
 }
-.doc-mark { display: grid; place-items: center; flex: none; }
-.doc-mark .glyph { width: 34px; height: 34px; }
-.doc-mark.sm { width: 20px; }
-.doc-mark.sm .glyph { width: 17px; height: 17px; }
+/* Company marks ------------------------------------------------------------
+   Third-party logos are drawn for their own clear space, never for a shared
+   list. Set loose next to each other they disagree on every axis that matters
+   for scanning: Meta's wide infinity against MiniMax's thin bars, Anthropic's
+   heavy A against Google's light ring — different visual weights, different
+   widths, a ragged left edge down the column.
+
+   A fixed container is the standard answer (GitHub org avatars, App Store
+   icons, integration directories) because it restores one optical frame and
+   one alignment edge. Rounded square rather than circle: the convention reads
+   circles as people and squares as organisations, and a circle crops wide
+   marks harder.
+
+   The tint and hairline are mixed from the company's own hue, so the frame
+   carries identity instead of competing with it — colour stays the secondary
+   channel it is everywhere else here, under the mark and the name.
+
+   The marks were 13-17px, below the ~16px floor where a logo is still
+   recognisable rather than a smudge. --mark sizes the box; the glyph is a
+   share of it, so one number moves both. */
+.doc-mark,
+.modal-mark,
+.ask-mark {
+  --mark: 30px;
+  --mark-hue: var(--c, var(--c-other));
+  inline-size: var(--mark);
+  block-size: var(--mark);
+  display: grid;
+  place-items: center;
+  flex: none;
+  border-radius: calc(var(--mark) * 0.3);
+  color: var(--mark-hue);
+  background: color-mix(in oklab, var(--mark-hue) 11%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--mark-hue) 20%, transparent);
+}
+
+.doc-mark .glyph,
+.modal-mark .glyph,
+.ask-mark .glyph {
+  inline-size: 58%;
+  block-size: 58%;
+}
+
+/* The hero mark scales with the viewport so it stays proportional to a
+   clamp()ed page title on every screen. */
+.doc-mark { --mark: clamp(42px, 7vw, 54px); }
+.doc-mark.sm { --mark: 28px; }
+.ask-mark { --mark: 26px; }
+
+/* Initials, when a lab has no logo. Sized off the same box, so it drops into
+   any of the above without a second set of numbers. */
+.mark-mono {
+  font-size: calc(var(--mark) * 0.34);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  font-feature-settings: "tnum" 0;
+}
+
+/* In forced-colours mode the tint and hairline are dropped by the UA anyway;
+   make sure the box does not collapse to an invisible square. */
+@media (forced-colors: active) {
+  .doc-mark, .modal-mark, .ask-mark { border: 1px solid CanvasText; }
+}
 
 .doc-hero h1 {
   margin: 0;

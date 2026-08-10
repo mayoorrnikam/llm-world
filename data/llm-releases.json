@@ -3952,9 +3952,18 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "reasoning"
+        "reasoning",
+        "vision"
       ],
       "tags": [
         "flagship"
@@ -3996,12 +4005,20 @@
           "authority": "secondary",
           "archived_url": "https://web.archive.org/web/20250312184830/https://artificialanalysis.ai/models/claude-3-7-sonnet",
           "retrieved": "2025-03-12"
+        },
+        {
+          "id": "claude-3-7-sonnet-s3",
+          "url": "https://docs.anthropic.com/en/docs/about-claude/models/overview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250519172951/https://docs.anthropic.com/en/docs/about-claude/models/overview",
+          "retrieved": "2025-05-19"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to the lab's own announcement. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from Anthropic's model documentation as it stood on 2025-05-19, which lists this model as: “Claude 3.7 Sonnet Our most intelligent model Text and image input Text output 200k context window Extended thinking.” The current documentation no longer lists it, so the contemporaneous snapshot is cited rather than the live page."
       },
       "undisclosed": [
         "parameter_count"
@@ -4712,9 +4729,18 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "vision"
       ],
       "tags": [
         "flagship"
@@ -4756,11 +4782,20 @@
           "authority": "secondary",
           "archived_url": "https://web.archive.org/web/20250524155453/https://artificialanalysis.ai/models/claude-4-opus",
           "retrieved": "2025-05-24"
+        },
+        {
+          "id": "claude-4-opus-s3",
+          "url": "https://docs.anthropic.com/en/docs/about-claude/models/overview",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250526121527/https://docs.anthropic.com/en/docs/about-claude/models/overview",
+          "retrieved": "2025-05-26"
         }
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": " Modalities read from Anthropic's model documentation as it stood on 2025-05-26, which lists this model as: “Claude Opus 4 Our most powerful and capable model Text and image input Text output 200k context window Superior reasoning capabilities.” The current documentation no longer lists it, so the contemporaneous snapshot is cited rather than the live page."
       },
       "undisclosed": [
         "parameter_count"
