@@ -44,21 +44,22 @@
           "url": "https://research.google/blog/pathways-language-model-palm-scaling-to-540-billion-parameters-for-breakthrough-performance/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240412114709/https://research.google/blog/pathways-language-model-palm-scaling-to-540-billion-parameters-for-breakthrough-performance/",
+          "retrieved": "2024-04-12"
         },
         {
           "id": "palm-s2",
           "url": "https://arxiv.org/abs/2204.02311",
           "type": "technical_paper",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20220406011033/https://arxiv.org/abs/2204.02311",
+          "retrieved": "2022-04-06"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the technical paper. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -101,21 +102,22 @@
           "url": "https://arxiv.org/abs/2205.01068",
           "type": "technical_paper",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20220504144732/https://arxiv.org/abs/2205.01068",
+          "retrieved": "2022-05-04"
         },
         {
           "id": "opt-175b-s2",
           "url": "https://github.com/facebookresearch/metaseq",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20220504144833/https://github.com/facebookresearch/metaseq",
+          "retrieved": "2022-05-04"
         }
       ],
       "provenance": {
         "status": "estimated",
-        "confidence": 50
+        "confidence": 50,
+        "reason": "Cited to the technical paper and the official repository. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -157,13 +159,14 @@
           "url": "https://huggingface.co/bigscience/bloom",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20220711092607/https://huggingface.co/bigscience/bloom",
+          "retrieved": "2022-07-11"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -205,13 +208,14 @@
           "url": "https://github.com/zai-org/GLM-130B",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250729052130/https://github.com/zai-org/GLM-130B",
+          "retrieved": "2025-07-29"
         }
       ],
       "provenance": {
         "status": "estimated",
-        "confidence": 50
+        "confidence": 50,
+        "reason": "Cited to the official repository. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -255,13 +259,14 @@
           "url": "https://openai.com/index/chatgpt/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240502090536/https://openai.com/index/chatgpt",
+          "retrieved": "2024-05-02"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because parameter count, context window and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -303,13 +308,14 @@
           "url": "https://ai.meta.com/blog/large-language-model-llama-meta-ai/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230714040519/https://ai.meta.com/blog/large-language-model-llama-meta-ai/",
+          "retrieved": "2023-07-14"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -354,21 +360,22 @@
           "url": "https://www.anthropic.com/news/introducing-claude",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240117131957/https://www.anthropic.com/news/introducing-claude",
+          "retrieved": "2024-01-17"
         },
         {
           "id": "claude-1-s2",
           "url": "https://www.anthropic.com/news/100k-context-windows",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240118225720/https://www.anthropic.com/news/100k-context-windows",
+          "retrieved": "2024-01-18"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -381,11 +388,20 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision"
+      ],
       "tags": [
-        "flagship",
-        "multimodal"
+        "flagship"
       ],
       "note": "OpenAI's first multimodal flagship that set new standards across professional and academic benchmarks.",
       "events": [
@@ -414,21 +430,22 @@
           "url": "https://openai.com/index/gpt-4-research/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240502194322/https://openai.com/index/gpt-4-research",
+          "retrieved": "2024-05-02"
         },
         {
           "id": "gpt-4-s2",
           "url": "https://developers.openai.com/api/docs/models/gpt-4",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260222002942/https://developers.openai.com/api/docs/models/gpt-4",
+          "retrieved": "2026-02-22"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -472,13 +489,14 @@
           "url": "https://blog.google/technology/ai/try-bard/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230321140848/https://blog.google/technology/ai/try-bard/",
+          "retrieved": "2023-03-21"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because parameter count, context window and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -522,13 +540,14 @@
           "url": "https://blog.google/technology/ai/google-palm-2-ai-large-language-model/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230510180653/https://blog.google/technology/ai/google-palm-2-ai-large-language-model/",
+          "retrieved": "2023-05-10"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because parameter count, context window and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -572,13 +591,14 @@
           "url": "https://www.anthropic.com/news/claude-2",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240117223805/https://www.anthropic.com/news/claude-2",
+          "retrieved": "2024-01-17"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -621,21 +641,22 @@
           "url": "https://ai.meta.com/blog/llama-2/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230719035227/https://ai.meta.com/blog/llama-2/",
+          "retrieved": "2023-07-19"
         },
         {
           "id": "llama-2-s2",
           "url": "https://huggingface.co/meta-llama/Llama-2-70b-hf",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230718195233/https://huggingface.co/meta-llama/Llama-2-70b-hf",
+          "retrieved": "2023-07-18"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -681,29 +702,30 @@
           "url": "https://mistral.ai/news/announcing-mistral-7b/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230927145256/https://mistral.ai/news/announcing-mistral-7b/",
+          "retrieved": "2023-09-27"
         },
         {
           "id": "mistral-7b-s2",
           "url": "https://mistral.ai/news/announcing-mistral-7b",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230927145256/https://mistral.ai/news/announcing-mistral-7b/",
+          "retrieved": "2023-09-27"
         },
         {
           "id": "mistral-7b-s3",
           "url": "https://huggingface.co/mistralai/Mistral-7B-v0.1",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230927171925/https://huggingface.co/mistralai/Mistral-7B-v0.1",
+          "retrieved": "2023-09-27"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -756,29 +778,30 @@
           "url": "https://x.ai/news/grok",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250314194650/https://x.ai/news/grok",
+          "retrieved": "2025-03-14"
         },
         {
           "id": "grok-1-s2",
           "url": "https://github.com/xai-org/grok-1",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240317205046/https://github.com/xai-org/grok-1",
+          "retrieved": "2024-03-17"
         },
         {
           "id": "grok-1-open-s1",
           "url": "https://x.ai/news/grok-os",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250316195647/https://x.ai/news/grok-os",
+          "retrieved": "2025-03-16"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official repository. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       },
       "previous_ids": [
         "grok-1-open"
@@ -794,11 +817,23 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "audio"
+      ],
       "tags": [
-        "flagship",
-        "multimodal"
+        "flagship"
       ],
       "note": "Google's first natively multimodal model family with Ultra, Pro, and Nano tiers.",
       "events": [
@@ -827,21 +862,22 @@
           "url": "https://blog.google/technology/ai/google-gemini-ai/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20231206150851/https://blog.google/technology/ai/google-gemini-ai/",
+          "retrieved": "2023-12-06"
         },
         {
           "id": "gemini-1-s2",
           "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20231206151650/https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf",
+          "retrieved": "2023-12-06"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -884,21 +920,22 @@
           "url": "https://mistral.ai/news/mixtral-of-experts/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20231211075956/https://mistral.ai/news/mixtral-of-experts/",
+          "retrieved": "2023-12-11"
         },
         {
           "id": "mixtral-s2",
           "url": "https://mistral.ai/news/mixtral-of-experts",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20231211075956/https://mistral.ai/news/mixtral-of-experts/",
+          "retrieved": "2023-12-11"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -943,21 +980,22 @@
           "url": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20231212183225/https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/",
+          "retrieved": "2023-12-12"
         },
         {
           "id": "phi-2-s2",
           "url": "https://huggingface.co/microsoft/phi-2",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20231214040409/https://huggingface.co/microsoft/phi-2",
+          "retrieved": "2023-12-14"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1002,21 +1040,22 @@
           "url": "https://github.com/zai-org/GLM-4",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250729052117/https://github.com/zai-org/GLM-4",
+          "retrieved": "2025-07-29"
         },
         {
           "id": "glm-4-s2",
           "url": "https://arxiv.org/abs/2406.12793",
           "type": "technical_paper",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240619020423/https://arxiv.org/abs/2406.12793",
+          "retrieved": "2024-06-19"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the official repository and the technical paper. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1061,21 +1100,22 @@
           "url": "https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240215151350/https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/",
+          "retrieved": "2024-02-15"
         },
         {
           "id": "gemini-1-5-pro-s2",
           "url": "https://developers.googleblog.com/en/new-features-for-the-gemini-api-and-google-ai-studio/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240627135644/https://developers.googleblog.com/en/new-features-for-the-gemini-api-and-google-ai-studio/",
+          "retrieved": "2024-06-27"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1121,29 +1161,30 @@
           "url": "https://blog.google/technology/developers/gemma-open-models/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240221130902/https://blog.google/technology/developers/gemma-open-models/",
+          "retrieved": "2024-02-21"
         },
         {
           "id": "gemma-s2",
           "url": "https://huggingface.co/google/gemma-7b",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240221145741/https://huggingface.co/google/gemma-7b",
+          "retrieved": "2024-02-21"
         },
         {
           "id": "gemma-s3",
           "url": "https://ai.google.dev/gemma/terms",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240222072002/https://ai.google.dev/gemma/terms",
+          "retrieved": "2024-02-22"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1156,11 +1197,21 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "structured_output"
+      ],
       "tags": [
-        "flagship",
-        "multimodal"
+        "flagship"
       ],
       "note": "Anthropic's first vision-capable flagship that topped GPT-4 across most benchmarks.",
       "events": [
@@ -1188,13 +1239,14 @@
           "url": "https://www.anthropic.com/news/claude-3-family",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240304143650/https://www.anthropic.com/news/claude-3-family",
+          "retrieved": "2024-03-04"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1237,21 +1289,22 @@
           "url": "https://cohere.com/blog/command-r",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240418190542/https://cohere.com/blog/command-r",
+          "retrieved": "2024-04-18"
         },
         {
           "id": "command-r-s2",
           "url": "https://huggingface.co/CohereLabs/c4ai-command-r-v01",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250422100853/https://huggingface.co/CohereLabs/c4ai-command-r-v01",
+          "retrieved": "2025-04-22"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1294,21 +1347,22 @@
           "url": "https://ai.meta.com/blog/meta-llama-3/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240418155938/https://ai.meta.com/blog/meta-llama-3/",
+          "retrieved": "2024-04-18"
         },
         {
           "id": "llama-3-s2",
           "url": "https://huggingface.co/meta-llama/Meta-Llama-3-70B",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240418193825/https://huggingface.co/meta-llama/Meta-Llama-3-70B",
+          "retrieved": "2024-04-18"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1353,21 +1407,22 @@
           "url": "https://azure.microsoft.com/en-us/blog/introducing-phi-3-redefining-whats-possible-with-slms/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240423204115/https://azure.microsoft.com/en-us/blog/introducing-phi-3-redefining-whats-possible-with-slms/",
+          "retrieved": "2024-04-23"
         },
         {
           "id": "phi-3-s2",
           "url": "https://huggingface.co/microsoft/Phi-3-medium-128k-instruct",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240521154018/https://huggingface.co/microsoft/Phi-3-medium-128k-instruct",
+          "retrieved": "2024-05-21"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1410,21 +1465,22 @@
           "url": "https://arxiv.org/abs/2405.04434",
           "type": "technical_paper",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240508043415/https://arxiv.org/abs/2405.04434",
+          "retrieved": "2024-05-08"
         },
         {
           "id": "deepseek-v2-s2",
           "url": "https://huggingface.co/deepseek-ai/DeepSeek-V2",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240506170605/https://huggingface.co/deepseek-ai/DeepSeek-V2",
+          "retrieved": "2024-05-06"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1437,11 +1493,26 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "output": [
+          "text",
+          "image",
+          "audio"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "audio",
+        "speech_generation",
+        "image_generation"
+      ],
       "tags": [
-        "flagship",
-        "multimodal"
+        "flagship"
       ],
       "note": "OpenAI's natively multimodal real-time model with voice conversation, free in ChatGPT.",
       "events": [
@@ -1470,21 +1541,22 @@
           "url": "https://openai.com/index/hello-gpt-4o/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240513173656/https://openai.com/index/hello-gpt-4o/",
+          "retrieved": "2024-05-13"
         },
         {
           "id": "gpt-4o-s2",
           "url": "https://developers.openai.com/api/docs/models/gpt-4o",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260210080652/https://developers.openai.com/api/docs/models/gpt-4o",
+          "retrieved": "2026-02-10"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1527,21 +1599,22 @@
           "url": "https://qwenlm.github.io/blog/qwen2/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240606203728/https://qwenlm.github.io/blog/qwen2/",
+          "retrieved": "2024-06-06"
         },
         {
           "id": "qwen2-s2",
           "url": "https://huggingface.co/Qwen/Qwen2-72B-Instruct",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240606201220/https://huggingface.co/Qwen/Qwen2-72B-Instruct",
+          "retrieved": "2024-06-06"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1585,13 +1658,14 @@
           "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240620140357/https://www.anthropic.com/news/claude-3-5-sonnet",
+          "retrieved": "2024-06-20"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1634,21 +1708,22 @@
           "url": "https://ai.meta.com/blog/meta-llama-3-1/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240723153909/https://ai.meta.com/blog/meta-llama-3-1/",
+          "retrieved": "2024-07-23"
         },
         {
           "id": "llama-3-1-s2",
           "url": "https://huggingface.co/meta-llama/Llama-3.1-405B",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240927110330/https://huggingface.co/meta-llama/Llama-3.1-405B",
+          "retrieved": "2024-09-27"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1693,21 +1768,22 @@
           "url": "https://mistral.ai/news/mistral-large-2407/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240724152547/https://mistral.ai/news/mistral-large-2407/",
+          "retrieved": "2024-07-24"
         },
         {
           "id": "mistral-large-2-s2",
           "url": "https://huggingface.co/mistralai/Mistral-Large-Instruct-2407",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240724171028/https://huggingface.co/mistralai/Mistral-Large-Instruct-2407",
+          "retrieved": "2024-07-24"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1750,21 +1826,22 @@
           "url": "https://www.ai21.com/blog/announcing-jamba-model-family/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240822135946/https://www.ai21.com/blog/announcing-jamba-model-family",
+          "retrieved": "2024-08-22"
         },
         {
           "id": "jamba-1-5-s2",
           "url": "https://huggingface.co/ai21labs/AI21-Jamba-1.5-Large",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240822135916/https://huggingface.co/ai21labs/AI21-Jamba-1.5-Large",
+          "retrieved": "2024-08-22"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1809,21 +1886,22 @@
           "url": "https://openai.com/index/learning-to-reason-with-llms/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240912171926/https://openai.com/index/learning-to-reason-with-llms/",
+          "retrieved": "2024-09-12"
         },
         {
           "id": "o1-s2",
           "url": "https://developers.openai.com/api/docs/models/o1",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260320163509/https://developers.openai.com/api/docs/models/o1",
+          "retrieved": "2026-03-20"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1866,21 +1944,22 @@
           "url": "https://qwenlm.github.io/blog/qwen2.5/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240918201754/https://qwenlm.github.io/blog/qwen2.5/",
+          "retrieved": "2024-09-18"
         },
         {
           "id": "qwen2-5-s2",
           "url": "https://huggingface.co/Qwen/Qwen2.5-72B-Instruct",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240920075202/https://huggingface.co/Qwen/Qwen2.5-72B-Instruct",
+          "retrieved": "2024-09-20"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -1893,11 +1972,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
-      "tags": [
-        "multimodal"
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision"
       ],
+      "tags": [],
       "note": "The first vision-capable Llama plus 1B and 3B models for edge devices.",
       "events": [
         {
@@ -1925,21 +2012,22 @@
           "url": "https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240925173233/https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/",
+          "retrieved": "2024-09-25"
         },
         {
           "id": "llama-3-2-s2",
           "url": "https://huggingface.co/meta-llama/Llama-3.2-90B-Vision-Instruct",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240925174046/https://huggingface.co/meta-llama/Llama-3.2-90B-Vision-Instruct",
+          "retrieved": "2024-09-25"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card, and every recorded field has a value, but the individual facts have not yet been checked against the source one by one."
       }
     },
     {
@@ -1952,11 +2040,26 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text",
+          "image",
+          "video"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "video",
+        "image_generation",
+        "video_generation"
+      ],
       "tags": [
-        "flagship",
-        "multimodal"
+        "flagship"
       ],
       "note": "Amazon's new foundation model family spanning text, image, and video generation at re:Invent.",
       "events": [
@@ -1985,21 +2088,22 @@
           "url": "https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20241203175425/https://www.aboutamazon.com/news/aws/amazon-nova-artificial-intelligence-bedrock-aws",
+          "retrieved": "2024-12-03"
         },
         {
           "id": "nova-s2",
           "url": "https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20241203181439/https://aws.amazon.com/blogs/aws/introducing-amazon-nova-frontier-intelligence-and-industry-leading-price-performance/",
+          "retrieved": "2024-12-03"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2046,21 +2150,22 @@
           "url": "https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20241211154129/https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/",
+          "retrieved": "2024-12-11"
         },
         {
           "id": "gemini-2-flash-s2",
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260303034822/https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash",
+          "retrieved": "2026-03-03"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2103,21 +2208,22 @@
           "url": "https://arxiv.org/abs/2412.19437",
           "type": "technical_paper",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20241230045532/https://arxiv.org/abs/2412.19437",
+          "retrieved": "2024-12-30"
         },
         {
           "id": "deepseek-v3-s2",
           "url": "https://huggingface.co/deepseek-ai/DeepSeek-V3",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20241226081224/https://huggingface.co/deepseek-ai/DeepSeek-V3",
+          "retrieved": "2024-12-26"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2162,21 +2268,22 @@
           "url": "https://arxiv.org/abs/2501.12948",
           "type": "technical_paper",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250123030008/https://arxiv.org/abs/2501.12948",
+          "retrieved": "2025-01-23"
         },
         {
           "id": "deepseek-r1-s2",
           "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250120073421/https://huggingface.co/deepseek-ai/DeepSeek-R1",
+          "retrieved": "2025-01-20"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2221,21 +2328,22 @@
           "url": "https://mistral.ai/news/mistral-small-3/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250130143452/https://mistral.ai/news/mistral-small-3/",
+          "retrieved": "2025-01-30"
         },
         {
           "id": "mistral-small-3-s2",
           "url": "https://huggingface.co/mistralai/Mistral-Small-24B-Instruct-2501",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250130151122/https://huggingface.co/mistralai/Mistral-Small-24B-Instruct-2501",
+          "retrieved": "2025-01-30"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2282,21 +2390,22 @@
           "url": "https://x.ai/news/grok-3",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250311172142/https://x.ai/news/grok-3",
+          "retrieved": "2025-03-11"
         },
         {
           "id": "grok-3-s2",
           "url": "https://artificialanalysis.ai/models/grok-3",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250218213019/https://artificialanalysis.ai/models/grok-3",
+          "retrieved": "2025-02-18"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2343,21 +2452,22 @@
           "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250224183042/https://www.anthropic.com/news/claude-3-7-sonnet",
+          "retrieved": "2025-02-24"
         },
         {
           "id": "claude-3-7-sonnet-s2",
           "url": "https://artificialanalysis.ai/models/claude-3-7-sonnet",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250312184830/https://artificialanalysis.ai/models/claude-3-7-sonnet",
+          "retrieved": "2025-03-12"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2402,21 +2512,22 @@
           "url": "https://openai.com/index/introducing-gpt-4-5/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250228042933/https://openai.com/index/introducing-gpt-4-5/",
+          "retrieved": "2025-02-28"
         },
         {
           "id": "gpt-4-5-s2",
           "url": "https://developers.openai.com/api/docs/models/gpt-4.5-preview",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260211085909/https://developers.openai.com/api/docs/models/gpt-4.5-preview",
+          "retrieved": "2026-02-11"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2429,11 +2540,21 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
-      "tags": [
-        "multimodal"
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "function_calling",
+        "structured_output"
       ],
+      "tags": [],
       "note": "Google's open family adding vision, 128K context, and support for 140 languages.",
       "events": [
         {
@@ -2462,29 +2583,30 @@
           "url": "https://blog.google/technology/developers/gemma-3/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250312085706/https://blog.google/technology/developers/gemma-3/",
+          "retrieved": "2025-03-12"
         },
         {
           "id": "gemma-3-s2",
           "url": "https://huggingface.co/google/gemma-3-27b-it",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250312064154/https://huggingface.co/google/gemma-3-27b-it",
+          "retrieved": "2025-03-12"
         },
         {
           "id": "gemma-3-s3",
           "url": "https://ai.google.dev/gemma/terms",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250313154706/https://ai.google.dev/gemma/terms",
+          "retrieved": "2025-03-13"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card, and every recorded field has a value, but the individual facts have not yet been checked against the source one by one."
       }
     },
     {
@@ -2529,21 +2651,22 @@
           "url": "https://cohere.com/blog/command-a",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250313130452/https://cohere.com/blog/command-a",
+          "retrieved": "2025-03-13"
         },
         {
           "id": "command-a-s2",
           "url": "https://huggingface.co/CohereLabs/c4ai-command-a-03-2025",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250416154400/https://huggingface.co/CohereLabs/c4ai-command-a-03-2025",
+          "retrieved": "2025-04-16"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2590,21 +2713,22 @@
           "url": "https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250325170959/https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/",
+          "retrieved": "2025-03-25"
         },
         {
           "id": "gemini-2-5-pro-s2",
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260308075642/https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro",
+          "retrieved": "2026-03-08"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2617,11 +2741,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
-      "tags": [
-        "multimodal"
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision"
       ],
+      "tags": [],
       "note": "Meta's first mixture-of-experts family with Scout, Maverick, and Behemoth tiers.",
       "events": [
         {
@@ -2649,21 +2781,22 @@
           "url": "https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250405185132/https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
+          "retrieved": "2025-04-05"
         },
         {
           "id": "llama-4-s2",
           "url": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250405191842/https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+          "retrieved": "2025-04-05"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card, and every recorded field has a value, but the individual facts have not yet been checked against the source one by one."
       }
     },
     {
@@ -2708,21 +2841,22 @@
           "url": "https://qwenlm.github.io/blog/qwen3/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250429020635/https://qwenlm.github.io/blog/qwen3/",
+          "retrieved": "2025-04-29"
         },
         {
           "id": "qwen3-s2",
           "url": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250428214435/https://huggingface.co/Qwen/Qwen3-235B-A22B",
+          "retrieved": "2025-04-28"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2769,16 +2903,16 @@
           "url": "https://www.anthropic.com/news/claude-4",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250522163841/https://www.anthropic.com/news/claude-4",
+          "retrieved": "2025-05-22"
         },
         {
           "id": "claude-4-opus-s2",
           "url": "https://artificialanalysis.ai/models/claude-4-opus",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250524155453/https://artificialanalysis.ai/models/claude-4-opus",
+          "retrieved": "2025-05-24"
         }
       ],
       "provenance": {
@@ -2826,21 +2960,22 @@
           "url": "https://moonshotai.github.io/Kimi-K2/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250711154206/https://moonshotai.github.io/Kimi-K2/",
+          "retrieved": "2025-07-11"
         },
         {
           "id": "kimi-k2-s2",
           "url": "https://huggingface.co/moonshotai/Kimi-K2-Instruct",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250711151833/https://huggingface.co/moonshotai/Kimi-K2-Instruct",
+          "retrieved": "2025-07-11"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2883,16 +3018,16 @@
           "url": "https://z.ai/blog/glm-4.5",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250728122443/https://z.ai/blog/glm-4.5",
+          "retrieved": "2025-07-28"
         },
         {
           "id": "glm-4-5-s2",
           "url": "https://huggingface.co/zai-org/GLM-4.5",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250728132214/https://huggingface.co/zai-org/GLM-4.5",
+          "retrieved": "2025-07-28"
         }
       ],
       "provenance": {
@@ -2942,37 +3077,38 @@
           "url": "https://openai.com/index/introducing-gpt-oss/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250805170537/https://openai.com/index/introducing-gpt-oss/",
+          "retrieved": "2025-08-05"
         },
         {
           "id": "gpt-oss-s2",
           "url": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260213072021/https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "retrieved": "2026-02-13"
         },
         {
           "id": "gpt-oss-s3",
           "url": "https://arxiv.org/html/2508.10925v1",
           "type": "technical_paper",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250818033250/https://arxiv.org/html/2508.10925v1",
+          "retrieved": "2025-08-18"
         },
         {
           "id": "gpt-oss-s4",
           "url": "https://huggingface.co/openai/gpt-oss-120b",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250805170129/https://huggingface.co/openai/gpt-oss-120b",
+          "retrieved": "2025-08-05"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement, official documentation, the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -2985,11 +3121,21 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "reasoning"
+      ],
       "tags": [
-        "flagship",
-        "multimodal"
+        "flagship"
       ],
       "note": "OpenAI's unified flagship with integrated reasoning across ChatGPT and the API.",
       "events": [
@@ -3018,21 +3164,22 @@
           "url": "https://openai.com/index/introducing-gpt-5/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250807174456/https://openai.com/index/introducing-gpt-5/",
+          "retrieved": "2025-08-07"
         },
         {
           "id": "gpt-5-s2",
           "url": "https://developers.openai.com/api/docs/models/gpt-5",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260210054829/https://developers.openai.com/api/docs/models/gpt-5",
+          "retrieved": "2026-02-10"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count is not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -3075,21 +3222,22 @@
           "url": "https://api-docs.deepseek.com/news/news250821",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250821073920/https://api-docs.deepseek.com/news/news250821",
+          "retrieved": "2025-08-21"
         },
         {
           "id": "deepseek-v3-1-s2",
           "url": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250821064138/https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
+          "retrieved": "2025-08-21"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to official documentation and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -3136,21 +3284,22 @@
           "url": "https://www.anthropic.com/news/claude-sonnet-4-5",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250929165916/https://www.anthropic.com/news/claude-sonnet-4-5",
+          "retrieved": "2025-09-29"
         },
         {
           "id": "claude-sonnet-4-5-s2",
           "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20251122111216/https://platform.claude.com/docs/en/about-claude/models/overview",
+          "retrieved": "2025-11-22"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -3197,21 +3346,22 @@
           "url": "https://en.wikipedia.org/wiki/GPT-5.1",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20251113191350/https://en.wikipedia.org/wiki/GPT-5.1",
+          "retrieved": "2025-11-13"
         },
         {
           "id": "gpt-5-1-s2",
           "url": "https://developers.openai.com/api/docs/models/gpt-5.1",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260213212943/https://developers.openai.com/api/docs/models/gpt-5.1",
+          "retrieved": "2026-02-13"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -3257,21 +3407,22 @@
           "url": "https://blog.google/products/gemini/gemini-3/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20251118160715/https://blog.google/products/gemini/gemini-3/",
+          "retrieved": "2025-11-18"
         },
         {
           "id": "gemini-3-pro-s2",
           "url": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-3-Pro-Model-Card.pdf",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20251118111103/https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-3-Pro-Model-Card.pdf",
+          "retrieved": "2025-11-18"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -3318,21 +3469,22 @@
           "url": "https://www.anthropic.com/news/claude-opus-4-5",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20251124190104/https://www.anthropic.com/news/claude-opus-4-5",
+          "retrieved": "2025-11-24"
         },
         {
           "id": "claude-opus-4-5-s2",
           "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20251123190158/https://platform.claude.com/docs/en/about-claude/models/overview",
+          "retrieved": "2025-11-23"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 75
+        "confidence": 75,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -3345,11 +3497,20 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
-      "tags": [
-        "multimodal"
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "multilingual"
       ],
+      "tags": [],
       "note": "An open multimodal family including Mistral Large 3 and Ministral variants under Apache 2.0.",
       "events": [
         {
@@ -3377,21 +3538,22 @@
           "url": "https://techcrunch.com/2025/12/02/mistral-closes-in-on-big-ai-rivals-with-mistral-3-open-weight-frontier-and-small-models/",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20251202155302/https://techcrunch.com/2025/12/02/mistral-closes-in-on-big-ai-rivals-with-mistral-3-open-weight-frontier-and-small-models/",
+          "retrieved": "2025-12-02"
         },
         {
           "id": "mistral-3-s2",
           "url": "https://mistral.ai/news/mistral-3/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20251202152420/https://mistral.ai/news/mistral-3",
+          "retrieved": "2025-12-02"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every recorded field has a value, but the individual facts have not yet been checked against the source one by one."
       }
     },
     {
@@ -3438,21 +3600,22 @@
           "url": "https://en.wikipedia.org/wiki/GPT-5.2",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20251218083248/https://en.wikipedia.org/wiki/GPT-5.2",
+          "retrieved": "2025-12-18"
         },
         {
           "id": "gpt-5-2-s2",
           "url": "https://developers.openai.com/api/docs/models/gpt-5.2",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260210005456/https://developers.openai.com/api/docs/models/gpt-5.2",
+          "retrieved": "2026-02-10"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -3499,16 +3662,16 @@
           "url": "https://www.anthropic.com/news/claude-opus-4-6",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260205175758/https://www.anthropic.com/news/claude-opus-4-6",
+          "retrieved": "2026-02-05"
         },
         {
           "id": "claude-opus-4-6-s2",
           "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260204091134/https://platform.claude.com/docs/en/about-claude/models/overview",
+          "retrieved": "2026-02-04"
         }
       ],
       "provenance": {
@@ -3558,21 +3721,22 @@
           "url": "https://en.wikipedia.org/wiki/GPT-5.3-Codex",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260501204242/https://en.wikipedia.org/wiki/GPT-5.3-Codex",
+          "retrieved": "2026-05-01"
         },
         {
           "id": "gpt-5-3-codex-s2",
           "url": "https://developers.openai.com/api/docs/models/gpt-5.3-codex",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260216061110/https://developers.openai.com/api/docs/models/gpt-5.3-codex",
+          "retrieved": "2026-02-16"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -3619,21 +3783,22 @@
           "url": "https://en.wikipedia.org/wiki/Qwen",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260307122757/https://en.wikipedia.org/wiki/Qwen",
+          "retrieved": "2026-03-07"
         },
         {
           "id": "qwen-3-5-s2",
           "url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260216104038/https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+          "retrieved": "2026-02-16"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "Cited to the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -3678,16 +3843,16 @@
           "url": "https://www.anthropic.com/news/claude-sonnet-4-6",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260217175906/https://www.anthropic.com/news/claude-sonnet-4-6",
+          "retrieved": "2026-02-17"
         },
         {
           "id": "claude-sonnet-4-6-s2",
           "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260217170302/https://platform.claude.com/docs/en/about-claude/models/overview",
+          "retrieved": "2026-02-17"
         }
       ],
       "provenance": {
@@ -3737,21 +3902,22 @@
           "url": "https://techcrunch.com/2026/03/05/openai-launches-gpt-5-4-with-pro-and-thinking-versions/",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260305182156/https://techcrunch.com/2026/03/05/openai-launches-gpt-5-4-with-pro-and-thinking-versions/",
+          "retrieved": "2026-03-05"
         },
         {
           "id": "gpt-5-4-s2",
           "url": "https://developers.openai.com/api/docs/models/gpt-5.4",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260305185140/https://developers.openai.com/api/docs/models/gpt-5.4",
+          "retrieved": "2026-03-05"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -3764,11 +3930,22 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
-      "tags": [
-        "multimodal"
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "reasoning",
+        "agentic",
+        "coding"
       ],
+      "tags": [],
       "note": "A 119B open mixture-of-experts model unifying chat, coding, and agentic tasks.",
       "events": [
         {
@@ -3795,8 +3972,8 @@
           "url": "https://mistral.ai/news/mistral-small-4/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260316210415/https://mistral.ai/news/mistral-small-4",
+          "retrieved": "2026-03-16"
         }
       ],
       "provenance": {
@@ -3845,13 +4022,14 @@
           "url": "https://en.wikipedia.org/wiki/Llama_(language_model)",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260415051351/https://en.wikipedia.org/wiki/Llama_(language_model)",
+          "retrieved": "2026-04-15"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "No primary source. The release is recorded from news reporting only, so it cannot be verified until the lab's own announcement is cited."
       }
     },
     {
@@ -3898,24 +4076,24 @@
           "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260408163043/https://ai.meta.com/blog/introducing-muse-spark-msl/",
+          "retrieved": "2026-04-08"
         },
         {
           "id": "muse-spark-s2",
           "url": "https://en.wikipedia.org/wiki/Muse_Spark",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260718013514/https://en.wikipedia.org/wiki/Muse_Spark",
+          "retrieved": "2026-07-18"
         },
         {
           "id": "muse-spark-s3",
           "url": "https://artificialanalysis.ai/models/muse-spark",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260408164722/https://artificialanalysis.ai/models/muse-spark",
+          "retrieved": "2026-04-08"
         }
       ],
       "provenance": {
@@ -3967,16 +4145,16 @@
           "url": "https://www.anthropic.com/news/claude-opus-4-7",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260416142724/https://www.anthropic.com/news/claude-opus-4-7",
+          "retrieved": "2026-04-16"
         },
         {
           "id": "claude-opus-4-7-s2",
           "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260415205431/https://platform.claude.com/docs/en/about-claude/models/overview",
+          "retrieved": "2026-04-15"
         }
       ],
       "provenance": {
@@ -4029,24 +4207,24 @@
           "url": "https://openai.com/index/introducing-gpt-5-5/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260423180657/https://openai.com/index/introducing-gpt-5-5/",
+          "retrieved": "2026-04-23"
         },
         {
           "id": "gpt-5-5-s2",
           "url": "https://en.wikipedia.org/wiki/GPT-5.5",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260425005034/https://en.wikipedia.org/wiki/GPT-5.5",
+          "retrieved": "2026-04-25"
         },
         {
           "id": "gpt-5-5-s3",
           "url": "https://developers.openai.com/api/docs/models/gpt-5.5",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260424185633/https://developers.openai.com/api/docs/models/gpt-5.5",
+          "retrieved": "2026-04-24"
         }
       ],
       "provenance": {
@@ -4094,16 +4272,16 @@
           "url": "https://api-docs.deepseek.com/news/news260424",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260424071346/https://api-docs.deepseek.com/news/news260424",
+          "retrieved": "2026-04-24"
         },
         {
           "id": "deepseek-v4-flash-s2",
           "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260424025422/https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+          "retrieved": "2026-04-24"
         }
       ],
       "provenance": {
@@ -4155,21 +4333,22 @@
           "url": "https://en.wikipedia.org/wiki/Gemini_(language_model)",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260516195051/https://en.wikipedia.org/wiki/Gemini_(language_model)",
+          "retrieved": "2026-05-16"
         },
         {
           "id": "gemini-3-5-flash-s2",
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260519180605/https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash",
+          "retrieved": "2026-05-19"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -4216,16 +4395,16 @@
           "url": "https://www.anthropic.com/news/claude-opus-4-8",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260528165611/https://www.anthropic.com/news/claude-opus-4-8",
+          "retrieved": "2026-05-28"
         },
         {
           "id": "claude-opus-4-8-s2",
           "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260528070430/https://platform.claude.com/docs/en/about-claude/models/overview",
+          "retrieved": "2026-05-28"
         }
       ],
       "provenance": {
@@ -4275,16 +4454,16 @@
           "url": "https://research.nvidia.com/labs/nemotron/Nemotron-3-Ultra/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260604204450/https://research.nvidia.com/labs/nemotron/Nemotron-3-Ultra/",
+          "retrieved": "2026-06-04"
         },
         {
           "id": "nemotron-3-ultra-s2",
           "url": "https://openmdw.ai/license/1-1/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260528163158/https://openmdw.ai/license/1-1/",
+          "retrieved": "2026-05-28"
         }
       ],
       "provenance": {
@@ -4336,21 +4515,22 @@
           "url": "https://en.wikipedia.org/wiki/Claude_(language_model)",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260609152642/https://en.wikipedia.org/wiki/Claude_(language_model)",
+          "retrieved": "2026-06-09"
         },
         {
           "id": "claude-fable-5-s2",
           "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260608180822/https://platform.claude.com/docs/en/about-claude/models/overview",
+          "retrieved": "2026-06-08"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -4397,21 +4577,22 @@
           "url": "https://en.wikipedia.org/wiki/Claude_(language_model)",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260609152642/https://en.wikipedia.org/wiki/Claude_(language_model)",
+          "retrieved": "2026-06-09"
         },
         {
           "id": "claude-mythos-5-s2",
           "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260608180822/https://platform.claude.com/docs/en/about-claude/models/overview",
+          "retrieved": "2026-06-08"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -4454,16 +4635,16 @@
           "url": "https://z.ai/blog/glm-5.2",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260616175106/https://z.ai/blog/glm-5.2",
+          "retrieved": "2026-06-16"
         },
         {
           "id": "glm-5-2-s2",
           "url": "https://huggingface.co/zai-org/GLM-5.2",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260616174532/https://huggingface.co/zai-org/GLM-5.2",
+          "retrieved": "2026-06-16"
         }
       ],
       "provenance": {
@@ -4513,16 +4694,16 @@
           "url": "https://www.anthropic.com/news/claude-sonnet-5",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260630175737/https://www.anthropic.com/news/claude-sonnet-5",
+          "retrieved": "2026-06-30"
         },
         {
           "id": "claude-sonnet-5-s2",
           "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260630015858/https://platform.claude.com/docs/en/about-claude/models/overview",
+          "retrieved": "2026-06-30"
         }
       ],
       "provenance": {
@@ -4572,16 +4753,16 @@
           "url": "https://x.ai/news/grok-4-5",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260708180848/https://x.ai/news/grok-4-5",
+          "retrieved": "2026-07-08"
         },
         {
           "id": "grok-4-5-s2",
           "url": "https://docs.x.ai/docs/models",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260204041847/https://docs.x.ai/docs/models",
+          "retrieved": "2026-02-04"
         }
       ],
       "provenance": {
@@ -4634,8 +4815,8 @@
           "url": "https://en.wikipedia.org/wiki/GPT-5.6",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260709154055/https://en.wikipedia.org/wiki/GPT-5.6",
+          "retrieved": "2026-07-09"
         },
         {
           "id": "gpt-5-6-s2",
@@ -4648,7 +4829,8 @@
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -4693,8 +4875,8 @@
           "url": "https://simonwillison.net/2026/Jul/16/kimi-k3/",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260716202215/https://simonwillison.net/2026/Jul/16/kimi-k3/",
+          "retrieved": "2026-07-16"
         },
         {
           "id": "kimi-k3-s2",
@@ -4707,7 +4889,8 @@
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "Cited to the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
       }
     },
     {
@@ -4754,16 +4937,16 @@
           "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260721153557/https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/",
+          "retrieved": "2026-07-21"
         },
         {
           "id": "gemini-3-6-flash-s2",
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260722113351/https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+          "retrieved": "2026-07-22"
         }
       ],
       "provenance": {
@@ -4781,13 +4964,22 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "vision",
+        "multilingual"
       ],
       "tags": [
-        "flagship",
-        "multimodal"
+        "flagship"
       ],
       "note": "A step change over Opus 4.8, with a one-million-token context window and 3D rendering.",
       "events": [
@@ -4816,16 +5008,16 @@
           "url": "https://www.anthropic.com/news/claude-opus-5",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260724170217/https://www.anthropic.com/news/claude-opus-5",
+          "retrieved": "2026-07-24"
         },
         {
           "id": "claude-opus-5-s2",
           "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260724014617/https://platform.claude.com/docs/en/about-claude/models/overview",
+          "retrieved": "2026-07-24"
         }
       ],
       "provenance": {
@@ -4876,13 +5068,14 @@
           "url": "https://www.marktechpost.com/2026/08/03/alibaba-qwen-releases-qwen3-8-max/",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260803122753/https://www.marktechpost.com/2026/08/03/alibaba-qwen-releases-qwen3-8-max/",
+          "retrieved": "2026-08-03"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "No primary source. The release is recorded from news reporting only, so it cannot be verified until the lab's own announcement is cited."
       }
     },
     {
@@ -4929,21 +5122,22 @@
           "url": "https://en.wikipedia.org/wiki/Muse_Spark",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260718013514/https://en.wikipedia.org/wiki/Muse_Spark",
+          "retrieved": "2026-07-18"
         },
         {
           "id": "muse-spark-1-2-s2",
           "url": "https://artificialanalysis.ai/models/muse-spark-1-2",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260805215022/https://artificialanalysis.ai/models/muse-spark-1-2",
+          "retrieved": "2026-08-05"
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 60
+        "confidence": 60,
+        "reason": "No primary source. The release is recorded from news reporting only, so it cannot be verified until the lab's own announcement is cited."
       }
     }
   ]
