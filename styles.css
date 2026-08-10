@@ -50,6 +50,8 @@
   --c-amazon:     #6f6a00;
   --c-nvidia:     #4e7e27;
   --c-bigscience: #00874a;
+  --c-ai2:        #2f8a3f;
+  --c-minimax:    #4353cc;
   --c-openai:     #00786a;
   --c-microsoft:  #0d8494;
   --c-xai:        #0079b8;
@@ -105,6 +107,8 @@
     --c-amazon:     #a89a00;
     --c-nvidia:     #8abf4a;
     --c-bigscience: #22b070;
+    --c-ai2:        #4fbf68;
+    --c-minimax:    #7b8cf5;
     --c-openai:     #00b39b;
     --c-microsoft:  #0098b8;
     --c-xai:        #37b6ef;
@@ -151,6 +155,8 @@
   --c-amazon:     #a89a00;
   --c-nvidia:     #8abf4a;
   --c-bigscience: #22b070;
+  --c-ai2:        #4fbf68;
+  --c-minimax:    #7b8cf5;
   --c-openai:     #00b39b;
   --c-microsoft:  #0098b8;
   --c-xai:        #37b6ef;

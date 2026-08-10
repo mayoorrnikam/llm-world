@@ -20,6 +20,7 @@
 import { readFileSync, readdirSync, statSync, existsSync, writeFileSync, unlinkSync } from 'node:fs';
 import { join, dirname, resolve, extname } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { logoSlug } from '../lib/record.mjs';
 
 const fails = [];
 const fail = (page, msg) => fails.push(`${page}: ${msg}`);
@@ -231,6 +232,40 @@ function checkLibImports() {
 }
 
 /**
+ * Every company in the dataset must have its own logo and hue.
+ *
+ * Ai2 and MiniMax were added to the data and shipped with the generic "other"
+ * mark, because the company → slug map existed in three files and adding a lab
+ * only ever updated the dataset. Nothing failed; the labs just quietly looked
+ * like nobody's. That is a design regression the build could not see.
+ *
+ * The colour token is checked in all three places CLAUDE.md requires it —
+ * bare :root, prefers-color-scheme: dark, and [data-theme="dark"] — so an
+ * explicit theme choice cannot fall back to a hue that was only half added.
+ */
+function checkCompanyLogos() {
+  const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
+  const sprite = readFileSync('sprite.svg', 'utf8');
+  const css = readFileSync('styles.css', 'utf8');
+
+  for (const company of [...new Set(data.releases.map((r) => r.company))].sort()) {
+    const slug = logoSlug(company);
+    if (slug === 'other') {
+      fail('sprite.svg', `"${company}" has no logo — add it to COMPANY_SLUG in lib/record.mjs`);
+      continue;
+    }
+    if (!sprite.includes(`<g id="ic-${slug}"`)) {
+      fail('sprite.svg', `"${company}" maps to ic-${slug}, which is not in the sprite`);
+    }
+    const declared = (css.match(new RegExp(`--c-${slug}\\s*:`, 'g')) ?? []).length;
+    if (declared < 3) {
+      fail('styles.css', `--c-${slug} is declared ${declared}× — needs :root, `
+        + `prefers-color-scheme: dark and [data-theme="dark"] (${company})`);
+    }
+  }
+}
+
+/**
  * A script that accepts --write must contain a write.
  *
  * hf-metadata.mjs read --write, mutated the records, counted them and printed
@@ -312,6 +347,7 @@ checkStandaloneScripts();
 checkScriptsRun();
 checkLibImports();
 checkWriteScripts();
+checkCompanyLogos();
 
 const shown = fails.slice(0, 25);
 for (const f of shown) console.error(`  FAIL  ${f}`);

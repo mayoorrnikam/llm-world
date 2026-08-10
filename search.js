@@ -14,22 +14,13 @@
    ========================================================================== */
 
 import { parse, run } from './lib/query.mjs';
-import { canonicalDate, contextWindow, parameterCount, displayTags } from './lib/record.mjs';
+import { canonicalDate, contextWindow, parameterCount, displayTags, logoSlug } from './lib/record.mjs';
 
 const DATA_URL = new URL('data/llm-releases.json', import.meta.url);
 const SPRITE_URL = new URL('sprite.svg', import.meta.url);
 
-/** Company → logo slug. Identity rests on the mark and the name together, so
- *  results carry the logo the rest of the site uses (CLAUDE.md, design). */
-const LOGO = {
-  'AI21 Labs': 'ai21', Anthropic: 'anthropic', 'Mistral AI': 'mistral',
-  'Alibaba Qwen': 'alibaba', Amazon: 'amazon', NVIDIA: 'nvidia',
-  BigScience: 'bigscience', OpenAI: 'openai', Microsoft: 'microsoft', xAI: 'xai',
-  'Google DeepMind': 'google', DeepSeek: 'deepseek', 'Meta AI': 'meta',
-  'Moonshot AI': 'moonshot', 'Zhipu AI': 'zhipu', Cohere: 'cohere',
-};
 const logoFor = (company) => {
-  const slug = LOGO[company] ?? 'other';
+  const slug = logoSlug(company);
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('class', 'glyph');
   svg.setAttribute('viewBox', '0 0 24 24');

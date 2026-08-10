@@ -20,7 +20,7 @@ import { join } from 'node:path';
 import {
   dateParts, displayTags, contextWindow, parameterCount, tagLabel, diffRecords,
   fieldState, appliesTo, evidenceFor, assertedValue, EVIDENCED_FIELDS,
-  MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL,
+  MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL, logoSlug,
 } from '../lib/record.mjs';
 
 const EXPORT = process.argv.includes('--export');
@@ -73,14 +73,9 @@ const ERAS = [[2022, 'Pre-ChatGPT scaling'], [2023, 'The assistant boom'],
   [2024, 'Multimodal & open weights'], [2025, 'Reasoning models'], [2026, 'Agentic systems']];
 const eraFor = (y) => ERAS.reduce((acc, [yr, n]) => (y >= yr ? n : acc), ERAS[0][1]);
 
-const COMPANY_VAR = {
-  'AI21 Labs': 'ai21', Anthropic: 'anthropic', 'Mistral AI': 'mistral',
-  'Alibaba Qwen': 'alibaba', Amazon: 'amazon', NVIDIA: 'nvidia', BigScience: 'bigscience',
-  OpenAI: 'openai', Microsoft: 'microsoft', xAI: 'xai', 'Google DeepMind': 'google',
-  DeepSeek: 'deepseek', 'Meta AI': 'meta', 'Moonshot AI': 'moonshot', 'Zhipu AI': 'zhipu',
-  Cohere: 'cohere',
-};
-const slugFor = (c) => COMPANY_VAR[c] ?? 'other';
+// Company → logo/colour slug now lives in lib/record.mjs, imported below
+// with the other shared derived facts. See the note there.
+const slugFor = logoSlug;
 const companySlug = (c) => c.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 /** "o-series" → "o-series", "GPT-OSS" → "gpt-oss". Same rule as companies. */
 const familySlug = (f) => f.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

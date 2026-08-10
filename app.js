@@ -22,6 +22,7 @@
 import {
   dateParts, displayTags, contextWindow, parameterCount, tagLabel,
   fieldState, evidenceFor, MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL,
+  logoSlug,
 } from './lib/record.mjs';
 
 /* ------------------------------------------------------------------ config */
@@ -30,34 +31,6 @@ import {
  *  Colour is a SECONDARY channel: every card, chip and dialog prints the
  *  company name beside the swatch, so identity never rests on hue alone.
  *  Sixteen brands exceed the ~8-slot categorical ceiling — see README. */
-const COMPANY_VAR = {
-  'AI21 Labs': '--c-ai21',
-  'AI21': '--c-ai21',
-  'Anthropic': '--c-anthropic',
-  'Mistral AI': '--c-mistral',
-  'Mistral': '--c-mistral',
-  'Alibaba Qwen': '--c-alibaba',
-  'Alibaba': '--c-alibaba',
-  'Qwen': '--c-alibaba',
-  'Amazon': '--c-amazon',
-  'Amazon Web Services': '--c-amazon',
-  'NVIDIA': '--c-nvidia',
-  'Nvidia': '--c-nvidia',
-  'BigScience': '--c-bigscience',
-  'OpenAI': '--c-openai',
-  'Microsoft': '--c-microsoft',
-  'xAI': '--c-xai',
-  'Google DeepMind': '--c-google',
-  'Google': '--c-google',
-  'DeepSeek': '--c-deepseek',
-  'Meta AI': '--c-meta',
-  'Meta': '--c-meta',
-  'Moonshot AI': '--c-moonshot',
-  'Moonshot': '--c-moonshot',
-  'Zhipu AI': '--c-zhipu',
-  'Zhipu': '--c-zhipu',
-  'Cohere': '--c-cohere',
-};
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
@@ -288,7 +261,7 @@ function computeYears() {
   return out;
 }
 
-const varFor = (company) => COMPANY_VAR[company] || '--c-other';
+const varFor = (company) => `--c-${logoSlug(company)}`;
 const colorFor = (company) => `var(${varFor(company)})`;
 
 /** Company glyph, as an <svg><use> into the sprite in index.html.
