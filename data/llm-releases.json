@@ -2038,7 +2038,15 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "reasoning"
       ],
@@ -2085,7 +2093,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (September 12, 2024) and context window (200,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (September 12, 2024) and context window (200,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
       },
       "undisclosed": [
         "parameter_count"
@@ -3603,7 +3611,15 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "reasoning"
       ],
@@ -3652,7 +3668,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to official documentation. Not verified because parameter count and modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
       },
       "undisclosed": [
         "parameter_count"
@@ -3876,7 +3892,15 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "reasoning"
       ],
@@ -3925,7 +3949,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2025-12-11) and context window (400,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (2025-12-11) and context window (400,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
       },
       "undisclosed": [
         "parameter_count"
@@ -4221,7 +4245,15 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "flagship"
@@ -4268,7 +4300,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2026-03-05) and context window (1,050,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (2026-03-05) and context window (1,050,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
       },
       "undisclosed": [
         "parameter_count"
@@ -4555,7 +4587,15 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "reasoning"
       ],
@@ -4613,7 +4653,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (April 23, 2026) and context window (1,050,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (April 23, 2026) and context window (1,050,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
       },
       "undisclosed": [
         "parameter_count"

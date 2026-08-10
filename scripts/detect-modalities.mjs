@@ -48,6 +48,63 @@ const MULTIMODAL_HINTS = [
   /\bsee\s+(?:an?\s+)?image/i, /\blook at\b/i,
 ];
 
+/**
+ * Pass 1 — a structured declaration, which beats any inference.
+ *
+ * Documentation pages state modalities in a small table rather than in prose,
+ * which is why a prose probe misses them entirely:
+ *
+ *   OpenAI          "Input Text, image  Output Text"
+ *   Hugging Face    "Input modalities … Output modalities …"
+ *
+ * Matching is deliberately tight. Docs navigation is full of phrases like
+ * "Images and vision" and "Audio and speech", so a loose pattern would read the
+ * sidebar as a capability declaration for the model.
+ */
+// Global, because a docs page mentions "input"/"output" many times before the
+// real declaration — in navigation, pricing and prose. Every candidate is tried
+// and parseModalities decides which one is actually a declaration.
+const DECLARATION = [
+  /\bInputs?\s+modalities?\s*:?\s*([A-Za-z,\s]{3,90}?)\s+Outputs?\s+modalities?\s*:?\s*([A-Za-z,\s]{3,60}?)(?=\s+[A-Z][a-z]|\s*$)/g,
+  /\bInputs?\b\s*:?\s*([A-Za-z,\s]{3,90}?)\s+Outputs?\b\s*:?\s*([A-Za-z,\s]{3,60}?)(?=\s+[A-Z][a-z]|\s*$)/g,
+];
+
+const MODALITY_WORD = { text: 'text', image: 'image', images: 'image', audio: 'audio', video: 'video' };
+/** Words allowed inside a declaration that are not themselves modalities. */
+const IGNORABLE = new Set(['and', 'or', 'pdf', 'pdfs', 'document', 'documents', '']);
+
+/**
+ * "Text, Image, Video, Audio, and PDF" → ["text","image","video","audio"].
+ *
+ * Returns null if the span contains anything that is not a modality or a known
+ * connector. That check is what separates a declaration from ordinary prose:
+ * without it, "…the input prompt and the output text…" would parse as one.
+ */
+function parseModalities(s) {
+  const out = [];
+  for (const raw of s.split(/\s*(?:,|\band\b|\bor\b|\/)\s*/)) {
+    const w = raw.trim().toLowerCase();
+    if (IGNORABLE.has(w)) continue;
+    const m = MODALITY_WORD[w];
+    if (!m) return null;
+    if (!out.includes(m)) out.push(m);
+  }
+  return out.length ? out : null;
+}
+
+function declaredModalities(texts) {
+  for (const t of texts) {
+    for (const p of DECLARATION) {
+      for (const m of t.matchAll(p)) {
+        const input = parseModalities(m[1]);
+        const output = parseModalities(m[2]);
+        if (input && output) return { input, output, quote: m[0].slice(0, 120) };
+      }
+    }
+  }
+  return null;
+}
+
 /** An explicit denial is stronger than silence, and worth recording as such. */
 const EXPLICIT_TEXT_ONLY = [
   /\bgenerate[s]? text only\b/i,
@@ -82,21 +139,45 @@ async function fetchText(url) {
 const targets = data.releases.filter((r) => r.modalities == null);
 console.log(`${targets.length} records without modalities\n`);
 
-const textOnly = [], flagged = [], unreadable = [];
+const textOnly = [], flagged = [], unreadable = [], declaredHits = [], partial = [];
 let done = 0;
 
 async function examine(r) {
   const archived = r.sources.filter((s) => s.archived_url && s.authority === 'primary');
   const texts = [];
+  let failures = 0;
   for (const s of archived) {
     const t = await fetchText(s.archived_url);
-    if (t) texts.push(t);
+    if (t) texts.push(t); else failures++;
   }
 
   done++;
   process.stderr.write(`  ${done}/${targets.length} ${r.id}\n`);
 
   if (!texts.length) { unreadable.push(r.id); return; }
+
+  // Pass 1: the source states the modalities outright. Nothing to infer.
+  const declared = declaredModalities(texts);
+  if (declared) {
+    declaredHits.push(`${r.id}: in ${declared.input.join(', ')} · out ${declared.output.join(', ')}`);
+    if (WRITE) {
+      r.modalities = { input: declared.input, output: declared.output };
+      r.tags = r.tags.filter((t) => t !== 'multimodal');
+      r.provenance.reason = `${(r.provenance.reason ?? '').trim()} Modalities taken from the `
+        + `documentation's own declaration: "${declared.quote.trim()}".`.trim();
+    }
+    return;
+  }
+
+  // Pass 2 infers from silence, so it needs ALL the sources. Concluding
+  // "text-only" after reading two of a record's three sources means concluding
+  // it from a page we never opened — the unread one could be the model card
+  // that documents vision. A positive declaration (pass 1) is self-sufficient
+  // and therefore exempt; an inference from absence is not.
+  if (failures) {
+    partial.push(`${r.id} (${failures} of ${archived.length} sources unreadable)`);
+    return;
+  }
 
   const explicit = texts.some((t) => EXPLICIT_TEXT_ONLY.some((p) => p.test(t)));
   const hint = MULTIMODAL_HINTS.find((p) => texts.some((t) => p.test(t)));
@@ -123,10 +204,16 @@ await Promise.all(Array.from({ length: Math.min(CONCURRENCY, queue.length) }, as
   while (queue.length) await examine(queue.shift());
 }));
 
+console.log(`\nDECLARED — the documentation states the modalities (${declaredHits.length}):`);
+for (const d of declaredHits) console.log(`  ${d}`);
 console.log(`\nTEXT-ONLY — no non-text modality anywhere in the primary sources: ${textOnly.length}`);
 console.log(`  of which explicitly stated as text-only: ${textOnly.filter((t) => t.explicit).length}`);
 console.log(`\nLEFT FOR A PERSON — something multimodal is mentioned (${flagged.length}):`);
 for (const f of flagged) console.log(`  ${f}`);
+if (partial.length) {
+  console.log(`\nPARTIAL READ — not enough to infer from silence (${partial.length}):`);
+  for (const p of partial) console.log(`  ${p}`);
+}
 if (unreadable.length) console.log(`\nNO READABLE SOURCE (${unreadable.length}): ${unreadable.join(', ')}`);
 
 if (WRITE) {
