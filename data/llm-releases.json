@@ -2481,7 +2481,7 @@
       "family": "o-series",
       "classification": {
         "primary_type": "language",
-        "subtype": "llm"
+        "subtype": "reasoning"
       },
       "modalities": {
         "input": [
@@ -3013,7 +3013,7 @@
       "family": "DeepSeek",
       "classification": {
         "primary_type": "language",
-        "subtype": "llm"
+        "subtype": "reasoning"
       },
       "modalities": {
         "input": [
@@ -3625,7 +3625,7 @@
       "family": "Gemini",
       "classification": {
         "primary_type": "language",
-        "subtype": "llm"
+        "subtype": "reasoning"
       },
       "modalities": null,
       "capabilities": [
@@ -5567,7 +5567,7 @@
       "family": "Muse",
       "classification": {
         "primary_type": "language",
-        "subtype": "llm"
+        "subtype": "reasoning"
       },
       "modalities": {
         "input": [
