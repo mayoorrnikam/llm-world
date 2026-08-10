@@ -82,6 +82,10 @@ for (const file of process.argv.slice(2)) {
         badModality.push(row.id);
       } else {
         r.modalities = { input: [...input], output: [...output] };
+        // Once modalities exist, "multimodal" is derived from them. Leaving the
+        // editorial tag would store the same fact twice (METHODOLOGY §4), and
+        // the validator rejects it.
+        r.tags = r.tags.filter((t) => t !== 'multimodal');
         mods++;
       }
     }

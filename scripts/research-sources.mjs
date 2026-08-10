@@ -43,7 +43,9 @@ const PROBES = {
 
 const targets = data.releases.filter((r) => {
   if (IDS) return IDS.includes(r.id);
-  if (NEED === 'modalities') return r.modalities == null && r.tags.includes('multimodal');
+  // Every record without modalities, not just the ones we once tagged
+  // "multimodal" — a text-only model still needs its modalities evidenced.
+  if (NEED === 'modalities') return r.modalities == null;
   if (NEED === 'reasoning') return r.capabilities.includes('reasoning');
   if (NEED === 'context') return contextWindow(r) == null;
   return true;

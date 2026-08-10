@@ -12,7 +12,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "flagship"
@@ -72,7 +79,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Meta's open 175-billion-parameter model released to democratize access to large language models.",
@@ -117,7 +131,7 @@
       "provenance": {
         "status": "estimated",
         "confidence": 50,
-        "reason": "Cited to the technical paper and the official repository. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the technical paper and the official repository. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       }
     },
     {
@@ -130,7 +144,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "The 176-billion-parameter multilingual open model built by over a thousand volunteer researchers.",
@@ -179,7 +200,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "China's landmark open bilingual 130-billion-parameter model released in August 2022.",
@@ -283,7 +311,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Open foundation models from 7B to 65B parameters that ignited the open-source LLM ecosystem.",
@@ -332,7 +367,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "flagship"
@@ -468,7 +510,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "flagship"
@@ -523,7 +572,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "flagship"
@@ -578,7 +634,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "flagship"
@@ -616,7 +679,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Jul 11, 2023) and context window (100K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Jul 11, 2023) and context window (100K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "undisclosed": [
         "parameter_count"
@@ -632,7 +695,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "The first major open model with commercial licensing, defining open-source AI for a year.",
@@ -677,7 +747,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. The primary source states the model is text-only."
       }
     },
     {
@@ -690,7 +760,14 @@
         "primary_type": "language",
         "subtype": "slm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "small-efficient"
@@ -746,7 +823,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (September 27, 2023), context window (8192) and parameter count (7.3B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (September 27, 2023), context window (8192) and parameter count (7.3B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       }
     },
     {
@@ -759,7 +836,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "flagship"
@@ -914,7 +998,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "The first open mixture-of-experts model to rival much larger dense models.",
@@ -959,7 +1050,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the lab's own announcement. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       }
     },
     {
@@ -972,7 +1063,14 @@
         "primary_type": "language",
         "subtype": "slm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "small-efficient"
@@ -1095,8 +1193,20 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "video"
+      ],
       "tags": [
         "flagship"
       ],
@@ -1292,7 +1402,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Cohere's RAG-focused enterprise model family with 128K context and open weights.",
@@ -1337,7 +1454,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Mar 11, 2024), context window (128K) and parameter count (35B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (Mar 11, 2024), context window (128K) and parameter count (35B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
       }
     },
     {
@@ -1350,7 +1467,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "8B and 70B models with dramatically stronger reasoning that powered Meta's AI assistant.",
@@ -1395,7 +1519,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (April 18, 2024), context window (8,192) and parameter count (70B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (April 18, 2024), context window (8,192) and parameter count (70B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
       }
     },
     {
@@ -1468,7 +1592,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "An efficient 236B MoE with 21B active parameters that made DeepSeek a global open-model force.",
@@ -1513,7 +1644,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2024-05-06), context window (128K) and parameter count (236B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (2024-05-06), context window (128K) and parameter count (236B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       }
     },
     {
@@ -1717,7 +1848,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "The 405B open flagship with 128K context, the first open model at frontier scale.",
@@ -1762,7 +1900,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (July 23, 2024), context window (128K) and parameter count (405B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (July 23, 2024), context window (128K) and parameter count (405B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
       }
     },
     {
@@ -1775,7 +1913,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "flagship"
@@ -1822,7 +1967,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (July 24, 2024), context window (128k) and parameter count (123 billion) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (July 24, 2024), context window (128k) and parameter count (123 billion) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       }
     },
     {
@@ -2226,7 +2371,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "A 671B MoE open model whose near-frontier performance at minimal cost stunned the industry.",
@@ -2271,7 +2423,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       }
     },
     {
@@ -2284,7 +2436,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "reasoning"
       ],
@@ -2331,7 +2490,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched."
+        "reason": "Cited to the technical paper and the official model card. Not verified because modalities are not recorded — either undisclosed by the lab or not yet researched. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       }
     },
     {
@@ -2534,8 +2693,18 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision"
+      ],
       "tags": [
         "flagship"
       ],
@@ -2676,7 +2845,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [
         "flagship"
@@ -2723,7 +2899,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Mar 13, 2025), context window (256K) and parameter count (111B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (Mar 13, 2025), context window (256K) and parameter count (111B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
       }
     },
     {
@@ -2869,7 +3045,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "reasoning"
       ],
@@ -2916,7 +3099,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (April 29, 2025), context window (131072) and parameter count (235B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (April 29, 2025), context window (131072) and parameter count (235B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       }
     },
     {
@@ -2993,7 +3176,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "A trillion-parameter open MoE with 32B active parameters excelling at code and agents.",
@@ -3038,7 +3228,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2025-07-11), context window (128K) and parameter count (1T) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (2025-07-11), context window (128K) and parameter count (1T) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
       }
     },
     {
@@ -3051,7 +3241,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "A 355B MoE open model that became the first Chinese open model to rival closed frontier models.",
@@ -3095,7 +3292,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       }
     },
     {
@@ -3108,7 +3306,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "OpenAI's first open-weight release since GPT-2, with 120B and 20B variants.",
@@ -3171,7 +3376,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (August 5, 2025), context window (131,072) and parameter count (117B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (August 5, 2025), context window (131,072) and parameter count (117B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
       }
     },
     {
@@ -3258,7 +3463,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "A hybrid think-and-non-think update doubling context to 128K for the agent era.",
@@ -3303,7 +3515,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2025-08-21), context window (128K) and parameter count (671B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (2025-08-21), context window (128K) and parameter count (671B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
       }
     },
     {
@@ -3316,9 +3528,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "vision",
+        "multilingual"
       ],
       "tags": [
         "flagship"
@@ -3510,9 +3732,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "vision",
+        "multilingual"
       ],
       "tags": [
         "flagship"
@@ -3709,9 +3941,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "vision",
+        "multilingual"
       ],
       "tags": [
         "flagship"
@@ -3837,7 +4079,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "agentic"
       ],
@@ -3886,7 +4135,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2026-02-16), context window (262144) and parameter count (397B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (2026-02-16), context window (262144) and parameter count (397B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
       }
     },
     {
@@ -3899,9 +4148,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "vision",
+        "multilingual"
       ],
       "tags": [],
       "note": "The Sonnet-tier counterpart to Opus 4.6.",
@@ -4137,11 +4396,23 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "reasoning",
+        "tool_use",
+        "agentic"
+      ],
       "tags": [
-        "flagship",
-        "multimodal"
+        "flagship"
       ],
       "note": "Meta's first closed frontier model, from Meta Superintelligence Labs, shipped alongside the open-weights Llama 5.",
       "events": [
@@ -4209,9 +4480,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "vision",
+        "multilingual"
       ],
       "tags": [
         "flagship"
@@ -4348,7 +4629,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "A 284B MoE with 13B active parameters and 1M context, MIT-licensed alongside V4-Pro.",
@@ -4393,7 +4681,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2026-04-24), context window (1M) and parameter count (284B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (2026-04-24), context window (1M) and parameter count (284B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       }
     },
     {
@@ -4471,9 +4759,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "vision",
+        "multilingual"
       ],
       "tags": [
         "flagship"
@@ -4536,7 +4834,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "agentic"
       ],
@@ -4582,7 +4887,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       }
     },
     {
@@ -4595,9 +4901,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "reasoning"
+        "reasoning",
+        "vision",
+        "multilingual"
       ],
       "tags": [
         "flagship"
@@ -4660,9 +4976,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "reasoning"
+        "reasoning",
+        "vision",
+        "multilingual"
       ],
       "tags": [
         "flagship"
@@ -4782,9 +5108,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "vision",
+        "multilingual"
       ],
       "tags": [],
       "note": "The most agentic Sonnet to date, approaching Opus-class performance at a lower price.",

@@ -169,7 +169,7 @@ nobody has checked yet.
 | Context window | 80/84 | 3 | 1 |
 | Parameter count | 40/84 | 41 | 3 |
 | Licence (open weights only) | 34/35 | 0 | 1 |
-| Modalities | 12/84 | 0 | 72 |
+| Modalities | 54/84 | 0 | 30 |
 
 Most proprietary labs never publish parameter counts, which is why 41 of those
 nulls are correct answers rather than holes. Modalities are new in schema 1.6:
