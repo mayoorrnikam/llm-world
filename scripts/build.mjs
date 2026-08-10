@@ -18,7 +18,7 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import {
-  dateParts, displayTags, contextWindow, parameterCount, tagLabel,
+  dateParts, displayTags, contextWindow, parameterCount, tagLabel, diffRecords,
   fieldState, MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL,
 } from '../lib/record.mjs';
 
@@ -69,6 +69,8 @@ const COMPANY_VAR = {
 };
 const slugFor = (c) => COMPANY_VAR[c] ?? 'other';
 const companySlug = (c) => c.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+/** "o-series" → "o-series", "GPT-OSS" → "gpt-oss". Same rule as companies. */
+const familySlug = (f) => f.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (m) =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
@@ -495,6 +497,181 @@ function latestPage() {
   });
 }
 
+
+/**
+ * A family page: one model line, generation by generation.
+ *
+ * This is the question the timeline cannot answer. A timeline shows what
+ * shipped when; a family shows how one line of models actually developed —
+ * which is the thing a release tracker does not do.
+ */
+function familyPage(name, list) {
+  const gens = [...list].sort((a, b) => a.year - b.year || a.month - b.month || (a.day || 0) - (b.day || 0));
+  const labs = [...new Set(gens.map((r) => r.company))];
+  const first = gens[0], last = gens.at(-1);
+  const span = daysBetween(first, last);
+  const openCount = gens.filter((r) => r.access.open_weights).length;
+  const verified = gens.filter((r) => r.provenance.status === 'verified').length;
+
+  // Median gap needs at least two gaps to mean anything.
+  const gaps = gens.slice(1).map((r, i) => daysBetween(gens[i], r)).sort((a, b) => a - b);
+  const median = gaps.length >= 2 ? gaps[Math.floor(gaps.length / 2)] : null;
+
+  const ctxPoints = gens.filter((r) => r.technical.context_window != null);
+
+  const body = `
+<nav class="crumbs"><a href="../../">Home</a> › <a href="../">Families</a> › <span>${esc(name)}</span></nav>
+
+<div class="doc-hero">
+  <span class="doc-mark">${glyph(first.company)}</span>
+  <div>
+    <h1>${esc(name)}</h1>
+    <p class="doc-sub">${esc(labs.join(' · '))} · ${gens.length} tracked release${gens.length === 1 ? '' : 's'}${
+      gens.length > 1 ? ` · ${fullDate(first)} – ${fullDate(last)}` : ` · ${fullDate(first)}`}</p>
+  </div>
+</div>
+
+<h2>At a glance</h2>
+<table class="doc-table">
+<tbody>
+<tr><th scope="row">Releases tracked</th><td>${gens.length}</td></tr>
+<tr><th scope="row">First tracked</th><td>${fullDate(first)} — <a href="../../models/${esc(first.id)}/">${esc(first.model)}</a></td></tr>
+<tr><th scope="row">Latest</th><td>${fullDate(last)} — <a href="../../models/${esc(last.id)}/">${esc(last.model)}</a></td></tr>
+${gens.length > 1 ? `<tr><th scope="row">Span</th><td>${span.toLocaleString('en-US')} days</td></tr>` : ''}
+${median != null ? `<tr><th scope="row">Median gap</th><td>${median} days between releases</td></tr>` : ''}
+<tr><th scope="row">Weights</th><td>${openCount === gens.length ? 'Open throughout'
+    : openCount === 0 ? 'Proprietary throughout'
+    : `${openCount} of ${gens.length} open`}</td></tr>
+<tr><th scope="row">Record quality</th><td>${verified} of ${gens.length} verified · <a href="../../data-quality/">how this is judged</a></td></tr>
+</tbody></table>
+
+<h2>Lineage</h2>
+<p class="chart-note">Ordered by announcement date. Lineage is not inferred from
+version numbers — labs do not number consistently, so the dates decide the order.</p>
+<ol class="doc-lineage family-lineage">${gens.map((r) => `<li>
+<a href="../../models/${esc(r.id)}/">${esc(r.model)}</a>
+<span>${fullDate(r)}</span></li>`).join('')}</ol>
+
+${ctxPoints.length > 1 ? `<h2>Context window over time</h2>
+<p class="chart-note">Only releases with a disclosed context window appear${
+  ctxPoints.length < gens.length ? ` — ${gens.length - ctxPoints.length} of ${gens.length} are not shown` : ''}.</p>
+${barRows(ctxPoints.map((r) => ({
+    name: `${r.model} · ${r.year}`,
+    value: r.technical.context_window,
+    display: tokens(r.technical.context_window),
+    href: `../../models/${esc(r.id)}/`,
+  })))}` : ''}
+
+${gens.length > 1 ? whatChangedSection(gens) : `<h2>What changed</h2>
+<p class="doc-note">Only one release of this family is tracked, so there is nothing to compare yet.</p>`}
+
+<p class="doc-cta">
+  <a href="../../compare/?m=${gens.slice(-2).map((r) => esc(r.id)).join(',')}">Compare the two most recent side by side →</a><br>
+  <a href="../../companies/${companySlug(first.company)}/">All releases from ${esc(first.company)} →</a>
+</p>
+`;
+
+  return page({
+    title: `${name} — model family lineage and what changed | LLM World`,
+    description: `Every tracked ${name} release from ${first.company}, in order, with what changed between generations and the sources behind each figure.`,
+    canonical: `${BASE_URL}/families/${familySlug(name)}/`,
+    section: 'families/',
+    depth: 2,
+    sprites: [...new Set(gens.map((r) => slugFor(r.company)))],
+    body,
+  });
+}
+
+/**
+ * The diff between consecutive generations.
+ *
+ * Fields the data cannot support are listed as gaps rather than silently
+ * dropped, because "we did not compare this" and "nothing changed" look
+ * identical once you hide the difference.
+ */
+function whatChangedSection(gens) {
+  const pairs = gens.slice(1).map((next, i) => {
+    const d = diffRecords(gens[i], next);
+    return { prev: gens[i], next, ...d };
+  });
+
+  // A caveat that applies to every pair is a fact about the family, not about
+  // any one step. Repeating it fifteen times buries the changes that did happen.
+  const universal = pairs[0].incomparable
+    .filter((g) => pairs.every((p) => p.incomparable.some((x) => x.label === g.label)))
+    .map((g) => g.label);
+
+  return `<h2>What changed</h2>
+<p class="chart-note">Generation to generation, from evidenced values only. A field is
+compared only where both releases record it — otherwise it is called out as not comparable,
+so a research gap never reads as a change the lab made.</p>
+${universal.length ? `<p class="doc-note">Across every generation of this family,
+${esc(universal.join(', ').toLowerCase())} could not be compared — the values are not
+recorded on both sides of any step. That is a gap in this dataset, not a statement about
+the models. <a href="../../data-quality/">See data quality</a>.</p>` : ''}
+${pairs.map(({ prev, next, changes, incomparable }) => {
+    const local = incomparable.filter((g) => !universal.includes(g.label));
+    return `<div class="changeset">
+<h3><a href="../../models/${esc(prev.id)}/">${esc(prev.model)}</a> → <a href="../../models/${esc(next.id)}/">${esc(next.model)}</a>
+<span class="changeset-gap">${daysBetween(prev, next).toLocaleString('en-US')} days</span></h3>
+${changes.length ? `<dl class="change-list">${changes.map((c) => {
+      if (c.gained || c.lost) {
+        return `<div><dt>${esc(c.label)}</dt><dd>${
+          [...(c.gained ?? []).map((x) => `<span class="delta-add">+ ${esc(tagLabel(x))}</span>`),
+            ...(c.lost ?? []).map((x) => `<span class="delta-drop">− ${esc(tagLabel(x))}</span>`)].join(' ')
+        }</dd></div>`;
+      }
+      return `<div><dt>${esc(c.label)}</dt><dd><span class="delta-from">${esc(c.from)}</span>
+<span class="delta-arrow" aria-label="changed to">→</span>
+<span class="delta-to" data-direction="${esc(c.direction)}">${esc(c.to)}</span></dd></div>`;
+    }).join('')}</dl>` : '<p class="doc-note">No change in any field both releases record.</p>'}
+${local.length ? `<p class="change-gaps">Not comparable here: ${
+      local.map((g) => `${esc(g.label.toLowerCase())} (${esc(g.why)})`).join('; ')}.</p>` : ''}
+</div>`;
+  }).join('')}`;
+}
+
+/** Index of every tracked family. */
+function familiesIndexPage(byFamily) {
+  const rows = [...byFamily.entries()]
+    .map(([name, list]) => {
+      const gens = [...list].sort((a, b) => a.year - b.year || a.month - b.month);
+      return { name, gens, latest: gens.at(-1), first: gens[0] };
+    })
+    .sort((a, b) => b.gens.length - a.gens.length || a.name.localeCompare(b.name));
+
+  const multi = rows.filter((r) => r.gens.length > 1).length;
+
+  const body = `
+<nav class="crumbs"><a href="../">Home</a> › <span>Families</span></nav>
+
+<h1>Model families</h1>
+<p class="doc-sub">${rows.length} tracked lines · ${multi} with more than one generation</p>
+
+<p class="doc-note">A family is a lineage the lab itself presents as continuous.
+It is never inferred from names alone — <a href="../models/gpt-oss/">GPT-OSS</a> is not
+the GPT family merely for sharing a prefix.</p>
+
+<ol class="doc-list">${rows.map((r) => `<li>
+<span class="doc-mark sm">${glyph(r.first.company)}</span>
+<a class="cell-name" href="${familySlug(r.name)}/">${esc(r.name)}</a>
+<span class="cell-meta">${esc(r.first.company)}</span>
+<span class="cell-num">${r.gens.length} release${r.gens.length === 1 ? '' : 's'}</span>
+</li>`).join('')}</ol>
+
+<p class="doc-cta"><a href="../models/">Browse every release →</a></p>
+`;
+
+  return page({
+    title: 'LLM model families — lineage and evolution | LLM World',
+    description: `The ${rows.length} model families tracked here, from Claude and GPT to Llama and Qwen, each with its full lineage and what changed between generations.`,
+    canonical: `${BASE_URL}/families/`,
+    section: 'families/',
+    depth: 1,
+    sprites: [...new Set(rows.map((r) => slugFor(r.first.company)))],
+    body,
+  });
+}
 
 /**
  * The Data Quality page.
@@ -1012,12 +1189,18 @@ write('companies', companiesIndexPage(byCompany));
 write('latest', latestPage());
 write('analytics', analyticsPage(byCompany, byYear));
 write('data-quality', dataQualityPage());
+
+const byFamily = new Map();
+for (const r of releases) (byFamily.get(r.family) ?? byFamily.set(r.family, []).get(r.family)).push(r);
+for (const [name, list] of byFamily) write(`families/${familySlug(name)}`, familyPage(name, list));
+write('families', familiesIndexPage(byFamily));
 write('compare', comparePage());
 
 const BASE = BASE_URL;
 const urls = [
   `${BASE}/models/`, `${BASE}/companies/`, `${BASE}/latest/`,
-  `${BASE}/analytics/`, `${BASE}/compare/`, `${BASE}/data-quality/`,
+  `${BASE}/analytics/`, `${BASE}/compare/`, `${BASE}/data-quality/`, `${BASE}/families/`,
+  ...[...new Set(releases.map((r) => r.family))].map((f) => `${BASE}/families/${familySlug(f)}/`),
   `${BASE}/`,
   ...releases.map((r) => `${BASE}/models/${r.id}/`),
   ...[...byCompany.keys()].map((c) => `${BASE}/companies/${companySlug(c)}/`),
@@ -1112,6 +1295,6 @@ if (EXPORT) {
   console.log('  + export: api/index.json, api/models.json, api/companies.json, llm-releases.csv');
 }
 
-console.log(`built ${releases.length} model pages · ${byCompany.size} company pages · ` +
+console.log(`built ${releases.length} model pages · ${byFamily.size} family pages · ${byCompany.size} company pages · ` +
   `${byYear.size} year pages · sitemap (${urls.length} urls)`);
 if (!EXPORT) console.log('  bulk export skipped — pass --export to enable');

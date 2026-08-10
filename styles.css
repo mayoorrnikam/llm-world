@@ -1724,6 +1724,88 @@ code, kbd {
   color: var(--muted);
 }
 
+/* Family lineage — one generation per row, dates on the right. */
+.family-lineage li { padding: 10px 2px; }
+
+/* What changed: one block per consecutive pair of generations. */
+.changeset {
+  margin: 0 0 20px;
+  padding: 14px 16px;
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+}
+.changeset h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.changeset-gap {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.change-list { margin: 0; }
+.change-list > div {
+  display: grid;
+  grid-template-columns: minmax(0, 10em) minmax(0, 1fr);
+  gap: 10px;
+  padding: 6px 0;
+  border-top: 1px solid var(--line-soft);
+}
+.change-list > div:first-child { border-top: 0; }
+.change-list dt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.change-list dd {
+  margin: 0;
+  font-size: 13.5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+.delta-from { color: var(--muted); }
+.delta-arrow { color: var(--muted); font-family: var(--mono); }
+.delta-to { font-weight: 600; }
+/* Direction is carried by the arrow and the values themselves; colour only
+   reinforces it, never states it alone. */
+.delta-to[data-direction="up"] { color: var(--accent); }
+.delta-add, .delta-drop {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+.delta-add { color: var(--accent); border-color: currentColor; }
+.delta-drop { color: var(--warn); border-color: currentColor; }
+
+/* The gaps matter as much as the changes — same block, quieter voice. */
+.change-gaps {
+  margin: 10px 0 0;
+  padding-top: 9px;
+  border-top: 1px dashed var(--line-soft);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  .change-list > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .changeset-gap { margin-left: 0; }
+}
+
 .doc-main a { color: var(--accent); text-underline-offset: 3px; }
 
 .doc-cta { margin: 28px 0 0; font-size: 13.5px; }

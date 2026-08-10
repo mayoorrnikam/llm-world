@@ -104,12 +104,15 @@ generates static, no-JavaScript-required pages from the same dataset:
                      cadence, context-window growth, capability mix
 /compare/            pick 2-5 releases and read them side by side
 /data-quality/       verification, source authority, coverage and what's missing
+/families/           index of the 23 tracked model lines
+/families/<slug>/    23 pages — lineage, context growth, and what changed
+                     between each pair of generations
 /models/             index of everything, newest first, grouped by year
 /models/<id>/        84 pages (+1 retired-id redirect) — facts, sources, family lineage, cadence
 /companies/          index of labs, ranked by release count
 /companies/<slug>/   16 pages — a lab's releases and its median release gap
 /timeline/<year>/     5 pages — that year's releases by month
-/sitemap.xml        112 URLs
+/sitemap.xml        136 URLs
 ```
 
 **Header and footer are shared, not duplicated.** `build.mjs` lifts them

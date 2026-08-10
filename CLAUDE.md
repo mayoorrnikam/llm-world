@@ -61,8 +61,16 @@ out from the sources.
    so any view is linkable.
 2. **`scripts/build.mjs`** — generates static, no-JS-required pages for
    `/models/<id>/`, `/companies/<slug>/`, `/timeline/<year>/`, plus the
-   `/latest/`, `/models/`, `/companies/`, `/analytics/` and `/compare/` indexes,
+   `/families/<slug>/`, plus the `/latest/`, `/models/`, `/families/`,
+   `/companies/`, `/analytics/`, `/compare/` and `/data-quality/` indexes,
    a sitemap and robots.txt.
+
+**"What changed" must never turn a research gap into a claim.** `diffRecords()`
+in `lib/record.mjs` compares a field only when both records assert a value.
+Capabilities are the trap: they are recorded on 12 records, so a plain set
+difference reports "− vision" between two Claude releases and states that
+Anthropic removed it. Absence of a capability means "not evidenced", never
+"absent" — fields that cannot be compared are rendered as gaps, not dropped.
 
 Both must agree, which is why the next two points exist.
 
