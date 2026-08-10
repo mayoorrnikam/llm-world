@@ -2503,8 +2503,18 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision"
+      ],
       "tags": [
         "flagship"
       ],
@@ -2541,7 +2551,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from the launch announcement, which states: “Claude 3.5 Sonnet is our strongest vision model yet, surpassing Claude 3 Opus on standard vision benchmarks.” Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources, which labs advertise prominently when present."
       },
       "undisclosed": [
         "parameter_count"
@@ -3858,9 +3868,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "reasoning"
+        "reasoning",
+        "vision"
       ],
       "tags": [
         "flagship"
@@ -3907,7 +3927,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from the launch announcement, which states: “Grok 3 also excels in image understanding (MMMU) and video understanding (EgoSchema) tasks.” Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources, which labs advertise prominently when present."
       },
       "undisclosed": [
         "parameter_count"
@@ -5546,11 +5566,22 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision"
+      ],
       "tags": [
-        "flagship",
-        "multimodal"
+        "flagship"
       ],
       "note": "Google's natively multimodal reasoning flagship with DeepThink and 1M context.",
       "events": [
@@ -5594,7 +5625,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Nov 18, 2025) and context window (1 million) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Nov 18, 2025) and context window (1 million) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities read from the launch announcement, which states: “built from the start to seamlessly synthesize information about any topic across multiple modalities, including text, images, video, audio and code.” Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources, which labs advertise prominently when present."
       },
       "undisclosed": [
         "parameter_count"
