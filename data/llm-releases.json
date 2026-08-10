@@ -5708,7 +5708,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window"
+      ]
     },
     {
       "id": "olmo-3-32b",
@@ -5808,7 +5811,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window"
+      ]
     },
     {
       "id": "claude-opus-4-5",
@@ -6984,6 +6990,88 @@
       }
     },
     {
+      "id": "qwen-3-6-35b-a3b",
+      "model": "Qwen3.6-35B-A3B",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "A 35-billion-parameter mixture-of-experts Qwen release with 3B active parameters.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-04-15",
+          "sources": [
+            "qwen-3-6-35b-a3b-s1",
+            "qwen-3-6-35b-a3b-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 35000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "qwen-3-6-35b-a3b-s1",
+          "url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260416133036/https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+          "retrieved": "2026-04-16"
+        },
+        {
+          "id": "qwen-3-6-35b-a3b-s2",
+          "url": "https://qwen.ai/blog?id=qwen3.6",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260413115807/https://qwen.ai/blog?id=qwen3.6",
+          "retrieved": "2026-04-13"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-04-15",
+            "sources": [
+              "qwen-3-6-35b-a3b-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 35000000000,
+            "sources": [
+              "qwen-3-6-35b-a3b-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "claude-opus-4-7",
       "model": "Claude Opus 4.7",
       "company": "Anthropic",
@@ -7088,6 +7176,88 @@
           "observed_on": "2026-04-16"
         }
       ]
+    },
+    {
+      "id": "qwen-3-6-27b",
+      "model": "Qwen3.6-27B",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "The 27-billion-parameter dense model in the Qwen3.6 release.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-04-21",
+          "sources": [
+            "qwen-3-6-27b-s1",
+            "qwen-3-6-27b-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 27000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "qwen-3-6-27b-s1",
+          "url": "https://huggingface.co/Qwen/Qwen3.6-27B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260422132942/https://huggingface.co/Qwen/Qwen3.6-27B",
+          "retrieved": "2026-04-22"
+        },
+        {
+          "id": "qwen-3-6-27b-s2",
+          "url": "https://qwen.ai/blog?id=qwen3.6",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260422072805/https://qwen.ai/blog%3Fid%3Dqwen3.6",
+          "retrieved": "2026-04-22"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-04-21",
+            "sources": [
+              "qwen-3-6-27b-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 27000000000,
+            "sources": [
+              "qwen-3-6-27b-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gpt-5-5",
@@ -7483,6 +7653,86 @@
           ],
           "observed_on": "2026-05-28"
         }
+      ]
+    },
+    {
+      "id": "minimax-m3",
+      "model": "MiniMax M3",
+      "company": "MiniMax",
+      "family": "MiniMax",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "vision"
+      ],
+      "tags": [],
+      "note": "MiniMax's multimodal language model, taking image and text input to produce text.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-06-02",
+          "sources": [
+            "minimax-m3-s1",
+            "minimax-m3-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "minimax-m3-s1",
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260612193019/https://huggingface.co/MiniMaxAI/MiniMax-M3",
+          "retrieved": "2026-06-12"
+        },
+        {
+          "id": "minimax-m3-s2",
+          "url": "https://www.minimax.io/blog/minimax-m3",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260602105413/https://www.minimax.io/blog/minimax-m3",
+          "retrieved": "2026-06-02"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06-02",
+            "sources": [
+              "minimax-m3-s1"
+            ]
+          }
+        ]
+      },
+      "undisclosed": [
+        "context_window"
       ]
     },
     {
@@ -8326,6 +8576,71 @@
           "observed_on": "2026-07-24"
         }
       ]
+    },
+    {
+      "id": "minimax-h3",
+      "model": "MiniMax H3",
+      "company": "MiniMax",
+      "family": "MiniMax",
+      "classification": {
+        "primary_type": "video_generation",
+        "subtype": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "video"
+        ]
+      },
+      "capabilities": [
+        "video_generation"
+      ],
+      "tags": [],
+      "note": "MiniMax's video generation model, taking text and image prompts to produce video.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-28",
+          "sources": [
+            "minimax-h3-s1",
+            "minimax-h3-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {}
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "minimax-h3-s1",
+          "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260803023255/https://huggingface.co/MiniMaxAI/MiniMax-H3",
+          "retrieved": "2026-08-03"
+        },
+        {
+          "id": "minimax-h3-s2",
+          "url": "https://www.minimax.io/blog/minimax-h3",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260731201518/https://www.minimax.io/blog/minimax-h3",
+          "retrieved": "2026-07-31"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {}
     },
     {
       "id": "qwen-3-8-max",
