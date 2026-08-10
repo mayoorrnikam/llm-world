@@ -2135,3 +2135,94 @@ code, kbd {
   .search-field { flex: 1 1 160px; }
   .search-input { width: 100%; }
 }
+
+/* ==========================================================================
+   The landing page. One question, not a control panel — the timeline is a
+   tool, and tools make poor front doors.
+   ========================================================================== */
+
+.home-main { max-width: 780px; margin: 0 auto; padding: 0 20px 64px; }
+
+.ask { padding: 56px 0 8px; text-align: center; }
+.ask-title { margin: 0 0 6px; font-size: clamp(26px, 5vw, 38px); letter-spacing: -0.02em; }
+.ask-sub { margin: 0 0 26px; color: var(--muted); font-size: 14.5px; }
+
+.ask-form { display: flex; gap: 8px; }
+.ask-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 14px 18px;
+  font: inherit;
+  font-size: 16px;                 /* 16px stops iOS zooming on focus */
+  color: inherit;
+  background: var(--surface, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.ask-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+.ask-go {
+  padding: 0 22px;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.ask-go:hover { filter: brightness(1.08); }
+
+/* How the question was understood. Never hidden: a query that silently
+   ignores half of what you typed is worse than one that admits it. */
+.ask-reading {
+  margin: 14px 0 0;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.read-chip {
+  display: inline-block;
+  padding: 1px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.ask-examples {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+  margin: 22px 0 0; padding: 0; list-style: none;
+}
+.ask-examples button {
+  padding: 5px 12px;
+  font: inherit; font-size: 12.5px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px dashed var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.ask-examples button:hover { color: var(--accent); border-color: currentColor; border-style: solid; }
+
+.ask-count { margin: 30px 0 4px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.ask-none { margin: 8px 0 0; font-size: 13.5px; color: var(--muted); max-width: 58ch; }
+
+.ask-list { margin: 0; padding: 0; list-style: none; }
+.ask-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 14px;
+  padding: 13px 2px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.ask-name { font-size: 15px; font-weight: 600; text-decoration: none; color: var(--accent); }
+.ask-name:hover { text-decoration: underline; }
+.ask-meta { font-family: var(--mono); font-size: 11.5px; color: var(--muted); text-align: right; }
+.ask-facts { grid-column: 1 / -1; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.ask-chips { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px; }
+
+.ask-foot { margin: 40px 0 0; font-size: 13px; color: var(--muted); text-align: center; }
+
+@media (max-width: 560px) {
+  .ask { padding-top: 34px; }
+  .ask-list li { grid-template-columns: minmax(0, 1fr); }
+  .ask-meta { text-align: left; }
+}

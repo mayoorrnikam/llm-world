@@ -102,11 +102,19 @@ function checkChrome(page, html) {
   if (navs.length !== 1) fail(page, `expected exactly 1 shared nav, found ${navs.length}`);
 
   const current = html.match(/aria-current="page"/g) ?? [];
-  if (current.length !== 1) fail(page, `expected exactly 1 aria-current="page", found ${current.length}`);
+  // The landing page is not one of the nav sections — it is the thing the nav
+  // hangs off — so it has no current item to mark. Every generated page does.
+  if (page === 'index.html') {
+    if (current.length) fail(page, 'landing page should not mark a nav section current');
+  } else if (current.length !== 1) {
+    fail(page, `expected exactly 1 aria-current="page", found ${current.length}`);
+  }
 
   // The active marker must sit inside the nav, not on the brand logo.
   const nav = html.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)?.[0] ?? '';
-  if (!nav.includes('aria-current="page"')) fail(page, 'active nav marker is outside the nav');
+  if (page !== 'index.html' && !nav.includes('aria-current="page"')) {
+    fail(page, 'active nav marker is outside the nav');
+  }
 
   if (!/<footer class="site-footer">/.test(html)) fail(page, 'missing shared footer');
 }

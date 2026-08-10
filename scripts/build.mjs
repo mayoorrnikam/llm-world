@@ -99,11 +99,13 @@ const PROV_LABEL = {
   unverified: 'unverified', conflicting: 'conflicting', estimated: 'approximate date',
 };
 
-// Single source of truth for logos: pull the sprite out of index.html rather
-// than keeping a second copy here.
+// Two source files, one copy of each thing. The landing page owns the shared
+// header and footer; the timeline owns the logo sprite, because it is the page
+// that renders every company at once. Neither is duplicated.
 const indexHtml = readFileSync('index.html', 'utf8');
+const timelineHtml = readFileSync('timeline.html', 'utf8');
 const SPRITE = Object.fromEntries(
-  [...indexHtml.matchAll(/<g id="(ic-[a-z0-9]+)"[\s\S]*?<\/g>/g)]
+  [...timelineHtml.matchAll(/<g id="(ic-[a-z0-9]+)"[\s\S]*?<\/g>/g)]
     .map((m) => [m[1], m[0]]));
 
 /* Shared chrome, lifted verbatim out of index.html between the
@@ -559,7 +561,7 @@ ${[...byMonth.keys()].sort((a, b) => a - b).map((m) => `
     title: `LLM releases in ${year} — full timeline | LLM World`,
     description: `Every tracked large language model released in ${year}, by month, with companies, dates and sources.`,
     canonical: `${BASE_URL}/timeline/${year}/`,
-    section: '',
+    section: 'timeline/',
     depth: 2,
     sprites: [...new Set(list.map((r) => slugFor(r.company)))],
     body,
@@ -701,7 +703,7 @@ ${m.provenance.reason ? `<p class="doc-reason">${esc(m.provenance.reason)}</p>` 
     canonical: `${BASE_URL}/milestones/${m.id}/`,
     // Milestones are timeline events, so they mark Timeline. Two records do not
     // justify a nav slot of their own — revisit when there are more.
-    section: '',
+    section: 'timeline/',
     depth: 2,
     sprites: [slugFor(m.company)],
     body,
@@ -735,7 +737,7 @@ Every milestone needs a primary source, exactly like a model record.</p>
     title: 'Milestones — dated events that were not model releases | LLM World',
     description: 'Dated events that shaped large language model history without being model releases, each with a primary source.',
     canonical: `${BASE_URL}/milestones/`,
-    section: '',
+    section: 'timeline/',
     depth: 1,
     sprites: [...new Set(list.map((m) => slugFor(m.company)))],
     body,
@@ -1560,6 +1562,29 @@ for (const rd of data.redirects ?? []) {
   }));
 }
 
+/* The interactive timeline moved off the root so the landing page can ask one
+   question instead of presenting a control panel. It is emitted from
+   timeline.html with asset paths lifted one level and the shared chrome
+   swapped in, so there is still exactly one copy of the header and footer. */
+{
+  let page = timelineHtml
+    .replace(/(href|src)="(?!https?:|#|mailto:|data:|\/)([^"]+)"/g, (m, attr, href) =>
+      `${attr}="../${href === './' ? '' : href}"`)
+    .replace(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${BASE_URL}/timeline/">`);
+
+  // Shared chrome, at this page's depth, with Timeline marked current.
+  const swap = (name, shared) => {
+    const a = page.indexOf(`<!-- shared:${name}-start`);
+    const b = page.indexOf(`<!-- shared:${name}-end -->`);
+    if (a < 0 || b < 0) throw new Error(`timeline.html is missing shared:${name} markers`);
+    page = page.slice(0, page.indexOf('-->', a) + 3) + '\n' + shared + '\n' + page.slice(b);
+  };
+  swap('header', chrome(SHARED_HEADER, '../', 'timeline/'));
+  swap('footer', chrome(SHARED_FOOTER, '../'));
+
+  write('timeline', page);
+}
+
 for (const m of milestones) write(`milestones/${m.id}`, milestonePage(m));
 if (milestones.length) write('milestones', milestonesIndexPage(milestones));
 
@@ -1586,6 +1611,7 @@ const BASE = BASE_URL;
 const urls = [
   `${BASE}/models/`, `${BASE}/companies/`, `${BASE}/latest/`,
   `${BASE}/analytics/`, `${BASE}/compare/`, `${BASE}/data-quality/`, `${BASE}/families/`,
+  `${BASE}/timeline/`,
   ...(milestones.length ? [`${BASE}/milestones/`] : []),
   ...milestones.map((m) => `${BASE}/milestones/${m.id}/`),
   ...[...new Set(releases.map((r) => r.family))].map((f) => `${BASE}/families/${familySlug(f)}/`),

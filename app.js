@@ -114,6 +114,10 @@ const state = {
   openId: null,
 };
 
+/** Data lives beside this module, so the page can sit at any depth. */
+const DATA_URL = new URL('data/llm-releases.json', import.meta.url);
+const MILESTONES_URL = new URL('data/milestones.json', import.meta.url);
+
 const el = (id) => document.getElementById(id);
 const els = {};
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -173,7 +177,7 @@ async function loadData() {
   try {
     const ctl = new AbortController();
     const timer = setTimeout(() => ctl.abort(), 8000);
-    const res = await fetch('data/llm-releases.json', { cache: 'no-store', signal: ctl.signal });
+    const res = await fetch(DATA_URL, { cache: 'no-store', signal: ctl.signal });
     clearTimeout(timer);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
@@ -187,7 +191,7 @@ async function loadData() {
   // Milestones are a separate file and a separate concept, so a failure to load
   // them must not take the timeline down with it.
   try {
-    const res = await fetch('data/milestones.json', { cache: 'no-store' });
+    const res = await fetch(MILESTONES_URL, { cache: 'no-store' });
     if (res.ok) state.milestones = normalizeMilestones(await res.json());
   } catch { /* timeline renders without them */ }
 }
@@ -538,7 +542,7 @@ function buildLane(month, releases, marks = []) {
 function buildMilestone(m) {
   const a = document.createElement('a');
   a.className = 'milestone';
-  a.href = `milestones/${encodeURIComponent(m.id)}/`;
+  a.href = new URL(`milestones/${encodeURIComponent(m.id)}/`, import.meta.url).pathname;
   a.style.setProperty('--c', colorFor(m.company));
   a.setAttribute('aria-label', `Milestone: ${m.title}, ${m.company}. Read more.`);
 
@@ -753,9 +757,12 @@ const yearOrder = () => [...state.years, 'all'];
 
 /** Footer year links, generated so a new year in the data appears here too. */
 function buildFooterYears() {
+  // The footer is shared across the whole site and does not carry year links on
+  // every page, so its absence is normal rather than an error.
+  if (!els.footYearlinks) return;
   els.footYearlinks.replaceChildren(...[...state.years].reverse().map((y) => {
     const a = document.createElement('a');
-    a.href = `timeline/${y}/`;
+    a.href = new URL(`timeline/${y}/`, import.meta.url).pathname;
     a.textContent = String(y);
     return a;
   }));
@@ -1033,8 +1040,8 @@ function openModal(r) {
       els.modalEvents.append(li);
     }
   }
-  els.modalDetailLink.href = `models/${encodeURIComponent(r.id)}/`;
-  els.modalCompareLink.href = `compare/?m=${encodeURIComponent(r.id)}`;
+  els.modalDetailLink.href = new URL(`models/${encodeURIComponent(r.id)}/`, import.meta.url).pathname;
+  els.modalCompareLink.href = new URL(`compare/?m=${encodeURIComponent(r.id)}`, import.meta.url).href.replace(location.origin, '');
   renderCadenceLine(r);
 
   els.modalSource.replaceChildren();

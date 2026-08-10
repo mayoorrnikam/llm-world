@@ -1,331 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#0e131c" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
-  <meta name="description" content="LLM World — an interactive swim-lane timeline of large language model releases, month by month, from 2022 to today.">
-
-  <title>LLM World — LLM Release Timeline</title>
-
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="LLM World — LLM Release Timeline">
-  <meta property="og:description" content="An interactive swim-lane timeline of large language model releases, month by month.">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e131c'/%3E%3Ccircle cx='9' cy='11' r='3' fill='%2310b3a3'/%3E%3Ccircle cx='16' cy='19' r='3' fill='%234a90e8'/%3E%3Ccircle cx='23' cy='13' r='3' fill='%23e0824f'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- Apply the saved theme before first paint, so an explicit light choice on a
-       dark OS (or vice versa) never flashes the wrong palette. -->
-  <script>
-    try {
-      var t = localStorage.getItem('llm-world-theme');
-      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
-    } catch (e) { /* private mode: fall back to the OS preference */ }
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0e131c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
+<title>LLM World — ask the model dataset</title>
+<meta name="description" content="Ask a question about large language model releases and get an answer from a source-backed dataset: open weights, context windows, pricing, labs and families.">
+<link rel="canonical" href="https://mayoorrnikam.github.io/llm-world/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="LLM World — ask the model dataset">
+<meta property="og:description" content="Structured questions over a source-backed dataset of language model releases.">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<script>try{var t=localStorage.getItem('llm-world-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body>
+<body class="doc home">
 
-  <!-- ===================================================================
-       Company logo sprite.
+<!-- shared:header-start — build.mjs lifts this verbatim; edit here only -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="./">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="32" height="32"><rect width="32" height="32" rx="8" fill="#0e131c"/><circle cx="11" cy="13" r="3" fill="#22c55e"/><circle cx="21" cy="13" r="3" fill="#fb923c"/><circle cx="13" cy="21" r="3" fill="#3b82f6"/></svg>
+      </span>
+      <span class="brand-text">
+        <strong>LLM WORLD</strong>
+        <span class="brand-sub">language model releases, month by month</span>
+      </span>
+    </a>
 
-       Real brand marks from lobe-icons (MIT, github.com/lobehub/lobe-icons),
-       an icon set built specifically for AI/LLM brands. Each is monochrome
-       and painted with `currentColor`, so it picks up that company's hue
-       from the card or chip it sits in — the shape channel and the colour
-       channel stay independent.
+    <nav class="main-nav" aria-label="Sections">
+      <a href="timeline/">Timeline</a>
+      <a href="latest/">Latest</a>
+      <a href="models/">Models</a>
+      <a href="families/">Families</a>
+      <a href="companies/">Labs</a>
+      <a href="analytics/">Analytics</a>
+      <a href="compare/">Compare</a>
+      <a href="data-quality/">Data quality</a>
+    </nav>
 
-       Trademarks remain their owners'; these identify the companies whose
-       releases are listed, which is nominative use.
-       =================================================================== -->
-  <svg class="sprite" aria-hidden="true" focusable="false">
-    <defs>
-      <g id="ic-openai" fill="currentColor" fill-rule="evenodd"><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"></path></g>
-      <g id="ic-anthropic" fill="currentColor" fill-rule="evenodd"><path d="M13.827 3.52h3.603L24 20h-3.603l-6.57-16.48zm-7.258 0h3.767L16.906 20h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"></path></g>
-      <g id="ic-google" fill="currentColor" fill-rule="evenodd"><path d="M5.988 1.622A8.539 8.539 0 003.45 8.446c.349 4.408 4.506 7.995 8.276 7.995 3.507 0 4.88-3.061 4.541-5.14a4.318 4.318 0 00-.95-2.073c.632.34 1.244.776 1.809 1.3 1.52 1.415 2.44 3.229 2.587 5.1C20.04 19.763 16.98 24 11.863 24c-1.695 0-3.48-.432-4.98-1.143C2.816 20.937 0 16.797 0 12.002 0 7.571 2.405 3.7 5.988 1.622zM12.136 0c1.696 0 3.481.432 4.98 1.143C21.186 3.063 24 7.203 24 11.998c0 4.431-2.405 8.303-5.988 10.38a8.539 8.539 0 002.538-6.824c-.349-4.408-4.506-7.995-8.276-7.995-3.507 0-4.88 3.061-4.541 5.14a4.3 4.3 0 00.953 2.073 8.723 8.723 0 01-1.81-1.3c-1.52-1.415-2.44-3.227-2.589-5.1C3.96 4.237 7.02 0 12.137 0z"></path></g>
-      <g id="ic-meta" fill="currentColor" fill-rule="evenodd"><path d="M6.897 4c1.915 0 3.516.932 5.43 3.376l.282-.373c.19-.246.383-.484.58-.71l.313-.35C14.588 4.788 15.792 4 17.225 4c1.273 0 2.469.557 3.491 1.516l.218.213c1.73 1.765 2.917 4.71 3.053 8.026l.011.392.002.25c0 1.501-.28 2.759-.818 3.7l-.14.23-.108.153c-.301.42-.664.758-1.086 1.009l-.265.142-.087.04a3.493 3.493 0 01-.302.118 4.117 4.117 0 01-1.33.208c-.524 0-.996-.067-1.438-.215-.614-.204-1.163-.56-1.726-1.116l-.227-.235c-.753-.812-1.534-1.976-2.493-3.586l-1.43-2.41-.544-.895-1.766 3.13-.343.592C7.597 19.156 6.227 20 4.356 20c-1.21 0-2.205-.42-2.936-1.182l-.168-.184c-.484-.573-.837-1.311-1.043-2.189l-.067-.32a8.69 8.69 0 01-.136-1.288L0 14.468c.002-.745.06-1.49.174-2.23l.1-.573c.298-1.53.828-2.958 1.536-4.157l.209-.34c1.177-1.83 2.789-3.053 4.615-3.16L6.897 4zm-.033 2.615l-.201.01c-.83.083-1.606.673-2.252 1.577l-.138.199-.01.018c-.67 1.017-1.185 2.378-1.456 3.845l-.004.022a12.591 12.591 0 00-.207 2.254l.002.188c.004.18.017.36.04.54l.043.291c.092.503.257.908.486 1.208l.117.137c.303.323.698.492 1.17.492 1.1 0 1.796-.676 3.696-3.641l2.175-3.4.454-.701-.139-.198C9.11 7.3 8.084 6.616 6.864 6.616zm10.196-.552l-.176.007c-.635.048-1.223.359-1.82.933l-.196.198c-.439.462-.887 1.064-1.367 1.807l.266.398c.18.274.362.56.55.858l.293.475 1.396 2.335.695 1.114c.583.926 1.03 1.6 1.408 2.082l.213.262c.282.326.529.54.777.673l.102.05c.227.1.457.138.718.138.176.002.35-.023.518-.073.338-.104.61-.32.813-.637l.095-.163.077-.162c.194-.459.29-1.06.29-1.785l-.006-.449c-.08-2.871-.938-5.372-2.2-6.798l-.176-.189c-.67-.683-1.444-1.074-2.27-1.074z"></path></g>
-      <g id="ic-mistral" fill="currentColor" fill-rule="evenodd"><path clip-rule="evenodd" d="M3.428 3.4h3.429v3.428h3.429v3.429h-.002 3.431V6.828h3.427V3.4h3.43v13.714H24v3.429H13.714v-3.428h-3.428v-3.429h-3.43v3.428h3.43v3.429H0v-3.429h3.428V3.4zm10.286 13.715h3.428v-3.429h-3.427v3.429z"></path></g>
-      <g id="ic-deepseek" fill="currentColor" fill-rule="evenodd"><path d="M23.748 4.482c-.254-.124-.364.113-.512.234-.051.039-.094.09-.137.136-.372.397-.806.657-1.373.626-.829-.046-1.537.214-2.163.848-.133-.782-.575-1.248-1.247-1.548-.352-.156-.708-.311-.955-.65-.172-.241-.219-.51-.305-.774-.055-.16-.11-.323-.293-.35-.2-.031-.278.136-.356.276-.313.572-.434 1.202-.422 1.84.027 1.436.633 2.58 1.838 3.393.137.093.172.187.129.323-.082.28-.18.552-.266.833-.055.179-.137.217-.329.14a5.526 5.526 0 01-1.736-1.18c-.857-.828-1.631-1.742-2.597-2.458a11.365 11.365 0 00-.689-.471c-.985-.957.13-1.743.388-1.836.27-.098.093-.432-.779-.428-.872.004-1.67.295-2.687.684a3.055 3.055 0 01-.465.137 9.597 9.597 0 00-2.883-.102c-1.885.21-3.39 1.102-4.497 2.623C.082 8.606-.231 10.684.152 12.85c.403 2.284 1.569 4.175 3.36 5.653 1.858 1.533 3.997 2.284 6.438 2.14 1.482-.085 3.133-.284 4.994-1.86.47.234.962.327 1.78.397.63.059 1.236-.03 1.705-.128.735-.156.684-.837.419-.961-2.155-1.004-1.682-.595-2.113-.926 1.096-1.296 2.746-2.642 3.392-7.003.05-.347.007-.565 0-.845-.004-.17.035-.237.23-.256a4.173 4.173 0 001.545-.475c1.396-.763 1.96-2.015 2.093-3.517.02-.23-.004-.467-.247-.588zM11.581 18c-2.089-1.642-3.102-2.183-3.52-2.16-.392.024-.321.471-.235.763.09.288.207.486.371.739.114.167.192.416-.113.603-.673.416-1.842-.14-1.897-.167-1.361-.802-2.5-1.86-3.301-3.307-.774-1.393-1.224-2.887-1.298-4.482-.02-.386.093-.522.477-.592a4.696 4.696 0 011.529-.039c2.132.312 3.946 1.265 5.468 2.774.868.86 1.525 1.887 2.202 2.891.72 1.066 1.494 2.082 2.48 2.914.348.292.625.514.891.677-.802.09-2.14.11-3.054-.614zm1-6.44a.306.306 0 01.415-.287.302.302 0 01.2.288.306.306 0 01-.31.307.303.303 0 01-.304-.308zm3.11 1.596c-.2.081-.399.151-.59.16a1.245 1.245 0 01-.798-.254c-.274-.23-.47-.358-.552-.758a1.73 1.73 0 01.016-.588c.07-.327-.008-.537-.239-.727-.187-.156-.426-.199-.688-.199a.559.559 0 01-.254-.078c-.11-.054-.2-.19-.114-.358.028-.054.16-.186.192-.21.356-.202.767-.136 1.146.016.352.144.618.408 1.001.782.391.451.462.576.685.914.176.265.336.537.445.848.067.195-.019.354-.25.452z"></path></g>
-      <g id="ic-alibaba" fill="currentColor" fill-rule="evenodd"><path d="M12.604 1.34c.393.69.784 1.382 1.174 2.075a.18.18 0 00.157.091h5.552c.174 0 .322.11.446.327l1.454 2.57c.19.337.24.478.024.837-.26.43-.513.864-.76 1.3l-.367.658c-.106.196-.223.28-.04.512l2.652 4.637c.172.301.111.494-.043.77-.437.785-.882 1.564-1.335 2.34-.159.272-.352.375-.68.37-.777-.016-1.552-.01-2.327.016a.099.099 0 00-.081.05 575.097 575.097 0 01-2.705 4.74c-.169.293-.38.363-.725.364-.997.003-2.002.004-3.017.002a.537.537 0 01-.465-.271l-1.335-2.323a.09.09 0 00-.083-.049H4.982c-.285.03-.553-.001-.805-.092l-1.603-2.77a.543.543 0 01-.002-.54l1.207-2.12a.198.198 0 000-.197 550.951 550.951 0 01-1.875-3.272l-.79-1.395c-.16-.31-.173-.496.095-.965.465-.813.927-1.625 1.387-2.436.132-.234.304-.334.584-.335a338.3 338.3 0 012.589-.001.124.124 0 00.107-.063l2.806-4.895a.488.488 0 01.422-.246c.524-.001 1.053 0 1.583-.006L11.704 1c.341-.003.724.032.9.34zm-3.432.403a.06.06 0 00-.052.03L6.254 6.788a.157.157 0 01-.135.078H3.253c-.056 0-.07.025-.041.074l5.81 10.156c.025.042.013.062-.034.063l-2.795.015a.218.218 0 00-.2.116l-1.32 2.31c-.044.078-.021.118.068.118l5.716.008c.046 0 .08.02.104.061l1.403 2.454c.046.081.092.082.139 0l5.006-8.76.783-1.382a.055.055 0 01.096 0l1.424 2.53a.122.122 0 00.107.062l2.763-.02a.04.04 0 00.035-.02.041.041 0 000-.04l-2.9-5.086a.108.108 0 010-.113l.293-.507 1.12-1.977c.024-.041.012-.062-.035-.062H9.2c-.059 0-.073-.026-.043-.077l1.434-2.505a.107.107 0 000-.114L9.225 1.774a.06.06 0 00-.053-.031zm6.29 8.02c.046 0 .058.02.034.06l-.832 1.465-2.613 4.585a.056.056 0 01-.05.029.058.058 0 01-.05-.029L8.498 9.841c-.02-.034-.01-.052.028-.054l.216-.012 6.722-.012z"></path></g>
-      <g id="ic-xai" fill="currentColor" fill-rule="evenodd"><path d="M6.469 8.776L16.512 23h-4.464L2.005 8.776H6.47zm-.004 7.9l2.233 3.164L6.467 23H2l4.465-6.324zM22 2.582V23h-3.659V7.764L22 2.582zM22 1l-9.952 14.095-2.233-3.163L17.533 1H22z"></path></g>
-      <g id="ic-zhipu" fill="currentColor" fill-rule="evenodd"><path d="M11.991 23.503a.24.24 0 00-.244.248.24.24 0 00.244.249.24.24 0 00.245-.249.24.24 0 00-.22-.247l-.025-.001zM9.671 5.365a1.697 1.697 0 011.099 2.132l-.071.172-.016.04-.018.054c-.07.16-.104.32-.104.498-.035.71.47 1.279 1.186 1.314h.366c1.309.053 2.338 1.173 2.286 2.523-.052 1.332-1.152 2.38-2.478 2.327h-.174c-.715.018-1.274.64-1.239 1.368 0 .124.018.23.053.337.209.373.54.658.96.8.75.23 1.517-.125 1.9-.782l.018-.035c.402-.64 1.17-.96 1.92-.711.854.284 1.378 1.226 1.099 2.167a1.661 1.661 0 01-2.077 1.102 1.711 1.711 0 01-.907-.711l-.017-.035c-.2-.323-.463-.58-.851-.711l-.056-.018a1.646 1.646 0 00-1.954.746 1.66 1.66 0 01-1.065.764 1.677 1.677 0 01-1.989-1.279c-.209-.906.332-1.83 1.257-2.043a1.51 1.51 0 01.296-.035h.018c.68-.071 1.151-.622 1.116-1.333a1.307 1.307 0 00-.227-.693 2.515 2.515 0 01-.366-1.403 2.39 2.39 0 01.366-1.208c.14-.195.21-.444.227-.693.018-.71-.506-1.261-1.186-1.332l-.07-.018a1.43 1.43 0 01-.299-.07l-.05-.019a1.7 1.7 0 01-1.047-2.114 1.68 1.68 0 012.094-1.101zm-5.575 10.11c.26-.264.639-.367.994-.27.355.096.633.379.728.74.095.362-.007.748-.267 1.013-.402.41-1.053.41-1.455 0a1.062 1.062 0 010-1.482zm14.845-.294c.359-.09.738.024.992.297.254.274.344.665.237 1.025-.107.36-.396.634-.756.718-.551.128-1.1-.22-1.23-.781a1.05 1.05 0 01.757-1.26zm-.064-4.39c.314.32.49.753.49 1.206 0 .452-.176.886-.49 1.206-.315.32-.74.5-1.185.5-.444 0-.87-.18-1.184-.5a1.727 1.727 0 010-2.412 1.654 1.654 0 012.369 0zm-11.243.163c.364.484.447 1.128.218 1.691a1.665 1.665 0 01-2.188.923c-.855-.36-1.26-1.358-.907-2.228a1.68 1.68 0 011.33-1.038c.593-.08 1.183.169 1.547.652zm11.545-4.221c.368 0 .708.2.892.524.184.324.184.724 0 1.048a1.026 1.026 0 01-.892.524c-.568 0-1.03-.47-1.03-1.048 0-.579.462-1.048 1.03-1.048zm-14.358 0c.368 0 .707.2.891.524.184.324.184.724 0 1.048a1.026 1.026 0 01-.891.524c-.569 0-1.03-.47-1.03-1.048 0-.579.461-1.048 1.03-1.048zm10.031-1.475c.925 0 1.675.764 1.675 1.706s-.75 1.705-1.675 1.705-1.674-.763-1.674-1.705c0-.942.75-1.706 1.674-1.706zm-2.626-.684c.362-.082.653-.356.761-.718a1.062 1.062 0 00-.238-1.028 1.017 1.017 0 00-.996-.294c-.547.14-.881.7-.752 1.257.13.558.675.907 1.225.783zm0 16.876c.359-.087.644-.36.75-.72a1.062 1.062 0 00-.237-1.019 1.018 1.018 0 00-.985-.301 1.037 1.037 0 00-.762.717c-.108.361-.017.754.239 1.028.245.263.606.377.953.305l.043-.01zM17.19 3.5a.631.631 0 00.628-.64c0-.355-.279-.64-.628-.64a.631.631 0 00-.628.64c0 .355.28.64.628.64zm-10.38 0a.631.631 0 00.628-.64c0-.355-.28-.64-.628-.64a.631.631 0 00-.628.64c0 .355.279.64.628.64zm-5.182 7.852a.631.631 0 00-.628.64c0 .354.28.639.628.639a.63.63 0 00.627-.606l.001-.034a.62.62 0 00-.628-.64zm5.182 9.13a.631.631 0 00-.628.64c0 .355.279.64.628.64a.631.631 0 00.628-.64c0-.355-.28-.64-.628-.64zm10.38.018a.631.631 0 00-.628.64c0 .355.28.64.628.64a.631.631 0 00.628-.64c0-.355-.279-.64-.628-.64zm5.182-9.148a.631.631 0 00-.628.64c0 .354.279.639.628.639a.631.631 0 00.628-.64c0-.355-.28-.64-.628-.64zm-.384-4.992a.24.24 0 00.244-.249.24.24 0 00-.244-.249.24.24 0 00-.244.249c0 .142.122.249.244.249zM11.991.497a.24.24 0 00.245-.248A.24.24 0 0011.99 0a.24.24 0 00-.244.249c0 .133.108.236.223.247l.021.001zM2.011 6.36a.24.24 0 00.245-.249.24.24 0 00-.244-.249.24.24 0 00-.244.249.24.24 0 00.244.249zm0 11.263a.24.24 0 00-.243.248.24.24 0 00.244.249.24.24 0 00.244-.249.252.252 0 00-.244-.248zm19.995-.018a.24.24 0 00-.245.248.24.24 0 00.245.25.24.24 0 00.244-.25.252.252 0 00-.244-.248z"></path></g>
-      <g id="ic-cohere" fill="currentColor" fill-rule="evenodd"><path clip-rule="evenodd" d="M8.128 14.099c.592 0 1.77-.033 3.398-.703 1.897-.781 5.672-2.2 8.395-3.656 1.905-1.018 2.74-2.366 2.74-4.18A4.56 4.56 0 0018.1 1H7.549A6.55 6.55 0 001 7.55c0 3.617 2.745 6.549 7.128 6.549z"></path><path clip-rule="evenodd" d="M9.912 18.61a4.387 4.387 0 012.705-4.052l3.323-1.38c3.361-1.394 7.06 1.076 7.06 4.715a5.104 5.104 0 01-5.105 5.104l-3.597-.001a4.386 4.386 0 01-4.386-4.387z"></path><path d="M4.776 14.962A3.775 3.775 0 001 18.738v.489a3.776 3.776 0 007.551 0v-.49a3.775 3.775 0 00-3.775-3.775z"></path></g>
-      <g id="ic-microsoft" fill="currentColor" fill-rule="evenodd"><path d="M11.49 2H2v9.492h9.492V2h-.002z"></path><path d="M22 2h-9.492v9.492H22V2z"></path><path d="M11.49 12.508H2V22h9.492v-9.492h-.002z"></path><path d="M22 12.508h-9.492V22H22v-9.492z"></path></g>
-      <g id="ic-moonshot" fill="currentColor" fill-rule="evenodd"><path d="M1.052 16.916l9.539 2.552a21.007 21.007 0 00.06 2.033l5.956 1.593a11.997 11.997 0 01-5.586.865l-.18-.016-.044-.004-.084-.009-.094-.01a11.605 11.605 0 01-.157-.02l-.107-.014-.11-.016a11.962 11.962 0 01-.32-.051l-.042-.008-.075-.013-.107-.02-.07-.015-.093-.019-.075-.016-.095-.02-.097-.023-.094-.022-.068-.017-.088-.022-.09-.024-.095-.025-.082-.023-.109-.03-.062-.02-.084-.025-.093-.028-.105-.034-.058-.019-.08-.026-.09-.031-.066-.024a6.293 6.293 0 01-.044-.015l-.068-.025-.101-.037-.057-.022-.08-.03-.087-.035-.088-.035-.079-.032-.095-.04-.063-.028-.063-.027a5.655 5.655 0 01-.041-.018l-.066-.03-.103-.047-.052-.024-.096-.046-.062-.03-.084-.04-.086-.044-.093-.047-.052-.027-.103-.055-.057-.03-.058-.032a6.49 6.49 0 01-.046-.026l-.094-.053-.06-.034-.051-.03-.072-.041-.082-.05-.093-.056-.052-.032-.084-.053-.061-.039-.079-.05-.07-.047-.053-.035a7.785 7.785 0 01-.054-.036l-.044-.03-.044-.03a6.066 6.066 0 01-.04-.028l-.057-.04-.076-.054-.069-.05-.074-.054-.056-.042-.076-.057-.076-.059-.086-.067-.045-.035-.064-.052-.074-.06-.089-.073-.046-.039-.046-.039a7.516 7.516 0 01-.043-.037l-.045-.04-.061-.053-.07-.062-.068-.06-.062-.058-.067-.062-.053-.05-.088-.084a13.28 13.28 0 01-.099-.097l-.029-.028-.041-.042-.069-.07-.05-.051-.05-.053a6.457 6.457 0 01-.168-.179l-.08-.088-.062-.07-.071-.08-.042-.049-.053-.062-.058-.068-.046-.056a7.175 7.175 0 01-.027-.033l-.045-.055-.066-.082-.041-.052-.05-.064-.02-.025a11.99 11.99 0 01-1.44-2.402zm-1.02-5.794l11.353 3.037a20.468 20.468 0 00-.469 2.011l10.817 2.894a12.076 12.076 0 01-1.845 2.005L.657 15.923l-.016-.046-.035-.104a11.965 11.965 0 01-.05-.153l-.007-.023a11.896 11.896 0 01-.207-.741l-.03-.126-.018-.08-.021-.097-.018-.081-.018-.09-.017-.084-.018-.094c-.026-.141-.05-.283-.071-.426l-.017-.118-.011-.083-.013-.102a12.01 12.01 0 01-.019-.161l-.005-.047a12.12 12.12 0 01-.034-2.145zm1.593-5.15l11.948 3.196c-.368.605-.705 1.231-1.01 1.875l11.295 3.022c-.142.82-.368 1.612-.668 2.365l-11.55-3.09L.124 10.26l.015-.1.008-.049.01-.067.015-.087.018-.098c.026-.148.056-.295.088-.442l.028-.124.02-.085.024-.097c.022-.09.045-.18.07-.268l.028-.102.023-.083.03-.1.025-.082.03-.096.026-.082.031-.095a11.896 11.896 0 011.01-2.232zm4.442-4.4L17.352 4.59a20.77 20.77 0 00-1.688 1.721l7.823 2.093c.267.852.442 1.744.513 2.665L2.106 5.213l.045-.065.027-.04.04-.055.046-.065.055-.076.054-.072.064-.086.05-.065.057-.073.055-.07.06-.074.055-.069.065-.077.054-.066.066-.077.053-.06.072-.082.053-.06.067-.074.054-.058.073-.078.058-.06.063-.067.168-.17.1-.098.059-.056.076-.071a12.084 12.084 0 012.272-1.677zM12.017 0h.097l.082.001.069.001.054.002.068.002.046.001.076.003.047.002.06.003.054.002.087.005.105.007.144.011.088.007.044.004.077.008.082.008.047.005.102.012.05.006.108.014.081.01.042.006.065.01.207.032.07.012.065.011.14.026.092.018.11.022.046.01.075.016.041.01L14.7.3l.042.01.065.015.049.012.071.017.096.024.112.03.113.03.113.032.05.015.07.02.078.024.073.023.05.016.05.016.076.025.099.033.102.036.048.017.064.023.093.034.11.041.116.045.1.04.047.02.06.024.041.018.063.026.04.018.057.025.11.048.1.046.074.035.075.036.06.028.092.046.091.045.102.052.053.028.049.026.046.024.06.033.041.022.052.029.088.05.106.06.087.051.057.034.053.032.096.059.088.055.098.062.036.024.064.041.084.056.04.027.062.042.062.043.023.017c.054.037.108.075.161.114l.083.06.065.048.056.043.086.065.082.064.04.03.05.041.086.069.079.065.085.071c.712.6 1.353 1.283 1.909 2.031L7.222.994l.062-.027.065-.028.081-.034.086-.035c.113-.045.227-.09.341-.131l.096-.035.093-.033.084-.03.096-.031c.087-.03.176-.058.264-.085l.091-.027.086-.025.102-.03.085-.023.1-.026L9.04.37l.09-.023.091-.022.095-.022.09-.02.098-.021.091-.02.095-.018.092-.018.1-.018.091-.016.098-.017.092-.014.097-.015.092-.013.102-.013.091-.012.105-.012.09-.01.105-.01c.093-.01.186-.018.28-.024l.106-.008.09-.005.11-.006.093-.004.1-.004.097-.002.099-.002.197-.002z"></path></g>
-      <g id="ic-ai21" fill="currentColor" fill-rule="evenodd"><path d="M6.47 17l-.367-1.189H2.718L2.35 17H0l3.398-9.789h2.026L8.864 17H6.47zm-2.052-6.993l-1.17 4.028H5.56l-1.142-4.028zm4.707-2.796h2.23V17h-2.23V7.211zM11.955 15c.1-.483.277-.946.524-1.37.214-.359.482-.68.795-.951.32-.273.658-.52 1.013-.741.28-.168.54-.33.781-.483.222-.14.433-.296.632-.468.172-.148.317-.325.428-.525.107-.199.16-.423.157-.65 0-.392-.104-.674-.313-.846a1.176 1.176 0 00-.775-.259 1.207 1.207 0 00-.863.329c-.231.219-.347.585-.347 1.098H11.8a3.387 3.387 0 01.224-1.245c.146-.377.371-.716.66-.993.306-.29.667-.514 1.06-.657A4.04 4.04 0 0115.183 7c.42-.002.84.057 1.244.175.376.107.73.287 1.04.531.305.246.55.562.714.923.185.419.275.875.265 1.335.005.39-.084.774-.259 1.12-.167.328-.38.63-.632.894-.246.259-.517.49-.808.693-.29.2-.554.37-.789.51-.326.224-.596.417-.809.58a3.872 3.872 0 00-.51.455 1.229 1.229 0 00-.265.434 1.633 1.633 0 00-.074.517h4.078V17h-6.606a9.24 9.24 0 01.183-2zM18.8 8.93a5.05 5.05 0 001.135-.105c.25-.049.484-.156.686-.314.163-.139.28-.324.34-.532.068-.25.1-.51.095-.77H23V17h-2.243v-6.475H18.8V8.93z"></path></g>
-      <g id="ic-amazon" fill="currentColor" fill-rule="evenodd"><path d="M6.763 11.212c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335a.383.383 0 01-.208.072c-.08 0-.16-.04-.239-.112a2.47 2.47 0 01-.287-.375 6.18 6.18 0 01-.248-.471c-.622.734-1.405 1.101-2.347 1.101-.67 0-1.205-.191-1.596-.574-.39-.384-.59-.894-.59-1.533 0-.678.24-1.23.726-1.644.487-.415 1.133-.623 1.955-.623.272 0 .551.024.846.064.296.04.6.104.918.176v-.583c0-.607-.127-1.03-.375-1.277-.255-.248-.686-.367-1.3-.367-.28 0-.568.031-.863.103-.295.072-.583.16-.862.272-.09.04-.184.075-.28.104a.488.488 0 01-.127.023c-.112 0-.168-.08-.168-.247v-.391c0-.128.016-.224.056-.28a.597.597 0 01.224-.167 4.577 4.577 0 011.005-.36 4.84 4.84 0 011.246-.151c.95 0 1.644.216 2.091.647.44.43.662 1.085.662 1.963v2.586h.016zm-3.24 1.214c.263 0 .534-.048.822-.144a1.78 1.78 0 00.758-.51 1.27 1.27 0 00.272-.512c.047-.191.08-.423.08-.694v-.335a6.66 6.66 0 00-.735-.136 6.02 6.02 0 00-.75-.048c-.535 0-.926.104-1.19.32-.263.215-.39.518-.39.917 0 .375.095.655.295.846.191.2.47.296.838.296zm6.41.862c-.144 0-.24-.024-.304-.08-.064-.048-.12-.16-.168-.311L7.586 6.726a1.398 1.398 0 01-.072-.32c0-.128.064-.2.191-.2h.783c.151 0 .255.025.31.08.065.048.113.16.16.312l1.342 5.284 1.245-5.284c.04-.16.088-.264.151-.312a.549.549 0 01.32-.08h.638c.152 0 .256.025.32.08.063.048.12.16.151.312l1.261 5.348 1.381-5.348c.048-.16.104-.264.16-.312a.52.52 0 01.311-.08h.743c.127 0 .2.065.2.2 0 .04-.009.08-.017.128a1.137 1.137 0 01-.056.2l-1.923 6.17c-.048.16-.104.263-.168.311a.51.51 0 01-.303.08h-.687c-.15 0-.255-.024-.32-.08-.063-.056-.119-.16-.15-.32L12.32 7.747l-1.23 5.14c-.04.16-.087.264-.15.32-.065.056-.177.08-.32.08l-.686.001zm10.256.215c-.415 0-.83-.048-1.229-.143-.399-.096-.71-.2-.918-.32-.128-.071-.215-.151-.247-.223a.563.563 0 01-.048-.224v-.407c0-.167.064-.247.183-.247.048 0 .096.008.144.024.048.016.12.048.2.08.271.12.566.215.878.279.32.064.63.096.95.096.502 0 .894-.088 1.165-.264a.86.86 0 00.415-.758.777.777 0 00-.215-.559c-.144-.151-.416-.287-.807-.415l-1.157-.36c-.583-.183-1.014-.454-1.277-.813a1.902 1.902 0 01-.4-1.158c0-.335.073-.63.216-.886.144-.255.335-.479.575-.654.24-.184.51-.32.83-.415.32-.096.655-.136 1.006-.136.175 0 .36.008.535.032.183.024.35.056.518.088.16.04.312.08.455.127.144.048.256.096.336.144a.69.69 0 01.24.2.43.43 0 01.071.263v.375c0 .168-.064.256-.184.256a.83.83 0 01-.303-.096 3.652 3.652 0 00-1.532-.311c-.455 0-.815.071-1.062.223-.248.152-.375.383-.375.71 0 .224.08.416.24.567.16.152.454.304.877.44l1.134.358c.574.184.99.44 1.237.767.247.327.367.702.367 1.117 0 .343-.072.655-.207.926a2.157 2.157 0 01-.583.703c-.248.2-.543.343-.886.447-.36.111-.734.167-1.142.167z"></path><path d="M.378 15.475c3.384 1.963 7.56 3.153 11.877 3.153 2.914 0 6.114-.607 9.06-1.852.44-.2.814.287.383.607-2.626 1.94-6.442 2.969-9.722 2.969-4.598 0-8.74-1.7-11.87-4.526-.247-.223-.024-.527.272-.351zm23.531-.2c.287.36-.08 2.826-1.485 4.007-.215.184-.423.088-.327-.151l.175-.439c.343-.88.802-2.198.52-2.555-.336-.43-2.22-.207-3.074-.103-.255.032-.295-.192-.063-.36 1.5-1.053 3.967-.75 4.254-.399z"></path></g>
-      <g id="ic-nvidia" fill="currentColor" fill-rule="evenodd"><path d="M10.212 8.976V7.62c.127-.01.256-.017.388-.021 3.596-.117 5.957 3.184 5.957 3.184s-2.548 3.647-5.282 3.647a3.227 3.227 0 01-1.063-.175v-4.109c1.4.174 1.681.812 2.523 2.258l1.873-1.627a4.905 4.905 0 00-3.67-1.846 6.594 6.594 0 00-.729.044m0-4.476v2.025c.13-.01.259-.019.388-.024 5.002-.174 8.261 4.226 8.261 4.226s-3.743 4.69-7.643 4.69c-.338 0-.675-.031-1.007-.092v1.25c.278.038.558.057.838.057 3.629 0 6.253-1.91 8.794-4.169.421.347 2.146 1.193 2.501 1.564-2.416 2.083-8.048 3.763-11.24 3.763-.308 0-.603-.02-.894-.048V19.5H24v-15H10.21zm0 9.756v1.068c-3.356-.616-4.287-4.21-4.287-4.21a7.173 7.173 0 014.287-2.138v1.172h-.005a3.182 3.182 0 00-2.502 1.178s.615 2.276 2.507 2.931m-5.961-3.3c1.436-1.935 3.604-3.148 5.961-3.336V6.523C5.81 6.887 2 10.723 2 10.723s2.158 6.427 8.21 7.015v-1.166C5.77 16 4.25 10.958 4.25 10.958h-.002z"></path></g>
-      <!-- BigScience has no icon in the set; a neutral bloom stands in for BLOOM. -->
-      <g id="ic-bigscience" fill="currentColor"><circle cx="12" cy="5.4" r="3.7"/><circle cx="18.3" cy="9.9" r="3.7"/><circle cx="15.9" cy="17.4" r="3.7"/><circle cx="8.1" cy="17.4" r="3.7"/><circle cx="5.7" cy="9.9" r="3.7"/></g>
-      <!-- Capability icons: Lucide (ISC, lucide.dev). Stroke marks, so they
-           read as UI affordances rather than brand logos. -->
-      <g id="tag-open-weights" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-9" /> <path d="M15.17 2.21a1.67 1.67 0 0 1 1.63 0L21 4.57a1.93 1.93 0 0 1 0 3.36L8.82 14.79a1.655 1.655 0 0 1-1.64 0L3 12.43a1.93 1.93 0 0 1 0-3.36z" /> <path d="M20 13v3.87a2.06 2.06 0 0 1-1.11 1.83l-6 3.08a1.93 1.93 0 0 1-1.78 0l-6-3.08A2.06 2.06 0 0 1 4 16.87V13" /> <path d="M21 12.43a1.93 1.93 0 0 0 0-3.36L8.83 2.2a1.64 1.64 0 0 0-1.63 0L3 4.57a1.93 1.93 0 0 0 0 3.36l12.18 6.86a1.636 1.636 0 0 0 1.63 0z" /></g>
-      <g id="tag-flagship" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" /></g>
-      <g id="tag-multimodal" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></g>
-      <g id="tag-agentic" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8" /> <rect width="16" height="12" x="4" y="8" rx="2" /> <path d="M2 14h2" /> <path d="M20 14h2" /> <path d="M15 13v2" /> <path d="M9 13v2" /></g>
-      <g id="tag-small-efficient" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.086 18.412A2 2 0 0112.67 19H5v-7.672a2 2 0 01.586-1.414L11.75 3.75a6 6 0 118.49 8.49z" /> <path d="M16 8 2 22" /> <path d="M17.488 15H9" /></g>
-      <g id="tag-reasoning" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V5" /> <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" /> <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" /> <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" /> <path d="M18 18a4 4 0 0 0 2-7.464" /> <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" /> <path d="M6 18a4 4 0 0 1-2-7.464" /> <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" /></g>
-      <g id="ic-other" fill="currentColor"><circle cx="12" cy="12" r="6.3"/></g>
-    </defs>
-  </svg>
-
-  <a class="skip-link" href="#timeline">Skip to timeline</a>
-
-  <header class="site-header">
-    <!-- shared:header-start — build.mjs copies this verbatim into every
-         generated page, so the two can never drift apart again. -->
-    <div class="header-inner">
-      <a class="brand" href="./">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <div class="brand-text">
-          <h1>LLM&nbsp;WORLD</h1>
-          <p class="brand-sub">language model releases, month by month</p>
-        </div>
-      </a>
-
-      <!-- Primary sections belong here, not buried in the footer. -->
-      <nav class="main-nav" aria-label="Sections">
-        <a href="./" aria-current="page">Timeline</a>
-        <a href="latest/">Latest</a>
-        <a href="models/">Models</a>
-        <a href="families/">Families</a>
-        <a href="companies/">Labs</a>
-        <a href="analytics/">Analytics</a>
-        <a href="compare/">Compare</a>
-        <a href="data-quality/">Data quality</a>
-      </nav>
-
-      <div class="header-icons">
-        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Colour theme: system"
-                title="Colour theme (T)" data-theme-state="system">
-          <svg class="i-system" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="1.8" y="2.6" width="12.4" height="8.6" rx="1.8"></rect><path d="M5.4 13.6h5.2" stroke-linecap="round"></path>
-          </svg>
-          <svg class="i-light" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="8" cy="8" r="3.2"></circle>
-            <path d="M8 1.2v1.6M8 13.2v1.6M1.2 8h1.6M13.2 8h1.6M3.2 3.2l1.1 1.1M11.7 11.7l1.1 1.1M12.8 3.2l-1.1 1.1M4.3 11.7l-1.1 1.1" stroke-linecap="round"></path>
-          </svg>
-          <svg class="i-dark" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
-            <path d="M13.2 9.6A5.8 5.8 0 0 1 6.4 2.8a5.8 5.8 0 1 0 6.8 6.8Z"></path>
-          </svg>
-        </button>
-
-      </div>
-    </div>
-    <!-- shared:header-end -->
-
-    <!-- Timeline-only controls: these reshape the timeline, so they do not
-         belong on the static document pages. -->
-    <div class="controlbar">
-      <div class="controlbar-inner">
-        <nav class="year-selector" id="year-selector" role="tablist" aria-label="Select year"></nav>
-
-        <div class="control-tools">
-          <div class="search-field">
-            <svg class="search-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none"
-                 stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-              <circle cx="7" cy="7" r="4.4"></circle><path d="M10.4 10.4 14 14"></path>
-            </svg>
-            <input type="search" id="search" class="search-input" autocomplete="off" spellcheck="false"
-                   placeholder="Search models, companies, tags…" aria-label="Search releases">
-            <kbd class="search-kbd" aria-hidden="true">/</kbd>
-            <button type="button" class="search-clear" id="search-clear" aria-label="Clear search" hidden>✕</button>
-          </div>
-
-          <div class="seg" role="group" aria-label="View mode">
-            <button type="button" class="seg-btn" data-view="lanes" aria-pressed="true" title="Month lanes (V)">
-              <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
-                <rect x="1" y="2.5" width="14" height="2.4" rx="1.2"></rect>
-                <rect x="1" y="6.8" width="10" height="2.4" rx="1.2"></rect>
-                <rect x="1" y="11.1" width="12" height="2.4" rx="1.2"></rect>
-              </svg><span>Lanes</span>
-            </button>
-            <button type="button" class="seg-btn" data-view="grid" aria-pressed="false" title="Compact grid (V)">
-              <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor">
-                <rect x="1.5" y="1.5" width="5.6" height="5.6" rx="1.6"></rect>
-                <rect x="8.9" y="1.5" width="5.6" height="5.6" rx="1.6"></rect>
-                <rect x="1.5" y="8.9" width="5.6" height="5.6" rx="1.6"></rect>
-                <rect x="8.9" y="8.9" width="5.6" height="5.6" rx="1.6"></rect>
-              </svg><span>Grid</span>
-            </button>
-          </div>
-
-          <button type="button" class="icon-btn" id="refresh-btn" aria-label="Refresh release data" title="Refresh data (R)">
-            <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor"
-                 stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 8a6 6 0 1 1-1.8-4.3"></path>
-              <path d="M14.2 1.9v3.4h-3.4"></path>
-            </svg>
-          </button>
-
-          <button type="button" class="icon-btn" id="help-btn" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)">
-            <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <path d="M5.9 5.8a2.2 2.2 0 1 1 2.9 2.1c-.5.2-.8.7-.8 1.2v.4"></path>
-              <circle cx="8" cy="12.2" r=".9" fill="currentColor" stroke="none"></circle>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- The thesis of the page: every release in the dataset, one column per
-       month, so the acceleration is the first thing you see. Doubles as a
-       year picker. Keyboard users get the same navigation from the year
-       tabs above, and every release from the cards below. -->
-  <section class="cadence" aria-labelledby="cadence-title">
-    <div class="cadence-inner">
-      <div class="cadence-head">
-        <h2 class="cadence-title" id="cadence-title">Release cadence</h2>
-        <p class="cadence-facts" id="cadence-facts"></p>
-      </div>
-      <div class="ribbon" id="ribbon" role="img"></div>
-      <div class="ribbon-axis" id="ribbon-axis"></div>
-    </div>
-  </section>
-
-  <section class="filterbar" aria-label="Filters">
-    <div class="filterbar-inner">
-      <div class="filter-group">
-        <h2 class="filter-title" id="lbl-company">Company</h2>
-        <div class="chips" id="legend" role="group" aria-labelledby="lbl-company"></div>
-      </div>
-      <div class="filter-group">
-        <h2 class="filter-title" id="lbl-tag">Capability</h2>
-        <div class="chips" id="tagbar" role="group" aria-labelledby="lbl-tag"></div>
-      </div>
-      <button type="button" class="reset-btn" id="reset-btn" hidden>
-        <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-          <path d="M4 4l8 8M12 4l-8 8"></path>
-        </svg>
-        Reset filters
+    <div class="header-icons">
+      <button type="button" class="icon-btn" id="theme-toggle" aria-label="Colour theme: system" data-theme-state="system">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8"/></svg>
       </button>
     </div>
+  </div>
+</header>
+<!-- shared:header-end -->
+
+<main class="doc-main home-main" id="main">
+
+  <section class="ask">
+    <h1 class="ask-title">Ask the model dataset</h1>
+    <p class="ask-sub">Every answer comes from records with sources attached — not from a language model.</p>
+
+    <form class="ask-form" id="ask-form" role="search">
+      <label class="visually-hidden" for="ask-input">Ask a question about model releases</label>
+      <input type="search" id="ask-input" class="ask-input" autocomplete="off" spellcheck="false"
+        placeholder="open weights with 1M context">
+      <button type="submit" class="ask-go">Ask</button>
+    </form>
+
+    <!-- How the question was understood. Shown back so a query that ignores
+         half of what you typed cannot do so silently. -->
+    <p class="ask-reading" id="ask-reading" hidden></p>
+
+    <ul class="ask-examples" id="ask-examples">
+      <li><button type="button" data-q="open weights with 1M context">open weights with 1M context</button></li>
+      <li><button type="button" data-q="anthropic reasoning 2026">anthropic reasoning 2026</button></li>
+      <li><button type="button" data-q="open weights over 100B parameters">open weights over 100B parameters</button></li>
+      <li><button type="button" data-q="verified models under $3">verified models under $3</button></li>
+      <li><button type="button" data-q="image models">image models</button></li>
+    </ul>
   </section>
 
-  <main class="timeline" id="timeline">
-    <div class="lanes" id="lanes" role="tabpanel" aria-label="Release timeline" aria-busy="true"></div>
-    <div class="empty-state" id="empty-state" hidden>
-      <p class="empty-title">No releases match</p>
-      <p class="empty-sub" id="empty-sub"></p>
-      <button type="button" class="empty-action" id="empty-action">Clear all filters</button>
-    </div>
-  </main>
+  <section class="ask-results" id="ask-results" aria-live="polite"></section>
 
-  <!-- shared:footer-start -->
-  <footer class="site-footer">
-    <div class="foot-grid">
-      <nav class="foot-col foot-years" aria-labelledby="foot-years">
-        <h2 class="foot-title" id="foot-years">Browse by year</h2>
-        <div class="foot-yearlinks" id="foot-yearlinks"></div>
-      </nav>
+  <p class="ask-foot">
+    Prefer to browse? <a href="timeline/">The timeline</a> shows every release month by month,
+    or start from <a href="latest/">the latest releases</a>.
+  </p>
 
-      <nav class="foot-col" aria-labelledby="foot-data">
-        <h2 class="foot-title" id="foot-data">Open data</h2>
-        <a href="api/models.json">JSON API</a>
-        <a href="llm-releases.csv">CSV download</a>
-        <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener">CC BY 4.0</a>
-      </nav>
+</main>
 
-      <div class="foot-col">
-        <h2 class="foot-title">Data</h2>
-        <p class="data-status" id="data-status">loading <code>data/llm-releases.json</code>…</p>
-        <p class="foot-note">Curated from primary sources. Every release links to its own. Free to reuse with credit.</p>
-      </div>
-    </div>
-  </footer>
-  <!-- shared:footer-end -->
+<!-- shared:footer-start — build.mjs lifts this verbatim; edit here only -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-note">
+      A source-backed record of language model releases. Every figure cites where it came from;
+      the gaps are published too — see <a href="data-quality/">data quality</a>.
+    </p>
+    <nav class="footer-nav" aria-label="More">
+      <a href="models/">All models</a>
+      <a href="families/">Families</a>
+      <a href="companies/">Labs</a>
+      <a href="milestones/">Milestones</a>
+      <a href="analytics/">Analytics</a>
+      <a href="data-quality/">Data quality</a>
+      <a href="api/models.json">JSON API</a>
+      <a href="llm-releases.csv">CSV download</a>
+      <a href="https://github.com/mayoorrnikam/llm-world" rel="noopener">Source</a>
+    </nav>
+    <p class="footer-meta">Data CC BY 4.0 · code MIT</p>
+  </div>
+</footer>
+<!-- shared:footer-end -->
 
-  <dialog class="modal" id="modal" aria-labelledby="modal-title">
-    <article class="modal-body">
-      <header class="modal-head">
-        <span class="modal-mark" id="modal-mark" aria-hidden="true"></span>
-        <div class="modal-heading">
-          <h2 class="modal-title" id="modal-title"></h2>
-          <p class="modal-company" id="modal-company"></p>
-        </div>
-        <button type="button" class="icon-btn modal-close" id="modal-close" aria-label="Close details">
-          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-            <path d="M4 4l8 8M12 4l-8 8"></path>
-          </svg>
-        </button>
-      </header>
-
-      <dl class="modal-facts">
-        <div><dt>Released</dt><dd id="modal-date"></dd></div>
-        <div><dt>Family</dt><dd id="modal-family"></dd></div>
-        <div><dt>Type</dt><dd id="modal-type"></dd></div>
-        <div><dt>Era</dt><dd id="modal-era"></dd></div>
-        <!-- Specifications were in the view model from schema 1.6 but never
-             rendered here, so the dialog was thinner than the model page. -->
-        <div><dt>Context</dt><dd id="modal-context"></dd></div>
-        <div><dt>Parameters</dt><dd id="modal-params"></dd></div>
-        <div><dt>Modalities</dt><dd id="modal-modalities"></dd></div>
-      </dl>
-
-      <p class="modal-cadence" id="modal-cadence"></p>
-
-      <!-- Filled only when a model has more than one recorded lifecycle event,
-           so the usual single-date release doesn't grow an empty section. -->
-      <ol class="modal-events" id="modal-events" hidden></ol>
-
-      <div class="modal-tags" id="modal-tags"></div>
-      <p class="modal-note" id="modal-note"></p>
-
-      <p class="modal-source" id="modal-source"></p>
-
-      <!-- Falls back to the model index rather than "#": if a stale cached
-           app.js never fills this in, the link still goes somewhere real. -->
-      <p class="modal-detail">
-        <a id="modal-detail-link" href="models/">Full details &amp; sources →</a>
-        <a id="modal-compare-link" href="compare/">Compare with another model →</a>
-      </p>
-
-      <footer class="modal-foot">
-        <button type="button" class="ghost-btn" id="modal-prev">
-          <span aria-hidden="true">←</span> Previous
-        </button>
-        <button type="button" class="ghost-btn" id="modal-copy">Copy link</button>
-        <button type="button" class="ghost-btn" id="modal-next">
-          Next <span aria-hidden="true">→</span>
-        </button>
-      </footer>
-    </article>
-  </dialog>
-
-  <dialog class="modal help-modal" id="help" aria-labelledby="help-title">
-    <article class="modal-body">
-      <header class="modal-head">
-        <div class="modal-heading"><h2 class="modal-title" id="help-title">Keyboard shortcuts</h2></div>
-        <button type="button" class="icon-btn modal-close" id="help-close" aria-label="Close shortcuts">
-          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-            <path d="M4 4l8 8M12 4l-8 8"></path>
-          </svg>
-        </button>
-      </header>
-      <ul class="shortcuts">
-        <li><kbd>/</kbd><span>Focus search</span></li>
-        <li><kbd>←</kbd><kbd>→</kbd><span>Previous / next year</span></li>
-        <li><kbd>V</kbd><span>Toggle lanes / grid view</span></li>
-        <li><kbd>T</kbd><span>Cycle theme: system → light → dark</span></li>
-        <li><kbd>A</kbd><span>Show all years at once</span></li>
-        <li><kbd>R</kbd><span>Refresh release data</span></li>
-        <li><kbd>Esc</kbd><span>Close dialog, or clear search</span></li>
-        <li><kbd>?</kbd><span>This help</span></li>
-      </ul>
-      <p class="modal-note">Inside a release dialog, <kbd>←</kbd> and <kbd>→</kbd> step through the filtered results.</p>
-    </article>
-  </dialog>
-
-  <p class="sr-only" id="live" role="status" aria-live="polite"></p>
-
-  <noscript>
-    <p class="noscript">LLM World renders its timeline in the browser — please enable JavaScript.</p>
-  </noscript>
-
-  <script src="app.js" type="module"></script>
+<script src="search.js" type="module"></script>
 </body>
 </html>
