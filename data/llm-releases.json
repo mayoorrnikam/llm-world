@@ -1084,7 +1084,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gemini-1-pro",
@@ -1166,7 +1169,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gemini-1-nano",
@@ -1248,7 +1254,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "mixtral",
@@ -3171,6 +3180,7 @@
         "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Micro – A text-only model that delivers the lowest latency responses in the Amazon Nova family of models at a very low cost.\""
       },
       "undisclosed": [
+        "context_window",
         "parameter_count"
       ],
       "evidence": {
@@ -3253,6 +3263,7 @@
         "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Lite – A very low-cost multimodal model that is lightning fast for processing image, video, and text inputs to generate text output.\""
       },
       "undisclosed": [
+        "context_window",
         "parameter_count"
       ],
       "evidence": {
@@ -5602,6 +5613,204 @@
       }
     },
     {
+      "id": "olmo-3-7b",
+      "model": "Olmo 3 7B",
+      "company": "Allen Institute for AI",
+      "family": "Olmo",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "reasoning",
+        "coding",
+        "function_calling"
+      ],
+      "tags": [],
+      "note": "Part of Ai2's fully-open Olmo 3 family, released with every checkpoint, data point and dependency used to build it.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-11-20",
+          "sources": [
+            "olmo-3-7b-s1",
+            "olmo-3-7b-s2",
+            "olmo-3-7b-s3"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 7000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "olmo-3-7b-s1",
+          "url": "https://allenai.org/blog/olmo3",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251120152225/https://allenai.org/blog/olmo3",
+          "retrieved": "2025-11-20"
+        },
+        {
+          "id": "olmo-3-7b-s2",
+          "url": "https://arxiv.org/abs/2512.13961",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251217032856/https://arxiv.org/abs/2512.13961",
+          "retrieved": "2025-12-17"
+        },
+        {
+          "id": "olmo-3-7b-s3",
+          "url": "https://huggingface.co/allenai/Olmo-3-7B-Instruct",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251120144811/https://huggingface.co/allenai/Olmo-3-7B-Instruct",
+          "retrieved": "2025-11-20"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — release date and parameter count — was found in an archived primary source. Context window is not recorded: none of the cited sources states one, so nothing is claimed about it."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-11-20",
+            "sources": [
+              "olmo-3-7b-s1",
+              "olmo-3-7b-s3"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 7000000000,
+            "sources": [
+              "olmo-3-7b-s1",
+              "olmo-3-7b-s2",
+              "olmo-3-7b-s3"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "olmo-3-32b",
+      "model": "Olmo 3 32B",
+      "company": "Allen Institute for AI",
+      "family": "Olmo",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "reasoning",
+        "coding",
+        "function_calling"
+      ],
+      "tags": [
+        "flagship"
+      ],
+      "note": "Part of Ai2's fully-open Olmo 3 family, released with every checkpoint, data point and dependency used to build it.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-11-20",
+          "sources": [
+            "olmo-3-32b-s1",
+            "olmo-3-32b-s2",
+            "olmo-3-32b-s3"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 32000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "olmo-3-32b-s1",
+          "url": "https://allenai.org/blog/olmo3",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251120152225/https://allenai.org/blog/olmo3",
+          "retrieved": "2025-11-20"
+        },
+        {
+          "id": "olmo-3-32b-s2",
+          "url": "https://arxiv.org/abs/2512.13961",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251217032856/https://arxiv.org/abs/2512.13961",
+          "retrieved": "2025-12-17"
+        },
+        {
+          "id": "olmo-3-32b-s3",
+          "url": "https://huggingface.co/allenai/Olmo-3-32B-Think",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251120151210/https://huggingface.co/allenai/Olmo-3-32B-Think",
+          "retrieved": "2025-11-20"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Every value this record asserts — release date and parameter count — was found in an archived primary source. Context window is not recorded: none of the cited sources states one, so nothing is claimed about it."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-11-20",
+            "sources": [
+              "olmo-3-32b-s1",
+              "olmo-3-32b-s3"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 32000000000,
+            "sources": [
+              "olmo-3-32b-s1",
+              "olmo-3-32b-s2",
+              "olmo-3-32b-s3"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "claude-opus-4-5",
       "model": "Claude Opus 4.5",
       "company": "Anthropic",
@@ -7862,11 +8071,16 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
-      "tags": [
-        "multimodal"
-      ],
+      "tags": [],
       "note": "A 2.8-trillion-parameter open MoE, the largest open-weight model ever published.",
       "events": [
         {
@@ -7902,15 +8116,16 @@
           "url": "https://huggingface.co/moonshotai/Kimi-K3",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260723172717/https://huggingface.co/moonshotai/Kimi-K3",
+          "retrieved": "2026-07-23"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to the official model card. Not verified because the release date, the context window and the parameter count could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
-      }
+        "reason": "Cited to the official model card. Not verified because the release date, the context window and the parameter count could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {}
     },
     {
       "id": "gemini-3-6-flash",
