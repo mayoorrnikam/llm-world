@@ -266,10 +266,25 @@ ${chrome(SHARED_FOOTER, up, '').replace('id="foot-yearlinks"></div>',
 `;
 }
 
-const write = (path, html) => {
+/**
+ * Every page written, so the sitemap can be derived rather than remembered.
+ *
+ * The sitemap used to be a hand-maintained array beside the writes, which meant
+ * adding a route was two edits and the second one is invisible when you forget
+ * it — the page builds, the site works, and search engines never hear about it.
+ * /methodology/, /taxonomy/, /changes/ and /analytics/context-windows/ were all
+ * live and all absent from the sitemap for exactly that reason.
+ *
+ * Redirect stubs are excluded: a sitemap should list destinations, not the URLs
+ * that point at them.
+ */
+const WRITTEN = new Set();
+
+const write = (path, html, { sitemap = true } = {}) => {
   const dir = join(OUT, path);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, 'index.html'), html);
+  if (sitemap) WRITTEN.add(path);
 };
 
 /* --------------------------------------------------------------- templates */
@@ -2185,7 +2200,7 @@ for (const rd of data.redirects ?? []) {
     body: `<h1>Moved</h1>
 <p class="doc-sub">${esc(rd.reason)}</p>
 <p class="doc-cta"><a href="${'../'.repeat(depth)}${esc(rd.to)}/">Continue →</a></p>`,
-  }));
+  }), { sitemap: false });
 }
 
 /* The interactive timeline moved off the root so the landing page can ask one
@@ -2230,22 +2245,14 @@ for (const m of milestones) {
 <p class="doc-sub">${esc(m.title.replace(/ launches$/, ''))} is a product, not a model, so it is
 recorded as a <a href="../../milestones/${esc(m.id)}/">milestone</a>.</p>
 <p class="doc-cta"><a href="../../milestones/${esc(m.id)}/">Continue →</a></p>`,
-  }));
+  }), { sitemap: false });
 }
 write('compare', comparePage());
 
 const BASE = BASE_URL;
 const urls = [
-  `${BASE}/models/`, `${BASE}/companies/`, `${BASE}/latest/`,
-  `${BASE}/analytics/`, `${BASE}/compare/`, `${BASE}/data-quality/`, `${BASE}/families/`,
-  `${BASE}/timeline/`,
-  ...(milestones.length ? [`${BASE}/milestones/`] : []),
-  ...milestones.map((m) => `${BASE}/milestones/${m.id}/`),
-  ...[...new Set(releases.map((r) => r.family))].map((f) => `${BASE}/families/${familySlug(f)}/`),
   `${BASE}/`,
-  ...releases.map((r) => `${BASE}/models/${r.id}/`),
-  ...[...byCompany.keys()].map((c) => `${BASE}/companies/${companySlug(c)}/`),
-  ...[...byYear.keys()].map((y) => `${BASE}/timeline/${y}/`),
+  ...[...WRITTEN].sort().map((p) => `${BASE}/${p}/`),
 ];
 mkdirSync(OUT, { recursive: true });
 writeFileSync(join(OUT, 'sitemap.xml'),
