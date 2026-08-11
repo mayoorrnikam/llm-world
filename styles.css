@@ -1501,6 +1501,30 @@ code, kbd {
    The marks were 13-17px, below the ~16px floor where a logo is still
    recognisable rather than a smudge. --mark sizes the box; the glyph is a
    share of it, so one number moves both. */
+/* Context-window study ----------------------------------------------------- */
+.cs-figure { margin: 18px 0 22px; }
+.cs-chart {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  color: var(--accent);
+}
+.cs-grid { stroke: var(--line-soft); stroke-width: 1; }
+.cs-tick { fill: var(--muted); font-size: 11px; font-family: var(--mono); }
+.cs-step {
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.cs-dot { fill: currentColor; }
+.cs-figure figcaption {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
 /* Capability evolution --------------------------------------------------- */
 .cap-firsts {
   list-style: none;

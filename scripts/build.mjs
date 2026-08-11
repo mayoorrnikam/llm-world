@@ -1515,6 +1515,157 @@ function docPage({ file, slug, title, description, lead }) {
   });
 }
 
+/**
+ * The context-window study: /analytics/context-windows/.
+ *
+ * Every figure and every sentence with a number in it is computed from
+ * specifications.context_window at build time. That is the point — a
+ * hand-written narrative about a moving dataset is wrong within a month, and
+ * this one restates itself on every build.
+ *
+ * The chart is a STEP, not a line or a bar. A context window is a level that
+ * holds from the day it ships until something larger ships: GPT-4's 8K did not
+ * slide toward 128K over 426 days, it held at 8K and then jumped. A sloped line
+ * would draw a rate of change that never existed, and bars would imply each
+ * release is an independent measurement rather than a level that persisted.
+ * Log scale, because 2K to 1.05M on a linear axis flattens everything before
+ * 2024 into the baseline.
+ */
+function contextStudyPage() {
+  const disclosed = releases
+    .filter((r) => r.technical.context_window)
+    .sort((a, b) => stamp(a) - stamp(b));
+
+  // The frontier: releases that set a new maximum. Everything else sits under
+  // a ceiling somebody else had already reached.
+  const frontier = [];
+  let best = 0;
+  for (const r of disclosed) {
+    if (r.technical.context_window > best) {
+      best = r.technical.context_window;
+      frontier.push(r);
+    }
+  }
+
+  const fmt = (n) => n >= 1e6 ? `${+(n / 1e6).toFixed(2)}M` : n >= 1000 ? `${Math.round(n / 1000)}K` : String(n);
+  const first = frontier[0], last = frontier[frontier.length - 1];
+  const span = Math.round((stamp(last) - stamp(first)) / 86400000);
+  const multiple = Math.round(last.technical.context_window / first.technical.context_window);
+
+  // Biggest single jump on the frontier, by multiple rather than absolute — a
+  // 4x is the same engineering story at 8K as at 800K.
+  let biggest = null;
+  for (let i = 1; i < frontier.length; i++) {
+    const factor = frontier[i].technical.context_window / frontier[i - 1].technical.context_window;
+    if (!biggest || factor > biggest.factor) biggest = { factor, from: frontier[i - 1], to: frontier[i] };
+  }
+
+  // ---- the step chart ------------------------------------------------------
+  const W = 720, H = 300, PAD = { l: 52, r: 14, t: 14, b: 30 };
+  const t0 = stamp(first), t1 = stamp(last);
+  const lo = Math.log10(first.technical.context_window);
+  const hi = Math.log10(last.technical.context_window);
+  const x = (r) => PAD.l + (stamp(r) - t0) / Math.max(1, t1 - t0) * (W - PAD.l - PAD.r);
+  const y = (v) => H - PAD.b - (Math.log10(v) - lo) / Math.max(0.001, hi - lo) * (H - PAD.t - PAD.b);
+
+  // Step path: across at the old level, then up at the release date.
+  let d = `M ${x(first).toFixed(1)} ${y(first.technical.context_window).toFixed(1)}`;
+  for (let i = 1; i < frontier.length; i++) {
+    d += ` L ${x(frontier[i]).toFixed(1)} ${y(frontier[i - 1].technical.context_window).toFixed(1)}`;
+    d += ` L ${x(frontier[i]).toFixed(1)} ${y(frontier[i].technical.context_window).toFixed(1)}`;
+  }
+  d += ` L ${(W - PAD.r).toFixed(1)} ${y(last.technical.context_window).toFixed(1)}`;
+
+  const ticks = [1e3, 1e4, 1e5, 1e6].filter((v) => v >= 10 ** lo / 2 && v <= 10 ** hi * 2);
+  const gridlines = ticks.map((v) => `<g>
+<line x1="${PAD.l}" x2="${W - PAD.r}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}" class="cs-grid"/>
+<text x="${PAD.l - 8}" y="${(y(v) + 4).toFixed(1)}" class="cs-tick" text-anchor="end">${fmt(v)}</text>
+</g>`).join('');
+
+  const dots = frontier.map((r) => `<circle cx="${x(r).toFixed(1)}" cy="${y(r.technical.context_window).toFixed(1)}" r="3.5" class="cs-dot"><title>${
+    esc(r.model)} — ${fmt(r.technical.context_window)}, ${fullDate(r)}</title></circle>`).join('');
+
+  const yearMarks = [...new Set(frontier.map((r) => r.year))].map((yr) => {
+    const at = frontier.find((r) => r.year === yr);
+    return `<text x="${x(at).toFixed(1)}" y="${H - 10}" class="cs-tick" text-anchor="middle">${yr}</text>`;
+  }).join('');
+
+  const chart = `<figure class="cs-figure">
+<svg viewBox="0 0 ${W} ${H}" role="img" class="cs-chart"
+     aria-label="Frontier context window over time, log scale, as a step chart from ${
+       fmt(first.technical.context_window)} in ${first.year} to ${fmt(last.technical.context_window)} in ${last.year}.">
+${gridlines}
+<path d="${d}" class="cs-step" fill="none"/>
+${dots}${yearMarks}
+</svg>
+<figcaption>Frontier context window, log scale. The line holds at each level until a
+larger one ships — that is what the data says happened, and a sloped line would
+invent a rate of change between two dated announcements.</figcaption>
+</figure>`;
+
+  const body = `
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../">Analytics</a> <span aria-hidden="true">›</span> <span>Context windows</span></nav>
+<div class="doc-hero"><div class="doc-heading">
+<h1>How the context window grew ${multiple.toLocaleString('en-US')}×</h1>
+<p class="doc-sub">From ${fmt(first.technical.context_window)} to ${fmt(last.technical.context_window)} in ${
+  span.toLocaleString('en-US')} days, measured across ${disclosed.length} releases that disclose one.</p>
+</div></div>
+
+<div class="prose">
+<p>${frontier.length} of the ${disclosed.length} releases with a disclosed context window
+set a new maximum. The rest shipped under a ceiling someone had already reached —
+which is the useful shape here: the frontier moves in a few large steps, not
+continuously.</p>
+
+${chart}
+
+<h2>Every step of the frontier</h2>
+<p class="chart-note">A release appears here only if it disclosed a larger context
+window than anything before it. ${releases.length - disclosed.length} of ${releases.length}
+records disclose no context window at all and cannot appear — see
+<a href="../../data-quality/">data quality</a>.</p>
+${barRows(frontier.map((r, i) => ({
+    name: `${r.model} · ${r.year}`,
+    value: Math.log10(r.technical.context_window),
+    display: i === 0 ? fmt(r.technical.context_window)
+      : `${fmt(r.technical.context_window)} · ${Math.round(r.technical.context_window / frontier[i - 1].technical.context_window)}×`,
+    href: `../../models/${esc(r.id)}/`,
+  })))}
+
+<h2>The largest single jump</h2>
+<p>${esc(biggest.to.model)} multiplied the frontier by ${Math.round(biggest.factor)}×,
+from ${fmt(biggest.from.technical.context_window)} to ${fmt(biggest.to.technical.context_window)},
+${Math.round((stamp(biggest.to) - stamp(biggest.from)) / 86400000).toLocaleString('en-US')} days after
+${esc(biggest.from.model)} set the previous mark. Both figures are traced to the
+labs' own announcements — follow them from
+<a href="../../models/${esc(biggest.to.id)}/">${esc(biggest.to.model)}</a>.</p>
+
+<h2>What this cannot tell you</h2>
+<p>A context window is what the lab says the model accepts. It is not a claim about
+what the model uses well: retrieval quality across a full window is a benchmark
+question, and this dataset records no benchmark it has not traced to a primary
+source. Nor is the absence of a figure evidence of a small window —
+${releases.length - disclosed.length} records disclose nothing here, and most of
+those are proprietary models whose labs publish no specification at all.</p>
+</div>
+
+<p class="doc-cta">
+  <a href="../">Back to analytics →</a><br>
+  <a href="../../compare/">Compare two models side by side →</a>
+</p>`;
+
+  return page({
+    title: 'How the context window grew — a technical study | LLM World',
+    description: `From ${fmt(first.technical.context_window)} to ${fmt(last.technical.context_window)} in `
+      + `${span.toLocaleString('en-US')} days: every step of the context-window frontier, traced to primary sources.`,
+    canonical: `${BASE_URL}/analytics/context-windows/`,
+    section: 'analytics/',
+    depth: 2,
+    sprites: [],
+    body,
+  });
+}
+
 function analyticsPage(byCompany, byYear) {
   const years = [...byYear.keys()].sort((a, b) => a - b);
   const modalityYears = modalityEvolution();
@@ -1578,6 +1729,7 @@ ${barRows(cadence, { unit: 'd' })}
 Bars are on a <strong>log scale</strong> — the range spans three orders of magnitude, so a
 linear axis would render the early years invisible. Read the labels, not the widths.</p>
 ${contextGrowth(byYear)}
+<p class="doc-cta"><a href="context-windows/">Read the full study: how the context window grew, step by step →</a></p>
 
 <h2>Open-weights licences</h2>
 <p class="chart-note">How the ${releases.filter((r) => r.access.open_weights).length} open-weights
@@ -1844,6 +1996,7 @@ write('models', modelsIndexPage());
 write('companies', companiesIndexPage(byCompany));
 write('latest', latestPage());
 write('analytics', analyticsPage(byCompany, byYear));
+write('analytics/context-windows', contextStudyPage());
 write('data-quality', dataQualityPage());
 
 // The two documents that justify the dataset. They live in docs/ because they
