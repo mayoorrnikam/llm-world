@@ -299,7 +299,7 @@ function checkWriteScripts() {
  */
 function checkScriptsRun() {
   const scripts = [
-    'attribute-facts', 'detect-modalities', 'detect-undisclosed',
+    'attribute-facts', 'detect-modalities', 'detect-capabilities', 'detect-undisclosed',
     'extract-pricing', 'extract-benchmarks', 'hf-metadata', 'archive-sources',
     'state-reasons', 'discover-epoch', 'add-model', 'split-record',
   ];

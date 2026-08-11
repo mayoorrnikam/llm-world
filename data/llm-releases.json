@@ -19,7 +19,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "multilingual",
+        "reasoning"
+      ],
       "tags": [
         "flagship"
       ],
@@ -179,7 +183,9 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "multilingual"
+      ],
       "tags": [],
       "note": "The 176-billion-parameter multilingual open model built by over a thousand volunteer researchers.",
       "events": [
@@ -398,7 +404,9 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding"
+      ],
       "tags": [
         "flagship"
       ],
@@ -590,7 +598,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "multilingual",
+        "reasoning"
+      ],
       "tags": [
         "flagship"
       ],
@@ -661,7 +673,10 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "reasoning"
+      ],
       "tags": [
         "flagship"
       ],
@@ -821,7 +836,10 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "reasoning"
+      ],
       "tags": [
         "small-efficient"
       ],
@@ -925,7 +943,10 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "reasoning"
+      ],
       "tags": [
         "flagship"
       ],
@@ -1300,7 +1321,9 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding"
+      ],
       "tags": [],
       "note": "The first open mixture-of-experts model to rival much larger dense models.",
       "events": [
@@ -1375,7 +1398,9 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "reasoning"
+      ],
       "tags": [
         "small-efficient"
       ],
@@ -1461,7 +1486,9 @@
         "subtype": "llm"
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "multilingual"
+      ],
       "tags": [
         "flagship"
       ],
@@ -1625,7 +1652,9 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "reasoning"
+      ],
       "tags": [
         "small-efficient"
       ],
@@ -1803,7 +1832,13 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "function_calling",
+        "multilingual",
+        "reasoning",
+        "tool_use"
+      ],
       "tags": [],
       "note": "Cohere's RAG-focused enterprise model family with 128K context and open weights.",
       "events": [
@@ -1894,7 +1929,10 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "reasoning"
+      ],
       "tags": [],
       "note": "8B and 70B models with dramatically stronger reasoning that powered Meta's AI assistant.",
       "events": [
@@ -1986,7 +2024,9 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "reasoning"
+      ],
       "tags": [
         "small-efficient"
       ],
@@ -2444,7 +2484,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "multilingual",
+        "reasoning"
+      ],
       "tags": [],
       "note": "Alibaba's flagship open series spanning 0.5B to 72B parameters with strong multilingual ability.",
       "events": [
@@ -2622,7 +2666,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "multilingual",
+        "reasoning",
+        "tool_use"
+      ],
       "tags": [],
       "note": "The 405B open flagship with 128K context, the first open model at frontier scale.",
       "events": [
@@ -2715,7 +2763,13 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "function_calling",
+        "multilingual",
+        "reasoning",
+        "tool_use"
+      ],
       "tags": [
         "flagship"
       ],
@@ -2803,7 +2857,10 @@
         "subtype": "llm"
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "tool_use"
+      ],
       "tags": [],
       "note": "AI21's hybrid SSM-Transformer models with a 256K context window for long-document work.",
       "events": [
@@ -3167,7 +3224,10 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "reasoning"
+      ],
       "tags": [],
       "note": "Amazon's lowest-latency Nova model, text in and text out.",
       "events": [
@@ -3814,7 +3874,12 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "function_calling",
+        "multilingual",
+        "reasoning"
+      ],
       "tags": [
         "small-efficient"
       ],
@@ -4300,7 +4365,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "multilingual",
+        "tool_use"
+      ],
       "tags": [
         "flagship"
       ],
@@ -4868,7 +4937,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "coding",
+        "reasoning"
+      ],
       "tags": [],
       "note": "A trillion-parameter open MoE with 32B active parameters excelling at code and agents.",
       "events": [
@@ -4958,7 +5031,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "coding",
+        "reasoning"
+      ],
       "tags": [],
       "note": "A 355B MoE open model that became the first Chinese open model to rival closed frontier models.",
       "events": [
@@ -5040,7 +5117,13 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "coding",
+        "function_calling",
+        "reasoning",
+        "tool_use"
+      ],
       "tags": [],
       "note": "OpenAI's larger open-weight model, fitting on a single 80GB GPU.",
       "events": [
@@ -5152,7 +5235,13 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "coding",
+        "function_calling",
+        "reasoning",
+        "tool_use"
+      ],
       "tags": [],
       "note": "OpenAI's smaller open-weight model, running in 16GB of memory.",
       "events": [
@@ -7137,7 +7226,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "coding",
+        "reasoning"
+      ],
       "tags": [],
       "note": "A 35-billion-parameter mixture-of-experts Qwen release with 3B active parameters.",
       "events": [
@@ -7325,7 +7418,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "coding",
+        "reasoning"
+      ],
       "tags": [],
       "note": "The 27-billion-parameter dense model in the Qwen3.6 release.",
       "events": [
@@ -7521,7 +7618,10 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "reasoning"
+      ],
       "tags": [],
       "note": "A 284B MoE with 13B active parameters and 1M context, MIT-licensed alongside V4-Pro.",
       "events": [
@@ -8402,7 +8502,9 @@
         "subtype": "llm"
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "reasoning"
+      ],
       "tags": [
         "flagship"
       ],
@@ -8556,7 +8658,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "reasoning",
+        "tool_use"
+      ],
       "tags": [],
       "note": "A 2.8-trillion-parameter open MoE, the largest open-weight model ever published.",
       "events": [
