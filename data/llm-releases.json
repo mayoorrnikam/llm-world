@@ -2941,6 +2941,95 @@
       }
     },
     {
+      "id": "deepseek-v2-5",
+      "model": "DeepSeek-V2.5",
+      "company": "DeepSeek",
+      "family": "DeepSeek",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "coding",
+        "function_calling",
+        "structured_output"
+      ],
+      "tags": [],
+      "note": "An all-in-one merge of DeepSeek-V2-Chat and DeepSeek-Coder-V2 that combines general conversational and code capabilities.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2024-09-05",
+          "sources": [
+            "deepseek-v2-5-s1",
+            "deepseek-v2-5-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 236000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "DeepSeek License Agreement 1.0"
+      },
+      "sources": [
+        {
+          "id": "deepseek-v2-5-s1",
+          "url": "https://api-docs.deepseek.com/news/news0905/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20241112035822/http://api-docs.deepseek.com/news/news0905/",
+          "retrieved": "2024-11-12"
+        },
+        {
+          "id": "deepseek-v2-5-s2",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V2.5",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20240906133246/https://huggingface.co/deepseek-ai/DeepSeek-V2.5",
+          "retrieved": "2024-09-06"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-09-05",
+            "sources": [
+              "deepseek-v2-5-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 236000000000,
+            "sources": [
+              "deepseek-v2-5-s2"
+            ]
+          }
+        ]
+      },
+      "undisclosed": [
+        "context_window"
+      ]
+    },
+    {
       "id": "o1",
       "model": "o1",
       "company": "OpenAI",
@@ -3731,8 +3820,7 @@
           "type": "announcement",
           "date": "2024-12-26",
           "sources": [
-            "deepseek-v3-s1",
-            "deepseek-v3-s2"
+            "deepseek-v3-s3"
           ]
         }
       ],
@@ -3762,6 +3850,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20241226081224/https://huggingface.co/deepseek-ai/DeepSeek-V3",
           "retrieved": "2024-12-26"
+        },
+        {
+          "id": "deepseek-v3-s3",
+          "url": "https://api-docs.deepseek.com/news/news1226/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260811022652/https://api-docs.deepseek.com/news/news1226/",
+          "retrieved": "2026-08-10"
         }
       ],
       "provenance": {
@@ -8041,8 +8137,8 @@
           "url": "https://huggingface.co/google/gemma-4-12B-it",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260603160621/https://huggingface.co/google/gemma-4-12B-it",
+          "retrieved": "2026-06-03"
         }
       ],
       "provenance": {
