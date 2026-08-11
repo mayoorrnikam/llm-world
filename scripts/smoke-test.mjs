@@ -259,6 +259,43 @@ function checkLibImports() {
  * bare :root, prefers-color-scheme: dark, and [data-theme="dark"] — so an
  * explicit theme choice cannot fall back to a hue that was only half added.
  */
+/**
+ * The feed is not HTML, so the link crawler never opens it.
+ *
+ * That matters more than it sounds: a malformed feed still serves with a 200,
+ * still validates as a file, and simply appears empty in every reader. The
+ * specific trap is pubDate — RFC 822 is required, and a strict reader drops
+ * every item carrying an ISO 8601 date without saying so.
+ */
+function checkFeed() {
+  if (!existsSync('feed.xml')) { fail('feed.xml', 'missing — the build should emit it'); return; }
+  const xml = readFileSync('feed.xml', 'utf8');
+
+  const items = xml.match(/<item>/g) ?? [];
+  if (!items.length) fail('feed.xml', 'has no <item> entries');
+
+  const dates = [...xml.matchAll(/<pubDate>([^<]*)<\/pubDate>/g)].map((m) => m[1]);
+  if (dates.length !== items.length) {
+    fail('feed.xml', `${items.length} items but ${dates.length} pubDate values`);
+  }
+  const RFC822 = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|[+-]\d{4})$/;
+  for (const d of dates) {
+    if (!RFC822.test(d)) fail('feed.xml', `pubDate is not RFC 822: "${d}" — strict readers drop the item`);
+  }
+
+  // Every link must resolve to a page the build actually wrote.
+  for (const [, href] of xml.matchAll(/<link>([^<]+)<\/link>/g)) {
+    const path = href.replace(/^https?:\/\/[^/]+\/llm-world\/?/, '');
+    if (!path) continue;
+    const target = join(path, 'index.html');
+    if (!existsSync(target)) fail('feed.xml', `item links to ${href}, which was not built`);
+  }
+
+  for (const bad of xml.match(/&(?!amp;|lt;|gt;|quot;|apos;|#\d+;)/g) ?? []) {
+    fail('feed.xml', `unescaped "${bad}" — the XML will not parse`);
+  }
+}
+
 function checkCompanyLogos() {
   const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
   const sprite = readFileSync('sprite.svg', 'utf8');
@@ -364,6 +401,7 @@ checkScriptsRun();
 checkLibImports();
 checkWriteScripts();
 checkCompanyLogos();
+checkFeed();
 
 const shown = fails.slice(0, 25);
 for (const f of shown) console.error(`  FAIL  ${f}`);

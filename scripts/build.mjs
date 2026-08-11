@@ -225,6 +225,7 @@ function page({ title, description, canonical, depth, sprites, body, jsonld, sec
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical)}">
+<link rel="alternate" type="application/rss+xml" title="LLM World — tracked model releases" href="${up}feed.xml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
@@ -1824,6 +1825,76 @@ ${e.researched.length ? `<li><strong>Researched</strong> ${group(e.researched).s
   });
 }
 
+/**
+ * RSS 2.0 at /feed.xml — the 20 most recent releases and milestones.
+ *
+ * A feed is the one syndication format that costs nothing to maintain: it is
+ * the same dataset in a different envelope, regenerated on every build, and it
+ * cannot drift because there is nothing to keep in sync.
+ *
+ * pubDate must be RFC 822, not ISO 8601. Readers that parse strictly drop items
+ * with an ISO date silently, which is the worst failure mode available — the
+ * feed validates, serves, and simply appears empty.
+ *
+ * Dates carry no time of day here, so every item is stamped 00:00:00 GMT. That
+ * is honest: the dataset records the day a model was announced, not the hour.
+ */
+const RFC822_DAY = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const RFC822_MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+function rfc822(iso) {
+  const d = new Date(`${iso}T00:00:00Z`);
+  if (Number.isNaN(d.getTime())) return null;
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${RFC822_DAY[d.getUTCDay()]}, ${pad(d.getUTCDate())} ${RFC822_MON[d.getUTCMonth()]} `
+    + `${d.getUTCFullYear()} 00:00:00 GMT`;
+}
+
+function feedXml() {
+  const items = [
+    ...releases.map((r) => ({
+      title: `${r.model} — ${r.company}`,
+      link: `${BASE_URL}/models/${r.id}/`,
+      iso: isoDate(r),
+      sort: stamp(r),
+      guid: `${BASE_URL}/models/${r.id}/`,
+      description: `${r.company} released ${r.model} on ${fullDate(r)}.`
+        + (r.note ? ` ${r.note}` : ''),
+    })),
+    ...milestones.map((m) => ({
+      title: `${m.title} — ${m.company}`,
+      link: `${BASE_URL}/milestones/${m.id}/`,
+      iso: m.date,
+      sort: Date.parse(`${m.date}T00:00:00Z`),
+      guid: `${BASE_URL}/milestones/${m.id}/`,
+      description: `${m.note ?? m.title} Recorded as a milestone, not a model release.`,
+    })),
+  ].filter((i) => i.iso).sort((a, b) => b.sort - a.sort).slice(0, 20);
+
+  const built = rfc822(data.updated) ?? rfc822(items[0]?.iso);
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LLM World — tracked model releases</title>
+    <link>${BASE_URL}/</link>
+    <atom:link href="${BASE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Every large language model release this project tracks, each traced to the lab's own announcement, paper, model card or documentation.</description>
+    <language>en</language>
+    <lastBuildDate>${built}</lastBuildDate>
+    <docs>https://www.rssboard.org/rss-specification</docs>
+${items.map((i) => `    <item>
+      <title>${esc(i.title)}</title>
+      <link>${esc(i.link)}</link>
+      <guid isPermaLink="true">${esc(i.guid)}</guid>
+      <pubDate>${rfc822(i.iso)}</pubDate>
+      <description>${esc(i.description)}</description>
+    </item>`).join('\n')}
+  </channel>
+</rss>
+`;
+}
+
 function analyticsPage(byCompany, byYear) {
   const years = [...byYear.keys()].sort((a, b) => a - b);
   const modalityYears = modalityEvolution();
@@ -2267,6 +2338,7 @@ mkdirSync(OUT, { recursive: true });
 writeFileSync(join(OUT, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${
     urls.map((u) => `  <url><loc>${u}</loc><lastmod>${data.updated}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+writeFileSync(join(OUT, 'feed.xml'), feedXml());
 writeFileSync(join(OUT, 'robots.txt'),
   `User-agent: *\nAllow: /\n\nSitemap: ${BASE}/sitemap.xml\n`);
 
