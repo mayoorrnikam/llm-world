@@ -258,7 +258,9 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "multilingual"
+      ],
       "tags": [],
       "note": "China's landmark open bilingual 130-billion-parameter model released in August 2022.",
       "events": [
@@ -2196,7 +2198,10 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "reasoning"
+      ],
       "tags": [
         "small-efficient"
       ],
@@ -3048,7 +3053,9 @@
         "subtype": "llm"
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "multilingual"
+      ],
       "tags": [],
       "note": "A massive family of open models that became a default choice across the open ecosystem.",
       "events": [
@@ -5458,7 +5465,12 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "function_calling",
+        "reasoning",
+        "tool_use"
+      ],
       "tags": [],
       "note": "A hybrid think-and-non-think update doubling context to 128K for the agent era.",
       "events": [
@@ -6904,7 +6916,10 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "reasoning",
+        "vision"
+      ],
       "tags": [
         "flagship"
       ],
@@ -8324,7 +8339,12 @@
         "subtype": "llm"
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "coding",
+        "reasoning",
+        "tool_use"
+      ],
       "tags": [],
       "note": "A 744B MIT-licensed open model, the first open model to top closed frontiers on agentic coding.",
       "events": [
