@@ -52,13 +52,36 @@ const data = JSON.parse(readFileSync(FILE, 'utf8'));
 
 /** A capability, with the strong phrases that evidence it. */
 const CAPABILITIES = [
-  ['reasoning', /\breasoning\b/i],
+  // `reasoning` is NOT a bare keyword, and reading it as one put the capability
+  // on 21 records that never claimed it. TAXONOMY defines it as "trained or
+  // CONFIGURED to spend inference-time compute on explicit reasoning before
+  // answering, and presented as such by the lab" — so the evidence has to be a
+  // thinking mode, an effort setting, or the lab calling it a reasoning model.
+  //
+  // What a bare /reasoning/ actually matched: MMLU's "Commonsense Reasoning"
+  // category on Mistral 7B, the GRE's quantitative reasoning section on
+  // Claude 2, "question answering, summarization, and reasoning" in a task
+  // list on Gemma, and a partner's press quote. None is a claim by the lab
+  // that the model reasons at inference time, and taken together they dated
+  // the first reasoning model to 2022.
+  ['reasoning', new RegExp([
+    'extended thinking', 'thinking mode', 'thinking budget', 'enable_thinking',
+    'thinking models?', 'reasoning models?', 'reasoning[_ ]effort',
+    'reasoning strengths?', 'reasoning tokens?', 'adaptive thinking',
+    'test[- ]time compute', 'inference[- ]time compute',
+    'thinks? (?:before|through)', 'think (?:before|longer|harder)',
+    'step[- ]by[- ]step (?:reasoning|thinking)',
+  ].map((p) => `\\b${p}\\b`).join('|'), 'i')],
   ['coding', /\bcode\s+(?:generation|completion|assistant|intelligence)\b|\bcoding\b/i],
   ['multilingual', /\bmultilingual\b|\b\d+\s+(?:more\s+)?languages\b|\bmany\s+languages\b/i],
   ['tool_use', /\btool\s+use\b|\buse\s+(?:external\s+)?tools?\b|\bcall\s+tools?\b|\buses\s+tools?\b/i],
   ['function_calling', /\bfunction\s+call(?:ing)?\b|\bfunction-call\b/i],
   ['structured_output', /\bstructured\s+(?:output|generation)\b|\bJSON\s+mode\b|\bjson\s+(?:output|response)\b/i],
-  ['agentic', /\bagentic\b|\bagents?\b|\bautonomous\s+agent\b/i],
+  // `agentic` held up in the same audit — 33 of 34 records survived, because
+  // labs use the word deliberately rather than in passing. The one strip was a
+  // bare /agents?/ matching a docs nav heading ("Agentic Usage") and a
+  // benchmark category list, so the bare noun goes and the phrases stay.
+  ['agentic', /\bagentic\b|\bautonomous\s+agents?\b|\bagent(?:ic)?\s+(?:workflows?|tasks?|capabilit\w+|use cases?)\b|\bdesigned for (?:intelligent )?agents?\b|\bmulti[- ]step tool use\b/i],
   ['vision', /\bvision[- ]language\b|\bvisual\s+(?:reasoning|understanding|question\s+answering|QA)\b|\bimage\s+understanding\b|\bimage\s+input\b|\btakes?\s+(?:input\s+)?images\b|\bcomputer\s+vision\b|\bimage\s+recognition\b/i],
   ['audio', /\baudio\s+(?:input|understanding|transcription|content)\b|\bspeech\s+(?:recognition|input)\b|\bprocess(?:ing)?\s+audio\b/i],
   ['speech_generation', /\btext[- ]to[- ]speech\b|\bspeech\s+(?:generation|synthesis|output)\b|\bspeak\s+aloud\b/i],

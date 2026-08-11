@@ -21,8 +21,7 @@
       },
       "capabilities": [
         "coding",
-        "multilingual",
-        "reasoning"
+        "multilingual"
       ],
       "tags": [
         "flagship"
@@ -602,8 +601,7 @@
       },
       "capabilities": [
         "coding",
-        "multilingual",
-        "reasoning"
+        "multilingual"
       ],
       "tags": [
         "flagship"
@@ -676,8 +674,7 @@
         ]
       },
       "capabilities": [
-        "coding",
-        "reasoning"
+        "coding"
       ],
       "tags": [
         "flagship"
@@ -839,8 +836,7 @@
         ]
       },
       "capabilities": [
-        "coding",
-        "reasoning"
+        "coding"
       ],
       "tags": [
         "small-efficient"
@@ -946,8 +942,7 @@
         ]
       },
       "capabilities": [
-        "coding",
-        "reasoning"
+        "coding"
       ],
       "tags": [
         "flagship"
@@ -1400,9 +1395,7 @@
           "text"
         ]
       },
-      "capabilities": [
-        "reasoning"
-      ],
+      "capabilities": [],
       "tags": [
         "small-efficient"
       ],
@@ -1654,9 +1647,7 @@
           "text"
         ]
       },
-      "capabilities": [
-        "reasoning"
-      ],
+      "capabilities": [],
       "tags": [
         "small-efficient"
       ],
@@ -1838,7 +1829,6 @@
         "agentic",
         "function_calling",
         "multilingual",
-        "reasoning",
         "tool_use"
       ],
       "tags": [],
@@ -1932,8 +1922,7 @@
         ]
       },
       "capabilities": [
-        "coding",
-        "reasoning"
+        "coding"
       ],
       "tags": [],
       "note": "8B and 70B models with dramatically stronger reasoning that powered Meta's AI assistant.",
@@ -2026,9 +2015,7 @@
           "text"
         ]
       },
-      "capabilities": [
-        "reasoning"
-      ],
+      "capabilities": [],
       "tags": [
         "small-efficient"
       ],
@@ -2199,8 +2186,7 @@
         ]
       },
       "capabilities": [
-        "coding",
-        "reasoning"
+        "coding"
       ],
       "tags": [
         "small-efficient"
@@ -2491,8 +2477,7 @@
       },
       "capabilities": [
         "coding",
-        "multilingual",
-        "reasoning"
+        "multilingual"
       ],
       "tags": [],
       "note": "Alibaba's flagship open series spanning 0.5B to 72B parameters with strong multilingual ability.",
@@ -2673,7 +2658,6 @@
       },
       "capabilities": [
         "multilingual",
-        "reasoning",
         "tool_use"
       ],
       "tags": [],
@@ -2772,7 +2756,6 @@
         "coding",
         "function_calling",
         "multilingual",
-        "reasoning",
         "tool_use"
       ],
       "tags": [
@@ -3321,8 +3304,7 @@
         ]
       },
       "capabilities": [
-        "coding",
-        "reasoning"
+        "coding"
       ],
       "tags": [],
       "note": "Amazon's lowest-latency Nova model, text in and text out.",
@@ -3981,8 +3963,7 @@
       "capabilities": [
         "agentic",
         "function_calling",
-        "multilingual",
-        "reasoning"
+        "multilingual"
       ],
       "tags": [
         "small-efficient"
@@ -5941,7 +5922,6 @@
         ]
       },
       "capabilities": [
-        "reasoning",
         "coding",
         "function_calling"
       ],
@@ -6042,7 +6022,6 @@
         ]
       },
       "capabilities": [
-        "reasoning",
         "coding",
         "function_calling"
       ],
@@ -6827,9 +6806,7 @@
           "text"
         ]
       },
-      "capabilities": [
-        "agentic"
-      ],
+      "capabilities": [],
       "tags": [
         "flagship"
       ],
@@ -8277,7 +8254,6 @@
         ]
       },
       "capabilities": [
-        "reasoning",
         "vision",
         "multilingual"
       ],
@@ -8361,7 +8337,6 @@
         ]
       },
       "capabilities": [
-        "reasoning",
         "vision",
         "multilingual"
       ],
@@ -8777,7 +8752,6 @@
       },
       "capabilities": [
         "coding",
-        "reasoning",
         "tool_use"
       ],
       "tags": [],
