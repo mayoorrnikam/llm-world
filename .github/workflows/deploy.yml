@@ -25,6 +25,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # /changes/ is generated from the commits touching the dataset, and
+          # the default shallow clone has exactly one. Without this the
+          # changelog builds empty in CI while looking fine locally.
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

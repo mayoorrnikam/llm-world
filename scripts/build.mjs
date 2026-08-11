@@ -17,6 +17,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { execFileSync } from 'node:child_process';
 import {
   dateParts, stamp, displayTags, contextWindow, parameterCount, tagLabel, diffRecords,
   fieldState, appliesTo, evidenceFor, assertedValue, EVIDENCED_FIELDS,
@@ -26,6 +27,9 @@ import {
 const EXPORT = process.argv.includes('--export');
 const CHECK = process.argv.includes('--check');
 const OUT = CHECK ? '.build-check' : '.';
+/** Canonical repository, for linking a change to the commit that made it. */
+const REPO_URL = 'https://github.com/mayoorrnikam/llm-world';
+
 const BASE_URL = 'https://mayoorrnikam.github.io/llm-world';
 
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
@@ -1666,6 +1670,145 @@ those are proprietary models whose labs publish no specification at all.</p>
   });
 }
 
+/**
+ * /changes/ — a changelog of the DATASET, not a feed of AI news.
+ *
+ * The distinction decides what this page is. "What's new in AI" is the thing
+ * charter section 1 forbids the project becoming; "what did this dataset
+ * assert, and when did it change its mind" is the opposite — it is the
+ * corrections log rule R5 asks for, and no release tracker publishes one.
+ *
+ * The source is the repo's own history, because the dataset is version
+ * controlled and that history is already the record of what changed. Nothing is
+ * stored to make this page work: every commit touching data/llm-releases.json
+ * is compared against its parent, so the changelog cannot drift from the data
+ * the way a hand-maintained one would.
+ *
+ * CORRECTIONS are the part that matters. A value going from null to a figure is
+ * research; a value going from one figure to a DIFFERENT figure means this site
+ * published something wrong, which is exactly what a reader weighing our
+ * trustworthiness wants to see admitted in public.
+ */
+function changesPage() {
+  const git = (args) => {
+    try {
+      return execFileSync('git', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+    } catch { return null; }
+  };
+
+  const SEP = '\u001f';
+  const log = git(['log', '--format=%H%x1f%aI%x1f%s', '-n', '60', '--', 'data/llm-releases.json']);
+  const commits = (log ?? '').trim().split('\n').filter(Boolean).map((l) => {
+    const [sha, date, subject] = l.split(SEP);
+    return { sha, date, subject };
+  });
+
+  const at = (sha) => {
+    const raw = git(['show', sha + ':data/llm-releases.json']);
+    if (!raw) return null;
+    try { return JSON.parse(raw); } catch { return null; }
+  };
+
+  const index = (doc) => new Map((doc?.releases ?? []).map((r) => [r.id, r]));
+  const spec = (r, f) => f === 'license' ? r.access?.license : r.specifications?.language?.[f];
+  const FIELDS = [['context_window', 'context window'], ['parameter_count', 'parameters'], ['license', 'licence']];
+
+  const entries = [];
+  for (const c of commits) {
+    const now = index(at(c.sha));
+    const before = index(at(c.sha + '^'));
+    if (!now.size) continue;
+
+    const added = [...now.keys()].filter((id) => !before.has(id));
+    const removed = [...before.keys()].filter((id) => !now.has(id));
+
+    const verified = [], corrections = [], researched = [];
+    for (const [id, r] of now) {
+      const p = before.get(id);
+      if (!p) continue;
+
+      if (p.provenance?.status !== 'verified' && r.provenance?.status === 'verified') verified.push(id);
+
+      for (const [f, label] of FIELDS) {
+        const a = spec(p, f), b = spec(r, f);
+        if (a == null && b != null) researched.push({ id, label });
+        // A value replaced by a DIFFERENT value: this site had it wrong.
+        else if (a != null && b != null && a !== b) corrections.push({ id, label, from: a, to: b });
+      }
+
+      if (p.modalities == null && r.modalities != null) researched.push({ id, label: 'modalities' });
+      const capsBefore = new Set(p.capabilities ?? []);
+      const gained = (r.capabilities ?? []).filter((x) => !capsBefore.has(x));
+      const lost = [...capsBefore].filter((x) => !(r.capabilities ?? []).includes(x));
+      if (gained.length) researched.push({ id, label: 'capabilities (' + gained.map(tagLabel).join(', ') + ')' });
+      // A capability taken back OFF a record is a correction, not research.
+      if (lost.length) {
+        corrections.push({ id, label: 'capability withdrawn', from: lost.map(tagLabel).join(', '), to: 'not evidenced' });
+      }
+    }
+
+    if (!added.length && !removed.length && !verified.length && !corrections.length && !researched.length) continue;
+    entries.push({ ...c, added, removed, verified, corrections, researched });
+  }
+
+  const link = (id) => `<a href="../models/${esc(id)}/">${esc(id)}</a>`;
+  const group = (items) => {
+    const by = new Map();
+    for (const x of items) (by.get(x.id) ?? by.set(x.id, []).get(x.id)).push(x.label);
+    return [...by.entries()];
+  };
+
+  const body = `
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a> <span aria-hidden="true">&rsaquo;</span> <span>Changes</span></nav>
+<div class="doc-hero"><div class="doc-heading">
+<h1>What changed in the dataset</h1>
+<p class="doc-sub">Every edit to the data, taken from the repository's own history —
+what was added, what became verified, and what this site had wrong and fixed.</p>
+</div></div>
+
+<p class="doc-note">This is a log of the <strong>dataset</strong>, not of the industry.
+It answers &ldquo;has this record changed since I cited it?&rdquo; and &ldquo;does this
+project admit its mistakes?&rdquo; — not &ldquo;what shipped this week&rdquo;. For
+releases, see <a href="../latest/">Latest</a>.</p>
+
+${!entries.length ? `<p class="doc-note">No history is available in this build. The
+changelog is generated from the repository's commits, and a shallow clone has none to
+read.</p>` : `<ol class="chg-list">${entries.map((e) => `<li class="chg">
+<p class="chg-when"><time datetime="${esc(e.date)}">${esc(e.date.slice(0, 10))}</time>
+<a class="chg-sha" href="${REPO_URL}/commit/${esc(e.sha)}" rel="noopener">${esc(e.sha.slice(0, 7))}</a></p>
+<p class="chg-subject">${esc(e.subject)}</p>
+<ul class="chg-facts">
+${e.corrections.length ? `<li class="chg-fix"><strong>Corrected</strong> ${
+  e.corrections.slice(0, 8).map((x) => `${link(x.id)} ${esc(x.label)} ${esc(String(x.from))} &rarr; ${esc(String(x.to))}`).join('; ')}${
+  e.corrections.length > 8 ? ` and ${e.corrections.length - 8} more` : ''}</li>` : ''}
+${e.added.length ? `<li><strong>Added</strong> ${e.added.slice(0, 10).map(link).join(', ')}${
+  e.added.length > 10 ? ` and ${e.added.length - 10} more` : ''}</li>` : ''}
+${e.removed.length ? `<li><strong>Removed</strong> ${e.removed.map((x) => esc(x)).join(', ')}</li>` : ''}
+${e.verified.length ? `<li><strong>Verified</strong> ${e.verified.slice(0, 10).map(link).join(', ')}${
+  e.verified.length > 10 ? ` and ${e.verified.length - 10} more` : ''}</li>` : ''}
+${e.researched.length ? `<li><strong>Researched</strong> ${group(e.researched).slice(0, 8).map(([id, labels]) =>
+  `${link(id)} ${esc([...new Set(labels)].join(', '))}`).join('; ')}${
+  group(e.researched).length > 8 ? ` and ${group(e.researched).length - 8} more records` : ''}</li>` : ''}
+</ul>
+</li>`).join('')}</ol>`}
+
+<p class="doc-cta">
+  <a href="../data-quality/">How records are judged &rarr;</a><br>
+  <a href="../methodology/">The rules every figure had to pass &rarr;</a>
+</p>`;
+
+  return page({
+    title: 'What changed in the dataset — corrections and additions | LLM World',
+    description: 'A changelog of the LLM World dataset: records added, records verified, '
+      + 'and every figure this site published wrong and later corrected.',
+    canonical: `${BASE_URL}/changes/`,
+    section: 'changes/',
+    depth: 1,
+    sprites: [],
+    body,
+  });
+}
+
 function analyticsPage(byCompany, byYear) {
   const years = [...byYear.keys()].sort((a, b) => a - b);
   const modalityYears = modalityEvolution();
@@ -1998,6 +2141,7 @@ write('latest', latestPage());
 write('analytics', analyticsPage(byCompany, byYear));
 write('analytics/context-windows', contextStudyPage());
 write('data-quality', dataQualityPage());
+write('changes', changesPage());
 
 // The two documents that justify the dataset. They live in docs/ because they
 // are edited alongside the rules they describe, and they are published because
