@@ -3878,7 +3878,8 @@
           {
             "value": 671000000000,
             "sources": [
-              "deepseek-v3-s1"
+              "deepseek-v3-s1",
+              "deepseek-v3-s3"
             ]
           }
         ]
@@ -9202,6 +9203,96 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "No primary source. The release is recorded from news reporting only, so it cannot be verified until the lab's own announcement is cited."
+      }
+    },
+    {
+      "id": "muse-glimmer",
+      "model": "Muse Glimmer",
+      "company": "Meta AI",
+      "family": "Muse",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "agentic",
+        "tool_use",
+        "coding",
+        "reasoning",
+        "multilingual",
+        "vision"
+      ],
+      "tags": [],
+      "note": "A 30B open-weights agentic model distilled from Muse Spark, sized to run on a single consumer GPU: quantised to roughly 4-bit to fit under 20GB, and shipped with a DFlash speculative-decoding drafter. Meta's pitch is the always-on local agent rather than the frontier.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-10",
+          "sources": [
+            "muse-glimmer-s1",
+            "muse-glimmer-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 131072,
+          "parameter_count": 30000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "muse-glimmer-s1",
+          "url": "https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260810115311/https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model",
+          "retrieved": "2026-08-10"
+        },
+        {
+          "id": "muse-glimmer-s2",
+          "url": "https://huggingface.co/meta-models/Muse-Glimmer-30B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on meta-models/Muse-Glimmer-30B."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-10",
+            "sources": [
+              "muse-glimmer-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 30000000000,
+            "sources": [
+              "muse-glimmer-s1"
+            ]
+          }
+        ]
       }
     }
   ],
