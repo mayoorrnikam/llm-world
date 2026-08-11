@@ -51,6 +51,55 @@
         "confidence": 90,
         "reason": "Date confirmed in an archived primary source. A milestone records a dated event, so it carries no specifications."
       }
+    },
+    {
+      "id": "gemini-app",
+      "title": "Bard becomes Gemini",
+      "date": "2024-02-08",
+      "type": "product_launch",
+      "company": "Google DeepMind",
+      "note": "Google retired the Bard brand, renamed the assistant Gemini, and shipped it as a mobile app with a paid Advanced tier.",
+      "significance": "The point Google stopped positioning its assistant as an experiment and started selling it. Bard had been the reactive answer to ChatGPT; Gemini was the product line it became.",
+      "related_family": "Gemini",
+      "sources": [
+        {
+          "id": "gemini-app-s1",
+          "url": "https://blog.google/products/gemini/bard-gemini-advanced-app/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20240208131542/https://blog.google/products/gemini/bard-gemini-advanced-app/",
+          "retrieved": "2024-02-08"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Date confirmed in an archived primary source captured on the day of the announcement. A milestone records a dated event, so it carries no specifications."
+      }
+    },
+    {
+      "id": "eu-ai-act",
+      "title": "The EU AI Act enters into force",
+      "date": "2024-08-01",
+      "type": "policy",
+      "company": "European Union",
+      "note": "Regulation (EU) 2024/1689 — the first broad statutory regime for AI systems, including obligations that fall on general-purpose model providers.",
+      "significance": "The first time training and releasing a general-purpose model carried statutory duties rather than voluntary commitments. Obligations phase in over years, but this is the date the regime began to exist.",
+      "sources": [
+        {
+          "id": "eu-ai-act-s1",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20240712054922/https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689",
+          "retrieved": "2024-07-12"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 85,
+        "reason": "The regulation was published in the Official Journal on 12 July 2024, and its own Article 113 states that it enters into force on the twentieth day following publication — 1 August 2024. Both facts are in the archived primary source; the date here is their sum, not an estimate."
+      }
     }
   ]
 }
