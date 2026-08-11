@@ -1895,6 +1895,152 @@ ${items.map((i) => `    <item>
 `;
 }
 
+/**
+ * /analytics/pricing/ — a table, deliberately not a bar chart.
+ *
+ * Sixteen records carry pricing, and their observed_on dates span 2024-06-20 to
+ * 2026-07-24 across fourteen distinct observations. Token prices moved by one
+ * to two orders of magnitude in that window, so a bar chart of "input price per
+ * million tokens" across those sixteen would rank them by WHEN SOMEBODY LOOKED,
+ * not by price — and GPT-4 would render as the most expensive model on the site
+ * because its figure is the oldest observation here.
+ *
+ * A caption cannot retract that. The entire proposition of a bar chart is that
+ * the bars are comparable, and these are not. This is the same failure the
+ * field rename already fixed once: observed_on exists because effective_from
+ * presented a 2026 snapshot as a May-2024 launch price, off by up to 1,076
+ * days.
+ *
+ * So the observation date is a column, sortable by eye, sitting beside every
+ * figure — and the one chart on the page plots price AGAINST observation date,
+ * which shows the confound instead of hiding it.
+ */
+function pricingPage() {
+  const priced = releases
+    .filter((r) => r.pricing?.length)
+    .map((r) => ({ r, p: [...r.pricing].sort((a, b) => (b.observed_on ?? '').localeCompare(a.observed_on ?? ''))[0] }))
+    .filter((x) => x.p?.rates)
+    .sort((a, b) => (b.p.observed_on ?? '').localeCompare(a.p.observed_on ?? ''));
+
+  const money = (n) => n == null ? MISSING_LABEL.unresearched
+    : `$${n >= 1 ? n.toFixed(2).replace(/\.00$/, '') : n.toFixed(3).replace(/0$/, '')}`;
+
+  const dates = priced.map((x) => x.p.observed_on).filter(Boolean).sort();
+  const oldest = dates[0], newest = dates[dates.length - 1];
+  const spread = Math.round((Date.parse(newest) - Date.parse(oldest)) / 86400000);
+
+  // Source citation: the archived snapshot the figure was read from.
+  const cite = (x) => {
+    const id = x.p.sources?.[0];
+    const src = id && x.r.sources.find((s) => s.id === id);
+    if (!src) return '<span class="pr-nosrc">no source recorded</span>';
+    const href = src.archived_url ?? src.url;
+    return `<a href="${esc(href)}" rel="noopener">${esc(src.archived_url ? 'snapshot' : 'live page')}</a>`;
+  };
+
+  const rows = priced.map((x) => `<tr>
+<th scope="row"><a href="../../models/${esc(x.r.id)}/">${esc(x.r.model)}</a>
+<span class="pr-lab">${esc(x.r.company)}</span></th>
+<td class="pr-num">${money(x.p.rates.input)}</td>
+<td class="pr-num">${money(x.p.rates.output)}</td>
+<td class="pr-when"><time datetime="${esc(x.p.observed_on ?? '')}">${esc(x.p.observed_on ?? 'undated')}</time></td>
+<td class="pr-src">${cite(x)}</td>
+</tr>`).join('');
+
+  // The one chart worth drawing: price against WHEN it was observed.
+  const W = 720, H = 280, PAD = { l: 54, r: 16, t: 16, b: 34 };
+  const pts = priced.filter((x) => x.p.observed_on && x.p.rates.input != null);
+  const t0 = Math.min(...pts.map((x) => Date.parse(x.p.observed_on)));
+  const t1 = Math.max(...pts.map((x) => Date.parse(x.p.observed_on)));
+  const vals = pts.map((x) => x.p.rates.input).filter((v) => v > 0);
+  const lo = Math.log10(Math.min(...vals)), hi = Math.log10(Math.max(...vals));
+  const px = (x) => PAD.l + (Date.parse(x.p.observed_on) - t0) / Math.max(1, t1 - t0) * (W - PAD.l - PAD.r);
+  const py = (v) => H - PAD.b - (Math.log10(v) - lo) / Math.max(0.001, hi - lo) * (H - PAD.t - PAD.b);
+
+  const ticks = [0.1, 1, 10, 100].filter((v) => Math.log10(v) >= lo - 0.5 && Math.log10(v) <= hi + 0.5);
+  const grid = ticks.map((v) => `<line x1="${PAD.l}" x2="${W - PAD.r}" y1="${py(v).toFixed(1)}" y2="${py(v).toFixed(1)}" class="cs-grid"/>
+<text x="${PAD.l - 8}" y="${(py(v) + 4).toFixed(1)}" class="cs-tick" text-anchor="end">${money(v)}</text>`).join('');
+
+  const dots = pts.map((x) => `<circle cx="${px(x).toFixed(1)}" cy="${py(x.p.rates.input).toFixed(1)}" r="4" class="cs-dot">
+<title>${esc(x.r.model)} — ${money(x.p.rates.input)} per million input tokens, observed ${esc(x.p.observed_on)}</title></circle>`).join('');
+
+  const yearsShown = [...new Set(pts.map((x) => x.p.observed_on.slice(0, 4)))].sort();
+  const yearMarks = yearsShown.map((y) => {
+    const at = pts.find((x) => x.p.observed_on.startsWith(y));
+    return `<text x="${px(at).toFixed(1)}" y="${H - 12}" class="cs-tick" text-anchor="middle">${y}</text>`;
+  }).join('');
+
+  const body = `
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">&rsaquo;</span> <a href="../">Analytics</a> <span aria-hidden="true">&rsaquo;</span> <span>Pricing</span></nav>
+<div class="doc-hero"><div class="doc-heading">
+<h1>What the labs charge</h1>
+<p class="doc-sub">Published API prices for ${priced.length} of ${releases.length} tracked
+releases, each read from the lab's own page on a recorded date.</p>
+</div></div>
+
+<div class="prose">
+<p class="doc-note"><strong>These figures are not directly comparable.</strong> Each is a
+price observed on a particular day, and those days span ${spread.toLocaleString('en-US')}
+days — from ${esc(oldest)} to ${esc(newest)}. Two figures read years apart are not a
+price comparison, and published prices are cut without notice, so any of these may be
+stale. The observation date is in every row for that reason, and there is no chart
+ranking these against each other, because a bar chart would assert a comparison the data
+cannot support.</p>
+
+<h2>Published prices, per million tokens</h2>
+<p class="chart-note">Newest observation first. USD, per million tokens, as published by
+the lab. Where a record carries several observations, the most recent is shown.</p>
+<div class="table-scroll"><table class="pr-table">
+<thead><tr>
+<th scope="col">Model</th><th scope="col">Input</th><th scope="col">Output</th>
+<th scope="col">Observed</th><th scope="col">Source</th>
+</tr></thead>
+<tbody>${rows}</tbody>
+</table></div>
+
+<h2>Price against when it was read</h2>
+<p class="chart-note">The same figures plotted against their observation date, log scale.
+This is the confound made visible — but not in the direction you might expect. Fourteen
+of the sixteen were read within one recent stretch, and the vertical spread inside that
+stretch is far wider than the gap to the two older readings: prices within a single week
+range from $1.25 to $75, because they are different tiers of model, not different eras.
+The date matters for whether two figures can be compared at all; it does not, on this
+data, explain the spread.</p>
+<figure class="cs-figure">
+<svg viewBox="0 0 ${W} ${H}" role="img" class="cs-chart"
+     aria-label="Input price per million tokens plotted against the date each price was observed, log scale.">
+${grid}${dots}${yearMarks}
+</svg>
+<figcaption>Input price per million tokens, against observation date. Each point is one
+release; hover for the model and the date.</figcaption>
+</figure>
+
+<h2>What is missing</h2>
+<p>${releases.length - priced.length} of ${releases.length} records carry no pricing at
+all. Open-weights releases often have no list price to record, and several proprietary
+labs publish pricing only on pages that change without notice — which is why every figure
+here is cited to a dated snapshot rather than a live page. No record carries more than one
+observation yet, so price cuts are not yet visible; the schema holds a list precisely so
+they can be, once a second reading exists.</p>
+</div>
+
+<p class="doc-cta">
+  <a href="../">Back to analytics &rarr;</a><br>
+  <a href="../../methodology/">Why a price is recorded as observed, not effective &rarr;</a>
+</p>`;
+
+  return page({
+    title: 'What the labs charge — published API pricing | LLM World',
+    description: `Published per-million-token API prices for ${priced.length} tracked releases, `
+      + 'each cited to a dated snapshot, with the observation date beside every figure.',
+    canonical: `${BASE_URL}/analytics/pricing/`,
+    section: 'analytics/',
+    depth: 2,
+    sprites: [],
+    body,
+  });
+}
+
 function analyticsPage(byCompany, byYear) {
   const years = [...byYear.keys()].sort((a, b) => a - b);
   const modalityYears = modalityEvolution();
@@ -1959,6 +2105,7 @@ Bars are on a <strong>log scale</strong> — the range spans three orders of mag
 linear axis would render the early years invisible. Read the labels, not the widths.</p>
 ${contextGrowth(byYear)}
 <p class="doc-cta"><a href="context-windows/">Read the full study: how the context window grew, step by step →</a></p>
+<p class="doc-cta"><a href="pricing/">What the labs charge, and why the figures are not comparable →</a></p>
 
 <h2>Open-weights licences</h2>
 <p class="chart-note">How the ${releases.filter((r) => r.access.open_weights).length} open-weights
@@ -2226,6 +2373,7 @@ write('companies', companiesIndexPage(byCompany));
 write('latest', latestPage());
 write('analytics', analyticsPage(byCompany, byYear));
 write('analytics/context-windows', contextStudyPage());
+write('analytics/pricing', pricingPage());
 write('data-quality', dataQualityPage());
 write('changes', changesPage());
 

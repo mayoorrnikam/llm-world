@@ -1501,6 +1501,27 @@ code, kbd {
    The marks were 13-17px, below the ~16px floor where a logo is still
    recognisable rather than a smudge. --mark sizes the box; the glyph is a
    share of it, so one number moves both. */
+/* Pricing table ------------------------------------------------------------ */
+.pr-table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.pr-table th, .pr-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line-soft);
+  text-align: left;
+  vertical-align: baseline;
+}
+.pr-table thead th { color: var(--muted); font-weight: 600; font-size: 12px; }
+.pr-table th[scope="row"] { font-weight: 620; }
+.pr-lab { display: block; font-size: 11.5px; color: var(--muted); font-weight: 400; }
+.pr-num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.pr-when { font-variant-numeric: tabular-nums; color: var(--muted); white-space: nowrap; }
+.pr-src { font-size: 12px; }
+.pr-nosrc { color: var(--muted); }
+
+@media (max-width: 640px) {
+  .pr-table { font-size: 12px; }
+  .pr-table th, .pr-table td { padding: 7px 6px; }
+}
+
 /* Dataset changelog -------------------------------------------------------- */
 .chg-list { list-style: none; margin: 0 0 8px; padding: 0; }
 .chg { padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
