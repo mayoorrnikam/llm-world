@@ -1552,6 +1552,24 @@ code, kbd {
   box-shadow: 0 0 0 3px var(--bg);
 }
 
+/* Step connectors.
+   A bare spine leaves each card floating beside a line it has no visible tie
+   to. An elbow — down the spine, then out to the card — makes the path an
+   actual route between generations, and reads as a staircase once the tiers
+   alternate above 900px. Orthogonal on purpose: a diagonal would imply a rate
+   of change between two points that are dated events, not a trend. */
+.lin-rail::after {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  /* Reaches the full gutter so the elbow visibly meets the card instead of
+     stopping in empty space. Set from the same gap the grid uses. */
+  width: 14px;
+  height: 2px;
+  background: var(--line);
+}
+
 /* A tier holding same-day siblings gets a squared node, so "these shipped
    together" is legible without reading the caption. */
 .lin-tier[data-siblings="true"] .lin-node {
@@ -1630,6 +1648,9 @@ code, kbd {
     grid-row: 1;
     text-align: right;
   }
+  .lin-tier:nth-child(odd) .lin-rail::after { left: auto; right: 50%; }
+  /* A centred sibling tier has cards on both sides; give it both arms. */
+  .lin-tier[data-siblings="true"] .lin-rail::after { display: none; }
   .lin-tier:nth-child(even) .lin-body { grid-column: 3; grid-row: 1; }
 
   /* Chips are flex rows, so they need telling which edge to gather on. */
