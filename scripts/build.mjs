@@ -2179,6 +2179,15 @@ write('taxonomy', docPage({
   lead: 'The definitions behind every label on this site — model types, subtypes, '
     + 'modalities and capabilities, and how they overlap.',
 }));
+write('contribute', docPage({
+  file: 'docs/CONTRIBUTING.md',
+  slug: 'contribute',
+  title: 'Contributing',
+  description: 'How to add or correct a release in the LLM World dataset: the spec format, '
+    + 'the enrichment pass, and the five rules every record has to pass.',
+  lead: 'How to add a release, how to correct one, and the five rules every record '
+    + 'has to pass before it can ship.',
+}));
 
 const byFamily = new Map();
 for (const r of releases) (byFamily.get(r.family) ?? byFamily.set(r.family, []).get(r.family)).push(r);

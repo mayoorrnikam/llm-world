@@ -37,4 +37,5 @@ robots.txt
 docs/*
 !docs/METHODOLOGY.md
 !docs/TAXONOMY.md
+!docs/CONTRIBUTING.md
 .source-cache/
