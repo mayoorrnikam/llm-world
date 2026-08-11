@@ -1,8 +1,17 @@
-name: Freshness check
+name: Weekly digest
 
 # The dataset drifted 15 releases in three months with nobody watching, so
 # silence is the failure mode this guards against. Runs weekly and keeps a
 # single open issue up to date — never a new issue each week.
+#
+# It carries both discovery channels, because they answer different questions:
+# check-freshness watches Hugging Face and says "a lab published weights we do
+# not have"; check-feeds watches the labs' own newsrooms, which is the ONLY
+# signal for closed labs that ship nothing to a hub.
+#
+# It posts to an issue rather than committing a page. Generated output is never
+# committed here, and a digest that publishes itself on a schedule would have
+# broadcast the reasoning-capability defect weekly before anyone caught it.
 
 on:
   schedule:
@@ -14,7 +23,7 @@ permissions:
   issues: write
 
 jobs:
-  check:
+  digest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,17 +31,48 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Build report
+      - name: Build digest
         id: report
         run: |
-          node scripts/check-freshness.mjs --quiet > report.md
-          # --quiet prints a one-liner when there is nothing to do; the report
-          # always starts with the bold "Dataset last updated" heading.
-          if head -1 report.md | grep -q '^fresh:'; then
-            echo "due=false" >> "$GITHUB_OUTPUT"
-            cat report.md
+          set -o pipefail
+
+          # Freshness: is the dataset behind what Hugging Face shows?
+          node scripts/check-freshness.mjs --quiet > freshness.md || true
+          if head -1 freshness.md | grep -q '^fresh:'; then
+            FRESH_DUE=false
           else
+            FRESH_DUE=true
+          fi
+
+          # Feeds: what did the labs' own newsrooms publish this week?
+          node scripts/check-feeds.mjs --days=7 > feeds.md || true
+          if grep -q 'Nothing release-shaped' feeds.md; then
+            FEEDS_DUE=false
+          else
+            FEEDS_DUE=true
+          fi
+
+          {
+            echo "_Generated $(date -u +%Y-%m-%d) by the weekly digest workflow._"
+            echo
+            echo "## Dataset freshness"
+            echo
+            cat freshness.md
+            echo
+            cat feeds.md
+            echo
+            echo "---"
+            echo
+            echo "Candidates only. Every one needs a primary source and an archived"
+            echo "snapshot before it becomes a record — see \`docs/CONTRIBUTING.md\`."
+          } > digest.md
+
+          if [ "$FRESH_DUE" = "true" ] || [ "$FEEDS_DUE" = "true" ]; then
             echo "due=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "due=false" >> "$GITHUB_OUTPUT"
+            echo "nothing to report this week"
+            cat digest.md
           fi
 
       - name: Open or update the tracking issue
@@ -41,8 +81,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
         run: |
-          TITLE="Data freshness: releases may be missing"
-          BODY="$(cat report.md)"
+          TITLE="Weekly digest: releases to check"
+          BODY="$(cat digest.md)"
 
           # One issue, reused. A weekly pile of near-identical issues is noise,
           # and noise is what gets muted.
@@ -50,9 +90,9 @@ jobs:
                        --label freshness --limit 1 --json number --jq '.[0].number // empty')
 
           if [ -n "$EXISTING" ]; then
-            gh issue edit "$EXISTING" --repo "$REPO" --body "$BODY"
+            gh issue edit "$EXISTING" --repo "$REPO" --title "$TITLE" --body "$BODY"
             gh issue comment "$EXISTING" --repo "$REPO" \
-              --body "Re-checked $(date -u +%Y-%m-%d) — report above refreshed."
+              --body "Re-checked $(date -u +%Y-%m-%d) — digest above refreshed."
             echo "updated issue #$EXISTING"
           else
             gh label create freshness --repo "$REPO" \
