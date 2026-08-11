@@ -802,11 +802,10 @@ ${median != null ? `<tr><th scope="row">Median gap</th><td>${median} days betwee
 </tbody></table>
 
 <h2>Lineage</h2>
-<p class="chart-note">Ordered by announcement date. Lineage is not inferred from
-version numbers — labs do not number consistently, so the dates decide the order.</p>
-<ol class="doc-lineage family-lineage">${gens.map((r) => `<li>
-<a href="../../models/${esc(r.id)}/">${esc(r.model)}</a>
-<span>${fullDate(r)}</span></li>`).join('')}</ol>
+<p class="chart-note">Ordered by announcement date, and spaced by the gap between
+releases, so a quiet year looks like one. Lineage is not inferred from version
+numbers — labs do not number consistently, so the dates decide the order.</p>
+${lineageGraph(gens)}
 
 ${ctxPoints.length > 1 ? `<h2>Context window over time</h2>
 <p class="chart-note">Only releases with a disclosed context window appear${
@@ -845,6 +844,83 @@ ${gens.length > 1 ? whatChangedSection(gens) : `<h2>What changed</h2>
  * dropped, because "we did not compare this" and "nothing changed" look
  * identical once you hide the difference.
  */
+
+/**
+ * The family lineage as a dated rail rather than a flat list.
+ *
+ * Three things the list could not show, all of which are already in the data:
+ *
+ *   - WHEN. Spacing is proportional to the gap between releases, so an
+ *     eighteen-month pause reads as a pause instead of one more <li>. The
+ *     scale is damped (square root) and clamped, because a linear scale gives
+ *     a family with one long gap a screen of empty rail.
+ *   - WHAT CHANGED. Each edge carries the step from the previous generation,
+ *     via the same diffRecords() the What Changed section uses, so the two can
+ *     never disagree.
+ *   - SIBLINGS. Models shipped on one day are one tier, not a sequence. Nova
+ *     shipped four at once; rendering them as four generations invented three
+ *     upgrade steps that never happened.
+ *
+ * It stays an <ol> of models: the rail is drawn with CSS on top of a list that
+ * still reads correctly with no stylesheet and in a screen reader.
+ */
+function lineageGraph(gens) {
+  // Tiers: consecutive releases sharing a canonical date are siblings.
+  const tiers = [];
+  for (const r of gens) {
+    const key = isoDate(r);
+    const last = tiers[tiers.length - 1];
+    if (last && last.key === key) last.models.push(r);
+    else tiers.push({ key, models: [r] });
+  }
+
+  // The first release to evidence each capability — a fact about the family,
+  // computed once so a capability cannot be marked "first" twice.
+  const firstSeen = new Map();
+  for (const t of tiers) {
+    for (const r of t.models) {
+      for (const c of r.capabilities ?? []) if (!firstSeen.has(c)) firstSeen.set(c, r.id);
+    }
+  }
+
+  const dayMs = 86400000;
+  const items = tiers.map((tier, i) => {
+    const prev = tiers[i - 1];
+    const days = prev
+      ? Math.round((Date.parse(tier.key) - Date.parse(prev.key)) / dayMs)
+      : 0;
+    // Damped so one long gap cannot dominate the page, floored so consecutive
+    // releases still separate.
+    const lead = prev ? Math.min(120, Math.max(20, Math.round(Math.sqrt(Math.max(days, 0)) * 5))) : 0;
+
+    const edge = prev ? diffRecords(prev.models[prev.models.length - 1], tier.models[0]) : null;
+    const chips = (edge?.changes ?? []).map((c) => c.gained
+      ? `<span class="lin-chip lin-new">first evidenced: ${c.gained.map(tagLabel).map(esc).join(', ')}</span>`
+      : `<span class="lin-chip lin-${esc(c.direction)}">${esc(c.label)} ${esc(c.from)} → ${esc(c.to)}</span>`).join('');
+
+    const cards = tier.models.map((r) => {
+      const firsts = (r.capabilities ?? []).filter((c) => firstSeen.get(c) === r.id);
+      return `<div class="lin-card">
+<a class="lin-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a>
+${firsts.length ? `<p class="lin-firsts">${firsts.map((c) => `<span class="lin-chip lin-new">${esc(tagLabel(c))}</span>`).join('')}</p>` : ''}
+</div>`;
+    }).join('');
+
+    return `<li class="lin-tier"${tier.models.length > 1 ? ' data-siblings="true"' : ''} style="--lead:${lead}px">
+<div class="lin-rail" aria-hidden="true"><span class="lin-node"></span></div>
+<div class="lin-body">
+<p class="lin-date"><time datetime="${esc(tier.key)}">${fullDate(tier.models[0])}</time>${
+  prev ? ` <span class="lin-gap">+${days.toLocaleString('en-US')} days</span>` : ''}</p>
+${tier.models.length > 1
+  ? `<p class="lin-sibs">${tier.models.length} released the same day</p><div class="lin-cards">${cards}</div>`
+  : cards}
+${chips ? `<p class="lin-changes">${chips}</p>` : ''}
+</div></li>`;
+  }).join('');
+
+  return `<ol class="lineage-graph">${items}</ol>`;
+}
+
 function whatChangedSection(gens) {
   const pairs = gens.slice(1).map((next, i) => {
     const d = diffRecords(gens[i], next);
