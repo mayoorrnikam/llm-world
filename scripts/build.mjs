@@ -18,7 +18,7 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import {
-  dateParts, displayTags, contextWindow, parameterCount, tagLabel, diffRecords,
+  dateParts, stamp, displayTags, contextWindow, parameterCount, tagLabel, diffRecords,
   fieldState, appliesTo, evidenceFor, assertedValue, EVIDENCED_FIELDS,
   MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL, logoSlug, monogram,
 } from '../lib/record.mjs';
@@ -1314,9 +1314,85 @@ function modalityEvolution() {
   };
 }
 
+
+/**
+ * Capability evolution, from researched records only.
+ *
+ * The researched set is `r.modalities != null` — the same proxy diffRecords()
+ * uses, and for the same reason: capabilities and modalities are established in
+ * one research pass, so a record with modalities has had its capabilities read
+ * off a primary source. Without that test an empty capabilities[] means "nobody
+ * looked", and counting it as "does not have this capability" turns a research
+ * gap into a measurement.
+ *
+ * "First evidenced" is a claim about this dataset, never about history — it is
+ * the earliest release we can SHOW carrying the capability, which is why the
+ * heading and note say so. The distinction is not pedantic: before the
+ * capability audit, `reasoning` first appeared on PaLM in 2022, and a chart
+ * would have published that as the year reasoning models arrived.
+ */
+function capabilityEvolution() {
+  const known = releases.filter((r) => r.modalities).sort((a, b) => stamp(a) - stamp(b));
+
+  const first = new Map();
+  for (const r of known) {
+    for (const c of r.capabilities ?? []) if (!first.has(c)) first.set(c, r);
+  }
+
+  // Adoption per year, per capability, over the researched records of that year.
+  const years = [...new Set(known.map((r) => r.year))].sort((a, b) => a - b);
+  const perYear = new Map(years.map((y) => [y, known.filter((r) => r.year === y)]));
+
+  // Only capabilities with enough presence to have a shape worth drawing.
+  const totals = new Map();
+  for (const r of known) for (const c of r.capabilities ?? []) totals.set(c, (totals.get(c) ?? 0) + 1);
+  const tracked = [...totals.entries()].filter(([, n]) => n >= 3)
+    .sort((a, b) => b[1] - a[1]).map(([c]) => c);
+
+  const matrix = tracked.map((cap) => ({
+    cap,
+    total: totals.get(cap),
+    cells: years.map((y) => {
+      const list = perYear.get(y);
+      const n = list.filter((r) => (r.capabilities ?? []).includes(cap)).length;
+      return { year: y, n, of: list.length, pct: Math.round(n / list.length * 100) };
+    }),
+  }));
+
+  return {
+    researched: known.length,
+    years,
+    firsts: [...first.entries()]
+      .sort((a, b) => stamp(a[1]) - stamp(b[1]))
+      .map(([cap, r]) => ({ cap, r })),
+    matrix,
+  };
+}
+
+/**
+ * Capability adoption as a year × capability grid.
+ *
+ * One hue at varying strength, because every cell is the same measurement at a
+ * different magnitude — a categorical palette here would imply the capabilities
+ * are the variable being compared. Each cell is direct-labelled with its count,
+ * so the colour is a second channel and never the only one.
+ */
+function capabilityMatrix(evo) {
+  const head = evo.years.map((y) => `<th scope="col"><a href="../timeline/${y}/">${y}</a></th>`).join('');
+  const rows = evo.matrix.map((row) => `<tr>
+<th scope="row">${esc(tagLabel(row.cap))}</th>
+${row.cells.map((c) => `<td class="cap-cell"${c.n ? ` style="--fill:${(0.1 + c.pct / 100 * 0.9).toFixed(2)}"` : ''}>
+<span class="cap-n">${c.n}</span><span class="cap-of">/${c.of}</span></td>`).join('')}
+</tr>`).join('');
+  return `<div class="table-scroll"><table class="cap-matrix">
+<thead><tr><th scope="col">Capability</th>${head}</tr></thead>
+<tbody>${rows}</tbody></table></div>`;
+}
+
 function analyticsPage(byCompany, byYear) {
   const years = [...byYear.keys()].sort((a, b) => a - b);
   const modalityYears = modalityEvolution();
+  const capEvo = capabilityEvolution();
 
   const perYear = years.map((y) => ({ label: String(y), value: byYear.get(y).length }));
 
@@ -1399,6 +1475,25 @@ ${barRows(modalityYears.rows)}
 <p class="chart-note">Across every release with researched modalities. A model
 counts once per modality it accepts.</p>
 ${barRows(modalityYears.inputs)}
+
+<h2>When each capability was first evidenced</h2>
+<p class="chart-note">The earliest tracked release this dataset can SHOW carrying
+each capability, with the source behind it on the model's page. Not a claim about
+who did it first — only about what has been evidenced here, from the
+${capEvo.researched} records whose capabilities have been researched.</p>
+<ol class="cap-firsts">${capEvo.firsts.map(({ cap, r }) => `<li>
+<span class="cap-first-name">${esc(tagLabel(cap))}</span>
+<span class="cap-first-when"><time datetime="${isoDate(r)}">${fullDate(r)}</time></span>
+<a class="cap-first-model" href="../models/${esc(r.id)}/">${esc(r.model)}</a>
+</li>`).join('')}</ol>
+
+<h2>Capability adoption over time</h2>
+<p class="chart-note">Releases evidencing each capability, over the releases of that
+year whose capabilities have been researched. Read the counts: the denominator is
+small in early years, and a capability absent from a record means it has not been
+evidenced, never that the model lacks it — see
+<a href="../data-quality/">data quality</a>.</p>
+${capabilityMatrix(capEvo)}
 
 <p class="doc-cta">
   <a href="../compare/">Compare models side by side →</a><br>
