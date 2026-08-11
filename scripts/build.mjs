@@ -1389,6 +1389,132 @@ ${row.cells.map((c) => `<td class="cap-cell"${c.n ? ` style="--fill:${(0.1 + c.p
 <tbody>${rows}</tbody></table></div>`;
 }
 
+/**
+ * A small Markdown renderer for the two public reference documents.
+ *
+ * METHODOLOGY.md and TAXONOMY.md are the documents that justify the dataset to
+ * someone who does not trust it, and they were invisible to the site — sitting
+ * in a gitignored folder, which is the wrong place for the answer to "why
+ * should I believe this figure?". Publishing them is charter §48 and Phase 3
+ * finally reaching the reader.
+ *
+ * Deliberately not a Markdown implementation. It handles exactly what those two
+ * files use — headings, paragraphs, lists, tables, fenced code, blockquotes,
+ * rules, and inline code/bold/italic/links — and a dependency would buy the
+ * other 90% of CommonMark that neither document contains. If a doc grows a
+ * construct this cannot render, it renders as literal text, which is visible
+ * and fixable rather than silent.
+ */
+function renderMarkdown(src) {
+  const out = [];
+  const lines = src.replace(/\r\n/g, '\n').split('\n');
+
+  const inline = (t) => esc(t)
+    .replace(/`([^`]+)`/g, (_, c) => `<code>${c}</code>`)
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>')
+    .replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" rel="noopener">$1</a>')
+    // Relative links point at the sibling documents in docs/, and most of those
+    // are deliberately unpublished — the charter and the execution order stay
+    // local. Linking them would 404; leaving the raw [text](file.md) on the page
+    // looks broken. So the link text survives and the link does not.
+    .replace(/\[([^\]]+)\]\((?!https?:)[^)\s]*\)/g, '$1');
+
+  const cells = (row) => row.replace(/^\||\|$/g, '').split('|').map((c) => c.trim());
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    if (/^```/.test(line)) {
+      const body = [];
+      while (++i < lines.length && !/^```/.test(lines[i])) body.push(lines[i]);
+      out.push(`<pre class="doc-pre"><code>${esc(body.join('\n'))}</code></pre>`);
+      continue;
+    }
+
+    const h = /^(#{1,6})\s+(.*)$/.exec(line);
+    if (h) {
+      // The page already has an <h1>, so document headings step down one level
+      // and the page keeps exactly one top-level heading.
+      const level = Math.min(6, h[1].length + 1);
+      out.push(`<h${level}>${inline(h[2])}</h${level}>`);
+      continue;
+    }
+
+    if (/^(-{3,}|\*{3,})\s*$/.test(line)) { out.push('<hr>'); continue; }
+
+    // Tables: a header row, a separator, then body rows.
+    if (/^\|/.test(line) && /^\|[\s:|-]+\|?\s*$/.test(lines[i + 1] ?? '')) {
+      const head = cells(line);
+      i += 2;
+      const body = [];
+      while (i < lines.length && /^\|/.test(lines[i])) body.push(cells(lines[i++]));
+      i--;
+      out.push(`<div class="table-scroll"><table class="doc-table">
+<thead><tr>${head.map((c) => `<th scope="col">${inline(c)}</th>`).join('')}</tr></thead>
+<tbody>${body.map((r) => `<tr>${r.map((c) => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</tbody>
+</table></div>`);
+      continue;
+    }
+
+    if (/^>\s?/.test(line)) {
+      const body = [];
+      while (i < lines.length && /^>\s?/.test(lines[i])) body.push(lines[i++].replace(/^>\s?/, ''));
+      i--;
+      out.push(`<blockquote>${inline(body.join(' '))}</blockquote>`);
+      continue;
+    }
+
+    const listType = /^\s*[-*]\s+/.test(line) ? 'ul' : /^\s*\d+\.\s+/.test(line) ? 'ol' : null;
+    if (listType) {
+      const items = [];
+      const match = listType === 'ul' ? /^\s*[-*]\s+/ : /^\s*\d+\.\s+/;
+      while (i < lines.length && match.test(lines[i])) items.push(lines[i++].replace(match, ''));
+      i--;
+      out.push(`<${listType}>${items.map((t) => `<li>${inline(t)}</li>`).join('')}</${listType}>`);
+      continue;
+    }
+
+    if (!line.trim()) continue;
+
+    // Otherwise a paragraph: gather until a blank line or a block starts.
+    const para = [line];
+    while (i + 1 < lines.length && lines[i + 1].trim()
+      && !/^(#{1,6}\s|```|\||>|\s*[-*]\s|\s*\d+\.\s|-{3,})/.test(lines[i + 1])) para.push(lines[++i]);
+    out.push(`<p>${inline(para.join(' '))}</p>`);
+  }
+
+  return out.join('\n');
+}
+
+/** Publishes a local reference document as a page. */
+function docPage({ file, slug, title, description, lead }) {
+  const src = readFileSync(file, 'utf8');
+  // The file's own H1 becomes the page H1; the rest is rendered beneath.
+  const firstHeading = /^#\s+(.*)$/m.exec(src);
+  const body = renderMarkdown(src.replace(/^#\s+.*$/m, '').trim());
+
+  return page({
+    title: `${title} | LLM World`,
+    description,
+    canonical: `${BASE_URL}/${slug}/`,
+    section: `${slug}/`,
+    depth: 1,
+    sprites: [],
+    body: `
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a> <span aria-hidden="true">›</span> <span>${esc(title)}</span></nav>
+<div class="doc-hero"><div class="doc-heading">
+<h1>${esc(firstHeading?.[1] ?? title)}</h1>
+<p class="doc-sub">${esc(lead)}</p>
+</div></div>
+<div class="prose">${body}</div>
+<p class="doc-cta">
+  <a href="../data-quality/">See how every record scores against this →</a><br>
+  <a href="../models/">Browse the records themselves →</a>
+</p>`,
+  });
+}
+
 function analyticsPage(byCompany, byYear) {
   const years = [...byYear.keys()].sort((a, b) => a - b);
   const modalityYears = modalityEvolution();
@@ -1719,6 +1845,28 @@ write('companies', companiesIndexPage(byCompany));
 write('latest', latestPage());
 write('analytics', analyticsPage(byCompany, byYear));
 write('data-quality', dataQualityPage());
+
+// The two documents that justify the dataset. They live in docs/ because they
+// are edited alongside the rules they describe, and they are published because
+// "why should I believe this figure?" deserves an answer with a URL.
+write('methodology', docPage({
+  file: 'docs/METHODOLOGY.md',
+  slug: 'methodology',
+  title: 'Methodology',
+  description: 'How LLM World decides what counts as a source, what "verified" means, '
+    + 'and why a missing value is left missing.',
+  lead: 'What counts as evidence here, what the record statuses mean, and the rules '
+    + 'every figure on this site had to pass.',
+}));
+write('taxonomy', docPage({
+  file: 'docs/TAXONOMY.md',
+  slug: 'taxonomy',
+  title: 'Taxonomy',
+  description: 'How LLM World classifies models: primary types, subtypes, modalities '
+    + 'and capabilities, and how overlapping classifications resolve.',
+  lead: 'The definitions behind every label on this site — model types, subtypes, '
+    + 'modalities and capabilities, and how they overlap.',
+}));
 
 const byFamily = new Map();
 for (const r of releases) (byFamily.get(r.family) ?? byFamily.set(r.family, []).get(r.family)).push(r);

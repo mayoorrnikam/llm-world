@@ -28,6 +28,11 @@ milestones/
 sitemap.xml
 robots.txt
 
-# Local planning and methodology docs — never commit or push (2026-08-09)
-docs/
+# Local planning docs — never commit or push (2026-08-09).
+# METHODOLOGY.md and TAXONOMY.md are the exceptions: they are published at
+# /methodology/ and /taxonomy/, so they have to be in the repo the build runs
+# against. The charter and the execution order stay local.
+docs/*
+!docs/METHODOLOGY.md
+!docs/TAXONOMY.md
 .source-cache/

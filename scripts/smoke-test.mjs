@@ -37,6 +37,12 @@ function htmlFiles(dir = '.', acc = []) {
   return acc;
 }
 
+/** The sections the shared nav actually links to, read from its one source. */
+const NAV_SECTIONS = new Set(
+  [...(/<nav class="main-nav"[\s\S]*?<\/nav>/.exec(readFileSync('index.html', 'utf8'))?.[0] ?? '')
+    .matchAll(/href="([^"#?]+)"/g)].map((m) => m[1]).filter((h) => h && h !== '/'),
+);
+
 const pages = htmlFiles();
 if (pages.length < 10) {
   console.error(`FATAL: only ${pages.length} HTML files found — run \`npm run build\` first`);
@@ -103,17 +109,27 @@ function checkChrome(page, html) {
   if (navs.length !== 1) fail(page, `expected exactly 1 shared nav, found ${navs.length}`);
 
   const current = html.match(/aria-current="page"/g) ?? [];
-  // The landing page is not one of the nav sections — it is the thing the nav
-  // hangs off — so it has no current item to mark. Every generated page does.
+  // A page marks a nav item current only if it IS one of the nav's sections.
+  // The landing page is not — it is the thing the nav hangs off — and neither
+  // are the reference documents, which are reached from the footer. The rule
+  // used to be "every page but index.html", which failed /methodology/ and
+  // /taxonomy/ for correctly marking nothing. What it is really guarding is
+  // drift between the nav and the page, so it asks the nav which sections
+  // exist rather than assuming every page is one.
+  const inNav = NAV_SECTIONS.has(page.split('/')[0] + '/');
   if (page === 'index.html') {
     if (current.length) fail(page, 'landing page should not mark a nav section current');
-  } else if (current.length !== 1) {
+  } else if (inNav && current.length !== 1) {
     fail(page, `expected exactly 1 aria-current="page", found ${current.length}`);
+  } else if (current.length > 1) {
+    fail(page, `expected at most 1 aria-current="page", found ${current.length}`);
   }
+  // Pages that are not themselves a nav section may still mark their parent —
+  // /milestones/ marks Timeline — so they are allowed 0 or 1, never more.
 
   // The active marker must sit inside the nav, not on the brand logo.
   const nav = html.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)?.[0] ?? '';
-  if (page !== 'index.html' && !nav.includes('aria-current="page"')) {
+  if (inNav && !nav.includes('aria-current="page"')) {
     fail(page, 'active nav marker is outside the nav');
   }
 
