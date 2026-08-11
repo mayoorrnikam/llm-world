@@ -1608,6 +1608,49 @@ code, kbd {
   color: var(--text);
 }
 
+/* Zig-zag, but only where there is width for it.
+   Alternating around a centre spine is the shape people expect from a
+   timeline, and it uses the horizontal room a family page otherwise wastes.
+   It also halves the column, and these chips are long — "Modalities in text,
+   image · out text → in text, image, audio · out text" wraps even at full
+   width. So it switches on at 900px and the single left rail stays below
+   that, which is also what mobile needs anyway.
+
+   DOM order is unchanged: the list still reads top to bottom in sequence, and
+   only the painted side alternates. */
+@media (min-width: 900px) {
+  .lin-tier {
+    grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1fr);
+    gap: 0 20px;
+  }
+  .lin-rail { grid-column: 2; grid-row: 1; }
+
+  .lin-tier:nth-child(odd) .lin-body {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: right;
+  }
+  .lin-tier:nth-child(even) .lin-body { grid-column: 3; grid-row: 1; }
+
+  /* Chips are flex rows, so they need telling which edge to gather on. */
+  .lin-tier:nth-child(odd) .lin-firsts,
+  .lin-tier:nth-child(odd) .lin-changes,
+  .lin-tier:nth-child(odd) .lin-cards { justify-content: flex-end; }
+
+  /* A tier of same-day siblings is about the tier, not about a side — centre
+     it across both columns so five Nova models do not crush into half a page. */
+  .lin-tier[data-siblings="true"] .lin-body {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    text-align: center;
+    padding-top: 6px;
+  }
+  .lin-tier[data-siblings="true"] .lin-cards,
+  .lin-tier[data-siblings="true"] .lin-firsts,
+  .lin-tier[data-siblings="true"] .lin-changes { justify-content: center; }
+  .lin-tier[data-siblings="true"] .lin-rail { grid-row: 1 / -1; }
+}
+
 @media (max-width: 640px) {
   .lin-tier { grid-template-columns: 14px minmax(0, 1fr); gap: 0 10px; }
   .lin-chip { font-size: 11px; }
