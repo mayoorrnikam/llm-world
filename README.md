@@ -1,14 +1,45 @@
 # LLM World
 
-An interactive swim-lane timeline of large language model releases, month by month.
-Zero dependencies, no build step — three static files and a JSON dataset.
+A source-backed record of large language model releases. Every figure on the site
+is traced to the lab's own announcement, paper, model card or documentation — and
+where a lab publishes nothing, the record says so instead of guessing.
+
+**Live at [mayoorrnikam.github.io/llm-world](https://mayoorrnikam.github.io/llm-world/)**
+
+Zero dependencies, no bundler, no backend. A JSON dataset, three hand-written
+files, and a build script that generates the rest.
 
 ```
-index.html    markup & dialogs
+index.html    the landing page — ask a structured question
+timeline.html the interactive timeline
 styles.css    dual-theme design system
 app.js        ES module: state, rendering, URL sync
-data/llm-releases.json
+search.js     landing-page query parsing and results
+lib/record.mjs  derived facts, shared by the browser and the build
+data/llm-releases.json   the dataset — the source of truth for everything
 ```
+
+## Using the site
+
+Start anywhere. Every view is built from the same dataset, and every URL is
+shareable.
+
+| Where | What it is for |
+|---|---|
+| **/** | Ask a structured question — `open weights 2026`, `context > 200K`, `anthropic vs openai`. Free text narrows; filters combine |
+| **/timeline/** | The interactive swim-lane timeline, one column per month since 2022. Filter by company, capability or text; state lives in the URL |
+| **/latest/** | The 20 most recent releases, with the gap since the previous one |
+| **/models/** | Every tracked release, newest first. Each model page carries its facts, its sources, and which figure came from which |
+| **/families/** | Model lines. Each family page draws its lineage as a dated rail — spacing shows the real gap between releases, edges show what changed |
+| **/companies/** | Labs, with release cadence and how it compares to the field |
+| **/analytics/** | Release velocity, open-weights share, context growth, modality and capability evolution |
+| **/analytics/context-windows/** | A study of how the context window grew, computed from the dataset at build time |
+| **/compare/** | Put 2–5 releases side by side |
+| **/changes/** | What changed in the dataset — additions, verifications, and corrections this project made to its own published figures |
+| **/data-quality/** | How complete the data is, and what is still missing |
+| **/methodology/** | What counts as evidence here, and what each record status means |
+| **/taxonomy/** | The definitions behind every label — types, subtypes, modalities, capabilities |
+| **/api/models.json**, **/llm-releases.csv** | The whole dataset, CC BY 4.0 |
 
 ## Running it
 
@@ -117,23 +148,34 @@ The single-page app can't provide indexable URLs, so `scripts/build.mjs`
 generates static, no-JavaScript-required pages from the same dataset:
 
 ```
+/timeline/           the interactive timeline (the app itself)
 /latest/             the 20 most recent releases
 /analytics/          release frequency, lab activity, open-weights share,
-                     cadence, context-window growth, capability mix
+                     cadence, context growth, modality and capability evolution
+/analytics/context-windows/
+                     technical study — how the frontier context window grew
 /compare/            pick 2-5 releases and read them side by side
+/changes/            dataset changelog: additions, verifications, corrections
 /data-quality/       verification, source authority, coverage and what's missing
+/methodology/        built from docs/METHODOLOGY.md — the evidence rules
+/taxonomy/           built from docs/TAXONOMY.md — what every label means
 /milestones/         dated events that were not model releases
-/milestones/<id>/    2 pages — what happened, and why it is not a model record
-/families/           index of the 23 tracked model lines
-/families/<slug>/    23 pages — lineage, context growth, and what changed
-                     between each pair of generations
+/milestones/<id>/    what happened, and why it is not a model record
+/families/           index of the tracked model lines
+/families/<slug>/    lineage rail, context growth, and what changed between
+                     each pair of generations
 /models/             index of everything, newest first, grouped by year
-/models/<id>/        82 pages (+3 retired-id redirects) — facts, sources, family lineage, cadence
+/models/<id>/        facts, sources, family lineage, cadence
 /companies/          index of labs, ranked by release count
-/companies/<slug>/   16 pages — a lab's releases and its median release gap
-/timeline/<year>/     5 pages — that year's releases by month
-/sitemap.xml        137 URLs
+/companies/<slug>/   a lab's releases and its median release gap
+/timeline/<year>/    that year's releases by month
+/sitemap.xml
 ```
+
+The nav carries the seven browsing surfaces. The four that explain *how the
+data is made* — methodology, taxonomy, changes, data quality — live in the
+footer under "How this is made", because they are what you reach for when you
+doubt a figure, not destinations you set out for.
 
 **Header and footer are shared, not duplicated.** `build.mjs` lifts them
 verbatim out of `index.html` between `<!-- shared:header -->` and
@@ -384,6 +426,51 @@ dropped at load rather than rendered broken. Adding a release is a JSON edit —
 no code change. A company with no assigned hue falls back to a neutral swatch.
 
 ## Features
+
+### What the site does that a release tracker does not
+
+**Every figure is traced to a source, and gaps are honest**
+- A record cites the lab's own announcement, paper, model card or docs, and
+  each figure links to the one it came from
+- Sources are cited by *archived snapshot*, not live URL — a live page proves
+  what it says today, not what it said when it was read
+- `null` never renders as "Not disclosed" unless someone actually read the
+  sources and found nothing. Otherwise it says "Not researched", because those
+  are different claims and only one of them is about the lab
+
+**Family lineage as a dated rail** — `/families/<slug>/`
+- Spacing is proportional to the real gap between releases, so an 18-month
+  pause reads as a pause
+- Edges carry what changed between generations, from the same diff the
+  What Changed section uses
+- Same-day releases collapse into one tier — five Nova models shipped together
+  are not four upgrade steps
+- Markers show where a capability was first evidenced in that family
+
+**Capability and modality evolution** — `/analytics/`
+- When each capability was first *evidenced*, linked to the record that shows it
+- A year × capability adoption grid, counted over researched records only, so a
+  research gap can never render as "the model lacked it"
+
+**A public corrections log** — `/changes/`
+- Generated from the repository's own commits, so it cannot drift from the data
+- Separates *research* (null → a figure) from *corrections* (a figure → a
+  different figure, or a capability withdrawn). The second means this site
+  published something wrong, and says so
+
+**A technical study** — `/analytics/context-windows/`
+- How the frontier context window grew, every number computed at build time
+- Drawn as a step chart, because a context window holds at a level until a
+  larger one ships — it does not slope between two dated announcements
+
+**Structured ask** — `/`
+- `open weights 2026`, `context > 200K`, `anthropic vs openai`
+- Filters combine; free text narrows rather than replacing them
+
+**Reference documents, published** — `/methodology/`, `/taxonomy/`
+- The rules every figure had to pass, and the definitions behind every label
+
+### The interactive timeline — `/timeline/`
 
 **The cadence ribbon**
 - The page opens on the whole dataset: one column per month since 2022, one
