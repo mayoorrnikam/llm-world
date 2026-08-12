@@ -63,7 +63,9 @@ const EXTRA = [
   { lab: 'Cohere', url: 'https://cohere.com/blog' },
   { lab: 'Allen Institute for AI', url: 'https://allenai.org/blog' },
   { lab: 'AI21 Labs', url: 'https://www.ai21.com/blog/' },
-  { lab: 'NVIDIA', url: 'https://blogs.nvidia.com/blog/category/generative-ai/' },
+  // developer.nvidia.com, not blogs.nvidia.com: model announcements live on the
+  // developer blog, and the corporate one carries them late and partially.
+  { lab: 'NVIDIA', url: 'https://developer.nvidia.com/blog/' },
   { lab: 'MiniMax', url: 'https://www.minimax.io/news' },
   { lab: 'Moonshot AI', url: 'https://moonshotai.github.io/' },
 ];
