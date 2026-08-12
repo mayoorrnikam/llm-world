@@ -34,8 +34,11 @@ shareable.
 | **/companies/** | Labs, with release cadence and how it compares to the field |
 | **/analytics/** | Release velocity, open-weights share, context growth, modality and capability evolution |
 | **/analytics/context-windows/** | A study of how the context window grew, computed from the dataset at build time |
+| **/analytics/pricing/** | Published API prices, with the date each was observed beside it |
 | **/compare/** | Put 2–5 releases side by side |
 | **/changes/** | What changed in the dataset — additions, verifications, and corrections this project made to its own published figures |
+| **/contribute/** | How to add or correct a release, and the five rules every record passes |
+| **/feed.xml** | RSS — the 20 most recent releases and milestones |
 | **/data-quality/** | How complete the data is, and what is still missing |
 | **/methodology/** | What counts as evidence here, and what each record status means |
 | **/taxonomy/** | The definitions behind every label — types, subtypes, modalities, capabilities |
@@ -451,6 +454,8 @@ no code change. A company with no assigned hue falls back to a neutral swatch.
 - When each capability was first *evidenced*, linked to the record that shows it
 - A year × capability adoption grid, counted over researched records only, so a
   research gap can never render as "the model lacked it"
+- A lab × capability grid, restricted to labs with five or more researched
+  releases — below that a row measures how much has been researched, not the lab
 
 **A public corrections log** — `/changes/`
 - Generated from the repository's own commits, so it cannot drift from the data
@@ -463,9 +468,28 @@ no code change. A company with no assigned hue falls back to a neutral swatch.
 - Drawn as a step chart, because a context window holds at a level until a
   larger one ships — it does not slope between two dated announcements
 
-**Structured ask** — `/`
-- `open weights 2026`, `context > 200K`, `anthropic vs openai`
-- Filters combine; free text narrows rather than replacing them
+**Ask the dataset** — `/`
+- Filters: `open weights 2026`, `context > 200K`, `verified models under $3`
+- Comparisons: `anthropic vs openai` returns counts per lab
+- **Questions with answers**: `which model has the largest context window`,
+  `how many open weight models are there`, `what is the cheapest model`,
+  `newest open weights model`. The answer is computed from the same matched set
+  shown below it, links the record it came from, and states what it excluded —
+  the largest *disclosed* context window is a different claim from the largest one
+- Same facet ORs, different facets AND. Free text ranks when a filter is present
+  and never empties the page
+
+**Pricing, honestly** — `/analytics/pricing/`
+- A table rather than bar charts. Sixteen records carry pricing, observed across
+  fourteen dates spanning 764 days — a bar chart would rank them by when somebody
+  looked, and no caption can retract what a bar chart asserts
+- Observation date and the archived snapshot beside every figure
+
+**Benchmarks as dated claims**
+- A score evidences that the lab measured and published it, never that a model is
+  "good at" something, and no composite is ever computed
+- The benchmark a lab chooses to report is itself a claim about what the model is
+  for, so SWE-bench evidences coding and τ-bench evidences agentic behaviour
 
 **Reference documents, published** — `/methodology/`, `/taxonomy/`
 - The rules every figure had to pass, and the definitions behind every label
