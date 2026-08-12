@@ -41,6 +41,19 @@ chart counts only researched records and says so.
 
 ---
 
+## Submitting a release without touching the repo
+
+[**Submit a release**](https://github.com/mayoorrnikam/llm-world/issues/new?template=new-release.yml)
+— paste the lab's own announcement and the rest is drafted for you: the source
+is fetched, a Wayback snapshot is requested, the record is drafted and validated,
+and a pull request opens with the diff.
+
+A person reviews every claim before it merges. That is deliberate. A fetcher can
+tell you a page loaded; it cannot tell you the page says what was extracted from
+it, and this project has had a benchmark parser read scores off by one, a PDF
+reader return bitmap noise as prose, and a citation return HTTP 200 from a
+different model's page. Each would have merged itself.
+
 ## Adding a release
 
 Write a small spec describing only what a human has to decide. Everything

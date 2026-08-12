@@ -1,0 +1,75 @@
+name: Submit a release
+description: Point us at a model announcement and we'll draft the record from it.
+title: "Add: "
+labels: ["submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Paste the lab's own announcement, paper, model card or documentation.
+        A bot will read it, ask the Wayback Machine for a snapshot, draft the
+        record and open a pull request — but a person reviews every claim
+        before it ships, so nothing here goes live unread.
+
+        News coverage is not enough on its own. A date corroborated only by
+        reporting is recorded as `partially_verified`, however reputable the
+        outlet.
+
+  - type: input
+    id: url
+    attributes:
+      label: Primary source
+      description: The lab's own page for this model. One URL.
+      placeholder: https://…
+    validations:
+      required: true
+
+  - type: input
+    id: model
+    attributes:
+      label: Model name
+      description: Exactly as the lab writes it — "Claude Opus 5", not "claude opus 5".
+      placeholder: Claude Opus 5
+    validations:
+      required: true
+
+  - type: input
+    id: company
+    attributes:
+      label: Lab
+      placeholder: Anthropic
+    validations:
+      required: true
+
+  - type: input
+    id: date
+    attributes:
+      label: Announcement date
+      description: YYYY-MM-DD, as stated on the page. Leave blank if the page does not say.
+      placeholder: 2026-08-11
+
+  - type: input
+    id: model_card
+    attributes:
+      label: Model card or weights (optional)
+      description: A Hugging Face URL if the weights are published. Licence and
+        modalities are read from the card automatically when there is one.
+      placeholder: https://huggingface.co/…
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything the page gets wrong or leaves out
+      description: Optional. Figures the lab does not publish are recorded as
+        undisclosed rather than guessed, so it helps to know what you looked for
+        and could not find.
+
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: Before submitting
+      options:
+        - label: The link is the lab's own page, not a news article or aggregator
+          required: true
+        - label: I have not estimated any figure the page does not state
+          required: true
