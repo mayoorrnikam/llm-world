@@ -23,6 +23,8 @@
  * dropped, which is why several large labs are absent rather than guessed at.
  */
 
+import { readFileSync } from 'node:fs';
+
 const DAYS = Number(process.argv.find((a) => a.startsWith('--days='))?.split('=')[1] ?? 21);
 const ALL = process.argv.includes('--all');
 
@@ -77,6 +79,54 @@ function items(xml) {
   return out;
 }
 
+/**
+ * AI newsletters, read for ONE job: finding labs this project has never heard of.
+ *
+ * They are never sources. A newsletter is third-hand — it summarises reporting
+ * that summarises the lab's announcement — and this dataset already refuses to
+ * mark a date verified on second-hand reporting alone. They are also edited,
+ * copyrighted works, so a headline and its link is the whole of what is used
+ * here; nothing is stored or reproduced.
+ *
+ * Nor are they much use as a general discovery channel any more. scan-labs.mjs
+ * reads sixteen labs' own announcement pages directly, so a newsletter reports
+ * the same release later, with less precision and an editor's selection on top.
+ *
+ * What they cover that nothing else here can is the blind spot every other
+ * channel shares. check-freshness has a whitelist of Hugging Face orgs,
+ * check-feeds has a list of labs, scan-labs derives its patterns from ids
+ * already tracked — all three are keyed on what this dataset already knows, so
+ * NONE of them can surface a lab that is not in it. Ai2, MiniMax and Moonshot
+ * each had to be noticed by a person first.
+ *
+ * So items mentioning a lab already tracked are dropped, and what is left is
+ * the interesting half: a release from somebody new.
+ */
+const NEWSLETTERS = [
+  ['Import AI', 'https://importai.substack.com/feed'],
+  ['Interconnects', 'https://www.interconnects.ai/feed'],
+  ['Ahead of AI', 'https://magazine.sebastianraschka.com/feed'],
+  ['TLDR AI', 'https://tldr.tech/api/rss/ai'],
+];
+
+/** Labs already tracked, so an item about one of them is not news here. */
+const KNOWN = (() => {
+  const d = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
+  const names = new Set();
+  for (const r of d.releases) {
+    names.add(r.company.toLowerCase());
+    names.add(String(r.family).toLowerCase());
+    const stem = /^[a-z]+/.exec(r.id)?.[0];
+    if (stem && stem.length > 2) names.add(stem);
+  }
+  return [...names].filter((n) => n.length > 2);
+})();
+
+const mentionsKnown = (title) => {
+  const t = title.toLowerCase();
+  return KNOWN.some((n) => t.includes(n));
+};
+
 const cutoff = Date.now() - DAYS * 86400000;
 const found = [];
 const failed = [];
@@ -100,7 +150,30 @@ for (const [lab, url] of FEEDS) {
   await new Promise((r) => setTimeout(r, 200));
 }
 
+/* --------------------------------------------- newsletters: unknown labs */
+
+const novel = [];
+for (const [name, url] of NEWSLETTERS) {
+  try {
+    const res = await fetch(url, {
+      redirect: 'follow',
+      signal: AbortSignal.timeout(20000),
+      headers: { 'user-agent': 'Mozilla/5.0 (compatible; llm-world feed-check)' },
+    });
+    if (!res.ok) { failed.push(`${name} (newsletter) — HTTP ${res.status}`); continue; }
+    const recent = items(await res.text())
+      .filter((i) => i.date && i.date >= cutoff)
+      .filter((i) => RELEASE.test(i.title) && MODELISH.test(i.title))
+      .filter((i) => !mentionsKnown(i.title));
+    for (const i of recent) novel.push({ lab: name, ...i });
+  } catch (e) {
+    failed.push(`${name} (newsletter) — ${e.name === 'TimeoutError' ? 'timed out' : e.message}`);
+  }
+  await new Promise((r) => setTimeout(r, 200));
+}
+
 found.sort((a, b) => b.date - a.date);
+novel.sort((a, b) => b.date - a.date);
 
 console.log(`## Lab newsroom feeds — last ${DAYS} days\n`);
 if (!found.length) {
@@ -111,6 +184,20 @@ if (!found.length) {
   for (const f of found) {
     console.log(`- **${f.lab}** — [${f.title}](${f.link})`);
     console.log(`  ${new Date(f.date).toISOString().slice(0, 10)}`);
+  }
+  console.log('');
+}
+
+console.log(`## Possibly a lab we do not track\n`);
+if (!novel.length) {
+  console.log('Nothing from the newsletters that is not about a lab already tracked.\n');
+} else {
+  console.log(`${novel.length} item${novel.length === 1 ? '' : 's'} naming no lab in this dataset. `
+    + `Newsletters are a discovery channel only — never a source — so each still needs `
+    + `the lab's own announcement before it becomes a record.\n`);
+  for (const n of novel) {
+    console.log(`- **${n.lab}** — [${n.title}](${n.link})`);
+    console.log(`  ${new Date(n.date).toISOString().slice(0, 10)}`);
   }
   console.log('');
 }
