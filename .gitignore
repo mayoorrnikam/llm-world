@@ -32,6 +32,9 @@ contribute/
 sitemap.xml
 robots.txt
 feed.xml
+draft-spec.json
+draft-report.txt
+comment.md
 
 # Local planning docs — never commit or push (2026-08-09).
 # METHODOLOGY.md and TAXONOMY.md are the exceptions: they are published at

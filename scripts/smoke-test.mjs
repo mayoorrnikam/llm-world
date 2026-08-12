@@ -355,6 +355,7 @@ function checkScriptsRun() {
     'attribute-facts', 'detect-modalities', 'detect-capabilities', 'detect-undisclosed',
     'extract-pricing', 'extract-benchmarks', 'hf-metadata', 'archive-sources',
     'state-reasons', 'discover-epoch', 'add-model', 'split-record',
+    'draft-from-url',
   ];
   for (const name of scripts) {
     const file = `scripts/${name}.mjs`;

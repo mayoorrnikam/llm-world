@@ -1,0 +1,157 @@
+name: Draft a submitted release
+
+# Someone submits a URL through the issue form; this does the tedious half and
+# opens a pull request with the result.
+#
+# It opens a PR and never commits to main. That is the whole design. A fetcher
+# can tell you a page loaded; it cannot tell you the page says what was
+# extracted from it — this repo has had a benchmark parser read scores off by
+# one, a PDF reader return bitmap noise as prose, and a citation return HTTP 200
+# from a different model's page. Every one was caught by a person looking at the
+# diff. Automate the labour, never the judgement.
+
+on:
+  issues:
+    types: [opened, edited, labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  draft:
+    if: contains(github.event.issue.labels.*.name, 'submission')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Read the submission
+        id: fields
+        env:
+          BODY: ${{ github.event.issue.body }}
+        run: |
+          node --input-type=module -e '
+            // GitHub issue forms render as "### Label\n\n value" blocks.
+            const body = process.env.BODY ?? "";
+            const get = (label) => {
+              const re = new RegExp("### " + label + "\\s*\\n+([\\s\\S]*?)(?=\\n### |$)", "i");
+              const v = (re.exec(body)?.[1] ?? "").trim();
+              return v === "_No response_" ? "" : v;
+            };
+            const out = {
+              url: get("Primary source"),
+              model: get("Model name"),
+              company: get("Lab"),
+              date: get("Announcement date"),
+              card: get("Model card or weights \\(optional\\)"),
+            };
+            const fs = await import("node:fs");
+            for (const [k, v] of Object.entries(out)) {
+              fs.appendFileSync(process.env.GITHUB_OUTPUT, `${k}<<EOF\n${v}\nEOF\n`);
+            }
+            console.log(out);
+          '
+
+      - name: Draft the record
+        id: draft
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node scripts/draft-from-url.mjs "${{ steps.fields.outputs.url }}" \
+            --model="${{ steps.fields.outputs.model }}" \
+            --company="${{ steps.fields.outputs.company }}" \
+            ${{ steps.fields.outputs.date && format('--date={0}', steps.fields.outputs.date) || '' }} \
+            2>&1 | tee draft-report.txt
+
+      - name: Add, enrich and validate
+        id: apply
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node scripts/add-model.mjs draft-spec.json --write 2>&1 | tee -a draft-report.txt
+          # Enrichment writes to archive.org, which is opt-in everywhere else in
+          # this repo; here the submitter has asked for the record to be added,
+          # and a source with no snapshot cannot satisfy R1.
+          npm run enrich 2>&1 | tail -40 | tee -a draft-report.txt
+          npm run check 2>&1 | tail -30 | tee -a draft-report.txt
+
+      - name: Open a pull request
+        id: pr
+        if: steps.apply.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BRANCH="submission/${{ github.event.issue.number }}"
+          git config user.name "llm-world bot"
+          git config user.email "noreply@github.com"
+          git checkout -b "$BRANCH"
+          rm -f draft-spec.json draft-report.txt
+          git add data/
+          if git diff --cached --quiet; then
+            echo "nothing changed" >> "$GITHUB_STEP_SUMMARY"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "Add ${{ steps.fields.outputs.model }} (submitted in #${{ github.event.issue.number }})
+
+          Drafted from ${{ steps.fields.outputs.url }} by the submission
+          workflow. Every figure is either quoted from that page or absent —
+          nothing here is estimated. A reviewer still has to confirm the page
+          says what was extracted from it, which is the part no fetcher can do.
+
+          Closes #${{ github.event.issue.number }}"
+          git push -u origin "$BRANCH" --force
+          URL=$(gh pr create --title "Add ${{ steps.fields.outputs.model }}" \
+            --body "Drafted from the submission in #${{ github.event.issue.number }}.
+
+          **A reviewer must confirm**, because the bot cannot:
+          - the source page is this model's own page, not a sibling's or an index
+          - every figure in the diff is stated on that page, about this model
+          - anything the lab does not publish is absent rather than guessed
+
+          The full gate ran before this opened: validate, build, smoke." \
+            --head "$BRANCH" --base main)
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Report back on the issue
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            if [ "${{ steps.draft.outcome }}" != "success" ]; then
+              echo "Could not draft a record from that URL."
+              echo
+              echo "The page may be client-rendered, may block automated fetches, or may be a"
+              echo "format the reader does not handle. A source that cannot be read cannot be"
+              echo "cited, so there is nothing to draft — a different URL for the same release"
+              echo "usually fixes it."
+            elif [ "${{ steps.apply.outcome }}" != "success" ]; then
+              echo "Read the page, but the record did not pass the gate."
+              echo
+              echo "Most often this is a missing primary source, a licence on a proprietary"
+              echo "record, or one record holding a whole family. The log says which:"
+            elif [ "${{ steps.pr.outputs.changed }}" = "false" ]; then
+              echo "Read the page, but nothing changed — this release may already be tracked."
+            else
+              echo "Drafted: ${{ steps.pr.outputs.url }}"
+              echo
+              echo "A reviewer will confirm the page says what was extracted from it before it"
+              echo "merges. Nothing goes live unread."
+            fi
+            echo
+            echo '<details><summary>What the bot read</summary>'
+            echo
+            echo '```'
+            tail -60 draft-report.txt 2>/dev/null || echo "(no report)"
+            echo '```'
+            echo '</details>'
+          } > comment.md
+          gh issue comment "${{ github.event.issue.number }}" --repo "${{ github.repository }}" --body-file comment.md
