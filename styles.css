@@ -2538,41 +2538,125 @@ code, kbd {
 
 .home-main { max-width: 780px; margin: 0 auto; padding: 0 20px 64px; }
 
-.ask { padding: 56px 0 8px; text-align: center; }
-.ask-title { margin: 0 0 6px; font-size: clamp(26px, 5vw, 38px); letter-spacing: -0.02em; }
-.ask-sub { margin: 0 0 26px; color: var(--muted); font-size: 14.5px; }
+/* The landing page ---------------------------------------------------------
+   This is a reference desk, not a product page. The field is the instrument:
+   everything above it states what the record contains, everything below it
+   shows how the question was read. No gradient, no card, one accent.
 
-.ask-form { display: flex; gap: 8px; }
+   Mobile first — the field is full width and 16px (any smaller and iOS zooms
+   on focus), and every control clears 44px. */
+.ask { padding: 34px 0 6px; }
+
+.ask-eyebrow {
+  margin: 0 0 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ask-title {
+  margin: 0 0 8px;
+  font-size: clamp(30px, 8vw, 46px);
+  font-weight: 760;
+  letter-spacing: -0.032em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+.ask-sub {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.45;
+  max-width: 54ch;
+}
+
+/* The field. A 14px radius rather than a pill: a pill reads as a chat box,
+   and this takes structured queries, not conversation. */
+.ask-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 .ask-input {
   flex: 1 1 auto;
   min-width: 0;
-  padding: 14px 18px;
+  height: 56px;
+  padding: 0 46px 0 46px;
   font: inherit;
-  font-size: 16px;                 /* 16px stops iOS zooming on focus */
+  font-size: 16px;
   color: inherit;
-  background: var(--surface, transparent);
+  background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 14px;
+  transition: border-color 140ms var(--ease), box-shadow 140ms var(--ease);
 }
-.ask-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
-.ask-go {
-  padding: 0 22px;
-  font: inherit;
-  font-weight: 600;
-  color: #fff;
-  background: var(--accent);
+.ask-input::placeholder { color: var(--muted); }
+.ask-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 22%, transparent);
+}
+/* The UA's own clear affordance would sit beside ours. */
+.ask-input::-webkit-search-cancel-button { display: none; }
+
+.ask-glass,
+.ask-clear {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.ask-glass { left: 14px; }
+.ask-glass svg, .ask-clear svg { width: 18px; height: 18px; }
+
+/* The clear control replaces the keyboard hint once there is something to
+   clear, so the right-hand slot always holds exactly one thing. */
+.ask-clear {
+  right: 11px;
+  width: 30px;
+  height: 30px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 8px;
+  background: transparent;
   cursor: pointer;
+  pointer-events: auto;
 }
-.ask-go:hover { filter: brightness(1.08); }
+.ask-clear:hover { color: var(--text); background: var(--panel-2); }
+.ask-clear:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* A 30px button is under the touch minimum, so the tappable area is widened
+   without moving the glyph. */
+.ask-clear::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+
+.ask-key {
+  position: absolute;
+  right: 14px;
+  padding: 2px 7px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  pointer-events: none;
+}
+/* A keyboard hint is noise where there is no keyboard. */
+@media (hover: none), (max-width: 640px) { .ask-key { display: none; } }
 
 /* How the question was understood. Never hidden: a query that silently
    ignores half of what you typed is worse than one that admits it. */
 .ask-reading {
-  margin: 14px 0 0;
+  margin: 12px 0 0;
   font-family: var(--mono);
   font-size: 11.5px;
+  line-height: 1.7;
   color: var(--muted);
 }
 .read-chip {
@@ -2582,20 +2666,48 @@ code, kbd {
   border-radius: 999px;
 }
 
+/* Examples are a starting point, not navigation, so they stay quiet and sit
+   on one scrollable line rather than wrapping into a block that competes with
+   the field above them. */
 .ask-examples {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
-  margin: 22px 0 0; padding: 0; list-style: none;
+  display: flex;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 2px 0 6px;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+.ask-examples::-webkit-scrollbar { display: none; }
+.ask-examples li { flex: 0 0 auto; }
 .ask-examples button {
-  padding: 5px 12px;
-  font: inherit; font-size: 12.5px;
+  padding: 7px 13px;
+  font: inherit;
+  font-size: 12.5px;
+  white-space: nowrap;
   color: var(--muted);
-  background: transparent;
-  border: 1px dashed var(--line);
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 999px;
   cursor: pointer;
+  transition: color 120ms var(--ease), border-color 120ms var(--ease);
 }
-.ask-examples button:hover { color: var(--accent); border-color: currentColor; border-style: solid; }
+.ask-examples button:hover { color: var(--text); border-color: var(--accent); }
+.ask-examples button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* The field's focus ring and the chips animate; nothing here is decorative
+   motion, but a transition is still motion. */
+@media (prefers-reduced-motion: reduce) {
+  .ask-input, .ask-examples button, .ask-clear { transition: none; }
+}
+
+@media (min-width: 720px) {
+  .ask { padding: 64px 0 8px; }
+  .ask-input { height: 62px; padding: 0 56px 0 52px; font-size: 17px; }
+  .ask-glass { left: 18px; }
+  .ask-glass svg, .ask-clear svg { width: 19px; height: 19px; }
+  .ask-examples { flex-wrap: wrap; overflow: visible; }
+}
 
 .ask-count { margin: 30px 0 4px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
 .ask-none { margin: 8px 0 0; font-size: 13.5px; color: var(--muted); max-width: 58ch; }

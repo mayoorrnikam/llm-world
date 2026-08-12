@@ -325,6 +325,7 @@ function submit(q, { push = true } = {}) {
   render(q);
   const url = q.trim() ? `?q=${encodeURIComponent(q.trim())}` : location.pathname;
   if (push) history.replaceState(null, '', url);
+  syncControls();
 }
 
 form.addEventListener('submit', (e) => {
@@ -332,11 +333,55 @@ form.addEventListener('submit', (e) => {
   submit(input.value);
 });
 
+/**
+ * The right-hand slot holds exactly one control: the keyboard hint when the
+ * field is empty, the clear button as soon as there is something to clear.
+ * Two affordances in one slot would either overlap or make the field wider
+ * than it needs to be, and a clear button with nothing to clear is a dead
+ * control the eye still has to skip.
+ */
+const clearBtn = el('ask-clear');
+const keyHint = el('ask-key');
+
+function syncControls() {
+  const has = input.value.length > 0;
+  if (clearBtn) clearBtn.hidden = !has;
+  if (keyHint) keyHint.hidden = has;
+}
+
+clearBtn?.addEventListener('click', () => {
+  input.value = '';
+  syncControls();
+  submit('');
+  input.focus();
+});
+
 // Answer as you type once the question is long enough to mean something.
 let timer;
 input.addEventListener('input', () => {
+  syncControls();
   clearTimeout(timer);
   timer = setTimeout(() => { if (input.value.trim().length >= 3) submit(input.value); }, 220);
+});
+
+// Escape clears from the keyboard, matching the button beside it.
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && input.value) {
+    e.preventDefault();
+    input.value = '';
+    syncControls();
+    submit('');
+  }
+});
+
+// "/" focuses the field, which is what the hint in that slot promises.
+document.addEventListener('keydown', (e) => {
+  if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return;
+  const t = e.target;
+  if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+  e.preventDefault();
+  input.focus();
+  input.select();
 });
 
 el('ask-examples').addEventListener('click', (e) => {
@@ -351,4 +396,7 @@ await load();
 renderPulse();
 const initial = new URLSearchParams(location.search).get('q');
 if (initial) submit(initial, { push: false });
+// After the initial query lands, so a shared link arrives with its clear
+// control already showing rather than a keyboard hint over a full field.
+syncControls();
 input.focus();

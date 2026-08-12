@@ -64,21 +64,34 @@
 <main class="doc-main home-main" id="main">
 
   <section class="ask">
-    <h1 class="ask-title">Ask the model dataset</h1>
+    <p class="ask-eyebrow" id="ask-eyebrow">the public record of model releases</p>
+    <h1 class="ask-title">Ask the model&nbsp;dataset</h1>
     <p class="ask-sub">Every answer comes from records with sources attached — not from a language model.</p>
 
     <form class="ask-form" id="ask-form" role="search">
       <label class="sr-only" for="ask-input">Ask a question about model releases</label>
+      <span class="ask-glass" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" focusable="false">
+          <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path>
+        </svg>
+      </span>
       <input type="search" id="ask-input" class="ask-input" autocomplete="off" spellcheck="false"
-        placeholder="open weights with 1M context">
-      <button type="submit" class="ask-go">Ask</button>
+        placeholder="largest context window">
+      <button type="button" class="ask-clear" id="ask-clear" hidden aria-label="Clear the question">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" aria-hidden="true" focusable="false">
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+      <kbd class="ask-key" id="ask-key" aria-hidden="true">/</kbd>
     </form>
 
     <!-- How the question was understood. Shown back so a query that ignores
          half of what you typed cannot do so silently. -->
     <p class="ask-reading" id="ask-reading" hidden></p>
 
-    <ul class="ask-examples" id="ask-examples">
+    <ul class="ask-examples" id="ask-examples" aria-label="Example questions">
       <li><button type="button" data-q="open weights with 1M context">open weights with 1M context</button></li>
       <li><button type="button" data-q="anthropic reasoning 2026">anthropic reasoning 2026</button></li>
       <li><button type="button" data-q="open weights over 100B parameters">open weights over 100B parameters</button></li>
