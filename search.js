@@ -13,7 +13,7 @@
    All state lives in the URL (?q=), so any answer is linkable.
    ========================================================================== */
 
-import { parse, run } from './lib/query.mjs';
+import { parse, run, answer } from './lib/query.mjs';
 import { canonicalDate, contextWindow, parameterCount, displayTags, logoSlug, monogram } from './lib/record.mjs';
 
 const DATA_URL = new URL('data/llm-releases.json', import.meta.url);
@@ -149,6 +149,33 @@ function render(q) {
     ig.className = 'read-ignored';
     ig.textContent = ` · ignored ${ignored.map((w) => `“${w}”`).join(', ')}`;
     reading.append(ig);
+  }
+
+  // A direct answer, when the question has one. It is computed from the same
+  // matched set rendered below, so the headline and the list cannot disagree,
+  // and it names the record it came from.
+  const a = answer(found, { raw: q, terms: parsed.terms });
+  if (a) {
+    const box = document.createElement('div');
+    box.className = 'ask-answer';
+    const line = document.createElement('p');
+    line.className = 'ask-answer-text';
+    if (a.record) {
+      const link = document.createElement('a');
+      link.href = `models/${a.record.id}/`;
+      link.textContent = a.text;
+      line.append(link);
+    } else {
+      line.textContent = a.text;
+    }
+    box.append(line);
+    if (a.detail) {
+      const d = document.createElement('p');
+      d.className = 'ask-answer-detail';
+      d.textContent = a.detail;
+      box.append(d);
+    }
+    results.append(box);
   }
 
   const head = document.createElement('p');

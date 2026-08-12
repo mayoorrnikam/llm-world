@@ -1501,6 +1501,28 @@ code, kbd {
    The marks were 13-17px, below the ~16px floor where a logo is still
    recognisable rather than a smudge. --mark sizes the box; the glyph is a
    share of it, so one number moves both. */
+/* Direct answer above the results ----------------------------------------- */
+.ask-answer {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--panel-2);
+}
+.ask-answer-text {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 680;
+  letter-spacing: -0.012em;
+  line-height: 1.25;
+}
+.ask-answer-detail {
+  margin: 3px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
 /* Pricing table ------------------------------------------------------------ */
 .pr-table { border-collapse: collapse; width: 100%; font-size: 13px; }
 .pr-table th, .pr-table td {
