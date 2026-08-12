@@ -542,7 +542,7 @@ ${barRows(caps.map(([c, n]) => ({ name: tagLabel(c), value: n })))}` : ''}
 
 <h2>Releases</h2>
 <ol class="doc-list cols-3">${sorted.map((r) =>
-  `<li>${companyMark(r.company, 'sm')}<a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.family)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>
+  `<li style="--c:var(--c-${slugFor(r.company)})">${companyMark(r.company, 'sm')}<a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.family)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>
 
 <p class="doc-cta">
   <a href="../../?company=${encodeURIComponent(name)}&year=all">Filter the timeline to ${esc(name)} →</a><br>
@@ -580,11 +580,11 @@ function yearPage(year, list) {
 ${yearMilestones.length ? `<h2>Milestones</h2>
 <p class="chart-note">Dated events that mattered without being model releases.</p>
 <ol class="doc-list">${yearMilestones.map((m) =>
-    `<li>${companyMark(m.company, 'sm')}<a class="cell-name" href="../../milestones/${esc(m.id)}/">${esc(m.title)}</a><span class="cell-meta">${esc(m.company)}</span><span class="cell-num">${esc(eventDate(m.date))}</span></li>`).join('')}</ol>` : ''}
+    `<li style="--c:var(--c-${slugFor(m.company)})">${companyMark(m.company, 'sm')}<a class="cell-name" href="../../milestones/${esc(m.id)}/">${esc(m.title)}</a><span class="cell-meta">${esc(m.company)}</span><span class="cell-num">${esc(eventDate(m.date))}</span></li>`).join('')}</ol>` : ''}
 ${[...byMonth.keys()].sort((a, b) => a - b).map((m) => `
 <h2>${MONTHS[m - 1]} ${year}</h2>
 <ol class="doc-list">${byMonth.get(m).map((r) =>
-  `<li>${companyMark(r.company, 'sm')}<a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
+  `<li style="--c:var(--c-${slugFor(r.company)})">${companyMark(r.company, 'sm')}<a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
 <p class="doc-cta"><a href="../../?year=${year}">See ${year} on the interactive timeline →</a></p>
 `;
   return page({
@@ -613,7 +613,7 @@ function modelsIndexPage() {
 ${[...byYear.keys()].sort((a, b) => b - a).map((y) => `
 <h2><a href="../timeline/${y}/">${y}</a> — ${byYear.get(y).length} releases</h2>
 <ol class="doc-list">${byYear.get(y).map((r) =>
-  `<li>${companyMark(r.company, 'sm')}<a class="cell-name" href="${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
+  `<li style="--c:var(--c-${slugFor(r.company)})">${companyMark(r.company, 'sm')}<a class="cell-name" href="${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
 `;
   return page({
     title: 'All tracked LLM releases | LLM World',
@@ -662,7 +662,7 @@ function latestPage() {
 </div></div>
 <ol class="doc-list">${recent.map((r) => {
   const prev = predecessorOf(r);
-  return `<li>${companyMark(r.company, 'sm')}<a class="cell-name" href="../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}${
+  return `<li style="--c:var(--c-${slugFor(r.company)})">${companyMark(r.company, 'sm')}<a class="cell-name" href="../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}${
     prev ? ` · +${daysBetween(prev, r)}d` : ''}</span></li>`;
 }).join('')}</ol>
 <p class="doc-cta"><a href="../models/">Browse all ${releases.length} releases →</a></p>
@@ -938,7 +938,11 @@ ${chips ? `<p class="lin-changes">${chips}</p>` : ''}
 </div></li>`;
   }).join('');
 
-  return `<ol class="lineage-graph">${items}</ol>`;
+  // A family page is about ONE lab, so a single hue on the rail carries
+  // identity with no rainbow risk — the objection to colouring list rows
+  // elsewhere is that sixteen companies exceed the categorical ceiling, and
+  // that cannot happen where every row is the same company.
+  return `<ol class="lineage-graph" style="--c:var(--c-${slugFor(gens[0].company)})">${items}</ol>`;
 }
 
 function whatChangedSection(gens) {

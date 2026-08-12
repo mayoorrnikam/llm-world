@@ -226,6 +226,7 @@ function render(q) {
 
   for (const r of found.slice(0, 40)) {
     const li = document.createElement('li');
+  li.style.setProperty('--c', `var(--c-${logoSlug(r.company)})`);
 
     const a = document.createElement('a');
     a.className = 'ask-name';

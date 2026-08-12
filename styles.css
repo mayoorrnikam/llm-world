@@ -1501,6 +1501,42 @@ code, kbd {
    The marks were 13-17px, below the ~16px floor where a logo is still
    recognisable rather than a smudge. --mark sizes the box; the glyph is a
    share of it, so one number moves both. */
+/* List rows, made to respond ----------------------------------------------
+   The timeline's cards carry a coloured edge, a hover lift and a count; the
+   static lists were plain text rows that did nothing under the cursor, which
+   is the difference in liveliness between the two surfaces — not hue.
+
+   The edge appears on hover rather than at rest, so a list of sixteen labs is
+   never sixteen colours at once, and the row still tells you which lab it
+   belongs to the moment you point at it. */
+.ask-list li,
+.doc-list li {
+  position: relative;
+  border-radius: 8px;
+  transition: background 120ms var(--ease);
+}
+.ask-list li::before,
+.doc-list li::before {
+  content: "";
+  position: absolute;
+  inset-block: 6px;
+  left: -10px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--c, var(--c-other));
+  opacity: 0;
+  transition: opacity 120ms var(--ease);
+}
+.ask-list li:hover,
+.doc-list li:hover { background: var(--panel-2); }
+.ask-list li:hover::before,
+.doc-list li:hover::before { opacity: 0.9; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ask-list li, .ask-list li::before,
+  .doc-list li, .doc-list li::before { transition: none; }
+}
+
 /* Direct answer above the results ----------------------------------------- */
 .ask-answer {
   margin: 0 0 14px;
@@ -1684,7 +1720,9 @@ code, kbd {
   left: 50%;
   width: 2px;
   transform: translateX(-50%);
-  background: var(--line);
+  /* Tinted from the family's own hue: one lab per page, so this is identity
+     rather than decoration, and no rainbow is possible. */
+  background: color-mix(in oklab, var(--c, var(--c-other)) 38%, var(--line));
 }
 .lineage-graph > .lin-tier:first-child .lin-rail::before { top: 9px; }
 .lineage-graph > .lin-tier:last-child .lin-rail::before { bottom: calc(100% - 9px); }
@@ -1716,7 +1754,7 @@ code, kbd {
      stopping in empty space. Set from the same gap the grid uses. */
   width: 14px;
   height: 2px;
-  background: var(--line);
+  background: color-mix(in oklab, var(--c, var(--c-other)) 38%, var(--line));
 }
 
 /* A tier holding same-day siblings gets a squared node, so "these shipped
