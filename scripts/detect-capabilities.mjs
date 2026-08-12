@@ -45,6 +45,9 @@ const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
 const LIMIT = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('=')[1] ?? Infinity);
 const CONTEXT = process.argv.includes('--context');
+// Find the sentence behind capabilities a record ALREADY carries, rather than
+// looking for new ones. See the backfill block at the foot of this file.
+const BACKFILL = process.argv.includes('--backfill');
 
 const CONCURRENCY = 6;
 
@@ -119,8 +122,17 @@ const SIBLING_LINES = [
   /\bGLM-4\s+All\s+Tools\b/i,                           // distinct variant with its own tool model
 ];
 
-const targets = data.releases.filter((r) => !r.capabilities?.length).slice(0, LIMIT);
-console.log(`${targets.length} records without capabilities\n`);
+const EVIDENCE_MARK = 'Capabilities evidenced from the primary sources:';
+
+const targets = (BACKFILL
+  ? data.releases.filter((r) => r.capabilities?.length
+      && !(r.provenance?.reason ?? '').includes(EVIDENCE_MARK))
+  : data.releases.filter((r) => !r.capabilities?.length)
+).slice(0, LIMIT);
+
+console.log(BACKFILL
+  ? `${targets.length} records carry capabilities with no evidence recorded\n`
+  : `${targets.length} records without capabilities\n`);
 
 const tier1 = [], flagged = [], unreadable = [], partial = [];
 let done = 0;
@@ -204,14 +216,79 @@ async function examine(r) {
   }
 }
 
+/**
+ * Backfill: record WHY a capability is on a record that already carries it.
+ *
+ * Modalities have always carried the sentence they were read from; capabilities
+ * did not. Ninety-five records asserted capabilities and eighty-one of them
+ * offered no basis a reader could check — the claim was simply there. That is
+ * the same shape as an unsourced figure, and this project does not publish
+ * those.
+ *
+ * This never adds or removes a capability. It searches the record's own
+ * archived primary sources for a sentence that evidences each one already
+ * present, and appends what it finds to provenance.reason.
+ *
+ * The capabilities it CANNOT find a sentence for are the valuable output. A
+ * claim with no locatable evidence is either badly worded in the source or was
+ * never evidenced at all, and the reasoning audit showed how many of the second
+ * kind can accumulate unnoticed.
+ */
+async function backfill(r) {
+  const archived = r.sources.filter((s) => s.archived_url && s.authority === 'primary');
+  const texts = [];
+  for (const s of archived) {
+    const t = await sourceText(s.archived_url);
+    if (t) texts.push(t);
+  }
+
+  done++;
+  process.stderr.write(`  ${done}/${targets.length} ${r.id}\n`);
+
+  if (!texts.length) { unreadable.push(r.id); return; }
+
+  const { broad, narrow } = gates(r);
+  const found = new Map();
+
+  for (const t of texts) {
+    const cleaned = t.replace(/<[^>]*>/g, ' ');
+    for (const sentence of cleaned.match(/[^.!?\n]+[.!?]?/g) ?? []) {
+      const x = sentence.replace(/\s+/g, ' ').trim();
+      if (!x || x.length > 400) continue;
+      if (NOT_A_CLAIM.some((p) => p.test(x))) continue;
+      if (FUTURE.some((p) => p.test(x))) continue;
+      if (SIBLING_LINES.some((p) => p.test(x))) continue;
+      if (!broad.test(x)) continue;
+      for (const [cap, re] of CAPABILITIES) {
+        if (!r.capabilities.includes(cap) || found.has(cap)) continue;
+        if (re.test(x)) found.set(cap, { quote: x.slice(0, 170), own: narrow.test(x) });
+      }
+    }
+  }
+
+  const missing = r.capabilities.filter((c) => !found.has(c));
+  if (found.size) {
+    const how = [...found.entries()].map(([c, v]) => `${c}: “${v.quote}”`).join(' | ');
+    if (WRITE) {
+      r.provenance.reason = `${(r.provenance.reason ?? '').trim()} ${EVIDENCE_MARK} ${how}.`.trim();
+    }
+    tier1.push({ id: r.id, model: r.model, hits: [...found.keys()].join(', ') });
+  }
+  if (missing.length) flagged.push(`${r.id} — no sentence found for: ${missing.join(', ')}`);
+}
+
 const queue = [...targets];
 await Promise.all(Array.from({ length: Math.min(CONCURRENCY, queue.length) }, async () => {
-  while (queue.length) await examine(queue.shift());
+  while (queue.length) await (BACKFILL ? backfill(queue.shift()) : examine(queue.shift()));
 }));
 
-console.log(`\nTIER 1 — a specific claim about this model, all sources read (${tier1.length}):`);
+console.log(BACKFILL
+  ? `\nEVIDENCE RECORDED — a sentence found for capabilities already on the record (${tier1.length}):`
+  : `\nTIER 1 — a specific claim about this model, all sources read (${tier1.length}):`);
 for (const t of tier1) console.log(`  ${t.id.padEnd(22)} ${t.model.padEnd(26)} ${t.hits}`);
-console.log(`\nFLAGGED FOR A PERSON — review the sentences before recording (${flagged.length}):`);
+console.log(BACKFILL
+  ? `\nCLAIMED BUT NOT LOCATED — capabilities with no sentence to back them (${flagged.length}):`
+  : `\nFLAGGED FOR A PERSON — review the sentences before recording (${flagged.length}):`);
 for (const f of flagged) console.log(`  ${f}`);
 if (partial.length) {
   console.log(`\nPARTIAL READ — not enough to evidence anything (${partial.length}):`);

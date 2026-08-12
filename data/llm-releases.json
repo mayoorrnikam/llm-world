@@ -68,7 +68,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the technical paper. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to the lab's own announcement and the technical paper. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: multilingual: “PaLM was trained using a combination of English and multilingual datasets that include high-quality web documents, books, Wikipedia, conversations, and GitHub code.” | coding: “PaLM 540B shows strong performance across coding tasks and natural language tasks in a single model, even though it has only 5% code in the pre-training dataset.”."
       },
       "evidence": {
         "release_date": [
@@ -219,7 +219,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: multilingual: “0 bloom feature-extraction Model card Files Files and versions Community 23 Train Deploy Use in Transformers Edit model card BLOOM LM BigScience Large Open-science Open-a”."
       },
       "evidence": {
         "context_window": [
@@ -294,7 +294,7 @@
       "provenance": {
         "status": "estimated",
         "confidence": 50,
-        "reason": "Cited to the official repository. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to the official repository. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: multilingual: “For smaller models, please find monolingual GLMs (English: 10B/2B/515M/410M/335M/110M, Chinese: 10B/335M) and an 1B multilingual GLM (104 languages).”."
       },
       "evidence": {
         "context_window": [
@@ -453,7 +453,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Mar 14, 2023) and context window (9K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Mar 14, 2023) and context window (9K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: coding: “Claude can help with use cases including summarization, search, creative and collaborative writing, Q&A, coding, and more.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -639,7 +639,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (May 10, 2023) — was found in an archived primary source, checked 2026-08-10. Context window and parameter count are not recorded, so nothing is claimed about them."
+        "reason": "Every value this record asserts — date (May 10, 2023) — was found in an archived primary source, checked 2026-08-10. Context window and parameter count are not recorded, so nothing is claimed about them. Capabilities evidenced from the primary sources: coding: “PaLM 2 is a state-of-the-art language model with improved multilingual, reasoning and coding capabilities.” | multilingual: “PaLM 2 is a state-of-the-art language model with improved multilingual, reasoning and coding capabilities.”."
       },
       "undisclosed": [
         "context_window",
@@ -712,7 +712,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Jul 11, 2023) and context window (100K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Every value this record asserts — date (Jul 11, 2023) and context window (100K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: coding: “Their coding assistant Cody uses Claude 2’s improved reasoning ability to give even more accurate answers to user queries while also passing along more codebase context w”."
       },
       "undisclosed": [
         "parameter_count"
@@ -1005,7 +1005,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official repository. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to the lab's own announcement and the official repository. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: coding: “In the last two months, we have made significant improvements in reasoning and coding capabilities leading up to Grok-1, a state-of-the-art language model that is signifi”."
       },
       "previous_ids": [
         "grok-1-open"
@@ -1549,7 +1549,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\""
+        "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\" Capabilities evidenced from the primary sources: multilingual: “7k GLM-4 series: Open Multilingual Multimodal Chat LMs | 开源多语言多模态对话模型 License Apache-2.”."
       }
     },
     {
@@ -1608,7 +1608,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\""
+        "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\" Capabilities evidenced from the primary sources: multilingual: “7k GLM-4 series: Open Multilingual Multimodal Chat LMs | 开源多语言多模态对话模型 License Apache-2.”."
       }
     },
     {
@@ -1667,7 +1667,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\""
+        "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\" Capabilities evidenced from the primary sources: multilingual: “7k GLM-4 series: Open Multilingual Multimodal Chat LMs | 开源多语言多模态对话模型 License Apache-2.”."
       }
     },
     {
@@ -1908,7 +1908,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Mar 4, 2024) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Mar 4, 2024) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: structured_output: “In addition, the Claude 3 models are better at producing popular structured output in formats like JSON—making it simpler to instruct Claude for use cases like natural la”."
       },
       "undisclosed": [
         "parameter_count"
@@ -1998,7 +1998,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Mar 11, 2024), context window (128K) and parameter count (35B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Every value this record asserts — date (Mar 11, 2024), context window (128K) and parameter count (35B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only. Capabilities evidenced from the primary sources: tool_use: “Model Card for Cohere Labs Command-R Model Summary Model Details Grounded Generation and RAG Capabilities: Single-Step Tool Use Capabilities (&quot;Function Calling&quot;” | function_calling: “Model Card for Cohere Labs Command-R Model Summary Model Details Grounded Generation and RAG Capabilities: Single-Step Tool Use Capabilities (&quot;Function Calling&quot;” | agentic: “Model Card for Cohere Labs Command-R Model Summary Model Details Grounded Generation and RAG Capabilities: Single-Step Tool Use Capabilities (&quot;Function Calling&quot;” | multilingual: “Command-R has the capability for multilingual generation evaluated in 10 languages and highly performant RAG capabilities.”."
       },
       "evidence": {
         "release_date": [
@@ -2091,7 +2091,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (April 18, 2024), context window (8,192) and parameter count (70B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Every value this record asserts — date (April 18, 2024), context window (8,192) and parameter count (70B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only. Capabilities evidenced from the primary sources: coding: “We also saw greatly improved capabilities like reasoning, code generation, and instruction following making Llama 3 more steerable.”."
       },
       "evidence": {
         "release_date": [
@@ -2357,7 +2357,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Split from the former \"phi-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Phi-3-small (7B) and Phi-3-medium (14B) will be available in the Azure AI model catalog and other model gardens shortly. The cited model card is Phi-3-medium-128k-instruct, which is where the 128K context window comes from.\""
+        "reason": "Split from the former \"phi-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Phi-3-small (7B) and Phi-3-medium (14B) will be available in the Azure AI model catalog and other model gardens shortly. The cited model card is Phi-3-medium-128k-instruct, which is where the 128K context window comes from.\" Capabilities evidenced from the primary sources: coding: “Phi-3 models are the most capable and cost-effective small language models (SLMs) available, outperforming models of the same size and next size up across a variety of la”."
       },
       "evidence": {
         "release_date": [
@@ -2543,7 +2543,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (May 13, 2024) and context window (128,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (May 13, 2024) and context window (128,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: audio: “GPT-4o is especially better at vision and audio understanding compared to existing models.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -2646,7 +2646,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (June 7, 2024), context window (131,072) and parameter count (72B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (June 7, 2024), context window (131,072) and parameter count (72B) — was found in an archived primary source, checked 2026-08-10. Capabilities evidenced from the primary sources: coding: “5B, Qwen2-7B, Qwen2-57B-A14B, and Qwen2-72B ; Having been trained on data in 27 additional languages besides English and Chinese; State-of-the-art performance in a large ” | multilingual: “In terms of base language models, Qwen2-72B and state-of-the-art open models are evaluated for different capbilities including natural language understanding, knowledge a”."
       },
       "evidence": {
         "release_date": [
@@ -2827,7 +2827,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (July 23, 2024), context window (128K) and parameter count (405B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Every value this record asserts — date (July 23, 2024), context window (128K) and parameter count (405B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only. Capabilities evidenced from the primary sources: multilingual: “As part of our ongoing efforts to develop AI responsibly beyond the model layer and helping others to do the same, we’re releasing a full reference system that includes s”."
       },
       "evidence": {
         "release_date": [
@@ -2927,7 +2927,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (July 24, 2024), context window (128k) and parameter count (123 billion) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Every value this record asserts — date (July 24, 2024), context window (128k) and parameter count (123 billion) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: coding: “Compared to its predecessor, Mistral Large 2 is significantly more capable in code generation, mathematics, and reasoning.” | multilingual: “While the majority of models are English-centric, the new Mistral Large 2 was trained on a large proportion of multilingual data.” | tool_use: “Performance on Multilingual MMLU (measured on the base pretrained model) Tool Use & Function Calling Mistral Large 2 is equipped with enhanced function calling and retrie” | function_calling: “Performance on Multilingual MMLU (measured on the base pretrained model) Tool Use & Function Calling Mistral Large 2 is equipped with enhanced function calling and retrie”."
       },
       "evidence": {
         "release_date": [
@@ -3016,7 +3016,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (August 22, 2024), context window (256K) and parameter count (398B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (August 22, 2024), context window (256K) and parameter count (398B) — was found in an archived primary source, checked 2026-08-10. Capabilities evidenced from the primary sources: tool_use: “5-Large\" , use_mamba_kernels= False ) Model features Tool use with Jamba Jamba 1.”."
       },
       "evidence": {
         "release_date": [
@@ -3112,7 +3112,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: coding: “5: A New Open-Source Model Combining General and Coding Capabilities | DeepSeek API Docs Skip to main content DeepSeek API Docs English English 中文（中国） DeepSeek Platform Q” | function_calling: “5 Release 2024/09/05 Context Caching is Available 2024/08/02 New API Features 2024/07/25 API Reference API Guides Multi-round Conversation Chat Prefix Completion (Beta) F” | structured_output: “5 Release 2024/09/05 Context Caching is Available 2024/08/02 New API Features 2024/07/25 API Reference API Guides Multi-round Conversation Chat Prefix Completion (Beta) F”."
       },
       "evidence": {
         "release_date": [
@@ -3201,7 +3201,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (September 12, 2024) and context window (200,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
+        "reason": "Every value this record asserts — date (September 12, 2024) and context window (200,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\". Capabilities evidenced from the primary sources: reasoning: “o1 thinks before it answers—it can produce a long internal chain of thought before responding to the user.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -3393,7 +3393,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2024-09-25), context window (128k) and parameter count (90B) — was found in an archived primary source, checked 2026-08-10."
+        "reason": "Every value this record asserts — date (2024-09-25), context window (128k) and parameter count (90B) — was found in an archived primary source, checked 2026-08-10. Capabilities evidenced from the primary sources: vision: “To support image recognition tasks, the Llama 3.”."
       },
       "evidence": {
         "release_date": [
@@ -3485,7 +3485,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Micro – A text-only model that delivers the lowest latency responses in the Amazon Nova family of models at a very low cost.\""
+        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Micro – A text-only model that delivers the lowest latency responses in the Amazon Nova family of models at a very low cost.\" Capabilities evidenced from the primary sources: coding: “With a context length of 128K tokens and optimized for speed and cost, Amazon Nova Micro excels at tasks such as text summarization, translation, content classification, ”."
       },
       "undisclosed": [
         "context_window",
@@ -3568,7 +3568,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Lite – A very low-cost multimodal model that is lightning fast for processing image, video, and text inputs to generate text output.\""
+        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Lite – A very low-cost multimodal model that is lightning fast for processing image, video, and text inputs to generate text output.\" Capabilities evidenced from the primary sources: video: “You can build on Amazon Nova to analyze complex documents and videos, understand charts and diagrams, generate engaging video content, and build sophisticated AI agents, ”."
       },
       "undisclosed": [
         "context_window",
@@ -3653,7 +3653,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Pro is capable of processing up to 300K input tokens and sets new standards in multimodal intelligence and agentic workflows.\""
+        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Pro is capable of processing up to 300K input tokens and sets new standards in multimodal intelligence and agentic workflows.\" Capabilities evidenced from the primary sources: agentic: ““Our new Amazon Nova models are intended to help with these challenges for internal and external builders, and provide compelling intelligence and content generation whil” | video: “You can build on Amazon Nova to analyze complex documents and videos, understand charts and diagrams, generate engaging video content, and build sophisticated AI agents, ”."
       },
       "undisclosed": [
         "parameter_count"
@@ -4066,7 +4066,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the technical paper and the official model card. Not verified because the context window and the parameter count could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Cited to the technical paper and the official model card. Not verified because the context window and the parameter count could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: reasoning: “View a PDF of the paper titled DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning, by DeepSeek-AI and 199 other authors View PDF HTML (exp”."
       },
       "evidence": {
         "release_date": [
@@ -4146,7 +4146,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: function_calling: “Low-latency function calling: Mistral Small 3 is able to handle rapid function execution when used as part of automated or agentic workflows.” | agentic: “Low-latency function calling: Mistral Small 3 is able to handle rapid function execution when used as part of automated or agentic workflows.” | multilingual: “25k Safetensors 10 languages vllm mistral License: apache-2.”."
       },
       "evidence": {
         "release_date": [
@@ -4238,7 +4238,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from the launch announcement, which states: “Grok 3 also excels in image understanding (MMMU) and video understanding (EgoSchema) tasks.” Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from the launch announcement, which states: “Grok 3 also excels in image understanding (MMMU) and video understanding (EgoSchema) tasks.” Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: coding: “Trained on our Colossus supercluster with 10x the compute of previous state-of-the-art models, Grok 3 displays significant improvements in reasoning, mathematics, coding,” | reasoning: “Thinking Harder: Test-time Compute and Reasoning Today, we are announcing two beta reasoning models, Grok 3 (Think) and Grok 3 mini (Think).” | vision: “Grok 3 also excels in image understanding (MMMU) and video understanding (EgoSchema) tasks.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -4349,7 +4349,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from Anthropic's model documentation as it stood on 2025-05-19, which lists this model as: “Claude 3.7 Sonnet Our most intelligent model Text and image input Text output 200k context window Extended thinking.” The current documentation no longer lists it, so the contemporaneous snapshot is cited rather than the live page."
+        "reason": "Cited to the lab's own announcement. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from Anthropic's model documentation as it stood on 2025-05-19, which lists this model as: “Claude 3.7 Sonnet Our most intelligent model Text and image input Text output 200k context window Extended thinking.” The current documentation no longer lists it, so the contemporaneous snapshot is cited rather than the live page. Capabilities evidenced from the primary sources: reasoning: “Extended thinking mode is available on all surfaces except the free Claude tier.” | vision: “5 Haiku Our fastest model Text and image input Text output 200k context window Claude 3.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -4567,7 +4567,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: vision: “Gemma 3 supports over 140 languages and offers advanced text and visual reasoning capabilities.” | function_calling: “Gemma 3 includes a 128k-token context window and supports function calling for complex tasks.” | structured_output: “Create AI-driven workflows using function calling: Gemma 3 supports function calling and structured output to help you automate tasks and build agentic experiences.”."
       },
       "evidence": {
         "release_date": [
@@ -4657,7 +4657,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Mar 13, 2025), context window (256K) and parameter count (111B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Every value this record asserts — date (Mar 13, 2025), context window (256K) and parameter count (111B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only. Capabilities evidenced from the primary sources: agentic: “com/blog\"> &lt; Back to blog Introducing Command A: Max performance, minimal compute Cohere Team Mar 13, 2025 Command A is on par or better than GPT-4o and DeepSeek-V3 ac” | multilingual: “Compared to other leading proprietary and open-weights models Command A delivers maximum performance with minimum hardware costs, excelling on business-critical agentic a” | tool_use: “Tool Use Capabilities: Command A has been specifically trained with conversational tool use capabilities.”."
       },
       "evidence": {
         "release_date": [
@@ -4843,7 +4843,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 90,
-        "reason": "Split from the former \"llama-4\" record, which was named for the family while holding one variant's figures. Evidence: \"Llama 4 Scout, is a general purpose model with 17 billion active parameters, 16 experts, and 109 billion total parameters... Llama 4 Scout dramatically increases the supported context length from 128K in Llama 3 to an industry leading 10 million tokens.\""
+        "reason": "Split from the former \"llama-4\" record, which was named for the family while holding one variant's figures. Evidence: \"Llama 4 Scout, is a general purpose model with 17 billion active parameters, 16 experts, and 109 billion total parameters... Llama 4 Scout dramatically increases the supported context length from 128K in Llama 3 to an industry leading 10 million tokens.\" Capabilities evidenced from the primary sources: vision: “As our product workhorse model for general assistant and chat use cases, Llama 4 Maverick is great for precise image understanding and creative writing.”."
       },
       "evidence": {
         "release_date": [
@@ -4939,7 +4939,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 90,
-        "reason": "Split from the former \"llama-4\" record, which was named for the family while holding one variant's figures. Evidence: \"Llama 4 Maverick contains 17 billion active parameters, 128 experts, and 400 billion total parameters.\""
+        "reason": "Split from the former \"llama-4\" record, which was named for the family while holding one variant's figures. Evidence: \"Llama 4 Maverick contains 17 billion active parameters, 128 experts, and 400 billion total parameters.\" Capabilities evidenced from the primary sources: vision: “As our product workhorse model for general assistant and chat use cases, Llama 4 Maverick is great for precise image understanding and creative writing.”."
       },
       "evidence": {
         "release_date": [
@@ -5033,7 +5033,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (April 29, 2025), context window (131072) and parameter count (235B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Every value this record asserts — date (April 29, 2025), context window (131072) and parameter count (235B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: reasoning: “enable_thinking=True By default, Qwen3 has thinking capabilities enabled, similar to QwQ-32B.”."
       },
       "evidence": {
         "release_date": [
@@ -5139,7 +5139,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": " Modalities read from Anthropic's model documentation as it stood on 2025-05-26, which lists this model as: “Claude Opus 4 Our most powerful and capable model Text and image input Text output 200k context window Superior reasoning capabilities.” The current documentation no longer lists it, so the contemporaneous snapshot is cited rather than the live page."
+        "reason": "Modalities read from Anthropic's model documentation as it stood on 2025-05-26, which lists this model as: “Claude Opus 4 Our most powerful and capable model Text and image input Text output 200k context window Superior reasoning capabilities.” The current documentation no longer lists it, so the contemporaneous snapshot is cited rather than the live page. Capabilities evidenced from the primary sources: coding: “Introducing Claude 4 \\ Anthropic Skip to main content Skip to footer Claude API Solutions Research Commitments Learn News Try Claude Announcements Introducing Claude 4 Ma” | agentic: “Claude Opus 4 is the world’s best coding model, with sustained performance on complex, long-running tasks and agent workflows.” | vision: “Claude Opus 4 Our most powerful and capable model Text and image input Text output 200k context window Superior reasoning capabilities Claude Sonnet 4 High-performance mo”."
       },
       "undisclosed": [
         "parameter_count"
@@ -5248,7 +5248,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2025-07-11), context window (128K) and parameter count (1T) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Every value this record asserts — date (2025-07-11), context window (128K) and parameter count (1T) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only. Capabilities evidenced from the primary sources: coding: “Trained with the Muon optimizer, Kimi K2 achieves exceptional performance across frontier knowledge, reasoning, and coding tasks while being meticulously optimized for ag” | agentic: “Trained with the Muon optimizer, Kimi K2 achieves exceptional performance across frontier knowledge, reasoning, and coding tasks while being meticulously optimized for ag” | reasoning: “Evaluation Results Instruction model evaluation results Benchmark Metric Kimi K2 Instruct DeepSeek-V3-0324 Qwen3-235B-A22B (non-thinking) Claude Sonnet 4 (w/o extended th”."
       },
       "evidence": {
         "release_date": [
@@ -5342,7 +5342,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: reasoning: “We have open-sourced the base models, hybrid reasoning models, and FP8 versions of the hybrid reasoning models for both GLM-4.”."
       },
       "evidence": {
         "release_date": [
@@ -5448,7 +5448,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 90,
-        "reason": "Split from the former \"gpt-oss\" record, which was named for the family while holding one variant's figures. Evidence: \"gpt-oss-120b is our most powerful open-weight model, which fits into a single H100 GPU (117B parameters with 5.1B active parameters).\""
+        "reason": "Split from the former \"gpt-oss\" record, which was named for the family while holding one variant's figures. Evidence: \"gpt-oss-120b is our most powerful open-weight model, which fits into a single H100 GPU (117B parameters with 5.1B active parameters).\" Capabilities evidenced from the primary sources: tool_use: “Both models also perform strongly on tool use, few-shot function calling, CoT reasoning (as seen in results on the Tau-Bench agentic evaluation suite) and HealthBench (ev” | function_calling: “Both models also perform strongly on tool use, few-shot function calling, CoT reasoning (as seen in results on the Tau-Bench agentic evaluation suite) and HealthBench (ev” | agentic: “Both models also perform strongly on tool use, few-shot function calling, CoT reasoning (as seen in results on the Tau-Bench agentic evaluation suite) and HealthBench (ev” | reasoning: “Similar to the OpenAI o-series reasoning models in the API, the two open-weight models support three reasoning efforts—low, medium, and high—which trade off latency vs.” | coding: “Evaluations We evaluated gpt-oss-120b and gpt-oss-20b across standard academic benchmarks to measure their capabilities in coding, competition math, health, and agentic t”."
       },
       "evidence": {
         "release_date": [
@@ -5566,7 +5566,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 90,
-        "reason": "Split from the former \"gpt-oss\" record, which was named for the family while holding one variant's figures. Evidence: \"gpt-oss-20b ... 21B [total parameters] 3.6B [active]; gpt-oss-20b only requires 16GB.\""
+        "reason": "Split from the former \"gpt-oss\" record, which was named for the family while holding one variant's figures. Evidence: \"gpt-oss-20b ... 21B [total parameters] 3.6B [active]; gpt-oss-20b only requires 16GB.\" Capabilities evidenced from the primary sources: tool_use: “Both models also perform strongly on tool use, few-shot function calling, CoT reasoning (as seen in results on the Tau-Bench agentic evaluation suite) and HealthBench (ev” | function_calling: “Both models also perform strongly on tool use, few-shot function calling, CoT reasoning (as seen in results on the Tau-Bench agentic evaluation suite) and HealthBench (ev” | agentic: “Both models also perform strongly on tool use, few-shot function calling, CoT reasoning (as seen in results on the Tau-Bench agentic evaluation suite) and HealthBench (ev” | reasoning: “Similar to the OpenAI o-series reasoning models in the API, the two open-weight models support three reasoning efforts—low, medium, and high—which trade off latency vs.” | coding: “Evaluations We evaluated gpt-oss-120b and gpt-oss-20b across standard academic benchmarks to measure their capabilities in coding, competition math, health, and agentic t”."
       },
       "evidence": {
         "release_date": [
@@ -5666,7 +5666,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (August 7, 2025) and context window (400,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (August 7, 2025) and context window (400,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: coding: “GPT‑5 is a significant leap in intelligence over all our previous models, featuring state-of-the-art performance across coding, math, writing, health, visual perception, ” | reasoning: “One unified system GPT‑5 is a unified system with a smart, efficient model that answers most questions, a deeper reasoning model (GPT‑5 thinking) for harder problems, and” | vision: “In our evaluations, GPT‑5 (with thinking) performs better than OpenAI o3 with 50-80% less output tokens across capabilities, including visual reasoning, agentic coding, a”."
       },
       "undisclosed": [
         "parameter_count"
@@ -5809,7 +5809,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2025-08-21), context window (128K) and parameter count (671B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Every value this record asserts — date (2025-08-21), context window (128K) and parameter count (671B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only. Capabilities evidenced from the primary sources: reasoning: “5 Release 2024/09/05 Context Caching is Available 2024/08/02 New API Features 2024/07/25 API Reference API Guides Reasoning Model (deepseek-reasoner) Multi-round Conversa” | function_calling: “5 Release 2024/09/05 Context Caching is Available 2024/08/02 New API Features 2024/07/25 API Reference API Guides Reasoning Model (deepseek-reasoner) Multi-round Conversa” | tool_use: “DeepSeek-R1-0528 🛠️ Stronger agent skills: Post-training boosts tool use and multi-step agent tasks Try it now — toggle Think/Non-Think via the &quot;DeepThink&quot; but” | agentic: “DeepSeek-R1-0528 🛠️ Stronger agent skills: Post-training boosts tool use and multi-step agent tasks Try it now — toggle Think/Non-Think via the &quot;DeepThink&quot; but”."
       },
       "evidence": {
         "release_date": [
@@ -5907,7 +5907,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Sep 29, 2025) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Sep 29, 2025) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: multilingual: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.” | vision: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -6244,7 +6244,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — release date and parameter count — was found in an archived primary source. Context window is not recorded: none of the cited sources states one, so nothing is claimed about it."
+        "reason": "Every value this record asserts — release date and parameter count — was found in an archived primary source. Context window is not recorded: none of the cited sources states one, so nothing is claimed about it. Capabilities evidenced from the primary sources: coding: “On math benchmarks, Olmo 3-Think (7B) matches Qwen 3 8B on MATH and comes within a few points on AIME 2024 and 2025, and also leads all comparison models on HumanEvalPlus” | function_calling: “Olmo 3 model construction targets long-context reasoning, function calling, coding, instruction following, general chat, and knowledge recall.”."
       },
       "evidence": {
         "release_date": [
@@ -6346,7 +6346,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — release date and parameter count — was found in an archived primary source. Context window is not recorded: none of the cited sources states one, so nothing is claimed about it."
+        "reason": "Every value this record asserts — release date and parameter count — was found in an archived primary source. Context window is not recorded: none of the cited sources states one, so nothing is claimed about it. Capabilities evidenced from the primary sources: coding: “On math benchmarks, Olmo 3-Think (7B) matches Qwen 3 8B on MATH and comes within a few points on AIME 2024 and 2025, and also leads all comparison models on HumanEvalPlus” | function_calling: “Olmo 3 model construction targets long-context reasoning, function calling, coding, instruction following, general chat, and knowledge recall.”."
       },
       "evidence": {
         "release_date": [
@@ -6441,7 +6441,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Nov 24, 2025) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Nov 24, 2025) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: multilingual: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.” | vision: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -6531,7 +6531,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Split from the former \"mistral-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Mistral Large 3 – our most capable model to date – a sparse mixture-of-experts trained with 41B active and 675B total parameters.\""
+        "reason": "Split from the former \"mistral-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Mistral Large 3 – our most capable model to date – a sparse mixture-of-experts trained with 41B active and 675B total parameters.\" Capabilities evidenced from the primary sources: multilingual: “Introducing Mistral 3 | Mistral AI Products Solutions Research Resources Pricing Company Try AI Studio Talk to sales Mistral 3 Mistral 3 Mistral 3 Mistral 3 Mistral 3 Mis”."
       },
       "evidence": {
         "parameter_count": [
@@ -6609,7 +6609,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Split from the former \"mistral-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Ministral 3 series, available in three model sizes: 3B, 8B, and 14B parameters.\""
+        "reason": "Split from the former \"mistral-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Ministral 3 series, available in three model sizes: 3B, 8B, and 14B parameters.\" Capabilities evidenced from the primary sources: multilingual: “Introducing Mistral 3 | Mistral AI Products Solutions Research Resources Pricing Company Try AI Studio Talk to sales Mistral 3 Mistral 3 Mistral 3 Mistral 3 Mistral 3 Mis”."
       },
       "evidence": {
         "parameter_count": [
@@ -6687,7 +6687,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Split from the former \"mistral-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Ministral 3 series, available in three model sizes: 3B, 8B, and 14B parameters.\""
+        "reason": "Split from the former \"mistral-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Ministral 3 series, available in three model sizes: 3B, 8B, and 14B parameters.\" Capabilities evidenced from the primary sources: multilingual: “Introducing Mistral 3 | Mistral AI Products Solutions Research Resources Pricing Company Try AI Studio Talk to sales Mistral 3 Mistral 3 Mistral 3 Mistral 3 Mistral 3 Mis”."
       },
       "evidence": {
         "parameter_count": [
@@ -6765,7 +6765,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Split from the former \"mistral-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Ministral 3 series, available in three model sizes: 3B, 8B, and 14B parameters.\""
+        "reason": "Split from the former \"mistral-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Ministral 3 series, available in three model sizes: 3B, 8B, and 14B parameters.\" Capabilities evidenced from the primary sources: multilingual: “Introducing Mistral 3 | Mistral AI Products Solutions Research Resources Pricing Company Try AI Studio Talk to sales Mistral 3 Mistral 3 Mistral 3 Mistral 3 Mistral 3 Mis”."
       },
       "evidence": {
         "parameter_count": [
@@ -6950,7 +6950,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Feb 5, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Feb 5, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: multilingual: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.” | vision: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -7214,7 +7214,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Feb 17, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Feb 17, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: multilingual: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.” | vision: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -7401,7 +7401,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Capabilities evidenced from the primary sources: coding: “Mistral Small 4 is the first Mistral model to unify the capabilities of our flagship models, Magistral for reasoning, Pixtral for multimodal, and Devstral for agentic cod” | agentic: “Mistral Small 4 is the first Mistral model to unify the capabilities of our flagship models, Magistral for reasoning, Pixtral for multimodal, and Devstral for agentic cod” | reasoning: “Reasoning on Demand With the new reasoning_effort parameter, users can dynamically adjust the model’s behavior: reasoning_effort=&quot;none&quot; : Fast, lightweight resp”."
       },
       "evidence": {
         "context_window": [
@@ -7549,7 +7550,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Capabilities evidenced from the primary sources: reasoning: “Muse Spark is a natively multimodal reasoning model with support for tool-use, visual chain of thought, and multi-agent orchestration.” | agentic: “Capabilities for Personal Superintelligence Muse Spark offers competitive performance in multimodal perception, reasoning, health, and agentic tasks.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -7641,7 +7643,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to the official model card and the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Cited to the official model card and the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only. Capabilities evidenced from the primary sources: agentic: “6 via the Chat Completions API Agentic Usage Qwen-Agent Qwen Code Processing Ultra-Long Texts Best Practices Citation Qwen3.” | coding: “6-35B-A3B}: Agentic Coding Power, Now Open to All}, url = {https://qwen.”."
       },
       "evidence": {
         "release_date": [
@@ -7730,7 +7732,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Apr 16, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Apr 16, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: agentic: “Across our agentic reasoning over data benchmarks, it is the best-performing Claude model for enterprise document analysis.” | multilingual: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.” | vision: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -7833,7 +7835,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to the official model card and the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Cited to the official model card and the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only. Capabilities evidenced from the primary sources: agentic: “6 via the Chat Completions API Agentic Usage Qwen-Agent Qwen Code Processing Ultra-Long Texts Best Practices Citation Qwen3.” | coding: “6-27B}: Flagship-Level Coding in a {27B} Dense Model}, author = {{Qwen Team}}, month = {April}, year = {2026}, url = {https://qwen.”."
       },
       "evidence": {
         "release_date": [
@@ -7930,7 +7932,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (April 23, 2026) and context window (1,050,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
+        "reason": "Every value this record asserts — date (April 23, 2026) and context window (1,050,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\". Capabilities evidenced from the primary sources: agentic: “1% - Model capabilities OpenAI is building the global infrastructure for agentic AI, making it possible for people and businesses around the world to get work done with A” | reasoning: “1% Evals of GPT were run with reasoning effort set to xhigh and were conducted in a research environment, which may provide slightly different output from production Chat”."
       },
       "undisclosed": [
         "parameter_count"
@@ -8044,7 +8046,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2026-04-24), context window (1M) and parameter count (284B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Every value this record asserts — date (2026-04-24), context window (1M) and parameter count (284B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: coding: “co/collections/deepseek-ai/deepseek-v4 DeepSeek-V4-Pro ​ 🔹 Enhanced Agentic Capabilities: Open-source SOTA in Agentic Coding benchmarks.” | reasoning: “DeepSeek-V4-Pro-Max , the maximum reasoning effort mode of DeepSeek-V4-Pro, significantly advances the knowledge capabilities of open-source models, firmly establishing i”."
       },
       "evidence": {
         "release_date": [
@@ -8227,7 +8229,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (May 28, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (May 28, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: agentic: “It is our most capable generally available model, with a step-change improvement in agentic coding over Claude Opus 4.” | multilingual: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.” | vision: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -8413,7 +8415,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from the launch announcement, which states: “Novel unified architecture: No multimodal encoders. The vision and audio inputs flow directly into the LLM backbone,” and describes each path separately — vision through a lightweight embedding module, raw audio projected into the same dimensional space as text tokens. Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from the launch announcement, which states: “Novel unified architecture: No multimodal encoders. The vision and audio inputs flow directly into the LLM backbone,” and describes each path separately — vision through a lightweight embedding module, raw audio projected into the same dimensional space as text tokens. Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources. Capabilities evidenced from the primary sources: agentic: “5X 2X Today, we are introducing Gemma 4 12B, our latest model designed to bring agentic multimodal intelligence directly to laptops.” | vision: “Gemma 4 models are multimodal, handling text and image input (with audio supported on E2B, E4B, and 12B) and generating text output.” | coding: “Featuring both Dense and Mixture-of-Experts (MoE) architectures, Gemma 4 is well-suited for tasks like text generation, coding, and reasoning.” | reasoning: “Thinking Mode Configuration Compared to Gemma 3, the models use standard system , assistant , and user roles.”."
       },
       "evidence": {
         "release_date": [
@@ -8544,7 +8546,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: agentic: “Nemotron-Posttraining-v3 : A collection of post-training datasets for improving agentic, reasoning, and general model capabilities during SFT and RL.”."
       },
       "evidence": {
         "release_date": [
@@ -8640,7 +8642,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: multilingual: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.” | vision: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -8723,7 +8725,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: multilingual: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.” | vision: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -8797,7 +8799,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Capabilities evidenced from the primary sources: coding: “15763&quot;,&quot;type&quot;:&quot;arxiv&quot;,&quot;extra&quot;:{&quot;paperTitle&quot;:&quot;GLM-5: from Vibe Coding to Agentic Engineering&quot;}},{&quot;id&quot;:&quo” | agentic: “15763&quot;,&quot;type&quot;:&quot;arxiv&quot;,&quot;extra&quot;:{&quot;paperTitle&quot;:&quot;GLM-5: from Vibe Coding to Agentic Engineering&quot;}},{&quot;id&quot;:&quo”."
       },
       "evidence": {
         "context_window": [
@@ -8884,7 +8887,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Jun 30, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Jun 30, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: agentic: “Introducing Claude Sonnet 5 \\ Anthropic Skip to main content Skip to footer Research Policy Commitments Learn News Try Claude Product Introducing Claude Sonnet 5 Jun 30, ” | multilingual: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.” | vision: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -8979,7 +8982,8 @@
       ],
       "provenance": {
         "status": "verified",
-        "confidence": 90
+        "confidence": 90,
+        "reason": "Capabilities evidenced from the primary sources: reasoning: “code)]:bg-white/90\"> Grok 4 Information for Grok 3 Users When moving from grok-3 / grok-3-mini to grok-4 , please note the following differences: • Grok 4 is a reasoning ”."
       },
       "undisclosed": [
         "parameter_count"
@@ -9313,7 +9317,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Jul 24, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (Jul 24, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: agentic: “Cristian Rivera Staff Software Engineer Claude Opus 5 made large scale changes across our Fundamental Research Assistant codebase, adapting to feedback throughout an agen” | multilingual: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.” | vision: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -9412,7 +9416,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to the official model card and the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Licence from the model card's own license_name field on MiniMaxAI/MiniMax-H3."
+        "reason": "Cited to the official model card and the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Licence from the model card's own license_name field on MiniMaxAI/MiniMax-H3. Capabilities evidenced from the primary sources: video_generation: “case-T2VA Type: Text-to-video Duration: 10 seconds Aspect ratio: 16:9 stage request result H3-Context-IR View script { \"task\": { \"id\": \"&lt;task_id&gt;\", \"model\": \"MiniMa”."
       },
       "evidence": {}
     },
@@ -9598,7 +9602,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on meta-models/Muse-Glimmer-30B."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on meta-models/Muse-Glimmer-30B. Capabilities evidenced from the primary sources: agentic: “Muse Glimmer is a 30-billion-parameter model optimized for always-on local agent workflows.” | reasoning: “Muse Glimmer supports different reasoning strengths to select the right balance between quality and speed.” | multilingual: “Muse Glimmer is trained on data from more than 100 languages.”."
       },
       "evidence": {
         "release_date": [
