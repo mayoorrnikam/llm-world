@@ -47,8 +47,40 @@ const ONLY = process.argv.find((a) => a.startsWith('--lab='))?.split('=')[1];
  * both narrower than the dataset and a second thing to keep current.
  */
 const EXTRA = [
+  // Documentation indexes this dataset does not yet cite.
   { lab: 'Google DeepMind', url: 'https://ai.google.dev/gemini-api/docs/models' },
-  { lab: 'Mistral AI', url: 'https://docs.mistral.ai/getting-started/models/models_overview/' },
+
+  // News and blog indexes, for the twelve labs whose documentation is not cited
+  // by any record — without these the scan reached six labs out of eighteen.
+  // Every URL below was fetched before being added; a channel that 403s is
+  // worse than no channel, because it reports silence as calm.
+  { lab: 'Mistral AI', url: 'https://mistral.ai/news/' },
+  { lab: 'Anthropic', url: 'https://www.anthropic.com/news' },
+  { lab: 'Meta AI', url: 'https://ai.meta.com/blog/' },
+  { lab: 'Alibaba Qwen', url: 'https://qwenlm.github.io/blog/' },
+  { lab: 'Amazon', url: 'https://aws.amazon.com/blogs/machine-learning/' },
+  { lab: 'Microsoft', url: 'https://azure.microsoft.com/en-us/blog/' },
+  { lab: 'Cohere', url: 'https://cohere.com/blog' },
+  { lab: 'Allen Institute for AI', url: 'https://allenai.org/blog' },
+  { lab: 'AI21 Labs', url: 'https://www.ai21.com/blog/' },
+  { lab: 'NVIDIA', url: 'https://blogs.nvidia.com/blog/category/generative-ai/' },
+  { lab: 'MiniMax', url: 'https://www.minimax.io/news' },
+  { lab: 'Moonshot AI', url: 'https://moonshotai.github.io/' },
+];
+
+/**
+ * Hosts that refuse an automated request, kept so a gap is visible.
+ *
+ * openai.com returns 403 to every path tried, investor.nvidia.com the same,
+ * and z.ai serves an empty body. Their releases have to be noticed some other
+ * way, and the report says so rather than letting silence read as calm.
+ * OpenAI is covered by its developer documentation instead; NVIDIA by
+ * blogs.nvidia.com; Zhipu by nothing yet.
+ */
+const BLOCKED = [
+  { lab: 'OpenAI', url: 'https://openai.com/news/', covered: 'developer documentation' },
+  { lab: 'NVIDIA', url: 'https://investor.nvidia.com/news/', covered: 'blogs.nvidia.com' },
+  { lab: 'Zhipu AI', url: 'https://z.ai/blog', covered: null },
 ];
 
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
@@ -150,18 +182,19 @@ function channels() {
     out.push({
       lab,
       url,
-      models: new RegExp(`\\b${stem}(?:[-.][a-z]+){0,2}[-.][\\d][\\d.]*(?:-[a-z]+)*\\b`, 'gi'),
+      models: new RegExp(`\\b${stem}(?:[-. ][a-z]+){0,2}[-. ][\\d][\\d.]*(?:-[a-z]+)*\\b`, 'gi'),
       post: () => url,
     });
   }
 
   for (const x of EXTRA) {
-    if (out.some((c) => c.lab === x.lab)) continue;
+    // A lab can have both a docs index and a news index; both are worth reading.
+    if (out.some((c) => c.url === x.url)) continue;
     const ids = data.releases.filter((r) => r.company === x.lab).map((r) => r.id);
     const stem = /^[a-z]+/.exec(ids[0] ?? '')?.[0];
     if (!stem) continue;
     out.push({ lab: x.lab, url: x.url,
-      models: new RegExp(`\\b${stem}(?:[-.][a-z]+){0,2}[-.][\\d][\\d.]*(?:-[a-z]+)*\\b`, 'gi'), post: () => x.url });
+      models: new RegExp(`\\b${stem}(?:[-. ][a-z]+){0,2}[-. ][\\d][\\d.]*(?:-[a-z]+)*\\b`, 'gi'), post: () => x.url });
   }
   return out;
 }
@@ -223,6 +256,14 @@ for (const f of findings) {
   for (const m of f.fresh) console.log(`- \`${m}\` — start from ${f.post(m)}`);
   if (ALL && !f.fresh.length) console.log(`- all ${f.seen.length} already tracked`);
   console.log();
+}
+
+if (BLOCKED.length && !ONLY) {
+  console.log(`### Hosts that refuse an automated request\n`);
+  for (const b of BLOCKED) {
+    console.log(`- **${b.lab}** — ${b.url}${b.covered ? ` (covered instead by ${b.covered})` : ' — **no channel yet**'}`);
+  }
+  console.log(`\nSilence from these is not evidence of a quiet week.\n`);
 }
 
 if (unreachable.length) {

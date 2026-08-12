@@ -5,11 +5,16 @@
     "gemini25flashimage",
     "gemini25flashnativeaudio",
     "gemini25flashpreviewtts",
+    "gemini31",
     "gemini31flashimage",
     "gemini31flashliteimage",
     "gemini31flashlive",
     "gemini31flashtts",
     "gptrealtime21",
-    "grok46"
+    "grok46",
+    "minimaxmusic30",
+    "minimaxspeech28",
+    "mistralmedium35",
+    "mistralocr4"
   ]
 }
