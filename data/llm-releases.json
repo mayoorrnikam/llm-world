@@ -1487,7 +1487,7 @@
       "tags": [
         "flagship"
       ],
-      "note": "Zhipu's flagship series launched with GPT-4-class capabilities and a one-million-token context variant.",
+      "note": "Zhipu's flagship of the GLM-4 series, served through its API.",
       "events": [
         {
           "type": "announcement",
@@ -1529,21 +1529,125 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the official repository and the technical paper. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\""
+      }
+    },
+    {
+      "id": "glm-4-air",
+      "model": "GLM-4-Air",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
       },
-      "undisclosed": [
-        "parameter_count"
+      "modalities": null,
+      "capabilities": [
+        "multilingual"
       ],
-      "evidence": {
-        "context_window": [
-          {
-            "value": 128000,
-            "sources": [
-              "glm-4-s1",
-              "glm-4-s2"
-            ]
-          }
-        ]
+      "tags": [],
+      "note": "The cost-efficient tier of the GLM-4 series, served through the API alongside the flagship.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2024-01-16",
+          "sources": [
+            "glm-4-s1",
+            "glm-4-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-4-s1",
+          "url": "https://github.com/zai-org/GLM-4",
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250729052117/https://github.com/zai-org/GLM-4",
+          "retrieved": "2025-07-29"
+        },
+        {
+          "id": "glm-4-s2",
+          "url": "https://arxiv.org/abs/2406.12793",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20240619020423/https://arxiv.org/abs/2406.12793",
+          "retrieved": "2024-06-19"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75,
+        "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\""
+      }
+    },
+    {
+      "id": "glm-4-9b",
+      "model": "GLM-4-9B",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "multilingual"
+      ],
+      "tags": [],
+      "note": "The open-weights member of the GLM-4 series, released with the ChatGLM technical report.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2024-01-16",
+          "sources": [
+            "glm-4-s1",
+            "glm-4-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 128000,
+          "parameter_count": 9000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-4-s1",
+          "url": "https://github.com/zai-org/GLM-4",
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250729052117/https://github.com/zai-org/GLM-4",
+          "retrieved": "2025-07-29"
+        },
+        {
+          "id": "glm-4-s2",
+          "url": "https://arxiv.org/abs/2406.12793",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20240619020423/https://arxiv.org/abs/2406.12793",
+          "retrieved": "2024-06-19"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75,
+        "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\""
       }
     },
     {
@@ -9300,6 +9404,11 @@
       "from": "models/mistral-3",
       "to": "families/mistral",
       "reason": "The \"Mistral 3\" record described a family. It was split into Mistral Large 3 and the three Ministral 3 sizes."
+    },
+    {
+      "from": "models/glm-4",
+      "to": "families/glm",
+      "reason": "The \"GLM-4\" record described a family and was split into the models that shipped under it."
     }
   ]
 }

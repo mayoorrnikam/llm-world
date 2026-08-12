@@ -77,6 +77,11 @@ const parts = spec.into.map((p) => {
     modalities: 'modalities' in p ? p.modalities : original.modalities,
     capabilities: p.capabilities ?? original.capabilities,
     tags: p.tags ?? original.tags,
+    // Access has to be overridable, not inherited. A family record carries one
+    // access model, and the split is often exactly where they diverge: GLM-4
+    // and GLM-4-Air are served through an API while GLM-4-9B ships weights.
+    // Inheriting would have published an open-weights model as proprietary.
+    access: p.access ? { ...original.access, ...p.access } : original.access,
     specifications: Object.keys(language).length ? { language } : {},
     // Provenance is rewritten, not inherited: the old reason described the old
     // record's evidence, and these are new claims.
