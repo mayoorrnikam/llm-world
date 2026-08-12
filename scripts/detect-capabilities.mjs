@@ -75,7 +75,7 @@ const CAPABILITIES = [
     'thinks? (?:before|through)', 'think (?:before|longer|harder)',
     'step[- ]by[- ]step (?:reasoning|thinking)',
   ].map((p) => `\\b${p}\\b`).join('|'), 'i')],
-  ['coding', /\bcode\s+(?:generation|completion|assistant|intelligence)\b|\bcoding\b/i],
+  ['coding', /\bcode\s+(?:generation|completion|assistant|intelligence)\b|\bcoding\b|\bSWE-bench\b|\bHumanEval\b|\bLiveCodeBench\b|\bwrite (?:and debug )?code\b|\bcode benchmarks?\b/i],
   ['multilingual', /\bmultilingual\b|\b\d+\s+(?:more\s+)?languages\b|\bmany\s+languages\b/i],
   ['tool_use', /\btool\s+use\b|\buse\s+(?:external\s+)?tools?\b|\bcall\s+tools?\b|\buses\s+tools?\b/i],
   ['function_calling', /\bfunction\s+call(?:ing)?\b|\bfunction-call\b/i],
@@ -85,12 +85,16 @@ const CAPABILITIES = [
   // bare /agents?/ matching a docs nav heading ("Agentic Usage") and a
   // benchmark category list, so the bare noun goes and the phrases stay.
   ['agentic', /\bagentic\b|\bautonomous\s+agents?\b|\bagent(?:ic)?\s+(?:workflows?|tasks?|capabilit\w+|use cases?)\b|\bdesigned for (?:intelligent )?agents?\b|\bmulti[- ]step tool use\b/i],
-  ['vision', /\bvision[- ]language\b|\bvisual\s+(?:reasoning|understanding|question\s+answering|QA)\b|\bimage\s+understanding\b|\bimage\s+input\b|\btakes?\s+(?:input\s+)?images\b|\bcomputer\s+vision\b|\bimage\s+recognition\b/i],
-  ['audio', /\baudio\s+(?:input|understanding|transcription|content)\b|\bspeech\s+(?:recognition|input)\b|\bprocess(?:ing)?\s+audio\b/i],
+  // Widened to the forms labs actually use, found by reviewing every capability
+  // that was claimed but could not be located. The claims were fine; these
+  // patterns were not. GPT-4's own abstract reads "accepting image and text
+  // inputs, emitting text outputs" and matched nothing.
+  ['vision', /\bvision[- ]language\b|\bvisual\s+(?:reasoning|understanding|question\s+answering|QA|formats?)\b|\bimage\s+understanding\b|\bimage\s+input\b|\btakes?\s+(?:input\s+)?images\b|\bcomputer\s+vision\b|\bimage\s+recognition\b|\baccept(?:s|ing)?[^.]{0,40}\bimages?\b|\bimage\s+and\s+text\s+inputs?\b|\bvision\s+capabilit\w+|\bcombination of text[^.]{0,30}image|\bimages?,?\s+and\s+text\b|\bprocess[^.]{0,30}\b(?:photos|charts|diagrams)\b/i],
+  ['audio', /\baudio\s+(?:input|understanding|transcription|content)\b|\bspeech\s+(?:recognition|input)\b|\bprocess(?:ing)?\s+audio\b|\bimage,?\s+audio\s+and\s+video\s+understanding\b|\bcombination of text, audio\b|\bhours? of audio\b/i],
   ['speech_generation', /\btext[- ]to[- ]speech\b|\bspeech\s+(?:generation|synthesis|output)\b|\bspeak\s+aloud\b/i],
   ['image_generation', /\bimage\s+generation\b|\btext[- ]to[- ]image\b|\bimage\s+synthesis\b/i],
   ['video_generation', /\bvideo\s+generation\b|\btext[- ]to[- ]video\b/i],
-  ['video', /\bvideo\s+(?:input|understanding|analysis|content)\b|\bprocess(?:ing)?\s+video\b|\bvideo\s+frames?\b/i],
+  ['video', /\bvideo\s+(?:input|understanding|analysis|content)\b|\bprocess(?:ing)?\s+video\b|\bvideo\s+frames?\b|\bhours? of video\b|\b\d+\s*(?:minutes?|hours?) of video\b/i],
 ];
 
 /** Sentences that cannot be capability claims no matter what they contain. */
@@ -160,6 +164,21 @@ function gates(r) {
   return { broad: re(broad), narrow: re(narrow) };
 }
 
+/**
+ * The sibling patterns that are not this record's own name.
+ *
+ * SIBLING_LINES exists to stop a PaLM record being evidenced by Med-PaLM, but
+ * applied wholesale it rejects a record's own sentences: /\bGemini\b/ threw out
+ * every sentence about Gemini 1 Ultra, /\bNova (…|Reel|Canvas)\b/ threw out
+ * Nova Reel's, and /\bCodex\b/ threw out GPT-5.3-Codex's. Twenty records could
+ * not be evidenced from sources that describe them plainly, because the guard
+ * against siblings does not know which model it is guarding.
+ */
+function siblingsFor(r) {
+  const name = `${r.model} ${r.id}`;
+  return SIBLING_LINES.filter((p) => !p.test(name));
+}
+
 async function examine(r) {
   const archived = r.sources.filter((s) => s.archived_url && s.authority === 'primary');
   const texts = [];
@@ -181,6 +200,7 @@ async function examine(r) {
   // Sentence-scoped scan. Capability words in a page header or sidebar are
   // navigation, not a claim about the model.
   const { broad, narrow } = gates(r);
+  const siblings = siblingsFor(r);
   const found = new Map();
 
   for (const t of texts) {
@@ -190,7 +210,7 @@ async function examine(r) {
       if (!s || s.length > 400) continue;
       if (NOT_A_CLAIM.some((p) => p.test(s))) continue;
       if (FUTURE.some((p) => p.test(s))) continue;
-      if (SIBLING_LINES.some((p) => p.test(s))) continue;
+      if (siblings.some((p) => p.test(s))) continue;
       if (!broad.test(s)) continue; // not about this model, family or lab
       for (const [cap, re] of CAPABILITIES) {
         const m = s.match(re);
@@ -248,6 +268,7 @@ async function backfill(r) {
   if (!texts.length) { unreadable.push(r.id); return; }
 
   const { broad, narrow } = gates(r);
+  const siblings = siblingsFor(r);
   const found = new Map();
 
   for (const t of texts) {
@@ -257,7 +278,7 @@ async function backfill(r) {
       if (!x || x.length > 400) continue;
       if (NOT_A_CLAIM.some((p) => p.test(x))) continue;
       if (FUTURE.some((p) => p.test(x))) continue;
-      if (SIBLING_LINES.some((p) => p.test(x))) continue;
+      if (siblings.some((p) => p.test(x))) continue;
       if (!broad.test(x)) continue;
       for (const [cap, re] of CAPABILITIES) {
         if (!r.capabilities.includes(cap) || found.has(cap)) continue;

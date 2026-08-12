@@ -543,7 +543,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (March 14, 2023) and context window (8,192) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (March 14, 2023) and context window (8,192) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: vision: “GPT-4 is a large multimodal model (accepting image and text inputs, emitting text outputs) that, while less capable than humans in many real-world scenarios, exhibits hum”."
       },
       "undisclosed": [
         "parameter_count"
@@ -1111,7 +1111,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Ultra — our largest and most capable model for highly complex tasks.\""
+        "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Ultra — our largest and most capable model for highly complex tasks.\" Capabilities evidenced from the primary sources: audio: “From natural image, audio and video understanding to mathematical reasoning, Gemini Ultra’s performance exceeds current state-of-the-art results on 30 of the 32 widely-us” | vision: “This highlights Gemini Ultra's n ati v e m ultim oda lit y and eludes t o its m ore co mpl ex rea so ning a biliti es acro ss interl ea v ed sequ en ces o f image and tex”."
       },
       "evidence": {
         "release_date": [
@@ -1204,7 +1204,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Pro — our best model for scaling across a wide range of tasks. The 32,768-token context is carried from the former family record; the announcement does not state per-model context windows, so it is recorded here only and will show as untraceable until a source states it.\""
+        "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Pro — our best model for scaling across a wide range of tasks. The 32,768-token context is carried from the former family record; the announcement does not state per-model context windows, so it is recorded here only and will show as untraceable until a source states it.\" Capabilities evidenced from the primary sources: audio: “From natural image, audio and video understanding to mathematical reasoning, Gemini Ultra’s performance exceeds current state-of-the-art results on 30 of the 32 widely-us” | vision: “This highlights Gemini Ultra's n ati v e m ultim oda lit y and eludes t o its m ore co mpl ex rea so ning a biliti es acro ss interl ea v ed sequ en ces o f image and tex”."
       },
       "evidence": {
         "release_date": [
@@ -1297,7 +1297,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Nano, our most efficient model for on-device tasks, via AICore, a new system capability available in Android 14, starting on Pixel 8 Pro devices.\""
+        "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Nano, our most efficient model for on-device tasks, via AICore, a new system capability available in Android 14, starting on Pixel 8 Pro devices.\" Capabilities evidenced from the primary sources: audio: “From natural image, audio and video understanding to mathematical reasoning, Gemini Ultra’s performance exceeds current state-of-the-art results on 30 of the 32 widely-us” | vision: “This highlights Gemini Ultra's n ati v e m ultim oda lit y and eludes t o its m ore co mpl ex rea so ning a biliti es acro ss interl ea v ed sequ en ces o f image and tex”."
       },
       "evidence": {
         "release_date": [
@@ -1940,7 +1940,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Mar 4, 2024) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: structured_output: “In addition, the Claude 3 models are better at producing popular structured output in formats like JSON—making it simpler to instruct Claude for use cases like natural la”."
+        "reason": "Every value this record asserts — date (Mar 4, 2024) and context window (200K) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: vision: “Strong vision capabilities The Claude 3 models have sophisticated vision capabilities on par with other leading models.” | structured_output: “In addition, the Claude 3 models are better at producing popular structured output in formats like JSON—making it simpler to instruct Claude for use cases like natural la”."
       },
       "undisclosed": [
         "parameter_count"
@@ -2526,9 +2526,7 @@
       },
       "capabilities": [
         "vision",
-        "audio",
-        "speech_generation",
-        "image_generation"
+        "audio"
       ],
       "tags": [
         "flagship"
@@ -2575,7 +2573,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (May 13, 2024) and context window (128,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: audio: “GPT-4o is especially better at vision and audio understanding compared to existing models.”."
+        "reason": "Every value this record asserts — date (May 13, 2024) and context window (128,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: vision: “GPT-4o (“o” for “omni”) is a step towards much more natural human-computer interaction—it accepts as input any combination of text, audio, and image and generates any com” | audio: “GPT-4o (“o” for “omni”) is a step towards much more natural human-computer interaction—it accepts as input any combination of text, audio, and image and generates any com”."
       },
       "undisclosed": [
         "parameter_count"
@@ -3600,7 +3598,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Lite – A very low-cost multimodal model that is lightning fast for processing image, video, and text inputs to generate text output.\" Capabilities evidenced from the primary sources: video: “You can build on Amazon Nova to analyze complex documents and videos, understand charts and diagrams, generate engaging video content, and build sophisticated AI agents, ”."
+        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Lite – A very low-cost multimodal model that is lightning fast for processing image, video, and text inputs to generate text output.\" Capabilities evidenced from the primary sources: video: “You can build on Amazon Nova to analyze complex documents and videos, understand charts and diagrams, generate engaging video content, and build sophisticated AI agents, ” | vision: “Whether you’re developing document processing applications that need to process images and text, creating marketing content at scale, or building AI assistants that can u”."
       },
       "undisclosed": [
         "context_window",
@@ -3685,7 +3683,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Pro is capable of processing up to 300K input tokens and sets new standards in multimodal intelligence and agentic workflows.\" Capabilities evidenced from the primary sources: agentic: ““Our new Amazon Nova models are intended to help with these challenges for internal and external builders, and provide compelling intelligence and content generation whil” | video: “You can build on Amazon Nova to analyze complex documents and videos, understand charts and diagrams, generate engaging video content, and build sophisticated AI agents, ”."
+        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Pro is capable of processing up to 300K input tokens and sets new standards in multimodal intelligence and agentic workflows.\" Capabilities evidenced from the primary sources: agentic: ““Our new Amazon Nova models are intended to help with these challenges for internal and external builders, and provide compelling intelligence and content generation whil” | vision: “Amazon Nova Reel transforms a single image input into a brief video with the prompt: dolly forward .” | video: “Read more Video understanding To put the video understanding capabilities of Amazon Nova Pro to the test, we asked the model to review and describe a 12-second silent vid”."
       },
       "undisclosed": [
         "parameter_count"
@@ -3768,7 +3766,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Canvas – A state-of-the-art image generation model producing studio-quality images with precise control over style and content, including rich editing features such as inpainting, outpainting, and background removal.\""
+        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Canvas – A state-of-the-art image generation model producing studio-quality images with precise control over style and content, including rich editing features such as inpainting, outpainting, and background removal.\" Capabilities evidenced from the primary sources: image_generation: “Amazon Nova Canvas , a state-of-the-art image generation model.”."
       },
       "evidence": {
         "release_date": [
@@ -3840,7 +3838,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Reel – A state-of-the-art video generation model. With Amazon Nova Reel, you can produce short videos through text prompts and images.\""
+        "reason": "Split from the former single \"Nova\" family record. Every value is quoted from an archived AWS announcement: \"Amazon Nova Reel – A state-of-the-art video generation model. With Amazon Nova Reel, you can produce short videos through text prompts and images.\" Capabilities evidenced from the primary sources: video_generation: “Amazon Nova Reel , a state-of-the-art video generation model.”."
       },
       "evidence": {
         "release_date": [
@@ -3921,7 +3919,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Dec 11, 2024) and context window (1,048,576) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Inputs Audio, images, video, and text Output Text\"."
+        "reason": "Every value this record asserts — date (Dec 11, 2024) and context window (1,048,576) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Inputs Audio, images, video, and text Output Text\". Capabilities evidenced from the primary sources: agentic: “0: our new AI model for the agentic era Dec 11, 2024 · [[read-time]] min read Share Twitter Facebook LinkedIn Mail Copy link Sundar Pichai CEO of Google and Alphabet Demi”."
       },
       "undisclosed": [
         "parameter_count"
@@ -4786,7 +4784,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Mar 25, 2025) and context window (1 million) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Inputs Audio, images, video, text, and PDF Output Text\"."
+        "reason": "Every value this record asserts — date (Mar 25, 2025) and context window (1 million) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Inputs Audio, images, video, text, and PDF Output Text\". Capabilities evidenced from the primary sources: reasoning: “Building on this, we recently introduced our first thinking model, Gemini 2.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -6131,7 +6129,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Nov 18, 2025) and context window (1 million) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities read from the launch announcement, which states: “built from the start to seamlessly synthesize information about any topic across multiple modalities, including text, images, video, audio and code.” Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Every value this record asserts — date (Nov 18, 2025) and context window (1 million) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities read from the launch announcement, which states: “built from the start to seamlessly synthesize information about any topic across multiple modalities, including text, images, video, audio and code.” Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: coding: “Gemini 3 Pro outperforms previous models in reasoning, multimodality, and coding benchmarks.” | agentic: “Gemini 2 laid the foundation for agentic capabilities and pushed the frontiers on reasoning and thinking , helping with more complex tasks and ideas, leading to Gemini 2.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -9299,8 +9297,7 @@
         ]
       },
       "capabilities": [
-        "coding",
-        "tool_use"
+        "coding"
       ],
       "tags": [],
       "note": "A 2.8-trillion-parameter open MoE, the largest open-weight model ever published.",
@@ -9418,7 +9415,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (Jul 21, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Inputs Text, Image, Video, Audio, and PDF Output Text\"."
+        "reason": "Every value this record asserts — date (Jul 21, 2026) and context window (1M) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Inputs Text, Image, Video, Audio, and PDF Output Text\". Capabilities evidenced from the primary sources: agentic: “5 Flash-Lite: Built to scale agentic workflows Beyond Flash, we’re also releasing Gemini 3.”."
       },
       "undisclosed": [
         "parameter_count"
@@ -9808,7 +9805,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on meta-models/Muse-Glimmer-30B. Capabilities evidenced from the primary sources: agentic: “Muse Glimmer is a 30-billion-parameter model optimized for always-on local agent workflows.” | reasoning: “Muse Glimmer supports different reasoning strengths to select the right balance between quality and speed.” | multilingual: “Muse Glimmer is trained on data from more than 100 languages.”."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on meta-models/Muse-Glimmer-30B. Capabilities evidenced from the primary sources: agentic: “Muse Glimmer is a 30-billion-parameter model optimized for always-on local agent workflows.” | coding: “Muse Glimmer achieves strong success rates on full-task benchmarks including DeepSearch QA, MCP-Atlas, 𝛕-Bench and SWE-Bench, which measure its ability to work within sc” | reasoning: “Muse Glimmer supports different reasoning strengths to select the right balance between quality and speed.” | multilingual: “Muse Glimmer is trained on data from more than 100 languages.”."
       },
       "evidence": {
         "release_date": [
