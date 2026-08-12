@@ -2604,6 +2604,10 @@ code, kbd {
 .ask-glass,
 .ask-clear {
   position: absolute;
+  /* Both were positioned on one axis only, so they fell to their static
+     position vertically and sat above the text baseline. */
+  top: 50%;
+  translate: 0 -50%;
   display: grid;
   place-items: center;
   width: 24px;
@@ -2638,6 +2642,8 @@ code, kbd {
 
 .ask-key {
   position: absolute;
+  top: 50%;
+  translate: 0 -50%;
   right: 14px;
   padding: 2px 7px;
   font-family: var(--mono);
@@ -2708,6 +2714,27 @@ code, kbd {
   .ask-glass svg, .ask-clear svg { width: 19px; height: 19px; }
   .ask-examples { flex-wrap: wrap; overflow: visible; }
 }
+
+/* The result list scrolls in place, so the field and the answer stay put.
+   Only the LIST scrolls — the answer and the count sit above it and remain
+   visible, because scrolling away the thing that answered the question to
+   reach the evidence for it is backwards.
+
+   The page keeps its own scroll: overscroll chaining is left at its default
+   so reaching the end of the list continues down the page rather than
+   trapping, which is what makes nested scrolling unpleasant on a phone. */
+.ask-list {
+  max-height: clamp(300px, 56vh, 720px);
+  overflow-y: auto;
+  /* Room for the scrollbar so rows do not shift when it appears. */
+  padding-right: 4px;
+  /* A soft edge signals there is more below without adding furniture. */
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 26px), transparent 100%);
+}
+.ask-list:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+/* A short list needs neither the cap nor the fade. */
+.ask-list.is-short { max-height: none; overflow: visible; mask-image: none; }
 
 .ask-count { margin: 30px 0 4px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
 .ask-none { margin: 8px 0 0; font-size: 13.5px; color: var(--muted); max-width: 58ch; }

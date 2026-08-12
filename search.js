@@ -215,6 +215,14 @@ function render(q) {
 
   const list = document.createElement('ol');
   list.className = 'ask-list';
+  // Below about a screenful there is nothing to scroll, and a capped box with
+  // a fade over four results looks like a bug.
+  if (found.length <= 6) list.classList.add('is-short');
+  // A scrollable region has to be reachable by keyboard.
+  else { list.tabIndex = 0; list.setAttribute('role', 'group'); list.setAttribute('aria-label', 'Results'); }
+  // A new question starts at the top of its answers. Without this the browser
+  // keeps the previous scroll offset and the first result renders half cut off.
+  requestAnimationFrame(() => { list.scrollTop = 0; });
 
   for (const r of found.slice(0, 40)) {
     const li = document.createElement('li');
@@ -267,6 +275,29 @@ function render(q) {
  * Every figure is computed from the records — no hand-written trivia that would
  * drift out of date the next time a release lands.
  */
+/**
+ * The footer's "Browse by year" column, which was empty on this page alone.
+ *
+ * scripts/build.mjs fills it when it generates a page and app.js has it on the
+ * timeline, but the landing page is neither — it is a hand-written file served
+ * as-is, so the column rendered as a heading with nothing under it. The links
+ * are worth having and the heading is already there; it just needed the one
+ * renderer that was missing.
+ */
+function renderYearLinks() {
+  const host = el('foot-yearlinks');
+  if (!host || !records.length) return;
+  const years = [...new Set(records.map((r) => Number(String(canonicalDate(r)).slice(0, 4))))]
+    .filter((y) => Number.isFinite(y))
+    .sort((a, b) => b - a);
+  host.replaceChildren(...years.map((y) => {
+    const a = document.createElement('a');
+    a.href = `timeline/${y}/`;
+    a.textContent = String(y);
+    return a;
+  }));
+}
+
 function renderPulse() {
   const host = el('ask-pulse');
   if (!host || !records.length) return;
@@ -291,7 +322,27 @@ function renderPulse() {
     .sort((a, b) => a - b);
   const median = gaps.length ? gaps[Math.floor(gaps.length / 2)] : null;
 
-  const cards = [
+  // A pool rather than a fixed five, shuffled on load.
+  //
+  // Rotating on a timer was the other option and it is worse here: this sits
+  // directly under a field someone is about to type into, and text that moves
+  // while you are reading it is a distraction, not life. Shuffling per visit
+  // makes the page feel current without anything shifting under the cursor.
+  const labs = new Set(records.map((r) => r.company));
+  const archived = records.flatMap((r) => r.sources ?? []);
+  const withArchive = archived.filter((s) => s.archived_url).length;
+  const verified = records.filter((r) => r.provenance?.status === 'verified').length;
+  const priced = records.filter((r) => r.pricing?.length);
+  const cheapest = priced.length
+    ? priced.reduce((a, r) => (r.pricing[0].rates.input < a.pricing[0].rates.input ? r : a))
+    : null;
+  const biggest = records.reduce((a, r) =>
+    (parameterCount(r) ?? 0) > (parameterCount(a) ?? 0) ? r : a, records[0]);
+  const busiest = [...labs].map((c) => ({ c, n: records.filter((r) => r.company === c).length }))
+    .sort((a, b) => b.n - a.n)[0];
+  const undisclosedParams = records.filter((r) => r.undisclosed?.includes('parameter_count')).length;
+
+  const pool = [
     { k: 'Latest release', v: latest.model,
       s: `${latest.company} · ${fmtDate(canonicalDate(latest))}`,
       href: `models/${encodeURIComponent(latest.id)}/` },
@@ -303,7 +354,29 @@ function renderPulse() {
       s: `${open} of ${records.length} releases`, href: 'analytics/' },
     { k: 'Typical gap between releases', v: median != null ? `${median} days` : '—',
       s: 'median across all tracked labs', href: 'analytics/' },
-  ];
+    { k: 'Sources archived', v: `${Math.round(withArchive / Math.max(1, archived.length) * 100)}%`,
+      s: `${withArchive} of ${archived.length} citations are dated snapshots`, href: 'methodology/' },
+    { k: 'Records fully verified', v: String(verified),
+      s: `of ${records.length} — the rest say why not`, href: 'data-quality/' },
+    { k: 'Labs tracked', v: String(labs.size),
+      s: `${busiest.c} has the most, at ${busiest.n}`, href: 'companies/' },
+    { k: 'Largest disclosed model', v: biggest && parameterCount(biggest)
+      ? `${Math.round(parameterCount(biggest) / 1e9)}B` : '—',
+      s: biggest?.model ?? '', href: biggest ? `models/${encodeURIComponent(biggest.id)}/` : 'models/' },
+    { k: 'Labs that publish no parameter count', v: String(undisclosedParams),
+      s: 'recorded as undisclosed, not guessed', href: 'data-quality/' },
+    cheapest && { k: 'Cheapest published price', v: `$${cheapest.pricing[0].rates.input}`,
+      s: `${cheapest.model} · per million input tokens`, href: 'analytics/pricing/' },
+  ].filter(Boolean);
+
+  // Keep the latest release first — it is the one thing a returning visitor
+  // came to check — and shuffle the rest.
+  const rest = pool.slice(1);
+  for (let i = rest.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [rest[i], rest[j]] = [rest[j], rest[i]];
+  }
+  const cards = [pool[0], ...rest.slice(0, 4)];
 
   const wrap = document.createElement('div');
   wrap.className = 'pulse-grid';
@@ -394,6 +467,7 @@ el('ask-examples').addEventListener('click', (e) => {
 initTheme();
 await load();
 renderPulse();
+renderYearLinks();
 const initial = new URLSearchParams(location.search).get('q');
 if (initial) submit(initial, { push: false });
 // After the initial query lands, so a shared link arrives with its clear
