@@ -1,0 +1,15 @@
+{
+  "note": "Docs identifiers already surfaced by scripts/scan-labs.mjs. Presence here means \"reported once\", never \"tracked\" — the dataset is the record of what is tracked.",
+  "candidates": [
+    "claudehaiku4",
+    "gemini25flashimage",
+    "gemini25flashnativeaudio",
+    "gemini25flashpreviewtts",
+    "gemini31flashimage",
+    "gemini31flashliteimage",
+    "gemini31flashlive",
+    "gemini31flashtts",
+    "gptrealtime21",
+    "grok46"
+  ]
+}

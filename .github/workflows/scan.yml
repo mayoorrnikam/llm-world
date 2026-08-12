@@ -1,0 +1,91 @@
+name: Scan lab documentation
+
+# Twice daily, because a model documented this morning should not wait a week.
+#
+# It watches each lab's MODEL DOCUMENTATION, which is the channel that works for
+# labs the other two discovery scripts cannot see: check-freshness reads Hugging
+# Face and is blind to anyone shipping no weights, check-feeds reads RSS and xAI
+# publishes none. Grok 4.6 and Grok 4.20 were both live and documented while
+# this dataset's newest xAI record was Grok 4.5, and neither script could have
+# noticed.
+#
+# It reports; it never adds. A docs listing is a discovery source (METHODOLOGY
+# §5) — the record that follows still has to cite the lab's own announcement
+# and carry an archived snapshot.
+
+on:
+  schedule:
+    - cron: '17 6 * * *'    # 06:17 UTC
+    - cron: '17 18 * * *'   # 18:17 UTC
+  workflow_dispatch:
+    inputs:
+      backlog:
+        description: List everything untracked, not just what is new
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Scan
+        id: scan
+        run: |
+          set -o pipefail
+          FLAGS="--record"
+          if [ "${{ inputs.backlog }}" = "true" ]; then FLAGS="--backlog"; fi
+          node scripts/scan-labs.mjs $FLAGS > scan.md
+          cat scan.md
+          # "newly listed" only appears when there is something to act on.
+          if grep -q 'newly listed by a lab' scan.md; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # The seen list is state, not generated output: it records what has been
+      # reported so the next scan can report only the delta. Committing it is
+      # what stops a twice-daily job repeating the same backlog 730 times.
+      - name: Record what was surfaced
+        if: steps.scan.outputs.found == 'true' && inputs.backlog != true
+        run: |
+          git config user.name "llm-world bot"
+          git config user.email "noreply@github.com"
+          git add data/seen-candidates.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record docs identifiers surfaced by the scan
+
+          Reported once, so the next scan shows only what is new. Presence here
+          means surfaced, never tracked — the dataset is the record of what is
+          tracked."
+            git push
+          fi
+
+      - name: Open or update the tracking issue
+        if: steps.scan.outputs.found == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          TITLE="Documented by a lab, missing here"
+          BODY="$(cat scan.md)"
+          EXISTING=$(gh issue list --repo "$REPO" --state open \
+                       --label discovery --limit 1 --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "$REPO" --body "$BODY"
+            echo "commented on #$EXISTING"
+          else
+            gh label create discovery --repo "$REPO" \
+              --description "A lab documents a model this dataset lacks" --color 1D76DB 2>/dev/null || true
+            gh issue create --repo "$REPO" --title "$TITLE" --label discovery --body "$BODY"
+          fi
