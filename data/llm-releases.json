@@ -1550,6 +1550,17 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\" Capabilities evidenced from the primary sources: multilingual: “7k GLM-4 series: Open Multilingual Multimodal Chat LMs | 开源多语言多模态对话模型 License Apache-2.”."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "glm-4-s1",
+              "glm-4-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1609,7 +1620,8 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\" Capabilities evidenced from the primary sources: multilingual: “7k GLM-4 series: Open Multilingual Multimodal Chat LMs | 开源多语言多模态对话模型 License Apache-2.”."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "glm-4-9b",
@@ -1668,6 +1680,26 @@
         "status": "partially_verified",
         "confidence": 75,
         "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\" Capabilities evidenced from the primary sources: multilingual: “7k GLM-4 series: Open Multilingual Multimodal Chat LMs | 开源多语言多模态对话模型 License Apache-2.”."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "glm-4-s1",
+              "glm-4-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 9000000000,
+            "sources": [
+              "glm-4-s1",
+              "glm-4-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -9014,15 +9046,23 @@
       ]
     },
     {
-      "id": "gpt-5-6",
-      "model": "GPT-5.6",
+      "id": "gpt-5-6-sol",
+      "model": "GPT-5.6 Sol",
       "company": "OpenAI",
       "family": "GPT",
       "classification": {
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "reasoning",
         "agentic"
@@ -9030,14 +9070,14 @@
       "tags": [
         "flagship"
       ],
-      "note": "A three-variant family — Luna, Terra and Sol — after a limited partner preview in June.",
+      "note": "The frontier variant of the GPT-5.6 series.",
       "events": [
         {
           "type": "announcement",
           "date": "2026-07-09",
           "sources": [
-            "gpt-5-6-s1",
-            "gpt-5-6-s2"
+            "gpt-5-6-sol-s1",
+            "gpt-5-6-sol-s2"
           ]
         }
       ],
@@ -9053,7 +9093,7 @@
       },
       "sources": [
         {
-          "id": "gpt-5-6-s1",
+          "id": "gpt-5-6-sol-s1",
           "url": "https://en.wikipedia.org/wiki/GPT-5.6",
           "type": "news",
           "authority": "secondary",
@@ -9061,18 +9101,184 @@
           "retrieved": "2026-07-09"
         },
         {
-          "id": "gpt-5-6-s2",
-          "url": "https://developers.openai.com/api/docs/models/gpt-5.6",
+          "id": "gpt-5-6-sol-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260711182342/https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+          "retrieved": "2026-07-11"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Split from the former \"gpt-5-6\" record, which was named for the family while holding one variant's figures. Evidence: \"GPT-5.6 Sol is the frontier model in the GPT-5.6 series.\" Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1050000,
+            "sources": [
+              "gpt-5-6-sol-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gpt-5-6-luna",
+      "model": "GPT-5.6 Luna",
+      "company": "OpenAI",
+      "family": "GPT",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "reasoning",
+        "agentic"
+      ],
+      "tags": [],
+      "note": "The default variant of the GPT-5.6 series.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-09",
+          "sources": [
+            "gpt-5-6-luna-s1",
+            "gpt-5-6-luna-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1050000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-5-6-luna-s1",
+          "url": "https://en.wikipedia.org/wiki/GPT-5.6",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": "https://web.archive.org/web/20260709154055/https://en.wikipedia.org/wiki/GPT-5.6",
+          "retrieved": "2026-07-09"
+        },
+        {
+          "id": "gpt-5-6-luna-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260713134652/https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+          "retrieved": "2026-07-13"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Split from the former \"gpt-5-6\" record, which was named for the family while holding one variant's figures. Evidence: \"GPT-5.6 Luna Default — its own model page in OpenAI's API documentation, with its own specifications.\" Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1050000,
+            "sources": [
+              "gpt-5-6-luna-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gpt-5-6-terra",
+      "model": "GPT-5.6 Terra",
+      "company": "OpenAI",
+      "family": "GPT",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "reasoning",
+        "agentic"
+      ],
+      "tags": [],
+      "note": "The third variant of the GPT-5.6 series.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-09",
+          "sources": [
+            "gpt-5-6-terra-s1",
+            "gpt-5-6-terra-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1050000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-5-6-terra-s1",
+          "url": "https://en.wikipedia.org/wiki/GPT-5.6",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": "https://web.archive.org/web/20260709154055/https://en.wikipedia.org/wiki/GPT-5.6",
+          "retrieved": "2026-07-09"
+        },
+        {
+          "id": "gpt-5-6-terra-s2",
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260713173511/https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+          "retrieved": "2026-07-13"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Split from the former \"gpt-5-6\" record, which was named for the family while holding one variant's figures. Evidence: \"GPT-5.6 Terra Model — its own model page in OpenAI's API documentation, with its own specifications.\" Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1050000,
+            "sources": [
+              "gpt-5-6-terra-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -9659,6 +9865,11 @@
       "from": "models/glm-4",
       "to": "families/glm",
       "reason": "The \"GLM-4\" record described a family and was split into the models that shipped under it."
+    },
+    {
+      "from": "models/gpt-5-6",
+      "to": "families/gpt",
+      "reason": "The \"GPT-5.6\" record described a family and was split into the models that shipped under it."
     }
   ]
 }
