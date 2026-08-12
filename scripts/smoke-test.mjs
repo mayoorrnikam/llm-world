@@ -221,6 +221,28 @@ function stripNonCode(src) {
  * So this looks for shared helpers used in a file and asserts each is imported.
  * Cheap, and it fails on exactly the mistake that was made.
  */
+/**
+ * Node built-ins these scripts actually use.
+ *
+ * The lib/ half of this guard was written after an import line was deleted and
+ * nothing noticed. The same hole existed one layer down and stayed open until
+ * check-feeds.mjs — a script with no import statement at all — grew a call to
+ * readFileSync. `node --check` passed, because an undefined free identifier is
+ * a runtime error, not a syntax error, and the script only fails at the moment
+ * it is used.
+ *
+ * Only names taken as free identifiers count. `data.join(',')` is a method on
+ * an array and has nothing to do with node:path.
+ */
+const NODE_BUILTINS = [
+  'readFileSync', 'writeFileSync', 'appendFileSync', 'existsSync', 'mkdirSync',
+  'readdirSync', 'statSync', 'unlinkSync', 'rmSync', 'copyFileSync',
+  'join', 'dirname', 'resolve', 'basename', 'extname', 'relative',
+  'execFileSync', 'execSync', 'spawnSync',
+  'createHash', 'inflateSync', 'gunzipSync', 'deflateSync',
+  'fileURLToPath', 'pathToFileURL',
+];
+
 function checkLibImports() {
   const exported = new Set(
     [...readFileSync('lib/record.mjs', 'utf8').matchAll(/export (?:function|const) (\w+)/g)].map((m) => m[1])
@@ -230,20 +252,27 @@ function checkLibImports() {
 
   for (const file of readdirSync('scripts').filter((f) => f.endsWith('.mjs')).map((f) => `scripts/${f}`)) {
     const src = readFileSync(file, 'utf8');
+    // Every named import, from anywhere — lib/ and node: alike.
     const imported = new Set(
-      [...src.matchAll(/import\s*\{([^}]*)\}\s*from\s*'[^']*lib\/[^']*'/g)]
-        .flatMap((m) => m[1].split(',').map((x) => x.trim().split(/\s+as\s+/)[0]).filter(Boolean)),
+      [...src.matchAll(/import\s*\{([^}]*)\}\s*from\s*'[^']+'/g)]
+        .flatMap((m) => m[1].split(',').map((x) => x.trim().split(/\s+as\s+/)[1]
+          ?? x.trim().split(/\s+as\s+/)[0]).filter(Boolean)),
     );
     const code = stripNonCode(src);
 
-    for (const name of exported) {
-      if (imported.has(name)) continue;
+    const check = (name, where) => {
+      if (imported.has(name)) return;
       // Declared locally under the same name is fine.
-      if (new RegExp(`(?:function|const|let|var)\\s+${name}\\b`).test(code)) continue;
-      if (new RegExp(`\\b${name}\\s*\\(`).test(code) || new RegExp(`\\b${name}\\b`).test(code)) {
-        fail(file, `uses "${name}" from lib/ but never imports it — this parses, and fails at runtime`);
+      if (new RegExp(`(?:function|const|let|var)\\s+${name}\\b`).test(code)) return;
+      // A property access — data.join(), r.filter(...) — is not the free name.
+      if (new RegExp(`\\.\\s*${name}\\b`).test(code) && !new RegExp(`(?:^|[^.\\w])${name}\\s*\\(`, 'm').test(code)) return;
+      if (new RegExp(`(?:^|[^.\\w])${name}\\s*\\(`, 'm').test(code)) {
+        fail(file, `uses "${name}" ${where} but never imports it — this parses, and fails at runtime`);
       }
-    }
+    };
+
+    for (const name of exported) check(name, 'from lib/');
+    for (const name of NODE_BUILTINS) check(name, `from node:`);
   }
 }
 
