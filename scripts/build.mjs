@@ -2041,6 +2041,53 @@ they can be, once a second reading exists.</p>
   });
 }
 
+/**
+ * Labs against capabilities — restricted, because the full grid is mostly holes.
+ *
+ * All 17 labs by all 13 capabilities is 221 cells of which 145 are empty, and
+ * eight labs have fewer than three researched records. An empty cell means "not
+ * evidenced", but at that density it reads as "this lab does not do vision" —
+ * which is absence rendered as measurement, the exact error the reasoning audit
+ * removed from the dataset.
+ *
+ * So: labs with at least five researched records, capabilities evidenced on at
+ * least three, and the denominator printed in every row. What is left is a
+ * comparison the data can carry.
+ */
+function labCapabilityMatrix() {
+  const known = releases.filter((r) => r.modalities);
+
+  const byLab = new Map();
+  for (const r of known) (byLab.get(r.company) ?? byLab.set(r.company, []).get(r.company)).push(r);
+  const labs = [...byLab.entries()].filter(([, l]) => l.length >= 5).sort((a, b) => b[1].length - a[1].length);
+
+  const totals = new Map();
+  for (const r of known) for (const c of r.capabilities ?? []) totals.set(c, (totals.get(c) ?? 0) + 1);
+  const caps = [...totals.entries()].filter(([, n]) => n >= 3).sort((a, b) => b[1] - a[1]).map(([c]) => c);
+
+  if (!labs.length || !caps.length) return '';
+
+  const hidden = byLab.size - labs.length;
+  const head = caps.map((c) => `<th scope="col">${esc(tagLabel(c))}</th>`).join('');
+  const rows = labs.map(([lab, list]) => `<tr>
+<th scope="row"><a href="../companies/${companySlug(lab)}/">${esc(lab)}</a>
+<span class="pr-lab">${list.length} researched</span></th>
+${caps.map((c) => {
+    const n = list.filter((r) => (r.capabilities ?? []).includes(c)).length;
+    const pct = Math.round(n / list.length * 100);
+    return `<td class="cap-cell"${n ? ` style="--fill:${(0.1 + pct / 100 * 0.9).toFixed(2)}"` : ''}>
+<span class="cap-n">${n}</span><span class="cap-of">/${list.length}</span></td>`;
+  }).join('')}
+</tr>`).join('');
+
+  return `<div class="table-scroll"><table class="cap-matrix">
+<thead><tr><th scope="col">Lab</th>${head}</tr></thead>
+<tbody>${rows}</tbody></table></div>
+${hidden ? `<p class="chart-note">${hidden} lab${hidden === 1 ? '' : 's'} with fewer than five
+researched releases ${hidden === 1 ? 'is' : 'are'} left out — at one or two records a row
+says more about how much has been researched than about the lab.</p>` : ''}`;
+}
+
 function analyticsPage(byCompany, byYear) {
   const years = [...byYear.keys()].sort((a, b) => a - b);
   const modalityYears = modalityEvolution();
@@ -2148,6 +2195,14 @@ small in early years, and a capability absent from a record means it has not bee
 evidenced, never that the model lacks it — see
 <a href="../data-quality/">data quality</a>.</p>
 ${capabilityMatrix(capEvo)}
+
+<h2>Which labs evidence which capabilities</h2>
+<p class="chart-note">Counted over each lab's researched releases, not all of them, and
+the denominator is in every cell. A zero means the capability has not been evidenced on
+that lab's records — never that its models lack it. Labs with fewer than five researched
+releases are excluded, because at that size a row measures our research rather than the
+lab.</p>
+${labCapabilityMatrix()}
 
 <p class="doc-cta">
   <a href="../compare/">Compare models side by side →</a><br>
