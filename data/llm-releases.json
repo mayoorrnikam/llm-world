@@ -1020,7 +1020,27 @@
             ]
           }
         ]
-      }
+      },
+      "benchmarks": [
+        {
+          "name": "HumanEval",
+          "score": 63.2,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2023-11-04",
+          "sources": [
+            "grok-1-s1"
+          ]
+        },
+        {
+          "name": "MMLU",
+          "score": 73,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2023-11-04",
+          "sources": [
+            "grok-1-s1"
+          ]
+        }
+      ]
     },
     {
       "id": "gemini-1-ultra",
@@ -3135,7 +3155,8 @@
         ]
       },
       "capabilities": [
-        "reasoning"
+        "reasoning",
+        "vision"
       ],
       "tags": [],
       "note": "OpenAI's first reasoning model that thinks before answering, launching the reasoning-model era.",
@@ -3216,6 +3237,17 @@
             "o1-s2"
           ],
           "observed_on": "2026-03-20"
+        }
+      ],
+      "benchmarks": [
+        {
+          "name": "MMMU",
+          "score": 78.2,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2024-09-12",
+          "sources": [
+            "o1-s1"
+          ]
         }
       ]
     },
@@ -4158,7 +4190,8 @@
       },
       "capabilities": [
         "reasoning",
-        "vision"
+        "vision",
+        "coding"
       ],
       "tags": [
         "flagship"
@@ -4219,7 +4252,27 @@
             ]
           }
         ]
-      }
+      },
+      "benchmarks": [
+        {
+          "name": "LiveCodeBench",
+          "score": 79.4,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-02-17",
+          "sources": [
+            "grok-3-s1"
+          ]
+        },
+        {
+          "name": "AIME",
+          "score": 95.8,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-02-17",
+          "sources": [
+            "grok-3-s1"
+          ]
+        }
+      ]
     },
     {
       "id": "claude-3-7-sonnet",
@@ -5030,7 +5083,8 @@
       },
       "capabilities": [
         "agentic",
-        "vision"
+        "vision",
+        "coding"
       ],
       "tags": [
         "flagship"
@@ -5107,7 +5161,27 @@
             ]
           }
         ]
-      }
+      },
+      "benchmarks": [
+        {
+          "name": "SWE-bench",
+          "score": 72.5,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-05-22",
+          "sources": [
+            "claude-4-opus-s1"
+          ]
+        },
+        {
+          "name": "Terminal-Bench",
+          "score": 43.2,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-05-22",
+          "sources": [
+            "claude-4-opus-s1"
+          ]
+        }
+      ]
     },
     {
       "id": "kimi-k2",
@@ -5544,7 +5618,8 @@
       },
       "capabilities": [
         "vision",
-        "reasoning"
+        "reasoning",
+        "coding"
       ],
       "tags": [
         "flagship"
@@ -5627,6 +5702,44 @@
             "gpt-5-s2"
           ],
           "observed_on": "2026-02-10"
+        }
+      ],
+      "benchmarks": [
+        {
+          "name": "SWE-bench Verified",
+          "score": 74.9,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-08-07",
+          "sources": [
+            "gpt-5-s1"
+          ]
+        },
+        {
+          "name": "Aider Polyglot",
+          "score": 88,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-08-07",
+          "sources": [
+            "gpt-5-s1"
+          ]
+        },
+        {
+          "name": "MMMU",
+          "score": 84.2,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-08-07",
+          "sources": [
+            "gpt-5-s1"
+          ]
+        },
+        {
+          "name": "AIME",
+          "score": 94.6,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-08-07",
+          "sources": [
+            "gpt-5-s1"
+          ]
         }
       ]
     },
@@ -5936,7 +6049,10 @@
         ]
       },
       "capabilities": [
-        "vision"
+        "vision",
+        "coding",
+        "agentic",
+        "reasoning"
       ],
       "tags": [
         "flagship"
@@ -6006,7 +6122,54 @@
             ]
           }
         ]
-      }
+      },
+      "benchmarks": [
+        {
+          "name": "SWE-bench Verified",
+          "score": 76.2,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-11-18",
+          "sources": [
+            "gemini-3-pro-s1"
+          ]
+        },
+        {
+          "name": "Terminal-Bench",
+          "score": 54.2,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-11-18",
+          "sources": [
+            "gemini-3-pro-s1"
+          ]
+        },
+        {
+          "name": "MMMU",
+          "score": 81,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-11-18",
+          "sources": [
+            "gemini-3-pro-s1"
+          ]
+        },
+        {
+          "name": "GPQA Diamond",
+          "score": 91.9,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-11-18",
+          "sources": [
+            "gemini-3-pro-s1"
+          ]
+        },
+        {
+          "name": "Humanity’s Last Exam",
+          "score": 37.5,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2025-11-18",
+          "sources": [
+            "gemini-3-pro-s1"
+          ]
+        }
+      ]
     },
     {
       "id": "olmo-3-7b",
@@ -7400,7 +7563,18 @@
             ]
           }
         ]
-      }
+      },
+      "benchmarks": [
+        {
+          "name": "Humanity’s Last Exam",
+          "score": 58,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-04-08",
+          "sources": [
+            "muse-spark-s1"
+          ]
+        }
+      ]
     },
     {
       "id": "qwen-3-6-35b-a3b",
@@ -7699,7 +7873,8 @@
         ]
       },
       "capabilities": [
-        "reasoning"
+        "reasoning",
+        "agentic"
       ],
       "tags": [
         "flagship"
@@ -7791,6 +7966,17 @@
             "gpt-5-5-s3"
           ],
           "observed_on": "2026-04-24"
+        }
+      ],
+      "benchmarks": [
+        {
+          "name": "OSWorld",
+          "score": 78.7,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-04-23",
+          "sources": [
+            "gpt-5-5-s1"
+          ]
         }
       ]
     },
@@ -8181,7 +8367,8 @@
       "capabilities": [
         "reasoning",
         "agentic",
-        "vision"
+        "vision",
+        "coding"
       ],
       "tags": [],
       "note": "Sits between Gemma 4 E4B and the 26B MoE, and is Google's first mid-sized Gemma with native audio input. Drops the separate multimodal encoders: vision goes through a lightweight embedding module and raw audio is projected straight into the text token space, so both flow into the LLM backbone directly.",
@@ -8245,7 +8432,54 @@
             ]
           }
         ]
-      }
+      },
+      "benchmarks": [
+        {
+          "name": "LiveCodeBench",
+          "score": 80,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-06-03",
+          "sources": [
+            "gemma-4-12b-s2"
+          ]
+        },
+        {
+          "name": "MMMU",
+          "score": 76.9,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-06-03",
+          "sources": [
+            "gemma-4-12b-s2"
+          ]
+        },
+        {
+          "name": "GPQA Diamond",
+          "score": 84.3,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-06-03",
+          "sources": [
+            "gemma-4-12b-s2"
+          ]
+        },
+        {
+          "name": "AIME",
+          "score": 89.2,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-06-03",
+          "sources": [
+            "gemma-4-12b-s2"
+          ]
+        },
+        {
+          "name": "MMLU",
+          "score": 85.2,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-06-03",
+          "sources": [
+            "gemma-4-12b-s2"
+          ]
+        }
+      ]
     },
     {
       "id": "nemotron-3-ultra",
@@ -8926,7 +9160,8 @@
         ]
       },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "coding"
       ],
       "tags": [
         "small-efficient"
@@ -8997,7 +9232,18 @@
             ]
           }
         ]
-      }
+      },
+      "benchmarks": [
+        {
+          "name": "SWE-bench",
+          "score": 54.2,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-07-21",
+          "sources": [
+            "gemini-3-6-flash-s1"
+          ]
+        }
+      ]
     },
     {
       "id": "claude-opus-5",

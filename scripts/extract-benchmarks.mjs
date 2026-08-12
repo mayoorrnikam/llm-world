@@ -89,16 +89,32 @@ const BENCHMARKS = [
 function scoreNear(text, re) {
   const m = re.exec(text);
   if (!m) return null;
-  // A percent sign within 40 characters, and nothing else. The first version
-  // allowed a bare number in a 90-character window and produced "GPT-4 MMLU 14"
-  // and "Gemini Ultra MMLU 57" — both wildly wrong, picked from a citation year
-  // or a shot count sitting near the name. A benchmark name appears in prose far
-  // more often than it appears with its score, so anything looser invents data.
-  const win = text.slice(m.index + m[0].length, m.index + m[0].length + 40);
-  const s = /^[^.]{0,34}?(\d{1,3}(?:\.\d+)?)\s*%/.exec(win);
-  if (!s) return null;
-  const v = Number(s[1]);
-  return v > 0 && v <= 100 ? v : null;
+  const ok = (n) => (n > 0 && n <= 100 ? n : null);
+
+  // BACKWARD FIRST, because ordinary prose puts the score before the name:
+  // "74.9% on SWE-bench Verified, 88% on Aider Polyglot".
+  //
+  // Looking only forward reads that sentence off by one — it pairs SWE-bench
+  // with Aider's 88, Aider with MMMU's 84.2, and MMMU with a health score of
+  // 46.2. It did exactly that on eleven records, and every number would have
+  // been published as the lab's own claim. Grok-1's "HumanEval 73" was MMLU's
+  // score by the same slip.
+  // The connector is what separates the two layouts, and it has to be present:
+  // prose reads "74.9% ON SWE-bench Verified", while a benchmark TABLE reads
+  // "20.8% LiveCodeBench v6 80" — where the 20.8 belongs to the row above and
+  // 80 is this benchmark's score. Accepting a bare percentage before the name
+  // reads every table backwards.
+  const before = text.slice(Math.max(0, m.index - 30), m.index);
+  const b = /(\d{1,3}(?:\.\d+)?)\s*%\s+(?:on|for|in)\s+(?:the\s+)?$/.exec(before);
+  if (b) return ok(Number(b[1]));
+
+  // FORWARD SECOND, for the table and spec-sheet form: "SWE-bench Verified 74.9%".
+  // The window stops at any punctuation that could put the number with a
+  // different benchmark — a comma is exactly what separates them in the list
+  // above, so crossing one is how the off-by-one happened.
+  const after = text.slice(m.index + m[0].length, m.index + m[0].length + 40);
+  const a = /^[^.,;:)\n]{0,20}?(\d{1,3}(?:\.\d+)?)\s*%/.exec(after);
+  return a ? ok(Number(a[1])) : null;
 }
 
 const pending = data.releases.filter((r) => !r.benchmarks);
@@ -144,9 +160,14 @@ for (const r of pending.slice(0, LIMIT)) {
 
   // The capability a reported benchmark evidences. Additive only — nothing is
   // ever removed, because an unlisted capability means "not evidenced".
+  // Two benchmarks can evidence the same capability — GPT-5 reports both
+  // SWE-bench and Aider Polyglot, and both mean `coding`. Without the gained
+  // check the report reads "+coding +coding" and a --write run pushes the token
+  // twice, so dedupe against what has already been gained this record, not just
+  // against what the record started with.
   const gained = [];
   for (const row of rows) {
-    if (row._cap && !r.capabilities.includes(row._cap)) {
+    if (row._cap && !r.capabilities.includes(row._cap) && !gained.includes(row._cap)) {
       gained.push(row._cap);
       if (WRITE) r.capabilities.push(row._cap);
     }
