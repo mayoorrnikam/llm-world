@@ -3231,7 +3231,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (September 12, 2024) and context window (200,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\". Capabilities evidenced from the primary sources: reasoning: “o1 thinks before it answers—it can produce a long internal chain of thought before responding to the user.”."
+        "reason": "Every value this record asserts — date (September 12, 2024) and context window (200,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\". Capabilities evidenced from the primary sources: vision: “Modalities Text Input and output Image Input only Audio Not supported Video Not supported” | reasoning: “Reasoning token support”."
       },
       "undisclosed": [
         "parameter_count"
@@ -4483,7 +4483,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (February 27, 2025) and context window (128,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it."
+        "reason": "Every value this record asserts — date (February 27, 2025) and context window (128,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Capabilities evidenced from the primary sources: vision: “Modalities Text Input and output Image Input only Audio Not supported Video Not supported”."
       },
       "undisclosed": [
         "parameter_count"
@@ -6028,7 +6028,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\". Capabilities evidenced from the primary sources: reasoning: “Reasoning token support”."
       },
       "undisclosed": [
         "parameter_count"
@@ -6874,7 +6874,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2025-12-11) and context window (400,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
+        "reason": "Every value this record asserts — date (2025-12-11) and context window (400,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\". Capabilities evidenced from the primary sources: reasoning: “Reasoning token support”."
       },
       "undisclosed": [
         "parameter_count"
@@ -7070,7 +7070,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from OpenAI's own model documentation, which states: “Modalities Text Input and output Image Input only Audio Not supported Video Not supported.” The snapshot cited was moved from 2026-02-16 to 2026-02-26: the earlier capture caught only the page shell before its content rendered, so it evidenced nothing it was cited for."
+        "reason": "Cited to official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from OpenAI's own model documentation, which states: “Modalities Text Input and output Image Input only Audio Not supported Video Not supported.” The snapshot cited was moved from 2026-02-16 to 2026-02-26: the earlier capture caught only the page shell before its content rendered, so it evidenced nothing it was cited for. Capabilities evidenced from the primary sources: vision: “Modalities Text Input and output Image Input only Audio Not supported Video Not supported”."
       },
       "undisclosed": [
         "parameter_count"
@@ -7336,7 +7336,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2026-03-05) and context window (1,050,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
+        "reason": "Every value this record asserts — date (2026-03-05) and context window (1,050,000) — was found in an archived primary source, checked 2026-08-10. Parameter count is not recorded, so nothing is claimed about it. Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\". Capabilities evidenced from the primary sources: vision: “Modalities Text Input and output Image Input only Audio Not supported Video Not supported” | reasoning: “Reasoning token support”."
       },
       "undisclosed": [
         "parameter_count"
@@ -9110,7 +9110,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Split from the former \"gpt-5-6\" record, which was named for the family while holding one variant's figures. Evidence: \"GPT-5.6 Sol is the frontier model in the GPT-5.6 series.\" Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
+        "reason": "Split from the former \"gpt-5-6\" record, which was named for the family while holding one variant's figures. Evidence: \"GPT-5.6 Sol is the frontier model in the GPT-5.6 series.\" Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\". Capabilities evidenced from the primary sources: reasoning: “Reasoning token support”."
       },
       "evidence": {
         "context_window": [
@@ -9188,7 +9188,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Split from the former \"gpt-5-6\" record, which was named for the family while holding one variant's figures. Evidence: \"GPT-5.6 Luna Default — its own model page in OpenAI's API documentation, with its own specifications.\" Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
+        "reason": "Split from the former \"gpt-5-6\" record, which was named for the family while holding one variant's figures. Evidence: \"GPT-5.6 Luna Default — its own model page in OpenAI's API documentation, with its own specifications.\" Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\". Capabilities evidenced from the primary sources: reasoning: “Reasoning token support”."
       },
       "evidence": {
         "context_window": [
@@ -9266,7 +9266,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Split from the former \"gpt-5-6\" record, which was named for the family while holding one variant's figures. Evidence: \"GPT-5.6 Terra Model — its own model page in OpenAI's API documentation, with its own specifications.\" Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\"."
+        "reason": "Split from the former \"gpt-5-6\" record, which was named for the family while holding one variant's figures. Evidence: \"GPT-5.6 Terra Model — its own model page in OpenAI's API documentation, with its own specifications.\" Modalities taken from the documentation's own declaration: \"Input Text, image Output Text\". Capabilities evidenced from the primary sources: reasoning: “Reasoning token support”."
       },
       "evidence": {
         "context_window": [

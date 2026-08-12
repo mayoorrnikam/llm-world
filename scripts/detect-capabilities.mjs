@@ -174,6 +174,60 @@ function gates(r) {
  * not be evidenced from sources that describe them plainly, because the guard
  * against siblings does not know which model it is guarding.
  */
+/**
+ * Capabilities from a specification TABLE rather than prose.
+ *
+ * OpenAI's model documentation states the facts in a grid — "Modalities Text
+ * Input and output Image Input only Audio Not supported", "Function calling
+ * Supported", "Reasoning token support" — and the prose reader could not see
+ * any of it. A table has no sentence boundaries, so the whole page arrives as
+ * one run of text and every candidate exceeds the 400-character sentence cap.
+ * Sixteen records carried capabilities their own cited documentation stated
+ * plainly and this script could not locate.
+ *
+ * A table is also better evidence than prose. "Image  Input only" is the lab
+ * asserting a fact in a fixed vocabulary, with nothing to misread — the same
+ * reason hf-metadata trusts pipeline_tag over an announcement's adjectives.
+ */
+const TABLE_STATE = '(Input and output|Input only|Output only|Not supported)';
+
+function specTable(text) {
+  const found = new Map();
+  const add = (cap, quote) => { if (!found.has(cap)) found.set(cap, quote.replace(/\s+/g, ' ').trim()); };
+
+  // The modality grid. Each row is a modality and its direction.
+  const block = new RegExp(`Modalities\\s+((?:(?:Text|Image|Audio|Video)\\s+${TABLE_STATE}\\s*){2,})`).exec(text);
+  if (block) {
+    const quote = `Modalities ${block[1]}`.slice(0, 170);
+    for (const m of block[1].matchAll(new RegExp(`(Text|Image|Audio|Video)\\s+${TABLE_STATE}`, 'g'))) {
+      const [, kind, state] = m;
+      const takesInput = state.startsWith('Input');
+      const emits = state === 'Input and output' || state === 'Output only';
+      if (kind === 'Image' && takesInput) add('vision', quote);
+      if (kind === 'Image' && emits) add('image_generation', quote);
+      if (kind === 'Audio' && takesInput) add('audio', quote);
+      if (kind === 'Audio' && emits) add('speech_generation', quote);
+      if (kind === 'Video' && takesInput) add('video', quote);
+      if (kind === 'Video' && emits) add('video_generation', quote);
+    }
+  }
+
+  // Feature rows. "Supported" is the assertion; "Not supported" is equally
+  // explicit and must never be read as one.
+  for (const [cap, label] of [['function_calling', 'Function calling'],
+    ['structured_output', 'Structured outputs']]) {
+    const m = new RegExp(`${label}\\s+Supported\\b`).exec(text);
+    if (m) add(cap, m[0]);
+  }
+
+  // The spec line for a model that bills reasoning tokens separately, which is
+  // inference-time compute stated as a product fact.
+  const reasoning = /Reasoning token support/.exec(text);
+  if (reasoning) add('reasoning', 'Reasoning token support');
+
+  return found;
+}
+
 function siblingsFor(r) {
   const name = `${r.model} ${r.id}`;
   return SIBLING_LINES.filter((p) => !p.test(name));
@@ -270,6 +324,14 @@ async function backfill(r) {
   const { broad, narrow } = gates(r);
   const siblings = siblingsFor(r);
   const found = new Map();
+
+  // A specification table beats prose, so it is read first. Its page is this
+  // record's own documentation, so no sibling gate applies.
+  for (const t of texts) {
+    for (const [cap, quote] of specTable(t)) {
+      if (r.capabilities.includes(cap) && !found.has(cap)) found.set(cap, { quote, own: true });
+    }
+  }
 
   for (const t of texts) {
     const cleaned = t.replace(/<[^>]*>/g, ' ');
