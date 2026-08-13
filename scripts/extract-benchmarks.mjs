@@ -37,6 +37,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 // One reader for every script: HTML, PDF and client-rendered pages, cached on
 // disk so a full pass fetches each source once rather than five times.
 import { sourceText, FAILED } from '../lib/source-text.mjs';
+import { rowValues, cellScore, columnFor } from '../lib/benchmark-table.mjs';
 
 const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
@@ -73,7 +74,33 @@ const BENCHMARKS = [
   { name: 'Humanity’s Last Exam', re: /Humanity['’]s\s+Last\s+Exam/i, cap: 'reasoning' },
   { name: 'MGSM', re: /\bMGSM\b/, cap: 'multilingual' },
   { name: 'MMLU-Pro', re: /MMLU-?Pro/i, cap: null },
+  { name: 'MMLU-Redux', re: /MMLU-?Redux/i, cap: null },
   { name: 'MMLU', re: /\bMMLU\b(?!-)/, cap: null },
+
+  /**
+   * Names that only ever appear inside a comparison table.
+   *
+   * The list above was built from prose, where a lab names two or three
+   * benchmarks in a sentence. A table names fifteen, and the table reader needs
+   * at least three rows before it will trust a column count — so a list tuned
+   * for prose falls under the threshold and the whole table is skipped. Muse
+   * Glimmer's model card was doing exactly that: four readable rows, none of
+   * them a name this list knew.
+   */
+  { name: 'SWE-bench Pro', re: /SWE-?bench\s+Pro/i, cap: 'coding' },
+  { name: 'DeepSWE', re: /DeepSWE(?:\s*\d+(?:\.\d+)?)?/i, cap: 'coding' },
+  { name: 'FrontierSWE', re: /FrontierSWE/i, cap: 'coding' },
+  { name: 'MLS-Bench-Lite', re: /MLS-Bench-Lite/i, cap: null },
+  { name: 'SciCode', re: /SciCode/i, cap: 'coding' },
+  { name: 'OSWorld-Verified', re: /OSWorld-Verified/i, cap: 'agentic' },
+  { name: 'ScreenSpot Pro', re: /ScreenSpot\s*Pro/i, cap: 'vision' },
+  { name: 'AndroidWorld', re: /AndroidWorld/i, cap: 'agentic' },
+  { name: 'WebArena-Verified', re: /WebArena-Verified/i, cap: 'agentic' },
+  { name: 'MathVision', re: /MathVision/i, cap: 'vision' },
+  { name: 'IFBench', re: /IFBench/i, cap: null },
+  { name: 'C-Eval', re: /\bC-Eval\b/i, cap: 'multilingual' },
+  { name: 'HealthBench', re: /HealthBench/i, cap: null },
+  { name: 'ZeroBench', re: /ZeroBench/i, cap: 'vision' },
 ];
 
 
@@ -117,6 +144,63 @@ function scoreNear(text, re) {
   return a ? ok(Number(a[1])) : null;
 }
 
+/**
+ * The model names this dataset knows, used to identify table columns by name.
+ *
+ * Headers abbreviate — Anthropic's "Claude Opus 4.8" prints as "Opus4.8" — so
+ * each name also contributes its tail, which is what a header usually keeps.
+ */
+const LEXICON = [...new Set(data.releases.flatMap((r) => {
+  const w = r.model.split(/\s+/);
+  return [r.model, w.slice(1).join(' '), w.slice(2).join(' ')];
+}))].filter((x) => x && x.length > 3);
+
+/**
+ * Scores read from a comparison table, keyed by benchmark name.
+ *
+ * See lib/benchmark-table.mjs for why the column is identified by name rather
+ * than by position. Everything here is conservative on purpose:
+ *
+ *   - A table is only trusted when at least three rows agree on a width. One
+ *     row proves nothing, and a stray match inside prose produces exactly one.
+ *   - Rows that disagree with that width are DROPPED, not realigned. This is
+ *     what handles a versioned name: `/Terminal-?Bench/` matches
+ *     "Terminal-Bench 2.1" and leaves "2.1" to be read as the first cell,
+ *     giving the row one column too many. Realigning it would be a guess about
+ *     which number is the version; dropping it costs one benchmark.
+ */
+function tableScores(text, model) {
+  const rows = [];
+  for (const b of BENCHMARKS) {
+    const re = new RegExp(b.re.source, b.re.flags.includes('g') ? b.re.flags : `${b.re.flags}g`);
+    for (const m of text.matchAll(re)) {
+      const { values } = rowValues(text, m.index + m[0].length);
+      if (values.length >= 2) rows.push({ b, at: m.index, values });
+    }
+  }
+  if (rows.length < 3) return new Map();
+
+  const tally = {};
+  for (const r of rows) tally[r.values.length] = (tally[r.values.length] ?? 0) + 1;
+  const [width, n] = Object.entries(tally)
+    .map(([w, c]) => [Number(w), c])
+    .sort((a, b) => b[1] - a[1])[0];
+  if (n < 3) return new Map();
+
+  const group = rows.filter((r) => r.values.length === width).sort((a, b) => a.at - b.at);
+  const header = text.slice(Math.max(0, group[0].at - 320), group[0].at);
+  const col = columnFor(header, model, width, LEXICON);
+  if (!col) return new Map();
+
+  const out = new Map();
+  for (const r of group) {
+    if (out.has(r.b.name)) continue;
+    const score = cellScore(r.values[col.index]);
+    if (score != null) out.set(r.b.name, { score, cap: r.b.cap, columns: col.columns });
+  }
+  return out;
+}
+
 const pending = data.releases.filter((r) => !r.benchmarks);
 console.log(`${pending.length} records without benchmarks · trying ${Math.min(pending.length, LIMIT)}\n`);
 
@@ -151,6 +235,25 @@ for (const r of pending.slice(0, LIMIT)) {
         reported_on: r.events[0].date,
         sources: [c.id],
         _cap: b.cap,
+      });
+    }
+
+    // Prose first, table second. The prose reader is the proven one and its
+    // matches are unambiguous; the table reader exists because modern
+    // announcements state scores nowhere else.
+    for (const [name, hit] of tableScores(c.text, r.model)) {
+      if (seen.has(name)) continue;
+      seen.add(name);
+      rows.push({
+        name,
+        score: hit.score,
+        evaluation_type: 'vendor_reported',
+        reported_on: r.events[0].date,
+        sources: [c.id],
+        // The table this was read from, so a reader can check the column was
+        // the right one rather than take the parser's word for it.
+        compared_against: hit.columns,
+        _cap: hit.cap,
       });
     }
   }

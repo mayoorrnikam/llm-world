@@ -9064,7 +9064,9 @@
         "subtype": "llm"
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "coding"
+      ],
       "tags": [],
       "note": "A dense 128B open-weight model aimed at long-horizon coding and productivity work, released under a modified MIT licence.",
       "events": [
@@ -9118,7 +9120,18 @@
             ]
           }
         ]
-      }
+      },
+      "benchmarks": [
+        {
+          "name": "SWE-bench Verified",
+          "score": 77.6,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-05-22",
+          "sources": [
+            "mistral-medium-3-5-s1"
+          ]
+        }
+      ]
     },
     {
       "id": "claude-opus-4-8",
@@ -11208,7 +11221,107 @@
             ]
           }
         ]
-      }
+      },
+      "benchmarks": [
+        {
+          "name": "OSWorld-Verified",
+          "score": 65.9,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-08-10",
+          "sources": [
+            "muse-glimmer-s2"
+          ],
+          "compared_against": [
+            "Muse Glimmer",
+            "Gemma",
+            "Qwen3.6-27B"
+          ]
+        },
+        {
+          "name": "SWE-bench Pro",
+          "score": 51.2,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-08-10",
+          "sources": [
+            "muse-glimmer-s2"
+          ],
+          "compared_against": [
+            "Muse Glimmer",
+            "Gemma",
+            "Qwen3.6-27B"
+          ]
+        },
+        {
+          "name": "SWE-bench Verified",
+          "score": 76,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-08-10",
+          "sources": [
+            "muse-glimmer-s2"
+          ],
+          "compared_against": [
+            "Muse Glimmer",
+            "Gemma",
+            "Qwen3.6-27B"
+          ]
+        },
+        {
+          "name": "SciCode",
+          "score": 43.6,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-08-10",
+          "sources": [
+            "muse-glimmer-s2"
+          ],
+          "compared_against": [
+            "Muse Glimmer",
+            "Gemma",
+            "Qwen3.6-27B"
+          ]
+        },
+        {
+          "name": "ScreenSpot Pro",
+          "score": 75.4,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-08-10",
+          "sources": [
+            "muse-glimmer-s2"
+          ],
+          "compared_against": [
+            "Muse Glimmer",
+            "Gemma",
+            "Qwen3.6-27B"
+          ]
+        },
+        {
+          "name": "IFBench",
+          "score": 77,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-08-10",
+          "sources": [
+            "muse-glimmer-s2"
+          ],
+          "compared_against": [
+            "Muse Glimmer",
+            "Gemma",
+            "Qwen3.6-27B"
+          ]
+        },
+        {
+          "name": "AIME",
+          "score": 94.7,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-08-10",
+          "sources": [
+            "muse-glimmer-s2"
+          ],
+          "compared_against": [
+            "Muse Glimmer",
+            "Gemma",
+            "Qwen3.6-27B"
+          ]
+        }
+      ]
     },
     {
       "id": "mai-image-2-6",
@@ -11528,7 +11641,18 @@
             ]
           }
         ]
-      }
+      },
+      "benchmarks": [
+        {
+          "name": "AIME",
+          "score": 97,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-08-12",
+          "sources": [
+            "mai-thinking-1-s1"
+          ]
+        }
+      ]
     }
   ],
   "redirects": [
