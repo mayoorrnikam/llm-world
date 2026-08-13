@@ -107,10 +107,51 @@ const toIso = (raw) => {
   return `${m[3]}-${String(mi + 1).padStart(2, '0')}-${m[2].padStart(2, '0')}`;
 };
 
-const date = flag('date') ?? stated('announcement date', [
-  /\b(\d{4}-\d{2}-\d{2})\b/,
-  /\b((?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.?\s+\d{1,2},?\s+20\d{2})\b/,
-], toIso)?.value ?? null;
+/**
+ * Dates on a model page that are NOT its release date.
+ *
+ * Caught by drafting Grok 4.6 from xAI's own documentation, which reads "The
+ * knowledge cut-off date of Grok 4.6 is February 1, 2026". The first date on
+ * the page was taken as the release date, and an automatically opened pull
+ * request would have proposed February for a model that shipped in August.
+ *
+ * These are stripped before any date is looked for, rather than filtered
+ * afterwards, because the surrounding words are the only thing distinguishing
+ * them — the dates themselves look identical.
+ */
+// The window must not stop at a full stop: "knowledge cut-off date of Grok 4.6
+// is February 1, 2026" contains one inside the model's own name, so a [^.]
+// bound ended the match before it ever reached the date it was meant to remove.
+const NOT_A_RELEASE_DATE = [
+  /knowledge cut[- ]?off[^\n]{0,70}/gi,
+  /training data[^\n]{0,70}/gi,
+  /cut[- ]?off date[^\n]{0,70}/gi,
+  /deprecat\w+[^\n]{0,70}/gi,
+  /retire\w*[^\n]{0,70}/gi,
+  /shutdown[^\n]{0,70}/gi,
+  // A page timestamp. xAI's model page ends "Last updated: August 12, 2026",
+  // which is when the DOCS changed — proposing it as a release date would date
+  // every model to whenever the draft happened to run.
+  /last updated[^\n]{0,70}/gi,
+  /last modified[^\n]{0,70}/gi,
+  /©[^\n]{0,40}/g,
+];
+
+const dateText = NOT_A_RELEASE_DATE.reduce((t, p) => t.replace(p, ' '), text);
+
+const date = flag('date') ?? (() => {
+  for (const p of [
+    // A date the page ties to shipping outranks a bare one.
+    /\b(?:released|announced|launched|available)\b[^.]{0,30}?((?:January|February|March|April|May|June|July|August|September|October|November|December)\.?\s+\d{1,2},?\s+20\d{2})/i,
+    /\b(\d{4}-\d{2}-\d{2})\b/,
+    /\b((?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.?\s+\d{1,2},?\s+20\d{2})\b/,
+  ]) {
+    const m = p.exec(dateText);
+    if (m) return toIso(m[1]);
+  }
+  gaps.push('announcement date');
+  return null;
+})();
 
 const openWeights = /\bopen[- ]weights?\b|\bweights? (?:are )?(?:available|released)\b|huggingface\.co/i.test(text);
 
@@ -134,6 +175,19 @@ else {
 /* ----------------------------------------------------------------- spec */
 
 const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+// A draft with no date is not a draft. Documentation pages routinely carry a
+// knowledge cutoff and a last-updated stamp and no release date at all, which
+// is exactly the shape that produced a February date for an August model and
+// then today's date for the same one. Rather than emit a spec with a hole, this
+// says what is missing and exits non-zero, so an automated caller opens no pull
+// request and asks for the announcement URL instead.
+if (!date && !JSON_ONLY) {
+  console.error(`\ncannot draft ${model ?? url}: no release date on this page.\n`
+    + 'Documentation pages state a knowledge cutoff and a last-updated stamp;\n'
+    + 'neither is a release date. Point this at the announcement instead.');
+  process.exit(3);
+}
 
 const spec = {
   company: company ?? 'UNKNOWN — fill this in',

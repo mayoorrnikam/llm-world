@@ -85,6 +85,19 @@ const BLOCKED = [
   { lab: 'Zhipu AI', url: 'https://z.ai/blog', covered: null },
 ];
 
+
+/**
+ * Where a lab publishes one page per model, with a derivable URL.
+ *
+ * Absence is deliberate. A lab without an entry here is reported and never
+ * drafted, because the only page we can reach for it lists many models at once
+ * — and a draft built from that would mix their figures with a straight face.
+ */
+const MODEL_URL = {
+  xAI: (id) => `https://docs.x.ai/docs/models/${id.replace(/[. ]/g, '-')}`,
+  OpenAI: (id) => `https://developers.openai.com/api/docs/models/${id.replace(/ /g, '-')}`,
+};
+
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
 
 /**
@@ -186,6 +199,11 @@ function channels() {
       url,
       models: new RegExp(`\\b${stem}(?:[-. ][a-z]+){0,2}[-. ][\\d][\\d.]*(?:-[a-z]+)*\\b`, 'gi'),
       post: () => url,
+      // A per-model page, where the lab has a predictable one. This is the only
+      // input safe to draft from: a docs INDEX names every model the lab
+      // serves, so extracting a context window from it would take whichever
+      // figure appeared first and attach another model's number to this record.
+      modelUrl: MODEL_URL[lab],
     });
   }
 
@@ -272,6 +290,16 @@ if (unreachable.length) {
   console.log(`### Channels that did not answer\n`);
   for (const c of unreachable) console.log(`- **${c.lab}** — ${c.url}`);
   console.log(`\nA channel that cannot be read is not a quiet week. These labs need checking by hand.\n`);
+}
+
+if (process.argv.includes('--json')) {
+  const rows = findings.flatMap((f) => f.fresh.map((id) => ({
+    lab: f.lab,
+    id,
+    // null means "report only" — see MODEL_URL.
+    url: f.modelUrl ? f.modelUrl(id) : null,
+  })));
+  console.log(JSON.stringify(rows, null, 2));
 }
 
 if (process.argv.includes('--record')) {
