@@ -289,6 +289,42 @@ function checkLibImports() {
  * explicit theme choice cannot fall back to a hue that was only half added.
  */
 /**
+ * Every empty placeholder on the landing page must have a renderer.
+ *
+ * index.html is hand-written and served as-is, while every other page is
+ * generated — so scripts/build.mjs fills the shared chrome at build time and
+ * app.js fills it on the timeline, and the landing page needs a THIRD renderer
+ * that nobody remembers to write. Three elements shipped empty this way: the
+ * footer's year links, the footer's data line reading "loading
+ * data/llm-releases.json…" forever, and the freshness the hero now shows.
+ *
+ * It cannot check the rendered page without a browser, but it does not need to.
+ * The invariant is static: an element that ships empty is a promise that
+ * something will fill it, and search.js is the only thing that can. If the id
+ * appears nowhere in search.js, nothing will.
+ */
+function checkLandingRenderers() {
+  const html = readFileSync('index.html', 'utf8');
+  const js = readFileSync('search.js', 'utf8');
+
+  // Element PAIRS cannot be matched with a regex, and trying let <main> swallow
+  // every id inside it — the first version of this saw three placeholders out
+  // of eight and passed. What follows an opening tag is enough: an element
+  // whose tag is immediately followed by its own close ships empty, and one
+  // holding "loading…" ships a promise.
+  for (const m of html.matchAll(/<(\w+)\b[^>]*\bid="([^"]+)"[^>]*>/g)) {
+    const [tag, name, id] = [m[1], m[0], m[2]];
+    const after = html.slice(m.index + name.length, m.index + name.length + 60);
+    const empty = new RegExp(`^\\s*</${tag}>`).test(after);
+    const loading = /^\s*loading\b/i.test(after.replace(/<[^>]*>/g, ''));
+    if (!empty && !loading) continue;
+    if (js.includes(id)) continue;
+    fail('index.html', `#${id} ships empty and search.js never references it — `
+      + 'nothing will fill it, and the page shows a blank where content belongs');
+  }
+}
+
+/**
  * The feed is not HTML, so the link crawler never opens it.
  *
  * That matters more than it sounds: a malformed feed still serves with a 200,
@@ -432,6 +468,7 @@ checkLibImports();
 checkWriteScripts();
 checkCompanyLogos();
 checkFeed();
+checkLandingRenderers();
 
 const shown = fails.slice(0, 25);
 for (const f of shown) console.error(`  FAIL  ${f}`);
