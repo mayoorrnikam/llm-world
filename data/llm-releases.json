@@ -9798,8 +9798,8 @@
           "url": "https://huggingface.co/meta-models/Muse-Glimmer-30B",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260810104818/https://huggingface.co/meta-models/Muse-Glimmer-30B",
+          "retrieved": "2026-08-10"
         }
       ],
       "provenance": {
@@ -9812,7 +9812,16 @@
           {
             "value": "2026-08-10",
             "sources": [
-              "muse-glimmer-s1"
+              "muse-glimmer-s1",
+              "muse-glimmer-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 131072,
+            "sources": [
+              "muse-glimmer-s2"
             ]
           }
         ],
@@ -9820,7 +9829,77 @@
           {
             "value": 30000000000,
             "sources": [
-              "muse-glimmer-s1"
+              "muse-glimmer-s1",
+              "muse-glimmer-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "grok-4-6",
+      "model": "Grok 4.6",
+      "company": "xAI",
+      "family": "Grok",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "Builds on Grok 4.5 with a focus on long-running agents and more ambitious interactive and visual work.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-12",
+          "sources": [
+            "grok-4-6-s1",
+            "grok-4-6-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "grok-4-6-s1",
+          "url": "https://x.ai/news/grok-4-6",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260812154457/https://x.ai/news/grok-4-6",
+          "retrieved": "2026-08-12"
+        },
+        {
+          "id": "grok-4-6-s2",
+          "url": "https://docs.x.ai/docs/models/grok-4-6",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and official documentation, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-12",
+            "sources": [
+              "grok-4-6-s1"
             ]
           }
         ]

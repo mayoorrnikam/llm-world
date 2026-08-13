@@ -139,7 +139,37 @@ const NOT_A_RELEASE_DATE = [
 
 const dateText = NOT_A_RELEASE_DATE.reduce((t, p) => t.replace(p, ' '), text);
 
-const date = flag('date') ?? (() => {
+/**
+ * schema.org datePublished, which is the most reliable date on a modern
+ * announcement and the one the text reader never sees.
+ *
+ * sourceText strips <script> before returning prose, so the JSON-LD block goes
+ * with it. That block is a machine-readable declaration by the lab — xAI's
+ * Grok 4.6 page carries "datePublished":"2026-08-12T00:00:00Z" — and it does
+ * not depend on the dateline being written in a format the patterns happen to
+ * know. The prose fallback below missed "Aug 12, 2026" in one of my own checks
+ * for exactly that reason.
+ */
+async function publishedDate(u) {
+  try {
+    const res = await fetch(u, {
+      redirect: 'follow',
+      signal: AbortSignal.timeout(20000),
+      headers: { 'user-agent': 'Mozilla/5.0 (compatible; llm-world draft)' },
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+    for (const m of html.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)) {
+      const found = /"datePublished"\s*:\s*"(\d{4}-\d{2}-\d{2})/.exec(m[1]);
+      if (found) return found[1];
+    }
+  } catch { /* a missing block is not a finding */ }
+  return null;
+}
+
+const structuredDate = await publishedDate(url);
+
+const date = flag('date') ?? structuredDate ?? (() => {
   for (const p of [
     // A date the page ties to shipping outranks a bare one.
     /\b(?:released|announced|launched|available)\b[^.]{0,30}?((?:January|February|March|April|May|June|July|August|September|October|November|December)\.?\s+\d{1,2},?\s+20\d{2})/i,
@@ -215,7 +245,8 @@ if (JSON_ONLY) {
     if (got) say(`  ${label.padEnd(16)} ${got.value}   “${got.quote}”`);
   }
   say(`  ${'open weights'.padEnd(16)} ${openWeights}`);
-  say(`  ${'date'.padEnd(16)} ${date ?? '—'}`);
+  say(`  ${'date'.padEnd(16)} ${date ?? '—'}${
+    date && structuredDate === date ? '   (schema.org datePublished)' : date ? '   (read from the page text)' : ''}`);
 
   say(`\n--- a person still has to settle ----------------------------`);
   for (const g of gaps) say(`  · ${g}`);
