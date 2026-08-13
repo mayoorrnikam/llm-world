@@ -1644,6 +1644,31 @@ code, kbd {
    current the data is deserves the whole sentence. */
 .hero-fresh { flex-basis: 100%; }
 
+/* The chart on the homepage ------------------------------------------------
+   Same module as the analytics study, so it inherits .cs-* and needs only its
+   own framing here. */
+.home-chart {
+  margin: 34px 0 0;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+.home-chart-lead {
+  margin: 0 0 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 68ch;
+}
+.home-chart .cs-figure { margin: 10px 0 4px; }
+
+/* Below about 560px the year marks collide and the dots crowd the axis. The
+   chart keeps its aspect ratio and scrolls rather than being squeezed into
+   something unreadable — a deliberate mobile treatment, not a squashed one. */
+@media (max-width: 560px) {
+  .home-chart .cs-figure { overflow-x: auto; }
+  .home-chart .cs-chart { min-width: 480px; }
+}
+
 /* Why the record is worth citing ------------------------------------------
    Six claims, each linking to the page that backs it. A trust section whose
    assertions cannot be checked is marketing, which is the one thing this

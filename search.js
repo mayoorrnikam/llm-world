@@ -14,6 +14,7 @@
    ========================================================================== */
 
 import { parse, run, answer } from './lib/query.mjs';
+import { contextFrontier, stepChartSvg, tokenLabel } from './lib/chart.mjs';
 import { canonicalDate, contextWindow, parameterCount, displayTags, logoSlug, monogram } from './lib/record.mjs';
 
 const DATA_URL = new URL('data/llm-releases.json', import.meta.url);
@@ -125,7 +126,7 @@ function render(q) {
   const asking = Boolean(q.trim());
   // The stat line and the trust section explain the dataset; once a question is
   // being answered they are between the reader and the answer.
-  for (const id of ['ask-pulse', 'hero-stats', 'trust']) {
+  for (const id of ['ask-pulse', 'hero-stats', 'home-chart', 'trust']) {
     const node = el(id);
     if (node) node.hidden = asking;
   }
@@ -354,6 +355,58 @@ function renderHeroStats() {
   host.hidden = false;
 }
 
+
+/**
+ * The context-window frontier, drawn before anything is clicked.
+ *
+ * The homepage asked a visitor to type before it showed them anything. This is
+ * the field's actual history, and it is the most striking thing the dataset
+ * holds: a 4,000-fold rise that happens in a handful of jumps rather than a
+ * curve.
+ *
+ * The chart comes from lib/chart.mjs, the same module the analytics study uses.
+ * Reimplementing it here was the obvious shortcut and the wrong one — the logo
+ * map lived in three files, none knew about two labs, and both shipped
+ * unbranded. Two copies of a chart would disagree the same way, silently, about
+ * numbers.
+ */
+function renderHomeChart() {
+  const host = el('home-chart');
+  const figure = el('home-chart-figure');
+  const lead = el('home-chart-lead');
+  if (!host || !figure || !records.length) return;
+
+  const ctxOf = (r) => contextWindow(r);
+  const stampOf = (r) => {
+    const iso = canonicalDate(r);
+    return iso ? Date.parse(`${iso}T00:00:00Z`) : 0;
+  };
+
+  const frontier = contextFrontier(records, ctxOf, stampOf);
+  if (frontier.length < 2) return;
+
+  const first = frontier[0], last = frontier[frontier.length - 1];
+  const days = Math.round((stampOf(last) - stampOf(first)) / 86400000);
+  const multiple = Math.round(ctxOf(last) / ctxOf(first));
+  const disclosed = records.filter((r) => ctxOf(r)).length;
+
+  // "Disclosed" is load-bearing: the largest window anyone published is a
+  // different claim from the largest window that exists.
+  lead.textContent = `The largest disclosed context window grew ${
+    multiple.toLocaleString('en-US')}× in ${days.toLocaleString('en-US')} days — `
+    + `${frontier.length} of the ${disclosed} releases that disclose one set a new maximum. `
+    + `It moves in steps, not a curve.`;
+
+  figure.innerHTML = stepChartSvg(frontier, {
+    contextOf: ctxOf,
+    stampOf,
+    dateOf: (r) => canonicalDate(r),
+  }) + `<figcaption>Frontier context window, log scale. The line holds at each level `
+    + `until a larger one ships.</figcaption>`;
+
+  host.hidden = false;
+}
+
 function renderPulse() {
   const host = el('ask-pulse');
   if (!host || !records.length) return;
@@ -524,6 +577,7 @@ initTheme();
 await load();
 renderPulse();
 renderHeroStats();
+renderHomeChart();
 renderYearLinks();
 const initial = new URLSearchParams(location.search).get('q');
 if (initial) submit(initial, { push: false });
