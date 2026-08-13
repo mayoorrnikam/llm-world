@@ -248,6 +248,29 @@ for (const r of releases) {
     if (p.status === 'verified' && !r.sources?.some((s) => s.authority === 'primary')) {
       err(id, 'marked verified but has no primary source');
     }
+
+    /**
+     * Verified means every value the record ASSERTS was found in a primary
+     * source. Nothing recomputed that when a value changed, so correcting a
+     * figure on a verified record left the badge claiming more than the
+     * evidence did — seven records were in that state, five of them long
+     * before the edit that exposed it.
+     *
+     * Having a primary source is not the same as having traced the value to
+     * one, which is why the check above did not catch any of them.
+     */
+    if (p.status === 'verified') {
+      const untraced = EVIDENCED_FIELDS.filter((f) => {
+        const v = assertedValue(r, f);
+        if (v == null) return false;
+        return !(r.evidence?.[f] ?? []).some((e) => String(e.value) === String(v));
+      });
+      if (untraced.length) {
+        err(id, `marked verified but ${untraced.join(' and ')} `
+          + `${untraced.length === 1 ? 'is' : 'are'} not traced to any primary source `
+          + `— run attribute-facts --redo, or downgrade the status`);
+      }
+    }
     if (p.status === 'unverified') err(id, 'unverified records are not publishable (METHODOLOGY §9)');
 
     // Anything short of verified must say WHY, in the record, in public. A bare
