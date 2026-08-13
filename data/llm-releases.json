@@ -8236,6 +8236,72 @@
       }
     },
     {
+      "id": "mistral-medium-3-5",
+      "model": "Mistral Medium 3.5",
+      "company": "Mistral AI",
+      "family": "Mistral",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A dense 128B open-weight model aimed at long-horizon coding and productivity work, released under a modified MIT licence.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-05-22",
+          "sources": [
+            "mistral-medium-3-5-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 256000,
+          "parameter_count": 128000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Modified MIT"
+      },
+      "sources": [
+        {
+          "id": "mistral-medium-3-5-s1",
+          "url": "https://mistral.ai/news/vibe-remote-agents-mistral-medium-3-5",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260521023218/https://mistral.ai/news/vibe-remote-agents-mistral-medium-3-5",
+          "retrieved": "2026-05-21"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be traced: every archived snapshot of those sources predates the release — the newest is 2026-05-21, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2026-05-22 would settle it."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 256000,
+            "sources": [
+              "mistral-medium-3-5-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 128000000000,
+            "sources": [
+              "mistral-medium-3-5-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "claude-opus-4-8",
       "model": "Claude Opus 4.8",
       "company": "Anthropic",

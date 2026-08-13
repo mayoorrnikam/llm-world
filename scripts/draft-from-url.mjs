@@ -77,11 +77,22 @@ function stated(label, patterns, transform = (x) => x) {
 
 const num = (s) => Number(String(s).replace(/,/g, ''));
 
+// "256k context window" — the magnitude suffix broke the first pattern, and the
+// fallback then read digits from the far side of the phrase and produced 0. A
+// context window of zero is not a value; the parse failed and said nothing.
+const MAG = { k: 1e3, m: 1e6 };
+const toTokens = (raw) => {
+  const m = /^([\d.,]+)\s*([km])?$/i.exec(String(raw).trim());
+  if (!m) return null;
+  const n = Number(m[1].replace(/,/g, '')) * (m[2] ? MAG[m[2].toLowerCase()] : 1);
+  return n > 0 ? Math.round(n) : null;
+};
+
 const context = stated('context window', [
-  /([\d,]+)\s*(?:token\s*)?context window/i,
-  /context window[^\d]{0,20}([\d,]+)/i,
-  /([\d,]+)[- ]token context/i,
-], num);
+  /([\d.,]+\s*[km]?)\s*(?:token[- ]?)?context window/i,
+  /context window\s*(?:of|:)?\s*([\d.,]+\s*[km]?)\b/i,
+  /([\d.,]+\s*[km]?)[- ]token context/i,
+], toTokens);
 
 const params = stated('parameter count', [
   /\b([\d.]+)\s*(?:billion|B)\s+(?:total\s+)?parameters?\b/i,
@@ -231,7 +242,7 @@ const spec = {
     open_weights: openWeights,
     ...(licence && openWeights ? { license: licence.value } : {}),
     ...(params ? { parameter_count: params.value } : {}),
-    ...(context ? { context_window: context.value } : {}),
+    ...(context?.value ? { context_window: context.value } : {}),
     primary_type: 'language',
   }],
 };
