@@ -6913,6 +6913,50 @@
       ]
     },
     {
+      "id": "minimax-speech-2-8",
+      "model": "MiniMax Speech 2.8",
+      "company": "MiniMax",
+      "family": "MiniMax",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "MiniMax's speech model line.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-01-23",
+          "sources": [
+            "minimax-speech-2-8-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "minimax-speech-2-8-s1",
+          "url": "https://www.minimax.io/news/minimax-speech-28",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260419231337/https://www.minimax.io/news/minimax-speech-28",
+          "retrieved": "2026-04-19"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
+    },
+    {
       "id": "claude-opus-4-6",
       "model": "Claude Opus 4.6",
       "company": "Anthropic",
@@ -8852,6 +8896,59 @@
       }
     },
     {
+      "id": "mistral-ocr-4",
+      "model": "Mistral OCR 4",
+      "company": "Mistral AI",
+      "family": "Mistral OCR",
+      "classification": {
+        "primary_type": "vision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Mistral's document-understanding model, reading page images into structured text.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-06-23",
+          "sources": [
+            "mistral-ocr-4-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mistral-ocr-4-s1",
+          "url": "https://mistral.ai/news/ocr-4",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260623144429/https://mistral.ai/news/ocr-4/",
+          "retrieved": "2026-06-23"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06-23",
+            "sources": [
+              "mistral-ocr-4-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "claude-sonnet-5",
       "model": "Claude Sonnet 5",
       "company": "Anthropic",
@@ -9831,6 +9928,74 @@
             "sources": [
               "muse-glimmer-s1",
               "muse-glimmer-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "nemotron-3-5-lightning",
+      "model": "Nemotron 3.5 Lightning",
+      "company": "NVIDIA",
+      "family": "Nemotron",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "A 30B mixture-of-experts model with 3B active parameters, released with permissive licensing, weights, data and recipes, and aimed at long-running agent harnesses.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-11",
+          "sources": [
+            "nemotron-3-5-lightning-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 30000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "nemotron-3-5-lightning-s1",
+          "url": "https://developer.nvidia.com/blog/nvidia-nemotron-3-5-lightning-delivers-fast-accurate-specialized-task-execution-for-long-running-agents/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260812102612/https://developer.nvidia.com/blog/nvidia-nemotron-3-5-lightning-delivers-fast-accurate-specialized-task-execution-for-long-running-agents/",
+          "retrieved": "2026-08-12"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-11",
+            "sources": [
+              "nemotron-3-5-lightning-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 30000000000,
+            "sources": [
+              "nemotron-3-5-lightning-s1"
             ]
           }
         ]
