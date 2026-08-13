@@ -1104,12 +1104,22 @@ code, kbd {
 }
 .foot-col a:hover { color: var(--accent); }
 
-.foot-yearlinks { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+/* The year links sit in a row while every other footer column stacks, and
+   as bare links that read as a wrapping accident rather than a choice. They
+   ARE different — five numeric tokens, not five destinations, and stacking
+   them would spend five lines on an index. So they are styled as the token
+   row they are, which makes the difference deliberate. */
+.foot-yearlinks { display: flex; flex-wrap: wrap; gap: 6px; }
 .foot-yearlinks a {
   font-family: var(--mono);
-  font-size: 12.5px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
+  padding: 3px 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--muted);
 }
+.foot-yearlinks a:hover { color: var(--text); border-color: var(--accent); }
 
 .foot-note {
   margin: 2px 0 0;
@@ -2886,25 +2896,42 @@ code, kbd {
   border-radius: 999px;
 }
 
-/* Examples are a starting point, not navigation, so they stay quiet and sit
-   on one scrollable line rather than wrapping into a block that competes with
-   the field above them. */
-.ask-examples {
-  display: flex;
-  gap: 8px;
+/* Entry points, grouped by intent ------------------------------------------
+   A flat row of five reads as a random sample of the query language. Grouped
+   and labelled, each one demonstrates a different thing the dataset can be
+   asked — a filter, a superlative, a capability, a comparison — and the labels
+   double as a description of what the field understands.
+
+   Still quiet. The field is the hero; these sit under it and must not compete. */
+.ask-tries {
+  display: grid;
+  gap: 14px 26px;
   margin: 16px 0 0;
-  padding: 2px 0 6px;
-  list-style: none;
-  overflow-x: auto;
-  scrollbar-width: none;
+  grid-template-columns: 1fr;
 }
-.ask-examples::-webkit-scrollbar { display: none; }
-.ask-examples li { flex: 0 0 auto; }
-.ask-examples button {
-  padding: 7px 13px;
+.try-group { min-width: 0; }
+.try-label {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.try-group ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.try-group button {
+  padding: 6px 12px;
   font: inherit;
   font-size: 12.5px;
-  white-space: nowrap;
   color: var(--muted);
   background: var(--panel);
   border: 1px solid var(--line);
@@ -2912,13 +2939,14 @@ code, kbd {
   cursor: pointer;
   transition: color 120ms var(--ease), border-color 120ms var(--ease);
 }
-.ask-examples button:hover { color: var(--text); border-color: var(--accent); }
-.ask-examples button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.try-group button:hover { color: var(--text); border-color: var(--accent); }
+.try-group button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-/* The field's focus ring and the chips animate; nothing here is decorative
-   motion, but a transition is still motion. */
+@media (min-width: 620px) { .ask-tries { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 980px) { .ask-tries { grid-template-columns: repeat(4, 1fr); } }
+
 @media (prefers-reduced-motion: reduce) {
-  .ask-input, .ask-examples button, .ask-clear { transition: none; }
+  .try-group button { transition: none; }
 }
 
 @media (min-width: 720px) {
@@ -2926,7 +2954,6 @@ code, kbd {
   .ask-input { height: 62px; padding: 0 56px 0 52px; font-size: 17px; }
   .ask-glass { left: 18px; }
   .ask-glass svg, .ask-clear svg { width: 19px; height: 19px; }
-  .ask-examples { flex-wrap: wrap; overflow: visible; }
 }
 
 /* The result list scrolls in place, so the field and the answer stay put.
@@ -3020,6 +3047,5 @@ code, kbd {
   .ask-go { flex: 1 1 100%; padding: 12px; }
   .pulse-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .pulse-v { font-size: 17px; }
-  .ask-examples { gap: 6px; }
-  .ask-examples button { font-size: 12px; }
+  .try-group button { font-size: 12px; }
 }

@@ -294,6 +294,22 @@ function render(q) {
  * are worth having and the heading is already there; it just needed the one
  * renderer that was missing.
  */
+/**
+ * The footer's data line, which said "loading…" forever on this page.
+ *
+ * Third time this exact shape: scripts/build.mjs fills it when it generates a
+ * page and app.js fills it on the timeline, but the landing page is neither —
+ * hand-written and served as-is — so nobody had written the third renderer. The
+ * year links had the same hole, and so did the freshness the hero now shows.
+ */
+function renderDataStatus() {
+  const host = el('data-status');
+  if (!host || !records.length) return;
+  host.textContent = meta?.updated
+    ? `${records.length} releases · updated ${meta.updated}`
+    : `${records.length} releases`;
+}
+
 function renderYearLinks() {
   const host = el('foot-yearlinks');
   if (!host || !records.length) return;
@@ -579,6 +595,7 @@ renderPulse();
 renderHeroStats();
 renderHomeChart();
 renderYearLinks();
+renderDataStatus();
 const initial = new URLSearchParams(location.search).get('q');
 if (initial) submit(initial, { push: false });
 // After the initial query lands, so a shared link arrives with its clear

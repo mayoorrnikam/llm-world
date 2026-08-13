@@ -348,7 +348,7 @@ function provenanceBar(r) {
 <p class="pv-facts">${bits.join('')}</p>
 ${r.provenance?.reason ? `<details class="pv-why"><summary>Why this status</summary>
 <p>${esc(r.provenance.reason)}</p></details>` : ''}
-<p class="pv-more"><a href="../../methodology/">What these states mean</a> · <a href="../../data-quality/">How records are judged</a></p>
+<p class="pv-more"><a href="../../methodology/">What these states mean</a> · <a href="../../data-quality/">How records are judged</a> · <a href="../../changes/">Has this record changed?</a></p>
 </div>`;
 }
 

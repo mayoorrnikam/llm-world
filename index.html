@@ -92,14 +92,42 @@
          half of what you typed cannot do so silently. -->
     <p class="ask-reading" id="ask-reading" hidden></p>
 
-    <ul class="ask-examples" id="ask-examples" aria-label="Example questions">
-      <li><button type="button" data-q="open weights with 1M context">open weights with 1M context</button></li>
-      <li><button type="button" data-q="anthropic reasoning 2026">anthropic reasoning 2026</button></li>
-      <li><button type="button" data-q="open weights over 100B parameters">open weights over 100B parameters</button></li>
-      <li><button type="button" data-q="verified models under $3">verified models under $3</button></li>
-      <li><button type="button" data-q="how many models released in the last 30 days">how many in the last 30 days</button></li>
-      <li><button type="button" data-q="image models">image models</button></li>
-    </ul>
+    <!-- Entry points, grouped by what you are trying to do. A flat row of five
+         reads as a random sample of the query language; grouped, each one
+         demonstrates a different thing the dataset can be asked. -->
+    <div class="ask-tries" id="ask-examples">
+      <div class="try-group">
+        <span class="try-label">Explore</span>
+        <ul>
+          <li><button type="button" data-q="how many models released in the last 30 days">how many in the last 30 days</button></li>
+          <li><button type="button" data-q="newest open weights model">newest open weights</button></li>
+          <li><button type="button" data-q="releases in 2026">releases in 2026</button></li>
+        </ul>
+      </div>
+      <div class="try-group">
+        <span class="try-label">Specs</span>
+        <ul>
+          <li><button type="button" data-q="which model has the largest context window">largest context window</button></li>
+          <li><button type="button" data-q="open weights over 100B parameters">open weights over 100B</button></li>
+          <li><button type="button" data-q="verified models under $3">verified under $3</button></li>
+        </ul>
+      </div>
+      <div class="try-group">
+        <span class="try-label">Capabilities</span>
+        <ul>
+          <li><button type="button" data-q="reasoning models 2026">reasoning models</button></li>
+          <li><button type="button" data-q="models that can hear audio">audio input</button></li>
+          <li><button type="button" data-q="image models">image models</button></li>
+        </ul>
+      </div>
+      <div class="try-group">
+        <span class="try-label">Compare</span>
+        <ul>
+          <li><button type="button" data-q="anthropic vs openai">Anthropic vs OpenAI</button></li>
+          <li><button type="button" data-q="llama vs claude">Llama vs Claude</button></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <!-- Size, coverage and freshness, computed at load. Never hardcoded: the
@@ -154,9 +182,10 @@
       </li>
       <li>
         <h3>Corrections in public</h3>
-        <p>When the evidence changes, the record changes and the change is published —
-          including the figures this project got wrong.</p>
-        <a href="changes/">What changed</a>
+        <p>The record changes when the evidence changes, and every change is published —
+          separating new research from figures this project had wrong. No other model
+          tracker publishes its own corrections.</p>
+        <a href="changes/">Read the changelog</a>
       </li>
       <li>
         <h3>Built to be reused</h3>
