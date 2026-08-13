@@ -112,6 +112,24 @@ for (const [i, job] of jobs.entries()) {
   const hit = await lookup(job.source.url, job.near);
   const label = `${job.record.id}/${job.source.id} (${job.source.type}) ${job.source.url}`;
 
+  // A snapshot captured BEFORE the release cannot evidence it. Mistral Medium
+  // 3.5 was cited to a capture from the day before its announcement: the page
+  // existed, named the model, and carried no date at all, so attribute-facts
+  // could not trace the release date and the record stayed partially_verified
+  // for what read like a research gap and was really a citation pointing one
+  // day early. An earlier capture is not "fine — the page predates our record";
+  // it is a page that had not said the thing yet.
+  if (hit && hit !== FAILED && hit !== ABSENT) {
+    const on = canonicalDate(job.record);
+    if (on && hit.captured < on) {
+      const later = await lookup(job.source.url, stampFor(on), 2);
+      if (later && later !== FAILED && later !== ABSENT && later.captured >= on) {
+        hit.url = later.url;
+        hit.captured = later.captured;
+      }
+    }
+  }
+
   if (hit === FAILED) {
     failed++;
     errors.push(label);
@@ -133,7 +151,11 @@ for (const [i, job] of jobs.entries()) {
 console.log(`\nsnapshots found:   ${found}`);
 console.log(`no snapshot:       ${absent}`);
 console.log(`lookup failed:     ${failed}${failed ? '  ← unknown, NOT a confirmed gap' : ''}`);
-if (early) console.log(`captured before the recorded date: ${early} (fine — the page predates our record)`);
+if (early) {
+  console.log(`captured before the recorded date: ${early}`);
+  console.log(`  These cannot evidence the release — the page had not announced it yet.`);
+  console.log(`  Re-run with --save to request a capture from on or after the date.`);
+}
 
 if (gaps.length && !SAVE) {
   console.log(`\nconfirmed to have no snapshot — cannot satisfy R1 until one exists:`);
