@@ -63,9 +63,11 @@
 <main class="doc-main home-main" id="main">
 
   <section class="ask">
-    <p class="ask-eyebrow" id="ask-eyebrow">the public record of model releases</p>
-    <h1 class="ask-title">Ask the model&nbsp;dataset</h1>
-    <p class="ask-sub">Every answer comes from records with sources attached — not from a language model.</p>
+    <p class="ask-eyebrow">LLM World</p>
+    <h1 class="ask-title">The evidence-backed history of large language&nbsp;models.</h1>
+    <p class="ask-sub">Releases, families, labs, capabilities, context windows and pricing —
+      every figure traced to the lab's own announcement, paper, model card or documentation.
+      Where a lab publishes nothing, the record says so instead of guessing.</p>
 
     <form class="ask-form" id="ask-form" role="search">
       <label class="sr-only" for="ask-input">Ask a question about model releases</label>
@@ -100,10 +102,58 @@
     </ul>
   </section>
 
+  <!-- Size, coverage and freshness, computed at load. Never hardcoded: the
+       numbers are the claim, so a stale one would be the worst kind of copy. -->
+  <p class="hero-stats" id="hero-stats" hidden></p>
+
   <!-- What the dataset shows before a question is asked. Hidden once one is. -->
   <section class="ask-pulse" id="ask-pulse" aria-label="Dataset at a glance"></section>
 
   <section class="ask-results" id="ask-results" aria-live="polite"></section>
+
+  <!-- Why the data is worth citing. Each claim links to the page that backs it,
+       because a trust section that cannot be checked is marketing. -->
+  <section class="trust" id="trust" aria-labelledby="trust-h">
+    <h2 class="trust-h" id="trust-h">Why trust this record</h2>
+    <ul class="trust-grid">
+      <li>
+        <h3>Primary sources</h3>
+        <p>Official announcements, papers, model cards and documentation. Reporting alone
+          is never enough to mark a date verified.</p>
+        <a href="methodology/">The evidence rules</a>
+      </li>
+      <li>
+        <h3>Nothing is guessed</h3>
+        <p>A figure no lab published stays empty. Undisclosed figures and unresearched
+          ones are recorded as different things, because they are.</p>
+        <a href="data-quality/">What is missing</a>
+      </li>
+      <li>
+        <h3>Claim-level evidence</h3>
+        <p>Dates, context windows and parameter counts are traced to the specific source
+          that states them, not to a source list.</p>
+        <a href="models/">Open any record</a>
+      </li>
+      <li>
+        <h3>Citations that cannot rot</h3>
+        <p>Sources are cited by dated snapshot. A live page proves what it says today,
+          not what it said when it was read.</p>
+        <a href="methodology/">How sources are cited</a>
+      </li>
+      <li>
+        <h3>Corrections in public</h3>
+        <p>When the evidence changes, the record changes and the change is published —
+          including the figures this project got wrong.</p>
+        <a href="changes/">What changed</a>
+      </li>
+      <li>
+        <h3>Built to be reused</h3>
+        <p>The whole dataset is downloadable as JSON or CSV under CC BY 4.0, with an RSS
+          feed of new releases.</p>
+        <a href="api/models.json">JSON API</a>
+      </li>
+    </ul>
+  </section>
 
   <p class="ask-foot">
     Prefer to browse? <a href="timeline/">The timeline</a> shows every release month by month,

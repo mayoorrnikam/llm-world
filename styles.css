@@ -1623,6 +1623,71 @@ code, kbd {
   .doc-list li, .doc-list li::before { transition: none; }
 }
 
+/* The dataset's own measurements, under the field ------------------------- */
+.hero-stats {
+  margin: 18px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+.hero-stats strong {
+  color: var(--text);
+  font-weight: 640;
+  font-variant-numeric: tabular-nums;
+}
+.hero-sep { opacity: 0.45; }
+/* Freshness wraps to its own line on a phone rather than shortening: how
+   current the data is deserves the whole sentence. */
+.hero-fresh { flex-basis: 100%; }
+
+/* Why the record is worth citing ------------------------------------------
+   Six claims, each linking to the page that backs it. A trust section whose
+   assertions cannot be checked is marketing, which is the one thing this
+   project cannot afford to look like. */
+.trust {
+  margin: 40px 0 8px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+.trust-h {
+  margin: 0 0 18px;
+  font-size: 13px;
+  font-weight: 660;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.trust-grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 22px 30px;
+  grid-template-columns: 1fr;
+}
+.trust-grid > li { display: grid; gap: 5px; align-content: start; }
+.trust-grid h3 {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 680;
+  letter-spacing: -0.011em;
+}
+.trust-grid p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 46ch;
+}
+.trust-grid a { font-size: 12.5px; }
+
+@media (min-width: 660px) { .trust-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .trust-grid { grid-template-columns: repeat(3, 1fr); } }
+
 /* Direct answer above the results ----------------------------------------- */
 .ask-answer {
   margin: 0 0 14px;

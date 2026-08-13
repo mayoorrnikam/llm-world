@@ -79,6 +79,8 @@ const reading = el('ask-reading');
 const results = el('ask-results');
 
 let records = [];
+// The dataset's own metadata — `updated` drives the freshness line.
+let meta = {};
 let vocab = { companies: [], families: [] };
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -109,6 +111,7 @@ async function load() {
   const res = await fetch(DATA_URL, { cache: 'no-store' });
   const json = await res.json();
   records = json.releases ?? [];
+  meta = json;
   vocab = {
     companies: [...new Set(records.map((r) => r.company))],
     families: [...new Set(records.map((r) => r.family))],
@@ -119,8 +122,13 @@ function render(q) {
   results.replaceChildren();
   reading.hidden = true;
 
-  const pulse = el('ask-pulse');
-  if (pulse) pulse.hidden = Boolean(q.trim());
+  const asking = Boolean(q.trim());
+  // The stat line and the trust section explain the dataset; once a question is
+  // being answered they are between the reader and the answer.
+  for (const id of ['ask-pulse', 'hero-stats', 'trust']) {
+    const node = el(id);
+    if (node) node.hidden = asking;
+  }
 
   if (!q.trim()) return;
 
@@ -299,6 +307,53 @@ function renderYearLinks() {
   }));
 }
 
+
+/**
+ * Size, coverage and freshness, measured rather than written down.
+ *
+ * The numbers ARE the claim on this page, so a hardcoded one is the worst kind
+ * of copy: it reads as confident and goes quietly wrong. Every figure here is
+ * computed from the dataset that was just loaded, so the line cannot describe a
+ * dataset other than the one being served.
+ *
+ * Freshness is stated in days rather than as a date, because "updated
+ * 2026-08-08" asks the reader to do the subtraction and a stale site is exactly
+ * what that arithmetic reveals.
+ */
+function renderHeroStats() {
+  const host = el('hero-stats');
+  if (!host || !records.length) return;
+
+  const dated = records.map((r) => canonicalDate(r)).filter(Boolean).sort();
+  const labs = new Set(records.map((r) => r.company)).size;
+  const sources = records.flatMap((r) => r.sources ?? []);
+  const archived = sources.filter((s) => s.archived_url).length;
+  const pct = Math.round(archived / Math.max(1, sources.length) * 100);
+
+  const updated = meta?.updated;
+  const days = updated
+    ? Math.round((Date.now() - Date.parse(`${updated}T00:00:00Z`)) / 86400000)
+    : null;
+  const fresh = days == null ? null
+    : days <= 0 ? 'updated today'
+    : days === 1 ? 'updated yesterday'
+    : `updated ${days} days ago`;
+
+  const bits = [
+    `<strong>${records.length}</strong> releases`,
+    `<strong>${labs}</strong> labs`,
+    `<strong>${dated[0].slice(0, 4)}–${dated[dated.length - 1].slice(0, 4)}</strong>`,
+    `<strong>${pct}%</strong> of sources archived`,
+  ];
+  if (fresh) bits.push(`<span class="hero-fresh">${fresh} · lab pages checked twice daily</span>`);
+
+  const sep = '<span class="hero-sep" aria-hidden="true">·</span>';
+  // The freshness item wraps to its own line, so the separator that would sit
+  // before it is left dangling at the end of the previous one.
+  host.innerHTML = bits.slice(0, 4).join(sep) + (bits[4] ? bits[4] : '');
+  host.hidden = false;
+}
+
 function renderPulse() {
   const host = el('ask-pulse');
   if (!host || !records.length) return;
@@ -366,7 +421,7 @@ function renderPulse() {
       s: biggest?.model ?? '', href: biggest ? `models/${encodeURIComponent(biggest.id)}/` : 'models/' },
     { k: 'Labs that publish no parameter count', v: String(undisclosedParams),
       s: 'recorded as undisclosed, not guessed', href: 'data-quality/' },
-    cheapest && { k: 'Cheapest published price', v: `$${cheapest.pricing[0].rates.input}`,
+    cheapest && { k: 'Lowest published price', v: `$${cheapest.pricing[0].rates.input}`,
       s: `${cheapest.model} · per million input tokens`, href: 'analytics/pricing/' },
   ].filter(Boolean);
 
@@ -468,6 +523,7 @@ el('ask-examples').addEventListener('click', (e) => {
 initTheme();
 await load();
 renderPulse();
+renderHeroStats();
 renderYearLinks();
 const initial = new URLSearchParams(location.search).get('q');
 if (initial) submit(initial, { push: false });
