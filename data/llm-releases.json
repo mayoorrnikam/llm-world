@@ -7677,6 +7677,59 @@
       ]
     },
     {
+      "id": "mai-image-2-efficient",
+      "model": "MAI-Image-2-Efficient",
+      "company": "Microsoft",
+      "family": "MAI",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A cost-reduced tier of the MAI-Image-2 line, positioned at flagship quality for lower cost.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-04-14",
+          "sources": [
+            "mai-image-2-efficient-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mai-image-2-efficient-s1",
+          "url": "https://microsoft.ai/news/mai-image-2-efficient/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260420081724/https://microsoft.ai/news/mai-image-2-efficient/",
+          "retrieved": "2026-04-20"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-04-14",
+            "sources": [
+              "mai-image-2-efficient-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "qwen-3-6-35b-a3b",
       "model": "Qwen3.6-35B-A3B",
       "company": "Alibaba Qwen",
@@ -8510,6 +8563,225 @@
       "undisclosed": [
         "context_window"
       ]
+    },
+    {
+      "id": "mai-image-2-5",
+      "model": "MAI-Image-2.5",
+      "company": "Microsoft",
+      "family": "MAI",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Image generation and editing model from Microsoft's Superintelligence team.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-06-02",
+          "sources": [
+            "mai-image-2-5-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mai-image-2-5-s1",
+          "url": "https://microsoft.ai/news/introducing-mai-image-2-5/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260602211645/https://microsoft.ai/news/introducing-mai-image-2-5/",
+          "retrieved": "2026-06-02"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06-02",
+            "sources": [
+              "mai-image-2-5-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "mai-voice-2",
+      "model": "MAI-Voice-2",
+      "company": "Microsoft",
+      "family": "MAI",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Multilingual text-to-speech with voice cloning.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-06-02",
+          "sources": [
+            "mai-voice-2-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mai-voice-2-s1",
+          "url": "https://microsoft.ai/news/mai-voice-2/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260712151543/http://microsoft.ai/news/mai-voice-2/",
+          "retrieved": "2026-07-12"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06-02",
+            "sources": [
+              "mai-voice-2-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "mai-transcribe-1-5",
+      "model": "MAI-Transcribe-1.5",
+      "company": "Microsoft",
+      "family": "MAI",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Speech-to-text model, positioned for production transcription workloads.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-06-02",
+          "sources": [
+            "mai-transcribe-1-5-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mai-transcribe-1-5-s1",
+          "url": "https://microsoft.ai/news/mai-transcribe-1-5more-accurate-context-aware-and-built-for-production/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260603031322/https://microsoft.ai/news/mai-transcribe-1-5more-accurate-context-aware-and-built-for-production/",
+          "retrieved": "2026-06-03"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06-02",
+            "sources": [
+              "mai-transcribe-1-5-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "mai-code-1-flash",
+      "model": "MAI-Code-1-Flash",
+      "company": "Microsoft",
+      "family": "MAI",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "coding"
+      ],
+      "tags": [],
+      "note": "Lightweight coding model for agentic developer workflows.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-06-02",
+          "sources": [
+            "mai-code-1-flash-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mai-code-1-flash-s1",
+          "url": "https://microsoft.ai/news/introducingmai-code-1-flash/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260602191242/https://microsoft.ai/news/introducingmai-code-1-flash/",
+          "retrieved": "2026-06-02"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06-02",
+            "sources": [
+              "mai-code-1-flash-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gemma-4-12b",
@@ -9640,6 +9912,112 @@
       ]
     },
     {
+      "id": "mai-image-2-5-pro",
+      "model": "MAI-Image-2.5-Pro",
+      "company": "Microsoft",
+      "family": "MAI",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The higher-capability tier of MAI-Image-2.5, announced alongside MAI-Voice-2-Flash.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-23",
+          "sources": [
+            "mai-image-2-5-pro-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mai-image-2-5-pro-s1",
+          "url": "https://microsoft.ai/news/introducing-mai-image-2-5-pro-and-mai-voice-2-flash/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260724015709/https://microsoft.ai/news/introducing-mai-image-2-5-pro-and-mai-voice-2-flash/",
+          "retrieved": "2026-07-24"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-07-23",
+            "sources": [
+              "mai-image-2-5-pro-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "mai-voice-2-flash",
+      "model": "MAI-Voice-2-Flash",
+      "company": "Microsoft",
+      "family": "MAI",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The low-latency tier of MAI-Voice-2, announced alongside MAI-Image-2.5-Pro.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-23",
+          "sources": [
+            "mai-voice-2-flash-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mai-voice-2-flash-s1",
+          "url": "https://microsoft.ai/news/introducing-mai-image-2-5-pro-and-mai-voice-2-flash/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260724015709/https://microsoft.ai/news/introducing-mai-image-2-5-pro-and-mai-voice-2-flash/",
+          "retrieved": "2026-07-24"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-07-23",
+            "sources": [
+              "mai-voice-2-flash-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "claude-opus-5",
       "model": "Claude Opus 5",
       "company": "Anthropic",
@@ -9744,6 +10122,64 @@
           "observed_on": "2026-07-24"
         }
       ]
+    },
+    {
+      "id": "mai-cyber-1-flash",
+      "model": "MAI-Cyber-1-Flash",
+      "company": "Microsoft",
+      "family": "MAI",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A security-focused model, announced as part of Microsoft's MDASH work.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-27",
+          "sources": [
+            "mai-cyber-1-flash-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mai-cyber-1-flash-s1",
+          "url": "https://microsoft.ai/news/introducing-mai-cyber-1-flash-inside-mdash/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260727172721/https://microsoft.ai/news/introducing-mai-cyber-1-flash-inside-mdash/",
+          "retrieved": "2026-07-27"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-07-27",
+            "sources": [
+              "mai-cyber-1-flash-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "minimax-h3",
@@ -10024,6 +10460,49 @@
       }
     },
     {
+      "id": "mai-image-2-6",
+      "model": "MAI-Image-2.6",
+      "company": "Microsoft",
+      "family": "MAI",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The current MAI image generation and editing model.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-10",
+          "sources": [
+            "mai-image-2-6-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mai-image-2-6-s1",
+          "url": "https://microsoft.ai/news/mai-image-2-6-launches-at-no-2-on-arena-ahead-of-google-meta-and-xai/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "nemotron-3-5-lightning",
       "model": "Nemotron 3.5 Lightning",
       "company": "NVIDIA",
@@ -10086,6 +10565,66 @@
             "value": 30000000000,
             "sources": [
               "nemotron-3-5-lightning-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "mai-code-1-1-flash",
+      "model": "MAI-Code-1.1-Flash",
+      "company": "Microsoft",
+      "family": "MAI",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "coding"
+      ],
+      "tags": [],
+      "note": "An iteration of MAI-Code-1-Flash, positioned as faster at a quarter of the cost.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-11",
+          "sources": [
+            "mai-code-1-1-flash-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mai-code-1-1-flash-s1",
+          "url": "https://microsoft.ai/news/mai-code-1-1-flash-br-better-faster-at-a-quarter-of-the-cost/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260811194735/https://microsoft.ai/news/mai-code-1-1-flash-br-better-faster-at-a-quarter-of-the-cost/",
+          "retrieved": "2026-08-11"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-11",
+            "sources": [
+              "mai-code-1-1-flash-s1"
             ]
           }
         ]
