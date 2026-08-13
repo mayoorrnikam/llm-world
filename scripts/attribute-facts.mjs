@@ -100,6 +100,7 @@ console.log(`${data.releases.length} records · ${data.releases.length - pending
   + ` · ${Math.min(pending.length, LIMIT)} to do now\n`);
 
 let attributed = 0, skipped = 0, unproven = 0;
+const conflicts = [];
 const skippedIds = [];
 
 for (const r of pending.slice(0, LIMIT)) {
@@ -111,7 +112,7 @@ for (const r of pending.slice(0, LIMIT)) {
   for (const s of archived) {
     const t = await sourceText(s.archived_url);
     if (t === FAILED) { failed = true; break; }
-    corpus.push({ id: s.id, text: t });
+    corpus.push({ id: s.id, type: s.type, text: t });
     await sleep(1200);
   }
 
@@ -134,6 +135,54 @@ for (const r of pending.slice(0, LIMIT)) {
     if (backing.length) {
       evidence[field] = [{ value, sources: backing }];
       found.push(`${field}←${backing.join(',')}`);
+      continue;
+    }
+
+    /**
+     * The source states a DIFFERENT date. Report it; never resolve it.
+     *
+     * "Could not be traced" covers two very different situations and this
+     * script could not tell them apart: the page says nothing about the date,
+     * or the page says a different date. Three records are the second kind —
+     * Anthropic dates the Claude 3.5 Sonnet announcement 21 June 2024 where the
+     * record says the 20th, and both Grok records differ from x.ai by a day or
+     * two. Timezones and publication-versus-announcement explain most of that,
+     * which is exactly why a person has to look: this project publishes
+     * disagreement rather than silently picking a side (METHODOLOGY §8).
+     *
+     * Nothing is written. A near-miss is a prompt to read the page, not a
+     * licence to overwrite a date somebody sourced.
+     */
+    if (field === 'release_date') {
+      // Dates that belong to the artefact rather than the announcement: arXiv
+      // submission and revision stamps, git commit dates. OPT-175B tripped this
+      // on "[v1] Mon, 2 May 2022" and "Initial commit May 3, 2022" — neither is
+      // a claim about when the model was released.
+      const NOT_AN_ANNOUNCEMENT = /submitted on|last revised|view email|\[v\d\]|initial commit|commit\b|released just|\b[0-9a-f]{7}\b/i;
+      // Only sources that carry a DATELINE. A repository shows commit dates and
+      // a paper shows submission stamps; both look like dates near a model name
+      // and neither is a claim about when the model was released. OPT-175B kept
+      // surfacing on "Initial commit May 3, 2022" for exactly that reason.
+      const DATED = new Set(['official_announcement', 'official_documentation', 'news']);
+      const near = [];
+      for (const c of corpus) {
+        if (!DATED.has(c.type)) continue;
+        for (const m of c.text.matchAll(/([A-Z][a-z]{2,8})\.?\s+(\d{1,2}),?\s+(20\d\d)/g)) {
+          const around = c.text.slice(Math.max(0, m.index - 70), m.index + 30);
+          if (NOT_AN_ANNOUNCEMENT.test(around)) continue;
+          const mi = MONTHS.findIndex((x) => x.slice(0, 3) === m[1].slice(0, 3));
+          if (mi < 0) continue;
+          const iso = `${m[3]}-${String(mi + 1).padStart(2, '0')}-${m[2].padStart(2, '0')}`;
+          if (iso === value) continue;
+          const gap = Math.abs(Date.parse(iso) - Date.parse(value)) / 86400000;
+          if (gap <= 3) near.push({ iso, id: c.id });
+        }
+      }
+      if (near.length) {
+        const seen = [...new Map(near.map((x) => [x.iso, x])).values()];
+        conflicts.push(`${r.id}: record says ${value}, ${seen.map((x) =>
+          `${x.id} says ${x.iso}`).join(' · ')}`);
+      }
     }
   }
 
@@ -154,7 +203,14 @@ console.log(`\nattributed: ${attributed}`);
 console.log(`skipped:    ${skipped}`);
 if (unproven) console.log(`of the attributed, ${unproven} had no field matched in any source`);
 if (skippedIds.length) {
-  console.log(`\nskipped records:`);
+  if (conflicts.length) {
+  console.log(`\nSOURCE STATES A DIFFERENT DATE — read the page before changing anything (${conflicts.length}):`);
+  for (const c of conflicts) console.log(`  ${c}`);
+  console.log(`  Timezone and publication-versus-announcement explain most of these.`);
+  console.log(`  Where they do not, record the disagreement rather than choosing quietly.`);
+}
+
+console.log(`\nskipped records:`);
   for (const s of skippedIds) console.log(`  ${s}`);
 }
 

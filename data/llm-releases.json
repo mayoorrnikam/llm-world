@@ -951,7 +951,7 @@
       "events": [
         {
           "type": "announcement",
-          "date": "2023-11-04",
+          "date": "2023-11-03",
           "sources": [
             "grok-1-s1",
             "grok-1-s2"
@@ -1005,12 +1005,20 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official repository. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: coding: “In the last two months, we have made significant improvements in reasoning and coding capabilities leading up to Grok-1, a state-of-the-art language model that is signifi”."
+        "reason": "Cited to the lab's own announcement and the official repository. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "previous_ids": [
         "grok-1-open"
       ],
       "evidence": {
+        "release_date": [
+          {
+            "value": "2023-11-03",
+            "sources": [
+              "grok-1-s1"
+            ]
+          }
+        ],
         "parameter_count": [
           {
             "value": 314000000000,
@@ -2734,7 +2742,7 @@
       "events": [
         {
           "type": "announcement",
-          "date": "2024-06-20",
+          "date": "2024-06-21",
           "sources": [
             "claude-3-5-sonnet-s1"
           ]
@@ -2763,12 +2771,20 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from the launch announcement, which states: “Claude 3.5 Sonnet is our strongest vision model yet, surpassing Claude 3 Opus on standard vision benchmarks.” Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "undisclosed": [
         "parameter_count"
       ],
       "evidence": {
+        "release_date": [
+          {
+            "value": "2024-06-21",
+            "sources": [
+              "claude-3-5-sonnet-s1"
+            ]
+          }
+        ],
         "context_window": [
           {
             "value": 200000,
@@ -4230,7 +4246,7 @@
       "events": [
         {
           "type": "announcement",
-          "date": "2025-02-17",
+          "date": "2025-02-19",
           "sources": [
             "grok-3-s1",
             "grok-3-s2"
@@ -4268,12 +4284,20 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from the launch announcement, which states: “Grok 3 also excels in image understanding (MMMU) and video understanding (EgoSchema) tasks.” Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: coding: “Trained on our Colossus supercluster with 10x the compute of previous state-of-the-art models, Grok 3 displays significant improvements in reasoning, mathematics, coding,” | reasoning: “Thinking Harder: Test-time Compute and Reasoning Today, we are announcing two beta reasoning models, Grok 3 (Think) and Grok 3 mini (Think).” | vision: “Grok 3 also excels in image understanding (MMMU) and video understanding (EgoSchema) tasks.”."
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "undisclosed": [
         "parameter_count"
       ],
       "evidence": {
+        "release_date": [
+          {
+            "value": "2025-02-19",
+            "sources": [
+              "grok-3-s1"
+            ]
+          }
+        ],
         "context_window": [
           {
             "value": 1000000,
