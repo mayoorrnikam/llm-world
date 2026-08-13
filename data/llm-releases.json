@@ -1711,6 +1711,123 @@
       }
     },
     {
+      "id": "qwen-vl-max",
+      "model": "Qwen-VL-Max",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "vision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The API-only top of the Qwen-VL line, announced alongside Qwen-VL-Plus as an upgrade over the open Qwen-VL.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2024-01-25",
+          "sources": [
+            "qwen-vl-max-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen-vl-max-s1",
+          "url": "https://qwenlm.github.io/blog/qwen-vl/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "qwen1-5-72b",
+      "model": "Qwen1.5-72B",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The largest of the eight Qwen1.5 sizes, and the one the lab recommended; every size supports a 32,768-token context.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2024-02-04",
+          "sources": [
+            "qwen1-5-72b-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 32768,
+          "parameter_count": 72000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen1-5-72b-s1",
+          "url": "https://qwenlm.github.io/blog/qwen1.5/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20240205162344/https://qwenlm.github.io/blog/qwen1.5/",
+          "retrieved": "2024-02-05"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-02-04",
+            "sources": [
+              "qwen1-5-72b-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 32768,
+            "sources": [
+              "qwen1-5-72b-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 72000000000,
+            "sources": [
+              "qwen1-5-72b-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "gemini-1-5-pro",
       "model": "Gemini 1.5 Pro",
       "company": "Google DeepMind",
@@ -2622,7 +2739,7 @@
     },
     {
       "id": "qwen2",
-      "model": "Qwen2",
+      "model": "Qwen2-72B",
       "company": "Alibaba Qwen",
       "family": "Qwen",
       "classification": {
@@ -2642,7 +2759,7 @@
         "multilingual"
       ],
       "tags": [],
-      "note": "Alibaba's flagship open series spanning 0.5B to 72B parameters with strong multilingual ability.",
+      "note": "The largest of the five Qwen2 sizes, trained on data in 27 languages beyond English and Chinese.",
       "events": [
         {
           "type": "announcement",
@@ -2656,7 +2773,7 @@
       "specifications": {
         "language": {
           "context_window": 131072,
-          "parameter_count": 72000000000
+          "parameter_count": 72710000000
         }
       },
       "access": {
@@ -2682,9 +2799,9 @@
         }
       ],
       "provenance": {
-        "status": "verified",
-        "confidence": 90,
-        "reason": "Every value this record asserts — date (June 7, 2024), context window (131,072) and parameter count (72B) — was found in an archived primary source, checked 2026-08-10. Capabilities evidenced from the primary sources: coding: “5B, Qwen2-7B, Qwen2-57B-A14B, and Qwen2-72B ; Having been trained on data in 27 additional languages besides English and Chinese; State-of-the-art performance in a large ” | multilingual: “In terms of base language models, Qwen2-72B and state-of-the-art open models are evaluated for different capbilities including natural language understanding, knowledge a”."
+        "status": "partially_verified",
+        "confidence": 80,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the parameter count could not be traced: every archived snapshot of those sources predates the release — the newest is 2024-06-06, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2024-06-07 would settle it."
       },
       "evidence": {
         "release_date": [
@@ -2702,13 +2819,70 @@
               "qwen2-s2"
             ]
           }
+        ]
+      }
+    },
+    {
+      "id": "nemotron-4-340b",
+      "model": "Nemotron-4 340B",
+      "company": "NVIDIA",
+      "family": "Nemotron",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Shipped as base, instruct and reward models under a permissive open licence, built to generate synthetic training data.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2024-06-14",
+          "sources": [
+            "nemotron-4-340b-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 340000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "NVIDIA Open Model License"
+      },
+      "sources": [
+        {
+          "id": "nemotron-4-340b-s1",
+          "url": "https://blogs.nvidia.com/blog/nemotron-4-synthetic-data-generation-llm-training/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20240614155430/https://blogs.nvidia.com/blog/nemotron-4-synthetic-data-generation-llm-training/",
+          "retrieved": "2024-06-14"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2024-06-14",
+            "sources": [
+              "nemotron-4-340b-s1"
+            ]
+          }
         ],
         "parameter_count": [
           {
-            "value": 72000000000,
+            "value": 340000000000,
             "sources": [
-              "qwen2-s1",
-              "qwen2-s2"
+              "nemotron-4-340b-s1"
             ]
           }
         ]
@@ -3299,7 +3473,7 @@
     },
     {
       "id": "qwen2-5",
-      "model": "Qwen2.5",
+      "model": "Qwen2.5-72B",
       "company": "Alibaba Qwen",
       "family": "Qwen",
       "classification": {
@@ -3311,7 +3485,7 @@
         "multilingual"
       ],
       "tags": [],
-      "note": "A massive family of open models that became a default choice across the open ecosystem.",
+      "note": "The largest open Qwen2.5 model, released alongside the Qwen2.5-Coder and Qwen2.5-Math lines.",
       "events": [
         {
           "type": "announcement",
@@ -3325,7 +3499,7 @@
       "specifications": {
         "language": {
           "context_window": 131072,
-          "parameter_count": 72700000000
+          "parameter_count": 72000000000
         }
       },
       "access": {
@@ -3353,7 +3527,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the parameter count could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Renamed from the series to the shipped flagship, which Alibaba describes as \"a 72B-parameter dense decoder-only language model\". The 72B and 3B variants are excluded from the series-wide Apache 2.0 licence."
       },
       "evidence": {
         "release_date": [
@@ -3369,6 +3543,15 @@
           {
             "value": 131072,
             "sources": [
+              "qwen2-5-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 72000000000,
+            "sources": [
+              "qwen2-5-s1",
               "qwen2-5-s2"
             ]
           }
@@ -4547,6 +4730,74 @@
       ]
     },
     {
+      "id": "qwq-32b",
+      "model": "QwQ-32B",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "reasoning"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "A 32B open reasoning model trained with reinforcement learning, released under Apache 2.0.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-03-06",
+          "sources": [
+            "qwq-32b-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 32000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "qwq-32b-s1",
+          "url": "https://qwenlm.github.io/blog/qwq-32b/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250305205353/https://qwenlm.github.io/blog/qwq-32b/",
+          "retrieved": "2025-03-05"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-03-06",
+            "sources": [
+              "qwq-32b-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 32000000000,
+            "sources": [
+              "qwq-32b-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "gemma-3",
       "model": "Gemma 3",
       "company": "Google DeepMind",
@@ -5025,8 +5276,8 @@
       }
     },
     {
-      "id": "qwen3",
-      "model": "Qwen3",
+      "id": "qwen3-235b-a22b",
+      "model": "Qwen3-235B-A22B",
       "company": "Alibaba Qwen",
       "family": "Qwen",
       "classification": {
@@ -5045,7 +5296,7 @@
         "reasoning"
       ],
       "tags": [],
-      "note": "Open MoE models with hybrid thinking modes that topped open-model benchmarks.",
+      "note": "Qwen3's flagship open MoE, with hybrid thinking modes and 22B active parameters.",
       "events": [
         {
           "type": "announcement",
@@ -5085,9 +5336,9 @@
         }
       ],
       "provenance": {
-        "status": "verified",
+        "status": "partially_verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (April 29, 2025), context window (131072) and parameter count (235B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: reasoning: “enable_thinking=True By default, Qwen3 has thinking capabilities enabled, similar to QwQ-32B.”."
+        "reason": "Split from the former \"qwen3\" record, which was named for the family while holding one variant's figures. Evidence: \"We are open-weighting two MoE models: Qwen3-235B-A22B, a large model with 235 billion total parameters and 22 billion activated parameters, and Qwen3-30B-A3B, a smaller MoE model with 30 billion total parameters and 3 billion activated parameters.\""
       },
       "evidence": {
         "release_date": [
@@ -5112,6 +5363,98 @@
             "sources": [
               "qwen3-s1",
               "qwen3-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "qwen3-30b-a3b",
+      "model": "Qwen3-30B-A3B",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "The smaller Qwen3 MoE, which the lab said outperformed QwQ-32B with a tenth of the activated parameters.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-04-29",
+          "sources": [
+            "qwen3-s1",
+            "qwen3-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 131072,
+          "parameter_count": 30000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "qwen3-s1",
+          "url": "https://qwenlm.github.io/blog/qwen3/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250429020635/https://qwenlm.github.io/blog/qwen3/",
+          "retrieved": "2025-04-29"
+        },
+        {
+          "id": "qwen3-s2",
+          "url": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250428214435/https://huggingface.co/Qwen/Qwen3-235B-A22B",
+          "retrieved": "2025-04-28"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 90,
+        "reason": "Split from the former \"qwen3\" record, which was named for the family while holding one variant's figures. Evidence: \"the small MoE model, Qwen3-30B-A3B, outcompetes QwQ-32B with 10 times of activated parameters\""
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-04-29",
+            "sources": [
+              "qwen3-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 131072,
+            "sources": [
+              "qwen3-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 30000000000,
+            "sources": [
+              "qwen3-s1"
             ]
           }
         ]
@@ -5332,6 +5675,83 @@
       }
     },
     {
+      "id": "qwen3-coder-480b-a35b",
+      "model": "Qwen3-Coder-480B-A35B-Instruct",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "coding",
+        "agentic"
+      ],
+      "tags": [],
+      "note": "A 480B Mixture-of-Experts with 35B active parameters for agentic coding, natively 256K context and extendable to 1M with YaRN.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-07-22",
+          "sources": [
+            "qwen3-coder-480b-a35b-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 256000,
+          "parameter_count": 480000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen3-coder-480b-a35b-s1",
+          "url": "https://qwenlm.github.io/blog/qwen3-coder/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250722211347/https://qwenlm.github.io/blog/qwen3-coder/",
+          "retrieved": "2025-07-22"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-07-22",
+            "sources": [
+              "qwen3-coder-480b-a35b-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 256000,
+            "sources": [
+              "qwen3-coder-480b-a35b-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 480000000000,
+            "sources": [
+              "qwen3-coder-480b-a35b-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "glm-4-5",
       "model": "GLM-4.5",
       "company": "Zhipu AI",
@@ -5394,9 +5814,9 @@
         }
       ],
       "provenance": {
-        "status": "verified",
-        "confidence": 90,
-        "reason": "Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: reasoning: “We have open-sourced the base models, hybrid reasoning models, and FP8 versions of the hybrid reasoning models for both GLM-4.”."
+        "status": "partially_verified",
+        "confidence": 80,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "release_date": [
@@ -5412,6 +5832,59 @@
             "value": 355000000000,
             "sources": [
               "glm-4-5-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "qwen-image",
+      "model": "Qwen-Image",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Alibaba's open image generation model, built around native text rendering inside generated images.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-08-04",
+          "sources": [
+            "qwen-image-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen-image-s1",
+          "url": "https://qwenlm.github.io/blog/qwen-image/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250804155750/https://qwenlm.github.io/blog/qwen-image/",
+          "retrieved": "2025-08-04"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-08-04",
+            "sources": [
+              "qwen-image-s1"
             ]
           }
         ]
@@ -6937,6 +7410,64 @@
       ]
     },
     {
+      "id": "nemotron-3-nano-30b-a3b",
+      "model": "Nemotron 3 Nano 30B-A3B",
+      "company": "NVIDIA",
+      "family": "Nemotron",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A 31.6B open Mixture-of-Experts hybrid Mamba-Transformer aimed at agentic reasoning on a single GPU.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-12-23",
+          "sources": [
+            "nemotron-3-nano-30b-a3b-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 31600000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "nemotron-3-nano-30b-a3b-s1",
+          "url": "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Nano-Technical-Report.pdf",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251217015106/https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Nano-Technical-Report.pdf",
+          "retrieved": "2025-12-17"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the technical paper. Not verified because the release date could not be traced: every archived snapshot of those sources predates the release — the newest is 2025-12-17, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2025-12-23 would settle it."
+      },
+      "evidence": {
+        "parameter_count": [
+          {
+            "value": 31600000000,
+            "sources": [
+              "nemotron-3-nano-30b-a3b-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "minimax-speech-2-8",
       "model": "MiniMax Speech 2.8",
       "company": "MiniMax",
@@ -6971,6 +7502,108 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260419231337/https://www.minimax.io/news/minimax-speech-28",
           "retrieved": "2026-04-19"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
+    },
+    {
+      "id": "qwen3-max-thinking",
+      "model": "Qwen3-Max-Thinking",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "reasoning"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "The reasoning configuration of Qwen3-Max, served through the API as qwen3-max-2026-01-23.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-01-23",
+          "sources": [
+            "qwen3-max-thinking-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen3-max-thinking-s1",
+          "url": "https://qwen.ai/blog?id=qwen3-max-thinking",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260126154449/https://qwen.ai/blog?id=qwen3-max-thinking",
+          "retrieved": "2026-01-26"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
+    },
+    {
+      "id": "qwen3-coder-next",
+      "model": "Qwen3-Coder-Next",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "coding"
+      ],
+      "tags": [],
+      "note": "An open coding model in the Qwen3 line, released between the Qwen3.5 and Qwen3.6 generations.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-02-02",
+          "sources": [
+            "qwen3-coder-next-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen3-coder-next-s1",
+          "url": "https://qwen.ai/blog?id=qwen3-coder-next",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260203161636/https://qwen.ai/blog?id=qwen3-coder-next",
+          "retrieved": "2026-02-03"
         }
       ],
       "provenance": {
@@ -7156,7 +7789,7 @@
     },
     {
       "id": "qwen-3-5",
-      "model": "Qwen 3.5",
+      "model": "Qwen3.5-397B-A17B",
       "company": "Alibaba Qwen",
       "family": "Qwen",
       "classification": {
@@ -7175,13 +7808,13 @@
       "tags": [
         "flagship"
       ],
-      "note": "Alibaba's agentic-era flagship claimed to outperform GPT-5 with desktop and mobile operation.",
+      "note": "The first Qwen3.5 model released open-weight: a native vision-language MoE with 397B total and 17B active parameters.",
       "events": [
         {
           "type": "announcement",
-          "date": "2026-02-16",
+          "date": "2026-02-14",
           "sources": [
-            "qwen-3-5-s1",
+            "qwen-3-5-s0",
             "qwen-3-5-s2"
           ]
         }
@@ -7193,17 +7826,17 @@
         }
       },
       "access": {
-        "open_weights": false,
+        "open_weights": true,
         "license": null
       },
       "sources": [
         {
-          "id": "qwen-3-5-s1",
-          "url": "https://en.wikipedia.org/wiki/Qwen",
-          "type": "news",
-          "authority": "secondary",
-          "archived_url": "https://web.archive.org/web/20260307122757/https://en.wikipedia.org/wiki/Qwen",
-          "retrieved": "2026-03-07"
+          "id": "qwen-3-5-s0",
+          "url": "https://qwen.ai/blog?id=qwen3.5",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260216094454/https://qwen.ai/blog?id=qwen3.5",
+          "retrieved": "2026-02-16"
         },
         {
           "id": "qwen-3-5-s2",
@@ -7215,19 +7848,11 @@
         }
       ],
       "provenance": {
-        "status": "verified",
-        "confidence": 90,
-        "reason": "Every value this record asserts — date (2026-02-16), context window (262144) and parameter count (397B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "status": "partially_verified",
+        "confidence": 80,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
-        "release_date": [
-          {
-            "value": "2026-02-16",
-            "sources": [
-              "qwen-3-5-s2"
-            ]
-          }
-        ],
         "context_window": [
           {
             "value": 262144,
@@ -7443,6 +8068,72 @@
       ]
     },
     {
+      "id": "nemotron-3-super",
+      "model": "Nemotron 3 Super",
+      "company": "NVIDIA",
+      "family": "Nemotron",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A 120B open hybrid Mamba-Transformer MoE for agentic reasoning, with a one-million-token context.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-03-11",
+          "sources": [
+            "nemotron-3-super-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "nemotron-3-super-s1",
+          "url": "https://developer.nvidia.com/blog/introducing-nemotron-3-super-an-open-hybrid-mamba-transformer-moe-for-agentic-reasoning/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260311192531/https://developer.nvidia.com/blog/introducing-nemotron-3-super-an-open-hybrid-mamba-transformer-moe-for-agentic-reasoning/",
+          "retrieved": "2026-03-11"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-03-11",
+            "sources": [
+              "nemotron-3-super-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "nemotron-3-super-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "mistral-small-4",
       "model": "Mistral Small 4",
       "company": "Mistral AI",
@@ -7498,9 +8189,9 @@
         }
       ],
       "provenance": {
-        "status": "verified",
-        "confidence": 90,
-        "reason": "Capabilities evidenced from the primary sources: coding: “Mistral Small 4 is the first Mistral model to unify the capabilities of our flagship models, Magistral for reasoning, Pixtral for multimodal, and Devstral for agentic cod” | agentic: “Mistral Small 4 is the first Mistral model to unify the capabilities of our flagship models, Magistral for reasoning, Pixtral for multimodal, and Devstral for agentic cod” | reasoning: “Reasoning on Demand With the new reasoning_effort parameter, users can dynamically adjust the model’s behavior: reasoning_effort=&quot;none&quot; : Fast, lightweight resp”."
+        "status": "partially_verified",
+        "confidence": 80,
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "context_window": [
@@ -7520,6 +8211,57 @@
           }
         ]
       }
+    },
+    {
+      "id": "qwen-3-6-plus",
+      "model": "Qwen3.6-Plus",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "An API-only agentic upgrade over Qwen3.5, with a one-million-token context.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-04-02",
+          "sources": [
+            "qwen-3-6-plus-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen-3-6-plus-s1",
+          "url": "https://qwen.ai/blog?id=qwen3.6",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260402050028/https://qwen.ai/blog?id=qwen3.6",
+          "retrieved": "2026-04-02"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
     },
     {
       "id": "llama-5",
@@ -7647,9 +8389,9 @@
         }
       ],
       "provenance": {
-        "status": "verified",
-        "confidence": 90,
-        "reason": "Capabilities evidenced from the primary sources: reasoning: “Muse Spark is a natively multimodal reasoning model with support for tool-use, visual chain of thought, and multi-agent orchestration.” | agentic: “Capabilities for Personal Superintelligence Muse Spark offers competitive performance in multimodal perception, reasoning, health, and agentic tasks.”."
+        "status": "partially_verified",
+        "confidence": 80,
+        "reason": "Cited to the lab's own announcement. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
         "parameter_count"
@@ -9234,9 +9976,9 @@
         }
       ],
       "provenance": {
-        "status": "verified",
-        "confidence": 90,
-        "reason": "Capabilities evidenced from the primary sources: coding: “15763&quot;,&quot;type&quot;:&quot;arxiv&quot;,&quot;extra&quot;:{&quot;paperTitle&quot;:&quot;GLM-5: from Vibe Coding to Agentic Engineering&quot;}},{&quot;id&quot;:&quo” | agentic: “15763&quot;,&quot;type&quot;:&quot;arxiv&quot;,&quot;extra&quot;:{&quot;paperTitle&quot;:&quot;GLM-5: from Vibe Coding to Agentic Engineering&quot;}},{&quot;id&quot;:&quo”."
+        "status": "partially_verified",
+        "confidence": 80,
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "context_window": [
@@ -9470,9 +10212,9 @@
         }
       ],
       "provenance": {
-        "status": "verified",
-        "confidence": 90,
-        "reason": "Capabilities evidenced from the primary sources: reasoning: “code)]:bg-white/90\"> Grok 4 Information for Grok 3 Users When moving from grok-3 / grok-3-mini to grok-4 , please note the following differences: • Grok 4 is a reasoning ”."
+        "status": "partially_verified",
+        "confidence": 80,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
         "parameter_count"
@@ -10268,13 +11010,13 @@
           "type": "announcement",
           "date": "2026-08-03",
           "sources": [
-            "qwen-3-8-max-s1"
+            "qwen-3-8-max-s0"
           ]
         }
       ],
       "specifications": {
         "language": {
-          "context_window": 1000000,
+          "context_window": 256000,
           "parameter_count": 2400000000000
         }
       },
@@ -10283,6 +11025,14 @@
         "license": null
       },
       "sources": [
+        {
+          "id": "qwen-3-8-max-s0",
+          "url": "https://qwen.ai/blog?id=qwen3.8",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260803035012/https://qwen.ai/blog?id=qwen3.8",
+          "retrieved": "2026-08-03"
+        },
         {
           "id": "qwen-3-8-max-s1",
           "url": "https://www.marktechpost.com/2026/08/03/alibaba-qwen-releases-qwen3-8-max/",
@@ -10295,8 +11045,9 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "No primary source. The release is recorded from news reporting only, so it cannot be verified until the lab's own announcement is cited."
-      }
+        "reason": "Re-sourced to the lab's own announcement, replacing a news citation. Alibaba said the weights would be released the following week; open_weights stays false until that is evidenced."
+      },
+      "evidence": {}
     },
     {
       "id": "muse-spark-1-2",
@@ -10492,14 +11243,24 @@
           "url": "https://microsoft.ai/news/mai-image-2-6-launches-at-no-2-on-arena-ahead-of-google-meta-and-xai/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260813024921/https://microsoft.ai/news/mai-image-2-6-launches-at-no-2-on-arena-ahead-of-google-meta-and-xai/",
+          "retrieved": "2026-08-13"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-10",
+            "sources": [
+              "mai-image-2-6-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -10810,6 +11571,11 @@
       "from": "models/gpt-5-6",
       "to": "families/gpt",
       "reason": "The \"GPT-5.6\" record described a family and was split into the models that shipped under it."
+    },
+    {
+      "from": "models/qwen3",
+      "to": "families/qwen",
+      "reason": "The \"Qwen3\" record described a family and was split into the models that shipped under it."
     }
   ]
 }
