@@ -99,6 +99,27 @@ function reasonFor(r) {
     .filter((x) => x.retrieved)
     .every((x) => x.retrieved < on);
 
+  /**
+   * A release from the last fortnight has not had time to be archived.
+   *
+   * The stale-snapshot sentence below describes a defect, and for a model added
+   * days after it shipped that is simply wrong — archive.org has not caught up,
+   * which is a wait rather than a fault. Telling someone who added the record
+   * this morning that "a capture would settle it" reads as an accusation of
+   * sloppy work, when provenance is meant to describe the state of the evidence
+   * and not imply blame for it.
+   */
+  const ageDays = on
+    ? Math.round((Date.now() - Date.parse(`${on}T00:00:00Z`)) / 86400000)
+    : Infinity;
+
+  if (stale && ageDays <= 14) {
+    return `${cited}. ${list(unproven.map((f) => FIELD_PHRASE[f] ?? f))} `
+      + `could not be traced yet: this release is ${ageDays} day${ageDays === 1 ? '' : 's'} old `
+      + `and archive.org has not captured the announcement since it went up. That is a `
+      + `wait, not a gap — re-running the archive pass will settle it.`;
+  }
+
   if (stale) {
     const newest = primary.map((x) => x.retrieved).filter(Boolean).sort().pop();
     return `${cited}. Not verified because ${list(unproven.map((f) => FIELD_PHRASE[f] ?? f))} `
