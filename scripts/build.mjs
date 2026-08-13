@@ -290,6 +290,67 @@ const write = (path, html, { sitemap = true } = {}) => {
 
 /* --------------------------------------------------------------- templates */
 
+/**
+ * The record's evidence state, at the top of the page instead of buried.
+ *
+ * A model page opened with the name, the lab and the date, and said nothing
+ * about whether any of it had been checked — while the dataset knew precisely,
+ * for every field, whether a figure was traced to a source, withheld by the
+ * lab, or simply never researched. The strongest thing about this project was
+ * three scrolls down.
+ *
+ * Restrained on purpose. Nothing here is green or red: a verified record is not
+ * "good news" and an unresearched field is not an error, it is an honest gap.
+ * The states are distinguished by weight and a leading mark, not by hue alone,
+ * so they survive a monochrome screen and forced colours.
+ *
+ * The counts are the part that cannot overclaim. "Verified" on its own invites
+ * a reader to assume every number on the page is checked; "3 of 5 values traced
+ * to a source" says exactly what was done.
+ */
+function provenanceBar(r) {
+  const status = r.provenance?.status ?? 'unverified';
+
+  const LABEL = {
+    verified: 'Verified',
+    partially_verified: 'Partially verified',
+    estimated: 'Estimated',
+    unverified: 'Not verified',
+  };
+
+  // Fields this record could carry, and what is actually known about each.
+  const fields = ['release_date', 'context_window', 'parameter_count']
+    .filter((f) => appliesTo(r, f));
+  const traced = fields.filter((f) => evidenceFor(r, f).sources.length).length;
+  const asserted = fields.filter((f) => assertedValue(r, f) != null).length;
+
+  const undisclosed = (r.undisclosed ?? []).length;
+  const unresearched = ['context_window', 'parameter_count', 'license']
+    .filter((f) => appliesTo(r, f) && fieldState(r, f) === 'unresearched').length;
+
+  const archived = r.sources.filter((x) => x.archived_url).length;
+  const primary = r.sources.filter((x) => x.authority === 'primary').length;
+
+  const bits = [
+    `<span class="pv-fact"><strong>${traced}</strong> of ${asserted} published values traced to a source</span>`,
+    `<span class="pv-fact"><strong>${primary}</strong> primary source${primary === 1 ? '' : 's'}, ${archived} archived</span>`,
+  ];
+  if (undisclosed) {
+    bits.push(`<span class="pv-fact"><strong>${undisclosed}</strong> not disclosed by the lab</span>`);
+  }
+  if (unresearched) {
+    bits.push(`<span class="pv-fact pv-gap"><strong>${unresearched}</strong> not researched yet</span>`);
+  }
+
+  return `<div class="pv" data-status="${esc(status)}">
+<p class="pv-head"><span class="pv-dot" aria-hidden="true"></span>${esc(LABEL[status] ?? status)}</p>
+<p class="pv-facts">${bits.join('')}</p>
+${r.provenance?.reason ? `<details class="pv-why"><summary>Why this status</summary>
+<p>${esc(r.provenance.reason)}</p></details>` : ''}
+<p class="pv-more"><a href="../../methodology/">What these states mean</a> · <a href="../../data-quality/">How records are judged</a></p>
+</div>`;
+}
+
 function modelPage(r) {
   const prev = predecessorOf(r);
   const fam = releases.filter((x) => x.family === r.family).sort((a, b) => a.year - b.year || a.month - b.month || (a.day || 0) - (b.day || 0));
@@ -356,6 +417,8 @@ function modelPage(r) {
       prev ? ` · ${daysBetween(prev, r)} days after <a href="../${esc(prev.id)}/">${esc(prev.model)}</a>` : ''}</p>
   </div>
 </div>
+
+${provenanceBar(r)}
 
 ${r.note ? `<p class="doc-note">${esc(r.note)}</p>` : ''}
 
