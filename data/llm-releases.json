@@ -8280,7 +8280,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be traced: every archived snapshot of those sources predates the release — the newest is 2026-05-21, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2026-05-22 would settle it."
       },
       "evidence": {
         "context_window": [

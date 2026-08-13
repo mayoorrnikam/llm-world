@@ -21,7 +21,7 @@
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import {
-  assertedValue, evidenceFor, EVIDENCED_FIELDS,
+  assertedValue, evidenceFor, EVIDENCED_FIELDS, canonicalDate,
 } from '../lib/record.mjs';
 
 const FILE = 'data/llm-releases.json';
@@ -82,6 +82,32 @@ function reasonFor(r) {
   if (!unproven.length) {
     return `${cited}, and every value it asserts was found there.`;
   }
+  /**
+   * A snapshot older than the release is a different failure, and saying so
+   * matters.
+   *
+   * "Could not be found in any cited primary source" reads as: nobody
+   * published it, or nobody looked. For Mistral Medium 3.5 neither was true —
+   * the announcement states 22 May 2026 plainly, and the only capture
+   * archive.org holds is from the day before, when the page had not announced
+   * yet. The record blamed the research when the problem was the citation's
+   * timing, which is exactly the kind of quiet inaccuracy this dataset is
+   * supposed to refuse.
+   */
+  const on = canonicalDate(r);
+  const stale = on && primary
+    .filter((x) => x.retrieved)
+    .every((x) => x.retrieved < on);
+
+  if (stale) {
+    const newest = primary.map((x) => x.retrieved).filter(Boolean).sort().pop();
+    return `${cited}. Not verified because ${list(unproven.map((f) => FIELD_PHRASE[f] ?? f))} `
+      + `could not be traced: every archived snapshot of those sources predates the `
+      + `release — the newest is ${newest}, captured before the page announced it — `
+      + `so the archived copy does not contain the figure. A capture from on or after `
+      + `${on} would settle it.`;
+  }
+
   return `${cited}. Not verified because ${list(unproven.map((f) => FIELD_PHRASE[f] ?? f))} `
     + `could not be found in any cited primary source — the value may be correct, `
     + `but this dataset cannot yet show where it came from.`;
