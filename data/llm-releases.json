@@ -10159,6 +10159,76 @@
           }
         ]
       }
+    },
+    {
+      "id": "mai-thinking-1",
+      "model": "MAI-Thinking-1",
+      "company": "Microsoft",
+      "family": "MAI",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning",
+        "coding",
+        "function_calling"
+      ],
+      "tags": [],
+      "note": "Microsoft Superintelligence team's first reasoning model: a sparse Mixture of Experts with 35B active parameters of roughly 1T total, a 256k-token window, and function calling.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-12",
+          "sources": [
+            "mai-thinking-1-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 256000,
+          "parameter_count": 35000000000
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mai-thinking-1-s1",
+          "url": "https://microsoft.ai/news/introducing-mai-thinking-1/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260805034757/https://microsoft.ai/news/introducing-mai-thinking-1/",
+          "retrieved": "2026-08-05"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement. the release date could not be traced yet: this release is 1 day old and archive.org has not captured the announcement since it went up. That is a wait, not a gap — re-running the archive pass will settle it."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 256000,
+            "sources": [
+              "mai-thinking-1-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 35000000000,
+            "sources": [
+              "mai-thinking-1-s1"
+            ]
+          }
+        ]
+      }
     }
   ],
   "redirects": [

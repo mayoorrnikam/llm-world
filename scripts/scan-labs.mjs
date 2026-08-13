@@ -48,7 +48,7 @@ const ONLY = process.argv.find((a) => a.startsWith('--lab='))?.split('=')[1];
  */
 const EXTRA = [
   // Documentation indexes this dataset does not yet cite.
-  { lab: 'Google DeepMind', url: 'https://ai.google.dev/gemini-api/docs/models' },
+  { lab: 'Google DeepMind', url: 'https://ai.google.dev/gemini-api/docs/models', docs: true },
 
   // News and blog indexes, for the twelve labs whose documentation is not cited
   // by any record — without these the scan reached six labs out of eighteen.
@@ -59,6 +59,9 @@ const EXTRA = [
   { lab: 'Meta AI', url: 'https://ai.meta.com/blog/' },
   { lab: 'Alibaba Qwen', url: 'https://qwenlm.github.io/blog/' },
   { lab: 'Amazon', url: 'https://aws.amazon.com/blogs/machine-learning/' },
+  // microsoft.ai, not the Azure blog: the MAI line ships on the former and the
+  // latter names none of it. Eight MAI models were live and undiscoverable.
+  { lab: 'Microsoft', url: 'https://microsoft.ai/news/' },
   { lab: 'Microsoft', url: 'https://azure.microsoft.com/en-us/blog/' },
   { lab: 'Cohere', url: 'https://cohere.com/blog' },
   { lab: 'Allen Institute for AI', url: 'https://allenai.org/blog' },
@@ -184,11 +187,23 @@ function channels() {
 
   const out = [];
   for (const [lab, e] of byLab) {
-    // The alphabetic stem shared by this lab's ids — "grok", "gpt", "claude".
-    const stems = e.ids.map((id) => /^[a-z]+/.exec(id)?.[0]).filter(Boolean);
-    const stem = [...new Set(stems)].sort((a, b) =>
-      stems.filter((x) => x === b).length - stems.filter((x) => x === a).length)[0];
-    if (!stem || stem.length < 2) continue;
+    /**
+     * EVERY stem this lab uses, not just its commonest.
+     *
+     * Taking the most frequent one gave Microsoft "phi", because four Phi
+     * records outnumbered one MAI — so the entire MAI line, eight models across
+     * text, image, speech and code, was invisible to a scan pointed straight at
+     * the page listing them. A lab with two product lines is normal; assuming
+     * one was the bug.
+     */
+    const counts = new Map();
+    for (const id of e.ids) {
+      const st = /^[a-z]+/.exec(id)?.[0];
+      if (st && st.length >= 2) counts.set(st, (counts.get(st) ?? 0) + 1);
+    }
+    const stems = [...counts.keys()];
+    if (!stems.length) continue;
+    const stem = stems.join('|');
 
     // The index cited by the most records is the one the lab actually maintains.
     const url = [...e.docs.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
@@ -197,8 +212,9 @@ function channels() {
     out.push({
       lab,
       url,
-      models: new RegExp(`\\b${stem}(?:[-. ][a-z]+){0,2}[-. ][\\d][\\d.]*(?:-[a-z]+)*\\b`, 'gi'),
+      models: new RegExp(`\\b(?:${stem})(?:[-. ][a-z]+){0,2}[-. ][\\d][\\d.]*(?:-[a-z]+)*\\b`, 'gi'),
       post: () => url,
+      docs: true,
       // A per-model page, where the lab has a predictable one. This is the only
       // input safe to draft from: a docs INDEX names every model the lab
       // serves, so extracting a context window from it would take whichever
@@ -211,10 +227,13 @@ function channels() {
     // A lab can have both a docs index and a news index; both are worth reading.
     if (out.some((c) => c.url === x.url)) continue;
     const ids = data.releases.filter((r) => r.company === x.lab).map((r) => r.id);
-    const stem = /^[a-z]+/.exec(ids[0] ?? '')?.[0];
+    // Every stem, as above. Taking ids[0] gave Microsoft "phi" from a Phi
+    // record and lost the whole MAI line on the page that lists it.
+    const stem = [...new Set(ids.map((id) => /^[a-z]+/.exec(id)?.[0])
+      .filter((st) => st && st.length >= 2))].join('|');
     if (!stem) continue;
-    out.push({ lab: x.lab, url: x.url,
-      models: new RegExp(`\\b${stem}(?:[-. ][a-z]+){0,2}[-. ][\\d][\\d.]*(?:-[a-z]+)*\\b`, 'gi'), post: () => x.url });
+    out.push({ lab: x.lab, url: x.url, docs: Boolean(x.docs),
+      models: new RegExp(`\\b(?:${stem})(?:[-. ][a-z]+){0,2}[-. ][\\d][\\d.]*(?:-[a-z]+)*\\b`, 'gi'), post: () => x.url });
   }
   return out;
 }
@@ -242,7 +261,19 @@ for (const c of targets) {
     const k = m[0].toLowerCase();
     counts.set(k, (counts.get(k) ?? 0) + 1);
   }
-  const seen = [...counts.entries()].filter(([, n]) => n > 1).map(([k]) => k);
+  // The repeat rule only applies to DOCUMENTATION. It exists because a docs
+  // page mentions ids in prose — xAI's "not supported by models grok-4.20 and
+  // newer" is an API caveat, not a model — and a model the lab serves appears
+  // in its card, its heading and its alias. A NEWS INDEX is the opposite: each
+  // release appears exactly once, as a headline. Applying the rule there hid
+  // all eight MAI models from a scan pointed straight at the page listing them.
+  // On a news index the stem is also the company name, so a funding headline
+  // matches as readily as a release: "Mistral AI raises 1.7B" parses as a model
+  // called "mistral ai raises 1". These words never appear inside a model id.
+  const HEADLINE_NOISE = /\b(?:raises?|compute|partners?|funding|series|announces?|launches?|introduces?|available|joins?|acquires?|expands?)\b/i;
+  const seen = [...counts.entries()]
+    .filter(([k, n]) => (c.docs ? n > 1 : n >= 1) && !HEADLINE_NOISE.test(k))
+    .map(([k]) => k);
   // Collapse snapshot ids of the same model to one candidate.
   const byBase = new Map();
   for (const m of seen) if (!byBase.has(base(m))) byBase.set(base(m), m);
