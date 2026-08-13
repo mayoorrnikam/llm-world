@@ -1,8 +1,12 @@
 # LLM World
 
-A source-backed record of large language model releases. Every figure on the site
-is traced to the lab's own announcement, paper, model card or documentation — and
+A source-backed record of frontier model releases. Every figure on the site is
+traced to the lab's own announcement, paper, model card or documentation — and
 where a lab publishes nothing, the record says so instead of guessing.
+
+**140 releases · 19 labs · 28 families.** Language models are 87% of it; the rest
+are image, video, audio and vision models, because the labs stopped shipping only
+language some time ago and a tracker that ignores that is describing 2023.
 
 **Live at [mayoorrnikam.github.io/llm-world](https://mayoorrnikam.github.io/llm-world/)**
 
@@ -321,6 +325,12 @@ unless marked estimated, at least one source per release, `verified` implies a
 primary source, numeric fields numeric-or-null, and agreement between
 `access.open_weights` and the open-weights tag.
 
+It also enforces the harder half of what `verified` means: **every value a record
+asserts must be traced to a primary source**, not merely accompanied by one.
+Nothing recomputes provenance when a figure changes, so correcting a value on a
+verified record used to leave the badge claiming more than the evidence did —
+seven records were in that state when the check was added.
+
 It earns its place — its first run caught six releases marked `verified` that
 were backed only by secondary reporting.
 
@@ -355,6 +365,22 @@ announcement link you can check.
 Updates are **manual by design** — there is no reliable public API for "notable
 LLM releases" (Hugging Face indexes repos, not releases, and the largest labs
 don't publish weights there at all), so a curated JSON beats a noisy feed.
+
+**Discovery is automated; recording is not**, and the line is deliberate.
+`scan-labs.mjs` runs twice a day and files a discovery issue, `submission.yml`
+drafts a pull request from a pasted announcement, and `discover-epoch.mjs`
+diffs the dataset against Epoch AI's notable-models list. All of them stop at a
+person. Extraction is simply not reliable enough to merge itself: in one sitting
+the drafter proposed a rival model's context window, 7B parameters for a 72B
+model, `proprietary` for three Apache-licensed models, and a URL that returned
+HTTP 200 with a 36-character error id. Each was caught by reading the page.
+
+```bash
+npm run scan        # what each lab's own channel lists that we don't track
+npm run discover    # what Epoch AI lists that we don't track
+npm run enrich      # archive → attribute → modalities → capabilities →
+                    # benchmarks → pricing → undisclosed → restate reasons
+```
 
 To add a release: append an object to `data/llm-releases.json`, bump `updated`
 to today, and push. CI validates the data, regenerates every page and deploys.
@@ -490,6 +516,17 @@ no code change. A company with no assigned hue falls back to a neutral swatch.
   "good at" something, and no composite is ever computed
 - The benchmark a lab chooses to report is itself a claim about what the model is
   for, so SWE-bench evidences coding and τ-bench evidences agentic behaviour
+- Scores are read out of **comparison tables by column, and the column is
+  identified by name** — see `lib/benchmark-table.mjs`. Once flattened, a row is
+  `GPQA Diamond 93.5 92.6 94.1 91.0` with nothing to say which column is the
+  announced model, and it is often not the first: Alibaba's Qwen3.8-Max table
+  puts Claude Opus 4.8 in column one. Taking the leading number would publish a
+  rival's result as the lab's own `vendor_reported` claim, citing the lab's
+  announcement. The reader refuses unless every column resolves to a known model
+  and exactly one of them is this record's
+- Coverage is thin and will stay thin: most labs publish benchmarks as **images**,
+  which no text reader will ever see. Model cards and repo READMEs are where the
+  machine-readable tables actually live
 
 **Reference documents, published** — `/methodology/`, `/taxonomy/`
 - The rules every figure had to pass, and the definitions behind every label
@@ -568,9 +605,9 @@ alone. Glyphs are `aria-hidden`, being decorative.
 
 Checked and rejected: **Simple Icons** (CC0) is the usual general-purpose brand
 set, but it has no OpenAI, Microsoft or Amazon — brands that asked to be
-removed from icon sets. It covers only 11 of our 16 labs.
+removed from icon sets. It covers only 11 of our 19 labs.
 
-Both sets are inlined into the sprite in `index.html`; nothing is fetched at
+Both sets are inlined into `sprite.svg`; nothing is fetched at
 runtime. Capability icons are deliberately *stroke* marks while company logos
 are *filled*, so the two never read as the same kind of thing.
 
@@ -583,8 +620,10 @@ specifically for AI/LLM brands. They're monochrome and painted with
 independent. Trademarks remain their owners'; using them to identify the
 companies whose releases are listed is nominative use.
 
-15 of our 16 labs are covered. BigScience has no mark in the set, so a neutral
-bloom stands in for BLOOM. (Simple Icons was the other candidate but is missing
+18 of our 19 labs are covered. BigScience has no mark in the set, so a neutral
+bloom stands in for BLOOM, and Black Forest Labs uses the FLUX mark — the set
+carries `flux.svg` but no house logo, and FLUX is how the lab brands its models.
+Anything uncovered falls back to a monogram rather than a generic grey blob. (Simple Icons was the other candidate but is missing
 OpenAI, Microsoft and Amazon — brands that have asked to be removed from icon
 sets.)
 
