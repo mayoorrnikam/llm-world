@@ -1734,9 +1734,24 @@ those are proprietary models whose labs publish no specification at all.</p>
 function changesPage() {
   const git = (args) => {
     try {
-      return execFileSync('git', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+      return execFileSync('git', args, {
+        encoding: 'utf8',
+        maxBuffer: 64 * 1024 * 1024,
+        // Failures here are expected and handled by the callers — asking for the
+        // root commit's parent is the normal case. Letting git print "fatal:
+        // invalid object name" to the build log makes a healthy build look
+        // broken, which is worse than useless: it trains you to ignore the one
+        // line that might one day matter.
+        stdio: ['ignore', 'pipe', 'ignore'],
+      });
     } catch { return null; }
   };
+
+  /** The parent commit, or null when there is none (the root). */
+  const parentOf = (sha) => git(['rev-parse', '--verify', '--quiet', `${sha}^`])?.trim() || null;
+
+  /** Whether a commit contains the dataset at all. */
+  const hasData = (sha) => git(['cat-file', '-e', `${sha}:data/llm-releases.json`]) !== null;
 
   const SEP = '\u001f';
   const log = git(['log', '--format=%H%x1f%aI%x1f%s', '-n', '60', '--', 'data/llm-releases.json']);
@@ -1758,8 +1773,31 @@ function changesPage() {
   const entries = [];
   for (const c of commits) {
     const now = index(at(c.sha));
-    const before = index(at(c.sha + '^'));
     if (!now.size) continue;
+
+    /**
+     * "No parent to compare against" and "could not read the parent" are very
+     * different, and treating them alike is how a changelog fabricates.
+     *
+     * The previous version read `sha^` and fell back to an empty map on any
+     * failure, so an unreadable or unparseable parent would have published the
+     * entire dataset as newly added on that date. It never fired, because the
+     * only failing case was the root commit — where an empty map happens to be
+     * the right answer. That is luck, not correctness, and the /changes/ page
+     * is precisely where this project promises not to overclaim.
+     */
+    const parent = parentOf(c.sha);
+    let before;
+    if (!parent || !hasData(parent)) {
+      // Nothing preceded this: the root commit, or the commit that first added
+      // the dataset. Every record in it really is new.
+      before = new Map();
+    } else {
+      const doc = at(parent);
+      // Readable history, unreadable content — say nothing rather than guess.
+      if (doc === null) continue;
+      before = index(doc);
+    }
 
     const added = [...now.keys()].filter((id) => !before.has(id));
     const removed = [...before.keys()].filter((id) => !now.has(id));
