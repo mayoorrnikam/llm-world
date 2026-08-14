@@ -85,6 +85,15 @@ const EXTRA = [
   { lab: 'NVIDIA', url: 'https://developer.nvidia.com/blog/' },
   { lab: 'MiniMax', url: 'https://www.minimax.io/news' },
   { lab: 'Moonshot AI', url: 'https://moonshotai.github.io/' },
+  // Zhipu was listed as having no channel at all: z.ai/blog now 404s and the
+  // homepage is client-rendered down to 53 characters. Its DEVELOPER docs carry
+  // dated release notes for every GLM model, which is the one surface the lab
+  // maintains in readable HTML.
+  //
+  // z.ai answers 200 for paths that do not exist — /blog/glm-5.3 and an
+  // invented control both return a body no reader can use — so this channel was
+  // confirmed by reading 8,711 characters of it, never by its status code.
+  { lab: 'Zhipu AI', url: 'https://docs.z.ai/release-notes', docs: true },
 ];
 
 /**
@@ -99,7 +108,7 @@ const EXTRA = [
 const BLOCKED = [
   { lab: 'OpenAI', url: 'https://openai.com/news/', covered: 'developer documentation' },
   { lab: 'NVIDIA', url: 'https://investor.nvidia.com/news/', covered: 'blogs.nvidia.com' },
-  { lab: 'Zhipu AI', url: 'https://z.ai/blog', covered: null },
+  { lab: 'Zhipu AI', url: 'https://z.ai/blog', covered: 'docs.z.ai release notes' },
 ];
 
 
