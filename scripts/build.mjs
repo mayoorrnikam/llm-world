@@ -211,6 +211,42 @@ const eventDate = (iso) => {
 const predecessorOf = (r) => releases
   .filter((x) => x.company === r.company && x.id !== r.id && daysBetween(x, r) > 0).at(-1);
 
+/**
+ * "What changed" against the previous release in the same FAMILY.
+ *
+ * The family predecessor, not the lab's previous release: GPT-4o follows GPT-4,
+ * and putting it next to whatever OpenAI happened to ship most recently
+ * compares two unrelated products. Families already order by date on the family
+ * page, so the same neighbour is used here and the two pages cannot disagree.
+ *
+ * Rendered statically. This is a fact about two records that never changes
+ * between builds, so it needs no JavaScript — the compare page computes the
+ * same thing at runtime only because its pair is chosen by the reader.
+ */
+function changedSection(prev, next) {
+  if (!prev) return '';
+  const { changes, incomparable } = diffRecords(prev, next);
+  if (!changes.length && !incomparable.length) return '';
+
+  const rows = changes.map((c) => `<li data-direction="${esc(c.direction)}">`
+    + `<span class="cmp-diff-label">${esc(c.label)}</span>`
+    + `<span class="cmp-diff-value">${esc(c.gained ? c.gained.join(', ') : `${c.from} → ${c.to}`)}</span>`
+    + `</li>`).join('');
+
+  return `
+<h2>What changed from ${esc(prev.model)}</h2>
+<p class="chart-note">Compared with the previous release in this family. A field
+appears only when both records state a value — where one does not, it is listed
+as uncomparable rather than dropped, because a gap in our research is not a
+finding about the model.</p>
+<div class="cmp-diff">
+${rows ? `<ul class="cmp-diff-list">${rows}</ul>` : ''}
+${incomparable.length ? `<p class="cmp-diff-gap">Not comparable: ${
+  esc(incomparable.map((x) => `${x.label} (${x.why})`).join('; '))}</p>` : ''}
+<p class="doc-note"><a href="../../compare/?m=${esc(prev.id)},${esc(next.id)}">Compare them side by side →</a></p>
+</div>`;
+}
+
 /* -------------------------------------------------------------------- shell */
 
 function page({ title, description, canonical, depth, sprites, body, jsonld, section, head = '' }) {
@@ -551,6 +587,8 @@ ${r.provenance.reason ? `<p class="doc-reason">${esc(r.provenance.reason)}</p>` 
 <ol class="doc-lineage">${fam.map((x, i) => `<li${x.id === r.id ? ' aria-current="true"' : ''}>${
   x.id === r.id ? `<strong>${esc(x.model)}</strong>` : `<a href="../${esc(x.id)}/">${esc(x.model)}</a>`
 } <span>${fullDate(x)}</span></li>`).join('')}</ol>
+
+${changedSection(fam[idx - 1], r)}
 
 <p class="doc-share">
   <button type="button" class="copy-btn" data-copy="url" hidden>Copy link</button>
