@@ -10343,6 +10343,64 @@
       }
     },
     {
+      "id": "seed-2-1",
+      "model": "Seed2.1",
+      "company": "ByteDance",
+      "family": "Seed",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "ByteDance's agent model for real-world productivity, and the flagship of the Seed line.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-06-23",
+          "sources": [
+            "seed-2-1-s1",
+            "seed-2-1-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "seed-2-1-s1",
+          "url": "https://seed.bytedance.com/blog/seed2-1-officially-released-advancing-ai-productivity",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "seed-2-1-s2",
+          "url": "https://seed.bytedance.com/en/seed2_1",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260623045712/https://seed.bytedance.com/en/seed2_1",
+          "retrieved": "2026-06-23"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
+    },
+    {
       "id": "claude-sonnet-5",
       "model": "Claude Sonnet 5",
       "company": "Anthropic",
@@ -10533,6 +10591,59 @@
           "observed_on": "2026-07-08"
         }
       ]
+    },
+    {
+      "id": "seedream-5-0-pro",
+      "model": "Seedream 5.0 Pro",
+      "company": "ByteDance",
+      "family": "Seed",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A multimodal image generation model positioned around understanding design intent rather than generation alone.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-08",
+          "sources": [
+            "seedream-5-0-pro-s1",
+            "seedream-5-0-pro-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "seedream-5-0-pro-s1",
+          "url": "https://seed.bytedance.com/blog/beyond-generation-it-understands-design-introducing-seedream-5-0-pro",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "seedream-5-0-pro-s2",
+          "url": "https://seed.bytedance.com/en/seedream5_0_pro",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260708133912/https://seed.bytedance.com/en/seedream5_0_pro",
+          "retrieved": "2026-07-08"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
     },
     {
       "id": "gpt-5-6-sol",
@@ -10887,6 +10998,49 @@
         "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {}
+    },
+    {
+      "id": "seed-audio-1-0",
+      "model": "Seed Audio 1.0",
+      "company": "ByteDance",
+      "family": "Seed",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "An audio creation model covering speech through to full-scene audio generation.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-20",
+          "sources": [
+            "seed-audio-1-0-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "seed-audio-1-0-s1",
+          "url": "https://seed.bytedance.com/blog/from-speech-to-audio-creation-introducing-the-seed-audio-1-0-audio-creation-model",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
     },
     {
       "id": "gemini-3-6-flash",
@@ -11383,6 +11537,59 @@
       "evidence": {}
     },
     {
+      "id": "seedance-2-5",
+      "model": "Seedance 2.5",
+      "company": "ByteDance",
+      "family": "Seed",
+      "classification": {
+        "primary_type": "video_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A joint audio-video generation model built around one-take creation and flexible referencing.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-31",
+          "sources": [
+            "seedance-2-5-s1",
+            "seedance-2-5-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "seedance-2-5-s1",
+          "url": "https://seed.bytedance.com/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "seedance-2-5-s2",
+          "url": "https://seed.bytedance.com/en/seedance2_5",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260731062553/https://seed.bytedance.com/en/seedance2_5",
+          "retrieved": "2026-07-31"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
+    },
+    {
       "id": "qwen-3-8-max",
       "model": "Qwen3.8-Max",
       "company": "Alibaba Qwen",
@@ -11563,6 +11770,59 @@
         "confidence": 60,
         "reason": "No primary source. The release is recorded from news reporting only, so it cannot be verified until the lab's own announcement is cited."
       }
+    },
+    {
+      "id": "seedrealtime",
+      "model": "SeedRealtime",
+      "company": "ByteDance",
+      "family": "Seed",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A native audio-visual full-duplex model that understands audio, visual and temporal information together.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-05",
+          "sources": [
+            "seedrealtime-s1",
+            "seedrealtime-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "seedrealtime-s1",
+          "url": "https://seed.bytedance.com/blog/seedrealtime-audio-visual-full-duplex-llm-released-toward-omni-modal-natural-interaction",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "seedrealtime-s2",
+          "url": "https://seed.bytedance.com/en/SeedRealtime",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260805042444/https://seed.bytedance.com/en/seedrealtime",
+          "retrieved": "2026-08-05"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
     },
     {
       "id": "muse-glimmer",
