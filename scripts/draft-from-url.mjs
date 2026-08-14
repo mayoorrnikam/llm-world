@@ -57,7 +57,13 @@ const company = flag('company');
 // A page that never names the model is the wrong page — the exact failure that
 // put a hollow citation on gpt-5-3-codex, where a docs URL archived as
 // navigation and evidenced nothing it was cited for.
-if (model && !new RegExp(model.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i').test(text)) {
+// Labs typeset model names with non-breaking hyphens: OpenAI's Daybreak post
+// writes "GPT‑5.6‑Cyber" with U+2011, not "-". An ASCII-only comparison called
+// that page "never names GPT-5.6-Cyber" when it names it eleven times, and a
+// false alarm on this check is expensive — it is the guard against citing a
+// page about a different model, so it has to be believable.
+const dashes = (s) => s.replace(/[‐-―−﹘﹣－]/g, '-');
+if (model && !new RegExp(dashes(model).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i').test(dashes(text))) {
   say(`\n⚠ the page never names "${model}" — check the URL is this model's own page`);
 }
 

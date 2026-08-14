@@ -8550,6 +8550,92 @@
       "evidence": {}
     },
     {
+      "id": "seedance-2-0",
+      "model": "Seedance 2.0",
+      "company": "ByteDance",
+      "family": "Seed",
+      "classification": {
+        "primary_type": "video_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The 2.0 generation of ByteDance's video generation model.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-02-12",
+          "sources": [
+            "seedance-2-0-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "seedance-2-0-s1",
+          "url": "https://seed.bytedance.com/blog/seedance-2-0-official-launch",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "seedream-5-0-lite",
+      "model": "Seedream 5.0 Lite",
+      "company": "ByteDance",
+      "family": "Seed",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The lighter Seedream 5.0 variant, positioned around more deliberate generation.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-02-13",
+          "sources": [
+            "seedream-5-0-lite-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "seedream-5-0-lite-s1",
+          "url": "https://seed.bytedance.com/blog/deeper-thinking-more-accurate-generation-introducing-seedream-5-0-lite",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "qwen-3-5",
       "model": "Qwen3.5-397B-A17B",
       "company": "Alibaba Qwen",
@@ -8631,6 +8717,54 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "id": "seed-2-0",
+      "model": "Seed2.0",
+      "company": "ByteDance",
+      "family": "Seed",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The 2.0 foundation model, with upgraded multimodal understanding and stronger agent performance.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-02-14",
+          "sources": [
+            "seed-2-0-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "seed-2-0-s1",
+          "url": "https://seed.bytedance.com/blog/seed-2-0-official-launch",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       }
     },
     {
@@ -9812,6 +9946,49 @@
           ]
         }
       ]
+    },
+    {
+      "id": "seed3d-2-0",
+      "model": "Seed3D 2.0",
+      "company": "ByteDance",
+      "family": "Seed",
+      "classification": {
+        "primary_type": "3d",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "ByteDance's 3D generation model, released with higher precision and broader usability.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-04-23",
+          "sources": [
+            "seed3d-2-0-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "seed3d-2-0-s1",
+          "url": "https://seed.bytedance.com/blog/seed3d-2-0-released-higher-precision-and-greater-usability",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
     },
     {
       "id": "deepseek-v4-flash",
@@ -13003,6 +13180,64 @@
             "value": "2026-08-10",
             "sources": [
               "mai-image-2-6-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gpt-5-6-cyber",
+      "model": "GPT-5.6-Cyber",
+      "company": "OpenAI",
+      "family": "GPT",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A cybersecurity-specific model available only through Daybreak Red, OpenAI's gated access tier for approved defenders.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-10",
+          "sources": [
+            "gpt-5-6-cyber-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-5-6-cyber-s1",
+          "url": "https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260810220432/https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows/",
+          "retrieved": "2026-08-10"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-10",
+            "sources": [
+              "gpt-5-6-cyber-s1"
             ]
           }
         ]
