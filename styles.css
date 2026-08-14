@@ -3124,3 +3124,44 @@ code, kbd {
 @media (prefers-reduced-motion: reduce) {
   .copy-btn { transition: none; }
 }
+
+/* Per-value evidence.
+   Provenance is the one part of this site that must work when nothing else
+   does, so this is a <details> and not a scripted popover. */
+.fact-ev { display: inline; }
+.fact-ev > summary {
+  display: inline;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--muted);
+  list-style: none;
+}
+.fact-ev > summary::-webkit-details-marker { display: none; }
+.fact-ev > summary::after {
+  content: " ▸";
+  font-size: 9px;
+  vertical-align: middle;
+}
+.fact-ev[open] > summary::after { content: " ▾"; }
+.fact-ev > summary:hover { color: var(--text); }
+.fact-ev > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.fact-ev-body {
+  margin: 8px 0 4px;
+  padding: 10px 12px;
+  border-left: 2px solid var(--accent-line);
+  background: var(--panel-2);
+  border-radius: var(--radius-sm);
+}
+.fact-ev-claim { margin: 0 0 8px; font-size: 12.5px; color: var(--text); }
+.fact-ev-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.fact-ev-list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 12px;
+  color: var(--muted);
+}
+.fact-ev-type { color: var(--text-dim); }
+.fact-ev-when { font-variant-numeric: tabular-nums; }

@@ -89,6 +89,28 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (m) =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 
 const fullDate = (r) => `${MONTHS[r.month - 1]}${r.day ? ` ${r.day}` : ''}, ${r.year}`;
+
+/** A YYYY-MM-DD string as prose. Sources carry `retrieved` in that form. */
+const fullDateISO = (iso) => {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso));
+  if (!m) return String(iso);
+  return `${MONTHS[Number(m[2]) - 1]} ${Number(m[3])}, ${m[1]}`;
+};
+
+/**
+ * The claim a traced value makes, written as a sentence.
+ *
+ * An evidence panel that opens onto "context_window: 128000" restates the row
+ * the reader just clicked. The point is to say what is being ASSERTED, so the
+ * source underneath it can be judged against a claim rather than a field name.
+ */
+const CLAIM_TEXT = {
+  release_date: (v, r) => `${r.model} was released on ${fullDateISO(v)}.`,
+  context_window: (v, r) => `${r.model} supports a context window of ${
+    Number(v).toLocaleString('en-US')} tokens.`,
+  parameter_count: (v, r) => `${r.model} has ${
+    Number(v).toLocaleString('en-US')} parameters.`,
+};
 const isoDate = (r) => `${r.year}-${String(r.month).padStart(2, '0')}` +
   (r.day ? `-${String(r.day).padStart(2, '0')}` : '');
 
@@ -476,10 +498,42 @@ function modelPage(r) {
             esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a>`).join(', ')})`).join(' · ')}</span>`;
     }
     if (!e.sources.length) return '';
-    return `<span class="fact-cite">stated in ${e.sources.map((s) =>
-      `<a href="${esc(s.archived_url || s.url)}" rel="noopener noreferrer nofollow" title="${
-        esc(SOURCE_LABEL[s.type] ?? s.type)}">${esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a>`
-    ).join(', ')}</span>`;
+
+    /**
+     * The evidence behind ONE value, opened in place.
+     *
+     * The previous version was a bare link with the source type hidden in a
+     * `title` attribute — invisible on touch, unreadable to most screen readers,
+     * and silent about the two things that decide how much a figure is worth:
+     * whether the source is primary, and when it was read.
+     *
+     * A <details> rather than a scripted popover, because this is the one part
+     * of the site that must still work when nothing else does. Provenance that
+     * depends on JavaScript is provenance a reader cannot check.
+     */
+    const claim = CLAIM_TEXT[field]?.(e.claims[0].value, r) ?? `${field} is ${e.claims[0].value}.`;
+    const rows = e.sources.map((s) => {
+      const host = esc(new URL(s.url).hostname.replace(/^www\./, ''));
+      const when = s.retrieved
+        ? `<span class="fact-ev-when">read ${esc(fullDateISO(s.retrieved))}</span>`
+        : '';
+      return `<li>
+<span class="fact-ev-type">${esc(SOURCE_LABEL[s.type] ?? s.type)}</span>
+<span class="src-authority" data-authority="${esc(s.authority)}">${esc(AUTHORITY_LABEL[s.authority] ?? s.authority)}</span>
+${when}
+<a href="${esc(s.url)}" rel="noopener noreferrer nofollow">${host}</a>${
+  s.archived_url ? ` <a class="src-archive" href="${esc(s.archived_url)}" rel="noopener noreferrer nofollow">archived</a>`
+    : ' <span class="fact-ev-when">no snapshot yet</span>'}
+</li>`;
+    }).join('');
+
+    return `<details class="fact-ev">
+<summary>stated in ${e.sources.map((s) => esc(new URL(s.url).hostname.replace(/^www\./, ''))).join(', ')}</summary>
+<div class="fact-ev-body">
+<p class="fact-ev-claim">${esc(claim)}</p>
+<ul class="fact-ev-list">${rows}</ul>
+</div>
+</details>`;
   };
 
   const facts = [

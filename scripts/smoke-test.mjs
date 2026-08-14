@@ -29,7 +29,14 @@ const fail = (page, msg) => fails.push(`${page}: ${msg}`);
 
 function htmlFiles(dir = '.', acc = []) {
   for (const name of readdirSync(dir)) {
-    if (['.git', 'node_modules', '.github', 'data', 'scripts', '.build-check'].includes(name)) continue;
+    /**
+     * `.claude` holds agent worktrees — full checkouts of this repo, complete
+     * with their own build output. Walking into one doubles the page count and
+     * tests somebody else's working copy as if it were this one: a broken build
+     * over there fails the gate here, and a passing gate here says nothing about
+     * what is about to be committed. Neither answer is about this tree.
+     */
+    if (['.git', '.claude', 'node_modules', '.github', 'data', 'scripts', '.build-check'].includes(name)) continue;
     const full = join(dir, name);
     if (statSync(full).isDirectory()) htmlFiles(full, acc);
     else if (extname(full) === '.html') acc.push(full);
