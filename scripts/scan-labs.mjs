@@ -55,6 +55,14 @@ const EXTRA = [
   // scan ran twice, succeeded twice, and reported nothing. A docs-only channel
   // reports a same-day release as a quiet day.
   { lab: 'Google DeepMind', url: 'https://blog.google/products/gemini/rss/' },
+  // The best Google channel of the three: dated release notes naming the API
+  // id, updated the day a model ships. It carried "August 13, 2026 — Gemini 3.7
+  // Flash generally available" while the models page still stopped at 3.6.
+  //
+  // ?hl=en is required, not cosmetic. Without it this page is served in
+  // whatever locale Google picks — it came back in Bengali — and every pattern
+  // here expects English.
+  { lab: 'Google DeepMind', url: 'https://ai.google.dev/gemini-api/docs/changelog?hl=en', docs: true },
 
   // News and blog indexes, for the twelve labs whose documentation is not cited
   // by any record — without these the scan reached six labs out of eighteen.

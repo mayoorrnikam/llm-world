@@ -11711,6 +11711,164 @@
       }
     },
     {
+      "id": "shieldstral-1-0-3b",
+      "model": "Shieldstral 1.0 3B",
+      "company": "Mistral AI",
+      "family": "Mistral",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "A small open safety-classification model, released under Apache 2.0.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-04",
+          "sources": [
+            "shieldstral-1-0-3b-s1",
+            "shieldstral-1-0-3b-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "shieldstral-1-0-3b-s1",
+          "url": "https://mistral.ai/news/shieldstral",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260804165841/https://mistral.ai/news/shieldstral/",
+          "retrieved": "2026-08-04"
+        },
+        {
+          "id": "shieldstral-1-0-3b-s2",
+          "url": "https://huggingface.co/mistralai/Shieldstral-1.0-3B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260805060349/https://huggingface.co/mistralai/Shieldstral-1.0-3B",
+          "retrieved": "2026-08-05"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-04",
+            "sources": [
+              "shieldstral-1-0-3b-s1",
+              "shieldstral-1-0-3b-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "lfm2-5-2-6b",
+      "model": "LFM2.5-2.6B",
+      "company": "Liquid AI",
+      "family": "LFM",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "A 2.6B open-weight model in Liquid AI's on-device LFM2.5 line.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-04",
+          "sources": [
+            "lfm2-5-2-6b-s1",
+            "lfm2-5-2-6b-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 2600000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "lfm2-5-2-6b-s1",
+          "url": "https://www.liquid.ai/blog/lfm2-5-2-6b",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260805033613/https://www.liquid.ai/blog/lfm2-5-2-6b",
+          "retrieved": "2026-08-05"
+        },
+        {
+          "id": "lfm2-5-2-6b-s2",
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-2.6B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260804175207/https://huggingface.co/LiquidAI/LFM2.5-2.6B",
+          "retrieved": "2026-08-04"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-04",
+            "sources": [
+              "lfm2-5-2-6b-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 2600000000,
+            "sources": [
+              "lfm2-5-2-6b-s1",
+              "lfm2-5-2-6b-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "muse-spark-1-2",
       "model": "Muse Spark 1.2",
       "company": "Meta AI",
