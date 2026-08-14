@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-13",
+  "updated": "2026-08-14",
   "schema_version": "1.6",
   "releases": [
     {
@@ -5699,6 +5699,49 @@
       }
     },
     {
+      "id": "cogvideox-3",
+      "model": "CogVideoX-3",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "video_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "An incremental upgrade to Zhipu's video generation model.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-07-15",
+          "sources": [
+            "cogvideox-3-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "cogvideox-3-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "qwen3-coder-480b-a35b",
       "model": "Qwen3-Coder-480B-A35B-Instruct",
       "company": "Alibaba Qwen",
@@ -6302,6 +6345,68 @@
       ]
     },
     {
+      "id": "glm-4-5v",
+      "model": "GLM-4.5V",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "vision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A 100B-scale open vision reasoning model covering a broad range of visual tasks including video.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-08-11",
+          "sources": [
+            "glm-4-5v-s1",
+            "glm-4-5v-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-4-5v-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-4-5v-s2",
+          "url": "https://huggingface.co/zai-org/GLM-4.5V",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250811154730/https://huggingface.co/zai-org/GLM-4.5V",
+          "retrieved": "2025-08-11"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-08-11",
+            "sources": [
+              "glm-4-5v-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "deepseek-v3-1",
       "model": "DeepSeek-V3.1",
       "company": "DeepSeek",
@@ -6485,6 +6590,82 @@
             "sources": [
               "claude-sonnet-4-5-s1",
               "claude-sonnet-4-5-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "glm-4-6",
+      "model": "GLM-4.6",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "coding"
+      ],
+      "tags": [],
+      "note": "Zhipu's flagship coding model of the 4.6 generation.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-09-30",
+          "sources": [
+            "glm-4-6-s1",
+            "glm-4-6-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-4-6-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-4-6-s2",
+          "url": "https://huggingface.co/zai-org/GLM-4.6",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250930155549/https://huggingface.co/zai-org/GLM-4.6",
+          "retrieved": "2025-09-30"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-09-30",
+            "sources": [
+              "glm-4-6-s2"
             ]
           }
         ]
@@ -7443,6 +7624,111 @@
       }
     },
     {
+      "id": "glm-4-6v",
+      "model": "GLM-4.6V",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "vision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The 4.6-generation multimodal model, with improved vision understanding.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-12-08",
+          "sources": [
+            "glm-4-6v-s1",
+            "glm-4-6v-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-4-6v-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-4-6v-s2",
+          "url": "https://huggingface.co/zai-org/GLM-4.6V",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251208114911/https://huggingface.co/zai-org/GLM-4.6V",
+          "retrieved": "2025-12-08"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-12-08",
+            "sources": [
+              "glm-4-6v-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "glm-asr-2512",
+      "model": "GLM-ASR-2512",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A speech recognition model the lab reports at a 0.0717 character error rate.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-12-10",
+          "sources": [
+            "glm-asr-2512-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-asr-2512-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "gpt-5-2",
       "model": "GPT-5.2",
       "company": "OpenAI",
@@ -7547,6 +7833,76 @@
       ]
     },
     {
+      "id": "glm-4-7",
+      "model": "GLM-4.7",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "coding",
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "The 4.7 foundation model, with improvements to coding, reasoning and agentic behaviour.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-12-22",
+          "sources": [
+            "glm-4-7-s1",
+            "glm-4-7-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-4-7-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-4-7-s2",
+          "url": "https://huggingface.co/zai-org/GLM-4.7",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251222173319/https://huggingface.co/zai-org/GLM-4.7",
+          "retrieved": "2025-12-22"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-12-22",
+            "sources": [
+              "glm-4-7-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "nemotron-3-nano-30b-a3b",
       "model": "Nemotron 3 Nano 30B-A3B",
       "company": "NVIDIA",
@@ -7606,6 +7962,133 @@
             "value": 31600000000,
             "sources": [
               "nemotron-3-nano-30b-a3b-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "glm-image",
+      "model": "GLM-Image",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "An image generation model built on a multimodal architecture and trained on domestic compute.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-01-14",
+          "sources": [
+            "glm-image-s1",
+            "glm-image-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-image-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-image-s2",
+          "url": "https://huggingface.co/zai-org/GLM-Image",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260114043506/https://huggingface.co/zai-org/GLM-Image",
+          "retrieved": "2026-01-14"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
+    },
+    {
+      "id": "glm-4-7-flash",
+      "model": "GLM-4.7-Flash",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "The lightweight free-tier counterpart to GLM-4.7.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-01-19",
+          "sources": [
+            "glm-4-7-flash-s1",
+            "glm-4-7-flash-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-4-7-flash-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-4-7-flash-s2",
+          "url": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260119150010/https://huggingface.co/zai-org/GLM-4.7-Flash",
+          "retrieved": "2026-01-19"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-01-19",
+            "sources": [
+              "glm-4-7-flash-s2"
             ]
           }
         ]
@@ -7768,6 +8251,59 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {}
+    },
+    {
+      "id": "glm-ocr",
+      "model": "GLM-OCR",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "vision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A compact optical character recognition model built on Zhipu's own CogViT.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-02-03",
+          "sources": [
+            "glm-ocr-s1",
+            "glm-ocr-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-ocr-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-ocr-s2",
+          "url": "https://huggingface.co/zai-org/GLM-OCR",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260203014757/https://huggingface.co/zai-org/GLM-OCR",
+          "retrieved": "2026-02-03"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {}
     },
@@ -7944,6 +8480,74 @@
           }
         ]
       }
+    },
+    {
+      "id": "glm-5",
+      "model": "GLM-5",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "coding",
+        "agentic"
+      ],
+      "tags": [],
+      "note": "Built for complex system engineering and long-range agent tasks, which the lab frames as a shift from coding to engineering.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-02-12",
+          "sources": [
+            "glm-5-s1",
+            "glm-5-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-5-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-5-s2",
+          "url": "https://huggingface.co/zai-org/GLM-5",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260212032142/https://huggingface.co/zai-org/GLM-5",
+          "retrieved": "2026-02-12"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {}
     },
     {
       "id": "qwen-3-5",
@@ -8292,6 +8896,56 @@
       }
     },
     {
+      "id": "glm-5-turbo",
+      "model": "GLM-5-Turbo",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "A high-throughput variant aimed at stability and efficiency in long-chain agent workloads.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-03-15",
+          "sources": [
+            "glm-5-turbo-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-5-turbo-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "mistral-small-4",
       "model": "Mistral Small 4",
       "company": "Mistral AI",
@@ -8371,6 +9025,49 @@
       }
     },
     {
+      "id": "glm-5v-turbo",
+      "model": "GLM-5V-Turbo",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "vision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Native multimodal understanding for vision-based coding and agent workflows.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-04-01",
+          "sources": [
+            "glm-5v-turbo-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-5v-turbo-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "qwen-3-6-plus",
       "model": "Qwen3.6-Plus",
       "company": "Alibaba Qwen",
@@ -8427,6 +9124,82 @@
         "reason": "Cited to the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {}
+    },
+    {
+      "id": "glm-5-1",
+      "model": "GLM-5.1",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "Built for long-horizon work, which the lab says can run independently for up to eight hours in a single session.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-04-07",
+          "sources": [
+            "glm-5-1-s1",
+            "glm-5-1-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-5-1-s1",
+          "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-5-1-s2",
+          "url": "https://huggingface.co/zai-org/GLM-5.1",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260407161846/https://huggingface.co/zai-org/GLM-5.1",
+          "retrieved": "2026-04-07"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-04-07",
+            "sources": [
+              "glm-5-1-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "llama-5",
@@ -10268,7 +11041,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 80,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Zhipu's own release notes date GLM-5.2 to 2026-06-16 where this record publishes 2026-06-13; the disagreement is recorded rather than resolved."
       },
       "evidence": {
         "context_window": [
