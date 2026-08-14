@@ -3165,3 +3165,157 @@ code, kbd {
 }
 .fact-ev-type { color: var(--text-dim); }
 .fact-ev-when { font-variant-numeric: tabular-nums; }
+
+.ms-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 18px 26px;
+  margin: 26px 0 0;
+  padding: 16px 0 4px;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
+.ms-controls .reset-btn { margin-top: 18px; }
+
+.ms-status {
+  margin: 12px 0 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.ms-empty {
+  margin: 18px 0 0;
+  padding: 16px;
+  font-size: 13.5px;
+  color: var(--text-dim);
+  background: var(--panel);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-sm);
+}
+
+/* `hidden` has to win over the layout below, or a filtered-out card keeps its
+   grid/flex display and stays on screen. */
+.ms-item[hidden], .ms-year[hidden], .ms-controls[hidden] { display: none; }
+
+.ms-year { margin: 34px 0 0; }
+.ms-year-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.ms-year-n {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ms-year-link { margin: 8px 0 0; font-size: 12.5px; }
+
+.ms-list { margin: 14px 0 0; padding: 0; list-style: none; }
+
+.ms-item {
+  margin: 0 0 14px;
+  padding: 16px;
+  background: var(--panel);
+  border: 1px solid var(--line-soft);
+  border-left: 3px solid color-mix(in oklab, var(--c, var(--c-other)) 55%, var(--line));
+  border-radius: var(--radius-sm);
+}
+
+.ms-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.ms-headtext { min-width: 0; }
+
+.ms-title { margin: 0; font-size: 16px; letter-spacing: -0.01em; }
+
+.ms-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+.ms-meta time { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.ms-kind {
+  padding: 1px 8px;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--panel-2);
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+}
+.ms-lab { color: var(--text-dim); }
+
+.ms-note { margin: 12px 0 0; font-size: 14px; color: var(--text); }
+.ms-sig {
+  margin: 10px 0 0;
+  padding-left: 12px;
+  font-size: 13px;
+  color: var(--text-dim);
+  border-left: 2px solid var(--line);
+}
+
+/* The dataset link. Two rows at most, so a definition list beats a table —
+   and it degrades to stacked label/value on a narrow screen for free. */
+.ms-line {
+  display: grid;
+  grid-template-columns: minmax(0, 210px) minmax(0, 1fr);
+  gap: 4px 16px;
+  margin: 14px 0 0;
+  padding: 12px 0 0;
+  font-size: 12.5px;
+  border-top: 1px solid var(--line-soft);
+}
+.ms-line dt {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ms-line dd { margin: 0; color: var(--text-dim); }
+.ms-line time { font-variant-numeric: tabular-nums; }
+
+.ms-gap {
+  margin: 14px 0 0;
+  padding: 12px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+  border-top: 1px solid var(--line-soft);
+}
+
+.ms-prov { margin: 14px 0 0; font-size: 11.5px; color: var(--muted); }
+.ms-sources { margin: 6px 0 0; padding: 0; list-style: none; }
+.ms-sources li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  font-size: 11.5px;
+}
+.ms-sources li > span {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--muted);
+}
+
+@media (max-width: 620px) {
+  .ms-controls { gap: 14px 18px; }
+  .ms-item { padding: 14px 12px; }
+  .ms-line { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .ms-line dd { margin-bottom: 8px; }
+  .ms-line dd:last-child { margin-bottom: 0; }
+  .ms-title { font-size: 15px; }
+}

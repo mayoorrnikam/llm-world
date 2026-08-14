@@ -968,36 +968,272 @@ ${m.provenance.reason ? `<p class="doc-reason">${esc(m.provenance.reason)}</p>` 
   });
 }
 
+/**
+ * What a milestone connects to in the model dataset — and nothing more.
+ *
+ * The ONLY link a milestone record asserts to llm-releases.json is its own
+ * `related_family` field. It never names a model. ChatGPT's note mentions
+ * GPT-3.5 in prose, but prose is not a field: turning it into a link would be
+ * this build inventing a relationship the record does not make, which is
+ * exactly the failure mode diffRecords() exists to avoid elsewhere.
+ *
+ * So the family is the evidenced edge, and the model-page link on top of it is
+ * a plain statement about dates *within that family* — "the most recent tracked
+ * release in this line before this date". That is arithmetic over two fields,
+ * not a claim that the milestone was served by that model. Where nothing in the
+ * line predates the milestone — which is the case for ChatGPT, because this
+ * dataset's GPT coverage starts at GPT-4 — the page says so rather than
+ * reaching for the nearest record and implying a connection.
+ */
+function milestoneLine(m) {
+  if (!m.related_family) return null;
+  const line = releases
+    .filter((r) => r.family === m.related_family)
+    .sort((a, b) => isoDate(a).localeCompare(isoDate(b)));
+  // A family named on a milestone but absent from the dataset gets no link at
+  // all. A dead link is worse than an admitted gap.
+  if (!line.length) return null;
+
+  // Ties are the whole reason this returns arrays. Gemini 1.0 Ultra, Pro and
+  // Nano all carry 2023-12-06, so "the" nearest release before a 2024 milestone
+  // does not exist — taking the last of the three would be this build picking
+  // one on no evidence and presenting it as the answer. Every record on the
+  // winning date is named instead.
+  const sameDate = (pool, iso) => pool.filter((r) => isoDate(r) === iso);
+  const earlier = line.filter((r) => isoDate(r) <= m.date);
+  return {
+    family: m.related_family,
+    line,
+    before: earlier.length ? sameDate(earlier, isoDate(earlier.at(-1))) : [],
+    first: sameDate(line, isoDate(line[0])),
+  };
+}
+
+/** The "Model line" block on a milestone card. Renders the gap when there is one. */
+function milestoneLineBlock(m) {
+  const rel = milestoneLine(m);
+  if (!rel) {
+    return `<p class="ms-gap">No model line is recorded on this milestone, so nothing here `
+      + `links it to a model record.</p>`;
+  }
+  const named = (rs) => rs.map((r) => `<a href="../models/${esc(r.id)}/">${esc(r.model)}</a>`)
+    .join(', ').replace(/, ([^,]*)$/, ' and $1');
+  const on = (rs) => `<time datetime="${esc(isoDate(rs[0]))}">${fullDate(rs[0])}</time>`;
+  const nearest = rel.before.length
+    ? `${named(rel.before)} — ${on(rel.before)}`
+    : `None. This dataset's record of the ${esc(rel.family)} line starts later, `
+      + `with ${named(rel.first)} on ${on(rel.first)}.`;
+  return `<dl class="ms-line">
+<dt>Model line</dt>
+<dd><a href="../families/${familySlug(rel.family)}/">${esc(rel.family)}</a> · `
+    + `${rel.line.length} tracked release${rel.line.length === 1 ? '' : 's'}</dd>
+<dt>Most recent tracked release in that line before this date</dt>
+<dd>${nearest}</dd>
+</dl>`;
+}
+
 function milestonesIndexPage(list) {
+  // Oldest first. Every other index here leads with the newest record, because
+  // the question there is "what shipped lately". This page answers a different
+  // one: these events refer to each other — Bard is a response to ChatGPT,
+  // Gemini is Bard renamed, the AI Act regulates the market the first two made
+  // — and read newest-first that chain runs backwards. The set is also small
+  // enough to see whole, so the usual reason to front-load recency (scanning a
+  // long list) does not apply.
   const sorted = [...list].sort((a, b) => a.date.localeCompare(b.date));
+  const releaseYears = new Set(releases.map((r) => r.year));
+
+  const years = [...new Set(sorted.map((m) => m.date.slice(0, 4)))];
+
+  /* Facets are read off the records, never declared. A `type` that appears in
+     milestones.json gets a control; one that does not, does not — so the
+     controls can never offer a filter the data cannot answer. */
+  const facet = (key, label, of) => {
+    const counts = new Map();
+    for (const m of sorted) counts.set(of(m), (counts.get(of(m)) ?? 0) + 1);
+    const opts = [...counts.keys()].sort();
+    return { key, label, opts, counts };
+  };
+  const facets = [
+    facet('kind', 'Kind', (m) => m.type),
+    facet('lab', 'Recorded against', (m) => m.company),
+  ].filter((f) => f.opts.length > 1); // a one-value facet filters nothing
+
+  const chipFor = (f, value) => {
+    const text = f.key === 'kind' ? (MILESTONE_LABEL[value] ?? value) : value;
+    const hue = f.key === 'lab' ? ` style="--c:var(--c-${slugFor(value)})"` : '';
+    return `<button type="button" class="chip" data-facet="${esc(f.key)}" data-value="${esc(value)}"${hue} aria-pressed="false">`
+      + `${f.key === 'lab' ? '<span class="chip-dot"></span>' : ''}`
+      + `${esc(text)} <span class="chip-count">${f.counts.get(value)}</span></button>`;
+  };
+
+  const card = (m) => `<li class="ms-item" id="ms-${esc(m.id)}"
+ data-kind="${esc(m.type)}" data-lab="${esc(m.company)}" style="--c:var(--c-${slugFor(m.company)})">
+<div class="ms-head">
+${companyMark(m.company, 'sm')}
+<div class="ms-headtext">
+<h3 class="ms-title"><a href="${esc(m.id)}/">${esc(m.title)}</a></h3>
+<p class="ms-meta"><time datetime="${esc(m.date)}">${esc(eventDate(m.date))}</time>
+<span class="ms-kind">${esc(MILESTONE_LABEL[m.type] ?? m.type)}</span>
+<span class="ms-lab">${esc(m.company)}</span></p>
+</div>
+</div>
+<p class="ms-note">${esc(m.note)}</p>
+${m.significance ? `<p class="ms-sig">${esc(m.significance)}</p>` : ''}
+${milestoneLineBlock(m)}
+<p class="ms-prov">Record status: <span class="prov-badge" data-status="${esc(m.provenance.status)}">${
+  esc(PROV_LABEL[m.provenance.status] ?? m.provenance.status)}</span> · confidence ${m.provenance.confidence}/100</p>
+<ul class="ms-sources">${m.sources.map((s) => `<li>
+<a href="${esc(s.url)}" rel="noopener noreferrer nofollow">${esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a>
+<span>${esc(SOURCE_LABEL[s.type] ?? s.type)}</span>
+<span class="src-authority" data-authority="${esc(s.authority)}">${esc(AUTHORITY_LABEL[s.authority] ?? s.authority)}</span>${
+  s.archived_url ? `<a class="src-archive" href="${esc(s.archived_url)}" rel="noopener noreferrer nofollow">archived</a>` : ''}
+</li>`).join('')}</ul>
+</li>`;
+
+  const yearSection = (y) => {
+    const ms = sorted.filter((m) => m.date.slice(0, 4) === y);
+    return `<section class="ms-year" data-year="${esc(y)}" aria-labelledby="ms-y${esc(y)}">
+<h2 class="ms-year-head" id="ms-y${esc(y)}">${esc(y)}
+<span class="ms-year-n" data-total="${ms.length}">${ms.length} milestone${ms.length === 1 ? '' : 's'}</span></h2>
+${releaseYears.has(Number(y)) ? `<p class="ms-year-link"><a href="../timeline/${esc(y)}/">Model releases in ${esc(y)} →</a></p>` : ''}
+<ol class="ms-list">${ms.map(card).join('')}</ol>
+</section>`;
+  };
+
   const body = `
-<nav class="crumbs"><a href="../">Home</a> › <span>Milestones</span></nav>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a> <span aria-hidden="true">›</span> <span>Milestones</span></nav>
 
 <h1>Milestones</h1>
-<p class="doc-sub">${sorted.length} dated event${sorted.length === 1 ? '' : 's'} that mattered but were not model releases</p>
+<p class="doc-sub">${sorted.length} dated event${sorted.length === 1 ? '' : 's'} that mattered but were not model releases,
+${years.length === 1 ? `all in ${years[0]}` : `${years[0]}–${years[years.length - 1]}`}</p>
 
 <p class="doc-note">Not everything that shaped this history was a set of weights.
-A milestone records a dated event — a product launch, an architectural shift — that
+A milestone records a dated event — a product launch, a statutory regime — that
 belongs on the timeline but has no parameters, context window or licence.
 Every milestone needs a primary source, exactly like a model record.</p>
 
-<ol class="doc-list">${sorted.map((m) => `<li>
-${companyMark(m.company, 'sm')}
-<a class="cell-name" href="${esc(m.id)}/">${esc(m.title)}</a>
-<span class="cell-meta">${esc(MILESTONE_LABEL[m.type] ?? m.type)} · ${esc(m.company)}</span>
-<span class="cell-num">${esc(eventDate(m.date))}</span>
-</li>`).join('')}</ol>
+<p class="doc-note">This is a deliberately short list, and it is short because the
+bar is high: an event earns a record here only when it changed what the labs in
+this dataset could ship or sell. ${sorted.length} record${sorted.length === 1 ? '' : 's'} is the honest
+count, not a placeholder for a longer one.</p>
+
+${facets.length ? `<div class="ms-controls" id="ms-controls" hidden>
+${facets.map((f) => `<div class="filter-group">
+<p class="filter-title" id="ms-f-${esc(f.key)}">${esc(f.label)}</p>
+<div class="chips" role="group" aria-labelledby="ms-f-${esc(f.key)}">${f.opts.map((v) => chipFor(f, v)).join('')}</div>
+</div>`).join('')}
+<button type="button" class="reset-btn" id="ms-reset" hidden>Clear filters</button>
+</div>
+<p class="ms-status" id="ms-status" role="status" hidden></p>
+<p class="ms-empty" id="ms-empty" hidden>No milestone matches those filters.</p>` : ''}
+
+${years.map(yearSection).join('')}
 
 <p class="doc-cta"><a href="../models/">Browse tracked model releases →</a></p>
 `;
 
+  /* Progressive enhancement, and the order matters: the controls ship `hidden`
+     in the markup and are revealed here. A reader without JavaScript sees the
+     full list, grouped by year, with every source and provenance badge intact,
+     and never sees a filter button that cannot do anything.
+
+     Filter state goes into the query string, like every other view on this
+     site, so a filtered page is a linkable page. */
+  const script = `<script defer>
+addEventListener('DOMContentLoaded',function(){
+  var box=document.getElementById('ms-controls');
+  if(!box)return;
+  var FACETS=['kind','lab'];
+  var items=[].slice.call(document.querySelectorAll('.ms-item'));
+  var sections=[].slice.call(document.querySelectorAll('.ms-year'));
+  var chips=[].slice.call(box.querySelectorAll('[data-facet]'));
+  var reset=document.getElementById('ms-reset');
+  var live=document.getElementById('ms-status');
+  var empty=document.getElementById('ms-empty');
+  var picked={};
+
+  var q=new URLSearchParams(location.search);
+  FACETS.forEach(function(f){
+    var raw=q.get(f);
+    picked[f]=raw?raw.split(',').filter(Boolean):[];
+  });
+
+  box.hidden=false;
+  if(live)live.hidden=false;
+
+  function apply(store){
+    var shown=0;
+    items.forEach(function(el){
+      var ok=FACETS.every(function(f){
+        return !picked[f].length||picked[f].indexOf(el.dataset[f])>-1;
+      });
+      el.hidden=!ok;
+      if(ok)shown++;
+    });
+    sections.forEach(function(s){
+      /* Deliberately NOT named "live" — that is the status element in the outer
+         scope, and shadowing a page global inside a nested callback is the bug
+         class this project already shipped once (CLAUDE.md, compare page). */
+      var here=s.querySelectorAll('.ms-item:not([hidden])').length;
+      s.hidden=here===0;
+      /* The year heading counts what is on screen. Left static it reads
+         "2 milestones" above a single card and contradicts the page. */
+      var n=s.querySelector('.ms-year-n');
+      if(n){
+        var total=Number(n.dataset.total);
+        n.textContent=here===total
+          ?total+' milestone'+(total===1?'':'s')
+          :here+' of '+total+' milestones';
+      }
+    });
+    chips.forEach(function(c){
+      c.setAttribute('aria-pressed',
+        picked[c.dataset.facet].indexOf(c.dataset.value)>-1?'true':'false');
+    });
+    var any=FACETS.some(function(f){return picked[f].length>0;});
+    if(reset)reset.hidden=!any;
+    if(empty)empty.hidden=shown!==0;
+    if(live){
+      live.textContent=shown===items.length
+        ?'Showing all '+items.length+' milestones.'
+        :'Showing '+shown+' of '+items.length+' milestones.';
+    }
+    if(store){
+      var next=new URLSearchParams(location.search);
+      FACETS.forEach(function(f){
+        if(picked[f].length)next.set(f,picked[f].join(','));else next.delete(f);
+      });
+      var qs=next.toString();
+      history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash);
+    }
+  }
+
+  chips.forEach(function(c){
+    c.addEventListener('click',function(){
+      var arr=picked[c.dataset.facet];
+      var at=arr.indexOf(c.dataset.value);
+      if(at>-1)arr.splice(at,1);else arr.push(c.dataset.value);
+      apply(true);
+    });
+  });
+  if(reset)reset.addEventListener('click',function(){
+    FACETS.forEach(function(f){picked[f]=[];});
+    apply(true);
+  });
+
+  apply(false);
+});
+</script>`;
+
   return page({
     title: 'Milestones — dated events that were not model releases | LLM World',
-    description: 'Dated events that shaped large language model history without being model releases, each with a primary source.',
+    description: 'Dated events that shaped large language model history without being model releases, grouped by year, each with a primary source.',
     canonical: `${BASE_URL}/milestones/`,
     section: 'timeline/',
     depth: 1,
     sprites: [...new Set(list.map((m) => slugFor(m.company)))],
+    head: facets.length ? script : '',
     body,
   });
 }
