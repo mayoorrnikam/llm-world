@@ -248,6 +248,71 @@ addEventListener('DOMContentLoaded',function(){
   b.addEventListener('click',function(){set(order[(order.indexOf(now)+1)%3]);});
 });
 </script>
+<script defer>
+/* Copy this view.
+   Every view here is already addressable — the URL carries the filters, the
+   picks, the year. Nothing surfaced that, so a reader who wanted to cite a
+   comparison had to know to copy the address bar. This is progressive
+   enhancement: the buttons are rendered by the page and only become useful
+   here, so a reader without JavaScript sees no dead control. */
+addEventListener('DOMContentLoaded',function(){
+  var boxes=document.querySelectorAll('[data-copy]');
+  if(!boxes.length)return;
+  boxes.forEach(function(btn){
+    btn.hidden=false;
+    btn.addEventListener('click',function(){
+      var url=location.href;
+      /* Markdown, because the thing people paste this into is an issue, a PR or
+         a doc — and a bare URL there loses what it pointed at. */
+      var text=btn.dataset.copy==='md'
+        ? '['+(btn.dataset.copyTitle||document.title)+']('+url+')'
+        : url;
+      /* Capture the label ONCE, from the markup, so a second click never
+         restores "Copied" or "Press ⌘C" as if it were the button's name. The
+         first version read textContent at click time and a failed copy left the
+         button permanently mislabelled. */
+      if(!btn.dataset.label)btn.dataset.label=btn.textContent;
+      var restore=function(){setTimeout(function(){btn.textContent=btn.dataset.label;},1400);};
+      btn.setAttribute('aria-live','polite');
+      navigator.clipboard.writeText(text).then(function(){
+        btn.textContent='Copied';
+        restore();
+      }).catch(function(){
+        /* Clipboard writes need a secure origin and a real user gesture, and
+           some policies block them outright. Say so rather than doing nothing
+           silently — then put the label back. */
+        btn.textContent='Press ⌘C';
+        restore();
+      });
+    });
+  });
+});
+</script>
+<script defer>
+/* Surprise me.
+   A database you can only query is a database you have to already have a
+   question about. This is the way in for a reader who does not — one click,
+   another record, keep going.
+   The id list is fetched lazily ON CLICK rather than inlined into all 169 model
+   pages, and the current record is excluded so the button never appears to do
+   nothing. */
+addEventListener('DOMContentLoaded',function(){
+  var b=document.getElementById('surprise');if(!b)return;
+  b.hidden=false;
+  b.addEventListener('click',function(){
+    b.disabled=true;
+    fetch('${up}data/llm-releases.json',{cache:'force-cache'})
+      .then(function(r){return r.json();})
+      .then(function(d){
+        var here=location.pathname.replace(/\\/$/,'').split('/').pop();
+        var ids=d.releases.map(function(r){return r.id;}).filter(function(id){return id!==here;});
+        if(!ids.length){b.disabled=false;return;}
+        location.href='${up}models/'+ids[Math.floor(Math.random()*ids.length)]+'/';
+      })
+      .catch(function(){b.disabled=false;b.textContent='Could not load';});
+  });
+});
+</script>
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ''}
 ${head}
 </head>
@@ -486,6 +551,13 @@ ${r.provenance.reason ? `<p class="doc-reason">${esc(r.provenance.reason)}</p>` 
 <ol class="doc-lineage">${fam.map((x, i) => `<li${x.id === r.id ? ' aria-current="true"' : ''}>${
   x.id === r.id ? `<strong>${esc(x.model)}</strong>` : `<a href="../${esc(x.id)}/">${esc(x.model)}</a>`
 } <span>${fullDate(x)}</span></li>`).join('')}</ol>
+
+<p class="doc-share">
+  <button type="button" class="copy-btn" data-copy="url" hidden>Copy link</button>
+  <button type="button" class="copy-btn" data-copy="md" data-copy-title="${esc(r.model)} — ${esc(r.company)}" hidden>Copy as Markdown</button>
+  <a class="copy-btn copy-btn--link" href="../">Browse models</a>
+  <button type="button" class="copy-btn" id="surprise" hidden>🎲 Surprise me</button>
+</p>
 
 <p class="doc-cta">
   <a href="../../compare/?m=${esc(r.id)}">Compare ${esc(r.model)} with another model →</a><br>
@@ -2301,6 +2373,20 @@ function comparePage() {
 
 <div class="cmp-scroll"><table class="cmp-table" id="cmp-table"></table></div>
 
+<section class="cmp-changed" id="cmp-changed" hidden>
+  <h2>What changed</h2>
+  <p class="chart-note">Read in release order. A field is compared only when both
+  releases state a value — where one of them does not, the field is listed as
+  uncomparable rather than dropped, because a gap in our research is not a
+  finding about the model.</p>
+  <div id="cmp-changed-body"></div>
+</section>
+
+<p class="doc-share">
+  <button type="button" class="copy-btn" data-copy="url" hidden>Copy link</button>
+  <button type="button" class="copy-btn" data-copy="md" data-copy-title="Model comparison — LLM World" hidden>Copy as Markdown</button>
+</p>
+
 <noscript><p class="doc-note">The comparison picker needs JavaScript. Every model's
 figures are also on its own page — start from <a href="../models/">the model index</a>.</p></noscript>
 
@@ -2310,7 +2396,7 @@ figures are also on its own page — start from <a href="../models/">the model i
 // Same derivation the static pages use, from the same module — this page reads
 // the raw dataset at runtime, so without it the canonical date would be
 // computed twice by two different rules.
-import { dateParts, contextWindow, parameterCount, fieldState, MISSING_LABEL } from '../lib/record.mjs';
+import { dateParts, contextWindow, parameterCount, fieldState, MISSING_LABEL, diffRecords } from '../lib/record.mjs';
 const RES = (await fetch('../data/llm-releases.json', { cache: 'no-store' })
   .then((r) => r.json()).then((d) => d.releases).catch(() => []))
   .map((r) => ({
@@ -2436,6 +2522,74 @@ function render() {
       if (!same) td.dataset.differs = 'true';
     }
   }
+
+  renderChanged(models);
+}
+
+/**
+ * The diff between consecutive picks, in release order.
+ *
+ * The table above says what each model IS; this says what moved between them,
+ * which is the question people are actually asking when they put two releases
+ * side by side. diffRecords is the same function the model and family pages
+ * use — it compares a field only when both records assert a value, so a null
+ * never becomes "removed".
+ *
+ * Sorted by date rather than by pick order: "what changed" only means anything
+ * in one direction, and a reader who added the newer model first should not be
+ * told the context window shrank.
+ */
+function renderChanged(models) {
+  const box = document.getElementById('cmp-changed');
+  const body = document.getElementById('cmp-changed-body');
+  const stamp = (r) => Date.UTC(r.year, r.month - 1, r.day || 1);
+  const ordered = [...models].sort((a, b) => stamp(a) - stamp(b));
+  body.replaceChildren();
+
+  let shown = 0;
+  for (let i = 1; i < ordered.length; i++) {
+    const prev = ordered[i - 1], next = ordered[i];
+    const { changes, incomparable } = diffRecords(prev, next);
+    if (!changes.length && !incomparable.length) continue;
+    shown++;
+
+    const sec = document.createElement('section');
+    sec.className = 'cmp-diff';
+    const h = document.createElement('h3');
+    h.textContent = \`\${prev.model} → \${next.model}\`;
+    sec.appendChild(h);
+
+    if (changes.length) {
+      const ul = document.createElement('ul');
+      ul.className = 'cmp-diff-list';
+      for (const c of changes) {
+        const li = document.createElement('li');
+        li.dataset.direction = c.direction;
+        const label = document.createElement('span');
+        label.className = 'cmp-diff-label';
+        label.textContent = c.label;
+        li.appendChild(label);
+        const val = document.createElement('span');
+        val.className = 'cmp-diff-value';
+        // "first evidenced" carries a list, not a from/to pair.
+        val.textContent = c.gained ? c.gained.join(', ') : \`\${c.from} → \${c.to}\`;
+        li.appendChild(val);
+        ul.appendChild(li);
+      }
+      sec.appendChild(ul);
+    }
+
+    if (incomparable.length) {
+      const p = document.createElement('p');
+      p.className = 'cmp-diff-gap';
+      p.textContent = 'Not comparable: '
+        + incomparable.map((x) => \`\${x.label} (\${x.why})\`).join('; ');
+      sec.appendChild(p);
+    }
+    body.appendChild(sec);
+  }
+
+  box.hidden = shown === 0;
 }
 
 render();

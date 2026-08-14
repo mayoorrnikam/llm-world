@@ -2732,6 +2732,39 @@ code, kbd {
 /* Only rows where the models actually differ get emphasis. */
 .cmp-table td[data-differs="true"] { color: var(--text); font-weight: 600; }
 
+/* What changed — the diff between consecutive picks, in release order. */
+.cmp-changed { margin-top: 34px; }
+.cmp-changed h2 { font-size: 17px; margin: 0 0 6px; }
+.cmp-diff { margin-top: 20px; }
+.cmp-diff h3 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.cmp-diff-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.cmp-diff-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 170px) minmax(0, 1fr);
+  gap: 12px;
+  align-items: baseline;
+  font-size: 13px;
+  padding-left: 11px;
+  border-left: 2px solid var(--line-soft);
+}
+/* Direction is carried by the border AND spelled out in the value beside it,
+   so the colour is never the only signal (README, design notes). */
+.cmp-diff-list li[data-direction="up"]   { border-left-color: var(--c-ai2); }
+.cmp-diff-list li[data-direction="down"] { border-left-color: var(--c-anthropic); }
+.cmp-diff-label { color: var(--muted); }
+.cmp-diff-value { color: var(--text); font-variant-numeric: tabular-nums; }
+.cmp-diff-gap { font-size: 12.5px; color: var(--muted); margin: 8px 0 0; }
+
+@media (max-width: 620px) {
+  .cmp-diff-list li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+
 @media (max-width: 620px) {
   .chart-row { grid-template-columns: minmax(0, 120px) minmax(0, 1fr) 62px; gap: 10px; }
   .chart-label { font-size: 12px; }
@@ -3057,4 +3090,37 @@ code, kbd {
   .pulse-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .pulse-v { font-size: 17px; }
   .try-group button { font-size: 12px; }
+}
+
+/* Share and discovery controls.
+   Rendered hidden and revealed by script: a copy button without a clipboard,
+   or a shuffle without a dataset, is a control that lies about what it does. */
+.doc-share {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 28px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-soft);
+}
+.copy-btn {
+  font: inherit;
+  font-size: 12.5px;
+  line-height: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  color: var(--text-dim);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color .15s ease, color .15s ease;
+}
+.copy-btn:hover { border-color: var(--accent); color: var(--text); }
+.copy-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.copy-btn[disabled] { opacity: .55; cursor: progress; }
+.copy-btn--link { display: inline-flex; align-items: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .copy-btn { transition: none; }
 }
