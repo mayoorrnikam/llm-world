@@ -49,6 +49,12 @@ const ONLY = process.argv.find((a) => a.startsWith('--lab='))?.split('=')[1];
 const EXTRA = [
   // Documentation indexes this dataset does not yet cite.
   { lab: 'Google DeepMind', url: 'https://ai.google.dev/gemini-api/docs/models', docs: true },
+  // Documentation LAGS the announcement, which is a different failure from
+  // documentation being unreachable. On the day Gemini 3.7 Flash shipped, this
+  // docs page listed up to gemini-3.6-flash and never mentioned 3.7 — so the
+  // scan ran twice, succeeded twice, and reported nothing. A docs-only channel
+  // reports a same-day release as a quiet day.
+  { lab: 'Google DeepMind', url: 'https://blog.google/products/gemini/rss/' },
 
   // News and blog indexes, for the twelve labs whose documentation is not cited
   // by any record — without these the scan reached six labs out of eighteen.

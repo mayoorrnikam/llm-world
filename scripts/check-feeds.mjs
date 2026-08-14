@@ -31,6 +31,13 @@ const ALL = process.argv.includes('--all');
 /** Verified 2026-08-10: each returns real <item>/<entry> elements. */
 const FEEDS = [
   ['OpenAI', 'https://openai.com/news/rss.xml'],
+  // Two feeds, because Google splits its own announcements and the model
+  // releases are NOT in the DeepMind one. "Introducing Gemini 3.7 Flash"
+  // published to /innovation-and-ai/models-and-research/gemini-models/, which
+  // surfaces in the Gemini product feed; the DeepMind feed that day carried a
+  // roundtable piece instead. Gemini 3.6 Flash went the same way. Watching only
+  // DeepMind means watching the section Gemini releases do not appear in.
+  ['Google DeepMind', 'https://blog.google/products/gemini/rss/'],
   ['Google DeepMind', 'https://blog.google/technology/google-deepmind/rss/'],
   ['Mistral AI', 'https://mistral.ai/rss.xml'],
   ['Alibaba Qwen', 'https://qwenlm.github.io/blog/index.xml'],
