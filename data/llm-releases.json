@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08",
+  "updated": "2026-08-13",
   "schema_version": "1.6",
   "releases": [
     {
@@ -9136,6 +9136,62 @@
       }
     },
     {
+      "id": "qwen-3-7-max",
+      "model": "Qwen3.7-Max",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "Alibaba's proprietary agent-focused flagship, served through Alibaba Cloud Model Studio.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-05-16",
+          "sources": [
+            "qwen-3-7-max-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen-3-7-max-s1",
+          "url": "https://qwen.ai/blog?id=qwen3.7",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260520025139/https://qwen.ai/blog?id=qwen3.7",
+          "retrieved": "2026-05-20"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {}
+    },
+    {
       "id": "gemini-3-5-flash",
       "model": "Gemini 3.5 Flash",
       "company": "Google DeepMind",
@@ -11828,11 +11884,11 @@
         },
         {
           "id": "grok-4-6-s2",
-          "url": "https://docs.x.ai/docs/models/grok-4-6",
+          "url": "https://docs.x.ai/developers/grok-4-6",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260814040702/https://docs.x.ai/developers/grok-4-6",
+          "retrieved": "2026-08-14"
         }
       ],
       "provenance": {
@@ -11931,6 +11987,64 @@
           ]
         }
       ]
+    },
+    {
+      "id": "gemini-3-7-flash",
+      "model": "Gemini 3.7 Flash",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Google's workhorse model, introduced at half the per-token price of 3.6 Flash and aimed at software engineering and agent workloads.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-13",
+          "sources": [
+            "gemini-3-7-flash-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-3-7-flash-s1",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260813195326/https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/",
+          "retrieved": "2026-08-13"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-13",
+            "sources": [
+              "gemini-3-7-flash-s1"
+            ]
+          }
+        ]
+      }
     }
   ],
   "redirects": [
