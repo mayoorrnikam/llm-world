@@ -316,6 +316,49 @@
       }
     },
     {
+      "id": "whisper",
+      "model": "Whisper",
+      "company": "OpenAI",
+      "family": "Whisper",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "OpenAI's speech recognition model, released with open weights and inference code.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2022-09-21",
+          "sources": [
+            "whisper-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "whisper-s1",
+          "url": "https://openai.com/index/whisper/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20240502131713/https://openai.com/index/whisper",
+          "retrieved": "2024-05-02"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      }
+    },
+    {
       "id": "llama-1",
       "model": "Llama 1",
       "company": "Meta AI",
@@ -6724,6 +6767,49 @@
       }
     },
     {
+      "id": "sora-2",
+      "model": "Sora 2",
+      "company": "OpenAI",
+      "family": "Sora",
+      "classification": {
+        "primary_type": "video_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "OpenAI's video generation model, the second generation of Sora.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-09-30",
+          "sources": [
+            "sora-2-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "sora-2-s1",
+          "url": "https://openai.com/index/sora-2/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "gpt-5-1",
       "model": "GPT-5.1",
       "company": "OpenAI",
@@ -9365,8 +9451,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260404053513/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2026-04-04"
         },
         {
           "id": "veo-3-s2",
@@ -9380,7 +9466,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       }
     },
     {
@@ -11680,6 +11766,58 @@
       ]
     },
     {
+      "id": "gemini-omni-flash",
+      "model": "Gemini Omni Flash",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "video_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A multimodal model for high-speed video generation and conversational video editing, released in public preview.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-06-30",
+          "sources": [
+            "gemini-omni-flash-s1",
+            "gemini-omni-flash-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-omni-flash-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260701184207/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2026-07-01"
+        },
+        {
+          "id": "gemini-omni-flash-s2",
+          "url": "https://deepmind.google/models/gemini-omni/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      }
+    },
+    {
       "id": "grok-4-5",
       "model": "Grok 4.5",
       "company": "xAI",
@@ -12710,6 +12848,58 @@
         "reason": "Cited to the official model card and the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Licence from the model card's own license_name field on MiniMaxAI/MiniMax-H3. Capabilities evidenced from the primary sources: video_generation: “case-T2VA Type: Text-to-video Duration: 10 seconds Aspect ratio: 16:9 stage request result H3-Context-IR View script { \"task\": { \"id\": \"&lt;task_id&gt;\", \"model\": \"MiniMa”."
       },
       "evidence": {}
+    },
+    {
+      "id": "gemini-robotics-er-2",
+      "model": "Gemini Robotics-ER 2",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "vision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "An embodied reasoning endpoint for robotics, covering spatial reasoning, tool orchestration and multi-robot coordination.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-30",
+          "sources": [
+            "gemini-robotics-er-2-s1",
+            "gemini-robotics-er-2-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-robotics-er-2-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260729115014/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2026-07-29"
+        },
+        {
+          "id": "gemini-robotics-er-2-s2",
+          "url": "https://deepmind.google/models/gemini-robotics/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because the release date could not be traced: every archived snapshot of those sources predates the release — the newest is 2026-07-29, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2026-07-30 would settle it."
+      }
     },
     {
       "id": "seedance-2-5",

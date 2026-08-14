@@ -23,10 +23,14 @@
   /* ink */
   --text: #0f172a;
   --text-dim: #475569;
-  --muted: #77839a;
+  /* 5.07:1 on --bg, 5.38:1 on --panel. Was #77839a at 3.59:1 — a fail, and
+     this token is the colour of 101 rules, 83 of them under 18.5px. */
+  --muted: #5f6b80;
 
   /* accent */
-  --accent: #2f6fe0;
+  /* 5.22:1 on --bg. Was #2f6fe0 at 4.42:1, which put every body link on
+     every static page marginally under AA in light mode. */
+  --accent: #2563d1;
   --accent-ink: #ffffff;
   --accent-soft: rgba(47, 111, 224, 0.12);
   --accent-line: rgba(47, 111, 224, 0.4);
@@ -89,7 +93,7 @@
 
     --text: #e9eef7;
     --text-dim: #a9b4c8;
-    --muted: #6b788f;
+    --muted: #8794aa;
 
     --accent: #6aa5ff;
     --accent-ink: #06101f;
@@ -140,7 +144,7 @@
 
   --text: #e9eef7;
   --text-dim: #a9b4c8;
-  --muted: #6b788f;
+  --muted: #8794aa;
 
   --accent: #6aa5ff;
   --accent-ink: #06101f;
