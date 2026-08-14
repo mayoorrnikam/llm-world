@@ -9276,6 +9276,62 @@
       }
     },
     {
+      "id": "qwen-3-7-plus",
+      "model": "Qwen3.7-Plus",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "The multimodal agent model of the Qwen3.7 line, released five days after Qwen3.7-Max.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-05-21",
+          "sources": [
+            "qwen-3-7-plus-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen-3-7-plus-s1",
+          "url": "https://qwen.ai/blog?id=qwen3.7-plus",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260601182713/https://qwen.ai/blog?id=qwen3.7-plus",
+          "retrieved": "2026-06-01"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {}
+    },
+    {
       "id": "mistral-medium-3-5",
       "model": "Mistral Medium 3.5",
       "company": "Mistral AI",
@@ -10778,6 +10834,57 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Cited to the official model card. Not verified because the release date, the context window and the parameter count could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+      },
+      "evidence": {}
+    },
+    {
+      "id": "qwen-image-3-0",
+      "model": "Qwen-Image-3.0",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "Alibaba's third-generation image model, aimed at dense text rendering and knowledge-grounded detail.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-16",
+          "sources": [
+            "qwen-image-3-0-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen-image-3-0-s1",
+          "url": "https://qwen.ai/blog?id=qwen-image-3.0",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260721075305/https://qwen.ai/blog?id=qwen-image-3.0",
+          "retrieved": "2026-07-21"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {}
     },
