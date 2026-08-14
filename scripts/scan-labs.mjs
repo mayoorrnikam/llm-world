@@ -40,6 +40,22 @@ const ALL = process.argv.includes('--all');
 const ONLY = process.argv.find((a) => a.startsWith('--lab='))?.split('=')[1];
 
 /**
+ * `--limit=0` means "start, then stop" — the smoke test's contract.
+ *
+ * checkScriptsRun() launches every script this way with a 30-second timeout to
+ * prove it can still start; a script gutted by a bad edit fails there rather
+ * than at 6am in CI. Every other script honours it. This one never read the
+ * flag at all, so the check ran a FULL live scan of every channel and passed
+ * only because that happened to finish in time.
+ *
+ * Adding three channels in one day took it past thirty seconds, and CI failed
+ * with "exit null" — killed by the timeout, which reads like a broken script
+ * rather than a slow one. The check was never meant to measure how fast the
+ * network is.
+ */
+if (process.argv.includes('--limit=0')) process.exit(0);
+
+/**
  * Extra channels for labs whose documentation this dataset does not yet cite.
  *
  * Everything else is DERIVED from the dataset's own sources — see channels()
