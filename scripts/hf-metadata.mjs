@@ -25,6 +25,7 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { saveDataset } from '../lib/dataset.mjs';
 
 const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
@@ -155,7 +156,7 @@ if (WRITE) {
   // touching the file. `npm run enrich` runs it with --write, so every licence
   // and modality it claimed to record was discarded, and the report said
   // otherwise. A script that lies about writing is worse than one that cannot.
-  writeFileSync(FILE, JSON.stringify(data, null, 2) + '\n');
+  saveDataset(data);
   console.log(`\nwrote ${FILE}`);
 } else {
   console.log(`\ndry run — pass --write to record`);

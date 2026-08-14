@@ -397,8 +397,13 @@ function checkWriteScripts() {
   for (const file of readdirSync('scripts').filter((f) => f.endsWith('.mjs')).map((f) => `scripts/${f}`)) {
     const code = stripNonCode(readFileSync(file, 'utf8'));
     if (!/--write/.test(readFileSync(file, 'utf8'))) continue;
-    if (!/\bwriteFileSync\s*\(/.test(code)) {
-      fail(file, 'takes --write but never calls writeFileSync — it reports a write it does not perform');
+    // saveDataset() is the guarded path to the same place: it refuses to write
+    // when another script has changed the dataset since this one read it. The
+    // point of this check is that a script advertising --write persists
+    // something, not which function it uses to do it.
+    if (!/\b(?:writeFileSync|saveDataset)\s*\(/.test(code)) {
+      fail(file, 'takes --write but never persists anything — '
+        + 'it reports a write it does not perform');
     }
   }
 }

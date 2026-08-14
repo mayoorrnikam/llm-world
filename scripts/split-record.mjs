@@ -33,6 +33,7 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { saveDataset } from '../lib/dataset.mjs';
 
 const FILE = 'data/llm-releases.json';
 const specPath = process.argv[2];
@@ -124,7 +125,7 @@ console.log(`\nreleases: ${data.releases.length - parts.length + 1} → ${data.r
 console.log(`evidence[] cleared on each part — it referenced the old record's values`);
 
 if (WRITE) {
-  writeFileSync(FILE, JSON.stringify(data, null, 2) + '\n');
+  saveDataset(data);
   console.log(`\nwrote ${FILE}`);
 } else {
   console.log(`\ndry run — pass --write to apply`);

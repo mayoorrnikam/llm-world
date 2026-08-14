@@ -34,6 +34,7 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { saveDataset } from '../lib/dataset.mjs';
 // One reader for every script: HTML, PDF and client-rendered pages, cached on
 // disk so a full pass fetches each source once rather than five times.
 import { sourceText, FAILED } from '../lib/source-text.mjs';
@@ -283,7 +284,7 @@ for (const r of pending.slice(0, LIMIT)) {
 
   if (WRITE) {
     r.benchmarks = rows;
-    writeFileSync(FILE, JSON.stringify(data, null, 2) + '\n');
+    saveDataset(data);
   }
 }
 

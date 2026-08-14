@@ -45,6 +45,7 @@
  */
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { saveDataset } from '../lib/dataset.mjs';
 
 const specPath = process.argv[2];
 const WRITE = process.argv.includes('--write');
@@ -154,7 +155,7 @@ if (!WRITE) { console.log(`\ndry run — pass --write to add`); process.exit(0);
 
 data.releases.push(...built);
 data.releases.sort((a, b) => a.events[0].date.localeCompare(b.events[0].date));
-writeFileSync(FILE, JSON.stringify(data, null, 2) + '\n');
+saveDataset(data);
 
 console.log(`\nwrote ${FILE} — ${data.releases.length} releases`);
 console.log(`\nNext: npm run enrich`);

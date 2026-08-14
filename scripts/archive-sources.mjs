@@ -30,6 +30,7 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { saveDataset } from '../lib/dataset.mjs';
 import { canonicalDate } from '../lib/record.mjs';
 
 const FILE = 'data/llm-releases.json';
@@ -211,7 +212,7 @@ if (errors.length) {
 }
 
 if (WRITE) {
-  writeFileSync(FILE, JSON.stringify(data, null, 2) + '\n');
+  saveDataset(data);
   console.log(`\nwrote ${FILE}`);
 } else {
   console.log(`\ndry run — pass --write to record the snapshots found`);

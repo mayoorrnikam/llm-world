@@ -39,6 +39,7 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { saveDataset } from '../lib/dataset.mjs';
 import { sourceText, FAILED } from '../lib/source-text.mjs';
 
 const FILE = 'data/llm-releases.json';
@@ -380,7 +381,7 @@ if (partial.length) {
 if (unreadable.length) console.log(`\nNO READABLE SOURCE (${unreadable.length}): ${unreadable.join(', ')}`);
 
 if (WRITE) {
-  writeFileSync(FILE, JSON.stringify(data, null, 2) + '\n');
+  saveDataset(data);
   console.log(`\nwrote ${FILE}`);
 } else {
   console.log(`\ndry run — pass --write to record`);

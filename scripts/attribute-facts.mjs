@@ -34,6 +34,7 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { saveDataset } from '../lib/dataset.mjs';
 // One reader for every script: HTML, PDF and client-rendered pages, cached on
 // disk so a full pass fetches each source once rather than five times.
 import { sourceText, FAILED } from '../lib/source-text.mjs';
@@ -194,7 +195,7 @@ for (const r of pending.slice(0, LIMIT)) {
     // at the end is not resumable at all — rate limiting kills it and every
     // record read so far is thrown away. Each record costs several slow
     // fetches; none of them should have to be paid for twice.
-    writeFileSync(FILE, JSON.stringify(data, null, 2) + '\n');
+    saveDataset(data);
   }
   process.stdout.write(`  ✓ ${r.id}  ${found.join('  ') || '(nothing matched)'}\n`);
 }
@@ -215,7 +216,7 @@ console.log(`\nskipped records:`);
 }
 
 if (WRITE) {
-  writeFileSync(FILE, JSON.stringify(data, null, 2) + '\n');
+  saveDataset(data);
   console.log(`\nwrote ${FILE}`);
 } else {
   console.log(`\ndry run — pass --write to record`);

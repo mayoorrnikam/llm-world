@@ -20,6 +20,7 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { saveDataset } from '../lib/dataset.mjs';
 import {
   assertedValue, evidenceFor, EVIDENCED_FIELDS, canonicalDate,
 } from '../lib/record.mjs';
@@ -177,7 +178,7 @@ console.log(`\n${written} record${written === 1 ? '' : 's'} given a stated reaso
   + `${skipped ? `, ${skipped} already had one` : ''}`);
 
 if (WRITE) {
-  writeFileSync(FILE, JSON.stringify(data, null, 2) + '\n');
+  saveDataset(data);
   console.log(`wrote ${FILE}`);
 } else {
   console.log(`dry run — pass --write to apply`);
