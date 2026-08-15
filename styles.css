@@ -1402,7 +1402,31 @@ code, kbd {
 
   /* The ribbon stays — it is the point of the page — but the era captions
      don't survive a narrow column, so only the years remain. */
-  .ribbon { height: 34px; }
+  /**
+   * Was a hard 34px, which ignored --peak entirely.
+   *
+   * That was fine when the busiest month held four releases. It now holds
+   * seventeen, so the columns — which are sized from --peak — ran 117px past
+   * the container and, because .ribbon does not clip, painted straight over
+   * the company filters below it. The height has to follow the data, so it
+   * scales like the desktop rule and is capped so a busy month cannot eat the
+   * screen. Smaller units keep the whole range on a phone.
+   */
+  /* The year strip scrolls but said so nowhere, so 2026 simply looked cut
+     off. A fading right edge is the usual affordance and costs no layout. */
+  .year-selector {
+    mask-image: linear-gradient(to right, #000 88%, transparent);
+    scroll-snap-type: x proximity;
+  }
+  .year-btn { scroll-snap-align: start; }
+
+  .ribbon {
+    --unit: 5px;
+    --unit-gap: 1px;
+    height: min(calc((var(--unit) + var(--unit-gap)) * var(--peak, 4) + 4px), 132px);
+  }
+  /* A cap means a very busy month would otherwise overflow silently again. */
+  .ribbon-col { overflow: hidden; }
   .ribbon-yr-era { display: none; }
   .ribbon-yr { padding-inline: 4px; }
 
