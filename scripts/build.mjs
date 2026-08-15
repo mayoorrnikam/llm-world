@@ -939,11 +939,127 @@ ${[...byMonth.keys()].sort((a, b) => a - b).map((m) => `
 }
 
 /** Index of every tracked model, newest first, grouped by year. */
+/**
+ * A filter bar over an already-rendered list, as markup plus its behaviour.
+ *
+ * There were two copies of this and the second one arrived carrying a comment
+ * admitting it was a copy. They agreed on the whole protocol — a `hidden` bar,
+ * a search box, <select> facets, a clear button, a count in a live region, an
+ * empty-state line, `li[data-find]` rows, state in the query string — and
+ * differed only in an id prefix, the facet list, and whether the noun was
+ * "releases" or "records".
+ *
+ * PROGRESSIVE ENHANCEMENT IS THE POINT. These pages are static so they can be
+ * indexed and read without JavaScript; the full list stays in the HTML and this
+ * only hides rows once it loads. The controls ship `hidden` so a reader without
+ * JavaScript never meets a control that does nothing.
+ *
+ * The script is assembled by substitution into a plain string rather than
+ * written as a nested template literal. build.mjs is itself a template, so a
+ * `${}` meant for the browser has to be escaped from the build — and
+ * `node --check`, which smoke runs, validates syntax but not which stage a
+ * substitution belongs to. Getting that wrong produces valid JavaScript that
+ * does the wrong thing. Avoiding the nesting avoids the class.
+ */
+function filterBar({ prefix, noun, placeholder, facets, rowSelector, groupHeadings = false }) {
+  const markup = `
+<div class="filterbar" id="${prefix}" hidden>
+  <label class="filterbar-search">
+    <span class="sr-only">${esc(placeholder)}</span>
+    <input type="search" id="${prefix}-q" placeholder="${esc(placeholder)}" autocomplete="off">
+  </label>
+  ${facets.map((f) => `<label class="filterbar-sel">
+    <span class="sr-only">${esc(f.label)}</span>
+    <select id="${prefix}-${f.key}"><option value="">${esc(f.label)}: any</option>${
+      f.options.map((o) => `<option value="${esc(String(o))}">${
+        esc(String(o).replace(/_/g, ' '))}</option>`).join('')}</select>
+  </label>`).join('')}
+  <button type="button" class="reset-btn" id="${prefix}-clear" hidden>Clear</button>
+  <p class="filterbar-count" id="${prefix}-count" role="status"></p>
+</div>
+<p class="filterbar-empty" id="${prefix}-empty" hidden>Nothing matches those filters.</p>`;
+
+  const HEADINGS = `
+    // A year heading with nothing under it is noise, and its count is a lie.
+    heads.forEach(function(h){
+      var list=h.nextElementSibling; if(!list||list.tagName!=='OL')return;
+      var vis=[].slice.call(list.children).filter(function(x){return !x.hidden;}).length;
+      h.hidden=vis===0; list.hidden=vis===0;
+      if(vis){var a=h.querySelector('a');h.innerHTML='';if(a)h.appendChild(a);
+        h.appendChild(document.createTextNode(' — '+vis+' __NOUN_SING__'+(vis===1?'':'s')));}
+    });`;
+
+  const BODY = `
+addEventListener('DOMContentLoaded',function(){
+  var bar=document.getElementById('__P__');if(!bar)return;
+  bar.hidden=false;
+  var q=document.getElementById('__P__-q'),clear=document.getElementById('__P__-clear'),
+      count=document.getElementById('__P__-count'),empty=document.getElementById('__P__-empty'),
+      sels=__IDS__.map(function(i){return document.getElementById(i);}),
+      rows=[].slice.call(document.querySelectorAll('__ROWS__')),
+      heads=[].slice.call(document.querySelectorAll('.doc-main h2'));
+  var KEY=__KEYS__;
+  function apply(push){
+    var text=q.value.trim().toLowerCase(), on=0;
+    rows.forEach(function(li){
+      var ok=(!text||li.dataset.find.indexOf(text)>=0);
+      sels.forEach(function(s){ if(ok&&s.value&&li.dataset[KEY[s.id]]!==s.value) ok=false; });
+      li.hidden=!ok; if(ok)on++;
+    });__HEADINGS__
+    var filtered=!!text||sels.some(function(s){return !!s.value;});
+    count.textContent=filtered?(on+' of '+rows.length+' __NOUN__'):(rows.length+' __NOUN__');
+    clear.hidden=!filtered; empty.hidden=on>0;
+    if(push){
+      var p=new URLSearchParams();
+      if(text)p.set('q',q.value.trim());
+      sels.forEach(function(s){if(s.value)p.set(KEY[s.id],s.value);});
+      history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:''));
+    }
+  }
+  var p0=new URLSearchParams(location.search);
+  q.value=p0.get('q')||'';
+  sels.forEach(function(s){s.value=p0.get(KEY[s.id])||'';});
+  q.addEventListener('input',function(){apply(true);});
+  sels.forEach(function(s){s.addEventListener('change',function(){apply(true);});});
+  clear.addEventListener('click',function(){
+    q.value='';sels.forEach(function(s){s.value='';});apply(true);q.focus();
+  });
+  apply(false);
+});`;
+
+  const ids = facets.map((f) => `'${prefix}-${f.key}'`).join(',');
+  const keys = facets.map((f) => `'${prefix}-${f.key}':'${f.key}'`).join(',');
+  const script = '<script defer>' + BODY
+    .split('__P__').join(prefix)
+    .split('__IDS__').join('[' + ids + ']')
+    .split('__KEYS__').join('{' + keys + '}')
+    .split('__ROWS__').join(rowSelector)
+    .split('__HEADINGS__').join(groupHeadings ? HEADINGS : '')
+    .split('__NOUN_SING__').join(noun.replace(/s$/, ''))
+    .split('__NOUN__').join(noun) + '</script>';
+
+  return { markup, script };
+}
+
 function modelsIndexPage() {
   const byYear = new Map();
   for (const r of [...releases].reverse()) {
     (byYear.get(r.year) ?? byYear.set(r.year, []).get(r.year)).push(r);
   }
+  const mf = filterBar({
+    prefix: 'mf',
+    noun: 'releases',
+    placeholder: 'Search model, lab or family',
+    rowSelector: '.doc-list li[data-find]',
+    groupHeadings: true,
+    facets: [
+      { key: 'lab', label: 'Lab', options: [...new Set(releases.map((r) => r.company))].sort() },
+      { key: 'year', label: 'Year', options: [...new Set(releases.map((r) => r.year))].sort((a, b) => b - a) },
+      { key: 'type', label: 'Type', options: [...new Set(releases.map((r) => r.classification?.primary_type ?? 'language'))].sort() },
+      { key: 'weights', label: 'Weights', options: ['open', 'proprietary'] },
+    ],
+  });
+
   const body = `
 ${crumbs('../', ['Models'])}
 <div class="doc-hero"><div>
@@ -951,25 +1067,7 @@ ${crumbs('../', ['Models'])}
   <p class="doc-sub">${releases.length} releases from ${new Set(releases.map((r) => r.company)).size} labs, newest first</p>
 </div></div>
 
-<div class="filterbar" id="mf" hidden>
-  <label class="filterbar-search">
-    <span class="sr-only">Search models</span>
-    <input type="search" id="mf-q" placeholder="Search model, lab or family" autocomplete="off">
-  </label>
-  ${[
-    ['mf-lab', 'Lab', [...new Set(releases.map((r) => r.company))].sort()],
-    ['mf-year', 'Year', [...new Set(releases.map((r) => r.year))].sort((a, b) => b - a)],
-    ['mf-type', 'Type', [...new Set(releases.map((r) => r.classification?.primary_type ?? 'language'))].sort()],
-    ['mf-weights', 'Weights', ['open', 'proprietary']],
-  ].map(([id, label, opts]) => `<label class="filterbar-sel">
-    <span class="sr-only">${label}</span>
-    <select id="${id}"><option value="">${label}: any</option>${
-      opts.map((o) => `<option value="${esc(String(o))}">${esc(String(o).replace(/_/g, ' '))}</option>`).join('')}</select>
-  </label>`).join('')}
-  <button type="button" class="reset-btn" id="mf-clear" hidden>Clear</button>
-  <p class="filterbar-count" id="mf-count" role="status"></p>
-</div>
-<p class="filterbar-empty" id="mf-empty" hidden>No model matches those filters.</p>
+${mf.markup}
 ${[...byYear.keys()].sort((a, b) => b - a).map((y) => `
 <h2><a href="../timeline/${y}/">${y}</a> — ${byYear.get(y).length} releases</h2>
 <ol class="doc-list">${byYear.get(y).map((r) =>
@@ -1002,57 +1100,10 @@ ${[...byYear.keys()].sort((a, b) => b - a).map((y) => `
    * State lives in the query string like every other view here, so a filtered
    * list is a link somebody can send.
    */
-  const script = `<script defer>
-addEventListener('DOMContentLoaded',function(){
-  var bar=document.getElementById('mf');if(!bar)return;
-  bar.hidden=false;
-  var q=document.getElementById('mf-q'),clear=document.getElementById('mf-clear'),
-      count=document.getElementById('mf-count'),empty=document.getElementById('mf-empty'),
-      sels=['mf-lab','mf-year','mf-type','mf-weights'].map(function(i){return document.getElementById(i);}),
-      rows=[].slice.call(document.querySelectorAll('.doc-list li[data-find]')),
-      heads=[].slice.call(document.querySelectorAll('.doc-main h2'));
-  var KEY={'mf-lab':'lab','mf-year':'year','mf-type':'type','mf-weights':'weights'};
-  function read(){
-    var p=new URLSearchParams(location.search);
-    q.value=p.get('q')||'';
-    sels.forEach(function(s){s.value=p.get(KEY[s.id])||'';});
-  }
-  function apply(push){
-    var text=q.value.trim().toLowerCase(), on=0;
-    rows.forEach(function(li){
-      var ok=(!text||li.dataset.find.indexOf(text)>=0);
-      sels.forEach(function(s){ if(ok&&s.value&&li.dataset[KEY[s.id]]!==s.value) ok=false; });
-      li.hidden=!ok; if(ok)on++;
-    });
-    // A year heading with nothing under it is noise, and its count is a lie.
-    heads.forEach(function(h){
-      var list=h.nextElementSibling; if(!list||list.tagName!=='OL')return;
-      var vis=[].slice.call(list.children).filter(function(x){return !x.hidden;}).length;
-      h.hidden=vis===0; list.hidden=vis===0;
-      if(vis){var a=h.querySelector('a');h.innerHTML='';if(a)h.appendChild(a);
-        h.appendChild(document.createTextNode(' — '+vis+' release'+(vis===1?'':'s')));}
-    });
-    var filtered=!!text||sels.some(function(s){return !!s.value;});
-    count.textContent=filtered?(on+' of '+rows.length+' releases'):(rows.length+' releases');
-    clear.hidden=!filtered; empty.hidden=on>0;
-    if(push){
-      var p=new URLSearchParams();
-      if(text)p.set('q',q.value.trim());
-      sels.forEach(function(s){if(s.value)p.set(KEY[s.id],s.value);});
-      history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:''));
-    }
-  }
-  q.addEventListener('input',function(){apply(true);});
-  sels.forEach(function(s){s.addEventListener('change',function(){apply(true);});});
-  clear.addEventListener('click',function(){
-    q.value='';sels.forEach(function(s){s.value='';});apply(true);q.focus();
-  });
-  read();apply(false);
-});
-</script>`;
+
 
   return page({
-    head: script,
+    head: mf.script,
     title: 'All tracked LLM releases | LLM World',
     description: `An index of ${releases.length} tracked large language model releases, newest first, each with dates and sources.`,
     canonical: `${BASE_URL}/models/`,
@@ -1780,6 +1831,17 @@ function dataQualityPage() {
     license: 'Licence', release_date: 'Release date',
   };
 
+  const qf = filterBar({
+    prefix: 'qf',
+    noun: 'records',
+    placeholder: 'Search model, lab or reason',
+    rowSelector: '.quality-list li[data-find]',
+    facets: [
+      { key: 'lab', label: 'Lab', options: [...new Set(unproven.map((r) => r.company))].sort() },
+      { key: 'status', label: 'Status', options: [...new Set(unproven.map((r) => r.provenance.status))].sort() },
+    ],
+  });
+
   const body = `
 ${crumbs('../', ['Data quality'])}
 
@@ -1888,27 +1950,7 @@ Naming the gaps is more useful than a number that implies there are none.</p>
 <h2>Records not yet verified</h2>
 <p class="chart-note">${unproven.length} of ${total}. Each says which fact is unproven.</p>
 
-<div class="filterbar" id="qf" hidden>
-  <label class="filterbar-search">
-    <span class="sr-only">Search unverified records</span>
-    <input type="search" id="qf-q" placeholder="Search model, lab or reason" autocomplete="off">
-  </label>
-  <label class="filterbar-sel">
-    <span class="sr-only">Lab</span>
-    <select id="qf-lab"><option value="">Lab: any</option>${
-      [...new Set(unproven.map((r) => r.company))].sort()
-        .map((c) => `<option value="${esc(c)}">${esc(c)}</option>`).join('')}</select>
-  </label>
-  <label class="filterbar-sel">
-    <span class="sr-only">Status</span>
-    <select id="qf-status"><option value="">Status: any</option>${
-      [...new Set(unproven.map((r) => r.provenance.status))].sort()
-        .map((c) => `<option value="${esc(c)}">${esc(c.replace(/_/g, ' '))}</option>`).join('')}</select>
-  </label>
-  <button type="button" class="reset-btn" id="qf-clear" hidden>Clear</button>
-  <p class="filterbar-count" id="qf-count" role="status"></p>
-</div>
-<p class="filterbar-empty" id="qf-empty" hidden>No record matches those filters.</p>
+${qf.markup}
 
 <ol class="doc-list quality-list">${unproven.map((r) => `<li data-lab="${esc(r.company)}" data-status="${
   esc(r.provenance.status)}" data-find="${esc(`${r.model} ${r.company} ${r.provenance.reason ?? ''}`.toLowerCase())}">
@@ -1928,45 +1970,10 @@ ${companyMark(r.company, 'sm')}
    * filter rather than splitting. The list still ships whole in the HTML; this
    * only hides rows once it loads.
    */
-  const script = `<script defer>
-addEventListener('DOMContentLoaded',function(){
-  var bar=document.getElementById('qf');if(!bar)return;
-  bar.hidden=false;
-  var q=document.getElementById('qf-q'),lab=document.getElementById('qf-lab'),
-      st=document.getElementById('qf-status'),clear=document.getElementById('qf-clear'),
-      count=document.getElementById('qf-count'),empty=document.getElementById('qf-empty'),
-      rows=[].slice.call(document.querySelectorAll('.quality-list li[data-find]'));
-  function apply(push){
-    var text=q.value.trim().toLowerCase(),on=0;
-    rows.forEach(function(li){
-      var ok=(!text||li.dataset.find.indexOf(text)>=0)
-        &&(!lab.value||li.dataset.lab===lab.value)
-        &&(!st.value||li.dataset.status===st.value);
-      li.hidden=!ok; if(ok)on++;
-    });
-    var filtered=!!text||!!lab.value||!!st.value;
-    count.textContent=filtered?(on+' of '+rows.length+' records'):(rows.length+' records');
-    clear.hidden=!filtered; empty.hidden=on>0;
-    if(push){
-      var p=new URLSearchParams();
-      if(text)p.set('q',q.value.trim());
-      if(lab.value)p.set('lab',lab.value);
-      if(st.value)p.set('status',st.value);
-      history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:''));
-    }
-  }
-  var p=new URLSearchParams(location.search);
-  q.value=p.get('q')||'';lab.value=p.get('lab')||'';st.value=p.get('status')||'';
-  q.addEventListener('input',function(){apply(true);});
-  lab.addEventListener('change',function(){apply(true);});
-  st.addEventListener('change',function(){apply(true);});
-  clear.addEventListener('click',function(){q.value='';lab.value='';st.value='';apply(true);q.focus();});
-  apply(false);
-});
-</script>`;
+
 
   return page({
-    head: script,
+    head: qf.script,
     title: 'Data quality — what this dataset can prove | LLM World',
     description: `Verification status, source authority and specification coverage across ${total} tracked LLM releases, including what is missing and why.`,
     canonical: `${BASE_URL}/data-quality/`,
