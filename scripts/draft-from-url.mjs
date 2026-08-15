@@ -26,6 +26,10 @@
 
 import { writeFileSync } from 'node:fs';
 import { sourceText } from '../lib/source-text.mjs';
+// One date vocabulary for the whole project — the same module that generates
+// the forms attribute-facts.mjs searches for. See its header for why a numeric
+// 03/04/2026 is refused rather than guessed.
+import { scanDates, resolveOrder, describeAmbiguity } from '../lib/dates.mjs';
 
 const args = process.argv.slice(2);
 const url = args.find((a) => !a.startsWith('--'));
@@ -112,18 +116,6 @@ const licence = stated('licence', [
   /\b(Apache[- ]2\.0|MIT|BSD-3-Clause|CC BY(?:-[A-Z]{2})?[- ]?4\.0)\b/i,
 ]);
 
-// Labs date their posts in prose far more often than in ISO. Both forms are
-// read and normalised; nothing is inferred when neither appears.
-const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-const toIso = (raw) => {
-  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
-  const m = /([A-Za-z]{3,9})\.?\s+(\d{1,2}),?\s+(\d{4})/.exec(raw);
-  if (!m) return raw;
-  const mi = MONTHS.indexOf(m[1].slice(0, 3).toLowerCase());
-  if (mi < 0) return raw;
-  return `${m[3]}-${String(mi + 1).padStart(2, '0')}-${m[2].padStart(2, '0')}`;
-};
-
 /**
  * Dates on a model page that are NOT its release date.
  *
@@ -152,6 +144,14 @@ const NOT_A_RELEASE_DATE = [
   /last updated[^\n]{0,70}/gi,
   /last modified[^\n]{0,70}/gi,
   /©[^\n]{0,40}/g,
+  // The same traps in Chinese, because the same labs publish the same pages in
+  // it — qwen.ai, docs.z.ai and seed.bytedance.com all do. Now that a date can
+  // be read out of "2026年8月14日", the guards that make an English page safe
+  // have to hold for the Chinese one or this reads a knowledge cutoff off it.
+  /知识截止[^\n]{0,40}/g,   // knowledge cutoff
+  /训练数据[^\n]{0,40}/g,   // training data
+  /最后更新[^\n]{0,40}/g,   // last updated
+  /更新时间[^\n]{0,40}/g,   // updated at
 ];
 
 const dateText = NOT_A_RELEASE_DATE.reduce((t, p) => t.replace(p, ' '), text);
@@ -167,7 +167,10 @@ const dateText = NOT_A_RELEASE_DATE.reduce((t, p) => t.replace(p, ' '), text);
  * know. The prose fallback below missed "Aug 12, 2026" in one of my own checks
  * for exactly that reason.
  */
-async function publishedDate(u) {
+// The raw markup, fetched once. It carries two things the prose reader throws
+// away: the JSON-LD block, and the page's own declaration of what locale it is
+// written in — which is the only honest way to read a numeric 08/14/2026.
+async function rawHtml(u) {
   try {
     const res = await fetch(u, {
       redirect: 'follow',
@@ -175,27 +178,47 @@ async function publishedDate(u) {
       headers: { 'user-agent': 'Mozilla/5.0 (compatible; llm-world draft)' },
     });
     if (!res.ok) return null;
-    const html = await res.text();
-    for (const m of html.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)) {
-      const found = /"datePublished"\s*:\s*"(\d{4}-\d{2}-\d{2})/.exec(m[1]);
-      if (found) return found[1];
-    }
-  } catch { /* a missing block is not a finding */ }
-  return null;
+    return await res.text();
+  } catch { return null; }
 }
 
-const structuredDate = await publishedDate(url);
+const html = await rawHtml(url);
+
+const structuredDate = (() => {
+  if (!html) return null;
+  for (const m of html.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)) {
+    const found = /"datePublished"\s*:\s*"(\d{4}-\d{2}-\d{2})/.exec(m[1]);
+    if (found) return found[1];
+  }
+  return null;
+})();
+
+/**
+ * Which way round a numeric date on THIS page reads, or null.
+ *
+ * `lang="en-US"` on the document, failing that a single declared translation,
+ * failing that an unambiguous numeric date elsewhere on the same page. When
+ * none of those exist the order stays null and every ambiguous form is refused
+ * — see lib/dates.mjs. A default here would be a coin flip wearing a fact's
+ * clothes, and this project would rather publish a gap.
+ */
+const order = resolveOrder({ html, text: dateText });
+
+const refused = [];
 
 const date = flag('date') ?? structuredDate ?? (() => {
-  for (const p of [
-    // A date the page ties to shipping outranks a bare one.
-    /\b(?:released|announced|launched|available)\b[^.]{0,30}?((?:January|February|March|April|May|June|July|August|September|October|November|December)\.?\s+\d{1,2},?\s+20\d{2})/i,
-    /\b(\d{4}-\d{2}-\d{2})\b/,
-    /\b((?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.?\s+\d{1,2},?\s+20\d{2})\b/,
-  ]) {
-    const m = p.exec(dateText);
-    if (m) return toIso(m[1]);
-  }
+  const hits = scanDates(dateText, { order });
+  for (const h of hits) if (h.ambiguous) refused.push(h);
+
+  // A date the page ties to shipping outranks a bare one. The verb has to sit
+  // in the run of text immediately before the date; anything further away is
+  // a different sentence talking about something else.
+  const SHIPPING = /\b(?:released?|releasing|announced?|announcing|launched?|launching|available|introduc\w+|ships?|shipped)\b[^.]{0,40}$/i;
+  const settled = hits.filter((h) => !h.ambiguous);
+  const tied = settled.find((h) => SHIPPING.test(dateText.slice(Math.max(0, h.index - 60), h.index)));
+  if (tied) return tied.iso;
+  if (settled.length) return settled[0].iso;
+
   gaps.push('announcement date');
   return null;
 })();
@@ -233,6 +256,13 @@ if (!date && !JSON_ONLY) {
   console.error(`\ncannot draft ${model ?? url}: no release date on this page.\n`
     + 'Documentation pages state a knowledge cutoff and a last-updated stamp;\n'
     + 'neither is a release date. Point this at the announcement instead.');
+  // A page whose only date is 03/04/2026 has not failed to state a date — it
+  // has stated one this tool refuses to read, and saying so is the difference
+  // between "find another source" and "pass --date=, you can see it".
+  for (const h of refused.slice(0, 3)) console.error(`  ${describeAmbiguity(h)}`);
+  if (refused.length) {
+    console.error('  If you can tell which the page means, pass --date=YYYY-MM-DD.');
+  }
   process.exit(3);
 }
 
@@ -267,6 +297,7 @@ if (JSON_ONLY) {
 
   say(`\n--- a person still has to settle ----------------------------`);
   for (const g of gaps) say(`  · ${g}`);
+  for (const h of refused.slice(0, 3)) say(`  · ${describeAmbiguity(h)}`);
   say('  · whether every figure above is really about this model');
   say('  · modalities and capabilities — the detectors read those from the');
   say('    sources during `npm run enrich`, never from this draft');

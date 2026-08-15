@@ -24,15 +24,16 @@
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { canonicalDate, contextWindow, parameterCount } from '../lib/record.mjs';
+// The project's one date vocabulary — shared with attribute-facts.mjs, which
+// asks the same question of the same pages, and with draft-from-url.mjs, which
+// reads dates out of them.
+import { dateForms } from '../lib/dates.mjs';
 
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
 const arg = (n) => process.argv.find((a) => a.startsWith(`--${n}=`))?.split('=')[1];
 const IDS = arg('ids')?.split(',').filter(Boolean);
 const OUT = arg('out');
 const CONCURRENCY = Number(arg('jobs') ?? 5);
-
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'];
 
 /** Every plausible way a lab might write this token count. */
 function tokenForms(n) {
@@ -62,14 +63,13 @@ function paramForms(n) {
   return [...new Set(forms)];
 }
 
-function dateForms(iso) {
-  const [y, m, d] = iso.split('-').map(Number);
-  if (!d) return [`${MONTHS[m - 1]} ${y}`, iso];
-  const month = MONTHS[m - 1];
-  return [...new Set([
-    iso, `${month} ${d}, ${y}`, `${month} ${d} ${y}`, `${d} ${month} ${y}`,
-    `${month.slice(0, 3)} ${d}, ${y}`, `${month} ${d}`,
-  ])];
+// `loose` keeps the yearless "August 14" this script has always accepted. It is
+// right here and wrong in attribute-facts.mjs: this narrows human review to the
+// records where a value cannot be found AT ALL, so a weak hit costing a person
+// nothing is better than a miss costing them a page read; attribution records
+// which source states a fact, and "May 13" appears on pages about other years.
+function formsForDate(iso) {
+  return dateForms(iso, { loose: true });
 }
 
 function textOf(html) {
@@ -126,7 +126,7 @@ async function check(r) {
     status: r.provenance.status,
     readable: corpus.length,
     sources: archived.length,
-    date: date ? findIn(dateForms(date)) : null,
+    date: date ? findIn(formsForDate(date)) : null,
     context: ctx != null ? findIn(tokenForms(ctx)) : 'n/a',
     params: par != null ? findIn(paramForms(par)) : 'n/a',
   };

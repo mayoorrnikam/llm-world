@@ -70,6 +70,15 @@
   --c-cohere:     #c04a6e;
   --c-other:      #5b6779;
 
+  /* Semantic states. Separate from the company hues on purpose: eight rules
+     borrowed --c-bigscience for "verified", --c-anthropic for "correction"
+     and --c-ai2 for "improved", which made a lab's brand colour the MEANING
+     of a provenance state — re-hue that lab and the meaning moved with it.
+     Deliberately close to those hues, so nothing looks different. */
+  --state-ok:     #1f7a4d;
+  --state-gap:    #8a5a00;
+  --state-fix:    #b4562c;
+
   /* geometry & type */
   --radius: 12px;
   --radius-sm: 8px;
@@ -129,6 +138,9 @@
     --c-zhipu:      #dc5cb0;
     --c-cohere:     #f07d9e;
     --c-other:      #94a3b8;
+    --state-ok:     #4fbf88;
+    --state-gap:    #d9a441;
+    --state-fix:    #f0906a;
   }
 }
 
@@ -180,6 +192,9 @@
   --c-zhipu:      #dc5cb0;
   --c-cohere:     #f07d9e;
   --c-other:      #94a3b8;
+  --state-ok:     #4fbf88;
+  --state-gap:    #d9a441;
+  --state-fix:    #f0906a;
 }
 
 * { box-sizing: border-box; }
@@ -326,13 +341,6 @@ code, kbd {
   font-weight: 750;
   letter-spacing: 0.24em;
   line-height: 1.1;
-}
-
-.brand-sub {
-  margin: 3px 0 0;
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: var(--muted);
 }
 
 /* Primary sections. These were in the footer, which is the wrong place for
@@ -1381,14 +1389,12 @@ code, kbd {
    -------------------------------------------------------------------------- */
 
 @media (max-width: 980px) {
-  .brand-sub { display: none; }
   .search-input { width: clamp(150px, 34vw, 240px); }
 }
 
 @media (max-width: 720px) {
   .header-inner { gap: 10px; }
   .brand { margin-right: 0; }
-  .header-tools { width: 100%; }
   .search-field { flex: 1 1 160px; }
   .search-input { width: 100%; }
 
@@ -1469,21 +1475,6 @@ code, kbd {
   border-bottom: 1px solid var(--line);
 }
 
-.doc-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  font-weight: 750;
-  letter-spacing: 0.2em;
-  color: var(--text);
-  text-decoration: none;
-}
-.doc-brand .brand-mark { width: 26px; height: 26px; }
-
-.doc-back { font-size: 12.5px; color: var(--accent); text-decoration: none; }
-.doc-back:hover { text-decoration: underline; }
-
 .doc-main {
   max-width: 860px;
   margin-inline: auto;
@@ -1561,12 +1552,12 @@ code, kbd {
 /* Filled = traced through. Ringed = partial. Hollow = nothing checked yet.
    The shape carries it; the tint only reinforces. */
 .pv[data-status="verified"] .pv-dot {
-  background: var(--c-bigscience);
+  background: var(--state-ok);
   box-shadow: none;
 }
 .pv[data-status="partially_verified"] .pv-dot {
   background: transparent;
-  box-shadow: inset 0 0 0 2.5px var(--c-alibaba);
+  box-shadow: inset 0 0 0 2.5px var(--state-gap);
 }
 .pv[data-status="estimated"] .pv-dot,
 .pv[data-status="unverified"] .pv-dot {
@@ -1584,7 +1575,7 @@ code, kbd {
 }
 .pv-fact strong { color: var(--text); font-variant-numeric: tabular-nums; }
 /* A gap is worth pointing at, not hiding — but it is not a warning. */
-.pv-gap strong { color: var(--c-alibaba); }
+.pv-gap strong { color: var(--state-gap); }
 
 /* The full reason runs to a paragraph once capability quotes are appended, and
    a wall of text at the top of a page is not read. It stays one click away
@@ -1799,8 +1790,8 @@ code, kbd {
 
 /* A correction is the entry a reader came here to find, so it is the one that
    is marked. Not styled as an error: publishing the fix is the good outcome. */
-.chg-fix::marker { color: var(--c-anthropic); }
-.chg-fix strong { color: var(--c-anthropic); }
+.chg-fix::marker { color: var(--state-fix); }
+.chg-fix strong { color: var(--state-fix); }
 
 /* Context-window study ----------------------------------------------------- */
 .cs-figure { margin: 18px 0 22px; }
@@ -2006,7 +1997,7 @@ code, kbd {
 /* Direction is a secondary cue on top of the arrow already in the text, never
    the only one — and "down" is not styled as bad, because a smaller model or a
    cheaper licence is not a regression. */
-.lin-up { border-color: color-mix(in oklab, var(--c-bigscience) 42%, var(--line)); }
+.lin-up { border-color: color-mix(in oklab, var(--state-ok) 42%, var(--line)); }
 .lin-new {
   border-color: color-mix(in oklab, var(--c, var(--c-other)) 45%, var(--line));
   color: var(--text);
@@ -2112,7 +2103,14 @@ code, kbd {
   .doc-mark, .modal-mark, .ask-mark { border: 1px solid CanvasText; }
 }
 
-.doc-hero h1 {
+/* Three index pages emit a bare <main><h1> instead of the .doc-hero wrapper,
+   so they rendered at the browser default — 28px/700 against 32px/750 with
+   -0.02em elsewhere. The wrapper is hand-typed at 14 sites in build.mjs and
+   there is no docHero() helper, so this matches on the heading rather than
+   the wrapper: it is one rule instead of fourteen edits, and it cannot drift
+   again the next time a page is added. */
+.doc-hero h1,
+.doc-main > h1 {
   margin: 0;
   font-size: clamp(24px, 4vw, 32px);
   font-weight: 750;
@@ -2421,7 +2419,6 @@ code, kbd {
 }
 
 /* Family lineage — one generation per row, dates on the right. */
-.family-lineage li { padding: 10px 2px; }
 
 /* What changed: one block per consecutive pair of generations. */
 .changeset {
@@ -2516,17 +2513,6 @@ code, kbd {
   font-size: 13px;
 }
 
-.doc-foot {
-  max-width: 860px;
-  margin-inline: auto;
-  padding: 18px var(--pad) 40px;
-  border-top: 1px solid var(--line-soft);
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--muted);
-}
-.doc-foot p { margin: 0; }
-
 @media (max-width: 620px) {
   .doc-table th { width: 118px; }
   .doc-list li, .doc-list.cols-3 li {
@@ -2551,22 +2537,8 @@ code, kbd {
   text-underline-offset: 3px;
 }
 
-
-.doc-nav-top {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 18px;
-  font-size: 12.5px;
-}
-.doc-nav-top a {
-  color: var(--text-dim);
-  text-decoration: none;
-}
-.doc-nav-top a:hover { color: var(--accent); }
-
 @media (max-width: 560px) {
   .doc-head { flex-wrap: wrap; gap: 10px; }
-  .doc-nav-top { gap: 4px 14px; }
 }
 
 /* --------------------------------------------------------------------------
@@ -2738,7 +2710,15 @@ code, kbd {
 
 /* What changed — the diff between consecutive picks, in release order. */
 .cmp-changed { margin-top: 34px; }
-.cmp-changed h2 { font-size: 17px; margin: 0 0 6px; }
+/* Inherits mono + uppercase + 0.15em tracking from .doc-main h2, so setting
+   only the size rendered a 17px uppercase MONOSPACE eyebrow — the loudest
+   string on the page, where every other section heading is 11px. */
+.cmp-changed h2 {
+  font-family: var(--font);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  margin: 0 0 6px;
+}
 .cmp-diff { margin-top: 20px; }
 .cmp-diff h3 {
   font-size: 13px;
@@ -2759,8 +2739,8 @@ code, kbd {
 }
 /* Direction is carried by the border AND spelled out in the value beside it,
    so the colour is never the only signal (README, design notes). */
-.cmp-diff-list li[data-direction="up"]   { border-left-color: var(--c-ai2); }
-.cmp-diff-list li[data-direction="down"] { border-left-color: var(--c-anthropic); }
+.cmp-diff-list li[data-direction="up"]   { border-left-color: var(--state-ok); }
+.cmp-diff-list li[data-direction="down"] { border-left-color: var(--state-fix); }
 .cmp-diff-label { color: var(--muted); }
 .cmp-diff-value { color: var(--text); font-variant-numeric: tabular-nums; }
 .cmp-diff-gap { font-size: 12.5px; color: var(--muted); margin: 8px 0 0; }
@@ -2777,7 +2757,6 @@ code, kbd {
 /* Header responsiveness: the nav is the first thing to compress, then the
    search field, then the segmented control's labels. */
 @media (max-width: 1080px) {
-  .brand-sub { display: none; }
   .main-nav a { padding: 6px 9px; font-size: 12.5px; }
   .search-input { width: clamp(150px, 22vw, 230px); }
 }
@@ -3062,7 +3041,6 @@ code, kbd {
   clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 .ask-form { align-items: stretch; }
-.ask-go { line-height: 1; }
 
 /* Dataset at a glance — computed from the records, so it cannot go stale. */
 .pulse-grid {
@@ -3090,7 +3068,6 @@ code, kbd {
   .home-main { padding-left: 14px; padding-right: 14px; }
   .ask-form { flex-wrap: wrap; }
   .ask-input { flex: 1 1 100%; }
-  .ask-go { flex: 1 1 100%; padding: 12px; }
   .pulse-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .pulse-v { font-size: 17px; }
   .try-group button { font-size: 12px; }

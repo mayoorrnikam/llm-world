@@ -252,8 +252,8 @@ const NODE_BUILTINS = [
 
 function checkLibImports() {
   const exported = new Set(
-    [...readFileSync('lib/record.mjs', 'utf8').matchAll(/export (?:function|const) (\w+)/g)].map((m) => m[1])
-      .concat([...readFileSync('lib/source-text.mjs', 'utf8').matchAll(/export (?:function|const) (\w+)/g)].map((m) => m[1]))
+    ['lib/record.mjs', 'lib/source-text.mjs', 'lib/dates.mjs']
+      .flatMap((f) => [...readFileSync(f, 'utf8').matchAll(/export (?:function|const) (\w+)/g)].map((m) => m[1]))
       .concat(['FAILED', 'sourceText']),
   );
 
@@ -433,6 +433,11 @@ function checkScriptsRun() {
     'extract-pricing', 'extract-benchmarks', 'hf-metadata', 'archive-sources',
     'state-reasons', 'discover-epoch', 'add-model', 'split-record',
     'draft-from-url', 'scan-labs',
+    // Not a data script but a test: lib/dates.mjs decides what date gets read
+    // off an announcement, and a wrong release date is the worst thing this
+    // dataset can publish. It ignores --limit and exits non-zero on any failed
+    // assertion, so the gate fails here rather than in a pull request.
+    'test-dates',
   ];
   for (const name of scripts) {
     const file = `scripts/${name}.mjs`;

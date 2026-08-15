@@ -39,6 +39,10 @@ import { saveDataset } from '../lib/dataset.mjs';
 // disk so a full pass fetches each source once rather than five times.
 import { sourceText, FAILED } from '../lib/source-text.mjs';
 import { canonicalDate, assertedValue, EVIDENCED_FIELDS } from '../lib/record.mjs';
+// The project's one date vocabulary. This script generates the written forms of
+// a date it already holds; draft-from-url.mjs reads dates out of prose with the
+// same module, so a form one of them knows is a form the other knows.
+import { dateForms, scanDates } from '../lib/dates.mjs';
 
 const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
@@ -47,25 +51,16 @@ const LIMIT = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('
 const data = JSON.parse(readFileSync(FILE, 'utf8'));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'];
-
 /** Every plausible written form of a value, so a match is not missed. */
 function formsFor(field, v) {
-  if (field === 'release_date') {
-    const [y, m, d] = String(v).split('-').map(Number);
-    const month = MONTHS[m - 1];
-    if (!d) return [String(v), `${month} ${y}`];
-    // Zero-padded day as well as bare. blog.google datelines read "Jun 03,
-    // 2026", so Gemma 4 12B's date sat in its own archived announcement
-    // unmatched, and the record stayed partially_verified for a formatting
-    // difference rather than a missing fact.
-    const dd = String(d).padStart(2, '0');
-    return [...new Set([String(v), `${month} ${d}, ${y}`, `${month} ${d} ${y}`,
-      `${d} ${month} ${y}`, `${month.slice(0, 3)} ${d}, ${y}`,
-      `${month} ${dd}, ${y}`, `${month.slice(0, 3)} ${dd}, ${y}`,
-      `${dd} ${month} ${y}`])];
-  }
+  // Zero-padded day as well as bare, "14 August 2026" as well as "August 14,
+  // 2026", and 2026年8月14日 for the Chinese pages Qwen, Zhipu and ByteDance
+  // publish. blog.google datelines read "Jun 03, 2026", so Gemma 4 12B's date
+  // sat in its own archived announcement unmatched, and the record stayed
+  // partially_verified for a formatting difference rather than a missing fact.
+  // Every one of those forms now lives in lib/dates.mjs, once.
+  if (field === 'release_date') return dateForms(String(v));
+
   const forms = [String(v), v.toLocaleString('en-US')];
   if (field === 'context_window') {
     if (v % 1000 === 0) forms.push(`${v / 1000}K`, `${v / 1000}k`, `${v / 1000},000`);
@@ -168,15 +163,17 @@ for (const r of pending.slice(0, LIMIT)) {
       const near = [];
       for (const c of corpus) {
         if (!DATED.has(c.type)) continue;
-        for (const m of c.text.matchAll(/([A-Z][a-z]{2,8})\.?\s+(\d{1,2}),?\s+(20\d\d)/g)) {
-          const around = c.text.slice(Math.max(0, m.index - 70), m.index + 30);
+        // Every form the shared scanner knows, not just "Month D, YYYY" — a
+        // page that datelines "14 August 2026" or "2026年8月14日" disagrees with
+        // the record just as loudly, and the old pattern could not see either.
+        // Ambiguous numeric forms carry a null iso and are skipped: a date we
+        // refuse to read cannot be evidence that a source disagrees with us.
+        for (const h of scanDates(c.text)) {
+          if (h.ambiguous || h.iso === value) continue;
+          const around = c.text.slice(Math.max(0, h.index - 70), h.index + 30);
           if (NOT_AN_ANNOUNCEMENT.test(around)) continue;
-          const mi = MONTHS.findIndex((x) => x.slice(0, 3) === m[1].slice(0, 3));
-          if (mi < 0) continue;
-          const iso = `${m[3]}-${String(mi + 1).padStart(2, '0')}-${m[2].padStart(2, '0')}`;
-          if (iso === value) continue;
-          const gap = Math.abs(Date.parse(iso) - Date.parse(value)) / 86400000;
-          if (gap <= 3) near.push({ iso, id: c.id });
+          const gap = Math.abs(Date.parse(h.iso) - Date.parse(value)) / 86400000;
+          if (gap <= 3) near.push({ iso: h.iso, id: c.id });
         }
       }
       if (near.length) {
