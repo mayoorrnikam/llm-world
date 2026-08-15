@@ -19,6 +19,7 @@
 
 import { readFileSync, readdirSync, statSync, existsSync, writeFileSync, unlinkSync } from 'node:fs';
 import { join, dirname, resolve, extname } from 'node:path';
+import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
 import { logoSlug } from '../lib/record.mjs';
 
@@ -68,7 +69,17 @@ function checkInlineScripts(page, html) {
     }
     if (!code.trim()) return;
     const isModule = /type="module"/.test(attrs);
-    const tmp = `.smoke-${process.pid}-${i}.${isModule ? 'mjs' : 'js'}`;
+    /**
+     * Written to the OS temp directory, not the repo.
+     *
+     * These are throwaway files that `node --check` needs on disk. They used to
+     * be created in the working directory and unlinked in a finally block —
+     * which leaks the moment the run is interrupted, and .gitignore had no
+     * entry for them. One duly ended up committed as .smoke-38984-3.js and had
+     * to be deleted in the next commit. A build tool must not be able to add a
+     * file to the repository it is checking.
+     */
+    const tmp = join(tmpdir(), `llm-world-smoke-${process.pid}-${i}.${isModule ? 'mjs' : 'js'}`);
     try {
       writeFileSync(tmp, code);
       execFileSync(process.execPath, ['--check', tmp], { stdio: 'pipe' });

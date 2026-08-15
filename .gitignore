@@ -48,3 +48,6 @@ docs/*
 
 # Agent worktrees — full checkouts of this repo, never part of it.
 .claude/worktrees/
+
+# Belt and braces: smoke-test scratch files never belong in the repo.
+.smoke-*
