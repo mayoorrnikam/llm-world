@@ -90,6 +90,41 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (m) =>
 
 const fullDate = (r) => `${MONTHS[r.month - 1]}${r.day ? ` ${r.day}` : ''}, ${r.year}`;
 
+/**
+ * A breadcrumb trail. `up` is the depth prefix, then [label, href?] steps —
+ * the last step omits href and renders as text.
+ *
+ * Hand-typed at seventeen sites before this, and they had drifted: eleven were
+ * missing `aria-label="Breadcrumb"`, and the separator was written three ways
+ * (a literal ›, `&rsaquo;`, and one wrapped in aria-hidden while the others
+ * were read aloud). A screen reader announced the same navigation differently
+ * depending on which page you were on.
+ *
+ * Labels are passed already-escaped, because most call sites already had an
+ * esc() around a model or company name and double-escaping them would print
+ * the entities.
+ */
+/**
+ * One row of an index list: company mark, name, secondary, figure.
+ *
+ * Written out eight times before this, differing only in the link depth and
+ * which field went in the middle. The hue is set as an inline --c so the mark
+ * and the row's left edge pick up the company colour without a per-company
+ * rule; `company` is omitted only by the labs index, whose rows ARE companies.
+ */
+const listRow = ({ company, href, name, meta, num }) =>
+  `<li${company ? ` style="--c:var(--c-${slugFor(company)})"` : ''}>`
+  + `${companyMark(company ?? name, 'sm')}`
+  + `<a class="cell-name" href="${href}">${name}</a>`
+  + `<span class="cell-meta">${meta}</span>`
+  + `<span class="cell-num">${num}</span></li>`;
+
+const crumbs = (up, ...steps) => `<nav class="crumbs" aria-label="Breadcrumb">`
+  + `<a href="${up}">Home</a>`
+  + steps.map(([label, href]) => ' <span aria-hidden="true">&rsaquo;</span> '
+    + (href ? `<a href="${href}">${label}</a>` : `<span>${label}</span>`)).join('')
+  + `</nav>`;
+
 /** A YYYY-MM-DD string as prose. Sources carry `retrieved` in that form. */
 const fullDateISO = (iso) => {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso));
@@ -563,7 +598,7 @@ ${when}
   ];
 
   const body = `
-<nav class="crumbs"><a href="../../">Home</a> › <a href="../../companies/${companySlug(r.company)}/">${esc(r.company)}</a> › <span>${esc(r.model)}</span></nav>
+${crumbs('../../', [esc(r.company), `../../companies/${companySlug(r.company)}/`], [esc(r.model)])}
 
 <div class="doc-hero">
   ${companyMark(r.company)}
@@ -719,7 +754,7 @@ function companyPage(name, list) {
   const ctxPoints = asc.filter((r) => r.technical.context_window != null);
 
   const body = `
-<nav class="crumbs"><a href="../../">Home</a> › <a href="../">Labs</a> › <span>${esc(name)}</span></nav>
+${crumbs('../../', ['Labs', '../'], [esc(name)])}
 
 <div class="doc-hero">
   ${companyMark(name)}
@@ -770,7 +805,7 @@ ${barRows(caps.map(([c, n]) => ({ name: tagLabel(c), value: n })))}` : ''}
 
 <h2>Releases</h2>
 <ol class="doc-list cols-3">${sorted.map((r) =>
-  `<li style="--c:var(--c-${slugFor(r.company)})">${companyMark(r.company, 'sm')}<a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.family)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>
+  listRow({ company: r.company, href: `../../models/${esc(r.id)}/`, name: esc(r.model), meta: esc(r.family), num: fullDate(r) })).join('')}</ol>
 
 <p class="doc-cta">
   <a href="../../?company=${encodeURIComponent(name)}&year=all">Filter the timeline to ${esc(name)} →</a><br>
@@ -799,7 +834,7 @@ function yearPage(year, list) {
     .sort((a, b) => a.date.localeCompare(b.date));
 
   const body = `
-<nav class="crumbs"><a href="../../">Home</a> › <span>${year}</span></nav>
+${crumbs('../../', [year])}
 <div class="doc-hero"><div>
   <h1>LLM releases in ${year}</h1>
   <p class="doc-sub">${list.length} tracked release${list.length === 1 ? '' : 's'}${
@@ -808,11 +843,11 @@ function yearPage(year, list) {
 ${yearMilestones.length ? `<h2>Milestones</h2>
 <p class="chart-note">Dated events that mattered without being model releases.</p>
 <ol class="doc-list">${yearMilestones.map((m) =>
-    `<li style="--c:var(--c-${slugFor(m.company)})">${companyMark(m.company, 'sm')}<a class="cell-name" href="../../milestones/${esc(m.id)}/">${esc(m.title)}</a><span class="cell-meta">${esc(m.company)}</span><span class="cell-num">${esc(eventDate(m.date))}</span></li>`).join('')}</ol>` : ''}
+    listRow({ company: m.company, href: `../../milestones/${esc(m.id)}/`, name: esc(m.title), meta: esc(m.company), num: esc(eventDate(m.date)) })).join('')}</ol>` : ''}
 ${[...byMonth.keys()].sort((a, b) => a - b).map((m) => `
 <h2>${MONTHS[m - 1]} ${year}</h2>
 <ol class="doc-list">${byMonth.get(m).map((r) =>
-  `<li style="--c:var(--c-${slugFor(r.company)})">${companyMark(r.company, 'sm')}<a class="cell-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
+  listRow({ company: r.company, href: `../../models/${esc(r.id)}/`, name: esc(r.model), meta: esc(r.company), num: fullDate(r) })).join('')}</ol>`).join('')}
 <p class="doc-cta"><a href="../../?year=${year}">See ${year} on the interactive timeline →</a></p>
 `;
   return page({
@@ -833,7 +868,7 @@ function modelsIndexPage() {
     (byYear.get(r.year) ?? byYear.set(r.year, []).get(r.year)).push(r);
   }
   const body = `
-<nav class="crumbs"><a href="../">Home</a> › <span>Models</span></nav>
+${crumbs('../', ['Models'])}
 <div class="doc-hero"><div>
   <h1>All tracked models</h1>
   <p class="doc-sub">${releases.length} releases from ${new Set(releases.map((r) => r.company)).size} labs, newest first</p>
@@ -841,7 +876,7 @@ function modelsIndexPage() {
 ${[...byYear.keys()].sort((a, b) => b - a).map((y) => `
 <h2><a href="../timeline/${y}/">${y}</a> — ${byYear.get(y).length} releases</h2>
 <ol class="doc-list">${byYear.get(y).map((r) =>
-  `<li style="--c:var(--c-${slugFor(r.company)})">${companyMark(r.company, 'sm')}<a class="cell-name" href="${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}</span></li>`).join('')}</ol>`).join('')}
+  listRow({ company: r.company, href: `${esc(r.id)}/`, name: esc(r.model), meta: esc(r.company), num: fullDate(r) })).join('')}</ol>`).join('')}
 `;
   return page({
     title: 'All tracked LLM releases | LLM World',
@@ -858,14 +893,14 @@ ${[...byYear.keys()].sort((a, b) => b - a).map((y) => `
 function companiesIndexPage(byCompany) {
   const rows = [...byCompany].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
   const body = `
-<nav class="crumbs"><a href="../">Home</a> › <span>Companies</span></nav>
+${crumbs('../', ['Companies'])}
 <div class="doc-hero"><div>
   <h1>Labs</h1>
   <p class="doc-sub">${rows.length} organisations, ranked by tracked releases</p>
 </div></div>
 <ol class="doc-list cols-3">${rows.map(([name, list]) => {
   const latest = [...list].sort((a, b) => b.year - a.year || b.month - a.month || (b.day || 0) - (a.day || 0))[0];
-  return `<li>${companyMark(name, 'sm')}<a class="cell-name" href="${companySlug(name)}/">${esc(name)}</a><span class="cell-meta">${list.length} release${list.length === 1 ? '' : 's'}</span><span class="cell-num">${fullDate(latest)}</span></li>`;
+  return listRow({ href: `${companySlug(name)}/`, name: esc(name), meta: `${list.length} release${list.length === 1 ? '' : 's'}`, num: fullDate(latest) });
 }).join('')}</ol>
 `;
   return page({
@@ -883,7 +918,7 @@ function companiesIndexPage(byCompany) {
 function latestPage() {
   const recent = [...releases].reverse().slice(0, 20);
   const body = `
-<nav class="crumbs"><a href="../">Home</a> › <span>Latest</span></nav>
+${crumbs('../', ['Latest'])}
 <div class="doc-hero"><div>
   <h1>Latest releases</h1>
   <p class="doc-sub">The 20 most recent tracked releases · data updated ${esc(data.updated)}</p>
@@ -922,7 +957,7 @@ const MILESTONE_LABEL = {
  */
 function milestonePage(m) {
   const body = `
-<nav class="crumbs"><a href="../../">Home</a> › <a href="../">Milestones</a> › <span>${esc(m.title)}</span></nav>
+${crumbs('../../', ['Milestones', '../'], [esc(m.title)])}
 
 <div class="doc-hero">
   ${companyMark(m.company)}
@@ -1102,7 +1137,7 @@ ${releaseYears.has(Number(y)) ? `<p class="ms-year-link"><a href="../timeline/${
   };
 
   const body = `
-<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a> <span aria-hidden="true">›</span> <span>Milestones</span></nav>
+${crumbs('../', ['Milestones'])}
 
 <h1>Milestones</h1>
 <p class="doc-sub">${sorted.length} dated event${sorted.length === 1 ? '' : 's'} that mattered but were not model releases,
@@ -1260,7 +1295,7 @@ function familyPage(name, list) {
   const ctxPoints = gens.filter((r) => r.technical.context_window != null);
 
   const body = `
-<nav class="crumbs"><a href="../../">Home</a> › <a href="../">Families</a> › <span>${esc(name)}</span></nav>
+${crumbs('../../', ['Families', '../'], [esc(name)])}
 
 <div class="doc-hero">
   ${companyMark(first.company)}
@@ -1469,7 +1504,7 @@ function familiesIndexPage(byFamily) {
   const multi = rows.filter((r) => r.gens.length > 1).length;
 
   const body = `
-<nav class="crumbs"><a href="../">Home</a> › <span>Families</span></nav>
+${crumbs('../', ['Families'])}
 
 <h1>Model families</h1>
 <p class="doc-sub">${rows.length} tracked lines · ${multi} with more than one generation</p>
@@ -1557,7 +1592,7 @@ function dataQualityPage() {
   };
 
   const body = `
-<nav class="crumbs"><a href="../">Home</a> › <span>Data quality</span></nav>
+${crumbs('../', ['Data quality'])}
 
 <h1>Data quality</h1>
 <p class="doc-sub">What this dataset can prove, and what it cannot · ${total} records · updated ${esc(data.updated)}</p>
@@ -1990,7 +2025,7 @@ function docPage({ file, slug, title, description, lead }) {
     depth: 1,
     sprites: [],
     body: `
-<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a> <span aria-hidden="true">›</span> <span>${esc(title)}</span></nav>
+${crumbs('../', [esc(title)])}
 <div class="doc-hero"><div class="doc-heading">
 <h1>${esc(firstHeading?.[1] ?? title)}</h1>
 <p class="doc-sub">${esc(lead)}</p>
@@ -2050,7 +2085,7 @@ invent a rate of change between two dated announcements.</figcaption>
 </figure>`;
 
   const body = `
-<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../">Analytics</a> <span aria-hidden="true">›</span> <span>Context windows</span></nav>
+${crumbs('../../', ['Analytics', '../'], ['Context windows'])}
 <div class="doc-hero"><div class="doc-heading">
 <h1>How the context window grew ${multiple.toLocaleString('en-US')}×</h1>
 <p class="doc-sub">From ${fmt(first.technical.context_window)} to ${fmt(last.technical.context_window)} in ${
@@ -2239,7 +2274,7 @@ function changesPage() {
   };
 
   const body = `
-<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a> <span aria-hidden="true">&rsaquo;</span> <span>Changes</span></nav>
+${crumbs('../', ['Changes'])}
 <div class="doc-hero"><div class="doc-heading">
 <h1>What changed in the dataset</h1>
 <p class="doc-sub">Every edit to the data, taken from the repository's own history —
@@ -2435,7 +2470,7 @@ function pricingPage() {
   }).join('');
 
   const body = `
-<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">&rsaquo;</span> <a href="../">Analytics</a> <span aria-hidden="true">&rsaquo;</span> <span>Pricing</span></nav>
+${crumbs('../../', ['Analytics', '../'], ['Pricing'])}
 <div class="doc-hero"><div class="doc-heading">
 <h1>What the labs charge</h1>
 <p class="doc-sub">Published API prices for ${priced.length} of ${releases.length} tracked
@@ -2585,7 +2620,7 @@ function analyticsPage(byCompany, byYear) {
     .sort((a, b) => b.value - a.value);
 
   const body = `
-<nav class="crumbs"><a href="../">Home</a> › <span>Analytics</span></nav>
+${crumbs('../', ['Analytics'])}
 <div class="doc-hero"><div>
   <h1>Analytics</h1>
   <p class="doc-sub">${releases.length} tracked releases · ${byCompany.size} labs · ${years[0]}–${years.at(-1)}</p>
@@ -2690,7 +2725,7 @@ ${labCapabilityMatrix()}
  *  links into the model index. */
 function comparePage() {
   const body = `
-<nav class="crumbs"><a href="../">Home</a> › <span>Compare</span></nav>
+${crumbs('../', ['Compare'])}
 <div class="doc-hero"><div>
   <h1>Compare models</h1>
   <p class="doc-sub">Pick two to five releases and read them side by side</p>
