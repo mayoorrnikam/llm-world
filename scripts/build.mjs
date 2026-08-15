@@ -2557,6 +2557,7 @@ ${hero({
   sub: `Every edit to the data, taken from the repository's own history —
 what was added, what became verified, and what this site had wrong and fixed.`,
 })}
+<div class="prose">
 
 <p class="doc-note">This is a log of the <strong>dataset</strong>, not of the industry.
 It answers &ldquo;has this record changed since I cited it?&rdquo; and &ldquo;does this
@@ -2587,7 +2588,9 @@ ${e.researched.length ? `<li><strong>Researched</strong> ${group(e.researched).s
 <p class="doc-cta">
   <a href="../data-quality/">How records are judged &rarr;</a><br>
   <a href="../methodology/">The rules every figure had to pass &rarr;</a>
-</p>`;
+</p>
+</div>
+`;
 
   return page({
     title: 'What changed in the dataset — corrections and additions | LLM World',
