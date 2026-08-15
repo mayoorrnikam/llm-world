@@ -3307,6 +3307,142 @@ code, kbd {
 }
 
 /* ------------------------------------------------------------------ pills */
+
+/* ------------------------------------------- static cadence ribbon + labs */
+/*
+ * Two components that existed only on the timeline, now shared with the
+ * generated pages. Inserted here rather than at the end of the file only
+ * because another edit owns the tail of this file.
+ *
+ * The ribbon: one tile is exactly one release, and the twelve columns are
+ * twelve real months, so the empty space is the lab's silence rather than
+ * layout. Rows are sized off the busiest month (--rows), which build.mjs
+ * stamps inline, so a tile means the same thing on every row.
+ *
+ * It borrows --unit / --unit-gap from .ribbon deliberately: the interactive
+ * ribbon already named the "one release" measurement, and two names for one
+ * quantity is how the two ribbons would drift apart.
+ */
+.ribbon-static {
+  --unit: 8px;
+  --unit-gap: 2px;
+  display: grid;
+  gap: 5px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.rib-year {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr) 2.25rem;
+  align-items: end;
+  gap: 10px;
+}
+
+.rib-year-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 3px;
+}
+.rib-year-num:hover { color: var(--accent); }
+
+/* Quarter rules, at the faintest token on the page: enough to place a tile in
+   the year, not enough to compete with the tiles themselves. */
+.rib-months {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: end;
+  gap: 0 2px;
+  min-height: calc((var(--unit) + var(--unit-gap)) * var(--rows, 1));
+  margin: 0;
+  padding: 0 0 3px;
+  list-style: none;
+  border-bottom: 1px solid var(--line-soft);
+  background-image: repeating-linear-gradient(
+    to right, var(--grid-line) 0 1px, transparent 1px calc(100% / 4));
+}
+
+.rib-month {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--unit-gap);
+  min-width: 0;
+}
+
+.rib-tile {
+  display: block;
+  width: min(12px, 100%);
+  height: var(--unit);
+  flex: none;
+  border-radius: 1.5px;
+  background: var(--c, var(--c-other));
+  transition: box-shadow 0.15s var(--ease);
+}
+.rib-tile:hover { box-shadow: 0 0 0 1px var(--bg), 0 0 0 3px var(--c, var(--c-other)); }
+.rib-tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.rib-year-n {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--muted);
+  padding-bottom: 3px;
+}
+/* A year the lab shipped nothing in still gets a row — that is the point of
+   the ribbon — but its count should not read as data. */
+.rib-year-n[data-zero="true"] { opacity: 0.4; }
+
+@media (max-width: 620px) {
+  .ribbon-static { --unit: 7px; }
+  .rib-year { grid-template-columns: 2.6rem minmax(0, 1fr) 1.6rem; gap: 6px; }
+  .rib-year-num, .rib-year-n { font-size: 11px; }
+  .rib-tile { width: min(10px, 100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rib-tile { transition: none; }
+}
+
+/* A tile is pure colour, which forced-colors would flatten to nothing. */
+@media (forced-colors: active) {
+  .rib-tile { forced-color-adjust: none; outline: 1px solid CanvasText; }
+}
+
+/*
+ * The lab chip, as a link. Everything visual is inherited from .chip, which is
+ * the whole point — the labs index and the timeline's filter bar are now the
+ * same object. Only the things an anchor needs differently are restated.
+ */
+.lab-grid {
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lab-grid > li { display: flex; max-width: 100%; min-width: 0; }
+
+a.lab-chip {
+  max-width: 100%;
+  padding: 5px 10px 5px 8px;
+  text-decoration: none;
+}
+a.lab-chip:hover { color: var(--text); }
+a.lab-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.chip-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /*
  * Fifteen rules independently rebuilt the same object — a small label with a
  * full-radius border — differing only by a pixel of padding and half a point of
@@ -3371,4 +3507,60 @@ code, kbd {
   text-align: left;
   vertical-align: top;
   border-bottom: 1px solid var(--line-soft);
+}
+
+/* ------------------------------------------------------------- filter bar */
+/*
+ * /models/ is 181 rows — about fourteen screens. The list still ships whole in
+ * the HTML because these pages exist to be indexable and readable without
+ * JavaScript; this only hides rows once it loads, and ships `hidden` so a
+ * reader without JavaScript never sees a control that does nothing.
+ */
+.filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 20px 0 4px;
+  padding: 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.filterbar-search { flex: 1 1 200px; min-width: 0; }
+.filterbar-search input,
+.filterbar-sel select {
+  width: 100%;
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 10px;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.filterbar-sel select { width: auto; cursor: pointer; }
+.filterbar-search input:focus-visible,
+.filterbar-sel select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.filterbar-count {
+  flex: 1 0 100%;
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.filterbar-empty {
+  margin: 24px 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+@media (max-width: 620px) {
+  /* One control per row put the bar at 323px — 40% of a phone screen, on the
+     page whose whole point is less scrolling. Two up halves it, and the
+     labels are short enough to stay readable. */
+  .filterbar { gap: 6px; padding: 10px; }
+  .filterbar-search { flex: 1 0 100%; }
+  .filterbar-sel { flex: 1 1 calc(50% - 3px); min-width: 0; }
+  .filterbar-sel select { width: 100%; }
 }

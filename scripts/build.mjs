@@ -112,8 +112,9 @@ const fullDate = (r) => `${MONTHS[r.month - 1]}${r.day ? ` ${r.day}` : ''}, ${r.
  * and the row's left edge pick up the company colour without a per-company
  * rule; `company` is omitted only by the labs index, whose rows ARE companies.
  */
-const listRow = ({ company, href, name, meta, num }) =>
-  `<li${company ? ` style="--c:var(--c-${slugFor(company)})"` : ''}>`
+const listRow = ({ company, href, name, meta, num, data }) =>
+  `<li${company ? ` style="--c:var(--c-${slugFor(company)})"` : ''}${
+    data ? Object.entries(data).map(([k, v]) => ` data-${k}="${esc(String(v))}"`).join('') : ''}>`
   + `${companyMark(company ?? name, 'sm')}`
   + `<a class="cell-name" href="${href}">${name}</a>`
   + `<span class="cell-meta">${meta}</span>`
@@ -717,6 +718,64 @@ ${idx > 0 || idx < fam.length - 1 ? `<nav class="doc-nav">${
   });
 }
 
+/**
+ * The cadence ribbon, server-rendered.
+ *
+ * The timeline builds this in app.js from live state; these pages are the
+ * no-JS, indexable half of the site, so they get a second implementation
+ * rather than an import — app.js is a DOM program, not a renderer.
+ *
+ * One tile is always exactly one release (a unit chart), laid out on a real
+ * twelve-month grid per year. Spacing is therefore the DATA's spacing: a year
+ * with one release in March and nothing after is a row with one tile and a lot
+ * of empty months, and a year with none still gets a row. That is the whole
+ * read — an even list of rows cannot show a lab going quiet.
+ *
+ * Colour is a secondary channel here as everywhere (CLAUDE.md): every tile
+ * carries the model, the lab and the date as real text inside the link, so the
+ * ribbon is fully readable with the hue channel switched off.
+ */
+function cadenceRibbon(list, { up, label }) {
+  const asc = [...list].sort((a, b) =>
+    a.year - b.year || a.month - b.month || (a.day || 0) - (b.day || 0));
+  if (!asc.length) return '';
+
+  const years = [];
+  for (let y = asc[0].year; y <= asc.at(-1).year; y++) years.push(y);
+
+  const byYear = new Map(years.map((y) => [y, new Map()]));
+  for (const r of asc) {
+    const months = byYear.get(r.year);
+    (months.get(r.month) ?? months.set(r.month, []).get(r.month)).push(r);
+  }
+
+  // Row height is set by the busiest month, so a tile means the same amount
+  // everywhere on the page instead of being stretched to fill a fixed band.
+  const peak = Math.max(1, ...[...byYear.values()]
+    .flatMap((months) => [...months.values()].map((v) => v.length)));
+
+  const rows = years.map((y) => {
+    const months = byYear.get(y);
+    const n = [...months.values()].reduce((a, v) => a + v.length, 0);
+    const cells = [...months.entries()].sort((a, b) => a[0] - b[0]).map(([m, rs]) =>
+      `<li class="rib-month" style="grid-column:${m}">${rs.map((r) =>
+        `<a class="rib-tile" style="--c:var(--c-${slugFor(r.company)})"`
+        + ` href="${up}models/${esc(r.id)}/"`
+        + ` title="${esc(r.model)} — ${esc(r.company)}, ${fullDate(r)}">`
+        + `<span class="sr-only">${esc(r.model)}, ${esc(r.company)}, ${fullDate(r)}</span>`
+        + `</a>`).join('')}</li>`).join('');
+
+    return `<li class="rib-year">`
+      + `<a class="rib-year-num" href="${up}timeline/${y}/">${y}</a>`
+      + `<ol class="rib-months">${cells}</ol>`
+      + `<span class="rib-year-n"${n ? '' : ' data-zero="true"'}>${n}</span></li>`;
+  }).join('');
+
+  return `<ol class="ribbon-static" style="--rows:${peak}" aria-label="${
+    esc(label)} — ${asc.length} release${asc.length === 1 ? '' : 's'} from ${
+    years[0]} to ${years.at(-1)}, one tile per release, placed by month.">${rows}</ol>`;
+}
+
 function companyPage(name, list) {
   const sorted = [...list].sort((a, b) => b.year - a.year || b.month - a.month || (b.day || 0) - (a.day || 0));
   const gaps = [];
@@ -742,9 +801,9 @@ function companyPage(name, list) {
   const fieldMedian = allMedians.length
     ? [...allMedians].sort((a, b) => a - b)[Math.floor(allMedians.length / 2)] : null;
 
-  const perYear = new Map();
-  for (const r of list) perYear.set(r.year, (perYear.get(r.year) ?? 0) + 1);
-  const years = [...perYear.keys()].sort((a, b) => a - b);
+  // The ribbon counts its own years, so this is only the "is there more than
+  // one year to show" test.
+  const years = [...new Set(list.map((r) => r.year))].sort((a, b) => a - b);
 
   // Only capabilities that have actually been evidenced on this lab's records.
   const capCounts = new Map();
@@ -781,12 +840,12 @@ ${median != null ? `<tr><th scope="row">Median gap</th><td>${median} days${
 <tr><th scope="row">Record quality</th><td>${verified} of ${list.length} verified · <a href="../../data-quality/">how this is judged</a></td></tr>
 </tbody></table>
 
-${years.length > 1 ? `<h2>Releases per year</h2>
-<p class="chart-note">Tracked releases only — a quiet year here may mean this dataset
-is thin for that year rather than that the lab was quiet.</p>
-${barRows(years.map((y) => ({
-    name: String(y), value: perYear.get(y), href: `../../timeline/${y}/`,
-  })))}` : ''}
+${years.length > 1 ? `<h2>Release cadence</h2>
+<p class="chart-note">One tile per tracked release, placed in the month it shipped;
+the year links through to that year's timeline. Tracked releases only — a quiet
+year here may mean this dataset is thin for that year rather than that the lab
+was quiet.</p>
+${cadenceRibbon(list, { up: '../../', label: name })}` : ''}
 
 ${ctxPoints.length > 1 ? `<h2>Context window over time</h2>
 <p class="chart-note">Releases with a disclosed context window${
@@ -873,12 +932,109 @@ ${crumbs('../', ['Models'])}
   <h1>All tracked models</h1>
   <p class="doc-sub">${releases.length} releases from ${new Set(releases.map((r) => r.company)).size} labs, newest first</p>
 </div></div>
+
+<div class="filterbar" id="mf" hidden>
+  <label class="filterbar-search">
+    <span class="sr-only">Search models</span>
+    <input type="search" id="mf-q" placeholder="Search model, lab or family" autocomplete="off">
+  </label>
+  ${[
+    ['mf-lab', 'Lab', [...new Set(releases.map((r) => r.company))].sort()],
+    ['mf-year', 'Year', [...new Set(releases.map((r) => r.year))].sort((a, b) => b - a)],
+    ['mf-type', 'Type', [...new Set(releases.map((r) => r.classification?.primary_type ?? 'language'))].sort()],
+    ['mf-weights', 'Weights', ['open', 'proprietary']],
+  ].map(([id, label, opts]) => `<label class="filterbar-sel">
+    <span class="sr-only">${label}</span>
+    <select id="${id}"><option value="">${label}: any</option>${
+      opts.map((o) => `<option value="${esc(String(o))}">${esc(String(o).replace(/_/g, ' '))}</option>`).join('')}</select>
+  </label>`).join('')}
+  <button type="button" class="reset-btn" id="mf-clear" hidden>Clear</button>
+  <p class="filterbar-count" id="mf-count" role="status"></p>
+</div>
+<p class="filterbar-empty" id="mf-empty" hidden>No model matches those filters.</p>
 ${[...byYear.keys()].sort((a, b) => b - a).map((y) => `
 <h2><a href="../timeline/${y}/">${y}</a> — ${byYear.get(y).length} releases</h2>
 <ol class="doc-list">${byYear.get(y).map((r) =>
-  listRow({ company: r.company, href: `${esc(r.id)}/`, name: esc(r.model), meta: esc(r.company), num: fullDate(r) })).join('')}</ol>`).join('')}
+  listRow({
+    company: r.company,
+    href: `${esc(r.id)}/`,
+    name: esc(r.model),
+    meta: esc(r.company),
+    num: fullDate(r),
+    // Facets travel with the row, so filtering never re-reads the dataset —
+    // the page already contains every fact the filter needs.
+    data: {
+      lab: r.company,
+      year: r.year,
+      type: r.classification?.primary_type ?? 'language',
+      weights: r.access.open_weights ? 'open' : 'proprietary',
+      find: `${r.model} ${r.company} ${r.family}`.toLowerCase(),
+    },
+  })).join('')}</ol>`).join('')}
 `;
+  /**
+   * Filtering, as progressive enhancement.
+   *
+   * 181 rows is about fourteen screens, which is the real complaint. But these
+   * pages are static so that they are indexable and readable without
+   * JavaScript, so the whole list still ships in the HTML and the bar only
+   * HIDES rows once it loads. A reader with no JavaScript gets exactly what
+   * they got before, and no dead controls.
+   *
+   * State lives in the query string like every other view here, so a filtered
+   * list is a link somebody can send.
+   */
+  const script = `<script defer>
+addEventListener('DOMContentLoaded',function(){
+  var bar=document.getElementById('mf');if(!bar)return;
+  bar.hidden=false;
+  var q=document.getElementById('mf-q'),clear=document.getElementById('mf-clear'),
+      count=document.getElementById('mf-count'),empty=document.getElementById('mf-empty'),
+      sels=['mf-lab','mf-year','mf-type','mf-weights'].map(function(i){return document.getElementById(i);}),
+      rows=[].slice.call(document.querySelectorAll('.doc-list li[data-find]')),
+      heads=[].slice.call(document.querySelectorAll('.doc-main h2'));
+  var KEY={'mf-lab':'lab','mf-year':'year','mf-type':'type','mf-weights':'weights'};
+  function read(){
+    var p=new URLSearchParams(location.search);
+    q.value=p.get('q')||'';
+    sels.forEach(function(s){s.value=p.get(KEY[s.id])||'';});
+  }
+  function apply(push){
+    var text=q.value.trim().toLowerCase(), on=0;
+    rows.forEach(function(li){
+      var ok=(!text||li.dataset.find.indexOf(text)>=0);
+      sels.forEach(function(s){ if(ok&&s.value&&li.dataset[KEY[s.id]]!==s.value) ok=false; });
+      li.hidden=!ok; if(ok)on++;
+    });
+    // A year heading with nothing under it is noise, and its count is a lie.
+    heads.forEach(function(h){
+      var list=h.nextElementSibling; if(!list||list.tagName!=='OL')return;
+      var vis=[].slice.call(list.children).filter(function(x){return !x.hidden;}).length;
+      h.hidden=vis===0; list.hidden=vis===0;
+      if(vis){var a=h.querySelector('a');h.innerHTML='';if(a)h.appendChild(a);
+        h.appendChild(document.createTextNode(' — '+vis+' release'+(vis===1?'':'s')));}
+    });
+    var filtered=!!text||sels.some(function(s){return !!s.value;});
+    count.textContent=filtered?(on+' of '+rows.length+' releases'):(rows.length+' releases');
+    clear.hidden=!filtered; empty.hidden=on>0;
+    if(push){
+      var p=new URLSearchParams();
+      if(text)p.set('q',q.value.trim());
+      sels.forEach(function(s){if(s.value)p.set(KEY[s.id],s.value);});
+      history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:''));
+    }
+  }
+  q.addEventListener('input',function(){apply(true);});
+  sels.forEach(function(s){s.addEventListener('change',function(){apply(true);});});
+  clear.addEventListener('click',function(){
+    q.value='';sels.forEach(function(s){s.value='';});apply(true);q.focus();
+  });
+  read();apply(false);
+});
+</script>`;
+
   return page({
+    head: script,
     title: 'All tracked LLM releases | LLM World',
     description: `An index of ${releases.length} tracked large language model releases, newest first, each with dates and sources.`,
     canonical: `${BASE_URL}/models/`,
@@ -898,10 +1054,21 @@ ${crumbs('../', ['Companies'])}
   <h1>Labs</h1>
   <p class="doc-sub">${rows.length} organisations, ranked by tracked releases</p>
 </div></div>
-<ol class="doc-list cols-3">${rows.map(([name, list]) => {
+<p class="chart-note">Ranked by tracked releases. Each lab's own hue and logo are the
+same pair used on the timeline's filter chips, so a lab looks the same wherever you
+meet it.</p>
+<ul class="chips lab-grid">${rows.map(([name, list]) => {
   const latest = [...list].sort((a, b) => b.year - a.year || b.month - a.month || (b.day || 0) - (a.day || 0))[0];
-  return listRow({ href: `${companySlug(name)}/`, name: esc(name), meta: `${list.length} release${list.length === 1 ? '' : 's'}`, num: fullDate(latest) });
-}).join('')}</ol>
+  const n = `${list.length} tracked release${list.length === 1 ? '' : 's'}`;
+  // The count is followed by an sr-only noun so the link's accessible name is
+  // "OpenAI, 32 releases" rather than "OpenAI 32".
+  return `<li><a class="chip lab-chip" style="--c:var(--c-${slugFor(name)})"`
+    + ` href="${companySlug(name)}/"`
+    + ` title="${esc(name)} — ${n}, latest ${fullDate(latest)}">`
+    + `${glyph(name)}<span class="chip-name">${esc(name)}</span>`
+    + `<span class="chip-count">${list.length}<span class="sr-only"> releases</span></span>`
+    + `</a></li>`;
+}).join('')}</ul>
 `;
   return page({
     title: 'Labs tracked | LLM World',
@@ -1319,6 +1486,12 @@ ${median != null ? `<tr><th scope="row">Median gap</th><td>${median} days betwee
     : `${openCount} of ${gens.length} open`}</td></tr>
 <tr><th scope="row">Record quality</th><td>${verified} of ${gens.length} verified · <a href="../../data-quality/">how this is judged</a></td></tr>
 </tbody></table>
+
+${gens.length > 1 ? `<h2>Release cadence</h2>
+<p class="chart-note">One tile per tracked release, placed in the month it shipped,
+so the pauses in this line are the pauses in the data. Years with nothing tracked
+keep their row.</p>
+${cadenceRibbon(gens, { up: '../../', label: name })}` : ''}
 
 <h2>Lineage</h2>
 <p class="chart-note">Ordered by announcement date, and spaced by the gap between
