@@ -1871,7 +1871,31 @@ Naming the gaps is more useful than a number that implies there are none.</p>
 
 <h2>Records not yet verified</h2>
 <p class="chart-note">${unproven.length} of ${total}. Each says which fact is unproven.</p>
-<ol class="doc-list quality-list">${unproven.map((r) => `<li>
+
+<div class="filterbar" id="qf" hidden>
+  <label class="filterbar-search">
+    <span class="sr-only">Search unverified records</span>
+    <input type="search" id="qf-q" placeholder="Search model, lab or reason" autocomplete="off">
+  </label>
+  <label class="filterbar-sel">
+    <span class="sr-only">Lab</span>
+    <select id="qf-lab"><option value="">Lab: any</option>${
+      [...new Set(unproven.map((r) => r.company))].sort()
+        .map((c) => `<option value="${esc(c)}">${esc(c)}</option>`).join('')}</select>
+  </label>
+  <label class="filterbar-sel">
+    <span class="sr-only">Status</span>
+    <select id="qf-status"><option value="">Status: any</option>${
+      [...new Set(unproven.map((r) => r.provenance.status))].sort()
+        .map((c) => `<option value="${esc(c)}">${esc(c.replace(/_/g, ' '))}</option>`).join('')}</select>
+  </label>
+  <button type="button" class="reset-btn" id="qf-clear" hidden>Clear</button>
+  <p class="filterbar-count" id="qf-count" role="status"></p>
+</div>
+<p class="filterbar-empty" id="qf-empty" hidden>No record matches those filters.</p>
+
+<ol class="doc-list quality-list">${unproven.map((r) => `<li data-lab="${esc(r.company)}" data-status="${
+  esc(r.provenance.status)}" data-find="${esc(`${r.model} ${r.company} ${r.provenance.reason ?? ''}`.toLowerCase())}">
 ${companyMark(r.company, 'sm')}
 <a class="cell-name" href="../models/${esc(r.id)}/">${esc(r.model)}</a>
 <span class="cell-meta">${esc(r.provenance.reason ?? '')}</span>
@@ -1880,7 +1904,53 @@ ${companyMark(r.company, 'sm')}
 <p class="doc-cta"><a href="../analytics/">See release analytics →</a></p>
 `;
 
+  /**
+   * The same progressive-enhancement filter as /models/, scoped to one list.
+   *
+   * This page is 135 rows and 131 of them are in this single section — it is
+   * not a long page, it is a short page with one runaway list, so it wants a
+   * filter rather than splitting. The list still ships whole in the HTML; this
+   * only hides rows once it loads.
+   */
+  const script = `<script defer>
+addEventListener('DOMContentLoaded',function(){
+  var bar=document.getElementById('qf');if(!bar)return;
+  bar.hidden=false;
+  var q=document.getElementById('qf-q'),lab=document.getElementById('qf-lab'),
+      st=document.getElementById('qf-status'),clear=document.getElementById('qf-clear'),
+      count=document.getElementById('qf-count'),empty=document.getElementById('qf-empty'),
+      rows=[].slice.call(document.querySelectorAll('.quality-list li[data-find]'));
+  function apply(push){
+    var text=q.value.trim().toLowerCase(),on=0;
+    rows.forEach(function(li){
+      var ok=(!text||li.dataset.find.indexOf(text)>=0)
+        &&(!lab.value||li.dataset.lab===lab.value)
+        &&(!st.value||li.dataset.status===st.value);
+      li.hidden=!ok; if(ok)on++;
+    });
+    var filtered=!!text||!!lab.value||!!st.value;
+    count.textContent=filtered?(on+' of '+rows.length+' records'):(rows.length+' records');
+    clear.hidden=!filtered; empty.hidden=on>0;
+    if(push){
+      var p=new URLSearchParams();
+      if(text)p.set('q',q.value.trim());
+      if(lab.value)p.set('lab',lab.value);
+      if(st.value)p.set('status',st.value);
+      history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:''));
+    }
+  }
+  var p=new URLSearchParams(location.search);
+  q.value=p.get('q')||'';lab.value=p.get('lab')||'';st.value=p.get('status')||'';
+  q.addEventListener('input',function(){apply(true);});
+  lab.addEventListener('change',function(){apply(true);});
+  st.addEventListener('change',function(){apply(true);});
+  clear.addEventListener('click',function(){q.value='';lab.value='';st.value='';apply(true);q.focus();});
+  apply(false);
+});
+</script>`;
+
   return page({
+    head: script,
     title: 'Data quality — what this dataset can prove | LLM World',
     description: `Verification status, source authority and specification coverage across ${total} tracked LLM releases, including what is missing and why.`,
     canonical: `${BASE_URL}/data-quality/`,
