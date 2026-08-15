@@ -536,6 +536,23 @@ ${r.provenance?.reason ? `<details class="pv-why"><summary>Why this status</summ
 </div>`;
 }
 
+/**
+ * The page header: optional company mark, title, optional standfirst.
+ *
+ * Hand-typed at fourteen sites in three shapes — with a mark, bare, and wrapped
+ * in a `doc-heading` div that styles.css never defined. Three treatments of one
+ * object, and the dead class was emitted on four pages.
+ *
+ * `title` and `sub` are passed already-escaped: most call sites already wrap a
+ * model or company name in esc(), and escaping twice prints the entities.
+ */
+const hero = ({ mark = '', title, sub = '' }) => `<div class="doc-hero">${
+  mark ? `\n  ${mark}` : ''}
+  <div>
+    <h1>${title}</h1>${sub ? `\n    <p class="doc-sub">${sub}</p>` : ''}
+  </div>
+</div>`;
+
 function modelPage(r) {
   const prev = predecessorOf(r);
   const fam = releases.filter((x) => x.family === r.family).sort((a, b) => a.year - b.year || a.month - b.month || (a.day || 0) - (b.day || 0));
@@ -912,11 +929,11 @@ function yearPage(year, list) {
 
   const body = `
 ${crumbs('../../', [year])}
-<div class="doc-hero"><div>
-  <h1>LLM releases in ${year}</h1>
-  <p class="doc-sub">${list.length} tracked release${list.length === 1 ? '' : 's'}${
-    yearMilestones.length ? ` · ${yearMilestones.length} milestone${yearMilestones.length === 1 ? '' : 's'}` : ''} · ${eraFor(year)}</p>
-</div></div>
+${hero({
+  title: `LLM releases in ${year}`,
+  sub: `${list.length} tracked release${list.length === 1 ? '' : 's'}${
+    yearMilestones.length ? ` · ${yearMilestones.length} milestone${yearMilestones.length === 1 ? '' : 's'}` : ''} · ${eraFor(year)}`,
+})}
 ${yearMilestones.length ? `<h2>Milestones</h2>
 <p class="chart-note">Dated events that mattered without being model releases.</p>
 <ol class="doc-list">${yearMilestones.map((m) =>
@@ -1062,10 +1079,10 @@ function modelsIndexPage() {
 
   const body = `
 ${crumbs('../', ['Models'])}
-<div class="doc-hero"><div>
-  <h1>All tracked models</h1>
-  <p class="doc-sub">${releases.length} releases from ${new Set(releases.map((r) => r.company)).size} labs, newest first</p>
-</div></div>
+${hero({
+  title: 'All tracked models',
+  sub: `${releases.length} releases from ${new Set(releases.map((r) => r.company)).size} labs, newest first`,
+})}
 
 ${mf.markup}
 ${[...byYear.keys()].sort((a, b) => b - a).map((y) => `
@@ -1119,10 +1136,7 @@ function companiesIndexPage(byCompany) {
   const rows = [...byCompany].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
   const body = `
 ${crumbs('../', ['Companies'])}
-<div class="doc-hero"><div>
-  <h1>Labs</h1>
-  <p class="doc-sub">${rows.length} organisations, ranked by tracked releases</p>
-</div></div>
+${hero({ title: 'Labs', sub: `${rows.length} organisations, ranked by tracked releases` })}
 <p class="chart-note">Ranked by tracked releases. Each lab's own hue and logo are the
 same pair used on the timeline's filter chips, so a lab looks the same wherever you
 meet it.</p>
@@ -1155,10 +1169,10 @@ function latestPage() {
   const recent = [...releases].reverse().slice(0, 20);
   const body = `
 ${crumbs('../', ['Latest'])}
-<div class="doc-hero"><div>
-  <h1>Latest releases</h1>
-  <p class="doc-sub">The 20 most recent tracked releases · data updated ${esc(data.updated)}</p>
-</div></div>
+${hero({
+  title: 'Latest releases',
+  sub: `The 20 most recent tracked releases · data updated ${esc(data.updated)}`,
+})}
 <ol class="doc-list">${recent.map((r) => {
   const prev = predecessorOf(r);
   return listRow({
@@ -2292,10 +2306,7 @@ function docPage({ file, slug, title, description, lead }) {
     sprites: [],
     body: `
 ${crumbs('../', [esc(title)])}
-<div class="doc-hero"><div class="doc-heading">
-<h1>${esc(firstHeading?.[1] ?? title)}</h1>
-<p class="doc-sub">${esc(lead)}</p>
-</div></div>
+${hero({ title: esc(firstHeading?.[1] ?? title), sub: esc(lead) })}
 <div class="prose">${body}</div>
 <p class="doc-cta">
   <a href="../data-quality/">See how every record scores against this →</a><br>
@@ -2352,11 +2363,11 @@ invent a rate of change between two dated announcements.</figcaption>
 
   const body = `
 ${crumbs('../../', ['Analytics', '../'], ['Context windows'])}
-<div class="doc-hero"><div class="doc-heading">
-<h1>How the context window grew ${multiple.toLocaleString('en-US')}×</h1>
-<p class="doc-sub">From ${fmt(first.technical.context_window)} to ${fmt(last.technical.context_window)} in ${
-  span.toLocaleString('en-US')} days, measured across ${disclosed.length} releases that disclose one.</p>
-</div></div>
+${hero({
+  title: `How the context window grew ${multiple.toLocaleString('en-US')}×`,
+  sub: `From ${fmt(first.technical.context_window)} to ${fmt(last.technical.context_window)} in ${
+    span.toLocaleString('en-US')} days, measured across ${disclosed.length} releases that disclose one.`,
+})}
 
 <div class="prose">
 <p>${frontier.length} of the ${disclosed.length} releases with a disclosed context window
@@ -2541,11 +2552,11 @@ function changesPage() {
 
   const body = `
 ${crumbs('../', ['Changes'])}
-<div class="doc-hero"><div class="doc-heading">
-<h1>What changed in the dataset</h1>
-<p class="doc-sub">Every edit to the data, taken from the repository's own history —
-what was added, what became verified, and what this site had wrong and fixed.</p>
-</div></div>
+${hero({
+  title: 'What changed in the dataset',
+  sub: `Every edit to the data, taken from the repository's own history —
+what was added, what became verified, and what this site had wrong and fixed.`,
+})}
 
 <p class="doc-note">This is a log of the <strong>dataset</strong>, not of the industry.
 It answers &ldquo;has this record changed since I cited it?&rdquo; and &ldquo;does this
@@ -2737,11 +2748,11 @@ function pricingPage() {
 
   const body = `
 ${crumbs('../../', ['Analytics', '../'], ['Pricing'])}
-<div class="doc-hero"><div class="doc-heading">
-<h1>What the labs charge</h1>
-<p class="doc-sub">Published API prices for ${priced.length} of ${releases.length} tracked
-releases, each read from the lab's own page on a recorded date.</p>
-</div></div>
+${hero({
+  title: 'What the labs charge',
+  sub: `Published API prices for ${priced.length} of ${releases.length} tracked
+releases, each read from the lab's own page on a recorded date.`,
+})}
 
 <div class="prose">
 <p class="doc-note"><strong>These figures are not directly comparable.</strong> Each is a
