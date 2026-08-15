@@ -468,6 +468,31 @@ const write = (path, html, { sitemap = true } = {}) => {
  * a reader to assume every number on the page is checked; "3 of 5 values traced
  * to a source" says exactly what was done.
  */
+/**
+ * The source list under a record.
+ *
+ * There were two copies: modelPage and milestonePage carried these same
+ * lines character for character, differing only in whether the record was
+ * called `r` or `m`.
+ */
+/**
+ * Context window over time, as a bar per release.
+ *
+ * companyPage and familyPage carried these five lines identically. Only the
+ * surrounding prose differed, so the prose stays at the call sites and the
+ * chart is stated once.
+ */
+const ctxOverTime = (ctxPoints) => barRows(ctxPoints.map((r) => ({
+  name: `${r.model} · ${r.year}`,
+  value: r.technical.context_window,
+  display: tokens(r.technical.context_window),
+  href: `../../models/${esc(r.id)}/`,
+})));
+
+const sourceList = (rec) => `<ul class="doc-sources">${rec.sources.map((s) =>
+  `<li><a href="${esc(s.url)}" rel="noopener noreferrer nofollow">${esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a> <span>${esc(SOURCE_LABEL[s.type] ?? s.type)}</span> <span class="src-authority" data-authority="${esc(s.authority)}">${esc(AUTHORITY_LABEL[s.authority] ?? s.authority)}</span>${
+    s.archived_url ? ` <a class="src-archive" href="${esc(s.archived_url)}" rel="noopener noreferrer nofollow">archived</a>` : ''}</li>`).join('')}</ul>`;
+
 function provenanceBar(r) {
   const status = r.provenance?.status ?? 'unverified';
 
@@ -667,9 +692,7 @@ source that evidences it.</p>
   esc(PROV_LABEL[r.provenance.status] ?? r.provenance.status)}</span> · confidence ${r.provenance.confidence}/100 ·
 ${r.sources.filter((s) => s.authority === 'primary').length} of ${r.sources.length} primary</p>
 ${r.provenance.reason ? `<p class="doc-reason">${esc(r.provenance.reason)}</p>` : ''}
-<ul class="doc-sources">${r.sources.map((s) =>
-  `<li><a href="${esc(s.url)}" rel="noopener noreferrer nofollow">${esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a> <span>${esc(SOURCE_LABEL[s.type] ?? s.type)}</span> <span class="src-authority" data-authority="${esc(s.authority)}">${esc(AUTHORITY_LABEL[s.authority] ?? s.authority)}</span>${
-    s.archived_url ? ` <a class="src-archive" href="${esc(s.archived_url)}" rel="noopener noreferrer nofollow">archived</a>` : ''}</li>`).join('')}</ul>
+${sourceList(r)}
 <p class="doc-note">Primary means published by the organisation that made the model.
 <strong>Verified</strong> records require at least one.</p>
 
@@ -850,12 +873,7 @@ ${cadenceRibbon(list, { up: '../../', label: name })}` : ''}
 ${ctxPoints.length > 1 ? `<h2>Context window over time</h2>
 <p class="chart-note">Releases with a disclosed context window${
   ctxPoints.length < list.length ? ` — ${list.length - ctxPoints.length} of ${list.length} not shown` : ''}.</p>
-${barRows(ctxPoints.map((r) => ({
-    name: `${r.model} · ${r.year}`,
-    value: r.technical.context_window,
-    display: tokens(r.technical.context_window),
-    href: `../../models/${esc(r.id)}/`,
-  })))}` : ''}
+${ctxOverTime(ctxPoints)}` : ''}
 
 ${caps.length ? `<h2>Evidenced capabilities</h2>
 <p class="chart-note">How often each capability is cited across this lab's releases.
@@ -1092,8 +1110,13 @@ ${crumbs('../', ['Latest'])}
 </div></div>
 <ol class="doc-list">${recent.map((r) => {
   const prev = predecessorOf(r);
-  return `<li style="--c:var(--c-${slugFor(r.company)})">${companyMark(r.company, 'sm')}<a class="cell-name" href="../models/${esc(r.id)}/">${esc(r.model)}</a><span class="cell-meta">${esc(r.company)}</span><span class="cell-num">${fullDate(r)}${
-    prev ? ` · +${daysBetween(prev, r)}d` : ''}</span></li>`;
+  return listRow({
+    company: r.company,
+    href: `../models/${esc(r.id)}/`,
+    name: esc(r.model),
+    meta: esc(r.company),
+    num: `${fullDate(r)}${prev ? ` · +${daysBetween(prev, r)}d` : ''}`,
+  });
 }).join('')}</ol>
 <p class="doc-cta"><a href="../models/">Browse all ${releases.length} releases →</a></p>
 `;
@@ -1150,9 +1173,7 @@ ${m.related_family ? `The model line behind it is tracked as
 <p class="doc-prov">Record status: <span class="prov-badge" data-status="${esc(m.provenance.status)}">${
   esc(PROV_LABEL[m.provenance.status] ?? m.provenance.status)}</span> · confidence ${m.provenance.confidence}/100</p>
 ${m.provenance.reason ? `<p class="doc-reason">${esc(m.provenance.reason)}</p>` : ''}
-<ul class="doc-sources">${m.sources.map((s) =>
-  `<li><a href="${esc(s.url)}" rel="noopener noreferrer nofollow">${esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a> <span>${esc(SOURCE_LABEL[s.type] ?? s.type)}</span> <span class="src-authority" data-authority="${esc(s.authority)}">${esc(AUTHORITY_LABEL[s.authority] ?? s.authority)}</span>${
-    s.archived_url ? ` <a class="src-archive" href="${esc(s.archived_url)}" rel="noopener noreferrer nofollow">archived</a>` : ''}</li>`).join('')}</ul>
+${sourceList(m)}
 
 <p class="doc-cta"><a href="../../timeline/${m.date.slice(0, 4)}/">See what else happened in ${m.date.slice(0, 4)} →</a></p>
 `;
@@ -1502,12 +1523,7 @@ ${lineageGraph(gens)}
 ${ctxPoints.length > 1 ? `<h2>Context window over time</h2>
 <p class="chart-note">Only releases with a disclosed context window appear${
   ctxPoints.length < gens.length ? ` — ${gens.length - ctxPoints.length} of ${gens.length} are not shown` : ''}.</p>
-${barRows(ctxPoints.map((r) => ({
-    name: `${r.model} · ${r.year}`,
-    value: r.technical.context_window,
-    display: tokens(r.technical.context_window),
-    href: `../../models/${esc(r.id)}/`,
-  })))}` : ''}
+${ctxOverTime(ctxPoints)}` : ''}
 
 ${gens.length > 1 ? whatChangedSection(gens) : `<h2>What changed</h2>
 <p class="doc-note">Only one release of this family is tracked, so there is nothing to compare yet.</p>`}
