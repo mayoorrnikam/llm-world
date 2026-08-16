@@ -12,7 +12,7 @@
     "validate:links": "node scripts/validate-data.mjs --links",
     "build": "node scripts/build.mjs",
     "build:export": "node scripts/build.mjs --export",
-    "check": "npm run validate && npm run build:export && npm run smoke",
+    "check": "npm run validate && node scripts/update-readme.mjs && npm run build:export && npm run smoke",
     "preview": "npm run build && node scripts/serve.mjs",
     "clean": "rm -rf models companies timeline families milestones analytics compare latest data-quality methodology taxonomy changes contribute sitemap.xml robots.txt feed.xml api llm-releases.csv .build-check",
     "setup": "git config core.hooksPath .githooks && echo 'git hooks enabled \u2014 pre-push now runs npm run check'",
@@ -27,6 +27,7 @@
     "discover": "node scripts/discover-epoch.mjs",
     "scan": "node scripts/scan-labs.mjs",
     "verify": "node scripts/verify-facts.mjs",
-    "hf": "node scripts/hf-metadata.mjs"
+    "hf": "node scripts/hf-metadata.mjs",
+    "readme": "node scripts/update-readme.mjs --write"
   }
 }

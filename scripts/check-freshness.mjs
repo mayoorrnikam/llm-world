@@ -57,6 +57,9 @@ const ORGS = [
 const BLIND_SPOTS = ['OpenAI (frontier)', 'Anthropic', 'Google (Gemini)', 'xAI (frontier)', 'Meta (Muse)'];
 
 /** Quantisations and format conversions are not releases. */
+/** How far back a Hugging Face release still counts as news. */
+const WINDOW_DAYS = 45;
+
 const NOISE = /gguf|awq|gptq|-int[48]|fp8|fp4|nvfp|mxfp|-4bit|-8bit|bnb|mlx|onnx|openvino|-lora|draft/i;
 
 /** Neither are non-LLM artefacts from the same orgs: speech, music, image
@@ -93,7 +96,20 @@ async function candidatesFor(org) {
     if (!res.ok) return { org, error: `HTTP ${res.status}`, models: [] };
     const list = await res.json();
     const models = list
-      .filter((m) => m.createdAt && Date.parse(m.createdAt) > updated)
+      /**
+       * A fixed window, NOT `updated`.
+       *
+       * This filtered to models created since the dataset's `updated` stamp,
+       * which quietly made the field a censor: bumping `updated` to today hid
+       * every model released before today, permanently. Qwen3.8-27B landed on
+       * Hugging Face on 5 August and Qwen3.8-2.4T-A95B on the 8th; `updated`
+       * moved to the 14th, and from that moment neither could ever be
+       * reported — a check that goes quieter the more you use it.
+       *
+       * The question this is really asking is "what is new and untracked",
+       * and `seenBefore` plus the dataset already answer the "untracked" half.
+       */
+      .filter((m) => m.createdAt && Date.now() - Date.parse(m.createdAt) < WINDOW_DAYS * 864e5)
       .filter((m) => !NOISE.test(m.id) && !OFF_TOPIC.test(m.id))
       .filter((m) => !seenBefore(m.id))
       .map((m) => ({ id: m.id, created: m.createdAt.slice(0, 10), likes: m.likes ?? 0 }))

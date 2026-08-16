@@ -3433,6 +3433,22 @@ if (EXPORT) {
   // Discovery document, so /api/ is not a dead end.
   writeJson('api/index.json', {
     ...META,
+    /**
+     * Counts, so a badge can read them without downloading the dataset.
+     *
+     * The README used to state these in prose and went stale within days.
+     * shields.io reads this endpoint, so the badge on the repository front page
+     * cannot disagree with what was last deployed.
+     */
+    stats: {
+      releases: releases.length,
+      labs: new Set(releases.map((r) => r.company)).size,
+      families: new Set(releases.map((r) => r.family)).size,
+      verified: releases.filter((r) => r.provenance?.status === 'verified').length,
+      open_weights: releases.filter((r) => r.access?.open_weights).length,
+      non_language: releases.filter((r) => (r.classification?.primary_type ?? 'language') !== 'language').length,
+      milestones: milestones.length,
+    },
     endpoints: {
       models: `${BASE_URL}/api/models.json`,
       companies: `${BASE_URL}/api/companies.json`,

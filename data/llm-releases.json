@@ -13348,6 +13348,102 @@
       "evidence": {}
     },
     {
+      "id": "qwen-3-8-27b",
+      "model": "Qwen3.8-27B",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The 27B open-weight model of the Qwen3.8 generation, released under Apache 2.0.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-05",
+          "sources": [
+            "qwen-3-8-27b-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 256000,
+          "parameter_count": 27000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "qwen-3-8-27b-s1",
+          "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "qwen-3-8-2-4t-a95b",
+      "model": "Qwen3.8-2.4T-A95B",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The open weights of the Qwen3.8-Max architecture — 2.4 trillion parameters with 95B active — promised at the Max announcement and published five days later.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-08",
+          "sources": [
+            "qwen-3-8-2-4t-a95b-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 256000,
+          "parameter_count": 2400000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen-3-8-2-4t-a95b-s1",
+          "url": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "muse-glimmer",
       "model": "Muse Glimmer",
       "company": "Meta AI",
