@@ -9318,6 +9318,13 @@
           "sources": [
             "nemotron-3-super-s1"
           ]
+        },
+        {
+          "type": "weights_availability",
+          "date": "2026-03-11",
+          "sources": [
+            "nemotron-3-super-s1"
+          ]
         }
       ],
       "specifications": {
@@ -11450,6 +11457,13 @@
             "gemma-4-12b-s1",
             "gemma-4-12b-s2"
           ]
+        },
+        {
+          "type": "weights_availability",
+          "date": "2026-06-03",
+          "sources": [
+            "gemma-4-12b-s1"
+          ]
         }
       ],
       "specifications": {
@@ -11580,6 +11594,13 @@
           "sources": [
             "nemotron-3-ultra-s1",
             "nemotron-3-ultra-s2"
+          ]
+        },
+        {
+          "type": "weights_availability",
+          "date": "2026-06-04",
+          "sources": [
+            "nemotron-3-ultra-s1"
           ]
         }
       ],
@@ -13621,6 +13642,13 @@
             "shieldstral-1-0-3b-s1",
             "shieldstral-1-0-3b-s2"
           ]
+        },
+        {
+          "type": "weights_availability",
+          "date": "2026-08-04",
+          "sources": [
+            "shieldstral-1-0-3b-s1"
+          ]
         }
       ],
       "specifications": {
@@ -13695,6 +13723,13 @@
           "sources": [
             "lfm2-5-2-6b-s1",
             "lfm2-5-2-6b-s2"
+          ]
+        },
+        {
+          "type": "weights_availability",
+          "date": "2026-08-04",
+          "sources": [
+            "lfm2-5-2-6b-s1"
           ]
         }
       ],
@@ -14306,6 +14341,13 @@
       "events": [
         {
           "type": "announcement",
+          "date": "2026-08-11",
+          "sources": [
+            "nemotron-3-5-lightning-s1"
+          ]
+        },
+        {
+          "type": "weights_availability",
           "date": "2026-08-11",
           "sources": [
             "nemotron-3-5-lightning-s1"
