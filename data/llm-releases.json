@@ -5795,8 +5795,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "cogvideox-3-zdocs",
@@ -6452,8 +6452,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-4-5v-s2",
@@ -6777,8 +6777,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-4-6-s2",
@@ -6904,15 +6904,30 @@
           "url": "https://platform.claude.com/docs/en/about-claude/models/overview.md",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055519/https://platform.claude.com/docs/en/about-claude/models/overview.md",
+          "retrieved": "2026-08-17"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 1,
+            "output": 5
+          },
+          "currency": "USD",
+          "observed_on": "2026-08-17",
+          "sources": [
+            "claude-haiku-4-5-adocs"
+          ],
+          "note": "Standard tier. Anthropic prices batch and cached tokens differently."
+        }
+      ]
     },
     {
       "id": "gpt-5-1",
@@ -7910,8 +7925,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-4-6v-s2",
@@ -7979,8 +7994,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-asr-2512-zdocs",
@@ -8143,8 +8158,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-4-7-s2",
@@ -8278,8 +8293,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-image-s2",
@@ -8351,8 +8366,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-4-7-flash-s2",
@@ -8573,8 +8588,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-ocr-s2",
@@ -8823,8 +8838,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-5-s2",
@@ -9457,8 +9472,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-5-turbo-zdocs",
@@ -9755,8 +9770,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-5v-turbo-zdocs",
@@ -9879,8 +9894,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-5-1-s2",
@@ -11801,8 +11816,8 @@
           "url": "https://platform.claude.com/docs/en/about-claude/models/overview.md",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055519/https://platform.claude.com/docs/en/about-claude/models/overview.md",
+          "retrieved": "2026-08-17"
         }
       ],
       "provenance": {
@@ -11822,7 +11837,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 10,
+            "output": 50
+          },
+          "currency": "USD",
+          "observed_on": "2026-08-17",
+          "sources": [
+            "claude-fable-5-adocs"
+          ],
+          "note": "Standard tier. Anthropic prices batch and cached tokens differently."
+        }
+      ]
     },
     {
       "id": "claude-mythos-5",
