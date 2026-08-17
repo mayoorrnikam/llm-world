@@ -18,14 +18,14 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **179** across 21 labs and 32 families, 2022–2026 |
+| **Releases tracked** | **180** across 21 labs and 32 families, 2022–2026 |
 | **Verified** | 46 (26%) — every value they assert traced to a primary source |
 | **Facts traced to a source** | 141 records carry claim-level evidence |
 | **Fully archived** | 148 records where every source has a snapshot |
 | **Open weights** | 77 (43%) |
 | **Beyond language** | 41 (23%) — 15 image generation · 9 audio · 9 video generation · 7 vision · 1 3d |
 | **Milestones** | 4 dated events that were not model releases |
-| **Most recent** | Gemini 3.7 Flash — Google DeepMind, 2026-08-13 |
+| **Most recent** | GLM-5.3 — Zhipu AI, 2026-08-14 |
 | **Dataset updated** | 2026-08-14 |
 
 <sub>Counted from `data/llm-releases.json` by `scripts/update-readme.mjs`. Nothing here is estimated; `npm run check` fails if this table has drifted from the data.</sub>

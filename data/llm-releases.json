@@ -14089,6 +14089,67 @@
           }
         ]
       }
+    },
+    {
+      "id": "glm-5-3",
+      "model": "GLM-5.3",
+      "company": "Zhipu AI",
+      "family": "GLM",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "coding",
+        "agentic",
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "Zhipu calls it the most capable open-weights coding model, but says three times that the weights follow two weeks after launch, once safety evaluation and hardening complete. Recorded proprietary until they land.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-14",
+          "sources": [
+            "glm-5-3-s1",
+            "glm-5-3-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "glm-5-3-s1",
+          "url": "https://z.ai/blog/glm-5.3",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-5-3-s2",
+          "url": "https://docs.z.ai/guides/llm/glm-5.3",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
     }
   ],
   "redirects": [
