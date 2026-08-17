@@ -45,6 +45,14 @@ jobs:
           FLAGS="--record"
           if [ "${{ inputs.backlog }}" = "true" ]; then FLAGS="--backlog"; fi
           node scripts/scan-labs.mjs $FLAGS > scan.md
+          # A release added on announcement day cannot have an archive snapshot
+          # or, often, its weights yet. This comes back for both rather than
+          # letting "not yet" quietly become "never".
+          echo "" >> scan.md
+          echo "## Follow-up" >> scan.md
+          echo '```' >> scan.md
+          node scripts/follow-up.mjs >> scan.md 2>&1 || true
+          echo '```' >> scan.md
           cat scan.md
           # "newly listed" only appears when there is something to act on.
           if grep -q 'newly listed by a lab' scan.md; then

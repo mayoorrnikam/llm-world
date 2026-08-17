@@ -28,6 +28,7 @@
     "scan": "node scripts/scan-labs.mjs",
     "verify": "node scripts/verify-facts.mjs",
     "hf": "node scripts/hf-metadata.mjs",
-    "readme": "node scripts/update-readme.mjs --write"
+    "readme": "node scripts/update-readme.mjs --write",
+    "follow-up": "node scripts/follow-up.mjs"
   }
 }

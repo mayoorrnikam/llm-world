@@ -12977,7 +12977,7 @@
       "tags": [
         "flagship"
       ],
-      "note": "A 2.4-trillion-parameter MoE with a one-million-token context, Alibaba's largest model to date.",
+      "note": "A 2.4-trillion-parameter MoE with a 256K context, Alibaba's largest model to date. Served via API; the weights were published five days later as Qwen3.8-2.4T-A95B, tracked separately.",
       "events": [
         {
           "type": "announcement",
@@ -13018,7 +13018,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Re-sourced to the lab's own announcement, replacing a news citation. Alibaba said the weights would be released the following week; open_weights stays false until that is evidenced. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Re-sourced to the lab's own announcement, replacing a news citation. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. The promised weights were published on 2026-08-08 as Qwen3.8-2.4T-A95B and are tracked as their own record."
       },
       "evidence": {}
     },
