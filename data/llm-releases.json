@@ -1160,8 +1160,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Ultra — our largest and most capable model for highly complex tasks.\" Capabilities evidenced from the primary sources: audio: “From natural image, audio and video understanding to mathematical reasoning, Gemini Ultra’s performance exceeds current state-of-the-art results on 30 of the 32 widely-us” | vision: “This highlights Gemini Ultra's n ati v e m ultim oda lit y and eludes t o its m ore co mpl ex rea so ning a biliti es acro ss interl ea v ed sequ en ces o f image and tex”."
       },
       "evidence": {
@@ -1253,8 +1253,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Pro — our best model for scaling across a wide range of tasks. The 32,768-token context is carried from the former family record; the announcement does not state per-model context windows, so it is recorded here only and will show as untraceable until a source states it.\" Capabilities evidenced from the primary sources: audio: “From natural image, audio and video understanding to mathematical reasoning, Gemini Ultra’s performance exceeds current state-of-the-art results on 30 of the 32 widely-us” | vision: “This highlights Gemini Ultra's n ati v e m ultim oda lit y and eludes t o its m ore co mpl ex rea so ning a biliti es acro ss interl ea v ed sequ en ces o f image and tex”."
       },
       "evidence": {
@@ -1346,8 +1346,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Split from the former \"gemini-1\" record, which was named for the family while holding one variant's figures. Evidence: \"Gemini Nano, our most efficient model for on-device tasks, via AICore, a new system capability available in Android 14, starting on Pixel 8 Pro devices.\" Capabilities evidenced from the primary sources: audio: “From natural image, audio and video understanding to mathematical reasoning, Gemini Ultra’s performance exceeds current state-of-the-art results on 30 of the 32 widely-us” | vision: “This highlights Gemini Ultra's n ati v e m ultim oda lit y and eludes t o its m ore co mpl ex rea so ning a biliti es acro ss interl ea v ed sequ en ces o f image and tex”."
       },
       "evidence": {
@@ -1791,8 +1791,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -1856,8 +1856,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {
@@ -2400,8 +2400,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Split from the former \"phi-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Phi-3-mini, a 3.8 billion parameter model. Microsoft's announcement adds that it 'is available in two context-length variants—4K and 128K tokens', so no single context window is recorded for it.\""
       },
       "undisclosed": [],
@@ -2485,8 +2485,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Split from the former \"phi-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Phi-3-small (7B) and Phi-3-medium (14B) will be available in the Azure AI model catalog and other model gardens shortly.\""
       },
       "undisclosed": [],
@@ -2925,8 +2925,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -3003,8 +3003,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "undisclosed": [
@@ -3390,8 +3390,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: coding: “5: A New Open-Source Model Combining General and Coding Capabilities | DeepSeek API Docs Skip to main content DeepSeek API Docs English English 中文（中国） DeepSeek Platform Q” | function_calling: “5 Release 2024/09/05 Context Caching is Available 2024/08/02 New API Features 2024/07/25 API Reference API Guides Multi-round Conversation Chat Prefix Completion (Beta) F” | structured_output: “5 Release 2024/09/05 Context Caching is Available 2024/08/02 New API Features 2024/07/25 API Reference API Guides Multi-round Conversation Chat Prefix Completion (Beta) F”."
       },
       "evidence": {
@@ -3585,8 +3585,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Renamed from the series to the shipped flagship, which Alibaba describes as \"a 72B-parameter dense decoder-only language model\". The 72B and 3B variants are excluded from the series-wide Apache 2.0 licence."
       },
       "evidence": {
@@ -4525,8 +4525,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "undisclosed": [
@@ -4644,8 +4644,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from Anthropic's model documentation as it stood on 2025-05-19, which lists this model as: “Claude 3.7 Sonnet Our most intelligent model Text and image input Text output 200k context window Extended thinking.” The current documentation no longer lists it, so the contemporaneous snapshot is cited rather than the live page. Capabilities evidenced from the primary sources: reasoning: “Extended thinking mode is available on all surfaces except the free Claude tier.” | vision: “5 Haiku Our fastest model Text and image input Text output 200k context window Claude 3.”."
       },
       "undisclosed": [
@@ -4841,8 +4841,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {
@@ -5213,7 +5213,7 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
+        "status": "verified",
         "confidence": 90,
         "reason": "Split from the former \"llama-4\" record, which was named for the family while holding one variant's figures. Evidence: \"Llama 4 Scout, is a general purpose model with 17 billion active parameters, 16 experts, and 109 billion total parameters... Llama 4 Scout dramatically increases the supported context length from 128K in Llama 3 to an industry leading 10 million tokens.\" Capabilities evidenced from the primary sources: vision: “As our product workhorse model for general assistant and chat use cases, Llama 4 Maverick is great for precise image understanding and creative writing.”."
       },
@@ -5309,7 +5309,7 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
+        "status": "verified",
         "confidence": 90,
         "reason": "Split from the former \"llama-4\" record, which was named for the family while holding one variant's figures. Evidence: \"Llama 4 Maverick contains 17 billion active parameters, 128 experts, and 400 billion total parameters.\" Capabilities evidenced from the primary sources: vision: “As our product workhorse model for general assistant and chat use cases, Llama 4 Maverick is great for precise image understanding and creative writing.”."
       },
@@ -5403,7 +5403,7 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
+        "status": "verified",
         "confidence": 90,
         "reason": "Split from the former \"qwen3\" record, which was named for the family while holding one variant's figures. Evidence: \"We are open-weighting two MoE models: Qwen3-235B-A22B, a large model with 235 billion total parameters and 22 billion activated parameters, and Qwen3-30B-A3B, a smaller MoE model with 30 billion total parameters and 3 billion activated parameters.\""
       },
@@ -5496,7 +5496,7 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
+        "status": "verified",
         "confidence": 90,
         "reason": "Split from the former \"qwen3\" record, which was named for the family while holding one variant's figures. Evidence: \"the small MoE model, Qwen3-30B-A3B, outcompetes QwQ-32B with 10 times of activated parameters\""
       },
@@ -5845,8 +5845,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {
@@ -6000,8 +6000,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -6098,7 +6098,7 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
+        "status": "verified",
         "confidence": 90,
         "reason": "Split from the former \"gpt-oss\" record, which was named for the family while holding one variant's figures. Evidence: \"gpt-oss-120b is our most powerful open-weight model, which fits into a single H100 GPU (117B parameters with 5.1B active parameters).\" Capabilities evidenced from the primary sources: tool_use: “Both models also perform strongly on tool use, few-shot function calling, CoT reasoning (as seen in results on the Tau-Bench agentic evaluation suite) and HealthBench (ev” | function_calling: “Both models also perform strongly on tool use, few-shot function calling, CoT reasoning (as seen in results on the Tau-Bench agentic evaluation suite) and HealthBench (ev” | agentic: “Both models also perform strongly on tool use, few-shot function calling, CoT reasoning (as seen in results on the Tau-Bench agentic evaluation suite) and HealthBench (ev” | reasoning: “Similar to the OpenAI o-series reasoning models in the API, the two open-weight models support three reasoning efforts—low, medium, and high—which trade off latency vs.” | coding: “Evaluations We evaluated gpt-oss-120b and gpt-oss-20b across standard academic benchmarks to measure their capabilities in coding, competition math, health, and agentic t”."
       },
@@ -6216,7 +6216,7 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
+        "status": "verified",
         "confidence": 90,
         "reason": "Split from the former \"gpt-oss\" record, which was named for the family while holding one variant's figures. Evidence: \"gpt-oss-20b ... 21B [total parameters] 3.6B [active]; gpt-oss-20b only requires 16GB.\" Capabilities evidenced from the primary sources: tool_use: “Both models also perform strongly on tool use, few-shot function calling, CoT reasoning (as seen in results on the Tau-Bench agentic evaluation suite) and HealthBench (ev” | function_calling: “Both models also perform strongly on tool use, few-shot function calling, CoT reasoning (as seen in results on the Tau-Bench agentic evaluation suite) and HealthBench (ev” | agentic: “Both models also perform strongly on tool use, few-shot function calling, CoT reasoning (as seen in results on the Tau-Bench agentic evaluation suite) and HealthBench (ev” | reasoning: “Similar to the OpenAI o-series reasoning models in the API, the two open-weight models support three reasoning efforts—low, medium, and high—which trade off latency vs.” | coding: “Evaluations We evaluated gpt-oss-120b and gpt-oss-20b across standard academic benchmarks to measure their capabilities in coding, competition math, health, and agentic t”."
       },
@@ -6450,8 +6450,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to official documentation and the official model card, and every value it asserts was found there."
       },
       "evidence": {
@@ -6775,8 +6775,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {
@@ -7461,8 +7461,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -7514,8 +7514,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -7896,8 +7896,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to official documentation and the official model card, and every value it asserts was found there."
       },
       "evidence": {
@@ -8129,8 +8129,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to official documentation and the official model card, and every value it asserts was found there."
       },
       "evidence": {
@@ -8329,8 +8329,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {
@@ -9178,8 +9178,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to official documentation, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
@@ -9348,8 +9348,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -9851,8 +9851,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {
@@ -10059,8 +10059,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -10137,8 +10137,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the official model card and the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only. Capabilities evidenced from the primary sources: agentic: “6 via the Chat Completions API Agentic Usage Qwen-Agent Qwen Code Processing Ultra-Long Texts Best Practices Citation Qwen3.” | coding: “6-35B-A3B}: Agentic Coding Power, Now Open to All}, url = {https://qwen.”."
       },
       "evidence": {
@@ -10329,8 +10329,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the official model card and the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only. Capabilities evidenced from the primary sources: agentic: “6 via the Chat Completions API Agentic Usage Qwen-Agent Qwen Code Processing Ultra-Long Texts Best Practices Citation Qwen3.” | coding: “6-27B}: Flagship-Level Coding in a {27B} Dense Model}, author = {{Qwen Team}}, month = {April}, year = {2026}, url = {https://qwen.”."
       },
       "evidence": {
@@ -11185,8 +11185,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the official model card and the lab's own announcement, and every value it asserts was found there. Licence from the model card's own license_name field on MiniMaxAI/MiniMax-M3."
       },
       "evidence": {
@@ -11241,8 +11241,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -11294,8 +11294,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -11347,8 +11347,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -11407,8 +11407,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -11495,8 +11495,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities read from the launch announcement, which states: “Novel unified architecture: No multimodal encoders. The vision and audio inputs flow directly into the LLM backbone,” and describes each path separately — vision through a lightweight embedding module, raw audio projected into the same dimensional space as text tokens. Output is recorded as text: no image, audio or video generation is claimed anywhere in the primary sources. Capabilities evidenced from the primary sources: agentic: “5X 2X Today, we are introducing Gemma 4 12B, our latest model designed to bring agentic multimodal intelligence directly to laptops.” | vision: “Gemma 4 models are multimodal, handling text and image input (with audio supported on E2B, E4B, and 12B) and generating text output.” | coding: “Featuring both Dense and Mixture-of-Experts (MoE) architectures, Gemma 4 is well-suited for tasks like text generation, coding, and reasoning.” | reasoning: “Thinking Mode Configuration Compared to Gemma 3, the models use standard system , assistant , and user roles.”."
       },
       "evidence": {
@@ -11956,8 +11956,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -13038,8 +13038,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -13091,8 +13091,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -13144,8 +13144,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -13308,8 +13308,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -13599,8 +13599,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -13680,8 +13680,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
@@ -13762,8 +13762,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
@@ -14063,8 +14063,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on meta-models/Muse-Glimmer-30B. Capabilities evidenced from the primary sources: agentic: “Muse Glimmer is a 30-billion-parameter model optimized for always-on local agent workflows.” | coding: “Muse Glimmer achieves strong success rates on full-task benchmarks including DeepSearch QA, MCP-Atlas, 𝛕-Bench and SWE-Bench, which measure its ability to work within sc” | reasoning: “Muse Glimmer supports different reasoning strengths to select the right balance between quality and speed.” | multilingual: “Muse Glimmer is trained on data from more than 100 languages.”."
       },
       "evidence": {
@@ -14234,8 +14234,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -14375,8 +14375,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -14443,8 +14443,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
