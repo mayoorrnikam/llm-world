@@ -4277,7 +4277,8 @@
           {
             "value": "2024-12-26",
             "sources": [
-              "deepseek-v3-s2"
+              "deepseek-v3-s2",
+              "deepseek-v3-s3"
             ]
           }
         ],
@@ -14512,8 +14513,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and official documentation, and every value it asserts was found there."
       },
       "evidence": {
@@ -14521,7 +14522,16 @@
           {
             "value": "2026-08-12",
             "sources": [
-              "grok-4-6-s1"
+              "grok-4-6-s1",
+              "grok-4-6-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 500000,
+            "sources": [
+              "grok-4-6-s2"
             ]
           }
         ]
@@ -14684,14 +14694,22 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
         "release_date": [
           {
             "value": "2026-08-13",
+            "sources": [
+              "gemini-3-7-flash-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1048576,
             "sources": [
               "gemini-3-7-flash-s1"
             ]
