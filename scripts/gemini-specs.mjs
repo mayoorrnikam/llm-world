@@ -41,6 +41,9 @@
 import { readFileSync } from 'node:fs';
 import { sourceText, FAILED } from '../lib/source-text.mjs';
 import { saveDataset } from '../lib/dataset.mjs';
+// Shared half of every docs reader. The parsing below stays lab-specific —
+// see lib/model-docs.mjs for why that line is drawn where it is.
+import { fetchText, flat, tokens } from '../lib/model-docs.mjs';
 
 const WRITE = process.argv.includes('--write');
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
@@ -69,12 +72,8 @@ const INDEX = 'https://ai.google.dev/gemini-api/docs/models?hl=en';
  * prose and the whole point here is the markup.
  */
 async function endpointsFromIndex() {
-  const res = await fetch(INDEX, {
-    signal: AbortSignal.timeout(25000),
-    headers: { 'user-agent': 'Mozilla/5.0 (compatible; llm-world docs reader)' },
-  });
-  if (!res.ok) return [];
-  const html = await res.text();
+  const html = await fetchText(INDEX);
+  if (!html) return [];
   return [...new Set([...html.matchAll(/href="[^"]*gemini-api\/docs\/models\/([a-z0-9.-]+)"/g)]
     .map((m) => m[1]))];
 }
@@ -136,7 +135,6 @@ const parseModalities = (s) => [...new Set(
   s.toLowerCase().split(/,|\band\b/).map((x) => MODALITY[x.trim()]).filter(Boolean),
 )];
 
-const num = (s) => Number(String(s).replace(/,/g, ''));
 
 async function specsFor(endpoint) {
   const url = `https://ai.google.dev/gemini-api/docs/models/${endpoint}?hl=en`;
@@ -154,8 +152,8 @@ async function specsFor(endpoint) {
     modalities: inputs && output
       ? { input: parseModalities(inputs[1]), output: parseModalities(output[1]) }
       : null,
-    context_window: ctx ? num(ctx[1]) : null,
-    output_limit: out ? num(out[1]) : null,
+    context_window: ctx ? tokens(ctx[1]) : null,
+    output_limit: out ? tokens(out[1]) : null,
   };
 }
 

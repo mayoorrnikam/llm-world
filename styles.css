@@ -2192,7 +2192,22 @@ code, kbd {
    declared tracks makes the columns actually line up. */
 .doc-list li {
   display: grid;
-  grid-template-columns: 20px minmax(0, 1fr) minmax(0, 168px) 132px;
+  /* The last track was a hard 132px, sized for a bare date. /latest/ appends
+     the gap since the previous release — "August 14, 2026 · +62d" needs 159px
+     — so the column clipped mid-word on every row of that page. max-content
+     sizes it to the widest cell actually present, so a list of plain dates is
+     unchanged and one carrying a suffix simply fits. */
+  /* Five tracks: mark, name, lab, modality glyphs, date.
+     The glyphs had their own column added rather than sharing the lab's,
+     because "Google DeepMind" plus four glyphs overflowed a 168px track and
+     truncated the lab name on every Gemini row. An empty glyph track collapses
+     to nothing, so rows without researched modalities are unchanged. */
+  /* Five FIXED trailing tracks, so the name column keeps whatever is left.
+     Two max-content tracks here collapsed the 1fr name column instead —
+     "GLM-5.3" rendered as "GL…" — which is the opposite of the clipping it was
+     meant to fix. 68px fits four 13px glyphs with their gaps; 164px fits
+     "August 14, 2026 · +62d", the longest date /latest/ produces. */
+  grid-template-columns: 20px minmax(0, 1fr) minmax(0, 168px) 68px 164px;
   align-items: center;
   gap: 14px;
   padding: 8px 2px;
@@ -2201,8 +2216,24 @@ code, kbd {
 }
 .doc-list li:hover { background: color-mix(in srgb, var(--accent) 4%, transparent); }
 
+/* Below a comfortable desktop the four trailing tracks leave the name column
+   too little to work with — 20 + 168 + 68 + 164 plus four gaps is 476px, so at
+   an 800px viewport "GLM-5.3" rendered as "GL…". The glyphs are the least
+   load-bearing column, so they go first, then the lab column narrows. The name
+   is the one thing on the row that must always be readable. */
+@media (max-width: 1000px) {
+  /* FOUR tracks, not five-with-a-zero. `display: none` removes the glyph span
+     from grid flow entirely, so a zero-width fifth track leaves the date to
+     land in it and clip — the same shift that broke this before, arriving from
+     the opposite direction. With the span gone there are four children, so
+     there must be four tracks. */
+  .doc-list li { grid-template-columns: 20px minmax(0, 1fr) minmax(0, 130px) 164px; }
+  .doc-list .mods { display: none; }
+}
+
+
 /* Two-metadata variant (companies index: count + latest date). */
-.doc-list.cols-3 li { grid-template-columns: 20px minmax(0, 1fr) 120px 168px; }
+.doc-list.cols-3 li { grid-template-columns: 20px minmax(0, 1fr) 120px max-content 168px; }
 
 .cell-name {
   min-width: 0;
@@ -2211,6 +2242,22 @@ code, kbd {
   white-space: nowrap;
   font-weight: 600;
 }
+
+/* On a phone a long name WRAPS rather than truncating.
+   Four of 180 model names exceed twenty characters — Qwen3-Coder-480B-A35B-
+   Instruct is the worst — and at 375px two of them clipped. Per-column
+   horizontal scrolling was considered and rejected: it would put 180
+   independent scroll containers on /models/, each with no visible affordance,
+   each fighting the page scroll on touch. A second line costs one row of
+   height on two rows and hides nothing. */
+@media (max-width: 620px) {
+  .cell-name {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.25;
+  }
+}
+
 
 .cell-meta {
   min-width: 0;

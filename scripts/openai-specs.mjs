@@ -40,25 +40,21 @@
 
 import { readFileSync } from 'node:fs';
 import { saveDataset } from '../lib/dataset.mjs';
+// Shared half of every docs reader. The parsing below stays lab-specific —
+// see lib/model-docs.mjs for why that line is drawn where it is.
+import { fetchText, flat, tokens } from '../lib/model-docs.mjs';
 
 const WRITE = process.argv.includes('--write');
 const INDEX = 'https://developers.openai.com/api/docs/models';
-const UA = { 'user-agent': 'Mozilla/5.0 (compatible; llm-world docs reader)' };
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
 
-const get = async (url) => {
-  const res = await fetch(url, { signal: AbortSignal.timeout(25000), headers: UA });
-  return res.ok ? res.text() : null;
-};
-
 /** Every model the index links to. The hrefs are the authoritative list. */
-const html = await get(INDEX);
+const html = await fetchText(INDEX);
 if (!html) { console.error(`could not read ${INDEX}`); process.exit(2); }
 const endpoints = [...new Set(
   [...html.matchAll(/href="[^"]*\/api\/docs\/models\/([a-z0-9.-]+)"/g)].map((m) => m[1]),
 )];
 
-const num = (s) => Number(String(s).replace(/,/g, ''));
 const MODALITY = new Set(['text', 'image', 'audio', 'video']);
 
 function parse(md) {
@@ -80,13 +76,12 @@ function parse(md) {
   };
   return {
     modalities: input && output ? { input, output } : null,
-    context_window: ctx ? num(ctx) : null,
+    context_window: ctx ? tokens(ctx) : null,
     input_price: row('Input'),
     output_price: row('Output'),
   };
 }
 
-const flat = (s) => String(s).toLowerCase().replace(/[\s._-]/g, '');
 const oai = data.releases.filter((r) => r.company === 'OpenAI');
 const today = new Date().toISOString().slice(0, 10);
 
@@ -98,7 +93,7 @@ for (const r of oai) {
     ?? endpoints.find((e) => flat(e).startsWith(flat(r.model)));
   if (!ep) { console.log(`  · ${r.model.padEnd(18)} not served by the API`); continue; }
 
-  const md = await get(`${INDEX}/${ep}.md`);
+  const md = await fetchText(`${INDEX}/${ep}.md`);
   if (!md) { console.log(`  ~ ${r.model.padEnd(18)} ${ep}.md unreadable`); continue; }
   const s = parse(md);
   const added = [];

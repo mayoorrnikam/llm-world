@@ -161,7 +161,12 @@ const listRow = ({ company, href, name, meta, num, data, marks }) =>
     data ? Object.entries(data).map(([k, v]) => ` data-${k}="${esc(String(v))}"`).join('') : ''}>`
   + `${companyMark(company ?? name, 'sm')}`
   + `<a class="cell-name" href="${href}">${name}</a>`
-  + `<span class="cell-meta">${meta}${marks ?? ''}</span>`
+  + `<span class="cell-meta">${meta}</span>`
+  // ALWAYS emitted, even empty. This is a grid, and a conditionally absent
+  // cell does not leave a hole — every later cell shifts left by one track. A
+  // row with no researched modalities put its date in the 68px glyph column
+  // and clipped it to "August 14, 2" on 61 of 180 rows.
+  + (marks || '<span class="mods"></span>')
   + `<span class="cell-num">${num}</span></li>`;
 
 const crumbs = (up, ...steps) => `<nav class="crumbs" aria-label="Breadcrumb">`
