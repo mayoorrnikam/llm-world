@@ -2227,7 +2227,20 @@ code, kbd {
      land in it and clip — the same shift that broke this before, arriving from
      the opposite direction. With the span gone there are four children, so
      there must be four tracks. */
-  .doc-list li { grid-template-columns: 20px minmax(0, 1fr) minmax(0, 130px) 164px; }
+  /* The glyphs STAY. Hiding them below 1000px meant they were invisible in
+     every pane narrower than a full desktop — which is where they were first
+     looked for and not found. They are the newest thing on the row and the
+     reason it exists; the lab name and the date give up width instead. */
+  .doc-list li { grid-template-columns: 20px minmax(0, 1fr) minmax(0, 132px) 56px 150px; }
+  .doc-list .mod { width: 11px; height: 11px; }
+  .doc-list .mods { gap: 3px; margin-left: 0; }
+}
+
+/* Only when even that will not fit do the glyphs go, and then the row returns
+   to its four-track shape — `display: none` removes the span from grid flow, so
+   a fifth track would leave the date to land in it. */
+@media (max-width: 520px) {
+  .doc-list li { grid-template-columns: 20px minmax(0, 1fr) minmax(0, 96px) 132px; }
   .doc-list .mods { display: none; }
 }
 
@@ -2250,7 +2263,7 @@ code, kbd {
    independent scroll containers on /models/, each with no visible affordance,
    each fighting the page scroll on touch. A second line costs one row of
    height on two rows and hides nothing. */
-@media (max-width: 620px) {
+@media (max-width: 760px) {
   .cell-name {
     white-space: normal;
     overflow-wrap: anywhere;
