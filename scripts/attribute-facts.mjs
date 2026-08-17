@@ -68,9 +68,31 @@ function formsFor(field, v) {
 
   const forms = [String(v), v.toLocaleString('en-US')];
   if (field === 'context_window') {
+    // Decimal shorthand, for the labs that round: 200000 -> "200k".
     if (v % 1000 === 0) forms.push(`${v / 1000}K`, `${v / 1000}k`, `${v / 1000},000`);
     if (v % 1_000_000 === 0) forms.push(`${v / 1e6}M`, `${v / 1e6} million`);
-    if (v === 1_048_576) forms.push('1M', '1 million');
+
+    /**
+     * BINARY shorthand, which is how the figures are actually stored.
+     *
+     * Context windows are powers of two — 131072, 1048576, 2097152 — and none
+     * of them is divisible by 1000, so the decimal rules above generated
+     * nothing at all for exactly the values this dataset holds most often.
+     * Meanwhile the labs write them the way people say them:
+     *
+     *   Gemma 3        "a 128k-token context window"      record: 131072
+     *   Gemini 1.5 Pro "2M context window"                record: 2097152
+     *
+     * Both sat untraced against their own archived announcements, and read as
+     * research gaps for a formatting difference. The single hard-coded case
+     * this replaces — `if (v === 1_048_576) push('1M')` — was the same bug
+     * being patched one value at a time.
+     */
+    if (v % 1024 === 0) forms.push(`${v / 1024}K`, `${v / 1024}k`, `${v / 1024}k-token`);
+    if (v % (1024 * 1024) === 0) {
+      const m = v / (1024 * 1024);
+      forms.push(`${m}M`, `${m}m`, `${m} million`, `${m}M-token`);
+    }
   } else {
     if (v >= 1e12) forms.push(`${+(v / 1e12).toFixed(2)}T`, `${+(v / 1e12).toFixed(2)} trillion`);
     else if (v >= 1e9) {

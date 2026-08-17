@@ -63,11 +63,19 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20220406011033/https://arxiv.org/abs/2204.02311",
           "retrieved": "2022-04-06"
+        },
+        {
+          "id": "palm-paper-pdf",
+          "url": "https://arxiv.org/pdf/2204.02311",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20240522140427/https://arxiv.org/pdf/2204.02311",
+          "retrieved": "2024-05-22"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and the technical paper. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: multilingual: “PaLM was trained using a combination of English and multilingual datasets that include high-quality web documents, books, Wikipedia, conversations, and GitHub code.” | coding: “PaLM 540B shows strong performance across coding tasks and natural language tasks in a single model, even though it has only 5% code in the pre-training dataset.”."
       },
       "evidence": {
@@ -79,12 +87,21 @@
             ]
           }
         ],
+        "context_window": [
+          {
+            "value": 2048,
+            "sources": [
+              "palm-paper-pdf"
+            ]
+          }
+        ],
         "parameter_count": [
           {
             "value": 540000000000,
             "sources": [
               "palm-s1",
-              "palm-s2"
+              "palm-s2",
+              "palm-paper-pdf"
             ]
           }
         ]
@@ -838,8 +855,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
@@ -848,6 +865,14 @@
             "value": "2023-07-18",
             "sources": [
               "llama-2-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 4096,
+            "sources": [
+              "llama-2-s2"
             ]
           }
         ],
@@ -1046,8 +1071,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and the official repository. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "previous_ids": [
@@ -1057,6 +1082,14 @@
         "release_date": [
           {
             "value": "2023-11-03",
+            "sources": [
+              "grok-1-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 8192,
             "sources": [
               "grok-1-s1"
             ]
@@ -1441,6 +1474,15 @@
         "release_date": [
           {
             "value": "2023-12-11",
+            "sources": [
+              "mixtral-s1",
+              "mixtral-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 32768,
             "sources": [
               "mixtral-s1",
               "mixtral-s2"
@@ -1953,8 +1995,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and official documentation. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
@@ -1966,6 +2008,14 @@
             "value": "2024-02-15",
             "sources": [
               "gemini-1-5-pro-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 2097152,
+            "sources": [
+              "gemini-1-5-pro-s2"
             ]
           }
         ]
@@ -2041,8 +2091,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
@@ -2053,6 +2103,14 @@
               "gemma-s1",
               "gemma-s2",
               "gemma-s3"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 8192,
+            "sources": [
+              "gemma-s2"
             ]
           }
         ],
@@ -2572,8 +2630,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Split from the former \"phi-3\" record, which was named for the family while holding one variant's figures. Evidence: \"Phi-3-small (7B) and Phi-3-medium (14B) will be available in the Azure AI model catalog and other model gardens shortly. The cited model card is Phi-3-medium-128k-instruct, which is where the 128K context window comes from.\" Capabilities evidenced from the primary sources: coding: “Phi-3 models are the most capable and cost-effective small language models (SLMs) available, outperforming models of the same size and next size up across a variety of la”."
       },
       "evidence": {
@@ -2582,6 +2640,15 @@
             "value": "2024-04-23",
             "sources": [
               "phi-3-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 131072,
+            "sources": [
+              "phi-3-s1",
+              "phi-3-s2"
             ]
           }
         ],
@@ -2876,6 +2943,7 @@
           {
             "value": 131072,
             "sources": [
+              "qwen2-s1",
               "qwen2-s2"
             ]
           }
@@ -4467,8 +4535,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: function_calling: “Low-latency function calling: Mistral Small 3 is able to handle rapid function execution when used as part of automated or agentic workflows.” | agentic: “Low-latency function calling: Mistral Small 3 is able to handle rapid function execution when used as part of automated or agentic workflows.” | multilingual: “25k Safetensors 10 languages vllm mistral License: apache-2.”."
       },
       "evidence": {
@@ -4477,6 +4545,14 @@
             "value": "2025-01-30",
             "sources": [
               "mistral-small-3-s1",
+              "mistral-small-3-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 32768,
+            "sources": [
               "mistral-small-3-s2"
             ]
           }
@@ -4971,8 +5047,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: vision: “Gemma 3 supports over 140 languages and offers advanced text and visual reasoning capabilities.” | function_calling: “Gemma 3 includes a 128k-token context window and supports function calling for complex tasks.” | structured_output: “Create AI-driven workflows using function calling: Gemma 3 supports function calling and structured output to help you automate tasks and build agentic experiences.”."
       },
       "evidence": {
@@ -4982,6 +5058,16 @@
             "sources": [
               "gemma-3-s1",
               "gemma-3-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 131072,
+            "sources": [
+              "gemma-3-s1",
+              "gemma-3-s2",
+              "gemma-3-s3"
             ]
           }
         ],
@@ -13077,16 +13163,41 @@
           "url": "https://huggingface.co/moonshotai/Kimi-K3",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": "https://web.archive.org/web/20260723172717/https://huggingface.co/moonshotai/Kimi-K3",
-          "retrieved": "2026-07-23"
+          "archived_url": "https://web.archive.org/web/20260727151224/https://huggingface.co/moonshotai/Kimi-K3",
+          "retrieved": "2026-07-27"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the official model card. Not verified because the release date, the context window and the parameter count could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
-      "evidence": {}
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-07-16",
+            "sources": [
+              "kimi-k3-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "kimi-k3-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 2800000000000,
+            "sources": [
+              "kimi-k3-s2"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "qwen-image-3-0",
