@@ -81,40 +81,57 @@ const LABS = {
   openai: {
     company: 'OpenAI',
     url: 'https://developers.openai.com/api/docs/pricing',
-    header: /Short context[\s\S]{0,120}?Long context[\s\S]{0,160}?Model\s+Input\s+Cached input/i,
+    header: /Short context[\s\S]{0,120}?Long context[\s\S]{0,200}?Model\s+Input\s+Cached input/i,
     /**
-     * EIGHT price columns, not two, and the difference is expensive.
+     * The column layout CHANGES, so it is read from the header every time.
      *
-     *   Short context                    Long context
-     *   Model | Input | Cached | Writes | Output | Input | Cached | Writes | Output
-     *   gpt-5.6-sol  $5.00 $0.50 $6.25 $30.00  $10.00 $1.00 $12.50 $45.00
+     * Two layouts of the same page, five months apart:
      *
-     * Reading "the first figure and the last" — the obvious shape, and what the
-     * xAI table genuinely is — records $45.00 as GPT-5.6 Sol's output rate. That
-     * is the LONG-context price, half again the real one, and it would look
-     * entirely plausible sitting in the field. Base input is column 1, base
-     * output column 4.
+     *   2026-04  Model | Input | Cached input | Output | Input | Cached input | Output
+     *   2026-08  Model | Input | Cached | Cache writes | Output | Input | Cached | Writes | Output
      *
-     * Rows also carry "-" where a tier does not apply:
+     * Base output is the third cell in one and the fourth in the other. A
+     * parser that hard-codes either is right for half the archive and
+     * confidently wrong for the rest — and "wrong" here means quoting the
+     * LONG-context rate, $45.00 where the answer is $30.00, which is a plausible
+     * number in the correct units that nothing downstream would question.
      *
-     *   gpt-5.5  $5.00 $0.50 - $30.00  $10.00 $1.00 - $45.00
+     * So the header is parsed into column names and Output is located by name,
+     * which is the same discipline lib/benchmark-table.mjs exists to enforce.
+     * The short-context group is everything up to the first Output; the same
+     * labels repeat afterwards for long context and are ignored.
      *
-     * so a pattern demanding eight dollar figures silently skips exactly the
-     * models with the simplest pricing. Cells are matched as "$n OR -", and a
-     * row whose first or fourth cell is a dash is dropped rather than guessed.
+     * Rows carry "-" where a tier does not apply (gpt-5.4-mini has no long
+     * context), so cells match "$n OR -" and a row missing either figure it
+     * needs is dropped rather than guessed.
      */
     parse(s) {
+      const LABELS = ['Cached input', 'Cache writes', 'Input', 'Output'];
+      const head = /Model((?:\s+(?:Cached input|Cache writes|Input|Output))+)/.exec(s);
+      if (!head) return new Map();
+      const cols = [];
+      let rest = head[1];
+      while (rest.trim()) {
+        const label = LABELS.find((l) => rest.trim().startsWith(l));
+        if (!label) break;
+        cols.push(label);
+        rest = rest.trim().slice(label.length);
+      }
+      const outputAt = cols.indexOf('Output');
+      const inputAt = cols.indexOf('Input');
+      if (outputAt < 0 || inputAt < 0 || inputAt > outputAt) return new Map();
+      const perRow = cols.length;
+
       const out = new Map();
-      const row = /\b([a-z][\w.\-]{2,28})\s+((?:(?:\$[\d.]+|-)\s+){7}(?:\$[\d.]+|-))/g;
+      const row = new RegExp(`\\b([a-z][\\w.\\-]{2,28})\\s+((?:(?:\\$[\\d.]+|-)\\s+){${perRow - 1}}(?:\\$[\\d.]+|-))`, 'g');
       for (const m of s.matchAll(row)) {
         const cells = m[2].trim().split(/\s+/);
-        if (cells.length !== 8) continue;
+        if (cells.length !== perRow) continue;
         const num = (c) => (c === '-' ? null : Number(c.replace('$', '')));
-        const input = num(cells[0]);
-        const output = num(cells[3]);
+        const input = num(cells[inputAt]);
+        const output = num(cells[outputAt]);
         if (input == null || output == null) continue;
-        const name = m[1].trim();
-        if (!out.has(name)) out.set(name, { input, output });
+        if (!out.has(m[1].trim())) out.set(m[1].trim(), { input, output });
       }
       return out;
     },
