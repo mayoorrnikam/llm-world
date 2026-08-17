@@ -169,6 +169,9 @@ for (const r of pending.slice(0, LIMIT)) {
       // on "[v1] Mon, 2 May 2022" and "Initial commit May 3, 2022" — neither is
       // a claim about when the model was released.
       const NOT_AN_ANNOUNCEMENT = /submitted on|last revised|view email|\[v\d\]|initial commit|commit\b|released just|\b[0-9a-f]{7}\b/i;
+      // Where a page stops being the article and starts being a list of links
+      // to other articles.
+      const RELATED_START = /related stories|keep reading|view all|more from|you might also|recommended for you|read next/i;
       // Only sources that carry a DATELINE. A repository shows commit dates and
       // a paper shows submission stamps; both look like dates near a model name
       // and neither is a claim about when the model was released. OPT-175B kept
@@ -177,14 +180,23 @@ for (const r of pending.slice(0, LIMIT)) {
       const near = [];
       for (const c of corpus) {
         if (!DATED.has(c.type)) continue;
+        // Everything past "Related stories" / "Keep reading" is a list of OTHER
+        // articles, each with its own byline and date, and every conflict this
+        // scanner has ever reported came from there. Gemini 1.5 Pro looked like
+        // it disagreed with itself by two days: its dateline says Feb 15 2024
+        // and the sidebar below carries a Pixel announcement from the 13th and
+        // an industry-partnership post from the 14th. GPT-5.6-Cyber was the
+        // same shape, its "Keep reading" list supplying Aug 7. A date under
+        // somebody else's headline is not this page disagreeing with us.
+        const body = c.text.split(RELATED_START)[0];
         // Every form the shared scanner knows, not just "Month D, YYYY" — a
         // page that datelines "14 August 2026" or "2026年8月14日" disagrees with
         // the record just as loudly, and the old pattern could not see either.
         // Ambiguous numeric forms carry a null iso and are skipped: a date we
         // refuse to read cannot be evidence that a source disagrees with us.
-        for (const h of scanDates(c.text)) {
+        for (const h of scanDates(body)) {
           if (h.ambiguous || h.iso === value) continue;
-          const around = c.text.slice(Math.max(0, h.index - 70), h.index + 30);
+          const around = body.slice(Math.max(0, h.index - 70), h.index + 30);
           if (NOT_AN_ANNOUNCEMENT.test(around)) continue;
           const gap = Math.abs(Date.parse(h.iso) - Date.parse(value)) / 86400000;
           if (gap <= 3) near.push({ iso: h.iso, id: c.id });

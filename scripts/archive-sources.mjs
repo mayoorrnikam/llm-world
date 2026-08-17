@@ -16,7 +16,8 @@
  *
  * By default this only READS from archive.org's availability API.
  *
- *   --save    ask archive.org to CREATE snapshots for sources that have none
+ *   --save         ask archive.org to CREATE snapshots for sources that have none
+ *   --save-max=N   how many to attempt in one run (default 12, newest first)
  *
  * `--save` writes to a third-party service, so it is opt-in and never runs as a
  * side effect of anything else. It submits public URLs that this dataset
@@ -206,15 +207,43 @@ if (gaps.length && !SAVE) {
 
 /* ------------------------------------------------------- create (opt-in) */
 
-if (gaps.length && SAVE) {
-  console.log(`\nasking archive.org to capture ${gaps.length} URL(s) — this writes to a`);
-  console.log(`third-party public archive, and each capture can take a minute.\n`);
+/**
+ * Saving is a scarce budget, so spend it newest-first and cap it.
+ *
+ * Reading an archive is cheap and creating one is not: Save Page Now takes up
+ * to a minute per URL and rate-limits hard, which is what turned a fifty-source
+ * run into an hour that finished nothing. Backfill does not need it at all —
+ * a page archived in 2024 is already archived, and the lookup pass above finds
+ * it in one request.
+ *
+ * What actually needs a fresh capture is a source nobody has archived YET, and
+ * that is overwhelmingly a page for a model released this week. An old record
+ * still lacking a snapshot usually has a URL no archive will ever hold — a
+ * bot-blocked host, or a page that has since 404ed — and retrying those every
+ * run spends the budget that new records need.
+ *
+ * So: newest record first, and a cap. A capped run that captures this week's
+ * five announcements beats an uncapped one that times out on 2022.
+ */
+const SAVE_CAP = Number(process.argv.find((a) => a.startsWith('--save-max='))?.split('=')[1] ?? 12);
 
-  for (const job of jobs) {
+if (gaps.length && SAVE) {
+  const queue = jobs
+    .filter((job) => !job.source.archived_url
+      && gaps.some((g) => g.includes(`${job.record.id}/${job.source.id} `)))
+    .sort((a, b) => String(canonicalDate(b.record) ?? '').localeCompare(String(canonicalDate(a.record) ?? '')))
+    .slice(0, SAVE_CAP);
+
+  console.log(`\nasking archive.org to capture ${queue.length} of ${gaps.length} URL(s), newest first`);
+  console.log(`— this writes to a third-party public archive, and each capture can take`);
+  console.log(`a minute. Raise or lower the cap with --save-max=N.\n`);
+  if (queue.length < gaps.length) {
+    console.log(`  ${gaps.length - queue.length} older gap(s) left for the next run; the daily`);
+    console.log(`  archive workflow works through them a batch at a time.\n`);
+  }
+
+  for (const job of queue) {
     const s = job.source;
-    if (s.archived_url) continue;
-    // Only the ones confirmed absent; a failed lookup is not a licence to save.
-    if (!gaps.some((g) => g.includes(`${job.record.id}/${s.id} `))) continue;
 
     process.stdout.write(`  ${job.record.id}/${s.id} … `);
     try {
