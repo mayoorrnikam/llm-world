@@ -31,11 +31,14 @@
  *
  * It writes only the two fields it can read verbatim, and only onto records
  * that have none — a figure already traced to a source is never overwritten by
- * a scrape. `capabilities` are left alone: this page states them as a
- * Supported/Not supported grid, and TAXONOMY §4 is explicit that an unlisted
- * capability means "not evidenced" rather than "absent", so importing a "Not
- * supported" cell as an absence would assert something the vocabulary here
- * does not carry.
+ * a scrape.
+ *
+ * `capabilities` ARE imported now, but only the affirmatives. This page states
+ * them as a Supported/Not supported grid, and TAXONOMY §4 is explicit that an
+ * unlisted capability means "not evidenced" rather than "absent" — so a
+ * "Supported" cell is evidence and a "Not supported" cell is dropped, because
+ * recording it as silence would be indistinguishable from never having looked.
+ * Which rows map to which capability is the delicate part; see GEMINI_CAPS.
  */
 
 import { readFileSync } from 'node:fs';
@@ -43,7 +46,7 @@ import { sourceText, FAILED } from '../lib/source-text.mjs';
 import { saveDataset } from '../lib/dataset.mjs';
 // Shared half of every docs reader. The parsing below stays lab-specific —
 // see lib/model-docs.mjs for why that line is drawn where it is.
-import { fetchText, flat, tokens, citeDocs } from '../lib/model-docs.mjs';
+import { fetchText, flat, tokens, citeDocs, mergeCaps } from '../lib/model-docs.mjs';
 
 const WRITE = process.argv.includes('--write');
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
@@ -154,7 +157,47 @@ async function specsFor(endpoint) {
       : null,
     context_window: ctx ? tokens(ctx[1]) : null,
     output_limit: out ? tokens(out[1]) : null,
+    caps: capsIn(s),
   };
+}
+
+/**
+ * The Capabilities block, which prints "<Feature> Supported" or "Not supported".
+ *
+ * WHAT IS DELIBERATELY NOT MAPPED
+ *
+ * "Audio generation: Supported" is not mapped either, and that one is subtler.
+ * The row is true of Lyria 3, which generates MUSIC, and of Gemini 3.1 Flash
+ * Live, which generates SPEECH. The vocabulary has speech_generation and no
+ * music equivalent, so the row would have labelled a music model as a speech
+ * model — a confident wrong fact from an accurate source. It waits for a
+ * taxonomy decision by a person.
+ *
+ * "Code execution: Supported" is a sandboxed tool the API can call. It says
+ * nothing about whether the model writes good code, and mapping it to `coding`
+ * would drop every Gemini model into "best model for coding" on a feature flag.
+ * Same for caching, search grounding, Maps, URL context and batch inference:
+ * platform features, not model abilities.
+ *
+ * A "Not supported" is read and discarded — see mergeCaps for why absence
+ * cannot be recorded here.
+ */
+const GEMINI_CAPS = {
+  Thinking: 'reasoning',
+  'Function calling': 'function_calling',
+  'Structured outputs': 'structured_output',
+  'Computer use': 'agentic',
+  'Image generation': 'image_generation',
+};
+
+function capsIn(s) {
+  const found = [];
+  for (const [label, cap] of Object.entries(GEMINI_CAPS)) {
+    // "Supported" must not match inside "Not supported".
+    const m = new RegExp(`\\b${label}\\s+(Not supported|Supported)`, 'i').exec(s);
+    if (m && !/^not/i.test(m[1])) found.push(cap);
+  }
+  return found;
 }
 
 const gemini = data.releases.filter((r) => r.company === 'Google DeepMind');
@@ -181,6 +224,9 @@ for (const r of gemini) {
     gaps.push(`modalities in ${s.modalities.input.join('/')} out ${s.modalities.output.join('/')}`);
     if (WRITE) r.modalities = s.modalities;
   }
+  const fresh = mergeCaps(r, s.caps ?? [], WRITE);
+  if (fresh.length) gaps.push(`capabilities +${fresh.join(' +')}`);
+
   if (!gaps.length) { console.log(`  · ${r.model.padEnd(24)} nothing to add`); continue; }
 
   console.log(`  ✓ ${r.model.padEnd(24)} ${gaps.join(' · ')}`);

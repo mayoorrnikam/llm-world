@@ -33,7 +33,7 @@
 import { readFileSync } from 'node:fs';
 import { saveDataset } from '../lib/dataset.mjs';
 import {
-  fetchText, mdRows, tokens, dollars, flat, applySpecs, untrackedIn, report,
+  fetchText, mdRows, tokens, dollars, flat, applySpecs, untrackedIn, report, mergeCaps,
 } from '../lib/model-docs.mjs';
 
 const WRITE = process.argv.includes('--write');
@@ -54,6 +54,26 @@ const rowFor = (label) => rows.find((c) =>
 
 const ctxRow = rowFor('Context window');
 const priceRow = rowFor('Pricing');
+/**
+ * Capabilities, from the only two places this page states any.
+ *
+ * There is no vision row and no coding row — an earlier note here claimed a
+ * vision Yes/No and it is simply not on the page. What is here:
+ *
+ *   **Extended thinking**  Yes | No
+ *   **Adaptive thinking**  Yes (always on)
+ *   **Description**        For complex agentic coding and enterprise work
+ *
+ * Either thinking row saying Yes is reasoning. The Description is Anthropic
+ * describing its own model, so "agentic coding" is evidence for both agentic
+ * and coding — but it is an inference from marketing prose, so the sentence is
+ * printed next to whatever it produces. Two of the four descriptions say
+ * nothing mappable ("The best combination of speed and intelligence") and
+ * yield nothing, which is the correct outcome rather than a failure.
+ */
+const thinkRow = rows.find((c) => /extended thinking/i.test(c[0] ?? ''));
+const adaptRow = rows.find((c) => /adaptive thinking/i.test(c[0] ?? ''));
+const descRow = rowFor('Description');
 
 const specs = new Map();
 models.forEach((name, i) => {
@@ -65,10 +85,18 @@ models.forEach((name, i) => {
   const p = cell(priceRow);
   const inp = /\$\s*([\d.]+)\s*\/\s*input/i.exec(p);
   const out = /\$\s*([\d.]+)\s*\/\s*output/i.exec(p);
+  const desc = cell(descRow);
+  const caps = [];
+  if (/\byes\b/i.test(cell(thinkRow)) || /\byes\b/i.test(cell(adaptRow))) caps.push('reasoning');
+  if (/\bcoding\b/i.test(desc)) caps.push('coding');
+  if (/\bagent(ic|s)\b/i.test(desc)) caps.push('agentic');
+
   specs.set(name, {
     context_window: ctxText ? tokens(ctxText[1]) : null,
     input_price: inp ? Number(inp[1]) : dollars(p),
     output_price: out ? Number(out[1]) : null,
+    caps,
+    desc,
   });
 });
 
@@ -87,14 +115,28 @@ const results = applySpecs({
   docsSuffix: 'adocs',
 });
 
+console.log('\nCAPABILITIES');
+let capped = 0;
+for (const r of records) {
+  const key = [...specs.keys()].find((k) => flat(k) === flat(r.model));
+  if (!key) continue;
+  const { caps, desc } = specs.get(key);
+  const fresh = mergeCaps(r, caps, WRITE);
+  if (!fresh.length) continue;
+  capped++;
+  console.log(`  \u2713 ${r.model.padEnd(18)} +${fresh.join(' +')}`);
+  if (fresh.includes('coding') || fresh.includes('agentic')) console.log(`      from: "${desc}"`);
+}
+
 const filled = report('Anthropic', results, untrackedIn(specs, records), {
   write: WRITE,
-  note: 'Modalities are not imported: the overview states vision support as a'
-    + '\nYes/No feature row, and TAXONOMY §4 reads an unlisted capability as "not'
-    + '\nevidenced" rather than "absent" — a "No" cell has no equivalent here.',
+  note: 'Modalities are not imported: this page states none. It has no vision row'
+    + '\nand no modality list at all — an earlier note here claimed a vision Yes/No'
+    + '\nand was simply wrong about the page. Capabilities come from the thinking'
+    + '\nrows and the Description, above.',
 });
 
-if (WRITE && filled) {
+if (WRITE && (filled || capped)) {
   saveDataset(data);
   console.log('wrote data/llm-releases.json');
 }

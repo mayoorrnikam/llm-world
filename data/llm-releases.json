@@ -4131,7 +4131,9 @@
         ]
       },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "function_calling",
+        "structured_output"
       ],
       "tags": [
         "flagship"
@@ -4173,6 +4175,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260303034822/https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash",
           "retrieved": "2026-03-03"
+        },
+        {
+          "id": "gemini-2-flash-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -5080,7 +5090,9 @@
         ]
       },
       "capabilities": [
-        "reasoning"
+        "reasoning",
+        "function_calling",
+        "structured_output"
       ],
       "tags": [
         "flagship"
@@ -5122,6 +5134,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260308075642/https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro",
           "retrieved": "2026-03-08"
+        },
+        {
+          "id": "gemini-2-5-pro-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -6272,7 +6292,9 @@
       "capabilities": [
         "vision",
         "reasoning",
-        "coding"
+        "coding",
+        "structured_output",
+        "function_calling"
       ],
       "tags": [
         "flagship"
@@ -6844,7 +6866,9 @@
         "subtype": "llm"
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "reasoning"
+      ],
       "tags": [],
       "note": "Anthropic's small model tier. The API id claude-haiku-4-5-20251001 carries a snapshot date two weeks before the announcement; the release date is the one Anthropic states.",
       "events": [
@@ -7010,7 +7034,9 @@
         "vision",
         "coding",
         "agentic",
-        "reasoning"
+        "reasoning",
+        "function_calling",
+        "structured_output"
       ],
       "tags": [
         "flagship"
@@ -7052,6 +7078,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20251118111103/https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-3-Pro-Model-Card.pdf",
           "retrieved": "2025-11-18"
+        },
+        {
+          "id": "gemini-3-pro-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -9142,7 +9176,10 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "reasoning",
+        "image_generation"
+      ],
       "tags": [],
       "note": "The image generation and editing model Google ships inside Gemini, and the most widely used of its image line.",
       "events": [
@@ -9172,6 +9209,14 @@
         {
           "id": "nano-banana-2-s2",
           "url": "https://deepmind.google/models/nano-banana/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "nano-banana-2-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=en",
           "type": "official_documentation",
           "authority": "primary",
           "archived_url": null,
@@ -9581,7 +9626,10 @@
           "audio"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "reasoning",
+        "function_calling"
+      ],
       "tags": [],
       "note": "An audio-to-audio model for real-time dialogue.",
       "events": [
@@ -10637,7 +10685,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "reasoning",
+        "function_calling",
+        "structured_output"
+      ],
       "tags": [],
       "note": "The lightweight text tier of the 3.1 generation, released to general availability. Distinct from gemini-3.1-flash-lite-image (Nano Banana 2 Lite), which shipped 2026-06-30.",
       "events": [
@@ -10760,7 +10812,10 @@
         ]
       },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "reasoning",
+        "function_calling",
+        "structured_output"
       ],
       "tags": [
         "small-efficient"
@@ -10802,6 +10857,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260519180605/https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash",
           "retrieved": "2026-05-19"
+        },
+        {
+          "id": "gemini-3-5-flash-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -11083,7 +11146,10 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "reasoning",
+        "image_generation"
+      ],
       "tags": [],
       "note": "The Pro tier of Google's native image model, served as gemini-3-pro-image.",
       "events": [
@@ -11685,7 +11751,9 @@
       },
       "capabilities": [
         "vision",
-        "multilingual"
+        "multilingual",
+        "reasoning",
+        "agentic"
       ],
       "tags": [
         "flagship"
@@ -12051,7 +12119,8 @@
       "capabilities": [
         "agentic",
         "vision",
-        "multilingual"
+        "multilingual",
+        "reasoning"
       ],
       "tags": [],
       "note": "The most agentic Sonnet to date, approaching Opus-class performance at a lower price.",
@@ -12205,7 +12274,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "reasoning",
+        "function_calling",
+        "image_generation"
+      ],
       "tags": [],
       "note": "The low-latency image generation and editing tier, served as gemini-3.1-flash-lite-image.",
       "events": [
@@ -12427,7 +12500,9 @@
       },
       "capabilities": [
         "reasoning",
-        "agentic"
+        "agentic",
+        "structured_output",
+        "function_calling"
       ],
       "tags": [
         "flagship"
@@ -12522,7 +12597,9 @@
       },
       "capabilities": [
         "reasoning",
-        "agentic"
+        "agentic",
+        "structured_output",
+        "function_calling"
       ],
       "tags": [],
       "note": "The default variant of the GPT-5.6 series.",
@@ -12615,7 +12692,9 @@
       },
       "capabilities": [
         "reasoning",
-        "agentic"
+        "agentic",
+        "structured_output",
+        "function_calling"
       ],
       "tags": [],
       "note": "The third variant of the GPT-5.6 series.",
@@ -12871,7 +12950,10 @@
       },
       "capabilities": [
         "agentic",
-        "coding"
+        "coding",
+        "reasoning",
+        "function_calling",
+        "structured_output"
       ],
       "tags": [
         "small-efficient"
@@ -12913,6 +12995,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260722113351/https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
           "retrieved": "2026-07-22"
+        },
+        {
+          "id": "gemini-3-6-flash-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -12975,7 +13065,12 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "reasoning",
+        "function_calling",
+        "structured_output",
+        "agentic"
+      ],
       "tags": [],
       "note": "The lightweight tier of the 3.5 generation, released to general availability alongside Gemini 3.6 Flash.",
       "events": [
@@ -13201,7 +13296,9 @@
       "capabilities": [
         "agentic",
         "vision",
-        "multilingual"
+        "multilingual",
+        "reasoning",
+        "coding"
       ],
       "tags": [
         "flagship"
@@ -14288,7 +14385,11 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "structured_output",
+        "function_calling",
+        "reasoning"
+      ],
       "tags": [],
       "note": "A cybersecurity-specific model available only through Daybreak Red, OpenAI's gated access tier for approved defenders.",
       "events": [
@@ -14693,7 +14794,12 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "reasoning",
+        "function_calling",
+        "structured_output",
+        "agentic"
+      ],
       "tags": [],
       "note": "Google's workhorse model, introduced at half the per-token price of 3.6 Flash and aimed at software engineering and agent workloads.",
       "events": [

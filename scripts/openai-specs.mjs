@@ -42,7 +42,7 @@ import { readFileSync } from 'node:fs';
 import { saveDataset } from '../lib/dataset.mjs';
 // Shared half of every docs reader. The parsing below stays lab-specific —
 // see lib/model-docs.mjs for why that line is drawn where it is.
-import { fetchText, flat, tokens, citeDocs } from '../lib/model-docs.mjs';
+import { fetchText, flat, tokens, citeDocs, mergeCaps } from '../lib/model-docs.mjs';
 
 const WRITE = process.argv.includes('--write');
 const INDEX = 'https://developers.openai.com/api/docs/models';
@@ -56,6 +56,41 @@ const endpoints = [...new Set(
 )];
 
 const MODALITY = new Set(['text', 'image', 'audio', 'video']);
+
+/**
+ * The "## Supported features" list, plus the reasoning line above it.
+ *
+ *   ## Supported features
+ *   - streaming
+ *   - structured_outputs
+ *   - function_calling
+ *   - file_search
+ *   - image_input
+ *   - web_search
+ *
+ * Only three of those are model abilities. streaming, prompt_caching,
+ * file_search and web_search are platform features — an API can stream any
+ * model's tokens, and web search is a tool the endpoint calls, not something
+ * the weights do. `image_input` is already carried by modalities, so mapping it
+ * to `vision` as well would state one fact in two places and let them drift.
+ *
+ * "Reasoning token support" is a separate line above the list, and is the only
+ * place this page says the model reasons.
+ */
+const OPENAI_CAPS = {
+  structured_outputs: 'structured_output',
+  function_calling: 'function_calling',
+  computer_use: 'agentic',
+};
+
+function capsIn(md) {
+  const block = /## Supported features([\s\S]*?)(?:\n## |$)/.exec(md)?.[1] ?? '';
+  const found = [...block.matchAll(/^-\s*([a-z_]+)\s*$/gim)]
+    .map((m) => OPENAI_CAPS[m[1]])
+    .filter(Boolean);
+  if (/^-\s*Reasoning token support\s*$/im.test(md)) found.push('reasoning');
+  return found;
+}
 
 function parse(md) {
   const line = (re) => re.exec(md)?.[1]?.trim() ?? null;
@@ -75,6 +110,7 @@ function parse(md) {
     return m ? Number(m[1]) : null;
   };
   return {
+    caps: capsIn(md),
     modalities: input && output ? { input, output } : null,
     context_window: ctx ? tokens(ctx) : null,
     input_price: row('Input'),
@@ -130,6 +166,9 @@ for (const r of oai) {
       }
     }
   }
+
+  const fresh = mergeCaps(r, s.caps ?? [], WRITE);
+  if (fresh.length) added.push(`capabilities +${fresh.join(' +')}`);
 
   if (!added.length) { console.log(`  · ${r.model.padEnd(18)} nothing to add`); continue; }
   console.log(`  ✓ ${r.model.padEnd(18)} ${added.join(' · ')}`);
