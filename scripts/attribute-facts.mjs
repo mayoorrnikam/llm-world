@@ -46,6 +46,11 @@ import { dateForms, scanDates } from '../lib/dates.mjs';
 
 const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
+// Recording a conflict forces provenance.status to "conflicting", which
+// downgrades a record. A date scanner over prose should not do that on its own
+// — the same class of matcher read a safety hypothetical as a release
+// statement earlier today — so it is opt-in and reported by default.
+const RECORD = process.argv.includes('--record-conflicts');
 const LIMIT = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('=')[1] ?? Infinity);
 
 const data = JSON.parse(readFileSync(FILE, 'utf8'));
@@ -97,6 +102,8 @@ console.log(`${data.releases.length} records · ${data.releases.length - pending
 
 let attributed = 0, skipped = 0, unproven = 0;
 const conflicts = [];
+const recordable = [];
+const conflicted = new Set();
 const skippedIds = [];
 
 for (const r of pending.slice(0, LIMIT)) {
@@ -131,7 +138,14 @@ for (const r of pending.slice(0, LIMIT)) {
     if (backing.length) {
       evidence[field] = [{ value, sources: backing }];
       found.push(`${field}←${backing.join(',')}`);
-      continue;
+      // Falls through to the disagreement scan below rather than continuing.
+      // It used to `continue` here, and that is why this dataset held zero
+      // conflicting values across 186 records: the scan only ever ran when the
+      // record's own value had NO source, which is the one shape the schema
+      // cannot store — evidence must contain the value the record publishes
+      // (validate-data §evidence), so "nobody backs us and someone contradicts
+      // us" has nowhere to go. The case the schema is built for — our value is
+      // backed by source A and source B says otherwise — was never looked for.
     }
 
     /**
@@ -180,6 +194,40 @@ for (const r of pending.slice(0, LIMIT)) {
         const seen = [...new Map(near.map((x) => [x.iso, x])).values()];
         conflicts.push(`${r.id}: record says ${value}, ${seen.map((x) =>
           `${x.id} says ${x.iso}`).join(' · ')}`);
+
+        /**
+         * RECORD the disagreement, do not just print it.
+         *
+         * This block found conflicts and pushed them to a console.log. The
+         * evidence written a few lines below held only the value that agreed
+         * with the record, so a source stating a different date was detected,
+         * reported to a terminal nobody keeps, and dropped. Across 186 records
+         * the dataset held zero conflicting values — not because the labs
+         * agree, but because disagreement had nowhere to live.
+         *
+         * METHODOLOGY §8 says both values are recorded when credible sources
+         * disagree, and evidence[] already has the shape for it: a list of
+         * {value, sources}. Nothing needed inventing; the second entry simply
+         * was never written.
+         *
+         * The STATUS is deliberately not changed here. Marking a record
+         * `conflicting` is a claim about the sources, and this detection is a
+         * date scanner over prose — the same class of machinery that read a
+         * safety hypothetical as a release statement earlier today. It reports
+         * what it found and a person decides; see reconcile-status.
+         */
+        // Record it only when the record's own value is also backed. Two
+        // claims is the shape the schema means by "conflicting"; one claim
+        // that contradicts the published value is a validation error, not a
+        // conflict, and writing it would break the build to make a point.
+        if (evidence[field]?.length) {
+          if (RECORD) {
+            for (const x of seen) evidence[field].push({ value: x.iso, sources: [x.id] });
+            conflicted.add(r.id);
+          } else {
+            recordable.push(`${r.id}: ${value} (backed) vs ${seen.map((x) => `${x.iso} (${x.id})`).join(', ')}`);
+          }
+        }
       }
     }
   }
@@ -188,6 +236,13 @@ for (const r of pending.slice(0, LIMIT)) {
   attributed++;
   if (WRITE) {
     r.evidence = evidence;
+    // Two claims on a field is exactly what "conflicting" means, and the
+    // validator errors unless the status says so.
+    if (conflicted.has(r.id)) {
+      r.provenance.status = 'conflicting';
+      r.provenance.reason = 'Sources state different dates for this release; both are '
+        + 'recorded in evidence[] rather than one being chosen (METHODOLOGY §8, R4).';
+    }
     // Flush as we go. Rule 2 says this is resumable, but a run that only saves
     // at the end is not resumable at all — rate limiting kills it and every
     // record read so far is thrown away. Each record costs several slow
@@ -201,6 +256,15 @@ console.log(`\nattributed: ${attributed}`);
 console.log(`skipped:    ${skipped}`);
 if (unproven) console.log(`of the attributed, ${unproven} had no field matched in any source`);
 if (skippedIds.length) {
+  if (recordable.length) {
+    console.log(`\nRECORDABLE CONFLICTS — both values are sourced, so the schema can hold`
+      + `\nboth (METHODOLOGY \u00a78). Pass --record-conflicts to write them, which sets`
+      + `\nprovenance.status to "conflicting" on each (${recordable.length}):`);
+    for (const c of recordable) console.log(`  ${c}`);
+  }
+  if (conflicted.size) {
+    console.log(`\nrecorded ${conflicted.size} conflicting record${conflicted.size === 1 ? '' : 's'}`);
+  }
   if (conflicts.length) {
   console.log(`\nSOURCE STATES A DIFFERENT DATE — read the page before changing anything (${conflicts.length}):`);
   for (const c of conflicts) console.log(`  ${c}`);
