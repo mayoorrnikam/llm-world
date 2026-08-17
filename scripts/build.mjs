@@ -112,12 +112,56 @@ const fullDate = (r) => `${MONTHS[r.month - 1]}${r.day ? ` ${r.day}` : ''}, ${r.
  * and the row's left edge pick up the company colour without a per-company
  * rule; `company` is omitted only by the labs index, whose rows ARE companies.
  */
-const listRow = ({ company, href, name, meta, num, data }) =>
+/**
+ * Modality glyphs — what goes in and what comes out, at a glance.
+ *
+ * A list row said "GPT-4o" and "Nano Banana 2" in identical type, and nothing
+ * on it distinguished a text model from an image generator. The dataset knows:
+ * 119 of 180 records carry researched modalities and 57 are multimodal. That
+ * fact was only visible by opening the record.
+ *
+ * Lucide (ISC), inlined like the company marks — nothing is fetched at runtime.
+ *
+ * COLOUR IS NOT USED. These are shapes, and each carries a <title>, because the
+ * page already spends its one colour channel on company identity (CLAUDE.md,
+ * Design constraints) and a second hue-coded axis would collide with it.
+ *
+ * A record with no researched modalities renders NOTHING rather than a neutral
+ * placeholder — an empty slot reads as "not looked at", which is exactly what
+ * it is, where a grey icon would read as "text only".
+ */
+const MODALITY_GLYPH = {
+  text: 'M17 6.1H3M21 12.1H3M15.1 18H3',
+  image: 'M3 5.5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM8.5 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M21 15l-5-5L5 20',
+  audio: 'M2 10v3M6 6v11M10 3v18M14 8v7M18 5v13M22 10v3',
+  video: 'M3 6.5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM15 10l6-3.5v11L15 14',
+};
+
+const MODALITY_LABEL = { text: 'Text', image: 'Image', audio: 'Audio', video: 'Video' };
+
+/** The union of a record's input and output modalities, in a stable order. */
+const modalityMarks = (r) => {
+  if (!r.modalities) return '';
+  const seen = [...new Set([...r.modalities.input, ...r.modalities.output])]
+    .filter((m) => MODALITY_GLYPH[m]);
+  if (!seen.length) return '';
+  const inOut = (m) => {
+    const i = r.modalities.input.includes(m);
+    const o = r.modalities.output.includes(m);
+    return i && o ? 'in and out' : i ? 'input' : 'output';
+  };
+  return `<span class="mods">${seen.map((m) =>
+    `<svg class="mod" viewBox="0 0 24 24" role="img" aria-label="${
+      esc(MODALITY_LABEL[m])} ${esc(inOut(m))}"><title>${
+      esc(MODALITY_LABEL[m])} ${esc(inOut(m))}</title><path d="${MODALITY_GLYPH[m]}"/></svg>`).join('')}</span>`;
+};
+
+const listRow = ({ company, href, name, meta, num, data, marks }) =>
   `<li${company ? ` style="--c:var(--c-${slugFor(company)})"` : ''}${
     data ? Object.entries(data).map(([k, v]) => ` data-${k}="${esc(String(v))}"`).join('') : ''}>`
   + `${companyMark(company ?? name, 'sm')}`
   + `<a class="cell-name" href="${href}">${name}</a>`
-  + `<span class="cell-meta">${meta}</span>`
+  + `<span class="cell-meta">${meta}${marks ?? ''}</span>`
   + `<span class="cell-num">${num}</span></li>`;
 
 const crumbs = (up, ...steps) => `<nav class="crumbs" aria-label="Breadcrumb">`
@@ -899,7 +943,7 @@ ${barRows(caps.map(([c, n]) => ({ name: tagLabel(c), value: n })))}` : ''}
 
 <h2>Releases</h2>
 <ol class="doc-list cols-3">${sorted.map((r) =>
-  listRow({ company: r.company, href: `../../models/${esc(r.id)}/`, name: esc(r.model), meta: esc(r.family), num: fullDate(r) })).join('')}</ol>
+  listRow({ company: r.company, href: `../../models/${esc(r.id)}/`, name: esc(r.model), meta: esc(r.family), num: fullDate(r) , marks: modalityMarks(r) })).join('')}</ol>
 
 <p class="doc-cta">
   <a href="../../?company=${encodeURIComponent(name)}&year=all">Filter the timeline to ${esc(name)} →</a><br>
@@ -941,7 +985,7 @@ ${yearMilestones.length ? `<h2>Milestones</h2>
 ${[...byMonth.keys()].sort((a, b) => a - b).map((m) => `
 <h2>${MONTHS[m - 1]} ${year}</h2>
 <ol class="doc-list">${byMonth.get(m).map((r) =>
-  listRow({ company: r.company, href: `../../models/${esc(r.id)}/`, name: esc(r.model), meta: esc(r.company), num: fullDate(r) })).join('')}</ol>`).join('')}
+  listRow({ company: r.company, href: `../../models/${esc(r.id)}/`, name: esc(r.model), meta: esc(r.company), num: fullDate(r), marks: modalityMarks(r) })).join('')}</ol>`).join('')}
 <p class="doc-cta"><a href="../../?year=${year}">See ${year} on the interactive timeline →</a></p>
 `;
   return page({
@@ -1094,6 +1138,7 @@ ${[...byYear.keys()].sort((a, b) => b - a).map((y) => `
     name: esc(r.model),
     meta: esc(r.company),
     num: fullDate(r),
+    marks: modalityMarks(r),
     // Facets travel with the row, so filtering never re-reads the dataset —
     // the page already contains every fact the filter needs.
     data: {
@@ -1181,6 +1226,7 @@ ${hero({
     name: esc(r.model),
     meta: esc(r.company),
     num: `${fullDate(r)}${prev ? ` · +${daysBetween(prev, r)}d` : ''}`,
+    marks: modalityMarks(r),
   });
 }).join('')}</ol>
 <p class="doc-cta"><a href="../models/">Browse all ${releases.length} releases →</a></p>

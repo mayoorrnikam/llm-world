@@ -3603,3 +3603,29 @@ code, kbd {
   .filterbar-sel { flex: 1 1 calc(50% - 3px); min-width: 0; }
   .filterbar-sel select { width: 100%; }
 }
+
+/* Modality glyphs on index rows.
+   Shape only, never colour: the one hue channel this design has is spent on
+   company identity, and a second colour-coded axis would collide with it. */
+.mods {
+  display: inline-flex;
+  gap: 5px;
+  margin-left: 8px;
+  vertical-align: -2px;
+}
+.mod {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.doc-list li:hover .mod { stroke: var(--text-dim); }
+
+@media (max-width: 620px) {
+  /* The row already stacks here; the glyphs sit under the lab name. */
+  .mods { margin-left: 6px; }
+}
