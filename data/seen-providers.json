@@ -1,0 +1,4 @@
+{
+  "note": "Catalogue identifiers already surfaced by scripts/check-providers.mjs. Presence here means \"reported once\", never \"tracked\" — the dataset is the record of what is tracked.",
+  "candidates": []
+}

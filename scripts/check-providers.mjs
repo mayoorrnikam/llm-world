@@ -1,0 +1,190 @@
+#!/usr/bin/env node
+/**
+ * Watches what the labs are actually SERVING, through a public model catalogue.
+ *
+ *   node scripts/check-providers.mjs            new models, and disagreements
+ *   node scripts/check-providers.mjs --backlog  every untracked model, not just new
+ *   node scripts/check-providers.mjs --record   remember what was reported
+ *
+ * WHY A FOURTH DISCOVERY CHANNEL
+ *
+ * The three that exist read prose and hope:
+ *
+ *   check-freshness  Hugging Face — blind to any lab shipping no weights
+ *   check-feeds      RSS — nineteen labs publish none
+ *   scan-labs        documentation HTML — works, but it is scraping, and a
+ *                    docs page can lag the API by days
+ *
+ * A provider's model catalogue is the same information as JSON, maintained
+ * because customers' code breaks when it is wrong. OpenRouter publishes one
+ * without an API key, covering ~60 vendors, and it carries context length,
+ * pricing and modalities per model. That is the channel ai-model-directory is
+ * built on, and it is free to read.
+ *
+ * IT ANSWERS A QUESTION NOTHING ELSE HERE CAN
+ *
+ * Not just "is there a model we lack" but "does the model we already recorded
+ * still match what is being served". No other channel compares a value we hold
+ * against a value in the world, so a context window that was right in March and
+ * silently revised in June stays wrong here forever.
+ *
+ * A DISAGREEMENT IS NOT AN ERROR
+ *
+ * OpenRouter is a RESELLER. It reports what IT serves, which is legitimately
+ * allowed to differ from the lab's own specification — a router may cap context
+ * to fit its own limits, or expose a variant under the base name. So a mismatch
+ * means "look at this", never "our value is wrong". Resolving one still means
+ * reading the lab's own announcement (METHODOLOGY §5).
+ *
+ * NOTHING IS WRITTEN TO THE DATASET. Not by this script, not ever.
+ */
+
+import { readFileSync, writeFileSync } from 'node:fs';
+import { canonicalDate, contextWindow, fieldState } from '../lib/record.mjs';
+
+const CATALOGUE = 'https://openrouter.ai/api/v1/models';
+const SEEN_FILE = 'data/seen-providers.json';
+const BACKLOG = process.argv.includes('--backlog');
+
+const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
+
+let seen = [];
+try { seen = JSON.parse(readFileSync(SEEN_FILE, 'utf8')).candidates ?? []; } catch { /* first run */ }
+const seenSet = new Set(seen);
+
+/**
+ * Identifiers compared with punctuation and vendor prefix removed.
+ *
+ * Matching must UNDER-match. A missed match costs one line in a report a person
+ * reads; a false match publishes "Anthropic changed Claude's context window"
+ * about two different models. So: no fuzzy distance, no prefix matching, and
+ * variants keep their suffix — `claude-opus-5-fast` is a different product from
+ * `claude-opus-5` and must never collapse into it.
+ */
+const key = (s) => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+const bare = (id) => key(String(id).split('/').pop());
+
+/**
+ * Serving variants are not models.
+ *
+ * A catalogue lists what you can BUY, so one model appears several times: a
+ * `:free` tier, a `:batch` tier, a `:nitro` route. Counting those as releases is
+ * the same inflation that makes a competing directory claim 10,679 models over
+ * 5,722 actual ids, and it would bury the six real ones in a report nobody then
+ * reads. The router's own meta-models (`openrouter/auto`) are not models at all,
+ * and a leading `~` marks a moving alias rather than a release.
+ */
+const VARIANT = /:(free|beta|extended|thinking|batch|nitro|floor|online|exacto|preview)$/;
+const isServingVariant = (id) =>
+  VARIANT.test(id) || id.startsWith('openrouter/') || id.startsWith('~');
+
+const tracked = new Map();
+for (const r of data.releases) {
+  tracked.set(bare(r.id), r);
+  tracked.set(key(r.model), r);
+}
+
+const res = await fetch(CATALOGUE, { headers: { 'user-agent': 'llm-world/1.0 (+discovery)' } });
+if (!res.ok) {
+  // A catalogue that will not answer is not evidence that nothing shipped.
+  console.error(`${CATALOGUE} answered ${res.status}. No conclusions drawn.`);
+  process.exit(1);
+}
+const served = (await res.json()).data ?? [];
+
+const untracked = [];
+const disagreements = [];
+
+for (const m of served) {
+  if (isServingVariant(m.id)) continue;
+  const k = bare(m.id);
+  const rec = tracked.get(k);
+
+  if (!rec) {
+    if (BACKLOG || !seenSet.has(k)) untracked.push(m);
+    continue;
+  }
+
+  // Compare only against a value we genuinely assert. `undisclosed` and
+  // `unresearched` are not claims, so they cannot disagree with anything.
+  if (fieldState(rec, 'context_window') !== 'recorded') continue;
+  const ours = contextWindow(rec);
+  const theirs = m.context_length;
+  if (typeof theirs === 'number' && ours !== theirs) {
+    /**
+     * "200K" and "262,144" are the same number in different bases, and a report
+     * that ranks them beside a genuine 200K-vs-1M gap trains the reader to skim
+     * past both. A lab writes the decimal figure in its announcement and serves
+     * the binary one, so the two disagree forever and neither is wrong.
+     *
+     * Five percent separates notation from news: 1,048,576 vs 1,000,000 is 4.9%,
+     * and the smallest real gap in the first run of this was 100%.
+     */
+    const drift = Math.abs(theirs - ours) / Math.max(theirs, ours);
+    disagreements.push({ rec, ours, theirs, id: m.id, notation: drift < 0.05 });
+  }
+}
+
+const n = (v) => (v == null ? '—' : v.toLocaleString('en-US'));
+const out = [];
+
+out.push(`## Served but not tracked — ${untracked.length}`);
+out.push('');
+if (!untracked.length) {
+  out.push('_Nothing new in the catalogue._');
+} else {
+  out.push('| Catalogue id | Name | Context | First seen |');
+  out.push('|---|---|---|---|');
+  for (const m of untracked.sort((a, b) => (b.created ?? 0) - (a.created ?? 0))) {
+    const when = m.created ? new Date(m.created * 1000).toISOString().slice(0, 10) : '—';
+    out.push(`| \`${m.id}\` | ${m.name ?? ''} | ${n(m.context_length)} | ${when} |`);
+  }
+}
+
+out.push('');
+const material = disagreements.filter((d) => !d.notation);
+const notation = disagreements.filter((d) => d.notation);
+
+out.push(`## Recorded value differs from what is served — ${material.length}`);
+out.push('');
+if (!material.length) {
+  out.push('_Every tracked model matches the catalogue, allowing for notation._');
+} else {
+  out.push('| Model | Ours | Served | Recorded |');
+  out.push('|---|---|---|---|');
+  for (const d of material.sort((a, b) => a.rec.model.localeCompare(b.rec.model))) {
+    out.push(`| ${d.rec.model} | ${n(d.ours)} | ${n(d.theirs)} | ${canonicalDate(d.rec) ?? '—'} |`);
+  }
+  out.push('');
+  out.push('A router may serve less than the lab documents, so a difference is a '
+    + 'question, not a correction. Check the lab\'s own announcement before changing a value.');
+}
+
+if (notation.length) {
+  out.push('');
+  out.push(`<details><summary>${notation.length} within 5% — decimal against binary, not news</summary>`);
+  out.push('');
+  out.push('| Model | Ours | Served |');
+  out.push('|---|---|---|');
+  for (const d of notation.sort((a, b) => a.rec.model.localeCompare(b.rec.model))) {
+    out.push(`| ${d.rec.model} | ${n(d.ours)} | ${n(d.theirs)} |`);
+  }
+  out.push('');
+  out.push('</details>');
+}
+
+out.push('');
+out.push('_A catalogue is a discovery source, never a source of truth. Nothing here is added '
+  + 'to the dataset without the lab\'s own announcement and an archived snapshot._');
+
+console.log(out.join('\n'));
+
+if (process.argv.includes('--record')) {
+  const all = [...new Set([...seen, ...untracked.map((m) => bare(m.id))])].sort();
+  writeFileSync(SEEN_FILE, `${JSON.stringify({
+    note: 'Catalogue identifiers already surfaced by scripts/check-providers.mjs. Presence '
+      + 'here means "reported once", never "tracked" — the dataset is the record of what is tracked.',
+    candidates: all,
+  }, null, 2)}\n`);
+  console.log(`\n_Recorded ${all.length} surfaced identifiers, so the next run reports only what is new._`);
+}
