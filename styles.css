@@ -3689,3 +3689,14 @@ code, kbd {
   /* The row already stacks here; the glyphs sit under the lab name. */
   .mods { margin-left: 6px; }
 }
+
+/* Modality glyphs on a lineage card.
+   The card is a flex column, not a grid row, so the glyphs simply follow the
+   name rather than needing a track of their own. */
+.lin-card .mods {
+  /* The shorthand here reset margin-left to 0 and the glyphs collided with the
+     model name — "GPT-4o" ran straight into its first icon. */
+  margin: 0 0 0 7px;
+  gap: 4px;
+}
+.lin-card .mod { width: 12px; height: 12px; }

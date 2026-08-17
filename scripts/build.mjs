@@ -1725,7 +1725,7 @@ function lineageGraph(gens) {
     const cards = tier.models.map((r) => {
       const firsts = (r.capabilities ?? []).filter((c) => firstSeen.get(c) === r.id);
       return `<div class="lin-card">
-<a class="lin-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a>
+<a class="lin-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a>${modalityMarks(r)}
 ${firsts.length ? `<p class="lin-firsts">${firsts.map((c) => `<span class="lin-chip lin-new">${esc(tagLabel(c))}</span>`).join('')}</p>` : ''}
 </div>`;
     }).join('');
