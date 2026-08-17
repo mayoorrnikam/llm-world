@@ -30,6 +30,7 @@
     "hf": "node scripts/hf-metadata.mjs",
     "readme": "node scripts/update-readme.mjs --write",
     "follow-up": "node scripts/follow-up.mjs",
-    "gemini": "node scripts/gemini-specs.mjs"
+    "gemini": "node scripts/gemini-specs.mjs",
+    "xai": "node scripts/xai-specs.mjs"
   }
 }

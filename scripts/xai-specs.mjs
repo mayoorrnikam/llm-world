@@ -1,0 +1,147 @@
+#!/usr/bin/env node
+/**
+ * Reads context windows and pricing from xAI's own models table.
+ *
+ *   node scripts/xai-specs.mjs           report what the table states
+ *   node scripts/xai-specs.mjs --write   record it
+ *
+ * WHY THE .md AND NOT THE PAGE
+ *
+ * docs.x.ai/developers/models.md is the same page as markdown, and markdown is
+ * a far better thing to parse than flattened HTML. Every row is one model:
+ *
+ *   | grok-4.6 (< 200k prompt tokens) | 500k | $2.00 | $0.50 | $6.00 |
+ *
+ * Model, context, input, cached input, output — delimited, in order, with no
+ * ambiguity about which number belongs to which column. Compare Anthropic's
+ * overview, where the same facts arrive as "1M tokens 1M tokens 1M tokens 200k
+ * tokens" with the model names in a header row somewhere above; that needs the
+ * column-identification machinery in lib/benchmark-table.mjs. This needs a
+ * split on a pipe.
+ *
+ * TIERED PRICING IS RECORDED AT THE BASE TIER
+ *
+ * xAI prices most models twice — one rate under a 200k-token prompt and a
+ * higher one at or above it. Only the base tier is recorded, because
+ * `pricing[].rates` holds one input and one output figure and inventing a
+ * blended number would publish a price nobody charges. The note says the
+ * threshold exists so the record does not read as the whole story.
+ *
+ * WHAT IT WILL NOT DO
+ *
+ * Only empty fields are filled. A context window already traced to a source
+ * outranks this table, which describes what is served today rather than what
+ * shipped on release day — those differ, and the record is about the release.
+ */
+
+import { readFileSync } from 'node:fs';
+import { saveDataset } from '../lib/dataset.mjs';
+
+const WRITE = process.argv.includes('--write');
+const SRC = 'https://docs.x.ai/developers/models.md';
+const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
+
+const res = await fetch(SRC, {
+  signal: AbortSignal.timeout(25000),
+  headers: { 'user-agent': 'Mozilla/5.0 (compatible; llm-world docs reader)' },
+});
+if (!res.ok) {
+  console.error(`could not read ${SRC} — HTTP ${res.status}`);
+  process.exit(2);
+}
+const md = await res.text();
+
+/** "500k" → 500000, "1M" → 1000000. */
+const tokens = (s) => {
+  const m = /^([\d.]+)\s*([km])$/i.exec(String(s).trim());
+  if (!m) return null;
+  return Math.round(Number(m[1]) * (m[2].toLowerCase() === 'k' ? 1e3 : 1e6));
+};
+const dollars = (s) => {
+  const m = /\$([\d.]+)/.exec(String(s));
+  return m ? Number(m[1]) : null;
+};
+
+/**
+ * One entry per model, from the base pricing tier only.
+ *
+ * The tier is identified by the "< 200k" marker rather than by row order: a
+ * model with a single row has no tiering at all, and assuming the first row is
+ * always the cheap one would silently take the expensive rate for those.
+ */
+const specs = new Map();
+for (const line of md.split('\n')) {
+  const cells = line.split('|').map((c) => c.trim()).filter(Boolean);
+  if (cells.length !== 5 || !/^grok/i.test(cells[0])) continue;
+  const [rawName, ctx, input, , output] = cells;
+  if (/≥/.test(rawName)) continue;
+  const id = rawName.replace(/\s*\(.*\)\s*$/, '').trim();
+  if (specs.has(id)) continue;
+  specs.set(id, {
+    context_window: tokens(ctx),
+    input: dollars(input),
+    output: dollars(output),
+    tiered: /</.test(rawName),
+  });
+}
+
+console.log(`${specs.size} models in xAI's pricing table\n`);
+
+const flat = (s) => String(s).toLowerCase().replace(/[\s._-]/g, '');
+const xai = data.releases.filter((r) => r.company === 'xAI');
+const today = new Date().toISOString().slice(0, 10);
+let touched = 0;
+
+for (const r of xai) {
+  const key = [...specs.keys()].find((k) => flat(k) === flat(r.model));
+  if (!key) { console.log(`  · ${r.model.padEnd(12)} not in the table`); continue; }
+  const s = specs.get(key);
+  const added = [];
+
+  if (r.specifications?.language && r.specifications.language.context_window == null && s.context_window) {
+    added.push(`context ${s.context_window.toLocaleString('en-US')}`);
+    if (WRITE) r.specifications.language.context_window = s.context_window;
+  }
+  if (!r.pricing && s.input != null && s.output != null) {
+    added.push(`$${s.input}/$${s.output} per 1M`);
+    if (WRITE) {
+      // observed_on, not effective_from: this records what the page said today,
+      // never when the price started.
+      r.pricing = [{
+        unit: 'per_million_tokens',
+        rates: { input: s.input, output: s.output },
+        currency: 'USD',
+        observed_on: today,
+        sources: [r.sources[0].id],
+        ...(s.tiered ? { note: 'Base tier. xAI bills a higher rate for prompts at or above 200k tokens.' } : {}),
+      }];
+    }
+  }
+
+  if (!added.length) { console.log(`  · ${r.model.padEnd(12)} nothing to add`); continue; }
+  console.log(`  ✓ ${r.model.padEnd(12)} ${added.join(' · ')}`);
+  touched++;
+}
+
+/**
+ * Models xAI prices that this dataset does not track at all.
+ *
+ * Reported, never added: a pricing row proves a model is served, not when it
+ * was released, and a record needs a date from the lab's own announcement.
+ */
+const untracked = [...specs.keys()].filter((k) => !xai.some((r) => flat(r.model) === flat(k)));
+const imagine = [...md.matchAll(/^\|\s*(grok-(?:imagine|voice)[a-z0-9.\-]*)/gim)].map((m) => m[1]);
+if (untracked.length || imagine.length) {
+  console.log(`\nNOT TRACKED — xAI serves these and this dataset has no record:`);
+  for (const k of untracked) console.log(`  ${k}  (text)`);
+  for (const k of [...new Set(imagine)]) console.log(`  ${k}  (image / video / voice)`);
+  console.log('  Each needs xAI\'s own announcement for a release date before it can be added.');
+}
+
+console.log(`\n${touched} record${touched === 1 ? '' : 's'} with something to add`);
+if (WRITE && touched) {
+  saveDataset(data);
+  console.log('wrote data/llm-releases.json');
+} else if (!WRITE) {
+  console.log('dry run — pass --write to record');
+}
