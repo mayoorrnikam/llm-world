@@ -12255,9 +12255,21 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "reasoning"
+        "reasoning",
+        "function_calling",
+        "structured_output",
+        "coding",
+        "agentic"
       ],
       "tags": [
         "flagship"
@@ -12299,6 +12311,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260204041847/https://docs.x.ai/docs/models",
           "retrieved": "2026-02-04"
+        },
+        {
+          "id": "grok-4-5-xmodel",
+          "url": "https://docs.x.ai/developers/models/grok-4.5",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -14468,9 +14488,21 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "agentic"
+        "agentic",
+        "function_calling",
+        "structured_output",
+        "reasoning",
+        "coding"
       ],
       "tags": [],
       "note": "Builds on Grok 4.5 with a focus on long-running agents and more ambitious interactive and visual work.",
@@ -14510,6 +14542,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260814040702/https://docs.x.ai/developers/grok-4-6",
           "retrieved": "2026-08-14"
+        },
+        {
+          "id": "grok-4-6-xmodel",
+          "url": "https://docs.x.ai/developers/models/grok-4.6",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {

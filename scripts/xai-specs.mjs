@@ -120,6 +120,91 @@ for (const r of xai) {
 }
 
 /**
+ * Per-model pages, which the pricing table cannot replace.
+ *
+ * docs.x.ai/developers/models/<id>.md states things the table has no column
+ * for — modalities, and an explicit Yes/No per capability:
+ *
+ *   - **Modalities:** text, image -> text
+ *   ## Capabilities
+ *   - **Function calling:** Yes
+ *   - **Reasoning:** Yes
+ *
+ * That Yes/No is the useful part. TAXONOMY §4 reads an unlisted capability as
+ * "not evidenced" rather than "absent", and a page that answers No is one of
+ * the few places a lab says absent out loud — so a No is skipped rather than
+ * recorded, because this schema has no way to express "the lab says it cannot".
+ *
+ * Coding and agentic come from the one-line description ("SpaceXAI's frontier
+ * model for coding, agentic tasks, and knowledge work"). That is the lab
+ * describing its own model, so it is evidence; the sentence is printed so the
+ * reading can be checked rather than trusted.
+ */
+const CAP_ROW = {
+  'Function calling': 'function_calling',
+  'Structured outputs': 'structured_output',
+  Reasoning: 'reasoning',
+};
+const MODALITY = new Set(['text', 'image', 'audio', 'video']);
+
+async function perModel(r) {
+  const key = [...specs.keys()].find((k) => flat(k) === flat(r.model));
+  if (!key) return null;
+  const url = `https://docs.x.ai/developers/models/${key}`;
+  const md = await fetchText(`${url}.md`);
+  if (!md) return null;
+
+  const modLine = /^-\s*\*\*Modalities:\*\*\s*(.+)$/im.exec(md);
+  let modalities = null;
+  if (modLine) {
+    const [inRaw, outRaw] = modLine[1].split(/->|→/);
+    const list = (x) => (x ?? '').split(',').map((y) => y.trim().toLowerCase())
+      .filter((y) => MODALITY.has(y));
+    const input = list(inRaw), output = list(outRaw);
+    if (input.length && output.length) modalities = { input, output };
+  }
+
+  const caps = [];
+  for (const [label, cap] of Object.entries(CAP_ROW)) {
+    if (new RegExp(`\\*\\*${label}:\\*\\*\\s*Yes`, 'i').test(md)) caps.push(cap);
+  }
+  // The description line sits under the H1, before "## At a glance".
+  const desc = md.split(/^##/m)[0].split('\n').map((l) => l.trim())
+    .filter((l) => l && !l.startsWith('#')).join(' ');
+  if (/\bfor\b[^.]*\bcoding\b/i.test(desc) || /\bcoding model\b/i.test(desc)) caps.push('coding');
+  if (/\bagentic\b/i.test(desc)) caps.push('agentic');
+
+  return { url, modalities, caps: [...new Set(caps)], desc };
+}
+
+console.log('\nPER-MODEL PAGES');
+let enriched = 0;
+for (const r of xai) {
+  const p = await perModel(r);
+  if (!p) { console.log(`  · ${r.model.padEnd(12)} no per-model page`); continue; }
+  const added = [];
+
+  if (!r.modalities && p.modalities) {
+    added.push(`modalities in ${p.modalities.input.join('/')} out ${p.modalities.output.join('/')}`);
+    if (WRITE) r.modalities = p.modalities;
+  }
+  const fresh = p.caps.filter((c) => !(r.capabilities ?? []).includes(c));
+  if (fresh.length) {
+    added.push(`capabilities +${fresh.join(' +')}`);
+    if (WRITE) r.capabilities = [...(r.capabilities ?? []), ...fresh];
+  }
+
+  if (!added.length) { console.log(`  · ${r.model.padEnd(12)} nothing to add`); continue; }
+  console.log(`  \u2713 ${r.model.padEnd(12)} ${added.join(' \u00b7 ')}`);
+  if (fresh.includes('coding') || fresh.includes('agentic')) {
+    console.log(`      from: "${p.desc.slice(0, 104)}"`);
+  }
+  enriched++;
+  if (WRITE) citeDocs(r, p.url, 'xmodel');
+}
+console.log(`  ${enriched} record${enriched === 1 ? '' : 's'} enriched from per-model pages`);
+
+/**
  * Models xAI prices that this dataset does not track at all.
  *
  * Reported, never added: a pricing row proves a model is served, not when it
@@ -141,7 +226,7 @@ if (deferrals.length) {
 }
 
 console.log(`\n${touched} record${touched === 1 ? '' : 's'} with something to add`);
-if (WRITE && (touched || deferrals.length)) {
+if (WRITE && (touched || deferrals.length || enriched)) {
   saveDataset(data);
   console.log('wrote data/llm-releases.json');
 } else if (!WRITE) {
