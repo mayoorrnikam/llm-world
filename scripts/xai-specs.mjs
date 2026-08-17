@@ -36,31 +36,17 @@
 
 import { readFileSync } from 'node:fs';
 import { saveDataset } from '../lib/dataset.mjs';
+// The shared half of every docs reader; the parsing below stays xAI-specific
+// on purpose — see lib/model-docs.mjs for why that line is drawn there.
+import { fetchText, tokens, dollars, flat } from '../lib/model-docs.mjs';
 
 const WRITE = process.argv.includes('--write');
 const SRC = 'https://docs.x.ai/developers/models.md';
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
 
-const res = await fetch(SRC, {
-  signal: AbortSignal.timeout(25000),
-  headers: { 'user-agent': 'Mozilla/5.0 (compatible; llm-world docs reader)' },
-});
-if (!res.ok) {
-  console.error(`could not read ${SRC} — HTTP ${res.status}`);
-  process.exit(2);
-}
-const md = await res.text();
+const md = await fetchText(SRC);
+if (!md) { console.error(`could not read ${SRC}`); process.exit(2); }
 
-/** "500k" → 500000, "1M" → 1000000. */
-const tokens = (s) => {
-  const m = /^([\d.]+)\s*([km])$/i.exec(String(s).trim());
-  if (!m) return null;
-  return Math.round(Number(m[1]) * (m[2].toLowerCase() === 'k' ? 1e3 : 1e6));
-};
-const dollars = (s) => {
-  const m = /\$([\d.]+)/.exec(String(s));
-  return m ? Number(m[1]) : null;
-};
 
 /**
  * One entry per model, from the base pricing tier only.
@@ -87,7 +73,6 @@ for (const line of md.split('\n')) {
 
 console.log(`${specs.size} models in xAI's pricing table\n`);
 
-const flat = (s) => String(s).toLowerCase().replace(/[\s._-]/g, '');
 const xai = data.releases.filter((r) => r.company === 'xAI');
 const today = new Date().toISOString().slice(0, 10);
 let touched = 0;

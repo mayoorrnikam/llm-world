@@ -20,7 +20,7 @@
     "freshness": "node scripts/check-freshness.mjs",
     "feeds": "node scripts/check-feeds.mjs",
     "add": "node scripts/add-model.mjs",
-    "enrich": "node scripts/archive-sources.mjs --save --write && node scripts/hf-metadata.mjs --write && node scripts/attribute-facts.mjs --write && node scripts/detect-modalities.mjs --write && node scripts/detect-capabilities.mjs --write && node scripts/extract-benchmarks.mjs --write && node scripts/extract-pricing.mjs --write && node scripts/detect-undisclosed.mjs --write && node scripts/state-reasons.mjs --write",
+    "enrich": "node scripts/archive-sources.mjs --save --write && node scripts/hf-metadata.mjs --write && npm run docs && node scripts/attribute-facts.mjs --write && node scripts/detect-modalities.mjs --write && node scripts/detect-capabilities.mjs --write && node scripts/extract-benchmarks.mjs --write && node scripts/extract-pricing.mjs --write && node scripts/detect-undisclosed.mjs --write && node scripts/state-reasons.mjs --write",
     "benchmarks": "node scripts/extract-benchmarks.mjs",
     "pricing": "node scripts/extract-pricing.mjs",
     "capabilities": "node scripts/detect-capabilities.mjs",
@@ -32,6 +32,8 @@
     "follow-up": "node scripts/follow-up.mjs",
     "gemini": "node scripts/gemini-specs.mjs",
     "xai": "node scripts/xai-specs.mjs",
-    "openai": "node scripts/openai-specs.mjs"
+    "openai": "node scripts/openai-specs.mjs",
+    "anthropic": "node scripts/anthropic-specs.mjs",
+    "docs": "node scripts/gemini-specs.mjs --write && node scripts/xai-specs.mjs --write && node scripts/openai-specs.mjs --write && node scripts/anthropic-specs.mjs --write"
   }
 }

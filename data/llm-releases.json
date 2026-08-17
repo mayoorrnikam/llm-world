@@ -11385,7 +11385,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 10,
+            "output": 50
+          },
+          "currency": "USD",
+          "observed_on": "2026-08-17",
+          "sources": [
+            "claude-fable-5-s1"
+          ],
+          "note": "Standard tier. Anthropic prices batch and cached tokens differently."
+        }
+      ]
     },
     {
       "id": "claude-mythos-5",
