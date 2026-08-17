@@ -32,6 +32,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { saveDataset } from '../lib/dataset.mjs';
 import { canonicalDate } from '../lib/record.mjs';
+import { findSnapshot, providers } from '../lib/archives.mjs';
 
 const FILE = 'data/llm-releases.json';
 const WRITE = process.argv.includes('--write');
@@ -91,6 +92,42 @@ async function lookup(url, near, attempts = 3) {
   return FAILED;
 }
 
+/**
+ * When archive.org is down, stop asking it.
+ *
+ * Its availability API has answered 502 to every request for days. Each lookup
+ * then costs three attempts at a 25s timeout, so a 50-source run spent an hour
+ * discovering the same outage fifty times over and was killed before it wrote
+ * anything. After three consecutive failures this gives up on archive.org for
+ * the rest of the run and goes straight to the archives that are answering.
+ */
+let waybackFails = 0;
+let waybackGiven = false;
+
+/** archive.org if it is up, then the fallbacks in lib/archives.mjs. */
+async function findAnywhere(url, near) {
+  if (!waybackGiven) {
+    const hit = await lookup(url, near);
+    if (hit !== FAILED) { waybackFails = 0; return hit; }
+    if (++waybackFails >= 3) {
+      waybackGiven = true;
+      console.log('\n  archive.org has failed three times running — skipping it for the rest of'
+        + '\n  this run and using arquivo.pt and archive.today only.\n');
+    }
+  }
+  // A date-aware "closest to `near`" query is archive.org's alone; the others
+  // answer with their newest capture, which the caller re-checks against the
+  // release date the same way.
+  const alt = await findSnapshot(url, { archives: [providers.arquivo, providers.archiveToday] });
+  if (!alt.url) return waybackGiven ? ABSENT : FAILED;
+  const t = String(alt.timestamp ?? '');
+  return {
+    url: alt.url.replace(/^http:/, 'https:'),
+    captured: `${t.slice(0, 4)}-${t.slice(4, 6)}-${t.slice(6, 8)}`,
+    via: alt.via,
+  };
+}
+
 const jobs = [];
 for (const r of data.releases) {
   const near = stampFor(canonicalDate(r) ?? '2024-01-01');
@@ -110,7 +147,9 @@ const gaps = [], errors = [];
 // Sequential on purpose: archive.org is a donated public service and this is
 // not urgent work. Hammering it in parallel would be rude.
 for (const [i, job] of jobs.entries()) {
-  const hit = await lookup(job.source.url, job.near);
+  // archive.today 429s under speed; one request every 1.5s drew none in testing.
+  if (i) await sleep(1500);
+  const hit = await findAnywhere(job.source.url, job.near);
   const label = `${job.record.id}/${job.source.id} (${job.source.type}) ${job.source.url}`;
 
   // A snapshot captured BEFORE the release cannot evidence it. Mistral Medium
@@ -123,7 +162,7 @@ for (const [i, job] of jobs.entries()) {
   if (hit && hit !== FAILED && hit !== ABSENT) {
     const on = canonicalDate(job.record);
     if (on && hit.captured < on) {
-      const later = await lookup(job.source.url, stampFor(on), 2);
+      const later = await findAnywhere(job.source.url, stampFor(on));
       if (later && later !== FAILED && later !== ABSENT && later.captured >= on) {
         hit.url = later.url;
         hit.captured = later.captured;

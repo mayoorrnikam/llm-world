@@ -5776,6 +5776,14 @@
           "authority": "primary",
           "archived_url": null,
           "retrieved": null
+        },
+        {
+          "id": "cogvideox-3-zdocs",
+          "url": "https://docs.z.ai/guides/video/cogvideox-3",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -6431,6 +6439,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20250811154730/https://huggingface.co/zai-org/GLM-4.5V",
           "retrieved": "2025-08-11"
+        },
+        {
+          "id": "glm-4-5v-zdocs",
+          "url": "https://docs.z.ai/guides/vlm/glm-4.5v",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://archive.md/20251005201008/https://docs.z.ai/guides/vlm/glm-4.5v",
+          "retrieved": "2025-10-05"
         }
       ],
       "provenance": {
@@ -6483,16 +6499,16 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20250605063552/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2025-06-05"
         },
         {
           "id": "imagen-4-s2",
           "url": "https://deepmind.google/models/imagen/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20250521045650/https://deepmind.google/models/imagen/",
+          "retrieved": "2025-05-21"
         }
       ],
       "provenance": {
@@ -6748,6 +6764,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20250930155549/https://huggingface.co/zai-org/GLM-4.6",
           "retrieved": "2025-09-30"
+        },
+        {
+          "id": "glm-4-6-zdocs",
+          "url": "https://docs.z.ai/guides/llm/glm-4.6",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://archive.md/20260112194543/https://docs.z.ai/guides/llm/glm-4.6",
+          "retrieved": "2026-01-12"
         }
       ],
       "provenance": {
@@ -6799,8 +6823,8 @@
           "url": "https://openai.com/index/sora-2/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260410121703/https://openai.com/index/sora-2/",
+          "retrieved": "2026-04-10"
         }
       ],
       "provenance": {
@@ -6847,8 +6871,8 @@
           "url": "https://www.anthropic.com/news/claude-haiku-4-5",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20251015195111/https://www.anthropic.com/news/claude-haiku-4-5",
+          "retrieved": "2025-10-15"
         },
         {
           "id": "claude-haiku-4-5-adocs",
@@ -7861,6 +7885,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20251208114911/https://huggingface.co/zai-org/GLM-4.6V",
           "retrieved": "2025-12-08"
+        },
+        {
+          "id": "glm-4-6v-zdocs",
+          "url": "https://docs.z.ai/guides/vlm/glm-4.6v",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -7910,6 +7942,14 @@
         {
           "id": "glm-asr-2512-s1",
           "url": "https://docs.z.ai/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "glm-asr-2512-zdocs",
+          "url": "https://docs.z.ai/guides/audio/glm-asr-2512",
           "type": "official_documentation",
           "authority": "primary",
           "archived_url": null,
@@ -8078,6 +8118,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20251222173319/https://huggingface.co/zai-org/GLM-4.7",
           "retrieved": "2025-12-22"
+        },
+        {
+          "id": "glm-4-7-zdocs",
+          "url": "https://docs.z.ai/guides/llm/glm-4.7",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://archive.md/20251222173159/https://docs.z.ai/guides/llm/glm-4.7",
+          "retrieved": "2025-12-22"
         }
       ],
       "provenance": {
@@ -8205,6 +8253,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260114043506/https://huggingface.co/zai-org/GLM-Image",
           "retrieved": "2026-01-14"
+        },
+        {
+          "id": "glm-image-zdocs",
+          "url": "https://docs.z.ai/guides/image/glm-image",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://archive.md/20260330123428/https://docs.z.ai/guides/image/glm-image",
+          "retrieved": "2026-03-30"
         }
       ],
       "provenance": {
@@ -8492,6 +8548,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260203014757/https://huggingface.co/zai-org/GLM-OCR",
           "retrieved": "2026-02-03"
+        },
+        {
+          "id": "glm-ocr-zdocs",
+          "url": "https://docs.z.ai/guides/vlm/glm-ocr",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://archive.md/20260203013651/https://docs.z.ai/guides/vlm/glm-ocr",
+          "retrieved": "2026-02-03"
         }
       ],
       "provenance": {
@@ -8733,6 +8797,14 @@
           "type": "official_model_card",
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260212032142/https://huggingface.co/zai-org/GLM-5",
+          "retrieved": "2026-02-12"
+        },
+        {
+          "id": "glm-5-zdocs",
+          "url": "https://docs.z.ai/guides/llm/glm-5",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://archive.md/20260212034837/https://docs.z.ai/guides/llm/glm-5",
           "retrieved": "2026-02-12"
         }
       ],
@@ -9334,6 +9406,14 @@
           "authority": "primary",
           "archived_url": null,
           "retrieved": null
+        },
+        {
+          "id": "glm-5-turbo-zdocs",
+          "url": "https://docs.z.ai/guides/llm/glm-5-turbo",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://archive.md/20260316015247/https://docs.z.ai/guides/llm/glm-5-turbo",
+          "retrieved": "2026-03-16"
         }
       ],
       "provenance": {
@@ -9455,16 +9535,16 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20250605063552/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2025-06-05"
         },
         {
           "id": "lyria-3-s2",
           "url": "https://deepmind.google/models/lyria/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20250521051108/https://deepmind.google/models/lyria/",
+          "retrieved": "2025-05-21"
         }
       ],
       "provenance": {
@@ -9516,8 +9596,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20250605063552/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2025-06-05"
         },
         {
           "id": "gemini-3-1-flash-live-gdocs",
@@ -9576,8 +9656,8 @@
           "url": "https://deepmind.google/models/veo/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20250909114804/https://deepmind.google/models/veo/",
+          "retrieved": "2025-09-09"
         }
       ],
       "provenance": {
@@ -9621,6 +9701,14 @@
           "authority": "primary",
           "archived_url": null,
           "retrieved": null
+        },
+        {
+          "id": "glm-5v-turbo-zdocs",
+          "url": "https://docs.z.ai/guides/vlm/glm-5v-turbo",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://archive.md/20260402035459/https://docs.z.ai/guides/vlm/glm-5v-turbo",
+          "retrieved": "2026-04-02"
         }
       ],
       "provenance": {
@@ -9744,6 +9832,14 @@
           "type": "official_model_card",
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260407161846/https://huggingface.co/zai-org/GLM-5.1",
+          "retrieved": "2026-04-07"
+        },
+        {
+          "id": "glm-5-1-zdocs",
+          "url": "https://docs.z.ai/guides/llm/glm-5.1",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://archive.md/20260407175312/https://docs.z.ai/guides/llm/glm-5.1",
           "retrieved": "2026-04-07"
         }
       ],
@@ -10408,8 +10504,8 @@
           "url": "https://seed.bytedance.com/blog/seed3d-2-0-released-higher-precision-and-greater-usability",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260423051829/https://seed.bytedance.com/blog/seed3d-2-0-released-higher-precision-and-greater-usability",
+          "retrieved": "2026-04-23"
         }
       ],
       "provenance": {
@@ -10561,8 +10657,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20250605063552/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2025-06-05"
         },
         {
           "id": "gemini-3-1-flash-lite-gdocs",
@@ -11002,8 +11098,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20250605063552/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2025-06-05"
         },
         {
           "id": "nano-banana-pro-gdocs",
@@ -12058,8 +12154,8 @@
           "url": "https://deepmind.google/models/gemini-omni/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260519193103/https://deepmind.google/models/gemini-omni/",
+          "retrieved": "2026-05-19"
         }
       ],
       "provenance": {
@@ -12110,8 +12206,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20250605063552/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2025-06-05"
         },
         {
           "id": "nano-banana-2-lite-gdocs",
@@ -12865,8 +12961,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20250605063552/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2025-06-05"
         },
         {
           "id": "gemini-3-5-flash-lite-gdocs",
@@ -13313,8 +13409,8 @@
           "url": "https://deepmind.google/models/gemini-robotics/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20251120093456/https://deepmind.google/models/gemini-robotics/",
+          "retrieved": "2025-11-20"
         }
       ],
       "provenance": {
@@ -13750,8 +13846,8 @@
           "url": "https://seed.bytedance.com/blog/seedrealtime-audio-visual-full-duplex-llm-released-toward-omni-modal-natural-interaction",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260805042512/https://seed.bytedance.com/blog/seedrealtime-audio-visual-full-duplex-llm-released-toward-omni-modal-natural-interaction",
+          "retrieved": "2026-08-05"
         },
         {
           "id": "seedrealtime-s2",
@@ -13807,8 +13903,8 @@
           "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260814145858/https://huggingface.co/Qwen/Qwen3.8-27B",
+          "retrieved": "2026-08-14"
         }
       ],
       "provenance": {
@@ -13855,8 +13951,8 @@
           "url": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260812150420/https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B",
+          "retrieved": "2026-08-12"
         }
       ],
       "provenance": {
@@ -14604,8 +14700,8 @@
           "url": "https://z.ai/blog/glm-5.3",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260814053329/https://z.ai/blog/glm-5.3",
+          "retrieved": "2026-08-14"
         },
         {
           "id": "glm-5-3-s2",
