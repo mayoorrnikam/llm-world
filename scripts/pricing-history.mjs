@@ -139,6 +139,54 @@ const LABS = {
       + 'OpenAI prices long-context requests higher and cached input lower; '
       + 'neither is recorded here.',
   },
+  google: {
+    company: 'Google DeepMind',
+    url: 'https://ai.google.dev/gemini-api/docs/pricing',
+    header: /Input price[\s\S]{0,400}?Output price/i,
+    /**
+     * Labels, not columns — which makes this the safest of the three.
+     *
+     * Google does not publish a price table. Each model gets a block:
+     *
+     *   Gemini 3.6 Flash  gemini-3.6-flash  …
+     *   Standard   Free Tier   Paid Tier, per 1M tokens in USD
+     *   Input price                          Free of charge   $1.50
+     *   Output price (including thinking tokens)  Free of charge   $7.50
+     *   Context caching price                Free of charge   $0.15
+     *
+     * A figure is found by the label above it rather than by counting cells, so
+     * the layout drift that broke the OpenAI parser across five months cannot
+     * bite here. "Free of charge" carries no dollar sign, so the first $ after
+     * a label is the paid rate — and anchoring on the label is what stops
+     * Context caching, one line further down, being read as the output price.
+     *
+     * The block is cut at the next model id. Without that boundary a model
+     * whose own block omits a price silently inherits the next model's, which
+     * is the same failure as reading a Related-stories date as this article's.
+     */
+    parse(s) {
+      const out = new Map();
+      const ids = [...s.matchAll(/\b(gemini-[\d.]+[a-z0-9-]*)\b/g)];
+      for (let i = 0; i < ids.length; i++) {
+        const id = ids[i][1];
+        if (out.has(id)) continue;
+        const from = ids[i].index;
+        const to = ids[i + 1]?.index ?? s.length;
+        const block = s.slice(from, Math.min(to, from + 1400));
+        const grab = (label) => {
+          const m = new RegExp(`${label}[^$]{0,160}?\\$([\\d.]+)`, 'i').exec(block);
+          return m ? Number(m[1]) : null;
+        };
+        const input = grab('Input price');
+        const output = grab('Output price');
+        if (input == null || output == null) continue;
+        out.set(id, { input, output });
+      }
+      return out;
+    },
+    note: 'Paid-tier input and output as the page read on this date. The free '
+      + 'tier and context-caching rates are priced separately and are not recorded here.',
+  },
 };
 
 const lab = LABS[LAB];
