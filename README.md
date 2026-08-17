@@ -331,9 +331,17 @@ npm run mcp
 
 ```json
 { "mcpServers": { "llm-world": {
-    "command": "node",
+    "command": "/opt/homebrew/bin/node",
     "args": ["/absolute/path/to/llm-world/mcp/server.mjs"] } } }
 ```
+
+**Use an absolute path to `node`, not `"node"`.** A GUI application on macOS
+inherits `/usr/bin:/bin:/usr/sbin:/sbin`, not the PATH from your shell profile,
+so a Node installed by nvm, Homebrew or any version manager is invisible to it
+and the server fails to spawn with no obvious cause. `which node` in a terminal
+will happily tell you it is on the PATH; that PATH is not the one Claude Desktop
+gets. Config lives at
+`~/Library/Application Support/Claude/claude_desktop_config.json`.
 
 | Tool | What it answers |
 |---|---|

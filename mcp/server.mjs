@@ -6,8 +6,14 @@
  *
  * Claude Desktop / Claude Code config:
  *
- *   { "mcpServers": { "llm-world": { "command": "node",
+ *   { "mcpServers": { "llm-world": { "command": "/opt/homebrew/bin/node",
  *       "args": ["/absolute/path/to/llm-world/mcp/server.mjs"] } } }
+ *
+ * The absolute path to node is not fussiness. A macOS GUI app inherits
+ * /usr/bin:/bin:/usr/sbin:/sbin, never the PATH from a shell profile, so a Node
+ * from nvm or Homebrew simply is not there — `"command": "node"` fails to spawn
+ * and the client reports nothing useful. `which node` in a terminal answers
+ * about a different PATH than the one Claude Desktop has.
  *
  * WHY THIS EXISTS, WHEN api/models.json ALREADY DOES
  *
@@ -244,9 +250,17 @@ rl.on('line', (line) => {
       });
     }
     if (method === 'tools/list') return ok(id, { tools: TOOLS });
+    // In the spec, and clients use it as a health check. Answering -32601 makes
+    // a live server look dead to anything that probes before calling.
+    if (method === 'ping') return ok(id, {});
     if (method === 'tools/call') {
       const out = callTool(params?.name, params?.arguments ?? {});
-      return ok(id, { content: [{ type: 'text', text: JSON.stringify(out, null, 2) }] });
+      // isError, or a client renders a failure as a successful answer and the
+      // model reads "no model with id" as though it were a finding.
+      return ok(id, {
+        content: [{ type: 'text', text: JSON.stringify(out, null, 2) }],
+        ...(out && out.error ? { isError: true } : {}),
+      });
     }
     if (id === undefined) return; // notification
     send({ jsonrpc: '2.0', id, error: { code: -32601, message: `unknown method: ${method}` } });
