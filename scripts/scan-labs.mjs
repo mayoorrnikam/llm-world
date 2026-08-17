@@ -171,10 +171,39 @@ for (const r of data.releases) {
   trackedByLab.get(k).push(base(r.id), base(r.model));
 }
 
+/**
+ * Display name → API id, read from a docs page that prints both.
+ *
+ * Google's model list is two columns: "Nano Banana 2" and
+ * `gemini-3.1-flash-image` are the same model. The scan only ever read the id
+ * column, so it reported gemini-3.1-flash-image as untracked while the dataset
+ * held Nano Banana 2 — a candidate that is not a candidate, which is the worst
+ * thing a discovery report can contain, because chasing it costs the same as
+ * chasing a real one and teaches you to trust the list less.
+ *
+ * The pairs are only believed when the id looks like an id (lowercase, hyphen
+ * or dot separated) and the name does not, so ordinary prose cannot be read as
+ * a mapping.
+ */
+const ALIAS_PAIR = /([A-Z][\w.\- ]{2,28}?)\s+((?:gemini|imagen|veo|lyria|gemma)-[a-z0-9.\-]{3,40})(?=\s|$)/g;
+
+function aliasesIn(text) {
+  const out = new Map();
+  for (const m of text.matchAll(ALIAS_PAIR)) {
+    const name = m[1].trim();
+    if (/^(model|endpoint|preview|new|all)$/i.test(name)) continue;
+    out.set(flat(m[2]), name);
+  }
+  return out;
+}
+
 /** Known if any tracked name for this lab is a prefix of it, or it of them. */
-const isKnown = (lab, id) => {
+const isKnown = (lab, id, aliases) => {
   const b = base(id);
   if (!b) return true;
+  // An id whose display name we already track is not a candidate.
+  const shown = aliases?.get(flat(id));
+  if (shown && (trackedByLab.get(lab) ?? []).some((t) => t && flat(shown).startsWith(t))) return true;
   return (trackedByLab.get(lab) ?? []).some((t) => t && (t.startsWith(b) || b.startsWith(t)));
 };
 
@@ -316,9 +345,12 @@ for (const c of targets) {
   // Collapse snapshot ids of the same model to one candidate.
   const byBase = new Map();
   for (const m of seen) if (!byBase.has(base(m))) byBase.set(base(m), m);
-  const untracked = [...byBase.values()].filter((m) => !isKnown(c.lab, m));
+  // Pages that print a display name beside an API id let us recognise an id we
+  // already track under its human name.
+  const aliases = aliasesIn(text);
+  const untracked = [...byBase.values()].filter((m) => !isKnown(c.lab, m, aliases));
   const fresh = BACKLOG ? untracked : untracked.filter((m) => !seenSet.has(base(m)));
-  findings.push({ ...c, seen, fresh });
+  findings.push({ ...c, seen, fresh, aliases });
 }
 
 /* -------------------------------------------------------------- report */
@@ -330,7 +362,7 @@ console.log(`## Lab documentation scan\n`);
 // Saying "everything is tracked" when thirty models are merely already-reported
 // would be the scan lying about the thing it exists to measure.
 const backlog = findings.reduce((n, f) =>
-  n + f.seen.filter((m) => !isKnown(f.lab, m)).length, 0);
+  n + f.seen.filter((m) => !isKnown(f.lab, m, f.aliases)).length, 0);
 
 console.log(total
   ? `${total} model${total === 1 ? '' : 's'} newly listed by a lab and not in this dataset. `
