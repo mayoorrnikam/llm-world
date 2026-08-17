@@ -14,7 +14,7 @@
     "build:export": "node scripts/build.mjs --export",
     "check": "npm run validate && node scripts/update-readme.mjs && npm run build:export && npm run smoke",
     "preview": "npm run build && node scripts/serve.mjs",
-    "clean": "rm -rf models companies timeline families milestones analytics compare latest data-quality methodology taxonomy changes contribute sitemap.xml robots.txt feed.xml api llm-releases.csv .build-check",
+    "clean": "rm -rf models companies timeline families milestones analytics compare latest data-quality methodology taxonomy changes contribute posts sitemap.xml robots.txt feed.xml api llm-releases.csv .build-check",
     "setup": "git config core.hooksPath .githooks && echo 'git hooks enabled \u2014 pre-push now runs npm run check'",
     "smoke": "node scripts/smoke-test.mjs",
     "freshness": "node scripts/check-freshness.mjs",

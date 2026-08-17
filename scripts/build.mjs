@@ -26,6 +26,8 @@ import {
 import { contextFrontier, stepChartSvg, tokenLabel } from '../lib/chart.mjs';
 import {
   fieldHistory, historyTable, historySources, historyCaveats,
+  openWeightsByYear, openWeightsTable, openWeightsFrontier, openWeightsFrontierTable,
+  frontierUnsourced, frontierLevel, LEVEL_TOLERANCE, historyClaims, frontierClaims,
 } from '../lib/history.mjs';
 
 const EXPORT = process.argv.includes('--export');
@@ -2417,6 +2419,10 @@ function renderMarkdown(src) {
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>')
     .replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" rel="noopener">$1</a>')
+    // Relative links too, so a generated table can point at the record behind
+    // each value. Restricted to ./ ../ and / on purpose: anything else — most
+    // of all `javascript:` — must stay literal text rather than become a link.
+    .replace(/\[([^\]]+)\]\((\.{0,2}\/[^)\s]*)\)/g, '<a href="$2">$1</a>')
     // Relative links point at the sibling documents in docs/, and most of those
     // are deliberately unpublished — the charter and the execution order stay
     // local. Linking them would 404; leaving the raw [text](file.md) on the page
@@ -3630,16 +3636,39 @@ function readPosts() {
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 
-function postPage(post) {
-  let body = post.body;
+/**
+ * `draft: true` keeps a post out of the built site.
+ *
+ * Posts are written in batches and released one at a time, so the file existing
+ * cannot be what publishes it. A draft is skipped completely — no page, no index
+ * row, no sitemap entry — and the build says how many it skipped, because a post
+ * silently absent from the site is indistinguishable from one you forgot.
+ *
+ * NOT a privacy mechanism. This repository is public: a draft's prose is readable
+ * on GitHub the moment it is committed. `draft: true` controls what the SITE
+ * publishes, not what the world can see. Anything genuinely unready to be read
+ * belongs outside the repo until it is.
+ */
+const isDraft = (p) => String(p.draft).toLowerCase() === 'true';
 
-  // `history: Company | field` appends the generated history to the prose.
-  if (post.history) {
-    const [company, field] = post.history.split('|').map((s) => s.trim());
+/**
+ * Post directives: the generated half of a post.
+ *
+ * A directive is one frontmatter key. It returns the markdown to append and the
+ * CLAIMS that markdown asserts — the values a headline is computed from. Adding
+ * a post type is one entry here, and it inherits the gate below for free.
+ *
+ * Each `run` receives the raw frontmatter value, so a directive owns its own
+ * argument syntax rather than pushing a parser into the caller.
+ */
+const POST_DIRECTIVES = {
+  /** `history: Company | field` */
+  history(spec, post) {
+    const [company, field] = String(spec).split('|').map((s) => s.trim());
     const h = fieldHistory(rawReleases, company, field);
-    // A post that names a history the data cannot support must fail the build,
-    // not publish an empty table. This is the same rule as everywhere else here:
-    // a gap is reported, never rendered as though it were a finding.
+    // A post naming a history the data cannot support fails the build rather
+    // than publishing an empty table — a gap is reported, never rendered as a
+    // finding.
     if (h.insufficient) {
       throw new Error(
         `content/posts/${post.slug}.md: "${company}" has ${h.known.length} recorded `
@@ -3647,12 +3676,101 @@ function postPage(post) {
       );
     }
     const caveats = historyCaveats(h);
-    body += `\n\n${historyTable(h, (x) => `../../models/${x.id}/`)}`
-      + `\n\n## Every change, and the document behind it\n\n${historySources(h)}`
-      + (caveats.length
-        ? `\n\n## What this does not claim\n\n${caveats.map((c) => `- ${c}`).join('\n')}`
-        : '');
+    return {
+      md: `\n\n${historyTable(h, (x) => `../../models/${x.id}/`)}`
+        + `\n\n## Every change, and the document behind it\n\n${historySources(h)}`
+        + (caveats.length
+          ? `\n\n## What this does not claim\n\n${caveats.map((c) => `- ${c}`).join('\n')}`
+          : ''),
+      claims: historyClaims(h),
+    };
+  },
+
+  /** `openweights: by-year` */
+  openweights(spec, post) {
+    if (spec !== 'by-year') {
+      throw new Error(`content/posts/${post.slug}.md: unknown openweights mode "${spec}"`);
+    }
+    const ow = openWeightsByYear(rawReleases);
+    const fr = openWeightsFrontier(rawReleases);
+    const flips = ow.crossings.length;
+    const level = frontierLevel(fr);
+    return {
+      md: `\n\n## How many releases, by licence\n\n${openWeightsTable(ow)}`
+        + `\n\n## The largest context window on each side\n\n${openWeightsFrontierTable(fr)}`
+        + `\n\n## What this does not claim\n\n`
+        + `- **Release count is not capability.** The first table counts how often a model `
+        + `shipped, not how good it was. In ${fr.at(-1).year} the proprietary total is `
+        + `concentrated in a few labs that ship many increments.\n`
+        + `- These are the ${ow.tracked} releases this dataset tracks, not every release `
+        + `that happened. Each year's direction is evidenced; the absolute counts are a sample.\n`
+        + `- \`access.open_weights\` is recorded on every record and must agree with the `
+        + `\`open-weights\` tag, so unlike most fields here this one has no gaps.\n`
+        + (flips
+          ? `- The share crossed the 50% line ${flips} time${flips === 1 ? '' : 's'} `
+            + `(${ow.crossings.map((c) => c.year).join(', ')}). A single year's shift is not a trend.\n`
+          : '')
+        + (level.length
+          ? `- Context window is the only capability recorded on both sides here, and it is `
+            + `one axis, not a ranking. Open weights led it, or came within `
+            + `${LEVEL_TOLERANCE * 100}%, in ${level.map((r) => r.year).join(', ')}.\n`
+          : '')
+        + (frontierUnsourced(fr).length
+          ? `- Marked ⚠︎: ${frontierUnsourced(fr).map((u) => `${u.model} (${u.year})`).join(', ')} `
+            + `— in the dataset, but the context window is not yet traced to a primary source. `
+            + `Treat any comparison resting on those as provisional.\n`
+          : ''),
+      claims: frontierClaims(fr),
+    };
+  },
+};
+
+/**
+ * The gate: a post may not publish a claim nothing sources.
+ *
+ * Two drafts of the open-weights post asserted things the dataset could not back
+ * — "open weights lost badly in 2026" from a release count, then "match the
+ * frontier" on a Kimi K3 figure with no evidence[] entry. Both read as facts.
+ * Neither would have been caught by validate (the records are fine) or by smoke
+ * (the HTML is fine). The failure is one level up: a true dataset, a false
+ * sentence.
+ *
+ * The escape hatch is deliberate. Some posts are worth publishing WITH the gap
+ * showing — that is the whole ⚠︎ mechanism — so a post may opt out by naming the
+ * reason in frontmatter:
+ *
+ *   unverified: allow — the 2026 open frontier is untraced; the page flags it
+ *
+ * What it cannot do is opt out silently. `allow` on its own is rejected: the
+ * reason is the point, because it is what a reader would want to have been told.
+ */
+function gatePostClaims(post, claims) {
+  const bad = claims.filter((c) => !c.sourced);
+  if (!bad.length) return;
+
+  const opt = post.unverified ?? '';
+  const reason = /^allow\b[\s—:-]*(.*)$/.exec(opt)?.[1]?.trim();
+  if (reason) return;
+
+  throw new Error(
+    `content/posts/${post.slug}.md publishes ${bad.length} claim(s) with no primary source:\n`
+    + bad.map((c) => `    ${c.model} — ${c.label} = ${c.value} (${c.status})`).join('\n')
+    + '\n  Trace them (scripts/attribute-facts.mjs), or say why they can ship anyway:\n'
+    + '    unverified: allow — <reason a reader would accept>',
+  );
+}
+
+function postPage(post) {
+  let body = post.body;
+  const claims = [];
+
+  for (const [key, run] of Object.entries(POST_DIRECTIVES)) {
+    if (!post[key]) continue;
+    const { md, claims: got } = run(post[key], post);
+    body += md;
+    claims.push(...(got ?? []));
   }
+  gatePostClaims(post, claims);
 
   return page({
     title: `${post.title} | LLM World`,
@@ -3681,6 +3799,36 @@ function postsIndexPage(posts) {
     section: 'posts/',
     depth: 1,
     sprites: [],
+    /* The list is the served markup; grid is a preference layered on top, so a
+       reader without JavaScript gets the full index rather than an empty shell
+       — the button ships hidden and is revealed only once this runs.
+       Wrapped in an IIFE on purpose: page globals and inline-script identifiers
+       share a scope here, and a bare `params` once shadowed URLSearchParams and
+       killed the compare page silently. */
+    head: `<script defer>
+addEventListener('DOMContentLoaded',function(){(function(){
+  var list=document.getElementById('posts-list'),btn=document.getElementById('posts-view');
+  if(!list||!btn)return;
+  var view='list';
+  function apply(v){
+    view=v;
+    list.setAttribute('data-view',v);
+    btn.setAttribute('aria-pressed',String(v==='grid'));
+    btn.textContent=v==='grid'?'List':'Grid';
+  }
+  var wanted=new URLSearchParams(location.search).get('view');
+  if(!wanted){try{wanted=localStorage.getItem('posts-view');}catch(e){}}
+  apply(wanted==='grid'?'grid':'list');
+  btn.hidden=false;
+  btn.addEventListener('click',function(){
+    apply(view==='grid'?'list':'grid');
+    try{localStorage.setItem('posts-view',view);}catch(e){}
+    var u=new URL(location.href);
+    if(view==='grid')u.searchParams.set('view','grid');else u.searchParams.delete('view');
+    history.replaceState(null,'',u);
+  });
+})();});
+</script>`,
     body: `
 ${crumbs('../', ['Posts'])}
 ${hero({
@@ -3690,23 +3838,46 @@ ${hero({
 <p class="chart-note">Each page answers one question. The prose is written; the
 numbers, tables and sources are generated from the dataset on every build, so a
 post cannot quietly go stale as records are added.</p>
-<ol class="doc-list">${posts.map((p) => listRow({
+<div class="view-switch"><button type="button" id="posts-view" aria-pressed="false"
+  aria-controls="posts-list" hidden>Grid</button></div>
+<ol class="doc-list" id="posts-list" data-view="list">${posts.map((p) => listRow({
       // A post about one lab carries that lab's hue, the same pair used on the
       // timeline chips, so a lab looks the same wherever you meet it.
-      company: p.history ? p.history.split('|')[0].trim() : 'other',
+      // A post about one lab carries that lab's monogram and hue. A post about
+      // the whole dataset carries the site's own — "other" renders as an "OT"
+      // badge, which reads as a lab nobody has heard of.
+      company: p.history ? p.history.split('|')[0].trim() : 'LLM World',
       href: `${esc(p.slug)}/`,
+      // The QUESTION is the link text: these pages exist to be found by someone
+      // asking something, and the question is what gets indexed and quoted. The
+      // meta column is sized for short labels, so the lab goes there, not the
+      // title — a headline truncated mid-word reads as a bug.
       name: esc(p.question),
-      meta: esc(p.title),
+      meta: esc(p.history ? p.history.split('|')[0].trim() : 'Dataset'),
       num: esc(p.date),
     })).join('')}</ol>
 `,
   });
 }
 
-const POSTS = readPosts();
+const ALL_POSTS = readPosts();
+const POSTS = ALL_POSTS.filter((p) => !isDraft(p));
+const DRAFTS = ALL_POSTS.length - POSTS.length;
 if (POSTS.length) {
   write('posts', postsIndexPage(POSTS));
   for (const p of POSTS) write(`posts/${p.slug}`, postPage(p));
+}
+// Drafts are rendered but not written, so the gate still runs on them. Finding
+// out a post cannot be sourced at the moment you decide to publish it is finding
+// out too late — and a draft that fails must not fail the BUILD, or the flag
+// stops being a way to park unfinished work.
+for (const p of ALL_POSTS.filter(isDraft)) {
+  try {
+    postPage(p);
+    console.log(`  draft ready: ${p.slug}`);
+  } catch (err) {
+    console.log(`  draft NOT publishable: ${p.slug}\n    ${err.message.split('\n')[0]}`);
+  }
 }
 
 write('compare', comparePage());

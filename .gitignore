@@ -30,6 +30,9 @@ methodology/
 taxonomy/
 changes/
 contribute/
+# Leading slash: root only. A bare `posts/` also matches content/posts/, which
+# is the SOURCE for these pages — it silently stopped the drafts being tracked.
+/posts/
 sitemap.xml
 robots.txt
 feed.xml

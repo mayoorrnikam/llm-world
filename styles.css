@@ -3735,3 +3735,62 @@ code, kbd {
   gap: 4px;
 }
 .lin-card .mod { width: 12px; height: 12px; }
+
+/* --------------------------------------------------------------------------
+   Posts: list or grid
+   --------------------------------------------------------------------------
+   The timeline already offers this choice, so this reuses its vocabulary —
+   the same ?view=grid parameter, the same auto-fill sizing — and the toggle
+   means one thing everywhere on the site.
+
+   The grid is NOT a second component. It re-flows the same <li> the list
+   already emits, so there is no second markup path to keep in sync: a card
+   here is the list row with its tracks stacked. */
+.doc-list[data-view="grid"] {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+}
+.doc-list[data-view="grid"] li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 12px;
+  background: linear-gradient(180deg, var(--card-sheen), transparent 55%), var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--c, var(--c-other));
+  border-radius: var(--radius);
+}
+/* The question wraps rather than truncating. A question clipped at "How has
+   Claude's cont…" is precisely the one thing a reader needs to see whole —
+   it is the reason the card exists. */
+.doc-list[data-view="grid"] .cell-name {
+  white-space: normal;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+  font-size: 15px;
+}
+.doc-list[data-view="grid"] .cell-num { text-align: left; }
+.doc-list[data-view="grid"] .mods { display: none; }
+/* The left hairline is the list's hover affordance; in grid the whole card
+   already carries the lab's hue on its border. */
+.doc-list[data-view="grid"] li::before { content: none; }
+
+.view-switch {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 10px;
+}
+.view-switch button {
+  padding: 4px 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.view-switch button:hover { background: var(--panel-2); color: var(--text); }
