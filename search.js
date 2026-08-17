@@ -135,7 +135,7 @@ function render(q) {
 
   const parsed = parse(q, vocab);
   // run() ranks by name match and breaks ties by date, so no re-sort here.
-  const { results: found, ignored, used } = run(records, parsed);
+  const { results: found, near, ignored, used } = run(records, parsed);
 
   // Say how the question was read, including anything left as plain text.
   const bits = parsed.terms.map((t) => t.label);
@@ -216,10 +216,15 @@ function render(q) {
   if (!found.length) {
     const none = document.createElement('p');
     none.className = 'ask-none';
-    none.textContent = 'Nothing in the dataset matches all of those. '
-      + 'Try removing a term — the reading above shows how the question was understood.';
+    none.textContent = near.length
+      ? 'Nothing matches all of those outright — but these are not ruled out.'
+      : 'Nothing in the dataset matches all of those. '
+        + 'Try removing a term — the reading above shows how the question was understood.';
     results.append(none);
-    return;
+    // Falling through when there are near misses is the point: "no results" and
+    // "no evidence either way" are different answers, and returning here gave
+    // the first when the truth was the second.
+    if (!near.length) return;
   }
 
   const list = document.createElement('ol');
@@ -233,9 +238,9 @@ function render(q) {
   // keeps the previous scroll offset and the first result renders half cut off.
   requestAnimationFrame(() => { list.scrollTop = 0; });
 
-  for (const r of found.slice(0, 40)) {
+  const rowFor = (r, why) => {
     const li = document.createElement('li');
-  li.style.setProperty('--c', `var(--c-${logoSlug(r.company)})`);
+    li.style.setProperty('--c', `var(--c-${logoSlug(r.company)})`);
 
     const a = document.createElement('a');
     a.className = 'ask-name';
@@ -266,8 +271,21 @@ function render(q) {
     }
 
     li.append(a, meta, facts, chips);
-    list.append(li);
-  }
+    // Per row, because the reason differs between rows: Claude Sonnet 5 has the
+    // context window and is unknown only on coding, while another row may be
+    // unknown on both. One blanket sentence above the list said "coding and
+    // context >= 1m are not evidenced for them", which is untrue of every row
+    // it covered.
+    if (why?.length) {
+      const u = document.createElement('span');
+      u.className = 'ask-unknown';
+      u.textContent = `${why.join(', ')} not evidenced`;
+      li.append(u);
+    }
+    return li;
+  };
+
+  for (const r of found.slice(0, 40)) list.append(rowFor(r));
 
   results.append(list);
 
@@ -276,6 +294,57 @@ function render(q) {
     more.className = 'ask-none';
     more.textContent = `Showing the 40 most recent of ${found.length}.`;
     results.append(more);
+  }
+
+  /**
+   * Models the dataset cannot rule in or out.
+   *
+   * These meet part of the question outright and rest on a field nobody has
+   * evidenced yet — almost always a capability, which TAXONOMY §4 reads as "not
+   * evidenced" and never "absent". Dropping them silently, which is what this
+   * page did until now, answers "best model for coding with 1M context" without
+   * Claude Opus 5 in the list and quietly asserts the one thing the dataset
+   * forbids itself from asserting.
+   *
+   * Showing them separately says the true thing: here is what matches, here is
+   * what would match if someone did the reading.
+   */
+  if (near.length) {
+    const h = document.createElement('p');
+    h.className = 'ask-count ask-near-head';
+    h.textContent = near.length === 1
+      ? '1 more is not ruled out'
+      : `${near.length} more are not ruled out`;
+    results.append(h);
+
+    const sub = document.createElement('p');
+    sub.className = 'ask-none';
+    sub.append('Each meets part of the question outright; the rest is unrecorded, '
+      + 'noted on every row. An unrecorded fact is a gap in the reading, not a "no" '
+      + 'from the model — ');
+    const a2 = document.createElement('a');
+    a2.href = new URL('data-quality/', import.meta.url).pathname;
+    a2.textContent = 'see data quality';
+    sub.append(a2, '.');
+    results.append(sub);
+
+    const nlist = document.createElement('ol');
+    nlist.className = 'ask-list is-near';
+    if (near.length <= 6) nlist.classList.add('is-short');
+    else {
+      nlist.tabIndex = 0;
+      nlist.setAttribute('role', 'group');
+      nlist.setAttribute('aria-label', 'Not ruled out');
+    }
+    for (const n of near.slice(0, 20)) nlist.append(rowFor(n.record, n.why));
+    results.append(nlist);
+
+    if (near.length > 20) {
+      const more = document.createElement('p');
+      more.className = 'ask-none';
+      more.textContent = `Showing 20 of ${near.length}.`;
+      results.append(more);
+    }
   }
 }
 
