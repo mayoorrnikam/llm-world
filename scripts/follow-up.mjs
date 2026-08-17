@@ -40,6 +40,10 @@
 import { readFileSync } from 'node:fs';
 import { canonicalDate } from '../lib/record.mjs';
 import { saveDataset } from '../lib/dataset.mjs';
+// archive.org is a single point of failure and has been down for hours at a
+// time; this tries it first and falls back, and refuses captures of error
+// pages from either.
+import { findSnapshot } from '../lib/archives.mjs';
 
 const WRITE = process.argv.includes('--write');
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
@@ -53,6 +57,9 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 /**
  * Sources still without a snapshot, newest release first.
  *
+ * Checked against archive.org and then Arquivo.pt — see lib/archives.mjs
+ * for why there are two, and why a captured error page is refused.
+ *
  * Ordered by age because a three-day-old announcement is the one most likely
  * to have been captured since we last looked, and a two-year-old one that is
  * still missing is missing for a reason.
@@ -60,21 +67,6 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const unarchived = R
   .filter((r) => r.sources.some((s) => !s.archived_url))
   .sort((a, b) => ageDays(a) - ageDays(b));
-
-async function lookup(url) {
-  try {
-    const res = await fetch(
-      `https://archive.org/wayback/available?url=${encodeURIComponent(url)}`,
-      { signal: AbortSignal.timeout(20000), headers: { 'user-agent': 'llm-world follow-up' } },
-    );
-    if (!res.ok) return { error: `HTTP ${res.status}` };
-    const j = await res.json();
-    const snap = j?.archived_snapshots?.closest;
-    return snap?.available ? { url: snap.url, ts: snap.timestamp } : {};
-  } catch (e) {
-    return { error: e.name === 'TimeoutError' ? 'timeout' : e.message };
-  }
-}
 
 /* ------------------------------------------------------------- 2. weights */
 
@@ -141,16 +133,18 @@ console.log(`${R.length} records · ${unarchived.length} with an unarchived sour
 
 let found = 0;
 if (unarchived.length) {
-  console.log('SNAPSHOTS — re-checking archive.org, newest release first');
+  console.log('SNAPSHOTS — re-checking every archive, newest release first');
   for (const r of unarchived.slice(0, 25)) {
     for (const s of r.sources.filter((x) => !x.archived_url)) {
-      const hit = await lookup(s.url);
-      if (hit.error) { console.log(`  ~ ${r.id} — ${hit.error}`); continue; }
-      if (!hit.url) continue;
-      console.log(`  ✓ ${r.id.padEnd(24)} ${s.id} → ${hit.ts}`);
+      const hit = await findSnapshot(s.url);
+      if (!hit.url) {
+        if (hit.notes?.length) console.log(`  ~ ${r.id} — ${hit.notes.join('; ')}`);
+        continue;
+      }
+      console.log(`  ✓ ${r.id.padEnd(24)} ${s.id} → ${hit.timestamp} via ${hit.via}`);
       if (WRITE) {
         s.archived_url = hit.url;
-        s.retrieved = `${hit.ts.slice(0, 4)}-${hit.ts.slice(4, 6)}-${hit.ts.slice(6, 8)}`;
+        s.retrieved = `${hit.timestamp.slice(0, 4)}-${hit.timestamp.slice(4, 6)}-${hit.timestamp.slice(6, 8)}`;
       }
       found++;
       await sleep(1200);
