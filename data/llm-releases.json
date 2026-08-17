@@ -6810,6 +6810,54 @@
       }
     },
     {
+      "id": "claude-haiku-4-5",
+      "model": "Claude Haiku 4.5",
+      "company": "Anthropic",
+      "family": "Claude",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Anthropic's small model tier. The API id claude-haiku-4-5-20251001 carries a snapshot date two weeks before the announcement; the release date is the one Anthropic states.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-10-15",
+          "sources": [
+            "claude-haiku-4-5-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 200000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "claude-haiku-4-5-s1",
+          "url": "https://www.anthropic.com/news/claude-haiku-4-5",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "gpt-5-1",
       "model": "GPT-5.1",
       "company": "OpenAI",
@@ -9418,6 +9466,67 @@
       }
     },
     {
+      "id": "gemini-3-1-flash-live",
+      "model": "Gemini 3.1 Flash Live",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text",
+          "audio"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "An audio-to-audio model for real-time dialogue.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-03-26",
+          "sources": [
+            "gemini-3-1-flash-live-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-3-1-flash-live-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-3-1-flash-live-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "veo-3",
       "model": "Veo 3",
       "company": "Google DeepMind",
@@ -10397,6 +10506,72 @@
       }
     },
     {
+      "id": "gemini-3-1-flash-lite",
+      "model": "Gemini 3.1 Flash-Lite",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "The lightweight text tier of the 3.1 generation, released to general availability. Distinct from gemini-3.1-flash-lite-image (Nano Banana 2 Lite), which shipped 2026-06-30.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-05-07",
+          "sources": [
+            "gemini-3-1-flash-lite-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-3-1-flash-lite-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-3-1-flash-lite-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "qwen-3-7-max",
       "model": "Qwen3.7-Max",
       "company": "Alibaba Qwen",
@@ -10776,6 +10951,66 @@
           "observed_on": "2026-05-28"
         }
       ]
+    },
+    {
+      "id": "nano-banana-pro",
+      "model": "Nano Banana Pro",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": {
+        "input": [
+          "image",
+          "text"
+        ],
+        "output": [
+          "image",
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "The Pro tier of Google's native image model, served as gemini-3-pro-image.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-05-28",
+          "sources": [
+            "nano-banana-pro-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "nano-banana-pro-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "nano-banana-pro-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
     },
     {
       "id": "minimax-m3",
@@ -11833,6 +12068,66 @@
       }
     },
     {
+      "id": "nano-banana-2-lite",
+      "model": "Nano Banana 2 Lite",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image",
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "The low-latency image generation and editing tier, served as gemini-3.1-flash-lite-image.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-06-30",
+          "sources": [
+            "nano-banana-2-lite-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "nano-banana-2-lite-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "nano-banana-2-lite-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "grok-4-5",
       "model": "Grok 4.5",
       "company": "xAI",
@@ -12520,6 +12815,72 @@
           ]
         }
       ]
+    },
+    {
+      "id": "gemini-3-5-flash-lite",
+      "model": "Gemini 3.5 Flash-Lite",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "The lightweight tier of the 3.5 generation, released to general availability alongside Gemini 3.6 Flash.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-21",
+          "sources": [
+            "gemini-3-5-flash-lite-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-3-5-flash-lite-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-3-5-flash-lite-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
     },
     {
       "id": "mai-image-2-5-pro",
