@@ -1,0 +1,98 @@
+name: Drain the archive backlog
+
+# R1 says cite the snapshot, not the live page, and for one whole day this
+# project could not: archive.org answered 502 on its availability API, 503 on
+# CDX and 404 on /save, and its own page said "Internet Archive: Temporarily
+# Offline". archive.today, the fallback, escalated from rate-limiting to a
+# CAPTCHA. Fifty sources sat unarchived and the only route to a snapshot was a
+# person pasting URLs into a browser.
+#
+# The archiving was never the problem. The problem was that archiving only ever
+# ran inside `npm run enrich`, by hand, so an outage did not delay the work — it
+# CANCELLED it, and the backlog only moved when somebody remembered.
+#
+# So it runs daily and does nothing dramatic when the archives are down. A day
+# archive.org is offline is a day this finds nothing and exits clean; the day it
+# returns, the backlog drains without anyone noticing it had built up. That is
+# the difference between a chore and a queue.
+#
+# It only ever fills empty archived_url fields. It cannot overwrite a citation,
+# and archive-sources refuses any capture dated before the record it would
+# evidence.
+
+on:
+  schedule:
+    - cron: '41 4 * * *'    # 04:41 UTC, well clear of the twice-daily scan
+  workflow_dispatch:
+    inputs:
+      save:
+        description: Also ASK archive.org to capture what has no snapshot
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: archive
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Look first. This reads three archives with failover and a circuit
+      # breaker, so a dead archive.org costs one round of timeouts rather than
+      # an hour of rediscovering the same outage.
+      - name: Look for snapshots that already exist
+        id: lookup
+        run: node scripts/archive-sources.mjs --write
+
+      # Then ask for the ones nobody holds. Separate step, and allowed to fail:
+      # writing to a third-party service is the part most likely to be down, and
+      # it must not lose the lookups above.
+      - name: Ask archive.org to capture the rest
+        if: github.event_name == 'schedule' || inputs.save
+        continue-on-error: true
+        run: node scripts/archive-sources.mjs --save --write
+
+      # A new snapshot is often the only thing standing between a record and its
+      # evidence: attribute-facts reads ARCHIVED primary sources only, so a date
+      # printed plainly on a lab's page stays untraced until the page is
+      # captured. Draining the backlog is what lets these two run at all.
+      - name: Trace what the new snapshots now make readable
+        continue-on-error: true
+        run: |
+          node scripts/attribute-facts.mjs --redo --write
+          node scripts/reconcile-status.mjs --write
+
+      # The README carries generated statistics and `check` FAILS on drift, so
+      # regenerating is part of changing the data, not a nicety.
+      - name: Regenerate the README statistics
+        run: node scripts/update-readme.mjs
+
+      - name: Check the result before committing anything
+        run: |
+          node scripts/validate-data.mjs
+          node scripts/build.mjs
+          node scripts/smoke-test.mjs
+
+      - name: Commit
+        run: |
+          git config user.name "llm-world bot"
+          git config user.email "noreply@github.com"
+          git add data/llm-releases.json README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive backlog: record snapshots that became available
+
+          Found by the daily sweep across archive.org, arquivo.pt and
+          archive.today. Only empty archived_url fields are filled, and a
+          capture dated before the record it would evidence is refused."
+            git push
+          fi
