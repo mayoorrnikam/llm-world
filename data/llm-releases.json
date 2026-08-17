@@ -5619,6 +5619,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20250526121527/https://docs.anthropic.com/en/docs/about-claude/models/overview",
           "retrieved": "2025-05-26"
+        },
+        {
+          "id": "claude-4-opus-price-20251119",
+          "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251119190003/https://platform.claude.com/docs/en/about-claude/pricing",
+          "retrieved": "2025-11-19"
         }
       ],
       "provenance": {
@@ -5665,6 +5673,21 @@
           "sources": [
             "claude-4-opus-s1"
           ]
+        }
+      ],
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 15,
+            "output": 75
+          },
+          "currency": "USD",
+          "observed_on": "2025-11-19",
+          "sources": [
+            "claude-4-opus-price-20251119"
+          ],
+          "note": "Base input and output rates as the page read on this date. Cache writes and cache hits are priced separately and are not recorded here."
         }
       ]
     },
@@ -6699,6 +6722,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20251122111216/https://platform.claude.com/docs/en/about-claude/models/overview",
           "retrieved": "2025-11-22"
+        },
+        {
+          "id": "claude-sonnet-4-5-price-20251119",
+          "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251119190003/https://platform.claude.com/docs/en/about-claude/pricing",
+          "retrieved": "2025-11-19"
         }
       ],
       "provenance": {
@@ -6727,7 +6758,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 3,
+            "output": 15
+          },
+          "currency": "USD",
+          "observed_on": "2025-11-19",
+          "sources": [
+            "claude-sonnet-4-5-price-20251119"
+          ],
+          "note": "Base input and output rates as the page read on this date. Cache writes and cache hits are priced separately and are not recorded here."
+        }
+      ]
     },
     {
       "id": "glm-4-6",
@@ -7443,6 +7489,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20251123190158/https://platform.claude.com/docs/en/about-claude/models/overview",
           "retrieved": "2025-11-23"
+        },
+        {
+          "id": "claude-opus-4-5-price-20251201",
+          "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20251201041432/https://platform.claude.com/docs/en/about-claude/pricing",
+          "retrieved": "2025-12-01"
         }
       ],
       "provenance": {
@@ -7471,7 +7525,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 5,
+            "output": 25
+          },
+          "currency": "USD",
+          "observed_on": "2025-12-01",
+          "sources": [
+            "claude-opus-4-5-price-20251201"
+          ],
+          "note": "Base input and output rates as the page read on this date. Cache writes and cache hits are priced separately and are not recorded here."
+        }
+      ]
     },
     {
       "id": "flux-2-dev",
@@ -8678,6 +8747,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260204091134/https://platform.claude.com/docs/en/about-claude/models/overview",
           "retrieved": "2026-02-04"
+        },
+        {
+          "id": "claude-opus-4-6-price-20260301",
+          "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260301150515/https://platform.claude.com/docs/en/about-claude/pricing",
+          "retrieved": "2026-03-01"
         }
       ],
       "provenance": {
@@ -8706,7 +8783,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 5,
+            "output": 25
+          },
+          "currency": "USD",
+          "observed_on": "2026-03-01",
+          "sources": [
+            "claude-opus-4-6-price-20260301"
+          ],
+          "note": "Base input and output rates as the page read on this date. Cache writes and cache hits are priced separately and are not recorded here."
+        }
+      ]
     },
     {
       "id": "gpt-5-3-codex",
@@ -9144,6 +9236,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260217170302/https://platform.claude.com/docs/en/about-claude/models/overview",
           "retrieved": "2026-02-17"
+        },
+        {
+          "id": "claude-sonnet-4-6-price-20260301",
+          "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260301150515/https://platform.claude.com/docs/en/about-claude/pricing",
+          "retrieved": "2026-03-01"
         }
       ],
       "provenance": {
@@ -9172,7 +9272,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 3,
+            "output": 15
+          },
+          "currency": "USD",
+          "observed_on": "2026-03-01",
+          "sources": [
+            "claude-sonnet-4-6-price-20260301"
+          ],
+          "note": "Base input and output rates as the page read on this date. Cache writes and cache hits are priced separately and are not recorded here."
+        }
+      ]
     },
     {
       "id": "nano-banana-2",
