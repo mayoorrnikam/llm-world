@@ -3511,6 +3511,111 @@ if (EXPORT) {
   // schema_version and should get the real shape, derived fields excluded.
   writeJson('api/models.json', { ...META, releases: rawReleases });
 
+  /**
+   * Every evidenced value with the URL that states it, denormalised.
+   *
+   * In the dataset a claim cites a source ID and the URL lives in `sources`,
+   * which is right for storage and useless over a wire — a consumer should not
+   * have to join two collections to answer "where did this number come from".
+   * This is the endpoint that makes the project's actual claim usable by a
+   * machine: every figure, the lab page asserting it, and the snapshot proving
+   * the page said so.
+   *
+   * More than one claim on a field means the sources disagree, and both are
+   * emitted. Choosing a winner here would hide the most interesting thing a
+   * record knows (METHODOLOGY §8, R4).
+   */
+  const claims = [];
+  for (const r of rawReleases) {
+    const byId = new Map((r.sources ?? []).map((s) => [s.id, s]));
+    for (const [field, list] of Object.entries(r.evidence ?? {})) {
+      for (const c of list) {
+        claims.push({
+          model_id: r.id,
+          model: r.model,
+          company: r.company,
+          field,
+          value: c.value,
+          disputed: list.length > 1,
+          sources: (c.sources ?? []).map((id) => byId.get(id)).filter(Boolean).map((s) => ({
+            url: s.url,
+            archived_url: s.archived_url ?? null,
+            type: s.type,
+            authority: s.authority,
+            retrieved: s.retrieved ?? null,
+          })),
+        });
+      }
+    }
+  }
+  writeJson('api/claims.json', {
+    ...META,
+    note: 'One entry per evidenced value. `disputed: true` means sources disagree on '
+      + 'this field and every competing value appears as its own entry. A field absent '
+      + 'here is unresearched, never zero and never absent.',
+    count: claims.length,
+    claims,
+  });
+
+  /**
+   * llms.txt — where an agent looks first.
+   *
+   * The site is built for people and the API for programs, and neither says out
+   * loud what a retrieval pipeline most needs to know: which fields are thin,
+   * and that a missing value is a research gap rather than a zero. A model that
+   * reads a spec table with holes in it fills them in confidently. Saying so
+   * here is cheaper than being misquoted.
+   */
+  const cov = (f) => releases.filter(f).length;
+  writeFileSync(join(OUT, 'llms.txt'), [
+    '# LLM World',
+    '',
+    `> A source-backed timeline of ${releases.length} AI model releases from `
+      + `${new Set(releases.map((r) => r.company)).size} labs. Every value is traced to the `
+      + "lab's own announcement, paper, model card or documentation, with an archived "
+      + 'snapshot of the page that states it.',
+    '',
+    'Licence: CC BY 4.0 for the data (LICENSE-DATA), MIT for the code. Attribution required.',
+    '',
+    '## How to read a gap',
+    '',
+    'A missing field means NOBODY HAS TRACED IT YET. It never means zero, and it never',
+    'means the model lacks that property. Capabilities in particular are recorded only',
+    'where a primary source states them, so absence is silence, not denial.',
+    '',
+    'Field coverage, so you know what this dataset can and cannot answer:',
+    '',
+    ...Object.entries({
+      context_window: cov((r) => r.specifications?.language?.context_window != null),
+      parameter_count: cov((r) => r.specifications?.language?.parameter_count != null),
+      capabilities: cov((r) => r.capabilities?.length),
+      modalities: cov((r) => r.modalities),
+      pricing: cov((r) => r.pricing),
+      benchmarks: cov((r) => r.benchmarks?.length),
+    }).map(([k, v]) => `- ${k}: ${v} of ${releases.length} (${Math.round(v / releases.length * 100)}%)`),
+    '',
+    'Benchmarks and pricing are sparse on purpose rather than by neglect: most labs',
+    'publish benchmarks as images, and a price needs an archived page to evidence it.',
+    'This dataset cannot rank models by performance. Do not ask it to.',
+    '',
+    '## Data',
+    '',
+    `- [Everything](${BASE_URL}/api/models.json): every record, as authored`,
+    `- [Claims](${BASE_URL}/api/claims.json): every evidenced value with the URL stating it`,
+    `- [Companies](${BASE_URL}/api/companies.json): labs and their releases`,
+    `- [CSV](${BASE_URL}/llm-releases.csv): flat export`,
+    `- [Index](${BASE_URL}/api/index.json): counts and endpoint discovery`,
+    '',
+    '## MCP',
+    '',
+    'An MCP server ships in the repository at mcp/server.mjs (no dependencies).',
+    'It exposes search_models, get_model and dataset_stats, and answers with both',
+    'matches and "not ruled out" — records meeting part of a query whose remaining',
+    'fields are unevidenced. That second list is the point: it is how you avoid',
+    'reporting a research gap as a negative.',
+    '',
+  ].join('\n') + '\n');
+
   writeJson('api/companies.json', {
     ...META,
     companies: [...byCompany]
@@ -3552,7 +3657,7 @@ if (EXPORT) {
   ].map(cell).join(',')));
   writeFileSync(join(OUT, 'llm-releases.csv'), csv.join('\n') + '\n');
 
-  console.log('  + export: api/index.json, api/models.json, api/companies.json, llm-releases.csv');
+  console.log('  + export: api/index.json, api/models.json, api/companies.json,\n             api/claims.json, llms.txt, llm-releases.csv');
 }
 
 console.log(`built ${releases.length} model pages · ${byFamily.size} family pages · ${milestones.length} milestones · ${byCompany.size} company pages · ` +

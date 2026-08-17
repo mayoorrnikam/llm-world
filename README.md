@@ -289,7 +289,9 @@ even commercially, provided you credit LLM World and link back.
 | [`/api/index.json`](https://mayoorrnikam.github.io/llm-world/api/index.json) | Discovery document: licence, counts, endpoint list |
 | [`/api/models.json`](https://mayoorrnikam.github.io/llm-world/api/models.json) | Every release with full schema, sources and provenance |
 | [`/api/companies.json`](https://mayoorrnikam.github.io/llm-world/api/companies.json) | Per-lab counts, open-weights share, first/latest release |
+| [`/api/claims.json`](https://mayoorrnikam.github.io/llm-world/api/claims.json) | Every evidenced value with the URL that states it, denormalised |
 | [`/llm-releases.csv`](https://mayoorrnikam.github.io/llm-world/llm-releases.csv) | Flat table for spreadsheets |
+| [`/llms.txt`](https://mayoorrnikam.github.io/llm-world/llms.txt) | What an agent should read first, including which fields are thin |
 
 Every JSON payload carries its own `license`, `attribution` and
 `schema_version`, so the terms travel with the data. **A breaking schema
@@ -302,6 +304,52 @@ https://mayoorrnikam.github.io/llm-world/ — CC BY 4.0
 
 Undisclosed figures are `null`, never estimated. Check a record's `sources[]`
 and `provenance.status` before relying on any individual figure.
+
+## For agents and retrieval pipelines
+
+A missing field in this dataset means **nobody has traced it yet**. It never
+means zero, and it never means the model lacks that property — capabilities are
+recorded only where a primary source states them, so absence is silence rather
+than denial. That distinction is the whole reason to prefer this over a scraped
+spec table: a pipeline asked for a context window nobody recorded will otherwise
+produce a confident, plausible, wrong one.
+
+`/api/claims.json` is the endpoint that makes it usable. In the dataset a claim
+cites a source id and the URL lives in `sources[]`, which is right for storage
+and useless over a wire; there, each entry carries the value, the lab page
+asserting it, and the archived snapshot proving the page said so. Where sources
+disagree, every competing value appears with `disputed: true` rather than one
+being chosen.
+
+### MCP server
+
+`mcp/server.mjs` speaks JSON-RPC over stdio and has no dependencies.
+
+```bash
+npm run mcp
+```
+
+```json
+{ "mcpServers": { "llm-world": {
+    "command": "node",
+    "args": ["/absolute/path/to/llm-world/mcp/server.mjs"] } } }
+```
+
+| Tool | What it answers |
+|---|---|
+| `search_models` | A plain-language query, returning **matches** and **not_ruled_out** |
+| `get_model` | One record in full, every claim with its primary and archived URL |
+| `dataset_stats` | Coverage per field, so a caller knows what the data can support |
+
+`not_ruled_out` is the part that matters. Asked for a coding model with a 1M
+context window, it returns eight matches — and separately lists Claude Sonnet 5
+and Claude Fable 5, which have the context window and whose coding ability
+nobody has evidenced. Reporting those as "no" would be wrong; omitting them
+silently, which the site itself did until recently, is how a research gap turns
+into a false negative.
+
+Nothing here ranks models. Benchmarks cover 7% of records, and a leaderboard
+built on that would be the one part of this project that is not evidence.
 
 ## Licensing
 

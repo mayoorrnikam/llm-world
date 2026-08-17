@@ -12,6 +12,7 @@ Build the definitive*.txt
 
 # Bulk export artifacts — generated only with --export, never committed
 api/
+llms.txt
 llm-releases.csv
 .build-check/
 
