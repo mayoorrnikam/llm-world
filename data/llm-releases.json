@@ -12036,7 +12036,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 5,
+            "output": 30
+          },
+          "currency": "USD",
+          "observed_on": "2026-08-17",
+          "sources": [
+            "gpt-5-6-sol-s1"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
+      ]
     },
     {
       "id": "gpt-5-6-luna",
@@ -12114,7 +12129,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 0.2,
+            "output": 1.2
+          },
+          "currency": "USD",
+          "observed_on": "2026-08-17",
+          "sources": [
+            "gpt-5-6-luna-s1"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
+      ]
     },
     {
       "id": "gpt-5-6-terra",
@@ -12192,7 +12222,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 2,
+            "output": 12
+          },
+          "currency": "USD",
+          "observed_on": "2026-08-17",
+          "sources": [
+            "gpt-5-6-terra-s1"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
+      ]
     },
     {
       "id": "kimi-k3",
@@ -13705,7 +13750,15 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "A cybersecurity-specific model available only through Daybreak Red, OpenAI's gated access tier for approved defenders.",
@@ -13720,7 +13773,7 @@
       ],
       "specifications": {
         "language": {
-          "context_window": null,
+          "context_window": 400000,
           "parameter_count": null
         }
       },
@@ -13752,7 +13805,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 12.5,
+            "output": 75
+          },
+          "currency": "USD",
+          "observed_on": "2026-08-17",
+          "sources": [
+            "gpt-5-6-cyber-s1"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
+      ]
     },
     {
       "id": "nemotron-3-5-lightning",

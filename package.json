@@ -31,6 +31,7 @@
     "readme": "node scripts/update-readme.mjs --write",
     "follow-up": "node scripts/follow-up.mjs",
     "gemini": "node scripts/gemini-specs.mjs",
-    "xai": "node scripts/xai-specs.mjs"
+    "xai": "node scripts/xai-specs.mjs",
+    "openai": "node scripts/openai-specs.mjs"
   }
 }
