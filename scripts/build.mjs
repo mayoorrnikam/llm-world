@@ -24,6 +24,9 @@ import {
   MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL, logoSlug, monogram,
 } from '../lib/record.mjs';
 import { contextFrontier, stepChartSvg, tokenLabel } from '../lib/chart.mjs';
+import {
+  fieldHistory, historyTable, historySources, historyCaveats,
+} from '../lib/history.mjs';
 
 const EXPORT = process.argv.includes('--export');
 const CHECK = process.argv.includes('--check');
@@ -1848,6 +1851,152 @@ ${companyMark(r.first.company, 'sm')}
  * gap. Nothing here is computed specially for display — every figure is read
  * back out of the same records the rest of the site renders.
  */
+/**
+ * /api/ — the machine-readable surface, for the people who wire it up.
+ *
+ * The endpoints existed and were documented only in the README, which is the
+ * one place a person arriving from a search engine will not look. llms.txt
+ * tells an agent what is here; this tells whoever is deciding whether to
+ * depend on it — what the licence requires, which fields are thin, and how to
+ * run the MCP server without the PATH trap that makes it fail silently.
+ *
+ * Every figure is computed at build time. A hand-written coverage table is
+ * wrong within a week, and being wrong about your own coverage is a worse
+ * failure here than anywhere else on the site.
+ */
+function apiPage() {
+  const n = releases.length;
+  const pct = (v) => `${Math.round((v / n) * 100)}%`;
+  const cov = (f) => releases.filter(f).length;
+  const fields = [
+    ['modalities', cov((r) => r.modalities), 'What the model takes in and puts out'],
+    ['capabilities', cov((r) => r.capabilities?.length), 'Only where a primary source states them'],
+    ['context_window', cov((r) => r.specifications?.language?.context_window != null), 'Language models only'],
+    ['parameter_count', cov((r) => r.specifications?.language?.parameter_count != null), 'Most proprietary labs publish none'],
+    ['pricing', cov((r) => r.pricing), 'Needs an archived page to evidence it'],
+    ['benchmarks', cov((r) => r.benchmarks?.length), 'Most labs publish these as images'],
+  ];
+  const verified = releases.filter((r) => r.provenance?.status === 'verified').length;
+  /**
+   * Which fields are actually thin, rather than which ones were thin the day
+   * this page was written.
+   *
+   * The table below has always been computed; the sentence under it named
+   * pricing and benchmarks in prose. Those two are at 12% and 7% today, and the
+   * moment either is backfilled the page would carry a correct table above a
+   * false sentence — the exact drift this project regenerates the README to
+   * avoid. A third under a quarter would have gone unmentioned for the same
+   * reason.
+   */
+  const thin = fields.filter(([, v]) => v / n < 0.25).map(([f]) => f);
+  const listOf = (xs) => xs.length < 2 ? (xs[0] ?? '')
+    : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`;
+  const claimCount = releases.reduce((t, r) =>
+    t + Object.values(r.evidence ?? {}).reduce((a, l) => a + l.length, 0), 0);
+
+  return page({
+    title: 'API, data and MCP | LLM World',
+    description: `Every record as JSON and CSV under CC BY 4.0, ${claimCount} evidenced claims `
+      + 'with the URL that states each one, and a dependency-free MCP server.',
+    canonical: `${BASE_URL}/api/`,
+    section: 'api/',
+    depth: 1,
+    sprites: [],
+    body: `
+${crumbs('../', ['API and MCP'])}
+${hero({
+    title: 'Use the data',
+    sub: `${n} releases, ${claimCount} evidenced claims, every one carrying the URL of the page that states it. CC BY 4.0.`,
+  })}
+<div class="prose">
+
+<h2>Endpoints</h2>
+<table class="facts">
+<tr><th scope="row"><a href="index.json">/api/index.json</a></th><td>Discovery: licence, counts, endpoint list. Stable — point a badge at it.</td></tr>
+<tr><th scope="row"><a href="models.json">/api/models.json</a></th><td>Every release as authored, with sources and provenance.</td></tr>
+<tr><th scope="row"><a href="claims.json">/api/claims.json</a></th><td>${claimCount} claims, denormalised: value, the lab page asserting it, the archived snapshot.</td></tr>
+<tr><th scope="row"><a href="companies.json">/api/companies.json</a></th><td>Per-lab counts, open-weights share, first and latest release.</td></tr>
+<tr><th scope="row"><a href="../llm-releases.csv">/llm-releases.csv</a></th><td>Flat table for spreadsheets.</td></tr>
+<tr><th scope="row"><a href="../llms.txt">/llms.txt</a></th><td>What an agent should read first.</td></tr>
+</table>
+
+<p>Every payload carries its own <code>license</code>, <code>attribution</code> and
+<code>schema_version</code>, so the terms travel with the data. A breaking shape change
+bumps <code>schema_version</code> — pin against it.</p>
+
+<h2>Licence</h2>
+<p>The <strong>data is CC BY 4.0</strong>: use it, change it, sell it, as long as you credit
+LLM World and link back. The <strong>code is MIT</strong>. See
+<a href="https://github.com/mayoorrnikam/llm-world/blob/main/LICENSE-DATA">LICENSE-DATA</a>
+and <a href="https://github.com/mayoorrnikam/llm-world/blob/main/NOTICE">NOTICE</a> for
+exactly what each covers.</p>
+<pre><code>Release dates and metadata from LLM World
+https://mayoorrnikam.github.io/llm-world/ — CC BY 4.0</code></pre>
+
+<h2>What a missing field means</h2>
+<p><strong>Nobody has traced it yet.</strong> Not zero, and not that the model lacks the
+property. Capabilities are recorded only where a primary source states them, so absence
+is silence rather than denial — a model with no <code>coding</code> capability may well
+code, and this dataset simply has not evidenced it. Building a "does not support"
+claim on a blank field is the one misuse that will make you wrong.</p>
+
+<table class="facts">
+<tr><th scope="row">Records</th><td>${n}, of which ${verified} (${pct(verified)}) are verified — every value traced to a primary source</td></tr>
+${fields.map(([f, v, note]) =>
+    `<tr><th scope="row"><code>${f}</code></th><td>${v} of ${n} (${pct(v)}) — ${note}</td></tr>`).join('\n')}
+</table>
+
+<p>${thin.length
+    ? `${listOf(thin.map((f) => `<code>${f}</code>`))} ${thin.length === 1 ? 'is' : 'are'} thin`
+    : 'Where a field is thin it is'} on purpose rather than by neglect, and the reasons are
+in <a href="../data-quality/">data quality</a>.${thin.length ? ` What follows from it: <strong>this dataset
+cannot ${thin.includes('benchmarks') ? 'rank models by performance' : 'compare models'}${thin.includes('pricing') ? ' or cost' : ''}</strong>
+across the whole set.` : ''} It can tell you what a lab stated and where.</p>
+
+<h2>MCP server</h2>
+<p>A dependency-free server over the same data, for Claude Desktop, Claude Code or any
+MCP client. It lives in the repository at <code>mcp/server.mjs</code>.</p>
+
+<pre><code>git clone https://github.com/mayoorrnikam/llm-world.git
+npm run mcp</code></pre>
+
+<p>Then add it to your client's config — for Claude Desktop that is
+<code>~/Library/Application&nbsp;Support/Claude/claude_desktop_config.json</code>:</p>
+
+<pre><code>{ "mcpServers": { "llm-world": {
+    "command": "/opt/homebrew/bin/node",
+    "args": ["/absolute/path/to/llm-world/mcp/server.mjs"] } } }</code></pre>
+
+<p><strong>Use an absolute path to <code>node</code>, not <code>"node"</code>.</strong> A GUI
+application on macOS inherits <code>/usr/bin:/bin:/usr/sbin:/sbin</code> and never the PATH
+from your shell profile, so a Node installed by nvm or a version manager is invisible to it
+and the server fails to spawn with nothing useful in the log. <code>which node</code> in a
+terminal answers about a different PATH than the one your client has.</p>
+
+<table class="facts">
+<tr><th scope="row"><code>search_models</code></th><td>A plain-language query. Returns <code>matches</code> and <code>not_ruled_out</code>.</td></tr>
+<tr><th scope="row"><code>get_model</code></th><td>One record in full, every claim with its primary and archived URL.</td></tr>
+<tr><th scope="row"><code>dataset_stats</code></th><td>Coverage per field, so a caller knows what the data supports.</td></tr>
+</table>
+
+<p><code>not_ruled_out</code> is the part worth having. Asked for a coding model with a 1M
+context window it returns the models that match — and separately lists Claude Sonnet 5
+and Claude Fable 5, which have the context window and whose coding ability nobody has
+evidenced. Reporting those as "no" would be false; dropping them silently is how a
+research gap turns into a wrong answer.</p>
+
+<p>Nothing in it ranks models. Benchmarks cover ${pct(cov((r) => r.benchmarks?.length))} of
+records, and a leaderboard on that basis would be the one part of this project that is not
+evidence.</p>
+
+</div>
+<p class="doc-cta">
+  <a href="../methodology/">How a record is verified →</a><br>
+  <a href="../data-quality/">Where the gaps are, and why →</a>
+</p>`,
+  });
+}
+
 function dataQualityPage() {
   const total = releases.length;
   const byStatus = {};
@@ -3341,6 +3490,7 @@ write('latest', latestPage());
 write('analytics', analyticsPage(byCompany, byYear));
 write('analytics/context-windows', contextStudyPage());
 write('analytics/pricing', pricingPage());
+write('api', apiPage());
 write('data-quality', dataQualityPage());
 write('changes', changesPage());
 
@@ -3442,6 +3592,123 @@ recorded as a <a href="../../milestones/${esc(m.id)}/">milestone</a>.</p>
 <p class="doc-cta"><a href="../../milestones/${esc(m.id)}/">Continue →</a></p>`,
   }), { sitemap: false });
 }
+/* -------------------------------------------------------------------- posts
+ *
+ * Question-shaped pages: /posts/ and /posts/<slug>/.
+ *
+ * A post is a markdown file in content/posts/ with frontmatter. The prose is
+ * written by a person; the numbers are not. A `history:` key expands to the
+ * generated change table, its sources and its caveats, which means a post
+ * cannot drift out of date as records are added — the thing that makes every
+ * hand-written "state of AI models" page wrong within a month.
+ *
+ * The frontmatter deliberately carries the QUESTION as well as the title. These
+ * pages exist to be found by someone asking something, and the question is what
+ * gets indexed, quoted and linked.
+ */
+function readPosts() {
+  const dir = 'content/posts';
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f) => f.endsWith('.md'))
+    .map((file) => {
+      const src = readFileSync(join(dir, file), 'utf8');
+      const m = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(src);
+      if (!m) throw new Error(`content/posts/${file}: missing frontmatter block`);
+      const meta = Object.fromEntries(
+        m[1].split('\n').filter(Boolean).map((line) => {
+          const i = line.indexOf(':');
+          if (i < 0) throw new Error(`content/posts/${file}: bad frontmatter line "${line}"`);
+          return [line.slice(0, i).trim(), line.slice(i + 1).trim()];
+        }),
+      );
+      for (const k of ['title', 'question', 'date']) {
+        if (!meta[k]) throw new Error(`content/posts/${file}: frontmatter needs "${k}"`);
+      }
+      return { ...meta, slug: file.replace(/\.md$/, ''), body: m[2].trim() };
+    })
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+function postPage(post) {
+  let body = post.body;
+
+  // `history: Company | field` appends the generated history to the prose.
+  if (post.history) {
+    const [company, field] = post.history.split('|').map((s) => s.trim());
+    const h = fieldHistory(rawReleases, company, field);
+    // A post that names a history the data cannot support must fail the build,
+    // not publish an empty table. This is the same rule as everywhere else here:
+    // a gap is reported, never rendered as though it were a finding.
+    if (h.insufficient) {
+      throw new Error(
+        `content/posts/${post.slug}.md: "${company}" has ${h.known.length} recorded `
+        + `${h.label} value(s). A history needs two.`,
+      );
+    }
+    const caveats = historyCaveats(h);
+    body += `\n\n${historyTable(h, (x) => `../../models/${x.id}/`)}`
+      + `\n\n## Every change, and the document behind it\n\n${historySources(h)}`
+      + (caveats.length
+        ? `\n\n## What this does not claim\n\n${caveats.map((c) => `- ${c}`).join('\n')}`
+        : '');
+  }
+
+  return page({
+    title: `${post.title} | LLM World`,
+    description: post.question,
+    canonical: `${BASE_URL}/posts/${post.slug}/`,
+    section: 'posts/',
+    depth: 2,
+    sprites: [],
+    body: `
+${crumbs('../../', ['Posts', '../'], [esc(post.title)])}
+${hero({ title: esc(post.title), sub: esc(post.question) })}
+<div class="prose">${renderMarkdown(body)}</div>
+<p class="doc-cta">
+  <a href="../">More questions →</a><br>
+  <a href="../../methodology/">How a value gets to "verified" →</a>
+</p>`,
+  });
+}
+
+function postsIndexPage(posts) {
+  return page({
+    title: 'Posts | LLM World',
+    description: 'Questions about how AI models changed over time, answered from the '
+      + 'dataset, with every value traced to the lab that published it.',
+    canonical: `${BASE_URL}/posts/`,
+    section: 'posts/',
+    depth: 1,
+    sprites: [],
+    body: `
+${crumbs('../', ['Posts'])}
+${hero({
+      title: 'Posts',
+      sub: `${posts.length} question${posts.length === 1 ? '' : 's'} answered from the dataset`,
+    })}
+<p class="chart-note">Each page answers one question. The prose is written; the
+numbers, tables and sources are generated from the dataset on every build, so a
+post cannot quietly go stale as records are added.</p>
+<ol class="doc-list">${posts.map((p) => listRow({
+      // A post about one lab carries that lab's hue, the same pair used on the
+      // timeline chips, so a lab looks the same wherever you meet it.
+      company: p.history ? p.history.split('|')[0].trim() : 'other',
+      href: `${esc(p.slug)}/`,
+      name: esc(p.question),
+      meta: esc(p.title),
+      num: esc(p.date),
+    })).join('')}</ol>
+`,
+  });
+}
+
+const POSTS = readPosts();
+if (POSTS.length) {
+  write('posts', postsIndexPage(POSTS));
+  for (const p of POSTS) write(`posts/${p.slug}`, postPage(p));
+}
+
 write('compare', comparePage());
 
 const BASE = BASE_URL;

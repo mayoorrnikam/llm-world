@@ -1872,6 +1872,21 @@ code, kbd {
    the capabilities are what is being compared. --fill carries the share and
    the count is printed in the cell, so colour is never the only channel. */
 .table-scroll { overflow-x: auto; margin-bottom: 8px; }
+
+/* A config block is one long line and the viewport is 440px on a phone. The
+   page body must never scroll sideways, so the code block scrolls inside
+   itself — the same contract the wide tables already follow. */
+.prose pre {
+  overflow-x: auto;
+  max-width: 100%;
+  padding: 12px 14px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.prose pre code { white-space: pre; }
 .cap-matrix {
   border-collapse: collapse;
   width: 100%;

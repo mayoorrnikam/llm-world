@@ -4181,8 +4181,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260303034822/https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=en",
+          "retrieved": "2026-03-03"
         }
       ],
       "provenance": {
@@ -5140,8 +5140,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260309160829/https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=en",
+          "retrieved": "2026-03-09"
         }
       ],
       "provenance": {
@@ -7099,8 +7099,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260219050535/https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=en",
+          "retrieved": "2026-02-19"
         }
       ],
       "provenance": {
@@ -7941,8 +7941,8 @@
           "url": "https://docs.z.ai/guides/vlm/glm-4.6v",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20251208114929/https://docs.z.ai/guides/vlm/glm-4.6v",
+          "retrieved": "2025-12-08"
         }
       ],
       "provenance": {
@@ -8002,8 +8002,8 @@
           "url": "https://docs.z.ai/guides/audio/glm-asr-2512",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20251213061254/https://docs.z.ai/guides/audio/glm-asr-2512",
+          "retrieved": "2025-12-13"
         }
       ],
       "provenance": {
@@ -9234,8 +9234,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260530143309/https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=en",
+          "retrieved": "2026-05-30"
         }
       ],
       "provenance": {
@@ -9675,8 +9675,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260327085354/https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=en",
+          "retrieved": "2026-03-27"
         }
       ],
       "provenance": {
@@ -10740,8 +10740,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260507181345/https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=en",
+          "retrieved": "2026-05-07"
         }
       ],
       "provenance": {
@@ -10878,24 +10878,33 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260525114658/https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=en",
+          "retrieved": "2026-05-25"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities taken from the documentation's own declaration: \"Inputs Text, Image, Video, Audio, and PDF Output Text\"."
       },
       "undisclosed": [
         "parameter_count"
       ],
       "evidence": {
+        "release_date": [
+          {
+            "value": "2026-05-19",
+            "sources": [
+              "gemini-3-5-flash-gdocs"
+            ]
+          }
+        ],
         "context_window": [
           {
             "value": 1048576,
             "sources": [
-              "gemini-3-5-flash-s2"
+              "gemini-3-5-flash-s2",
+              "gemini-3-5-flash-gdocs"
             ]
           }
         ]
@@ -11195,8 +11204,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260608132629/https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=en",
+          "retrieved": "2026-06-08"
         }
       ],
       "provenance": {
@@ -12339,8 +12348,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260704003755/https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=en",
+          "retrieved": "2026-07-04"
         }
       ],
       "provenance": {
@@ -12420,13 +12429,13 @@
           "url": "https://docs.x.ai/developers/models/grok-4.5",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260710125453/https://docs.x.ai/developers/models/grok-4.5",
+          "retrieved": "2026-07-10"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 80,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and official documentation. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "undisclosed": [
@@ -12438,6 +12447,14 @@
             "value": "2026-07-08",
             "sources": [
               "grok-4-5-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 500000,
+            "sources": [
+              "grok-4-5-xmodel"
             ]
           }
         ]
@@ -13031,8 +13048,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260731100445/https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=en",
+          "retrieved": "2026-07-31"
         }
       ],
       "provenance": {
@@ -13136,8 +13153,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260722151134/https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=en",
+          "retrieved": "2026-07-22"
         }
       ],
       "provenance": {
@@ -14455,13 +14472,13 @@
           "url": "https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260812140241/https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
+          "retrieved": "2026-08-12"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
       },
       "evidence": {
@@ -14470,6 +14487,14 @@
             "value": "2026-08-10",
             "sources": [
               "gpt-5-6-cyber-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 400000,
+            "sources": [
+              "gpt-5-6-cyber-odocs"
             ]
           }
         ]
@@ -14679,8 +14704,8 @@
           "url": "https://docs.x.ai/developers/models/grok-4.6",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260812154738/https://docs.x.ai/developers/models/grok-4.6",
+          "retrieved": "2026-08-12"
         }
       ],
       "provenance": {
@@ -14865,8 +14890,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260814155256/https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=en",
+          "retrieved": "2026-08-14"
         }
       ],
       "provenance": {
@@ -14944,8 +14969,8 @@
           "url": "https://docs.z.ai/guides/llm/glm-5.3",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260814120744/https://docs.z.ai/guides/llm/glm-5.3",
+          "retrieved": "2026-08-14"
         }
       ],
       "provenance": {
