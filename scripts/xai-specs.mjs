@@ -38,7 +38,7 @@ import { readFileSync } from 'node:fs';
 import { saveDataset } from '../lib/dataset.mjs';
 // The shared half of every docs reader; the parsing below stays xAI-specific
 // on purpose — see lib/model-docs.mjs for why that line is drawn there.
-import { fetchText, tokens, dollars, flat } from '../lib/model-docs.mjs';
+import { fetchText, tokens, dollars, flat, citeDocs } from '../lib/model-docs.mjs';
 
 const WRITE = process.argv.includes('--write');
 const SRC = 'https://docs.x.ai/developers/models.md';
@@ -75,6 +75,7 @@ console.log(`${specs.size} models in xAI's pricing table\n`);
 
 const xai = data.releases.filter((r) => r.company === 'xAI');
 const today = new Date().toISOString().slice(0, 10);
+const deferrals = [];
 let touched = 0;
 
 for (const r of xai) {
@@ -88,18 +89,28 @@ for (const r of xai) {
     if (WRITE) r.specifications.language.context_window = s.context_window;
   }
   if (!r.pricing && s.input != null && s.output != null) {
-    added.push(`$${s.input}/$${s.output} per 1M`);
-    if (WRITE) {
-      // observed_on, not effective_from: this records what the page said today,
-      // never when the price started.
-      r.pricing = [{
-        unit: 'per_million_tokens',
-        rates: { input: s.input, output: s.output },
-        currency: 'USD',
-        observed_on: today,
-        sources: [r.sources[0].id],
-        ...(s.tiered ? { note: 'Base tier. xAI bills a higher rate for prompts at or above 200k tokens.' } : {}),
-      }];
+    // The table states the price, so the table is what the price cites — not
+    // sources[0], which is the announcement and may say nothing about money.
+    // METHODOLOGY §6 wants a snapshot of the page as it read today, so the
+    // price waits for one rather than pointing at a live URL.
+    const cited = r.sources.find((x) => x.url === SRC);
+    if (!cited?.archived_url) {
+      deferrals.push(`${r.model}: $${s.input}/$${s.output} — ${cited ? 'table not archived yet' : 'table not yet a cited source'}`);
+      if (WRITE) citeDocs(r, SRC, 'xdocs');
+    } else {
+      added.push(`$${s.input}/$${s.output} per 1M`);
+      if (WRITE) {
+        // observed_on, not effective_from: this records what the page said
+        // today, never when the price started.
+        r.pricing = [{
+          unit: 'per_million_tokens',
+          rates: { input: s.input, output: s.output },
+          currency: 'USD',
+          observed_on: today,
+          sources: [cited.id],
+          ...(s.tiered ? { note: 'Base tier. xAI bills a higher rate for prompts at or above 200k tokens.' } : {}),
+        }];
+      }
     }
   }
 
@@ -123,8 +134,14 @@ if (untracked.length || imagine.length) {
   console.log('  Each needs xAI\'s own announcement for a release date before it can be added.');
 }
 
+if (deferrals.length) {
+  console.log(`\nWITHHELD — the price is read but not yet citable to an archived page (METHODOLOGY \u00a76):`);
+  for (const d of deferrals) console.log(`  ${d}`);
+  console.log('  Run `node scripts/archive-sources.mjs --save`, then this again.');
+}
+
 console.log(`\n${touched} record${touched === 1 ? '' : 's'} with something to add`);
-if (WRITE && touched) {
+if (WRITE && (touched || deferrals.length)) {
   saveDataset(data);
   console.log('wrote data/llm-releases.json');
 } else if (!WRITE) {

@@ -81,6 +81,10 @@ const results = applySpecs({
   write: WRITE,
   today: new Date().toISOString().slice(0, 10),
   priceNote: 'Standard tier. Anthropic prices batch and cached tokens differently.',
+  // One page describes every model, so every record cites the same URL — and it
+  // is this page, not the announcement, that states the price being recorded.
+  docsUrl: () => SRC,
+  docsSuffix: 'adocs',
 });
 
 const filled = report('Anthropic', results, untrackedIn(specs, records), {

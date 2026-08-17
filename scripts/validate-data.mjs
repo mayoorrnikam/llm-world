@@ -410,6 +410,17 @@ for (const r of releases) {
             err(id, `pricing cites "${sid}" which has no archived_url — a live pricing `
               + `page cannot evidence a past price (METHODOLOGY §6)`);
           }
+          // METHODOLOGY §5: a secondary source may corroborate a date, never
+          // back a value. Four prices reached production citing Wikipedia
+          // articles that state no figure at all — the numbers were right and
+          // the citations were fiction, which is precisely the failure this
+          // dataset exists to make impossible. The writer that produced them is
+          // fixed (lib/model-docs.mjs citeDocs); this is the gate that would
+          // have caught it.
+          if (s.authority !== 'primary') {
+            err(id, `pricing cites "${sid}" (${s.url}) whose authority is `
+              + `"${s.authority}" — only a primary source can back a value (METHODOLOGY §5)`);
+          }
         }
       }
     }

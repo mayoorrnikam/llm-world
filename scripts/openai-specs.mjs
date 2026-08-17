@@ -42,7 +42,7 @@ import { readFileSync } from 'node:fs';
 import { saveDataset } from '../lib/dataset.mjs';
 // Shared half of every docs reader. The parsing below stays lab-specific —
 // see lib/model-docs.mjs for why that line is drawn where it is.
-import { fetchText, flat, tokens } from '../lib/model-docs.mjs';
+import { fetchText, flat, tokens, citeDocs } from '../lib/model-docs.mjs';
 
 const WRITE = process.argv.includes('--write');
 const INDEX = 'https://developers.openai.com/api/docs/models';
@@ -87,6 +87,7 @@ const today = new Date().toISOString().slice(0, 10);
 
 console.log(`${oai.length} OpenAI records · ${endpoints.length} models linked from the index\n`);
 
+const deferrals = [];
 let touched = 0;
 for (const r of oai) {
   const ep = endpoints.find((e) => flat(e) === flat(r.model))
@@ -107,16 +108,26 @@ for (const r of oai) {
     if (WRITE) r.modalities = s.modalities;
   }
   if (!r.pricing && s.input_price != null && s.output_price != null) {
-    added.push(`$${s.input_price}/$${s.output_price} per 1M`);
-    if (WRITE) {
-      r.pricing = [{
-        unit: 'per_million_tokens',
-        rates: { input: s.input_price, output: s.output_price },
-        currency: 'USD',
-        observed_on: today,
-        sources: [r.sources[0].id],
-        note: 'Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output.',
-      }];
+    // The model's own docs page states the price, so that is what the price
+    // cites. sources[0] is the announcement, and for the GPT-5.6 records it was
+    // a Wikipedia article that names no figure at all.
+    const page = `${INDEX}/${ep}`;
+    const cited = r.sources.find((x) => x.url === page);
+    if (!cited?.archived_url) {
+      deferrals.push(`${r.model}: $${s.input_price}/$${s.output_price} — ${cited ? 'page not archived yet' : 'page not yet a cited source'}`);
+      if (WRITE) citeDocs(r, page, 'odocs');
+    } else {
+      added.push(`$${s.input_price}/$${s.output_price} per 1M`);
+      if (WRITE) {
+        r.pricing = [{
+          unit: 'per_million_tokens',
+          rates: { input: s.input_price, output: s.output_price },
+          currency: 'USD',
+          observed_on: today,
+          sources: [cited.id],
+          note: 'Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output.',
+        }];
+      }
     }
   }
 
@@ -133,8 +144,14 @@ if (untracked.length) {
     + '\n  needs its announcement, which openai.com serves only through the archive.');
 }
 
+if (deferrals.length) {
+  console.log(`\nWITHHELD — the price is read but not yet citable to an archived page (METHODOLOGY \u00a76):`);
+  for (const d of deferrals) console.log(`  ${d}`);
+  console.log('  Run `node scripts/archive-sources.mjs --save`, then this again.');
+}
+
 console.log(`\n${touched} record${touched === 1 ? '' : 's'} with something to add`);
-if (WRITE && touched) {
+if (WRITE && (touched || deferrals.length)) {
   saveDataset(data);
   console.log('wrote data/llm-releases.json');
 } else if (!WRITE) {

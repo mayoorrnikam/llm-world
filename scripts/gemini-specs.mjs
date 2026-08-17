@@ -43,7 +43,7 @@ import { sourceText, FAILED } from '../lib/source-text.mjs';
 import { saveDataset } from '../lib/dataset.mjs';
 // Shared half of every docs reader. The parsing below stays lab-specific —
 // see lib/model-docs.mjs for why that line is drawn where it is.
-import { fetchText, flat, tokens } from '../lib/model-docs.mjs';
+import { fetchText, flat, tokens, citeDocs } from '../lib/model-docs.mjs';
 
 const WRITE = process.argv.includes('--write');
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
@@ -185,19 +185,10 @@ for (const r of gemini) {
 
   console.log(`  ✓ ${r.model.padEnd(24)} ${gaps.join(' · ')}`);
   wrote++;
-  if (WRITE) {
-    // The page becomes a cited source, not an invisible one.
-    if (!r.sources.some((x) => x.url === s.url)) {
-      r.sources.push({
-        id: `${r.id}-gdocs`,
-        url: s.url,
-        type: 'official_documentation',
-        authority: 'primary',
-        archived_url: null,
-        retrieved: null,
-      });
-    }
-  }
+  // The page becomes a cited source, not an invisible one. This reader got that
+  // right from the start; citeDocs is that habit hoisted so the other three,
+  // which cited sources[0] for values they read here, cannot get it wrong.
+  if (WRITE) citeDocs(r, s.url, 'gdocs');
 }
 
 console.log(`\n${wrote} record${wrote === 1 ? '' : 's'} with something to add`);

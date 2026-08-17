@@ -6849,6 +6849,14 @@
           "authority": "primary",
           "archived_url": null,
           "retrieved": null
+        },
+        {
+          "id": "claude-haiku-4-5-adocs",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview.md",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -11601,6 +11609,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260608180822/https://platform.claude.com/docs/en/about-claude/models/overview",
           "retrieved": "2026-06-08"
+        },
+        {
+          "id": "claude-fable-5-adocs",
+          "url": "https://platform.claude.com/docs/en/about-claude/models/overview.md",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -11620,22 +11636,7 @@
             ]
           }
         ]
-      },
-      "pricing": [
-        {
-          "unit": "per_million_tokens",
-          "rates": {
-            "input": 10,
-            "output": 50
-          },
-          "currency": "USD",
-          "observed_on": "2026-08-17",
-          "sources": [
-            "claude-fable-5-s1"
-          ],
-          "note": "Standard tier. Anthropic prices batch and cached tokens differently."
-        }
-      ]
+      }
     },
     {
       "id": "claude-mythos-5",
@@ -12357,7 +12358,7 @@
           "currency": "USD",
           "observed_on": "2026-08-17",
           "sources": [
-            "gpt-5-6-sol-s1"
+            "gpt-5-6-sol-s2"
           ],
           "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
         }
@@ -12450,7 +12451,7 @@
           "currency": "USD",
           "observed_on": "2026-08-17",
           "sources": [
-            "gpt-5-6-luna-s1"
+            "gpt-5-6-luna-s2"
           ],
           "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
         }
@@ -12543,7 +12544,7 @@
           "currency": "USD",
           "observed_on": "2026-08-17",
           "sources": [
-            "gpt-5-6-terra-s1"
+            "gpt-5-6-terra-s2"
           ],
           "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
         }
@@ -14165,6 +14166,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260810220432/https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows/",
           "retrieved": "2026-08-10"
+        },
+        {
+          "id": "gpt-5-6-cyber-odocs",
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -14181,22 +14190,7 @@
             ]
           }
         ]
-      },
-      "pricing": [
-        {
-          "unit": "per_million_tokens",
-          "rates": {
-            "input": 12.5,
-            "output": 75
-          },
-          "currency": "USD",
-          "observed_on": "2026-08-17",
-          "sources": [
-            "gpt-5-6-cyber-s1"
-          ],
-          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
-        }
-      ]
+      }
     },
     {
       "id": "nemotron-3-5-lightning",
