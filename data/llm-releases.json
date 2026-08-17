@@ -14041,7 +14041,17 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Google's workhorse model, introduced at half the per-token price of 3.6 Flash and aimed at software engineering and agent workloads.",
@@ -14056,7 +14066,7 @@
       ],
       "specifications": {
         "language": {
-          "context_window": null,
+          "context_window": 1048576,
           "parameter_count": null
         }
       },
@@ -14072,6 +14082,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260813195326/https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/",
           "retrieved": "2026-08-13"
+        },
+        {
+          "id": "gemini-3-7-flash-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
