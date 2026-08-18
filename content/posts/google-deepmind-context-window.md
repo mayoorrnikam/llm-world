@@ -4,7 +4,6 @@ question: How did Gemini get to a million tokens?
 date: 2026-08-17
 draft: true
 history: Google DeepMind | context_window
-unverified: allow — PaLM, Gemma, Gemma 3 and Gemini 1.5 Pro carry context windows this dataset has not yet traced to a primary source. They are marked ⚠︎ in the table and no claim above depends on them.
 ---
 
 Google has the longest run of records here, and the most jumps: the context window

@@ -4,7 +4,7 @@ question: Is AI actually getting more open over time?
 date: 2026-08-17
 draft: true
 openweights: by-year
-unverified: allow — the 2026 open-weights frontier (Kimi K3) and three earlier cells are not yet traced to a primary source. They are marked in the table and the post says the newest comparison is provisional.
+unverified: allow — 2026’s open-weights frontier, Qwen3.8-2.4T-A95B, is not yet traced to a primary source. It is marked in the table and the post says the newest comparison is provisional.
 ---
 
 Ask how open AI is getting and you will usually be shown a count of releases. By
