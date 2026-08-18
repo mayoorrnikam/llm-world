@@ -41,8 +41,8 @@
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { canonicalDate, contextWindow, fieldState } from '../lib/record.mjs';
+import { fetchCatalogue, trackedIndex, bare } from '../lib/catalogue.mjs';
 
-const CATALOGUE = 'https://openrouter.ai/api/v1/models';
 const SEEN_FILE = 'data/seen-providers.json';
 const BACKLOG = process.argv.includes('--backlog');
 
@@ -52,51 +52,20 @@ let seen = [];
 try { seen = JSON.parse(readFileSync(SEEN_FILE, 'utf8')).candidates ?? []; } catch { /* first run */ }
 const seenSet = new Set(seen);
 
-/**
- * Identifiers compared with punctuation and vendor prefix removed.
- *
- * Matching must UNDER-match. A missed match costs one line in a report a person
- * reads; a false match publishes "Anthropic changed Claude's context window"
- * about two different models. So: no fuzzy distance, no prefix matching, and
- * variants keep their suffix — `claude-opus-5-fast` is a different product from
- * `claude-opus-5` and must never collapse into it.
- */
-const key = (s) => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
-const bare = (id) => key(String(id).split('/').pop());
+const tracked = trackedIndex(data.releases);
 
-/**
- * Serving variants are not models.
- *
- * A catalogue lists what you can BUY, so one model appears several times: a
- * `:free` tier, a `:batch` tier, a `:nitro` route. Counting those as releases is
- * the same inflation that makes a competing directory claim 10,679 models over
- * 5,722 actual ids, and it would bury the six real ones in a report nobody then
- * reads. The router's own meta-models (`openrouter/auto`) are not models at all,
- * and a leading `~` marks a moving alias rather than a release.
- */
-const VARIANT = /:(free|beta|extended|thinking|batch|nitro|floor|online|exacto|preview)$/;
-const isServingVariant = (id) =>
-  VARIANT.test(id) || id.startsWith('openrouter/') || id.startsWith('~');
-
-const tracked = new Map();
-for (const r of data.releases) {
-  tracked.set(bare(r.id), r);
-  tracked.set(key(r.model), r);
-}
-
-const res = await fetch(CATALOGUE, { headers: { 'user-agent': 'llm-world/1.0 (+discovery)' } });
-if (!res.ok) {
-  // A catalogue that will not answer is not evidence that nothing shipped.
-  console.error(`${CATALOGUE} answered ${res.status}. No conclusions drawn.`);
+let served;
+try {
+  served = await fetchCatalogue();
+} catch (err) {
+  console.error(err.message);
   process.exit(1);
 }
-const served = (await res.json()).data ?? [];
 
 const untracked = [];
 const disagreements = [];
 
 for (const m of served) {
-  if (isServingVariant(m.id)) continue;
   const k = bare(m.id);
   const rec = tracked.get(k);
 

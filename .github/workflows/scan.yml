@@ -52,6 +52,11 @@ jobs:
           echo "" >> scan.md
           echo "# Served by a provider" >> scan.md
           node scripts/check-providers.mjs $FLAGS >> scan.md 2>&1 || true
+          # For open-weights models the catalogue also names the Hugging Face
+          # repo, and a model card is a primary source. Drafting stops at the
+          # spec: the record still needs the announcement and a person.
+          echo "" >> scan.md
+          node scripts/hf-bridge.mjs --limit=15 >> scan.md 2>&1 || true
           # A release added on announcement day cannot have an archive snapshot
           # or, often, its weights yet. This comes back for both rather than
           # letting "not yet" quietly become "never".
@@ -64,7 +69,7 @@ jobs:
           # Any channel having something to act on opens the issue. Keying only
           # on the docs scan would have hidden a served-but-untracked model, and
           # a value disagreeing with what is served, behind a quiet docs day.
-          if grep -qE 'newly listed by a lab|not tracked — [1-9]|is served — [1-9]' scan.md; then
+          if grep -qE 'newly listed by a lab|not tracked — [1-9]|is served — [1-9]|with a model card' scan.md; then
             echo "found=true" >> "$GITHUB_OUTPUT"
           else
             echo "found=false" >> "$GITHUB_OUTPUT"
