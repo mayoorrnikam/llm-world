@@ -187,6 +187,157 @@ const LABS = {
     note: 'Paid-tier input and output as the page read on this date. The free '
       + 'tier and context-caching rates are priced separately and are not recorded here.',
   },
+  cohere: {
+    company: 'Cohere',
+    url: 'https://cohere.com/pricing',
+    header: /Input\s*\$\s*[\d.]+[\s\S]{0,40}?\/\s*1M tokens[\s\S]{0,120}?Output\s*\$\s*[\d.]+/i,
+    /**
+     * A card per model, and a FAQ underneath that states prices the other way round.
+     *
+     *   Command A new  Command A is our most efficient and performant model …
+     *   Input  $ 2.50 $ 2.50 / 1M tokens
+     *   Output $ 10.00 $ 10.00 / 1M tokens
+     *
+     * The doubled figure is the mobile copy of the same cell, so the first $ after
+     * the label is the rate either way; the older layout prints it once.
+     *
+     * The trap is the FAQ, which survives in captures where the cards do not:
+     *
+     *   Command pricing is $1.00/1M tokens for input and $2.00/1M tokens for output
+     *
+     * Here the figure comes BEFORE its label, so a loose "Input … $n" would read
+     * "for input and $2.00" and record the OUTPUT rate as the input price. Demanding
+     * the label be followed immediately by the figure and "/ 1M tokens" excludes
+     * that sentence, and so does the header — a capture with only the FAQ is
+     * reported as carrying no pricing table rather than parsed.
+     *
+     * Bare "Command" is skipped for the same reason: every occurrence of it is nav
+     * chrome or FAQ prose about the retired Command/Command-light models, never a
+     * card. Blocks are cut at the next model name so that a card without a rate
+     * cannot inherit the next card's, and the first card for a name wins — which is
+     * what keeps "Command R Fine-tuned Model", further down the page, from
+     * overwriting Command R's own rate with the fine-tuned one.
+     */
+    parse(s) {
+      const out = new Map();
+      // A variant is a short token — R, R+, A, R7B, Light — and never one of the
+      // table's own labels: the 2023 card reads "Command Input $ 1.00 / 1M tokens",
+      // which a greedier name would read as a model called "Command Input".
+      const names = [...s.matchAll(/\bCommand(?:\s+(?!Input|Output|Cost|Training|Model|Pricing)[A-Z][\w+.]{0,4})?/g)];
+      for (let i = 0; i < names.length; i++) {
+        const name = names[i][0].replace(/\s+/g, ' ').trim();
+        if (name === 'Command' || out.has(name)) continue;
+        const from = names[i].index;
+        const to = names[i + 1]?.index ?? s.length;
+        const block = s.slice(from, Math.min(to, from + 900));
+        const grab = (label) => {
+          const m = new RegExp(`\\b${label}\\s*\\$\\s*([\\d.]+)(?:\\s*\\$\\s*[\\d.]+)?\\s*\\/\\s*1M tokens`, 'i').exec(block);
+          return m ? Number(m[1]) : null;
+        };
+        const input = grab('Input');
+        const output = grab('Output');
+        if (input == null || output == null) continue;
+        out.set(name, { input, output });
+      }
+      return out;
+    },
+    note: 'Base input and output rates as the page read on this date. Fine-tuned '
+      + 'and training rates are priced separately and are not recorded here.',
+  },
+  deepseek: {
+    company: 'DeepSeek',
+    url: 'https://api-docs.deepseek.com/quick_start/pricing/',
+    header: /MODEL(?:\s*\(\d\))?\s+deepseek-[\w.-]+[\s\S]{0,1200}?1M\s+(?:TOKENS\s+)?INPUT(?:\s+PRICE)?(?:\s+TOKENS)?\s*\(CACHE MISS\)/,
+    /**
+     * The one transposed table here: models are COLUMNS, prices are labelled rows.
+     *
+     *   MODEL                            deepseek-chat   deepseek-reasoner
+     *   MODEL VERSION                    DeepSeek-V3.2 … DeepSeek-V3.2 …
+     *   STANDARD PRICE （UTC 00:30-16:30）
+     *   1M INPUT TOKENS (CACHE HIT)      $0.07           $0.14
+     *   1M INPUT TOKENS (CACHE MISS)     $0.27           $0.55
+     *   1M OUTPUT TOKENS                 $1.10           $2.19
+     *   DISCOUNT PRICE （UTC 16:30-00:30）
+     *   1M INPUT TOKENS (CACHE MISS)     $0.135（50% OFF）…
+     *
+     * Four ways to get a plausible wrong number off it, all of them live:
+     *
+     *   · CACHE HIT sits directly above CACHE MISS and is ~4× cheaper. The base
+     *     input rate is the MISS.
+     *   · The DISCOUNT PRICE section repeats every label of the STANDARD one, so
+     *     the region is cut at DISCOUNT PRICE when a standard section exists. On
+     *     the 2025-09 capture that same rule is what picks the price then in force
+     *     over the one announced for four days later, which is printed first.
+     *   · Columns are named deepseek-chat / deepseek-reasoner, which are endpoints
+     *     rather than models. MODEL VERSION names the model, and where that row is
+     *     absent the footnote ("The deepseek-chat model points to DeepSeek-V3")
+     *     does. Without one of the two there is nothing a record can be matched on.
+     *   · A row can carry one figure for all columns (a colspan, when both share a
+     *     price) or one per column. Anything else — a "(75% off)" annotation with
+     *     both the discounted and the list price in the same cell, as in 2026-05 —
+     *     is ambiguous, and the capture is refused rather than guessed at.
+     *
+     * Before 2025-03 the table ran the other way, a row per model, and by 2025-01
+     * each cell held the list price and a promotional one together with nothing in
+     * the markup to separate them. Those captures fail the header — MODEL is not
+     * followed by a model id there — and are reported as carrying no table.
+     */
+    parse(s) {
+      const ids = /\bMODEL(?:\s*\(\d\))?\s+((?:deepseek-[\w.-]+\s*(?:\(\d\)\s*)?)+)/.exec(s);
+      if (!ids) return new Map();
+      const cols = ids[1].match(/deepseek-[\w.-]+/gi) ?? [];
+
+      // MODEL VERSION first: it names the model in the same column order. The
+      // footnote is the fallback for captures published before that row existed.
+      const version = /MODEL VERSION(?:\s*\(\d\))?\s+((?:\s*DeepSeek-[A-Za-z0-9.]+(?:-[A-Za-z0-9.]+)*(?:\s*（?\(?[^)）]{0,24}[)）])?)+)/.exec(s);
+      let names = version ? (version[1].match(/DeepSeek-[A-Za-z0-9.]+(?:-[A-Za-z0-9.]+)*/g) ?? []) : [];
+      if (names.length !== cols.length) {
+        const byId = new Map();
+        for (const m of s.matchAll(/\b(deepseek-[\w.-]+)\s+(?:model\s+)?(?:points to|has been upgraded to)(?:\s+the new model)?\s+(DeepSeek-[A-Za-z0-9.]+(?:-[A-Za-z0-9.]+)*)/gi)) {
+          byId.set(m[1].toLowerCase(), m[2]);
+        }
+        names = cols.map((c) => byId.get(c.toLowerCase()));
+      }
+      if (names.length !== cols.length || names.some((n) => !n)) return new Map();
+
+      // Standard hours only. Where the page prints a discounted list too, every
+      // label below DISCOUNT PRICE is a repeat and none of it is the base rate.
+      const std = s.search(/STANDARD PRICE/);
+      const cut = s.search(/DISCOUNT PRICE/);
+      const region = std >= 0 ? s.slice(std, cut > std ? cut : s.length) : s;
+
+      // "1M TOKENS INPUT (CACHE MISS)" and "1M INPUT TOKENS (CACHE MISS)" are the
+      // same row a year apart, so the label is matched either way round.
+      const row = (label, qualifier = '') => {
+        const m = new RegExp(`1M\\s+(?:TOKENS\\s+)?${label}(?:\\s+PRICE)?(?:\\s+TOKENS)?${qualifier}(?:\\s*\\(\\d\\))?`).exec(region);
+        if (!m) return null;
+        const after = region.slice(m.index + m[0].length);
+        const stop = after.search(/1M\s+(?:TOKENS\s+)?(?:INPUT|OUTPUT)|DISCOUNT PRICE|Concurrency/);
+        const cells = after.slice(0, stop < 0 ? Math.min(after.length, 160) : stop);
+        // A run that also states a percentage holds the discounted price and the
+        // list price together, and nothing in the markup says which is in force.
+        if (/%|\boff\b/i.test(cells)) return null;
+        const figs = [...cells.matchAll(/\$([\d.]+)/g)].map((f) => Number(f[1]));
+        if (figs.length === cols.length) return figs;
+        if (figs.length === 1) return cols.map(() => figs[0]); // one cell spanning every column
+        return null; // a cell holding more than its own price — not ours to interpret
+      };
+      const input = row('INPUT', '\\s*\\(CACHE MISS\\)');
+      const output = row('OUTPUT');
+
+      const out = new Map();
+      if (!input || !output) return out;
+      for (let i = 0; i < cols.length; i++) {
+        // Thinking and non-thinking modes are one model under two endpoints, so
+        // the same version name arrives twice; the first column is the one kept.
+        if (!out.has(names[i])) out.set(names[i], { input: input[i], output: output[i] });
+      }
+      return out;
+    },
+    note: 'Standard-hours cache-miss input and output as the page read on this date. '
+      + 'Cache-hit input and any off-peak discount are priced separately and are not '
+      + 'recorded here.',
+  },
 };
 
 const lab = LABS[LAB];

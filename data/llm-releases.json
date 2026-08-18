@@ -2268,6 +2268,22 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20250422100853/https://huggingface.co/CohereLabs/c4ai-command-r-v01",
           "retrieved": "2025-04-22"
+        },
+        {
+          "id": "command-r-price-20240409",
+          "url": "https://cohere.com/pricing",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20240409111749/https://cohere.com/pricing",
+          "retrieved": "2024-04-09"
+        },
+        {
+          "id": "command-r-price-20240913",
+          "url": "https://cohere.com/pricing",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20240913064105/https://cohere.com/pricing",
+          "retrieved": "2024-09-13"
         }
       ],
       "provenance": {
@@ -2301,7 +2317,35 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 0.5,
+            "output": 1.5
+          },
+          "currency": "USD",
+          "observed_on": "2024-04-09",
+          "sources": [
+            "command-r-price-20240409"
+          ],
+          "note": "Base input and output rates as the page read on this date. Fine-tuned and training rates are priced separately and are not recorded here."
+        },
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 0.15,
+            "output": 0.6
+          },
+          "currency": "USD",
+          "observed_on": "2024-09-13",
+          "sources": [
+            "command-r-price-20240913"
+          ],
+          "note": "Base input and output rates as the page read on this date. Fine-tuned and training rates are priced separately and are not recorded here."
+        }
+      ]
     },
     {
       "id": "llama-3",
@@ -4366,6 +4410,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260811022652/https://api-docs.deepseek.com/news/news1226/",
           "retrieved": "2026-08-10"
+        },
+        {
+          "id": "deepseek-v3-price-20250306",
+          "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250306121853/https://api-docs.deepseek.com/quick_start/pricing/",
+          "retrieved": "2025-03-06"
         }
       ],
       "provenance": {
@@ -4392,7 +4444,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 0.27,
+            "output": 1.1
+          },
+          "currency": "USD",
+          "observed_on": "2025-03-06",
+          "sources": [
+            "deepseek-v3-price-20250306"
+          ],
+          "note": "Standard-hours cache-miss input and output as the page read on this date. Cache-hit input and any off-peak discount are priced separately and are not recorded here."
+        }
+      ]
     },
     {
       "id": "deepseek-r1",
@@ -4452,6 +4519,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20250120073421/https://huggingface.co/deepseek-ai/DeepSeek-R1",
           "retrieved": "2025-01-20"
+        },
+        {
+          "id": "deepseek-r1-price-20250306",
+          "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250306121853/https://api-docs.deepseek.com/quick_start/pricing/",
+          "retrieved": "2025-03-06"
         }
       ],
       "provenance": {
@@ -4468,7 +4543,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 0.55,
+            "output": 2.19
+          },
+          "currency": "USD",
+          "observed_on": "2025-03-06",
+          "sources": [
+            "deepseek-r1-price-20250306"
+          ],
+          "note": "Standard-hours cache-miss input and output as the page read on this date. Cache-hit input and any off-peak discount are priced separately and are not recorded here."
+        }
+      ]
     },
     {
       "id": "mistral-small-3",
@@ -5144,6 +5234,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20250416154400/https://huggingface.co/CohereLabs/c4ai-command-a-03-2025",
           "retrieved": "2025-04-16"
+        },
+        {
+          "id": "command-a-price-20250315",
+          "url": "https://cohere.com/pricing",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250315140740/https://cohere.com/pricing",
+          "retrieved": "2025-03-15"
         }
       ],
       "provenance": {
@@ -5176,7 +5274,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 2.5,
+            "output": 10
+          },
+          "currency": "USD",
+          "observed_on": "2025-03-15",
+          "sources": [
+            "command-a-price-20250315"
+          ],
+          "note": "Base input and output rates as the page read on this date. Fine-tuned and training rates are priced separately and are not recorded here."
+        }
+      ]
     },
     {
       "id": "gemini-2-5-pro",
@@ -6756,6 +6869,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20250821064138/https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
           "retrieved": "2025-08-21"
+        },
+        {
+          "id": "deepseek-v3-1-price-20250901",
+          "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250901020532/https://api-docs.deepseek.com/quick_start/pricing/",
+          "retrieved": "2025-09-01"
         }
       ],
       "provenance": {
@@ -6789,7 +6910,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 0.27,
+            "output": 1.1
+          },
+          "currency": "USD",
+          "observed_on": "2025-09-01",
+          "sources": [
+            "deepseek-v3-1-price-20250901"
+          ],
+          "note": "Standard-hours cache-miss input and output as the page read on this date. Cache-hit input and any off-peak discount are priced separately and are not recorded here."
+        }
+      ]
     },
     {
       "id": "claude-sonnet-4-5",
@@ -10891,6 +11027,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260424025422/https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
           "retrieved": "2026-04-24"
+        },
+        {
+          "id": "deepseek-v4-flash-price-20260602",
+          "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260602230941/https://api-docs.deepseek.com/quick_start/pricing/",
+          "retrieved": "2026-06-02"
         }
       ],
       "provenance": {
@@ -10925,7 +11069,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 0.14,
+            "output": 0.28
+          },
+          "currency": "USD",
+          "observed_on": "2026-06-02",
+          "sources": [
+            "deepseek-v4-flash-price-20260602"
+          ],
+          "note": "Standard-hours cache-miss input and output as the page read on this date. Cache-hit input and any off-peak discount are priced separately and are not recorded here."
+        }
+      ]
     },
     {
       "id": "gemini-3-1-flash-lite",

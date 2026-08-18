@@ -215,16 +215,35 @@ for (const r of releases) {
   } else {
     const seenSourceIds = new Set();
     const seenUrls = new Set();
+    const seenArchives = new Set();
     for (const s of r.sources) {
       if (!s.id) err(id, `source missing id: ${s.url}`);
       else if (seenSourceIds.has(s.id)) err(id, `duplicate source id "${s.id}"`);
       else seenSourceIds.add(s.id);
 
       if (!/^https?:\/\//.test(s.url ?? '')) err(id, `source url must be http(s): ${s.url}`);
-      else if (seenUrls.has(s.url)) {
-        // Two ids for one URL would read as two independent corroborations.
-        err(id, `same URL cited twice under different ids: ${s.url}`);
-      } else seenUrls.add(s.url);
+      /**
+       * One URL, many SNAPSHOTS, is not a duplicate citation.
+       *
+       * The rule below exists because two ids for one URL read as two
+       * independent corroborations when they are one. That reasoning holds
+       * only while both point at the same document — and a price history is
+       * the case where they do not. Cohere's pricing page captured in April
+       * 2024 says $0.50 per million and the same page captured in September
+       * says $0.15; those are different documents that happen to share a URL,
+       * and each observation has to cite the snapshot that states it.
+       *
+       * So duplicates are still an error, and the test is the archived_url. Two
+       * sources for one page with no snapshot, or with the SAME snapshot, are
+       * the double-counting this was written to stop. Two different dated
+       * captures are the evidence a history is made of.
+       */
+      else if (seenUrls.has(s.url) && !s.archived_url) {
+        err(id, `same URL cited twice under different ids, with no snapshot to `
+          + `distinguish them: ${s.url}`);
+      } else if (seenUrls.has(s.url) && seenArchives.has(s.archived_url)) {
+        err(id, `same snapshot cited twice under different ids: ${s.archived_url}`);
+      } else { seenUrls.add(s.url); if (s.archived_url) seenArchives.add(s.archived_url); }
 
       if (!VALID_SOURCE_TYPE.has(s.type)) err(id, `unknown source type "${s.type}"`);
       if (!VALID_AUTHORITY.has(s.authority)) err(id, `unknown source authority "${s.authority}"`);
