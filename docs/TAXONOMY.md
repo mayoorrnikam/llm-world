@@ -171,8 +171,7 @@ Everything else currently in `tags[]` moves:
 
 This split matters for trust: it makes the boundary between *what a source says*
 and *what we think* visible in the schema rather than blurred inside one array.
-`flagship` is on 44 of 85 records and is entirely our opinion; it should be
-labelled as such in the UI.
+`flagship` is entirely our opinion; it should be labelled as such in the UI.
 
 ---
 
@@ -238,7 +237,7 @@ not to be used as a precedent for adding more products.
 ## 8. Families and lineage
 
 A **family** is a lineage the lab itself presents as continuous — `Claude`,
-`Llama`, `Qwen`. Currently filled on all 85 records across 23 families.
+`Llama`, `Qwen`. Filled on every record.
 
 Rules:
 
@@ -248,8 +247,15 @@ Rules:
   one family, several generations.
 - Ordering within a family is derived from dates, not from version-number
   parsing. Version numbers are not reliably ordered across labs.
-- Explicit parent pointers (`lineage.parent_id`) are additive and come later;
-  family pages do not need them.
+- Explicit parent pointers are NOT stored. `lineageOf()` in `lib/record.mjs`
+  derives predecessor, successor and siblings from `family` and the canonical
+  date, both of which are filled on every record. A stored pointer would be a
+  second copy of a fact the dataset already holds, and would go wrong the first
+  time a date was corrected (§4).
+- **Same-day releases are siblings, not a succession.** Ordering a family purely
+  by date turns GPT-5.6 Sol, Luna and Terra into a three-step chain; they are one
+  launch of three sizes. `lineageOf()` returns anything sharing a date as a
+  sibling and never as a predecessor.
 
 Where a lab forks a line — a family that splits into open and closed branches —
 record both under the same family and let the branch show in lineage when it

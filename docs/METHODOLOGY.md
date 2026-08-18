@@ -97,7 +97,7 @@ A model has many dates. The timeline needs one.
 evidenced, fall back to the earliest evidenced event of any type.
 
 Rationale: announcement is the date almost universally reported, and it is what
-the existing 85 records already encode — PaLM sits at 2022-04-04, its research
+every existing record already encodes — PaLM sits at 2022-04-04, its research
 blog post. Choosing availability instead would silently re-order the entire
 timeline against every existing source, which is a change no reader could see or
 verify.
@@ -207,7 +207,21 @@ Where no snapshot exists, create one before citing. Where one cannot be created,
 the fact is not recorded.
 
 *Enforced for pricing since Stage 7: a `pricing[]` entry whose source has no
-`archived_url` fails the build.*
+`archived_url` fails the build. Since the price-history work it must also cite a
+source whose authority is `primary` — §5 has always said a secondary source
+cannot back a value, but nothing checked it, and four prices reached production
+citing Wikipedia articles that state no figure at all.*
+
+### One URL, many snapshots, is not a duplicate citation
+
+Two source ids for one URL normally read as two independent corroborations when
+they are one, and the validator rejects that. A price history is the exception:
+Cohere's pricing page captured in April 2024 says $0.50 per million and the same
+page in September says $0.15. Those are different documents that happen to share
+a URL, and each observation must cite the snapshot that states it.
+
+So the test is the snapshot, not the URL. Two sources for one page with no
+`archived_url`, or with the same one, remain an error.
 
 ### A snapshot dates itself, not the fact
 

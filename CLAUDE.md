@@ -17,6 +17,20 @@ npm run smoke              # structural test of the built output (run a build fi
 npm run freshness          # weekly staleness + Hugging Face candidate report
 npm run feeds              # labs' own newsroom feeds — the only signal for closed labs
 npm run clean              # delete all generated output
+npm run mcp                # MCP server over the dataset, stdio, zero deps
+```
+
+Research and enrichment tools, none of which write without `--write`:
+
+```bash
+node scripts/pricing-history.mjs --lab=anthropic   # price history from archived captures
+node scripts/weights-events.mjs                    # when open weights actually landed
+node scripts/reconcile-status.mjs                  # make provenance.status match the evidence
+node scripts/detect-undisclosed.mjs                # split "lab publishes nothing" from "nobody looked"
+node scripts/discover-litellm.mjs                  # which gaps a lab plausibly publishes (leads only)
+node scripts/repo-dates.mjs                        # corroborate dates against arXiv/GitHub
+node scripts/apply-archives.mjs caps.txt           # fold in snapshots captured by hand
+node scripts/archive-worklist.mjs                  # write ARCHIVE-WORKLIST.md for a person
 ```
 
 There is no test framework and no bundler. `npm run smoke` is the test suite; it
@@ -34,6 +48,17 @@ is a strong reason — dependency-free is a deliberate property of this project.
 `data/llm-releases.json` drives everything: the app, all ~112 generated pages,
 the analytics charts, the JSON/CSV export. Adding a release is a JSON edit, never
 a code change. Schema is documented in README under "Data model (schema 1.6)".
+
+**Lineage is derived, not stored.** `lineageOf()` returns predecessor,
+successor and siblings from `family` and the canonical date. Do not add a
+`predecessor` field — it would be a second copy of a fact already held, and
+records sharing a date are SIBLINGS, not a succession (GPT-5.6 Sol, Luna and
+Terra are one launch of three sizes).
+
+**`sourceText()` signals failure with a Symbol, which is truthy.** `if (t)` is
+not a valid guard; use `typeof t === 'string'`. This has caused three separate
+crashes — weights-events, detect-undisclosed, and one report that silently
+scored a Symbol as page text.
 
 **Derived facts live in `lib/record.mjs`, not in the JSON.** The canonical date
 (from `events[]`), multimodality (from `modalities`), long-context (from
