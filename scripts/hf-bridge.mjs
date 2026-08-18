@@ -72,6 +72,38 @@ function announcementHints(releases) {
     [c, [...hosts].sort((a, b) => b[1] - a[1]).map(([h]) => h)]));
 }
 
+/**
+ * pipeline_tag to classification.primary_type, by table and never by substring.
+ *
+ * A first version read `pipeline_tag.includes('text')`, which is true of
+ * `text-to-image`, `text-to-video` and `text-to-speech` — it would have proposed
+ * an image generator as a language model. TAXONOMY §2 is explicit that the type
+ * answers "what is this model FOR", not what it can handle, and that `unknown`
+ * with a good source beats a confident mis-type. So anything not listed here is
+ * left for a person.
+ */
+const PRIMARY_TYPE = {
+  'text-generation': 'language',
+  'text2text-generation': 'language',
+  // Output is text ABOUT an image, which TAXONOMY §2 puts under `language`:
+  // "includes models that also accept or emit other modalities".
+  'image-text-to-text': 'language',
+  'video-text-to-text': 'language',
+  'text-to-image': 'image_generation',
+  'image-to-image': 'image_generation',
+  'text-to-video': 'video_generation',
+  'image-to-video': 'video_generation',
+  'text-to-speech': 'audio',
+  'text-to-audio': 'audio',
+  'audio-to-audio': 'audio',
+  'automatic-speech-recognition': 'audio',
+  'image-classification': 'vision',
+  'object-detection': 'vision',
+  'image-segmentation': 'vision',
+  'visual-question-answering': 'vision',
+  // 'any-to-any' is deliberately absent: it names no primary purpose.
+};
+
 /** Company names already used, so a draft joins an existing lab rather than inventing one. */
 const KNOWN_COMPANY = new Map(data.releases.map((r) => [r.company.toLowerCase().replace(/[^a-z0-9]/g, ''), r.company]));
 
@@ -221,7 +253,9 @@ if (SPEC) {
       open_weights: true,
       license: r.license,
       ...(r.params.value ? { parameter_count: r.params.value } : {}),
-      primary_type: r.pipeline?.includes('text') ? 'language' : undefined,
+      // Omitted rather than guessed when the tag is unmapped or absent — the
+      // person reviewing the draft decides, as TAXONOMY §2 requires.
+      ...(PRIMARY_TYPE[r.pipeline] ? { primary_type: PRIMARY_TYPE[r.pipeline] } : {}),
     });
   }
   // add-model.mjs takes ONE company per file, so a run spanning several labs
