@@ -1714,7 +1714,10 @@
         "confidence": 75,
         "reason": "Split from the former \"glm-4\" record, which was named for the family while holding one variant's figures. Evidence: \"This report primarily focuses on the GLM-4 language series, which includes GLM-4, GLM-4-Air, and GLM-4-9B.\" Capabilities evidenced from the primary sources: multilingual: “7k GLM-4 series: Open Multilingual Multimodal Chat LMs | 开源多语言多模态对话模型 License Apache-2.”."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "context_window"
+      ]
     },
     {
       "id": "glm-4-9b",
@@ -1927,7 +1930,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "license"
+      ]
     },
     {
       "id": "gemini-1-5-pro",
@@ -3058,7 +3064,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window"
+      ]
     },
     {
       "id": "claude-3-5-sonnet",
@@ -5062,7 +5071,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window"
+      ]
     },
     {
       "id": "gemma-3",
@@ -6163,7 +6175,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "license"
+      ]
     },
     {
       "id": "glm-4-5",
@@ -6302,7 +6317,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "license"
+      ]
     },
     {
       "id": "gpt-oss-120b",
@@ -8594,7 +8612,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "license"
+      ]
     },
     {
       "id": "glm-image",
@@ -8831,7 +8853,11 @@
         "confidence": 60,
         "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "qwen3-coder-next",
@@ -8889,7 +8915,12 @@
         "confidence": 60,
         "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "context_window",
+        "license",
+        "parameter_count"
+      ]
     },
     {
       "id": "glm-ocr",
@@ -9813,7 +9844,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "license",
+        "parameter_count"
+      ]
     },
     {
       "id": "glm-5-turbo",
@@ -10227,7 +10262,10 @@
         "confidence": 60,
         "reason": "Cited to the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "glm-5-1",
@@ -11233,7 +11271,11 @@
         "confidence": 60,
         "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "gemini-3-5-flash",
@@ -11416,7 +11458,11 @@
         "confidence": 60,
         "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "mistral-medium-3-5",
@@ -11963,7 +12009,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "gemma-4-12b",
@@ -13074,6 +13124,9 @@
           ],
           "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
         }
+      ],
+      "undisclosed": [
+        "parameter_count"
       ]
     },
     {
@@ -13169,6 +13222,9 @@
           ],
           "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
         }
+      ],
+      "undisclosed": [
+        "parameter_count"
       ]
     },
     {
@@ -13264,6 +13320,9 @@
           ],
           "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
         }
+      ],
+      "undisclosed": [
+        "parameter_count"
       ]
     },
     {
@@ -14009,7 +14068,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "minimax-h3",
@@ -14382,7 +14445,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "lfm2-5-2-6b",
@@ -15021,7 +15087,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "nemotron-3-5-lightning",
@@ -15096,7 +15165,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "license"
+      ]
     },
     {
       "id": "mai-code-1-1-flash",
@@ -15156,7 +15229,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "grok-4-6",
@@ -15269,6 +15346,9 @@
           ],
           "note": "Base tier. xAI bills a higher rate for prompts at or above 200k tokens."
         }
+      ],
+      "undisclosed": [
+        "parameter_count"
       ]
     },
     {
@@ -15439,7 +15519,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "glm-5-3",

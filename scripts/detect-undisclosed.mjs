@@ -99,7 +99,11 @@ async function examine(c) {
   let unread = primary.length - archived.length;
   for (const s of archived) {
     const t = await sourceText(s.archived_url);
-    if (t) texts.push(t); else unread++;
+    // `t` may be the FAILED Symbol, which is TRUTHY — so `if (t)` pushed a
+    // Symbol into the corpus and the first regex test threw. sourceText
+    // signals failure with a sentinel, not a falsy value; a string check is
+    // the only correct guard. weights-events.mjs had the identical bug.
+    if (typeof t === 'string' && t.trim()) texts.push(t); else unread++;
   }
 
   done++;

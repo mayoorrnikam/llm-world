@@ -1887,6 +1887,26 @@ code, kbd {
   line-height: 1.55;
 }
 .prose pre code { white-space: pre; }
+
+/* The boundary between what this dataset holds and what it deliberately does
+   not. Set apart from the record so it reads as a signpost, not as data. */
+.elsewhere {
+  margin: 34px 0 8px;
+  padding: 18px 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.elsewhere h2 { margin: 0 0 8px; }
+.elsewhere p { margin: 0 0 12px; color: var(--muted); }
+.elsewhere-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.elsewhere-list li {
+  display: flex; flex-wrap: wrap; gap: 4px 12px;
+  align-items: baseline; justify-content: space-between;
+  padding-bottom: 8px; border-bottom: 1px solid var(--line);
+}
+.elsewhere-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+.el-what { color: var(--fg); }
 .cap-matrix {
   border-collapse: collapse;
   width: 100%;

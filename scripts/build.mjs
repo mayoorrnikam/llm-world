@@ -20,7 +20,7 @@ import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import {
   dateParts, stamp, displayTags, contextWindow, parameterCount, tagLabel, diffRecords,
-  fieldState, appliesTo, evidenceFor, assertedValue, EVIDENCED_FIELDS,
+  fieldState, appliesTo, evidenceFor, assertedValue, EVIDENCED_FIELDS, lineageOf,
   MISSING_LABEL, SOURCE_LABEL, AUTHORITY_LABEL, logoSlug, monogram,
 } from '../lib/record.mjs';
 import { contextFrontier, stepChartSvg, tokenLabel } from '../lib/chart.mjs';
@@ -591,6 +591,44 @@ ${r.provenance?.reason ? `<details class="pv-why"><summary>Why this status</summ
 }
 
 /**
+ * Where to go for the things this dataset deliberately does not hold.
+ *
+ * Pricing sits at 21% of records and benchmarks at 7%, and neither will ever be
+ * complete here: a price is true for a quarter and a leaderboard changes weekly,
+ * while every figure in this dataset has to be traced to a dated primary source
+ * before it can be published. That is the wrong shape for live data, and
+ * OpenRouter, Artificial Analysis and Hugging Face already do it properly.
+ *
+ * So the gap is stated as a boundary rather than left looking like neglect.
+ * This dataset answers "what was true, when, and who said so"; these answer
+ * "what is true right now". Links are search queries rather than deep links,
+ * because a guessed model slug on someone else's site 404s the moment they
+ * rename something, and a dead link is worse than one extra click.
+ */
+function elsewhere(r) {
+  const q = encodeURIComponent(r.model);
+  const links = [
+    ['Current price and providers', `https://openrouter.ai/models?q=${q}`, 'OpenRouter'],
+    ['Current benchmark scores', `https://artificialanalysis.ai/models?q=${q}`, 'Artificial Analysis'],
+  ];
+  if (r.access?.open_weights) {
+    links.push(['Weights and model card', `https://huggingface.co/models?search=${q}`, 'Hugging Face']);
+  }
+  return `
+<section class="elsewhere">
+  <h2>Current information, elsewhere</h2>
+  <p>This record is a historical one: every figure above is traced to a dated
+  primary source. For what is true <em>today</em> — live pricing, current
+  rankings, availability — these are better maintained than anything here
+  could be.</p>
+  <ul class="elsewhere-list">
+${links.map(([what, href, who]) =>
+    `    <li><span class="el-what">${what}</span> <a href="${esc(href)}" rel="noopener nofollow">${who} \u2197</a></li>`).join('\n')}
+  </ul>
+</section>`;
+}
+
+/**
  * The page header: optional company mark, title, optional standfirst.
  *
  * Hand-typed at fourteen sites in three shapes — with a mark, bare, and wrapped
@@ -672,6 +710,29 @@ ${when}
     ['Released', fullDate(r), cite('release_date')],
     ['Company', r.company],
     ['Family', r.family],
+    /**
+     * Where this sits in its family. Derived in lib/record.mjs, never stored —
+     * and same-day releases are shown as siblings rather than a chain, because
+     * GPT-5.6 Sol, Luna and Terra are one launch of three sizes and ordering
+     * them by date would invent a succession OpenAI never announced.
+     */
+    ...(() => {
+      const l = lineageOf(r, releases);
+      const link = (x) => `<a href="../${esc(x.id)}/">${esc(x.model)}</a>`;
+      const rows = [];
+      if (l.predecessor || l.successor) {
+        // Third slot, not second: the renderer escapes the value and leaves the
+        // third raw, which is the right default — links belong in the raw one.
+        rows.push(['Lineage', '', [
+          l.predecessor ? `after ${link(l.predecessor)}` : null,
+          l.successor ? `before ${link(l.successor)}` : null,
+        ].filter(Boolean).join(' · ')]);
+      }
+      if (l.siblings.length) {
+        rows.push(['Released alongside', '', l.siblings.map(link).join(' · ')]);
+      }
+      return rows;
+    })(),
     ['Era', eraFor(r.year)],
     ['Type', r.kind === 'product' ? 'Product' : TYPE_LABEL(r.classification)],
     ['Modalities', modalityText(r)],
@@ -757,6 +818,8 @@ source that evidences it.</p>
 <span class="event-src">${cited.map((s) =>
     `<a href="${esc(s.url)}" rel="noopener noreferrer nofollow">${esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a>`).join(', ') || '—'}</span></li>`;
 }).join('')}</ol>` : ''}
+
+${elsewhere(r)}
 
 <h2>Sources</h2>
 <p class="doc-prov">Record status: <span class="prov-badge" data-status="${esc(r.provenance.status)}">${
@@ -2109,7 +2172,23 @@ not holes.</p>
 <td${c.unresearched ? ' class="cell-gap"' : ''}>${c.unresearched}</td>
 </tr>`).join('')}
 <tr><th scope="row">Modalities</th><td>${modalities}/${total}</td><td>0</td><td class="cell-gap">${total - modalities}</td></tr>
+${/**
+   * The two thin fields belong in this table, not only in the prose below it.
+   * A coverage table that lists the fields we do well and omits the ones we do
+   * not is a marketing table. Pricing and benchmarks are the fields a reader is
+   * most likely to want and least likely to find, so they are stated here at
+   * full width with the reason attached.
+   */''}
+<tr><th scope="row">Pricing <span class="cell-note">historical observations</span></th>
+<td>${withPricing}/${total}</td><td>0</td><td class="cell-gap">${total - withPricing}</td></tr>
+<tr><th scope="row">Benchmarks <span class="cell-note">as published</span></th>
+<td>${withBenchmarks}/${total}</td><td>0</td><td class="cell-gap">${total - withBenchmarks}</td></tr>
 </tbody></table>
+<p class="doc-note">Pricing and benchmarks are thin, and deliberately so. A price is
+true for a quarter and a leaderboard changes weekly, while every figure here must be
+traced to a dated primary source before it can be published — the wrong shape for live
+data. <a href="../api/">OpenRouter and Artificial Analysis maintain those properly</a>,
+and each model page links out to them.</p>
 <p class="doc-note">Modalities are new to schema 1.6. The earlier schema recorded
 <em>that</em> a model was multimodal but never <em>which</em> modalities, so these are
 being researched from primary sources rather than back-filled with assumptions.</p>
