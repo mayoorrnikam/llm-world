@@ -106,7 +106,30 @@ for (const [i, m] of list.entries()) {
     // plainly. Lowercasing both sides is cheaper and safer than doubling every
     // entry in dateForms, which every other caller shares.
     const flat = t.replace(/\s+/g, ' ').toLowerCase();
-    const f = forms.find((x) => flat.includes(x.toLowerCase()));
+    let f = forms.find((x) => flat.includes(x.toLowerCase()));
+
+    /**
+     * Chinese reporting writes the day without the year, and spaces it out.
+     *
+     * IT之家 opens "IT之家 8 月 15 日消息" and Yicai writes "于10月25日正式上线".
+     * Neither carries 2023年 or 2024年, so every generated form missed, and two
+     * milestones dated from Chinese sources were reported as stating no date
+     * they plainly state.
+     *
+     * Spaces are stripped before comparing, and the year-less form counts only
+     * when the year ALSO appears somewhere on the page. On its own "8月15日"
+     * would match that day in any year, which is the kind of loose matching
+     * that manufactures false confirmations. The match is labelled so a reader
+     * of the report can see it is the weaker conjunction rather than one
+     * unambiguous string.
+     */
+    if (!f && /^(\d{4})-(\d{2})-(\d{2})$/.test(m.date)) {
+      const [y, mo, da] = m.date.split('-');
+      const cjk = `${Number(mo)}月${Number(da)}日`;
+      const tight = t.replace(/\s+/g, '');
+      if (tight.includes(cjk) && tight.includes(y)) f = `${cjk} + ${y} on the page`;
+    }
+
     if (f) { hit = { form: f, src: s }; break; }
   }
 
