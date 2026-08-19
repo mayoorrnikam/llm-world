@@ -73,7 +73,16 @@ for (const m of spec.models ?? []) {
   if (!m.id) problems.push(`${where}: needs an id`);
   if (!m.model) problems.push(`${where}: needs a model name`);
   if (data.releases.some((r) => r.id === m.id)) problems.push(`${where}: id already exists`);
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(m.date ?? '')) problems.push(`${where}: date must be YYYY-MM-DD`);
+  // Month precision is legal in the dataset — validate-data accepts
+  // YYYY-MM-DD *or* YYYY-MM for an event date, because some labs announce a
+  // month and nothing finer. This check was stricter than the schema it feeds,
+  // so a record the dataset would happily hold could not be added by the tool
+  // meant to add it. Ornith's two announcements are dated "Jun. 2026" and
+  // "Aug. 2026" and nothing else; refusing them would have meant inventing a
+  // day, which is the one thing this project will not do.
+  if (!/^\d{4}-\d{2}(-\d{2})?$/.test(m.date ?? '')) {
+    problems.push(`${where}: date must be YYYY-MM-DD or YYYY-MM`);
+  }
 
   const sources = m.sources ?? [];
   if (!sources.length) problems.push(`${where}: needs at least one source`);

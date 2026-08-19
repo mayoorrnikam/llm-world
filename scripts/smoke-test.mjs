@@ -21,7 +21,7 @@ import { readFileSync, readdirSync, statSync, existsSync, writeFileSync, unlinkS
 import { join, dirname, resolve, extname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
-import { logoSlug } from '../lib/record.mjs';
+import { COMPANY_SLUG, logoSlug } from '../lib/record.mjs';
 
 const fails = [];
 const fail = (page, msg) => fails.push(`${page}: ${msg}`);
@@ -386,7 +386,18 @@ function checkCompanyLogos() {
 
   for (const company of [...new Set(data.releases.map((r) => r.company))].sort()) {
     const slug = logoSlug(company);
-    if (slug === 'other') {
+    // 'other' means one of two very different things, and only one is a bug.
+    //
+    // A company ABSENT from COMPANY_SLUG was forgotten — that is the oversight
+    // this check was written to catch, and it still fails.
+    //
+    // A company mapped to 'other' ON PURPOSE is a decision: lobe-icons carries
+    // no mark for it and this project inlines only icons it can license, so it
+    // renders as a monogram. Ornith is the first such lab — its site ships a
+    // 72KB PNG and a favicon, no SVG, and its logo is not ours to redraw.
+    // Failing on a recorded decision would mean the only way to add a new lab
+    // is to invent a logo for it.
+    if (slug === 'other' && !(company in COMPANY_SLUG)) {
       fail('sprite.svg', `"${company}" has no logo — add it to COMPANY_SLUG in lib/record.mjs`);
       continue;
     }
