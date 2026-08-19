@@ -1341,6 +1341,7 @@ const MILESTONE_LABEL = {
   product_launch: 'Product launch', architecture: 'Architecture',
   context: 'Context length', multimodal: 'Multimodal', open_weights: 'Open weights',
   research: 'Research', policy: 'Policy',
+  agent: 'Agent & harness', protocol: 'Protocol',
 };
 
 /**

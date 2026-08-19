@@ -495,6 +495,16 @@ for (const [prev, owner] of retiredIds) {
 const VALID_MILESTONE_TYPE = new Set([
   'product_launch', 'architecture', 'context', 'multimodal',
   'open_weights', 'research', 'policy',
+  // The execution layer around a model, which is a different kind of event from
+  // shipping the model itself. Nineteen agent and harness milestones all typed
+  // `product_launch` would have filed AutoGPT, Claude Code and OpenClaw under
+  // the same label as ChatGPT — true but useless, since the index page facets
+  // on this field and a facet everything shares filters nothing.
+  'agent',
+  // A protocol is not a product. MCP has no launch price, no users and no
+  // owner in the way a product does; what it has is adoption. `architecture`
+  // was the alternative and reads as MODEL architecture everywhere else here.
+  'protocol',
 ]);
 
 let milestones = [];

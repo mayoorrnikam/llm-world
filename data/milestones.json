@@ -3,6 +3,40 @@
   "schema_version": "1.6",
   "milestones": [
     {
+      "id": "langchain",
+      "title": "LangChain's first release",
+      "date": "2022-10-24",
+      "type": "agent",
+      "company": "LangChain",
+      "note": "Harrison Chase published the first version of LangChain as a small Python package for chaining LLM calls, prompt templates and external tools.",
+      "significance": "The first widely adopted framework for wiring a language model to tools, memory and multi-step control flow. Almost every 2023 agent experiment, including AutoGPT and BabyAGI, was built on or against it.",
+      "draft": true,
+      "sources": [
+        {
+          "id": "langchain-s1",
+          "url": "https://x.com/hwchase17/status/1981791807160955231",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "langchain-s2",
+          "url": "https://www.langchain.com/blog/three-years-langchain",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 65,
+        "reason": "Day precision comes from a post by LangChain's creator: 'Three years ago, on October 24th of 2022, I released the first version of LangChain as a Python package.' x.com blocks automated fetches, so no tool here can re-read it; LangChain's own blog says only 'fall of 2022'. Held as a draft until the post is archived somewhere machine-readable."
+      },
+      "evidence_quote": "Three years ago, on October 24th of 2022, I released the first version of LangChain as a Python package."
+    },
+    {
       "id": "chatgpt",
       "title": "ChatGPT launches",
       "date": "2022-11-30",
@@ -53,6 +87,122 @@
       }
     },
     {
+      "id": "chatgpt-plugins",
+      "title": "ChatGPT plugins",
+      "date": "2023-03-23",
+      "type": "architecture",
+      "company": "OpenAI",
+      "note": "OpenAI gave ChatGPT the ability to call third-party services, plus its own browsing and code-interpreter plugins, initially to a waitlist.",
+      "significance": "The first time a mass-market language model could act outside its own text box. It is the origin of the tool-use pattern every later agent is built on, and OpenAI said so directly: it expected open standards to emerge for exposing an AI-facing interface.",
+      "sources": [
+        {
+          "id": "chatgpt-plugins-s1",
+          "url": "https://openai.com/index/chatgpt-plugins/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20230325000049/https://openai.com/blog/chatgpt-plugins",
+          "retrieved": "2023-03-25"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Dateline 'March 23, 2023' read directly from a Wayback capture of OpenAI's own announcement taken two days later. openai.com blocks automated fetches, so the live URL was not read."
+      },
+      "evidence_quote": "March 23, 2023"
+    },
+    {
+      "id": "babyagi",
+      "title": "BabyAGI (Task-Driven Autonomous Agent)",
+      "date": "2023-03-28",
+      "type": "agent",
+      "company": "Yohei Nakajima",
+      "note": "A roughly 100-line Python loop that creates, prioritises and executes its own tasks against an objective. Shared first as the 'Task-Driven Autonomous Agent', then released as the babyagi repository days later.",
+      "significance": "The minimum viable autonomous agent, small enough to read in one sitting. It defined the plan-execute-reprioritise loop that the whole 2023 agent wave copied, and its author explicitly framed it as documenting a pattern rather than shipping a product.",
+      "sources": [
+        {
+          "id": "babyagi-s1",
+          "url": "https://github.com/yoheinakajima/babyagi_archive",
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        },
+        {
+          "id": "babyagi-s2",
+          "url": "https://yoheinakajima.com/birth-of-babyagi/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 80,
+        "reason": "The project's own README dates the original Task-Driven Autonomous Agent to 28 March 2023 and links the announcing tweet; the author's blog post narrating its creation is dated 1 April 2023. The date recorded here is the one the project itself states. The babyagi repository under that name followed in early April, so a reader who expects the 'BabyAGI' name to be dated will see a few days' offset."
+      },
+      "evidence_quote": "This is a pared-down version of the original [Task-Driven Autonomous Agent](https://twitter.com/yoheinakajima/status/1640934493489070080?s=20) (Mar 28, 2023)."
+    },
+    {
+      "id": "autogpt",
+      "title": "AutoGPT",
+      "date": "2023-03-30",
+      "type": "agent",
+      "company": "Significant Gravitas",
+      "note": "An open-source program that gives GPT-4 a goal in natural language and lets it decompose the goal into sub-tasks, then run them against a browser, a file system and a code interpreter without further prompting.",
+      "significance": "The moment 'autonomous agent' became a mainstream idea rather than a research term. It became one of the fastest-starred repositories in GitHub history and set the expectations \u2014 and the disappointment \u2014 that the next two years of agent work were measured against.",
+      "sources": [
+        {
+          "id": "autogpt-s1",
+          "url": "https://en.wikipedia.org/wiki/AutoGPT",
+          "type": "independent_analysis",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        },
+        {
+          "id": "autogpt-s2",
+          "url": "https://github.com/Significant-Gravitas/AutoGPT",
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Dated only by Wikipedia, which states the release date plainly but is a secondary source. The project's own repository does not state a release date anywhere I could read, and there is no launch blog post. A contemporaneous announcement or the author's own dated statement is what is missing."
+      },
+      "evidence_quote": "AutoGPT was released on March 30, 2023, by Toran Bruce Richards, the founder of video game company Significant Gravitas Ltd."
+    },
+    {
+      "id": "openai-function-calling",
+      "title": "Function calling in the OpenAI API",
+      "date": "2023-06-13",
+      "type": "architecture",
+      "company": "OpenAI",
+      "note": "OpenAI shipped gpt-4-0613 and gpt-3.5-turbo-0613, fine-tuned to decide when a described function should be called and to emit a JSON object matching its signature.",
+      "significance": "Tool use stopped being a prompting trick and became an API primitive with a defined contract. Every agent framework after this date builds on structured tool calls rather than on parsing free text.",
+      "sources": [
+        {
+          "id": "openai-function-calling-s1",
+          "url": "https://openai.com/index/function-calling-and-other-api-updates/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20230615023709/https://openai.com/blog/function-calling-and-other-api-updates",
+          "retrieved": "2023-06-15"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Dateline 'June 13, 2023' read directly from a Wayback capture of OpenAI's own announcement taken two days later. openai.com blocks automated fetches, so the live URL was not read."
+      },
+      "evidence_quote": "June 13, 2023"
+    },
+    {
       "id": "gemini-app",
       "title": "Bard becomes Gemini",
       "date": "2024-02-08",
@@ -78,12 +228,38 @@
       }
     },
     {
+      "id": "devin",
+      "title": "Devin, the first agent sold as a software engineer",
+      "date": "2024-03-12",
+      "type": "agent",
+      "company": "Cognition",
+      "note": "Cognition unveiled Devin, an agent with its own shell, editor and browser, marketed as a teammate that completes engineering tasks end to end rather than as an autocomplete.",
+      "significance": "The first time an agent was positioned as a colleague with a job description rather than a developer tool. It reset what a coding agent was expected to do, and its SWE-bench claims made benchmark performance on real repositories the field's scoreboard.",
+      "draft": true,
+      "sources": [
+        {
+          "id": "devin-s1",
+          "url": "https://cognition.com/blog/introducing-devin",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 75,
+        "reason": "Cognition's own announcement is the source, but the only date on it is the numeric dateline '03.12.24'. Read as 12 March 2024 in US month-first order, which matches every contemporaneous report \u2014 but the page never writes the date unambiguously, so this is an interpretation rather than a stated fact and the record does not claim verified."
+      },
+      "evidence_quote": "Devin is a tireless, skilled teammate, equally ready to build alongside you or independently complete tasks for you to review."
+    },
+    {
       "id": "eu-ai-act",
       "title": "The EU AI Act enters into force",
       "date": "2024-08-01",
       "type": "policy",
       "company": "European Union",
-      "note": "Regulation (EU) 2024/1689 — the first broad statutory regime for AI systems, including obligations that fall on general-purpose model providers.",
+      "note": "Regulation (EU) 2024/1689 \u2014 the first broad statutory regime for AI systems, including obligations that fall on general-purpose model providers.",
       "significance": "The first time training and releasing a general-purpose model carried statutory duties rather than voluntary commitments. Obligations phase in over years, but this is the date the regime began to exist.",
       "sources": [
         {
@@ -98,8 +274,389 @@
       "provenance": {
         "status": "verified",
         "confidence": 85,
-        "reason": "The regulation was published in the Official Journal on 12 July 2024, and its own Article 113 states that it enters into force on the twentieth day following publication — 1 August 2024. Both facts are in the archived primary source; the date here is their sum, not an estimate."
+        "reason": "The regulation was published in the Official Journal on 12 July 2024, and its own Article 113 states that it enters into force on the twentieth day following publication \u2014 1 August 2024. Both facts are in the archived primary source; the date here is their sum, not an estimate."
       }
+    },
+    {
+      "id": "replit-agent",
+      "title": "Replit Agent early access",
+      "date": "2024-09-05",
+      "type": "agent",
+      "company": "Replit",
+      "note": "Replit opened early access to an agent that takes a natural-language description and sets up the environment, writes the code, provisions a database and deploys the result.",
+      "significance": "The first agent that shipped a running application rather than a diff, and the first commercial evidence that agents could carry a business: Replit's revenue growth after this release is what pulled the rest of the industry into agent products.",
+      "sources": [
+        {
+          "id": "replit-agent-s1",
+          "url": "https://x.com/Replit/status/1831731656073629939",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "replit-agent-s2",
+          "url": "https://www.aikatana.com/p/replit-ai-agent-early-access-opens-door-quick-app-creation",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        },
+        {
+          "id": "replit-agent-s3",
+          "url": "https://replit.com/blog/introducing-replit-agent",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 55,
+        "reason": "Dated by a news article published 5 September 2024 that describes the agent as launched that day and quotes a same-day post. Replit's own announcement is an X post whose dateline could not be read (x.com blocks automated fetches). There is a real tension to resolve: Replit's blog post 'Introducing Replit Agent' is dated 16 September 2024 and opens 'Last week, we launched Replit Agent', which points at the week of 9 September rather than 5 September. Confirm against the X post before treating 5 September as settled."
+      },
+      "evidence_quote": "Replit Agent (launched today)"
+    },
+    {
+      "id": "anthropic-computer-use",
+      "title": "Claude computer use",
+      "date": "2024-10-22",
+      "type": "architecture",
+      "company": "Anthropic",
+      "note": "Anthropic put a public beta API in developers' hands that lets Claude look at a screen, move a cursor, click and type \u2014 operating software built for people rather than calling an API.",
+      "significance": "The first frontier model offered as a general computer operator. It opened the second track of the agent era: instead of every tool needing an API, the agent uses the interface a human would.",
+      "sources": [
+        {
+          "id": "anthropic-computer-use-s1",
+          "url": "https://www.anthropic.com/news/3-5-models-and-computer-use",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Anthropic's own announcement, dated Oct 22, 2024 on the page. Note this post also announces model releases (Claude 3.5 Sonnet upgraded and Claude 3.5 Haiku), which belong in the model dataset; the milestone here is the computer-use capability only. No archived capture recorded; one should be added."
+      },
+      "evidence_quote": "We're also introducing a groundbreaking new capability in public beta: computer use."
+    },
+    {
+      "id": "mcp",
+      "title": "The Model Context Protocol is open-sourced",
+      "date": "2024-11-25",
+      "type": "protocol",
+      "company": "Anthropic",
+      "note": "Anthropic published MCP, an open standard and reference servers for connecting assistants to data sources and tools through one protocol instead of bespoke integrations.",
+      "significance": "The integration layer the agent era had been missing. Within a year it was adopted across competing labs and tools, making it the rare piece of AI infrastructure that became a shared standard rather than a moat.",
+      "sources": [
+        {
+          "id": "mcp-s1",
+          "url": "https://www.anthropic.com/news/model-context-protocol",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Anthropic's own announcement, dated Nov 25, 2024 on the page. Typed product_launch for lack of a better value in the schema \u2014 MCP is a protocol and reference implementation, not a product; 'architecture' was the alternative and reads as model architecture in this dataset. No archived capture recorded; one should be added."
+      },
+      "evidence_quote": "Today, we're open-sourcing the Model Context Protocol (MCP), a new standard for connecting AI assistants to the systems where data lives, including content repositories, business tools, and development environments."
+    },
+    {
+      "id": "openai-operator",
+      "title": "Operator",
+      "date": "2025-01-23",
+      "type": "agent",
+      "company": "OpenAI",
+      "note": "A research preview of an agent that drives a browser on the user's behalf \u2014 filling forms, ordering things, navigating sites \u2014 released to ChatGPT Pro subscribers.",
+      "significance": "The first consumer-facing agent from OpenAI that acted on the open web rather than answering questions. It moved computer-using agents from a developer capability to a subscription product.",
+      "sources": [
+        {
+          "id": "openai-operator-s1",
+          "url": "https://openai.com/index/introducing-operator/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250125121052/https://openai.com/index/introducing-operator/",
+          "retrieved": "2025-01-25"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Dateline 'January 23, 2025' read from a Wayback capture of OpenAI's own announcement taken two days later; the same string appears in the page's own publicationDateText field. openai.com blocks automated fetches, so the live URL was not read."
+      },
+      "evidence_quote": "January 23, 2025"
+    },
+    {
+      "id": "openai-deep-research",
+      "title": "Deep research",
+      "date": "2025-02-02",
+      "type": "agent",
+      "company": "OpenAI",
+      "note": "An agent inside ChatGPT that runs multi-step web research over tens of minutes and returns a cited report rather than a chat answer.",
+      "significance": "Created the research-agent category. Within months Google, Anthropic, Perplexity and xAI had shipped their own, and 'deep research' became a generic product name rather than a brand.",
+      "sources": [
+        {
+          "id": "openai-deep-research-s1",
+          "url": "https://openai.com/index/introducing-deep-research/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250203220621/https://openai.com/index/introducing-deep-research/",
+          "retrieved": "2025-02-03"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Dateline 'February 2, 2025' read from a Wayback capture of OpenAI's own announcement taken the next day, above the headline 'Introducing deep research'. openai.com blocks automated fetches, so the live URL was not read."
+      },
+      "evidence_quote": "February 2, 2025"
+    },
+    {
+      "id": "claude-code",
+      "title": "Claude Code",
+      "date": "2025-02-24",
+      "type": "agent",
+      "company": "Anthropic",
+      "note": "Anthropic released Claude Code as a limited research preview: an agentic coding tool that works in the terminal, reading and editing a repository and running commands.",
+      "significance": "Established the terminal as the agent's home rather than the IDE, a shape that Google, OpenAI and xAI all copied within eighteen months. It also became the reference harness that later open-source agents were benchmarked against.",
+      "sources": [
+        {
+          "id": "claude-code-s1",
+          "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 85,
+        "reason": "Anthropic's own announcement, dated Feb 24, 2025 on the page. The post's headline subject is the Claude 3.7 Sonnet model release, which belongs in the model dataset; Claude Code is introduced in the same post and is the milestone here. General availability came later (May 2025) and is a separate date if one is wanted. No archived capture recorded; one should be added."
+      },
+      "evidence_quote": "Today, we're empowering developers further by introducing Claude Code\u2014our first agentic coding tool\u2014in a limited research preview."
+    },
+    {
+      "id": "manus",
+      "title": "Manus",
+      "date": "2025-03-06",
+      "type": "agent",
+      "company": "Butterfly Effect",
+      "note": "A general-purpose agent from a Chinese startup, launched invitation-only, that plans and executes long multi-step tasks in a cloud sandbox and returns finished deliverables. It ran on other labs' models rather than its own.",
+      "significance": "Showed that a competitive agent product could be built on top of someone else's frontier model, and that the agent layer was a separate market from the model layer. Its viral launch is also the moment agents became a mass consumer expectation outside the US labs.",
+      "sources": [
+        {
+          "id": "manus-s1",
+          "url": "https://en.wikipedia.org/wiki/Manus_(AI_agent)",
+          "type": "independent_analysis",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 65,
+        "reason": "Dated by Wikipedia, which states the beta launch date plainly. The company's own launch announcement was a video and invite-code rollout rather than a dated blog post, and I found no primary page carrying the date. A contemporaneous news dateline (TechCrunch covered Manus through March 2025) would strengthen this."
+      },
+      "evidence_quote": "Manus launched in invitation-only beta on March 6, 2025."
+    },
+    {
+      "id": "openai-codex-agent",
+      "title": "Codex, a cloud software-engineering agent",
+      "date": "2025-05-16",
+      "type": "agent",
+      "company": "OpenAI",
+      "note": "OpenAI reused the Codex name for something new: an agent that runs in its own cloud sandbox, works several tasks in parallel against a repository, and returns pull requests.",
+      "significance": "Moved coding agents off the developer's machine. Work being dispatched to a fleet of remote agents rather than supervised in an editor is the shape that OpenAI, Google and GitHub all converged on through 2025.",
+      "sources": [
+        {
+          "id": "openai-codex-agent-s1",
+          "url": "https://openai.com/index/introducing-codex/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250517232536/https://openai.com/index/introducing-codex/",
+          "retrieved": "2025-05-17"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 85,
+        "reason": "Date 'May 16, 2025' read from the publicationDateText field in a Wayback capture of OpenAI's own announcement taken the next day, under the headline 'Introducing Codex'. openai.com blocks automated fetches, so the live URL was not read. Note this name collides with the 2021 Codex model and with the Codex CLI released in April 2025 \u2014 the entry here is the cloud agent."
+      },
+      "evidence_quote": "May 16, 2025"
+    },
+    {
+      "id": "gemini-cli",
+      "title": "Gemini CLI",
+      "date": "2025-06-25",
+      "type": "agent",
+      "company": "Google DeepMind",
+      "note": "Google released an Apache-2.0 licensed agent that runs in the terminal against a local codebase, with a free tier for personal Google accounts.",
+      "significance": "The first terminal agent from a frontier lab released as open source with a generous free tier, which turned the agent harness from a paid product into a commodity distribution channel for the underlying model.",
+      "sources": [
+        {
+          "id": "gemini-cli-s1",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-cli-open-source-ai-agent/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Google's own blog post, dated Jun 25, 2025 on the page. Company recorded as Google DeepMind to match the name this dataset already uses for Google entries, though the product shipped under Google Cloud/Labs branding. No archived capture recorded; one should be added."
+      },
+      "evidence_quote": "That's why we're introducing Gemini CLI, an open-source AI agent that brings the power of Gemini directly into your terminal."
+    },
+    {
+      "id": "chatgpt-agent",
+      "title": "ChatGPT agent",
+      "date": "2025-07-17",
+      "type": "agent",
+      "company": "OpenAI",
+      "note": "OpenAI merged Operator's browser control and deep research's multi-step reasoning into a single agentic mode inside ChatGPT, with its own virtual computer and terminal.",
+      "significance": "The point the separate agent experiments were folded back into the main product. After this, an agent was a mode of the assistant rather than a distinct thing you went somewhere else to use.",
+      "sources": [
+        {
+          "id": "chatgpt-agent-s1",
+          "url": "https://openai.com/index/introducing-chatgpt-agent/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20250721015518/https://openai.com/index/introducing-chatgpt-agent/",
+          "retrieved": "2025-07-21"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 85,
+        "reason": "Date 'July 17, 2025' read from the publicationDateText field and the page caption in a Wayback capture of OpenAI's own announcement taken four days later. No capture closer to the announcement exists in the Wayback Machine, and openai.com blocks automated fetches, so the live URL was not read."
+      },
+      "evidence_quote": "July 17, 2025"
+    },
+    {
+      "id": "openclaw",
+      "title": "OpenClaw",
+      "date": "2026-01-29",
+      "type": "agent",
+      "company": "OpenClaw",
+      "note": "Peter Steinberger's self-hosted personal agent \u2014 first published in late 2025 under earlier names, renamed Clawdbot then Moltbot then OpenClaw \u2014 that runs on the user's own machine and is driven from WhatsApp, Telegram, Discord, Slack or Teams.",
+      "significance": "The first viral consumer agent that was not a lab product: open source, self-hosted, and reached through chat apps people already had. It also made prompt injection and agent permissions a mainstream security story rather than a research concern.",
+      "sources": [
+        {
+          "id": "openclaw-s1",
+          "url": "https://openclaw.ai/blog/introducing-openclaw",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        },
+        {
+          "id": "openclaw-s2",
+          "url": "https://en.wikipedia.org/wiki/OpenClaw",
+          "type": "independent_analysis",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 75,
+        "reason": "The date recorded is the project's own rename announcement, dated 'Jan 29, 2026' on openclaw.ai \u2014 a primary source. It is NOT the date the project first appeared: that post says only 'Two months ago, I hacked together a weekend project' and Wikipedia says it was first published in November 2025 under an earlier name, with no day given. If the owner wants the origin rather than the rename dated, this entry needs different evidence. Note also that Wikipedia and Forbes place the OpenClaw rename on 30 January while the project's own post is dated 29 January."
+      },
+      "evidence_quote": "Today, I'm excited to announce our new name: OpenClaw"
+    },
+    {
+      "id": "hermes-agent",
+      "title": "Hermes Agent",
+      "date": "2026-02-25",
+      "type": "agent",
+      "company": "Nous Research",
+      "note": "Nous Research released an open-source, model-agnostic agent that runs as a persistent daemon on the user's own infrastructure, keeps memory across sessions and writes reusable skill files from its own experience.",
+      "significance": "The self-improving open-source harness: it made the agent's accumulated memory and skills, rather than the model behind it, the thing that got better over time. It became the fastest-growing open-source agent project of 2026.",
+      "sources": [
+        {
+          "id": "hermes-agent-s1",
+          "url": "https://hermesatlas.com/reports/state-of-hermes-april-2026",
+          "type": "independent_analysis",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        },
+        {
+          "id": "hermes-agent-s2",
+          "url": "https://www.marktechpost.com/2026/02/26/nous-research-releases-hermes-agent-to-fix-ai-forgetfulness-with-multi-level-memory-and-dedicated-remote-terminal-access-support/",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        },
+        {
+          "id": "hermes-agent-s3",
+          "url": "https://hermes-agent.nousresearch.com/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "The day comes from a third-party timeline that quotes Nous Research's announcement post; the launch is independently corroborated by MarkTechPost coverage dated 26 February 2026, the day after. Nous Research's own site states only 'released in February 2026' and I could not retrieve the dated announcement post itself (x.com blocks automated fetches). This is an agent harness, distinct from the Hermes 1-4 model family of the same name; the models belong in the release dataset, not here."
+      },
+      "evidence_quote": "February 25, 2026: Nous Research drops Hermes Agent on GitHub with a simple tweet: \"Meet Hermes Agent, the open source agent that grows with you.\""
+    },
+    {
+      "id": "grok-build",
+      "title": "Grok Build",
+      "date": "2026-05-14",
+      "type": "agent",
+      "company": "xAI",
+      "note": "xAI's first agentic coding tool: a terminal-native CLI that runs an autonomous agent against a local codebase, opened in early beta to top-tier subscribers before widening later in May.",
+      "significance": "The last of the frontier labs to ship a coding agent, which is the point at which the terminal harness became table stakes rather than a differentiator.",
+      "sources": [
+        {
+          "id": "grok-build-s1",
+          "url": "https://www.buildfastwithai.com/blogs/grok-build-xai-cli-ai-agents-2026",
+          "type": "independent_analysis",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        },
+        {
+          "id": "grok-build-s2",
+          "url": "https://www.techloy.com/grok-build-early-beta-6-ways-xais-new-ai-coding-agent-plans-to-take-on-claude-code/",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        },
+        {
+          "id": "grok-build-s3",
+          "url": "https://www.channelinsider.com/ai/news-xai-grok-4-6-ai-agents/",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": "2026-08-19"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 55,
+        "reason": "Dated by two independent write-ups that both name 14 May 2026, one of them published the next day. xAI's own announcement was an X post by Elon Musk, which I could not read (x.com blocks automated fetches), so there is no primary dateline. The wider rollout on 25 May 2026 is reported by the same sources and is a separate date if the owner prefers general availability."
+      },
+      "evidence_quote": "As of May 14, 2026, that framing is over. xAI shipped Grok Build \u2014 a terminal-native, agentic command-line tool"
     }
   ]
 }
