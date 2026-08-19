@@ -1367,13 +1367,16 @@ ${crumbs('../../', ['Milestones', '../'], [esc(m.title)])}
 <p class="doc-lede">${esc(m.note)}</p>
 ${m.significance ? `<p class="doc-note">${esc(m.significance)}</p>` : ''}
 
-<h2>Why this is not a model record</h2>
-<p class="doc-note">This dataset's model records describe sets of weights — parameters,
-a context window, a licence. ${esc(m.title.replace(/ launches$/, ''))} is a product built on
-a model, so it has none of those. Recording it as a model would mean a row where every
-specification is empty, and would count it as a release that never happened.
-${m.related_family ? `The model line behind it is tracked as
-<a href="../../families/${familySlug(m.related_family)}/">${esc(m.related_family)}</a>.` : ''}</p>
+${/**
+   * The "why this is not a model record" explainer used to sit here. It made
+   * sense when milestones were four, the distinction was new, and every visitor
+   * arrived from a page full of models. It is redundant now that there are 21
+   * behind their own nav entry — and worse, it had gone wrong: it told every
+   * reader that this thing "is a product built on a model", which describes
+   * ChatGPT and does not describe MCP, a protocol with no product behind it.
+   * The one useful thing it carried was the family link, kept below.
+   */''}${m.related_family ? `<p class="doc-note">Model line behind it:
+<a href="../../families/${familySlug(m.related_family)}/">${esc(m.related_family)}</a>.</p>` : ''}
 
 <h2>Sources</h2>
 <p class="doc-prov">Record status: <span class="prov-badge" data-status="${esc(m.provenance.status)}">${
@@ -1388,9 +1391,10 @@ ${sourceList(m)}
     title: `${m.title} — ${eventDate(m.date)} | LLM World`,
     description: `${m.title} on ${eventDate(m.date)}. ${m.note}`.slice(0, 300),
     canonical: `${BASE_URL}/milestones/${m.id}/`,
-    // Milestones are timeline events, so they mark Timeline. Two records do not
-    // justify a nav slot of their own — revisit when there are more.
-    section: 'timeline/',
+    // Milestones marked Timeline while there were two of them, with a note here
+    // to revisit when there were more. There are 21, spanning the agent era and
+    // faceted by kind, so they have their own nav slot and mark it.
+    section: 'milestones/',
     depth: 2,
     sprites: [slugFor(m.company)],
     body,
@@ -1659,7 +1663,7 @@ addEventListener('DOMContentLoaded',function(){
     title: 'Milestones — dated events that were not model releases | LLM World',
     description: 'Dated events that shaped large language model history without being model releases, grouped by year, each with a primary source.',
     canonical: `${BASE_URL}/milestones/`,
-    section: 'timeline/',
+    section: 'milestones/',
     depth: 1,
     sprites: [...new Set(list.map((m) => slugFor(m.company)))],
     head: facets.length ? script : '',
