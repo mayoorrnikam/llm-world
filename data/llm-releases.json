@@ -370,9 +370,19 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2022-09-21",
+            "sources": [
+              "whisper-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -4440,7 +4450,8 @@
             "value": "2024-12-26",
             "sources": [
               "deepseek-v3-s2",
-              "deepseek-v3-s3"
+              "deepseek-v3-s3",
+              "deepseek-v3-price-20250306"
             ]
           }
         ],
@@ -4548,7 +4559,8 @@
           {
             "value": "2025-01-20",
             "sources": [
-              "deepseek-r1-s2"
+              "deepseek-r1-s2",
+              "deepseek-r1-price-20250306"
             ]
           }
         ]
@@ -6083,8 +6095,8 @@
           "url": "https://docs.z.ai/guides/video/cogvideox-3",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250730192638/https://docs.z.ai/guides/video/cogvideox-3",
+          "retrieved": "2025-07-30"
         }
       ],
       "provenance": {
