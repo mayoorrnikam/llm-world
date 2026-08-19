@@ -1,6 +1,4 @@
 {
-  "updated": "2026-08-08",
-  "schema_version": "1.6",
   "milestones": [
     {
       "id": "langchain",
@@ -24,22 +22,22 @@
           "url": "https://www.langchain.com/blog/three-years-langchain",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260512145243/https://www.langchain.com/blog/three-years-langchain",
+          "retrieved": "2026-05-12"
         },
         {
           "id": "langchain-s3",
           "url": "https://en.wikipedia.org/wiki/LangChain",
           "type": "independent_analysis",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230421144550/https://en.wikipedia.org/wiki/LangChain",
+          "retrieved": "2023-04-21"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 70,
-        "reason": "Recorded at MONTH precision because that is the precision the readable evidence supports: Wikipedia states 'LangChain was launched in October 2022', and LangChain's own blog says only 'fall of 2022'. Its creator gives the exact day \u2014 'on October 24th of 2022, I released the first version' \u2014 but only on x.com, which blocks automated fetching, so no tool here can re-read it. The day is probably right; it is not recorded because it cannot be checked."
+        "reason": "Recorded at MONTH precision because that is the precision the readable evidence supports: Wikipedia states 'LangChain was launched in October 2022', and LangChain's own blog says only 'fall of 2022'. Its creator gives the exact day — 'on October 24th of 2022, I released the first version' — but only on x.com, which blocks automated fetching, so no tool here can re-read it. The day is probably right; it is not recorded because it cannot be checked."
       },
       "evidence_quote": "Three years ago, on October 24th of 2022, I released the first version of LangChain as a Python package."
     },
@@ -132,16 +130,16 @@
           "url": "https://github.com/yoheinakajima/babyagi_archive",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20240930114504/https://github.com/yoheinakajima/babyagi_archive",
+          "retrieved": "2024-09-30"
         },
         {
           "id": "babyagi-s2",
           "url": "https://yoheinakajima.com/birth-of-babyagi/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20230609075348/https://yoheinakajima.com/birth-of-babyagi/",
+          "retrieved": "2023-06-09"
         }
       ],
       "provenance": {
@@ -158,7 +156,7 @@
       "type": "agent",
       "company": "Significant Gravitas",
       "note": "An open-source program that gives GPT-4 a goal in natural language and lets it decompose the goal into sub-tasks, then run them against a browser, a file system and a code interpreter without further prompting.",
-      "significance": "The moment 'autonomous agent' became a mainstream idea rather than a research term. It became one of the fastest-starred repositories in GitHub history and set the expectations \u2014 and the disappointment \u2014 that the next two years of agent work were measured against.",
+      "significance": "The moment 'autonomous agent' became a mainstream idea rather than a research term. It became one of the fastest-starred repositories in GitHub history and set the expectations — and the disappointment — that the next two years of agent work were measured against.",
       "sources": [
         {
           "id": "autogpt-s1",
@@ -173,8 +171,8 @@
           "url": "https://github.com/Significant-Gravitas/AutoGPT",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230926012434/https://github.com/Significant-Gravitas/AutoGPT",
+          "retrieved": "2023-09-26"
         }
       ],
       "provenance": {
@@ -248,22 +246,22 @@
           "url": "https://cognition.com/blog/introducing-devin",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260627172536/https://cognition.com/blog/introducing-devin",
+          "retrieved": "2026-06-27"
         },
         {
           "id": "devin-s2",
           "url": "https://siliconangle.com/2024/03/12/cognition-launches-devin-generative-ai-powered-coding-engineer/",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240313041049/https://siliconangle.com/2024/03/12/cognition-launches-devin-generative-ai-powered-coding-engineer/",
+          "retrieved": "2024-03-13"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cognition's own announcement is primary but its only date is the numeric dateline '03.12.24', which is ambiguous on its face. SiliconANGLE's launch-day report states it unambiguously \u2014 'UPDATED 19:59 EDT / MARCH 12 2024' \u2014 so the date is corroborated by a secondary source rather than inferred. Not verified: that would require the company's own page to state it."
+        "reason": "Cognition's own announcement is primary but its only date is the numeric dateline '03.12.24', which is ambiguous on its face. SiliconANGLE's launch-day report states it unambiguously — 'UPDATED 19:59 EDT / MARCH 12 2024' — so the date is corroborated by a secondary source rather than inferred. Not verified: that would require the company's own page to state it."
       },
       "evidence_quote": "Devin is a tireless, skilled teammate, equally ready to build alongside you or independently complete tasks for you to review."
     },
@@ -273,7 +271,7 @@
       "date": "2024-08-01",
       "type": "policy",
       "company": "European Union",
-      "note": "Regulation (EU) 2024/1689 \u2014 the first broad statutory regime for AI systems, including obligations that fall on general-purpose model providers.",
+      "note": "Regulation (EU) 2024/1689 — the first broad statutory regime for AI systems, including obligations that fall on general-purpose model providers.",
       "significance": "The first time training and releasing a general-purpose model carried statutory duties rather than voluntary commitments. Obligations phase in over years, but this is the date the regime began to exist.",
       "sources": [
         {
@@ -288,7 +286,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 85,
-        "reason": "The regulation was published in the Official Journal on 12 July 2024, and its own Article 113 states that it enters into force on the twentieth day following publication \u2014 1 August 2024. Both facts are in the archived primary source; the date here is their sum, not an estimate."
+        "reason": "The regulation was published in the Official Journal on 12 July 2024, and its own Article 113 states that it enters into force on the twentieth day following publication — 1 August 2024. Both facts are in the archived primary source; the date here is their sum, not an estimate."
       }
     },
     {
@@ -305,24 +303,24 @@
           "url": "https://x.com/Replit/status/1831731656073629939",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240910012652/https://x.com/Replit/status/1831731656073629939",
+          "retrieved": "2024-09-10"
         },
         {
           "id": "replit-agent-s2",
           "url": "https://www.aikatana.com/p/replit-ai-agent-early-access-opens-door-quick-app-creation",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20240906105827/https://www.aikatana.com/p/replit-ai-agent-early-access-opens-door-quick-app-creation",
+          "retrieved": "2024-09-06"
         },
         {
           "id": "replit-agent-s3",
           "url": "https://replit.com/blog/introducing-replit-agent",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260613162407/https://replit.com/blog/introducing-replit-agent",
+          "retrieved": "2026-06-13"
         }
       ],
       "provenance": {
@@ -338,7 +336,7 @@
       "date": "2024-10-22",
       "type": "architecture",
       "company": "Anthropic",
-      "note": "Anthropic put a public beta API in developers' hands that lets Claude look at a screen, move a cursor, click and type \u2014 operating software built for people rather than calling an API.",
+      "note": "Anthropic put a public beta API in developers' hands that lets Claude look at a screen, move a cursor, click and type — operating software built for people rather than calling an API.",
       "significance": "The first frontier model offered as a general computer operator. It opened the second track of the agent era: instead of every tool needing an API, the agent uses the interface a human would.",
       "sources": [
         {
@@ -346,8 +344,8 @@
           "url": "https://www.anthropic.com/news/3-5-models-and-computer-use",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20241022151101/https://www.anthropic.com/news/3-5-models-and-computer-use",
+          "retrieved": "2024-10-22"
         }
       ],
       "provenance": {
@@ -371,14 +369,14 @@
           "url": "https://www.anthropic.com/news/model-context-protocol",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20241125160704/https://www.anthropic.com/news/model-context-protocol",
+          "retrieved": "2024-11-25"
         }
       ],
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Anthropic's own announcement, dated Nov 25, 2024 on the page. Typed product_launch for lack of a better value in the schema \u2014 MCP is a protocol and reference implementation, not a product; 'architecture' was the alternative and reads as model architecture in this dataset. No archived capture recorded; one should be added."
+        "reason": "Anthropic's own announcement, dated Nov 25, 2024 on the page. Typed product_launch for lack of a better value in the schema — MCP is a protocol and reference implementation, not a product; 'architecture' was the alternative and reads as model architecture in this dataset. No archived capture recorded; one should be added."
       },
       "evidence_quote": "Today, we're open-sourcing the Model Context Protocol (MCP), a new standard for connecting AI assistants to the systems where data lives, including content repositories, business tools, and development environments."
     },
@@ -412,14 +410,14 @@
           "url": "https://www.trae.ai/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20250120025821/https://www.trae.ai/",
+          "retrieved": "2025-01-20"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 50,
-        "reason": "The weakest entry in this batch. 20 January 2025 is stated by several aggregators and repeated across coverage, and Visual Studio Magazine covered the tool as newly shipped on 27 January 2025 \u2014 but I could not read a ByteDance page carrying the date. trae.ai's blog index returned no dated posts to an automated fetch, and visualstudiomagazine.com returned 403, so its dateline is from the URL path rather than the page. There is also a real ambiguity the entry does not resolve: the international Trae launched first and a separate Chinese-market build followed later in 2025, and the aibase article used here describes the Chinese-developer version while carrying a January date. Confirm against a ByteDance announcement before publishing."
+        "reason": "The weakest entry in this batch. 20 January 2025 is stated by several aggregators and repeated across coverage, and Visual Studio Magazine covered the tool as newly shipped on 27 January 2025 — but I could not read a ByteDance page carrying the date. trae.ai's blog index returned no dated posts to an automated fetch, and visualstudiomagazine.com returned 403, so its dateline is from the URL path rather than the page. There is also a real ambiguity the entry does not resolve: the international Trae launched first and a separate Chinese-market build followed later in 2025, and the aibase article used here describes the Chinese-developer version while carrying a January date. Confirm against a ByteDance announcement before publishing."
       },
       "evidence_quote": "ByteDance recently launched an AI integrated development environment (IDE) called Trae, specifically designed for Chinese developers."
     },
@@ -429,7 +427,7 @@
       "date": "2025-01-23",
       "type": "agent",
       "company": "OpenAI",
-      "note": "A research preview of an agent that drives a browser on the user's behalf \u2014 filling forms, ordering things, navigating sites \u2014 released to ChatGPT Pro subscribers.",
+      "note": "A research preview of an agent that drives a browser on the user's behalf — filling forms, ordering things, navigating sites — released to ChatGPT Pro subscribers.",
       "significance": "The first consumer-facing agent from OpenAI that acted on the open web rather than answering questions. It moved computer-using agents from a developer capability to a subscription product.",
       "sources": [
         {
@@ -487,8 +485,8 @@
           "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20250224183042/https://www.anthropic.com/news/claude-3-7-sonnet",
+          "retrieved": "2025-02-24"
         }
       ],
       "provenance": {
@@ -496,7 +494,7 @@
         "confidence": 85,
         "reason": "Anthropic's own announcement, dated Feb 24, 2025 on the page. The post's headline subject is the Claude 3.7 Sonnet model release, which belongs in the model dataset; Claude Code is introduced in the same post and is the milestone here. General availability came later (May 2025) and is a separate date if one is wanted. No archived capture recorded; one should be added."
       },
-      "evidence_quote": "Today, we're empowering developers further by introducing Claude Code\u2014our first agentic coding tool\u2014in a limited research preview."
+      "evidence_quote": "Today, we're empowering developers further by introducing Claude Code—our first agentic coding tool—in a limited research preview."
     },
     {
       "id": "manus",
@@ -512,8 +510,8 @@
           "url": "https://en.wikipedia.org/wiki/Manus_(AI_agent)",
           "type": "independent_analysis",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20250310120633/https://en.wikipedia.org/wiki/Manus_(AI_agent)",
+          "retrieved": "2025-03-10"
         }
       ],
       "provenance": {
@@ -544,7 +542,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 85,
-        "reason": "Date 'May 16, 2025' read from the publicationDateText field in a Wayback capture of OpenAI's own announcement taken the next day, under the headline 'Introducing Codex'. openai.com blocks automated fetches, so the live URL was not read. Note this name collides with the 2021 Codex model and with the Codex CLI released in April 2025 \u2014 the entry here is the cloud agent."
+        "reason": "Date 'May 16, 2025' read from the publicationDateText field in a Wayback capture of OpenAI's own announcement taken the next day, under the headline 'Introducing Codex'. openai.com blocks automated fetches, so the live URL was not read. Note this name collides with the 2021 Codex model and with the Codex CLI released in April 2025 — the entry here is the cloud agent."
       },
       "evidence_quote": "May 16, 2025"
     },
@@ -562,8 +560,8 @@
           "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-cli-open-source-ai-agent/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260107212259/https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-cli-open-source-ai-agent/",
+          "retrieved": "2026-01-07"
         }
       ],
       "provenance": {
@@ -587,24 +585,24 @@
           "url": "https://github.com/bytedance/trae-agent",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20250704200557/https://github.com/bytedance/trae-agent",
+          "retrieved": "2025-07-04"
         },
         {
           "id": "trae-agent-s2",
           "url": "https://www.aibase.com/news/19477",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20250705034341/https://www.aibase.com/news/19477",
+          "retrieved": "2025-07-05"
         },
         {
           "id": "trae-agent-s3",
           "url": "https://www.marktechpost.com/2025/07/07/bytedance-just-released-trae-agent-an-llm-based-agent-for-general-purpose-software-engineering-tasks/",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20250712021927/https://www.marktechpost.com/2025/07/07/bytedance-just-released-trae-agent-an-llm-based-agent-for-general-purpose-software-engineering-tasks/",
+          "retrieved": "2025-07-12"
         }
       ],
       "provenance": {
@@ -646,15 +644,15 @@
       "type": "agent",
       "company": "Alibaba Qwen",
       "note": "Alibaba open-sourced Qwen Code alongside Qwen3-Coder: an Apache-2.0 terminal coding agent adapted from Google's Gemini CLI, with the prompts and parser reworked for the Qwen3-Coder function-call format.",
-      "significance": "The first frontier-lab harness that was a fork of another frontier lab's harness. Google had released Gemini CLI open-source four weeks earlier; Alibaba took it, retargeted it at its own model and shipped it the same day as the model \u2014 which is the moment the open terminal agent became shared infrastructure rather than each lab's own product.",
+      "significance": "The first frontier-lab harness that was a fork of another frontier lab's harness. Google had released Gemini CLI open-source four weeks earlier; Alibaba took it, retargeted it at its own model and shipped it the same day as the model — which is the moment the open terminal agent became shared infrastructure rather than each lab's own product.",
       "sources": [
         {
           "id": "qwen-code-s1",
           "url": "https://qwenlm.github.io/blog/qwen3-coder/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20250722211347/https://qwenlm.github.io/blog/qwen3-coder/",
+          "retrieved": "2025-07-22"
         },
         {
           "id": "qwen-code-s2",
@@ -676,9 +674,9 @@
       "provenance": {
         "status": "verified",
         "confidence": 80,
-        "reason": "Qwen's own blog post announcing Qwen3-Coder introduces Qwen Code in the same post and carries the dateline 'July 22, 2025 \u00b7 5 min \u00b7 1000 words \u00b7 Qwen Team'. NOTE A DISAGREEMENT: Alibaba Cloud's own press room and most English coverage date the same launch to 23 July 2025 \u2014 plausibly a UTC-versus-China-time or an embargo-versus-blog split. Both are Alibaba pages. 22 July is recorded because it is the date on the technical announcement that actually introduces Qwen Code; a reader comparing against the press release will see one day's offset. The GitHub repository was created 26 June 2025 and its first tagged release is v0.0.2 on 1 August 2025, so neither was used."
+        "reason": "Qwen's own blog post announcing Qwen3-Coder introduces Qwen Code in the same post and carries the dateline 'July 22, 2025 · 5 min · 1000 words · Qwen Team'. NOTE A DISAGREEMENT: Alibaba Cloud's own press room and most English coverage date the same launch to 23 July 2025 — plausibly a UTC-versus-China-time or an embargo-versus-blog split. Both are Alibaba pages. 22 July is recorded because it is the date on the technical announcement that actually introduces Qwen Code; a reader comparing against the press release will see one day's offset. The GitHub repository was created 26 June 2025 and its first tagged release is v0.0.2 on 1 August 2025, so neither was used."
       },
-      "evidence_quote": "July 22, 2025 \u00b7 5 min \u00b7 1000 words \u00b7 Qwen Team"
+      "evidence_quote": "July 22, 2025 · 5 min · 1000 words · Qwen Team"
     },
     {
       "id": "kimi-cli",
@@ -687,7 +685,7 @@
       "type": "agent",
       "company": "Moonshot AI",
       "note": "Moonshot AI published Kimi CLI, an Apache-2.0 terminal agent written in Python that drives the Kimi models against a local codebase. It was renamed Kimi Code CLI in January 2026 and later rewritten in TypeScript.",
-      "significance": "Moonshot's entry into first-party terminal agents. The date is the earliest release Moonshot published, not the day the tool first existed \u2014 the tag is numbered 0.33, so earlier versions shipped untagged and the true first availability is earlier than this record can establish.",
+      "significance": "Moonshot's entry into first-party terminal agents. The date is the earliest release Moonshot published, not the day the tool first existed — the tag is numbered 0.33, so earlier versions shipped untagged and the true first availability is earlier than this record can establish.",
       "sources": [
         {
           "id": "kimi-cli-s1",
@@ -702,24 +700,24 @@
           "url": "https://moonshotai.github.io/kimi-cli/zh/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260226202306/https://moonshotai.github.io/kimi-cli/zh/",
+          "retrieved": "2026-02-26"
         },
         {
           "id": "kimi-cli-s3",
           "url": "https://platform.kimi.com/blog/posts/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260330170553/https://platform.kimi.com/blog/posts/changelog",
+          "retrieved": "2026-03-30"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 45,
-        "reason": "The weakest dating method used in this batch, and stated plainly: the date is the published_at of the earliest GitHub release on Moonshot's own repository (tag 0.33, published 2025-10-21T04:35:46Z). That tag is numbered 0.33, so versions 0.01 through 0.32 existed and were never published as GitHub releases \u2014 the true first public availability is earlier than this date, not later. The repository was created 15 October 2025, which is not used. Moonshot's platform changelog mentions Kimi CLI only once, on 2025-10-27 ('\u66f4\u65b0 kimi cli \u652f\u6301\u6587\u6863' \u2014 'updated the Kimi CLI support docs'), which corroborates that the tool was public by late October but does not date its launch. I found no Moonshot announcement post. Do not publish this without a company statement; it is included because the alternative is leaving Moonshot's first harness out of the timeline entirely."
+        "reason": "The weakest dating method used in this batch, and stated plainly: the date is the published_at of the earliest GitHub release on Moonshot's own repository (tag 0.33, published 2025-10-21T04:35:46Z). That tag is numbered 0.33, so versions 0.01 through 0.32 existed and were never published as GitHub releases — the true first public availability is earlier than this date, not later. The repository was created 15 October 2025, which is not used. Moonshot's platform changelog mentions Kimi CLI only once, on 2025-10-27 ('更新 kimi cli 支持文档' — 'updated the Kimi CLI support docs'), which corroborates that the tool was public by late October but does not date its launch. I found no Moonshot announcement post. Do not publish this without a company statement; it is included because the alternative is leaving Moonshot's first harness out of the timeline entirely."
       },
-      "evidence_quote": "0.33 \u2014 published_at 2025-10-21T04:35:46Z (MoonshotAI/kimi-cli, earliest published GitHub release)"
+      "evidence_quote": "0.33 — published_at 2025-10-21T04:35:46Z (MoonshotAI/kimi-cli, earliest published GitHub release)"
     },
     {
       "id": "openclaw",
@@ -727,7 +725,7 @@
       "date": "2026-01-29",
       "type": "agent",
       "company": "OpenClaw",
-      "note": "Peter Steinberger's self-hosted personal agent \u2014 first published in late 2025 under earlier names, renamed Clawdbot then Moltbot then OpenClaw \u2014 that runs on the user's own machine and is driven from WhatsApp, Telegram, Discord, Slack or Teams.",
+      "note": "Peter Steinberger's self-hosted personal agent — first published in late 2025 under earlier names, renamed Clawdbot then Moltbot then OpenClaw — that runs on the user's own machine and is driven from WhatsApp, Telegram, Discord, Slack or Teams.",
       "significance": "The first viral consumer agent that was not a lab product: open source, self-hosted, and reached through chat apps people already had. It also made prompt injection and agent permissions a mainstream security story rather than a research concern.",
       "sources": [
         {
@@ -735,22 +733,22 @@
           "url": "https://openclaw.ai/blog/introducing-openclaw",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260130052436/https://openclaw.ai/blog/introducing-openclaw",
+          "retrieved": "2026-01-30"
         },
         {
           "id": "openclaw-s2",
           "url": "https://en.wikipedia.org/wiki/OpenClaw",
           "type": "independent_analysis",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260130173322/https://en.wikipedia.org/wiki/OpenClaw",
+          "retrieved": "2026-01-30"
         }
       ],
       "provenance": {
         "status": "verified",
         "confidence": 75,
-        "reason": "The date recorded is the project's own rename announcement, dated 'Jan 29, 2026' on openclaw.ai \u2014 a primary source. It is NOT the date the project first appeared: that post says only 'Two months ago, I hacked together a weekend project' and Wikipedia says it was first published in November 2025 under an earlier name, with no day given. If the owner wants the origin rather than the rename dated, this entry needs different evidence. Note also that Wikipedia and Forbes place the OpenClaw rename on 30 January while the project's own post is dated 29 January."
+        "reason": "The date recorded is the project's own rename announcement, dated 'Jan 29, 2026' on openclaw.ai — a primary source. It is NOT the date the project first appeared: that post says only 'Two months ago, I hacked together a weekend project' and Wikipedia says it was first published in November 2025 under an earlier name, with no day given. If the owner wants the origin rather than the rename dated, this entry needs different evidence. Note also that Wikipedia and Forbes place the OpenClaw rename on 30 January while the project's own post is dated 29 January."
       },
       "evidence_quote": "Today, I'm excited to announce our new name: OpenClaw"
     },
@@ -768,24 +766,24 @@
           "url": "https://hermesatlas.com/reports/state-of-hermes-april-2026",
           "type": "independent_analysis",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260413043200/https://hermesatlas.com/reports/state-of-hermes-april-2026",
+          "retrieved": "2026-04-13"
         },
         {
           "id": "hermes-agent-s2",
           "url": "https://www.marktechpost.com/2026/02/26/nous-research-releases-hermes-agent-to-fix-ai-forgetfulness-with-multi-level-memory-and-dedicated-remote-terminal-access-support/",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260311050434/https://www.marktechpost.com/2026/02/26/nous-research-releases-hermes-agent-to-fix-ai-forgetfulness-with-multi-level-memory-and-dedicated-remote-terminal-access-support/",
+          "retrieved": "2026-03-11"
         },
         {
           "id": "hermes-agent-s3",
           "url": "https://hermes-agent.nousresearch.com/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260312122051/https://hermes-agent.nousresearch.com/",
+          "retrieved": "2026-03-12"
         }
       ],
       "provenance": {
@@ -809,16 +807,16 @@
           "url": "https://www.buildfastwithai.com/blogs/grok-build-xai-cli-ai-agents-2026",
           "type": "independent_analysis",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260608025155/https://www.buildfastwithai.com/blogs/grok-build-xai-cli-ai-agents-2026",
+          "retrieved": "2026-06-08"
         },
         {
           "id": "grok-build-s2",
           "url": "https://www.techloy.com/grok-build-early-beta-6-ways-xais-new-ai-coding-agent-plans-to-take-on-claude-code/",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260518042639/https://www.techloy.com/grok-build-early-beta-6-ways-xais-new-ai-coding-agent-plans-to-take-on-claude-code/",
+          "retrieved": "2026-05-18"
         },
         {
           "id": "grok-build-s3",
@@ -834,7 +832,7 @@
         "confidence": 55,
         "reason": "Dated by two independent write-ups that both name 14 May 2026, one of them published the next day. xAI's own announcement was an X post by Elon Musk, which I could not read (x.com blocks automated fetches), so there is no primary dateline. The wider rollout on 25 May 2026 is reported by the same sources and is a separate date if the owner prefers general availability."
       },
-      "evidence_quote": "As of May 14, 2026, that framing is over. xAI shipped Grok Build \u2014 a terminal-native, agentic command-line tool"
+      "evidence_quote": "As of May 14, 2026, that framing is over. xAI shipped Grok Build — a terminal-native, agentic command-line tool"
     },
     {
       "id": "kimi-code-cli",
@@ -843,7 +841,7 @@
       "type": "agent",
       "company": "Moonshot AI",
       "note": "Moonshot AI republished Kimi Code CLI as a new MIT-licensed repository, rewritten from Python to TypeScript, installable without Node.js, with coder, explore and plan subagents that run in isolated contexts. It migrates the configuration and sessions of the older Kimi CLI it replaces.",
-      "significance": "The subagent-with-its-own-context pattern arriving in a Chinese first-party harness, and a relicensing from Apache-2.0 to MIT that removed the last friction from redistributing it. Moonshot's own framing \u2014 'the starting point for next-gen agents' \u2014 positions the harness, not the model, as the product.",
+      "significance": "The subagent-with-its-own-context pattern arriving in a Chinese first-party harness, and a relicensing from Apache-2.0 to MIT that removed the last friction from redistributing it. Moonshot's own framing — 'the starting point for next-gen agents' — positions the harness, not the model, as the product.",
       "sources": [
         {
           "id": "kimi-code-cli-s1",
@@ -858,24 +856,24 @@
           "url": "https://www.marktechpost.com/2026/06/06/moonshot-ai-releases-kimi-code-cli-a-terminal-ai-coding-agent-built-in-typescript-for-next-gen-agents/",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260609114740/https://www.marktechpost.com/2026/06/06/moonshot-ai-releases-kimi-code-cli-a-terminal-ai-coding-agent-built-in-typescript-for-next-gen-agents/",
+          "retrieved": "2026-06-09"
         },
         {
           "id": "kimi-code-cli-s3",
           "url": "https://moonshotai.github.io/kimi-code/en/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260630074248/https://moonshotai.github.io/kimi-code/en/",
+          "retrieved": "2026-06-30"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 55,
-        "reason": "The date is the published_at of the earliest GitHub release on Moonshot's own MoonshotAI/kimi-code repository (tag @moonshot-ai/kimi-code@0.2.0, 2026-05-26T07:04:28Z); the repository itself was created 2026-05-22, which is not used. MarkTechPost reported the release on 6 June 2026, eleven days later, and Chinaz covered a 'major version upgrade' on 9 June 2026 without giving a date. Moonshot published no announcement post I could find, so there is no company statement of a launch date \u2014 only its own dated release artifact. NAMING TRAP: the name 'Kimi Code CLI' was applied to the older Python kimi-cli in January 2026, so a reader searching that name will find two projects and two dates; this record is the TypeScript rewrite, and the separate kimi-cli record is its predecessor."
+        "reason": "The date is the published_at of the earliest GitHub release on Moonshot's own MoonshotAI/kimi-code repository (tag @moonshot-ai/kimi-code@0.2.0, 2026-05-26T07:04:28Z); the repository itself was created 2026-05-22, which is not used. MarkTechPost reported the release on 6 June 2026, eleven days later, and Chinaz covered a 'major version upgrade' on 9 June 2026 without giving a date. Moonshot published no announcement post I could find, so there is no company statement of a launch date — only its own dated release artifact. NAMING TRAP: the name 'Kimi Code CLI' was applied to the older Python kimi-cli in January 2026, so a reader searching that name will find two projects and two dates; this record is the TypeScript rewrite, and the separate kimi-cli record is its predecessor."
       },
-      "evidence_quote": "@moonshot-ai/kimi-code@0.2.0 \u2014 published_at 2026-05-26T07:04:28Z (MoonshotAI/kimi-code, earliest published GitHub release)"
+      "evidence_quote": "@moonshot-ai/kimi-code@0.2.0 — published_at 2026-05-26T07:04:28Z (MoonshotAI/kimi-code, earliest published GitHub release)"
     },
     {
       "id": "minimax-code",
@@ -884,15 +882,15 @@
       "type": "agent",
       "company": "MiniMax",
       "note": "MiniMax renamed its desktop agent app to MiniMax Code and added a `minimax` command-line shortcut, turning a general-purpose assistant into a coding harness. Its agent loop was rebuilt on the open-source OpenCode and Pi Agent projects and trained jointly with the MiniMax M3 model released three days later.",
-      "significance": "The clearest case of the harness being treated as part of the model rather than a wrapper around it: MiniMax states that Code was designed for M3 and trained together with M3. It is also the batch's one proprietary Chinese harness \u2014 a desktop download, not a repository \u2014 built on other people's open harnesses.",
+      "significance": "The clearest case of the harness being treated as part of the model rather than a wrapper around it: MiniMax states that Code was designed for M3 and trained together with M3. It is also the batch's one proprietary Chinese harness — a desktop download, not a repository — built on other people's open harnesses.",
       "sources": [
         {
           "id": "minimax-code-s1",
           "url": "https://agent.minimaxi.com/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260617053837/https://agent.minimaxi.com/docs/changelog",
+          "retrieved": "2026-06-17"
         },
         {
           "id": "minimax-code-s2",
@@ -906,9 +904,9 @@
       "provenance": {
         "status": "verified",
         "confidence": 70,
-        "reason": "MiniMax's own product changelog dates release v3.0.33 to 2026-05-29 and states there that the desktop client was officially renamed MiniMax Code. READ THE SCOPE CAREFULLY: this dates the name, not the product's origin \u2014 the same changelog carries earlier entries for '\u007fMiniMax Agent \u684c\u9762\u7aef' (MiniMax Agent desktop), so the app existed before under another name and this record does not claim otherwise. The alternative date is 2026-06-01, when MiniMax's M3 blog post says '\u968f\u7740 M3 \u7684\u53d1\u5e03\uff0cMiniMax Code \u4e5f\u8fce\u6765\u66f4\u65b0' ('with the release of M3, MiniMax Code has also been updated') and describes the harness as built on OpenCode and Pi Agent \u2014 but that post describes an update to something already named, which is why the rename date is used here. MiniMax Code 2.0 followed on 2026-07-16."
+        "reason": "MiniMax's own product changelog dates release v3.0.33 to 2026-05-29 and states there that the desktop client was officially renamed MiniMax Code. READ THE SCOPE CAREFULLY: this dates the name, not the product's origin — the same changelog carries earlier entries for 'MiniMax Agent 桌面端' (MiniMax Agent desktop), so the app existed before under another name and this record does not claim otherwise. The alternative date is 2026-06-01, when MiniMax's M3 blog post says '随着 M3 的发布，MiniMax Code 也迎来更新' ('with the release of M3, MiniMax Code has also been updated') and describes the harness as built on OpenCode and Pi Agent — but that post describes an update to something already named, which is why the rename date is used here. MiniMax Code 2.0 followed on 2026-07-16."
       },
-      "evidence_quote": "v3.0.33 \u2014 2026-05-29: \u684c\u9762\u7aef\u6b63\u5f0f\u66f4\u540d\u4e3a MiniMax Code\uff0cDock / \u4efb\u52a1\u680f\u5c55\u793a\u65b0\u540d\u79f0\uff0c\u65b0\u589e minimax \u547d\u4ee4\u884c\u5feb\u6377\u65b9\u5f0f\u3002 (\"The desktop client is officially renamed MiniMax Code; the Dock and taskbar show the new name; a new `minimax` command-line shortcut is added.\")"
+      "evidence_quote": "v3.0.33 — 2026-05-29: 桌面端正式更名为 MiniMax Code，Dock / 任务栏展示新名称，新增 minimax 命令行快捷方式。 (\"The desktop client is officially renamed MiniMax Code; the Dock and taskbar show the new name; a new `minimax` command-line shortcut is added.\")"
     },
     {
       "id": "zcode",
@@ -916,8 +914,8 @@
       "date": "2026-07-01",
       "type": "agent",
       "company": "Zhipu AI",
-      "note": "Z.ai released ZCode, a free desktop 'agentic development environment' built around GLM-5.2, on macOS, Windows and Linux, with bring-your-own-key support for third-party models and a 1.5\u00d7 quota bonus for GLM Coding Plan subscribers.",
-      "significance": "The point a Chinese lab stopped competing on model price and started competing on the harness. Z.ai pitched ZCode directly against Cursor, Claude Code and Copilot and gave the app away to pull developers onto its own coding subscription \u2014 the same distribution play Google made with Gemini CLI, run by a lab whose model was the cheaper one.",
+      "note": "Z.ai released ZCode, a free desktop 'agentic development environment' built around GLM-5.2, on macOS, Windows and Linux, with bring-your-own-key support for third-party models and a 1.5× quota bonus for GLM Coding Plan subscribers.",
+      "significance": "The point a Chinese lab stopped competing on model price and started competing on the harness. Z.ai pitched ZCode directly against Cursor, Claude Code and Copilot and gave the app away to pull developers onto its own coding subscription — the same distribution play Google made with Gemini CLI, run by a lab whose model was the cheaper one.",
       "sources": [
         {
           "id": "zcode-s1",
@@ -940,14 +938,14 @@
           "url": "https://venturebeat.com/technology/z-ai-launches-zcode-to-challenge-cursor-claude-code-and-github-copilot-in-ai-coding",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260702153927/https://venturebeat.com/technology/z-ai-launches-zcode-to-challenge-cursor-claude-code-and-github-copilot-in-ai-coding",
+          "retrieved": "2026-07-02"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Dated by the South China Morning Post, published 6:00pm 2 July 2026, which says Z.ai 'on Wednesday introduced ZCode' \u2014 Wednesday of that week is 1 July 2026. Z.ai's own announcement is an X post ('Introducing ZCode, the official development environment for GLM-5.2'), which could not be read because x.com blocks automated fetches, and venturebeat.com returned 403. One caveat found in secondary coverage and not resolved: ZCode's public changelog reportedly shows the app iterating since around 26 June 2026, so 1 July is the announcement, possibly not the first public build. Company recorded as Zhipu AI to match this dataset; the product ships under the Z.ai brand."
+        "reason": "Dated by the South China Morning Post, published 6:00pm 2 July 2026, which says Z.ai 'on Wednesday introduced ZCode' — Wednesday of that week is 1 July 2026. Z.ai's own announcement is an X post ('Introducing ZCode, the official development environment for GLM-5.2'), which could not be read because x.com blocks automated fetches, and venturebeat.com returned 403. One caveat found in secondary coverage and not resolved: ZCode's public changelog reportedly shows the app iterating since around 26 June 2026, so 1 July is the announcement, possibly not the first public build. Company recorded as Zhipu AI to match this dataset; the product ships under the Z.ai brand."
       },
       "evidence_quote": "on Wednesday introduced ZCode [SCMP, published 6:00pm, 2 Jul 2026]"
     },
@@ -957,16 +955,16 @@
       "date": "2026-08-13",
       "type": "agent",
       "company": "DeepSeek",
-      "note": "DeepSeek open-sourced its first first-party agent harness under MIT as a v0.1 developer preview. Built on a dependency-injection core called Cordis, every layer \u2014 model adapter, tool registry, session log, sandbox, web UI and the agent loop itself \u2014 is a replaceable plugin, and it ships adapters for Anthropic, OpenAI, Bedrock, Azure and Google rather than only DeepSeek's own models.",
-      "significance": "The last of the large Chinese labs to ship a harness, and the one that refused to make it a product: released as a preview, provider-agnostic by design, with DeepSeek's own warning not to build anything load-bearing on it yet. It passed 160,000 GitHub stars within days, making the harness \u2014 not the model \u2014 DeepSeek's most-starred release.",
+      "note": "DeepSeek open-sourced its first first-party agent harness under MIT as a v0.1 developer preview. Built on a dependency-injection core called Cordis, every layer — model adapter, tool registry, session log, sandbox, web UI and the agent loop itself — is a replaceable plugin, and it ships adapters for Anthropic, OpenAI, Bedrock, Azure and Google rather than only DeepSeek's own models.",
+      "significance": "The last of the large Chinese labs to ship a harness, and the one that refused to make it a product: released as a preview, provider-agnostic by design, with DeepSeek's own warning not to build anything load-bearing on it yet. It passed 160,000 GitHub stars within days, making the harness — not the model — DeepSeek's most-starred release.",
       "sources": [
         {
           "id": "deepseek-harness-s1",
           "url": "https://thenewstack.io/deepseek-harness-open-source-plugins/",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260813173333/https://thenewstack.io/deepseek-harness-open-source-plugins/",
+          "retrieved": "2026-08-13"
         },
         {
           "id": "deepseek-harness-s2",
@@ -981,24 +979,24 @@
           "url": "https://github.com/deepseek-ai/deepseek-harness",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260813130907/https://github.com/deepseek-ai/deepseek-harness",
+          "retrieved": "2026-08-13"
         },
         {
           "id": "deepseek-harness-s4",
           "url": "https://deepseek.com/harness/en/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260813132415/https://www.deepseek.com/harness/en/",
+          "retrieved": "2026-08-13"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 70,
-        "reason": "Two independent outlets published same-day coverage of the release on 13 August 2026 \u2014 The New Stack (dateline 'August 13th, 2026 at 1:20pm') and CryptoBriefing (byline 'Aug. 13, 2026') \u2014 and the deepseek-ai/deepseek-harness repository was created 2026-08-13T11:56:32Z, which corroborates but is not the basis for the date. DeepSeek's own product page at deepseek.com/harness carries no date at all, only a 2026 copyright, so there is no primary dateline. Note the only tagged release, dsh-v0.1.0-rc.7, was published 2026-08-17 \u2014 four days after the announcement \u2014 and was deliberately not used as the date. Also note this launched alongside DeepSeek-V4-Pro's API GA, which is a model event belonging in the release dataset, not here."
+        "reason": "Two independent outlets published same-day coverage of the release on 13 August 2026 — The New Stack (dateline 'August 13th, 2026 at 1:20pm') and CryptoBriefing (byline 'Aug. 13, 2026') — and the deepseek-ai/deepseek-harness repository was created 2026-08-13T11:56:32Z, which corroborates but is not the basis for the date. DeepSeek's own product page at deepseek.com/harness carries no date at all, only a 2026 copyright, so there is no primary dateline. Note the only tagged release, dsh-v0.1.0-rc.7, was published 2026-08-17 — four days after the announcement — and was deliberately not used as the date. Also note this launched alongside DeepSeek-V4-Pro's API GA, which is a model event belonging in the release dataset, not here."
       },
-      "evidence_quote": "August 13th, 2026 at 1:20pm \u2014 \"DeepSeek open sources an agent harness where everything is a plugin\" [The New Stack]"
+      "evidence_quote": "August 13th, 2026 at 1:20pm — \"DeepSeek open sources an agent harness where everything is a plugin\" [The New Stack]"
     }
   ]
 }
