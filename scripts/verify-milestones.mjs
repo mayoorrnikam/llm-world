@@ -64,6 +64,34 @@ for (const [i, m] of list.entries()) {
   let readAny = false;
 
   for (const s of m.sources ?? []) {
+    // A GitHub release page renders its date as relative time ("2 months ago"),
+    // so the date is in the API and not in the text. Ask the API, which is the
+    // authoritative statement of when that tag was published and is a stronger
+    // citation than the rendered page ever was.
+    const rel = /github\.com\/([\w.-]+)\/([\w.-]+)\/releases\/tag\/(.+)$/.exec(s.url);
+    if (rel) {
+      const [, owner, repo, rawTag] = rel;
+      const tag = decodeURIComponent(rawTag);
+      try {
+        const res = await fetch(
+          `https://api.github.com/repos/${owner}/${repo}/releases/tags/${encodeURIComponent(tag)}`,
+          { signal: AbortSignal.timeout(25000), headers: { 'user-agent': 'llm-world milestone-verify' } },
+        );
+        if (res.ok) {
+          const j = await res.json();
+          const on = String(j.published_at ?? '').slice(0, 10);
+          readAny = true;
+          if (on && (on === m.date || on.startsWith(m.date))) {
+            hit = { form: `${tag} published ${on}`, src: s };
+            break;
+          }
+          // A tag that exists but is dated otherwise is a disagreement, not a
+          // miss — let the loop continue so another source can still confirm.
+        }
+      } catch { /* fall through to the text read below */ }
+      continue;
+    }
+
     // The archived copy first where one exists: it is what a reader checking
     // this in a year will actually be able to open.
     let t = null;
