@@ -83,11 +83,18 @@ jobs:
       - name: Regenerate the README statistics
         run: node scripts/update-readme.mjs --write
 
+      # `npm run check`, not a hand-rolled sequence. This step used to spell the
+      # gate out as validate + build + smoke, and the build it named was the
+      # plain one — so api/*.json, llm-releases.csv and llms.txt were never
+      # generated and smoke reported 569 broken links to them. deploy.yml has
+      # always passed because it builds with --export.
+      #
+      # It went unnoticed locally because those artefacts persist on disk once
+      # built: a working copy that has ever run an export has them, and CI never
+      # does. Running the project's one canonical gate is the only version of
+      # this that cannot drift out of step again.
       - name: Check the result before committing anything
-        run: |
-          node scripts/validate-data.mjs
-          node scripts/build.mjs
-          node scripts/smoke-test.mjs
+        run: npm run check
 
       - name: Commit
         run: |
