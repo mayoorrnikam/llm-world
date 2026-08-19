@@ -74,8 +74,14 @@ jobs:
 
       # The README carries generated statistics and `check` FAILS on drift, so
       # regenerating is part of changing the data, not a nicety.
+      #
+      # --write, and the flag is the whole point: without it this script is the
+      # CHECKER, which reports drift and exits 1. Two nightly runs failed here,
+      # each one correctly refusing to pass because of drift it had been asked
+      # to remove — and because the commit step never ran, each night's archive
+      # work was discarded on the way out.
       - name: Regenerate the README statistics
-        run: node scripts/update-readme.mjs
+        run: node scripts/update-readme.mjs --write
 
       - name: Check the result before committing anything
         run: |
