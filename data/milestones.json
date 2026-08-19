@@ -5,12 +5,11 @@
     {
       "id": "langchain",
       "title": "LangChain's first release",
-      "date": "2022-10-24",
+      "date": "2022-10",
       "type": "agent",
       "company": "LangChain",
       "note": "Harrison Chase published the first version of LangChain as a small Python package for chaining LLM calls, prompt templates and external tools.",
       "significance": "The first widely adopted framework for wiring a language model to tools, memory and multi-step control flow. Almost every 2023 agent experiment, including AutoGPT and BabyAGI, was built on or against it.",
-      "draft": true,
       "sources": [
         {
           "id": "langchain-s1",
@@ -27,12 +26,20 @@
           "authority": "primary",
           "archived_url": null,
           "retrieved": null
+        },
+        {
+          "id": "langchain-s3",
+          "url": "https://en.wikipedia.org/wiki/LangChain",
+          "type": "independent_analysis",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
         "status": "partially_verified",
-        "confidence": 65,
-        "reason": "Day precision comes from a post by LangChain's creator: 'Three years ago, on October 24th of 2022, I released the first version of LangChain as a Python package.' x.com blocks automated fetches, so no tool here can re-read it; LangChain's own blog says only 'fall of 2022'. Held as a draft until the post is archived somewhere machine-readable."
+        "confidence": 70,
+        "reason": "Recorded at MONTH precision because that is the precision the readable evidence supports: Wikipedia states 'LangChain was launched in October 2022', and LangChain's own blog says only 'fall of 2022'. Its creator gives the exact day \u2014 'on October 24th of 2022, I released the first version' \u2014 but only on x.com, which blocks automated fetching, so no tool here can re-read it. The day is probably right; it is not recorded because it cannot be checked."
       },
       "evidence_quote": "Three years ago, on October 24th of 2022, I released the first version of LangChain as a Python package."
     },
@@ -235,7 +242,6 @@
       "company": "Cognition",
       "note": "Cognition unveiled Devin, an agent with its own shell, editor and browser, marketed as a teammate that completes engineering tasks end to end rather than as an autocomplete.",
       "significance": "The first time an agent was positioned as a colleague with a job description rather than a developer tool. It reset what a coding agent was expected to do, and its SWE-bench claims made benchmark performance on real repositories the field's scoreboard.",
-      "draft": true,
       "sources": [
         {
           "id": "devin-s1",
@@ -244,12 +250,20 @@
           "authority": "primary",
           "archived_url": null,
           "retrieved": "2026-08-19"
+        },
+        {
+          "id": "devin-s2",
+          "url": "https://siliconangle.com/2024/03/12/cognition-launches-devin-generative-ai-powered-coding-engineer/",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 75,
-        "reason": "Cognition's own announcement is the source, but the only date on it is the numeric dateline '03.12.24'. Read as 12 March 2024 in US month-first order, which matches every contemporaneous report \u2014 but the page never writes the date unambiguously, so this is an interpretation rather than a stated fact and the record does not claim verified."
+        "reason": "Cognition's own announcement is primary but its only date is the numeric dateline '03.12.24', which is ambiguous on its face. SiliconANGLE's launch-day report states it unambiguously \u2014 'UPDATED 19:59 EDT / MARCH 12 2024' \u2014 so the date is corroborated by a secondary source rather than inferred. Not verified: that would require the company's own page to state it."
       },
       "evidence_quote": "Devin is a tireless, skilled teammate, equally ready to build alongside you or independently complete tasks for you to review."
     },

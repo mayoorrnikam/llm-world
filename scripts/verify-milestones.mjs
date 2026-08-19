@@ -72,8 +72,13 @@ for (const [i, m] of list.entries()) {
     // check is the only correct guard (this has bitten three other scripts).
     if (typeof t !== 'string' || !t.trim()) continue;
     readAny = true;
-    const flat = t.replace(/\s+/g, ' ');
-    const f = forms.find((x) => flat.includes(x));
+    // Case-insensitive on purpose. Newsrooms set datelines in caps —
+    // SiliconANGLE prints "UPDATED 19:59 EDT / MARCH 12 2024" — and a
+    // case-sensitive compare reported that page as not stating a date it states
+    // plainly. Lowercasing both sides is cheaper and safer than doubling every
+    // entry in dateForms, which every other caller shares.
+    const flat = t.replace(/\s+/g, ' ').toLowerCase();
+    const f = forms.find((x) => flat.includes(x.toLowerCase()));
     if (f) { hit = { form: f, src: s }; break; }
   }
 
