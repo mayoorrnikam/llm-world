@@ -35,6 +35,7 @@
     "openai": "node scripts/openai-specs.mjs",
     "anthropic": "node scripts/anthropic-specs.mjs",
     "docs": "node scripts/gemini-specs.mjs --write && node scripts/xai-specs.mjs --write && node scripts/openai-specs.mjs --write && node scripts/anthropic-specs.mjs --write",
-    "mcp": "node mcp/server.mjs"
+    "mcp": "node mcp/server.mjs",
+    "milestones": "node scripts/verify-milestones.mjs"
   }
 }

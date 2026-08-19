@@ -50,6 +50,27 @@ try {
 } catch { /* no milestones yet — the site renders without them */ }
 
 /**
+ * `draft: true` keeps a milestone off the site, exactly as it does for posts.
+ *
+ * Milestones may be dated from reputable media rather than the company's own
+ * announcement, which is allowed (a secondary-only milestone is
+ * partially_verified, never verified). That makes a review step worth having:
+ * research lands in the repository as a draft, a person checks the date against
+ * the quoted evidence, and publishing is flipping one flag.
+ *
+ * Filtered HERE, at the one place the file is read, and mirrored in app.js.
+ * The timeline fetches this JSON directly at runtime, so a filter applied only
+ * to the static build would hide a draft from /milestones/ and show it on the
+ * home page — the two renderers disagreeing about what is published, which is
+ * the failure this project designs against.
+ *
+ * NOT privacy. This repository is public, so a draft is readable on GitHub the
+ * moment it is committed. It controls what the SITE publishes.
+ */
+const draftMilestones = milestones.filter((m) => m.draft === true);
+milestones = milestones.filter((m) => m.draft !== true);
+
+/**
  * The dataset as these templates read it: the 1.6 record plus the facts derived
  * from it — canonical date, display tags, flattened language specs.
  *
@@ -4180,3 +4201,15 @@ if (EXPORT) {
 console.log(`built ${releases.length} model pages · ${byFamily.size} family pages · ${milestones.length} milestones · ${byCompany.size} company pages · ` +
   `${byYear.size} year pages · sitemap (${urls.length} urls)`);
 if (!EXPORT) console.log('  bulk export skipped — pass --export to enable');
+
+// Say what is queued. A draft that nobody remembers is a draft that never
+// ships, and the same line for posts is what makes "what is waiting" answerable
+// from a build rather than from memory.
+if (draftMilestones.length) {
+  console.log(`\n${draftMilestones.length} milestone draft(s) held back — verify, then remove \`draft: true\`:`);
+  for (const m of draftMilestones) {
+    const primary = (m.sources ?? []).some((x) => x.authority === 'primary');
+    console.log(`  ${m.date}  ${m.title}${primary ? '' : '  (media-dated)'}`);
+  }
+  console.log('  node scripts/verify-milestones.mjs --drafts   checks each date against its source');
+}

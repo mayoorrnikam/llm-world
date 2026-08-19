@@ -129,6 +129,37 @@ async function findAnywhere(url, near) {
   };
 }
 
+/**
+ * Milestones are archived too, and they need it MORE than model records do.
+ *
+ * A model record cites the lab's own announcement. A milestone may be dated
+ * only by Import AI, a Hacker News thread or a newsletter — allowed here, and
+ * recorded as partially_verified — and those are exactly the pages that go dead
+ * or paywalled first. This script covered data/llm-releases.json only, so every
+ * milestone added from now on would have gone unarchived indefinitely.
+ *
+ * Loaded separately because they live in their own file and are saved back to
+ * it; the archived_url they gain is the same field with the same meaning.
+ */
+let milestones = [];
+try {
+  milestones = JSON.parse(readFileSync('data/milestones.json', 'utf8')).milestones ?? [];
+} catch { /* optional file */ }
+
+/**
+ * Milestones live in their own file, so saving the dataset is not enough.
+ *
+ * The jobs above mutate `source` objects that belong to this array, so the
+ * archived_url they gain exists only in memory until this runs. Writing one
+ * file and not the other is how a run reports twenty snapshots found and
+ * commits none of them — the shape of the CI bug that discarded two nights of
+ * this script's own output.
+ */
+function saveMilestones() {
+  if (!milestones.length) return;
+  writeFileSync('data/milestones.json', `${JSON.stringify({ milestones }, null, 2)}\n`);
+}
+
 const jobs = [];
 for (const r of data.releases) {
   const near = stampFor(canonicalDate(r) ?? '2024-01-01');
@@ -136,6 +167,17 @@ for (const r of data.releases) {
     if (s.archived_url) continue;
     if (ONLY_DOCS && s.type !== 'official_documentation') continue;
     jobs.push({ record: r, source: s, near });
+  }
+}
+for (const m of milestones) {
+  const near = stampFor(m.date ?? '2024-01-01');
+  for (const s of m.sources ?? []) {
+    if (s.archived_url) continue;
+    if (ONLY_DOCS && s.type !== 'official_documentation') continue;
+    // `record` carries an id and a date, which is all the loop below reads —
+    // canonicalDate() understands events[] and a milestone has none, so the
+    // date is handed over directly.
+    jobs.push({ record: { id: m.id, events: [{ type: 'announcement', date: m.date }] }, source: s, near, milestone: true });
   }
 }
 
@@ -281,6 +323,7 @@ if (errors.length) {
 
 if (WRITE) {
   saveDataset(data);
+  saveMilestones();
   console.log(`\nwrote ${FILE}`);
 } else {
   console.log(`\ndry run — pass --write to record the snapshots found`);

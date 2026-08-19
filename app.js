@@ -172,6 +172,10 @@ async function loadData() {
 /** Dated events that were not model releases (TAXONOMY §7). */
 function normalizeMilestones(json) {
   return (Array.isArray(json?.milestones) ? json.milestones : [])
+    // Drafts are unpublished, and this renderer fetches the JSON directly — so
+    // the filter has to exist here too or the timeline shows what the static
+    // build hides. See the note in scripts/build.mjs.
+    .filter((m) => m && m.draft !== true)
     .filter((m) => m && typeof m.date === 'string' && typeof m.title === 'string')
     .map((m) => {
       const [year, month, day] = m.date.split('-').map(Number);
