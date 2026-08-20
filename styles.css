@@ -3137,6 +3137,34 @@ code, kbd {
 }
 .ask-list.is-near li { opacity: .82; }
 .ask-list.is-near li:hover { opacity: 1; }
+/* The significance tier, legible without touching the filter. Only canonical
+   and major are marked: badging every row would make the mark meaningless,
+   which is the same reason `flagship` is not on every model. */
+/* Interpretation, set apart from the facts above it. The rule and the indent
+   say "this is a reading" without needing the reader to have read the note
+   explaining the distinction. */
+.ms-why {
+  margin: 28px 0 8px;
+  padding-left: 16px;
+  border-left: 2px solid var(--line);
+}
+.ms-why h2 { margin: 0 0 6px; font-size: 15px; }
+.ms-why p { margin: 0 0 8px; }
+.ms-why-note { color: var(--muted); font-size: 13px; }
+
+.ms-rank {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 7px;
+  border-radius: var(--radius-pill, 999px);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .02em;
+  border: 1px solid currentColor;
+}
+.ms-rank[data-sig="canonical"] { color: var(--state-ok, #2f8a3f); }
+.ms-rank[data-sig="major"]    { color: var(--muted); }
+
 .ask-unknown {
   grid-column: 2 / -1;
   margin-top: 2px;

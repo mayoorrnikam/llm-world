@@ -1365,7 +1365,26 @@ ${crumbs('../../', ['Milestones', '../'], [esc(m.title)])}
 </div>
 
 <p class="doc-lede">${esc(m.note)}</p>
-${m.why_it_matters ? `<p class="doc-note">${esc(m.why_it_matters)}</p>` : ''}
+${/**
+   * Labelled, because the sentence above it is a fact and this one is not.
+   *
+   * The note says what happened and is traceable to a source. This says what it
+   * meant, and is this project's reading — "Without it, there is no modern AI"
+   * is an argument, not a citation. Rendered as an unlabelled paragraph in the
+   * same weight, a reader cannot tell which is which, and the whole point of
+   * separating the fields was to make that visible.
+   */''}${m.why_it_matters ? `<div class="ms-why">
+<h2>Why it matters</h2>
+<p>${esc(m.why_it_matters)}</p>
+<p class="ms-why-note">This is LLM World's historical reading, not a claim by
+${esc(m.company)}. The facts above and the sources below are what it rests on.</p>
+</div>` : ''}
+${/**
+   * A milestone and a model record can describe the same subject — GPT-4 is
+   * both — and until now neither page pointed at the other. The ids collide by
+   * design in that case, which the validator warns about; the useful response
+   * is a link rather than a rename.
+   */''}${releases.some((r) => r.id === m.id) ? `<p class="doc-cta"><a href="../../models/${esc(m.id)}/">The model record for ${esc(m.title)} →</a></p>` : ''}
 
 ${/**
    * The "why this is not a model record" explainer used to sit here. It made
@@ -1487,7 +1506,25 @@ function milestonesIndexPage(list) {
     const opts = [...counts.keys()].sort();
     return { key, label, opts, counts };
   };
+  /**
+   * Significance leads, because it answers the question the page is for.
+   *
+   * `kind` reached nine values, four of them holding a single record, which is
+   * a long thin control that separates a protocol from a policy — a distinction
+   * nobody arrives wanting. Significance separates "this changed the direction
+   * of AI" from "a lab shipped a tool", which is the whole reason the tier
+   * exists, and it was recorded in the data while appearing nowhere on screen.
+   *
+   * Ordered by weight, not alphabetically: canonical, major, then everything
+   * unranked. Alphabetical would put "canonical" after nothing and read as an
+   * arbitrary list rather than a hierarchy.
+   */
+  const SIG_ORDER = ['canonical', 'major', 'notable', 'unranked'];
+  const sigFacet = facet('sig', 'Significance', (m) => m.significance ?? 'unranked');
+  sigFacet.opts.sort((a, b) => SIG_ORDER.indexOf(a) - SIG_ORDER.indexOf(b));
+
   const facets = [
+    sigFacet,
     facet('kind', 'Kind', (m) => m.type),
     facet('lab', 'Recorded against', (m) => m.company),
   ].filter((f) => f.opts.length > 1); // a one-value facet filters nothing
@@ -1501,13 +1538,15 @@ function milestonesIndexPage(list) {
   };
 
   const card = (m) => `<li class="ms-item" id="ms-${esc(m.id)}"
- data-kind="${esc(m.type)}" data-lab="${esc(m.company)}" style="--c:var(--c-${slugFor(m.company)})">
+ data-sig="${esc(m.significance ?? 'unranked')}" data-kind="${esc(m.type)}" data-lab="${esc(m.company)}" style="--c:var(--c-${slugFor(m.company)})">
 <div class="ms-head">
 ${companyMark(m.company, 'sm')}
 <div class="ms-headtext">
 <h3 class="ms-title"><a href="${esc(m.id)}/">${esc(m.title)}</a></h3>
 <p class="ms-meta"><time datetime="${esc(m.date)}">${esc(eventDate(m.date))}</time>
-<span class="ms-kind">${esc(MILESTONE_LABEL[m.type] ?? m.type)}</span>
+${m.significance === 'canonical' || m.significance === 'major'
+    ? `<span class="ms-rank" data-sig="${esc(m.significance)}">${m.significance === 'canonical' ? 'Canonical' : 'Major'}</span>`
+    : ''}<span class="ms-kind">${esc(MILESTONE_LABEL[m.type] ?? m.type)}</span>
 <span class="ms-lab">${esc(m.company)}</span></p>
 </div>
 </div>
@@ -1577,7 +1616,13 @@ ${years.map(yearSection).join('')}
 addEventListener('DOMContentLoaded',function(){
   var box=document.getElementById('ms-controls');
   if(!box)return;
-  var FACETS=['kind','lab'];
+  // Derived from the facets rendered above, never hand-listed. It was a
+  // literal two-item array written out by hand, so adding a Significance facet
+  // produced a control that rendered, highlighted on click, and filtered
+  // nothing. A second copy of a list goes stale the first time the first grows.
+  // (No backticks in this comment: it lives inside a template literal, and one
+  // stray backtick closes the string while still parsing as valid JS.)
+  var FACETS=${JSON.stringify(facets.map((f) => f.key))};
   var items=[].slice.call(document.querySelectorAll('.ms-item'));
   var sections=[].slice.call(document.querySelectorAll('.ms-year'));
   var chips=[].slice.call(box.querySelectorAll('[data-facet]'));

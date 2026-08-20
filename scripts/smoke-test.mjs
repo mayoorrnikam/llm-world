@@ -379,6 +379,20 @@ function checkFeed() {
   }
 }
 
+/**
+ * Model records only, deliberately — milestones are not checked here.
+ *
+ * A model record's company is a lab, and a lab without a mark is usually an
+ * oversight worth failing on. A milestone's company is whoever did the thing:
+ * the European Union, Yohei Nakajima, Significant Gravitas, Stanford CRFM. Of
+ * the 25 companies across the milestone file, 14 are absent from COMPANY_SLUG
+ * and most will never have a mark in lobe-icons because they are individuals,
+ * institutions or one-person projects. A monogram is the CORRECT rendering for
+ * those, not a fallback, so demanding a registration for each would add
+ * ceremony and catch nothing.
+ *
+ * Written down because the absence looks like a gap until you ask why.
+ */
 function checkCompanyLogos() {
   const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
   const sprite = readFileSync('sprite.svg', 'utf8');
