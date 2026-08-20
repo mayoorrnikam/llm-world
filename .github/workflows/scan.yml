@@ -57,6 +57,13 @@ jobs:
           # spec: the record still needs the announcement and a person.
           echo "" >> scan.md
           node scripts/hf-bridge.mjs --limit=15 >> scan.md 2>&1 || true
+          # The only channel not bounded by labs we already know. Every other
+          # one reads documentation, a catalogue or an org list derived from the
+          # dataset, so a lab that has just appeared is invisible to all of
+          # them. This asks Hugging Face what anyone published and subtracts the
+          # watch list, which is the opposite operation.
+          echo "" >> scan.md
+          node scripts/hf-new-orgs.mjs >> scan.md 2>&1 || true
           # A release added on announcement day cannot have an archive snapshot
           # or, often, its weights yet. This comes back for both rather than
           # letting "not yet" quietly become "never".

@@ -24,34 +24,7 @@ import { readFileSync } from 'node:fs';
 const QUIET = process.argv.includes('--quiet');
 const STALE_DAYS = 14;
 
-/** Official lab accounts. Anything outside this list is community noise. */
-/**
- * The list was hand-written and covered only labs already in the dataset, so it
- * could never surface a lab we were missing — it confirmed what we knew.
- *
- * It is now derived. Epoch AI's notable-models database (CC BY 4.0) names the
- * labs shipping language models; every slug below was then checked against
- * huggingface.co/api/models, so none is a guess. THUDM and CohereForAI came
- * back empty because those orgs moved to zai-org and CohereLabs, which were
- * already here.
- *
- * A model card published by a lab's own org is that lab's own document, so this
- * is the one route where discovery and citation are the same page.
- *
- * Re-derive with: node scripts/discover-epoch.mjs --labs
- */
-const ORGS = [
-  // Already tracked in the dataset.
-  'meta-llama', 'mistralai', 'deepseek-ai', 'Qwen', 'google', 'microsoft',
-  'nvidia', 'CohereLabs', 'zai-org', 'moonshotai', 'ai21labs', 'openai',
-  'xai-org', 'allenai',
-
-  // Labs Epoch lists that this dataset does not cover at all.
-  'ByteDance-Seed', 'tencent', 'apple', 'XiaomiMiMo', 'baidu', 'stepfun-ai',
-  'MiniMaxAI', 'inclusionAI', 'internlm', 'OpenGVLab', 'Skywork', 'Tele-AI',
-  'LGAI-EXAONE', 'upstage', 'skt', 'naver-hyperclovax', 'Motif-Technologies',
-  'tiiuae', 'ibm-granite', 'arcee-ai', 'sarvamai', 'utter-project', 'PleIAs',
-];
+import { ORGS } from '../lib/hf-orgs.mjs';
 
 /** Labs with no meaningful Hugging Face presence — this check is blind to them. */
 const BLIND_SPOTS = ['OpenAI (frontier)', 'Anthropic', 'Google (Gemini)', 'xAI (frontier)', 'Meta (Muse)'];
