@@ -105,7 +105,14 @@ const parts = spec.into.map((p) => {
 const idx = data.releases.indexOf(original);
 data.releases.splice(idx, 1, ...parts);
 
-if (spec.redirect_to) {
+// Not when a part keeps the id. The GLM-4 split declared `models/glm-4 ->
+// families/glm` while emitting a part still called `glm-4`, and the build
+// writes redirects after model pages — so the split silently made its own
+// output unreachable. The parts are what the URL should serve.
+if (spec.redirect_to && parts.some((r) => r.id === spec.from)) {
+  console.log(`\nredirect NOT declared: a part keeps the id "${spec.from}", so `
+    + 'models/' + spec.from + '/ must serve that record, not a redirect.');
+} else if (spec.redirect_to) {
   data.redirects = [...(data.redirects ?? []), {
     from: `models/${spec.from}`,
     to: spec.redirect_to,

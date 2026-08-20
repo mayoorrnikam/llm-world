@@ -269,7 +269,7 @@
       "type": "research",
       "company": "Stanford CRFM",
       "note": "Within two weeks, Stanford released Alpaca (LLaMA 7B fine-tuned on 52K synthetic instructions for $600) and LMSYS released Vicuna (LLaMA 13B fine-tuned on 70K ShareGPT conversations for $300). Both demonstrated that instruction-tuning a base model was trivially cheap and replicable.",
-      "significance": "notable",
+      "significance": "major",
       "why_it_matters": "Proved that instruction-tuning was trivially cheap. The \"base model + synthetic instructions\" recipe became the template for every open instruction-tuned model. Also introduced GPT-4-as-judge evaluation.",
       "sources": [
         {

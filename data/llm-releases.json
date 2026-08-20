@@ -16031,11 +16031,6 @@
       "reason": "The \"Mistral 3\" record described a family. It was split into Mistral Large 3 and the three Ministral 3 sizes."
     },
     {
-      "from": "models/glm-4",
-      "to": "families/glm",
-      "reason": "The \"GLM-4\" record described a family and was split into the models that shipped under it."
-    },
-    {
       "from": "models/gpt-5-6",
       "to": "families/gpt",
       "reason": "The \"GPT-5.6\" record described a family and was split into the models that shipped under it."

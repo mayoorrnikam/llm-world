@@ -840,6 +840,21 @@ source that evidences it.</p>
     `<a href="${esc(s.url)}" rel="noopener noreferrer nofollow">${esc(new URL(s.url).hostname.replace(/^www\./, ''))}</a>`).join(', ') || '—'}</span></li>`;
 }).join('')}</ol>` : ''}
 
+${/**
+   * The reverse of the link a milestone page carries.
+   *
+   * GPT-4, Llama 2, o1 and DeepSeek-R1 are each both a release and a milestone,
+   * and until now the model page said nothing about it — a reader on
+   * /models/gpt-4/ had no way to know the release is part of the canonical
+   * history, while /milestones/gpt-4/ knew all about the model. A one-way link
+   * between two pages about the same subject is a link somebody forgot to
+   * finish.
+   */''}${milestones.some((m) => m.id === r.id) ? (() => {
+    const ms = milestones.find((m) => m.id === r.id);
+    const rank = ms.significance === 'canonical' ? 'a canonical milestone'
+      : ms.significance === 'major' ? 'a major milestone' : 'a milestone';
+    return `<p class="doc-cta"><a href="../../milestones/${esc(ms.id)}/">This release is also ${rank} in the history →</a></p>`;
+  })() : ''}
 ${elsewhere(r)}
 
 <h2>Sources</h2>
@@ -1519,7 +1534,7 @@ function milestonesIndexPage(list) {
    * unranked. Alphabetical would put "canonical" after nothing and read as an
    * arbitrary list rather than a hierarchy.
    */
-  const SIG_ORDER = ['canonical', 'major', 'notable', 'unranked'];
+  const SIG_ORDER = ['canonical', 'major', 'unranked'];
   const sigFacet = facet('sig', 'Significance', (m) => m.significance ?? 'unranked');
   sigFacet.opts.sort((a, b) => SIG_ORDER.indexOf(a) - SIG_ORDER.indexOf(b));
 
@@ -3689,6 +3704,12 @@ write('families', familiesIndexPage(byFamily));
 // Dataset-declared redirects: URLs that were public before a record changed
 // shape. Kept in the data rather than hardcoded here.
 for (const rd of data.redirects ?? []) {
+  // Never over a live record. `models/glm-4` was declared when that record was
+  // split into the family — but one of the parts KEPT the id `glm-4`, so this
+  // loop, which runs after the model pages, replaced GLM-4's own page with a
+  // stub sending readers to the family index. The record was unreachable on the
+  // site for as long as the redirect stood.
+  if (releases.some((r) => `models/${r.id}` === rd.from)) continue;
   const depth = rd.from.split('/').length;
   write(rd.from, page({
     title: 'Moved | LLM World',
@@ -3733,7 +3754,20 @@ if (milestones.length) write('milestones', milestonesIndexPage(milestones));
 
 // These were model URLs before the products moved out. They were public, so
 // they keep resolving rather than 404ing.
+//
+// ONLY where no model record holds the id. A milestone id and a release id are
+// allowed to collide — GPT-4, Llama 2, o1 and DeepSeek-R1 are each genuinely
+// both a release and a turning point — and this loop runs after the model
+// pages are written, so without the guard it OVERWROTE four real records with
+// a stub reading "GPT-4 is a product, not a model" and bounced the reader away
+// from the specifications, provenance and sources it had just built. It went
+// live: smoke checks that links resolve, and a redirect stub resolves fine.
+//
+// The validator warns about the id collision and said it was harmless because
+// "they are in separate directories". They are not — this loop writes into
+// models/ deliberately. That is the whole reason it exists.
 for (const m of milestones) {
+  if (releases.some((r) => r.id === m.id)) continue;
   write(`models/${m.id}`, page({
     title: `${m.title} — ${eventDate(m.date)} | LLM World`,
     description: `${m.id} is recorded as a milestone, not a model.`,

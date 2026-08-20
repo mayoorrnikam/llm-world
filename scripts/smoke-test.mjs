@@ -393,6 +393,33 @@ function checkFeed() {
  *
  * Written down because the absence looks like a gap until you ask why.
  */
+/**
+ * No model record may be served as a redirect.
+ *
+ * A milestone id is allowed to equal a release id, and build.mjs writes a
+ * models/<id> redirect stub for each milestone so the ex-model URLs of ChatGPT
+ * and Bard keep resolving. That loop runs after the model pages, so for four
+ * shared ids — gpt-4, llama-2, o1, deepseek-r1 — it overwrote the real record
+ * with a stub reading "is a product, not a model" and bounced the reader off
+ * the specifications entirely. It shipped: the file existed, every link in it
+ * resolved, and nothing here looked at what the page actually said.
+ *
+ * The other checks ask whether the output is well-formed. This one asks
+ * whether the page is the page it claims to be.
+ */
+function checkModelPagesAreNotRedirects() {
+  const { releases } = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
+  for (const r of releases) {
+    const f = join('models', r.id, 'index.html');
+    if (!existsSync(f)) { fail(`models/${r.id}/`, 'was not built'); continue; }
+    const html = readFileSync(f, 'utf8');
+    if (/http-equiv=["']refresh["']/i.test(html)) {
+      fail(`models/${r.id}/`, `is a redirect stub, but ${r.id} is a real model `
+        + 'record — something of the same id has overwritten its page');
+    }
+  }
+}
+
 function checkCompanyLogos() {
   const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
   const sprite = readFileSync('sprite.svg', 'utf8');
@@ -520,6 +547,7 @@ checkScriptsRun();
 checkLibImports();
 checkWriteScripts();
 checkCompanyLogos();
+checkModelPagesAreNotRedirects();
 checkFeed();
 checkLandingRenderers();
 

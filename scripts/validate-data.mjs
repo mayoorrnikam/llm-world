@@ -484,6 +484,20 @@ for (const [prev, owner] of retiredIds) {
   if (seenIds.has(prev)) err(owner, `previous_id "${prev}" collides with a live record`);
 }
 
+// Same rule for declared redirects, which are the other way a URL can be
+// claimed twice. `models/glm-4` pointed at the GLM family while a live glm-4
+// record existed, and because the redirect is written after the model pages it
+// replaced that record's page with a stub — the record was on the site and
+// unreachable. split-record.mjs had declared the redirect while one of its own
+// output parts kept the id.
+for (const rd of data.redirects ?? []) {
+  const from = String(rd.from ?? '');
+  if (from.startsWith('models/') && seenIds.has(from.slice('models/'.length))) {
+    err('redirects', `"${from}" redirects to ${rd.to}, but a live record holds that `
+      + 'id — the redirect would shadow the record\'s own page');
+  }
+}
+
 /* ------------------------------------------------------------- milestones */
 
 /**
@@ -525,18 +539,29 @@ for (const m of milestones) {
   else if (seenMilestoneIds.has(m.id)) err(id, 'duplicate milestone id');
   else seenMilestoneIds.add(m.id);
 
-  // A milestone id must not collide with a model id — they share a URL space
-  // in the reader's mind even though they sit in different directories.
+  // A shared id is legitimate: GPT-4, Llama 2, o1 and DeepSeek-R1 are each
+  // both a release and a turning point, and the two pages cross-link.
+  //
+  // This warning used to read "they sit in different directories", which was
+  // wrong and expensive. build.mjs writes a models/<id> redirect stub for every
+  // milestone — the ex-model URLs for ChatGPT and Bard — and it runs after the
+  // model pages, so a shared id silently replaced four real records with a stub
+  // saying the model was "a product, not a model". The build is guarded now and
+  // smoke-test enforces it; the note stays because the id space really is
+  // shared, not separate.
   if (seenIds.has(m.id)) {
-    warn(id, `milestone id also used by a model record — check this is intentional`);
+    warn(id, 'milestone id also used by a model record — both pages are built and cross-link');
   }
 
   if (!m.title?.trim()) err(id, 'milestone missing title');
   if (!VALID_MILESTONE_TYPE.has(m.type)) err(id, `unknown milestone type "${m.type}"`);
 
   if (m.significance !== null && m.significance !== undefined) {
-    if (!['canonical', 'major', 'notable'].includes(m.significance)) {
-      err(id, `unknown significance "${m.significance}" — must be canonical, major, notable, or null`);
+    // Two tiers and unranked. `notable` existed briefly and held exactly one
+    // record — a tier of one is not a tier, and once the facet rendered it that
+    // was visible to readers too. Its single member folded into `major`.
+    if (!['canonical', 'major'].includes(m.significance)) {
+      err(id, `unknown significance "${m.significance}" — must be canonical, major, or null`);
     }
   }
   if (m.why_it_matters !== undefined && m.why_it_matters !== null && typeof m.why_it_matters !== 'string') {
