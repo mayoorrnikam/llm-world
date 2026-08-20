@@ -287,12 +287,20 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20230503162315/https://lmsys.org/blog/2023-03-30-vicuna/",
           "retrieved": "2023-05-03"
+        },
+        {
+          "id": "alpaca-vicuna-s3",
+          "url": "https://en.wikipedia.org/wiki/Stanford_Alpaca",
+          "type": "independent_analysis",
+          "authority": "secondary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
-        "status": "verified",
-        "confidence": 85,
-        "reason": "Alpaca dated by Stanford CRFM blog post (March 13, 2023). Vicuna dated by LMSYS blog post (March 30, 2023). Both are primary sources."
+        "status": "partially_verified",
+        "confidence": 70,
+        "reason": "A composite milestone: Alpaca (13 March 2023) and Vicuna (30 March 2023) are seventeen days apart and the record is dated to the first. Neither Stanford's post nor LMSYS's states Alpaca's date in its text — the 13 March came from the Stanford URL path, which is not a claim the page makes. Wikipedia states it, so it is now cited. The Vicuna source states its own date, 30 March, which is the later half of the same transition."
       },
       "evidence_quote": "Alpaca 7B behaves qualitatively similarly to OpenAI's text-davinci-003, while being surprisingly small and easy/cheap to reproduce (<600$)."
     },
@@ -314,12 +322,20 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20240503222135/https://openai.com/index/gpt-4",
           "retrieved": "2024-05-03"
+        },
+        {
+          "id": "gpt-4-s2",
+          "url": "https://www.theverge.com/2023/3/14/23638033/openai-gpt-4-chatgpt-multimodal-deep-learning",
+          "type": "news",
+          "authority": "secondary",
+          "archived_url": "https://web.archive.org/web/20230314170909/https://www.theverge.com/2023/3/14/23638033/openai-gpt-4-chatgpt-multimodal-deep-learning",
+          "retrieved": "2023-03-14"
         }
       ],
       "provenance": {
-        "status": "verified",
-        "confidence": 90,
-        "reason": "OpenAI's own announcement, dated March 14, 2023. openai.com blocks automated fetches, so the live URL was not read. The date is universally reported."
+        "status": "partially_verified",
+        "confidence": 85,
+        "reason": "OpenAI's own announcement is the primary source and carries no date at all — the archived capture has none. The Verge's launch-day report states it in words (\"Mar 14, 2023\"), so the date is corroborated rather than inferred. Not verified: that would require the lab's own page to state it."
       },
       "evidence_quote": "We've created GPT-4, the latest milestone in OpenAI's effort in scaling up deep learning."
     },
