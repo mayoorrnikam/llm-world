@@ -24,7 +24,7 @@ ignores that is describing 2023.
 | **Fully archived** | 180 records where every source has a snapshot |
 | **Open weights** | 83 (43%) |
 | **Beyond language** | 44 (23%) — 17 image generation · 10 audio · 9 video generation · 7 vision · 1 3d |
-| **Milestones** | 39 dated events that were not model releases |
+| **Milestones** | 51 dated events that were not model releases |
 | **Most recent** | Ornith-1.5-9B — Ornith, 2026-08-19 |
 | **Dataset updated** | 2026-08-14 |
 

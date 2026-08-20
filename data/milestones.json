@@ -15,8 +15,8 @@
           "url": "https://arxiv.org/abs/1706.03762",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20170613180523/https://arxiv.org/abs/1706.03762",
+          "retrieved": "2017-06-13"
         }
       ],
       "provenance": {
@@ -42,8 +42,8 @@
           "url": "https://openai.com/index/better-language-models/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240508103516/https://openai.com/index/better-language-models",
+          "retrieved": "2024-05-08"
         }
       ],
       "provenance": {
@@ -68,8 +68,8 @@
           "url": "https://arxiv.org/abs/2001.08361",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20200127090648/https://arxiv.org/abs/2001.08361",
+          "retrieved": "2020-01-27"
         }
       ],
       "provenance": {
@@ -95,8 +95,8 @@
           "url": "https://arxiv.org/abs/2005.14165",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20200529020004/https://arxiv.org/abs/2005.14165",
+          "retrieved": "2020-05-29"
         }
       ],
       "provenance": {
@@ -122,8 +122,8 @@
           "url": "https://arxiv.org/abs/2203.02155",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20220307022110/https://arxiv.org/abs/2203.02155",
+          "retrieved": "2022-03-07"
         }
       ],
       "provenance": {
@@ -148,8 +148,8 @@
           "url": "https://arxiv.org/abs/2203.15556",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20220330131751/https://arxiv.org/abs/2203.15556",
+          "retrieved": "2022-03-30"
         }
       ],
       "provenance": {
@@ -243,16 +243,16 @@
           "url": "https://ai.meta.com/blog/large-language-model-llama-meta-ai/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230714040519/https://ai.meta.com/blog/large-language-model-llama-meta-ai/",
+          "retrieved": "2023-07-14"
         },
         {
           "id": "llama-s2",
           "url": "https://arxiv.org/abs/2302.13971",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230303112615/https://arxiv.org/abs/2302.13971",
+          "retrieved": "2023-03-03"
         }
       ],
       "provenance": {
@@ -277,16 +277,16 @@
           "url": "https://crfm.stanford.edu/2023/03/13/alpaca.html",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230313150221/https://crfm.stanford.edu/2023/03/13/alpaca.html",
+          "retrieved": "2023-03-13"
         },
         {
           "id": "vicuna-s1",
           "url": "https://www.lmsys.org/blog/2023-03-30-vicuna",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230503162315/https://lmsys.org/blog/2023-03-30-vicuna/",
+          "retrieved": "2023-05-03"
         }
       ],
       "provenance": {
@@ -312,8 +312,8 @@
           "url": "https://openai.com/index/gpt-4",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240503222135/https://openai.com/index/gpt-4",
+          "retrieved": "2024-05-03"
         }
       ],
       "provenance": {
@@ -472,8 +472,8 @@
           "url": "https://comate.baidu.com/zh",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20240414212503/https://comate.baidu.com/zh",
+          "retrieved": "2024-04-14"
         },
         {
           "id": "baidu-comate-s4",
@@ -535,8 +535,8 @@
           "url": "https://about.fb.com/news/2023/07/llama-2/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20230718165016/https://about.fb.com/news/2023/07/llama-2/",
+          "retrieved": "2023-07-18"
         }
       ],
       "provenance": {
@@ -617,8 +617,8 @@
           "url": "https://help.aliyun.com/zh/lingma/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20240919115204/https://help.aliyun.com/zh/lingma/",
+          "retrieved": "2024-09-19"
         }
       ],
       "provenance": {
@@ -814,8 +814,8 @@
           "url": "https://openai.com/index/introducing-openai-o1-preview/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20240912171617/https://openai.com/index/introducing-openai-o1-preview/",
+          "retrieved": "2024-09-12"
         }
       ],
       "provenance": {
@@ -872,8 +872,8 @@
           "url": "https://www.yicai.com/news/102334341.html",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20250219123245/https://www.yicai.com/news/102334341.html",
+          "retrieved": "2025-02-19"
         },
         {
           "id": "autoglm-s3",
@@ -984,8 +984,8 @@
           "url": "https://arxiv.org/abs/2501.12948",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20250123030008/https://arxiv.org/abs/2501.12948",
+          "retrieved": "2025-01-23"
         }
       ],
       "provenance": {
@@ -1290,8 +1290,8 @@
           "url": "https://github.com/QwenLM/qwen-code",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20250722211514/https://github.com/QwenLM/qwen-code",
+          "retrieved": "2025-07-22"
         },
         {
           "id": "qwen-code-s3",
@@ -1332,16 +1332,16 @@
           "url": "https://qoder.com/",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20250821152243/https://qoder.com/",
+          "retrieved": "2025-08-21"
         },
         {
           "id": "qoder-s3",
           "url": "https://finance.yahoo.com/news/alibaba-launches-qoder-agentic-coding-133000732.html",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20250821193240/https://finance.yahoo.com/news/alibaba-launches-qoder-agentic-coding-133000732.html",
+          "retrieved": "2025-08-21"
         }
       ],
       "provenance": {
@@ -1626,8 +1626,8 @@
           "url": "https://www.minimaxi.com/blog/minimax-m3",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260601011828/https://www.minimaxi.com/blog/minimax-m3",
+          "retrieved": "2026-06-01"
         }
       ],
       "provenance": {
@@ -1652,8 +1652,8 @@
           "url": "https://www.scmp.com/tech/tech-trends/article/3359170/zhipu-ai-releases-harness-glm-52-model-chinese-firm-takes-aim-anthropic",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260702112116/https://www.scmp.com/tech/tech-trends/article/3359170/zhipu-ai-releases-harness-glm-52-model-chinese-firm-takes-aim-anthropic",
+          "retrieved": "2026-07-02"
         },
         {
           "id": "zcode-s2",

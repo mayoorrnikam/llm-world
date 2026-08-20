@@ -15830,8 +15830,8 @@
           "url": "https://ornith.ai/ornith_1_5.html",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260819162854/https://ornith.ai/ornith_1_5.html",
+          "retrieved": "2026-08-19"
         },
         {
           "id": "ornith-1-5-9b-s2",
@@ -15900,16 +15900,16 @@
           "url": "https://ornith.ai/ornith_1_5.html",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260819162854/https://ornith.ai/ornith_1_5.html",
+          "retrieved": "2026-08-19"
         },
         {
           "id": "ornith-1-5-35b-a3b-s2",
           "url": "https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260819141646/https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B",
+          "retrieved": "2026-08-19"
         },
         {
           "id": "ornith-1-5-35b-a3b-s3",
@@ -15972,8 +15972,8 @@
           "url": "https://ornith.ai/ornith_1_5.html",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260819162854/https://ornith.ai/ornith_1_5.html",
+          "retrieved": "2026-08-19"
         },
         {
           "id": "ornith-1-5-397b-s2",
