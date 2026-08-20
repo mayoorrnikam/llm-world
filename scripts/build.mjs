@@ -337,7 +337,11 @@ const EVENT_LABEL = {
 
 const eventDate = (iso) => {
   const [y, m, d] = iso.split('-').map(Number);
-  return `${MONTHS[m - 1]}${d ? ` ${d}` : ''}, ${y}`;
+  // The comma belongs to the day, not the year: "March 28, 2023" but
+  // "October 2022". A month-precision date rendered "October, 2022" appeared
+  // on the LangChain milestone beside a correct "October 2022" produced
+  // elsewhere on the same page.
+  return d ? `${MONTHS[m - 1]} ${d}, ${y}` : `${MONTHS[m - 1]} ${y}`;
 };
 
 /** Previous release from the same lab. */
@@ -3867,6 +3871,47 @@ const POST_DIRECTIVES = {
           ? `\n\n## What this does not claim\n\n${caveats.map((c) => `- ${c}`).join('\n')}`
           : ''),
       claims: historyClaims(h),
+    };
+  },
+
+  /**
+   * `milestones: agent,harness` — the dated record for one or more milestone
+   * types, oldest first.
+   *
+   * Exists so a post can argue about WHEN something happened without typing a
+   * single date into prose. Every row is a milestone whose date this project
+   * checked against a source that states it, and the claim list carries each
+   * one into gatePostClaims — so a post built on this table cannot assert a
+   * date the dataset has not traced.
+   */
+  milestones(spec, post) {
+    const want = String(spec).split(',').map((x) => x.trim()).filter(Boolean);
+    for (const t of want) {
+      if (!milestones.some((m) => m.type === t)) {
+        throw new Error(`content/posts/${post.slug}.md: no milestone has type "${t}"`);
+      }
+    }
+    const xs = milestones
+      .filter((m) => want.includes(m.type))
+      .sort((a, b) => a.date.localeCompare(b.date));
+
+    const rows = xs.map((m) => {
+      const prim = m.sources.find((x) => x.authority === 'primary') ?? m.sources[0];
+      const host = prim ? new URL(prim.url).hostname.replace(/^www\./, '') : '—';
+      return `| ${eventDate(m.date)} | [${m.title}](../../milestones/${m.id}/) `
+        + `| ${m.company} | ${prim ? `[${host}](${prim.url})` : '—'} |`;
+    });
+
+    return {
+      md: `\n\n| Date | What shipped | Recorded against | Primary source |\n`
+        + `| --- | --- | --- | --- |\n${rows.join('\n')}\n`,
+      claims: xs.map((m) => ({
+        sourced: m.sources.some((x) => x.authority === 'primary'),
+        model: m.title,
+        label: 'date',
+        value: m.date,
+        status: m.provenance.status,
+      })),
     };
   },
 
