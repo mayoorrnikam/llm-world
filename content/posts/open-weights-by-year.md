@@ -2,13 +2,12 @@
 title: Open weights ship less often, and match the frontier anyway
 question: Is AI actually getting more open over time?
 date: 2026-08-17
-draft: true
 openweights: by-year
-unverified: allow — 2026’s open-weights frontier, Qwen3.8-2.4T-A95B, is not yet traced to a primary source. It is marked in the table and the post says the newest comparison is provisional.
+unverified: allow — 2022's open-weights frontier, OPT-175B, carries a 2,048-token context window that is not traced to a primary source. It is marked ⚠︎ in the table, and it sits in the earliest row of a comparison whose argument rests on 2024 onward.
 ---
 
 Ask how open AI is getting and you will usually be shown a count of releases. By
-that measure the answer for 2026 looks grim: twenty-six open-weights releases
+that measure the answer for 2026 looks grim: thirty-two open-weights releases
 tracked here against sixty-five proprietary ones, the lowest open share on record.
 
 That number is real, and it is close to meaningless as a scoreboard.

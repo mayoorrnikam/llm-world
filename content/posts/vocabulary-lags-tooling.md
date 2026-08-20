@@ -2,7 +2,6 @@
 title: The tools arrived about two years before the words did
 question: When did "harness engineering" begin?
 date: 2026-08-19
-draft: true
 milestones: agent,harness
 unverified: allow — Manus and Grok Build are dated from reporting rather than the lab's own page, and both are marked partially_verified in the table. Neither carries the argument: the claim here is about tools that shipped through 2024 and 2025, and those two records are from March 2025 and May 2026.
 ---
