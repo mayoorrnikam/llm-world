@@ -501,6 +501,9 @@ const VALID_MILESTONE_TYPE = new Set([
   // the same label as ChatGPT — true but useless, since the index page facets
   // on this field and a facet everything shares filters nothing.
   'agent',
+  // A coding harness (CLI, IDE, or wrapper around a model) is a distinct event
+  // from shipping the model itself. Gemini CLI is not Gemini 2.5 Pro.
+  'harness',
   // A protocol is not a product. MCP has no launch price, no users and no
   // owner in the way a product does; what it has is adoption. `architecture`
   // was the alternative and reads as MODEL architecture everywhere else here.
@@ -530,6 +533,15 @@ for (const m of milestones) {
 
   if (!m.title?.trim()) err(id, 'milestone missing title');
   if (!VALID_MILESTONE_TYPE.has(m.type)) err(id, `unknown milestone type "${m.type}"`);
+
+  if (m.significance !== null && m.significance !== undefined) {
+    if (!['canonical', 'major', 'notable'].includes(m.significance)) {
+      err(id, `unknown significance "${m.significance}" — must be canonical, major, notable, or null`);
+    }
+  }
+  if (m.why_it_matters !== undefined && m.why_it_matters !== null && typeof m.why_it_matters !== 'string') {
+    err(id, 'why_it_matters must be a string');
+  }
 
   const d = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(m.date ?? '');
   if (!d) err(id, `milestone date must be YYYY-MM-DD, got ${JSON.stringify(m.date)}`);
@@ -598,10 +610,14 @@ const stats = {
   companies: new Set(releases.map((r) => r.company)).size,
   families: new Set(releases.map((r) => r.family)).size,
   verified: releases.filter((r) => r.provenance?.status === 'verified').length,
+  canonical: milestones.filter((m) => m.significance === 'canonical').length,
+  major: milestones.filter((m) => m.significance === 'major').length,
+  harness: milestones.filter((m) => m.type === 'harness').length,
 };
 console.log(
   `${stats.releases} releases · ${stats.milestones} milestones · ${stats.companies} companies · ` +
-  `${stats.families} families · ${stats.verified} verified`,
+  `${stats.families} families · ${stats.verified} verified · ${stats.canonical} canonical · ` +
+  `${stats.major} major · ${stats.harness} harness`,
 );
 
 for (const w of warnings) console.log(`  WARN  ${w}`);

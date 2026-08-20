@@ -1,13 +1,171 @@
 {
   "milestones": [
     {
+      "id": "transformer",
+      "title": "Attention Is All You Need",
+      "date": "2017-06-12",
+      "type": "research",
+      "company": "Google Brain",
+      "note": "Google Brain published the Transformer architecture, replacing recurrent neural networks with self-attention mechanisms. The paper demonstrated that attention alone, without recurrence or convolutions, could achieve state-of-the-art results on machine translation.",
+      "significance": "canonical",
+      "why_it_matters": "Every large language model since — GPT, BERT, PaLM, Gemini, Llama — is a Transformer. The architecture is the foundation of the entire field. Without it, there is no modern AI.",
+      "sources": [
+        {
+          "id": "transformer-s1",
+          "url": "https://arxiv.org/abs/1706.03762",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 95,
+        "reason": "arXiv paper 1706.03762, submitted 2017-06-12. The paper is the primary source; the date is the arXiv submission timestamp."
+      },
+      "evidence_quote": "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely."
+    },
+    {
+      "id": "gpt-2",
+      "title": "Better Language Models and Their Implications",
+      "date": "2019-02-14",
+      "type": "product_launch",
+      "company": "OpenAI",
+      "note": "OpenAI demonstrated that scaling to 1.5B parameters produced qualitatively better text generation, then withheld the full model citing concerns about malicious applications — the first staged \"too dangerous to release\" decision by a major AI lab.",
+      "significance": "major",
+      "why_it_matters": "First public debate about AI safety and responsible publication by a major lab. Also demonstrated that scaling produces emergent qualitative improvements, not just quantitative ones.",
+      "related_family": "GPT",
+      "sources": [
+        {
+          "id": "gpt-2-s1",
+          "url": "https://openai.com/index/better-language-models/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "OpenAI's own blog post, dated February 14, 2019. openai.com blocks automated fetches, so the live URL was not read. The date is widely corroborated."
+      },
+      "evidence_quote": "Due to our concerns about malicious applications of the technology, we are not releasing the trained model."
+    },
+    {
+      "id": "scaling-laws",
+      "title": "Scaling Laws for Neural Language Models",
+      "date": "2020-01-23",
+      "type": "research",
+      "company": "OpenAI",
+      "note": "OpenAI researchers showed that language model loss follows predictable power laws across parameters, dataset size, and compute — spanning more than seven orders of magnitude.",
+      "significance": "canonical",
+      "why_it_matters": "Gave the field a quantitative framework for predicting how much compute a model needs. Directly predicted GPT-3's optimal size four months later. Compute allocation became a strategic decision rather than guesswork.",
+      "sources": [
+        {
+          "id": "scaling-laws-s1",
+          "url": "https://arxiv.org/abs/2001.08361",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 95,
+        "reason": "arXiv paper 2001.08361, submitted 2020-01-23. The paper is the primary source."
+      },
+      "evidence_quote": "The loss scales as a power-law with model size, dataset size, and the amount of compute used for training, with some trends spanning more than seven orders of magnitude."
+    },
+    {
+      "id": "gpt-3",
+      "title": "Language Models are Few-Shot Learners",
+      "date": "2020-05-28",
+      "type": "research",
+      "company": "OpenAI",
+      "note": "OpenAI trained GPT-3, a 175B-parameter autoregressive language model that demonstrated in-context few-shot learning without fine-tuning — sometimes becoming competitive with prior state-of-the-art fine-tuning approaches.",
+      "significance": "canonical",
+      "why_it_matters": "Proved that massive scale enables a qualitatively different capability: few-shot learning. Marked the transition from research curiosity to commercial viability. The foundation-model paradigm starts here.",
+      "related_family": "GPT",
+      "sources": [
+        {
+          "id": "gpt-3-s1",
+          "url": "https://arxiv.org/abs/2005.14165",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 95,
+        "reason": "arXiv paper 2005.14165, submitted 2020-05-28. The paper is the primary source. The API launched 2020-06-11."
+      },
+      "evidence_quote": "We train GPT-3, an autoregressive language model with 175 billion parameters, 10x more than any previous non-sparse language model."
+    },
+    {
+      "id": "instructgpt",
+      "title": "Training Language Models to Follow Instructions with Human Feedback",
+      "date": "2022-03-04",
+      "type": "research",
+      "company": "OpenAI",
+      "note": "OpenAI fine-tuned GPT-3 with human feedback (RLHF) to follow instructions. The 1.3B-parameter InstructGPT model was preferred by human evaluators over the 175B GPT-3.",
+      "significance": "canonical",
+      "why_it_matters": "The alignment tax became the alignment dividend. Fine-tuning with human feedback made language models actually useful — not just capable at next-token prediction, but capable at doing what humans want. Every chat product after this uses this technique.",
+      "related_family": "GPT",
+      "sources": [
+        {
+          "id": "instructgpt-s1",
+          "url": "https://arxiv.org/abs/2203.02155",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 95,
+        "reason": "arXiv paper 2203.02155, submitted 2022-03-04. The paper is the primary source. Also published at NeurIPS 2022."
+      },
+      "evidence_quote": "Outputs from the 1.3B parameter InstructGPT model are preferred to outputs from the 175B GPT-3, despite having 100x fewer parameters."
+    },
+    {
+      "id": "chinchilla",
+      "title": "Training Compute-Optimal Large Language Models",
+      "date": "2022-03-29",
+      "type": "research",
+      "company": "Google DeepMind",
+      "note": "DeepMind showed most existing LLMs (including GPT-3) were significantly undertrained — too many parameters, too little data. For compute-optimal training, model size and training tokens should scale equally.",
+      "significance": "major",
+      "why_it_matters": "Corrected the Kaplan scaling laws. Reshaped how the entire field allocated compute budgets. Directly inspired LLaMA, Mistral, and the \"smaller but better trained\" open-source ecosystem.",
+      "sources": [
+        {
+          "id": "chinchilla-s1",
+          "url": "https://arxiv.org/abs/2203.15556",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 95,
+        "reason": "arXiv paper 2203.15556, submitted 2022-03-29. The paper is the primary source."
+      },
+      "evidence_quote": "We find that current large language models are significantly undertrained, a consequence of the recent focus on scaling language models whilst keeping the amount of training data constant."
+    },
+    {
       "id": "langchain",
       "title": "LangChain's first release",
       "date": "2022-10",
       "type": "agent",
       "company": "LangChain",
       "note": "Harrison Chase published the first version of LangChain as a small Python package for chaining LLM calls, prompt templates and external tools.",
-      "significance": "The first widely adopted framework for wiring a language model to tools, memory and multi-step control flow. Almost every 2023 agent experiment, including AutoGPT and BabyAGI, was built on or against it.",
       "sources": [
         {
           "id": "langchain-s1",
@@ -39,7 +197,9 @@
         "confidence": 70,
         "reason": "Recorded at MONTH precision because that is the precision the readable evidence supports: Wikipedia states 'LangChain was launched in October 2022', and LangChain's own blog says only 'fall of 2022'. Its creator gives the exact day — 'on October 24th of 2022, I released the first version' — but only on x.com, which blocks automated fetching, so no tool here can re-read it. The day is probably right; it is not recorded because it cannot be checked."
       },
-      "evidence_quote": "Three years ago, on October 24th of 2022, I released the first version of LangChain as a Python package."
+      "evidence_quote": "Three years ago, on October 24th of 2022, I released the first version of LangChain as a Python package.",
+      "why_it_matters": "The first widely adopted framework for wiring a language model to tools, memory and multi-step control flow. Almost every 2023 agent experiment, including AutoGPT and BabyAGI, was built on or against it.",
+      "significance": null
     },
     {
       "id": "chatgpt",
@@ -48,7 +208,6 @@
       "type": "product_launch",
       "company": "OpenAI",
       "note": "The public chatbot built on GPT-3.5 that brought large language models to the mainstream.",
-      "significance": "The moment large language models reached the general public. Everything in this timeline after November 2022 happens in a market ChatGPT created.",
       "related_family": "GPT",
       "sources": [
         {
@@ -64,7 +223,105 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Date confirmed in an archived primary source. A milestone records a dated event, so it carries no specifications."
-      }
+      },
+      "why_it_matters": "The moment large language models reached the general public. Everything in this timeline after November 2022 happens in a market ChatGPT created.",
+      "significance": "canonical"
+    },
+    {
+      "id": "llama",
+      "title": "LLaMA: Open and Efficient Foundation Language Models",
+      "date": "2023-02-24",
+      "type": "open_weights",
+      "company": "Meta",
+      "note": "Meta released LLaMA (7B–65B parameters), trained exclusively on publicly available data. The weights were initially gated behind a researcher application form and leaked on March 3, 2023, igniting the open-weights fine-tuning ecosystem.",
+      "significance": "canonical",
+      "why_it_matters": "Proved that models trained on public data could match proprietary giants. The accidental leak created the open-weights fine-tuning ecosystem — Alpaca, Vicuna, Mistral, and the entire open-source LLM movement descend from this release.",
+      "related_family": "Llama",
+      "sources": [
+        {
+          "id": "llama-s1",
+          "url": "https://ai.meta.com/blog/large-language-model-llama-meta-ai/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "llama-s2",
+          "url": "https://arxiv.org/abs/2302.13971",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Meta's own blog post, dated February 24, 2023. The arXiv paper was submitted three days later on February 27. ai.meta.com blocks automated fetches."
+      },
+      "evidence_quote": "We introduce LLaMA, a collection of foundation language models ranging from 7B to 65B parameters. We train our models on trillions of tokens, and show that it is possible to train state-of-the-art models using publicly available datasets exclusively."
+    },
+    {
+      "id": "alpaca-vicuna",
+      "title": "The open instruction ecosystem",
+      "date": "2023-03-13",
+      "type": "research",
+      "company": "Stanford CRFM",
+      "note": "Within two weeks, Stanford released Alpaca (LLaMA 7B fine-tuned on 52K synthetic instructions for $600) and LMSYS released Vicuna (LLaMA 13B fine-tuned on 70K ShareGPT conversations for $300). Both demonstrated that instruction-tuning a base model was trivially cheap and replicable.",
+      "significance": "notable",
+      "why_it_matters": "Proved that instruction-tuning was trivially cheap. The \"base model + synthetic instructions\" recipe became the template for every open instruction-tuned model. Also introduced GPT-4-as-judge evaluation.",
+      "sources": [
+        {
+          "id": "alpaca-s1",
+          "url": "https://crfm.stanford.edu/2023/03/13/alpaca.html",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "vicuna-s1",
+          "url": "https://www.lmsys.org/blog/2023-03-30-vicuna",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 85,
+        "reason": "Alpaca dated by Stanford CRFM blog post (March 13, 2023). Vicuna dated by LMSYS blog post (March 30, 2023). Both are primary sources."
+      },
+      "evidence_quote": "Alpaca 7B behaves qualitatively similarly to OpenAI's text-davinci-003, while being surprisingly small and easy/cheap to reproduce (<600$)."
+    },
+    {
+      "id": "gpt-4",
+      "title": "GPT-4",
+      "date": "2023-03-14",
+      "type": "multimodal",
+      "company": "OpenAI",
+      "note": "OpenAI released GPT-4, the first major model to accept images as input alongside text, demonstrating human-level performance on professional benchmarks including the bar exam.",
+      "significance": "canonical",
+      "why_it_matters": "Established the new performance ceiling for commercial LLMs. Introduced multimodal input. Every frontier model after GPT-4 was expected to be multimodal. The benchmark arms race intensified.",
+      "related_family": "GPT",
+      "sources": [
+        {
+          "id": "gpt-4-s1",
+          "url": "https://openai.com/index/gpt-4",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "OpenAI's own announcement, dated March 14, 2023. openai.com blocks automated fetches, so the live URL was not read. The date is universally reported."
+      },
+      "evidence_quote": "We've created GPT-4, the latest milestone in OpenAI's effort in scaling up deep learning."
     },
     {
       "id": "bard",
@@ -73,7 +330,6 @@
       "type": "product_launch",
       "company": "Google DeepMind",
       "note": "Google's ChatGPT rival chatbot that brought the company into the consumer AI race.",
-      "significance": "Google's first consumer answer to ChatGPT, and the start of the assistant race between the two largest labs.",
       "related_family": "Gemini",
       "sources": [
         {
@@ -89,7 +345,9 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Date confirmed in an archived primary source. A milestone records a dated event, so it carries no specifications."
-      }
+      },
+      "why_it_matters": "Google's first consumer answer to ChatGPT, and the start of the assistant race between the two largest labs.",
+      "significance": "major"
     },
     {
       "id": "chatgpt-plugins",
@@ -98,7 +356,6 @@
       "type": "architecture",
       "company": "OpenAI",
       "note": "OpenAI gave ChatGPT the ability to call third-party services, plus its own browsing and code-interpreter plugins, initially to a waitlist.",
-      "significance": "The first time a mass-market language model could act outside its own text box. It is the origin of the tool-use pattern every later agent is built on, and OpenAI said so directly: it expected open standards to emerge for exposing an AI-facing interface.",
       "sources": [
         {
           "id": "chatgpt-plugins-s1",
@@ -114,7 +371,9 @@
         "confidence": 90,
         "reason": "Dateline 'March 23, 2023' read directly from a Wayback capture of OpenAI's own announcement taken two days later. openai.com blocks automated fetches, so the live URL was not read."
       },
-      "evidence_quote": "March 23, 2023"
+      "evidence_quote": "March 23, 2023",
+      "why_it_matters": "The first time a mass-market language model could act outside its own text box. It is the origin of the tool-use pattern every later agent is built on, and OpenAI said so directly: it expected open standards to emerge for exposing an AI-facing interface.",
+      "significance": "major"
     },
     {
       "id": "babyagi",
@@ -123,7 +382,6 @@
       "type": "agent",
       "company": "Yohei Nakajima",
       "note": "A roughly 100-line Python loop that creates, prioritises and executes its own tasks against an objective. Shared first as the 'Task-Driven Autonomous Agent', then released as the babyagi repository days later.",
-      "significance": "The minimum viable autonomous agent, small enough to read in one sitting. It defined the plan-execute-reprioritise loop that the whole 2023 agent wave copied, and its author explicitly framed it as documenting a pattern rather than shipping a product.",
       "sources": [
         {
           "id": "babyagi-s1",
@@ -147,7 +405,9 @@
         "confidence": 80,
         "reason": "The project's own README dates the original Task-Driven Autonomous Agent to 28 March 2023 and links the announcing tweet; the author's blog post narrating its creation is dated 1 April 2023. The date recorded here is the one the project itself states. The babyagi repository under that name followed in early April, so a reader who expects the 'BabyAGI' name to be dated will see a few days' offset."
       },
-      "evidence_quote": "This is a pared-down version of the original [Task-Driven Autonomous Agent](https://twitter.com/yoheinakajima/status/1640934493489070080?s=20) (Mar 28, 2023)."
+      "evidence_quote": "This is a pared-down version of the original [Task-Driven Autonomous Agent](https://twitter.com/yoheinakajima/status/1640934493489070080?s=20) (Mar 28, 2023).",
+      "why_it_matters": "The minimum viable autonomous agent, small enough to read in one sitting. It defined the plan-execute-reprioritise loop that the whole 2023 agent wave copied, and its author explicitly framed it as documenting a pattern rather than shipping a product.",
+      "significance": null
     },
     {
       "id": "autogpt",
@@ -156,7 +416,6 @@
       "type": "agent",
       "company": "Significant Gravitas",
       "note": "An open-source program that gives GPT-4 a goal in natural language and lets it decompose the goal into sub-tasks, then run them against a browser, a file system and a code interpreter without further prompting.",
-      "significance": "The moment 'autonomous agent' became a mainstream idea rather than a research term. It became one of the fastest-starred repositories in GitHub history and set the expectations — and the disappointment — that the next two years of agent work were measured against.",
       "sources": [
         {
           "id": "autogpt-s1",
@@ -180,7 +439,9 @@
         "confidence": 60,
         "reason": "Dated only by Wikipedia, which states the release date plainly but is a secondary source. The project's own repository does not state a release date anywhere I could read, and there is no launch blog post. A contemporaneous announcement or the author's own dated statement is what is missing."
       },
-      "evidence_quote": "AutoGPT was released on March 30, 2023, by Toran Bruce Richards, the founder of video game company Significant Gravitas Ltd."
+      "evidence_quote": "AutoGPT was released on March 30, 2023, by Toran Bruce Richards, the founder of video game company Significant Gravitas Ltd.",
+      "why_it_matters": "The moment 'autonomous agent' became a mainstream idea rather than a research term. It became one of the fastest-starred repositories in GitHub history and set the expectations — and the disappointment — that the next two years of agent work were measured against.",
+      "significance": null
     },
     {
       "id": "baidu-comate",
@@ -189,7 +450,6 @@
       "type": "product_launch",
       "company": "Baidu",
       "note": "Baidu Intelligent Cloud unveiled Comate, a code assistant built on the Wenxin (ERNIE) model, at a Wenxin large-model technical conference in Chengdu and opened it for invited testing. It covered around 30 languages, and Baidu claimed roughly a 50% acceptance rate for its suggestions in internal use. Baidu gave it the Chinese name 文心快码 (Wenxin Kuaima) on 2024-06-28.",
-      "significance": "The first coding assistant shipped by a Chinese hyperscaler on its own foundation model, three weeks after GitHub Copilot Chat's own beta and four months before Alibaba's equivalent. It marks the start of the Chinese Copilot generation — completion and chat inside an editor, not an agent — which is the baseline everything in the 2025 Chinese harness wave was built against.",
       "sources": [
         {
           "id": "baidu-comate-s1",
@@ -229,7 +489,9 @@
         "confidence": 70,
         "reason": "Dated by same-day Chinese media on 6 June 2023 — a Tencent News piece published that day reports 百度智能云推出「Comate」代码助手，并正式开放邀测 ('Baidu Intelligent Cloud launched the Comate code assistant and formally opened invited testing'), corroborated by IT之家 the same day and by Baidu Baike's product history, which gives the fullest chronology (internal tool April 2023, invited test 2023-06-06, commercial Comate X 2023-08-18, general availability 2023-10-24, renamed 文心快码 2024-06-28). Baidu Baike is user-editable and is cited only for that chronology, never as the basis for the date. What is missing is Baidu's own dated announcement post: comate.baidu.com carries the product but no launch date, and no Baidu newsroom item for the date could be read. SCOPE: this dates the invited beta, not general availability, which the same chronology puts at 2023-10-24."
       },
-      "evidence_quote": "2023年6月6日，在文心大模型技术交流会（成都）上，百度智能云推出「Comate」代码助手，并正式开放邀测。 (\"On 6 June 2023, at the Wenxin Large Model Technical Conference in Chengdu, Baidu Intelligent Cloud launched the 'Comate' code assistant and formally opened invited testing.\")"
+      "evidence_quote": "2023年6月6日，在文心大模型技术交流会（成都）上，百度智能云推出「Comate」代码助手，并正式开放邀测。 (\"On 6 June 2023, at the Wenxin Large Model Technical Conference in Chengdu, Baidu Intelligent Cloud launched the 'Comate' code assistant and formally opened invited testing.\")",
+      "why_it_matters": "The first coding assistant shipped by a Chinese hyperscaler on its own foundation model, three weeks after GitHub Copilot Chat's own beta and four months before Alibaba's equivalent. It marks the start of the Chinese Copilot generation — completion and chat inside an editor, not an agent — which is the baseline everything in the 2025 Chinese harness wave was built against.",
+      "significance": null
     },
     {
       "id": "openai-function-calling",
@@ -238,7 +500,6 @@
       "type": "architecture",
       "company": "OpenAI",
       "note": "OpenAI shipped gpt-4-0613 and gpt-3.5-turbo-0613, fine-tuned to decide when a described function should be called and to emit a JSON object matching its signature.",
-      "significance": "Tool use stopped being a prompting trick and became an API primitive with a defined contract. Every agent framework after this date builds on structured tool calls rather than on parsing free text.",
       "sources": [
         {
           "id": "openai-function-calling-s1",
@@ -254,7 +515,36 @@
         "confidence": 90,
         "reason": "Dateline 'June 13, 2023' read directly from a Wayback capture of OpenAI's own announcement taken two days later. openai.com blocks automated fetches, so the live URL was not read."
       },
-      "evidence_quote": "June 13, 2023"
+      "evidence_quote": "June 13, 2023",
+      "why_it_matters": "Tool use stopped being a prompting trick and became an API primitive with a defined contract. Every agent framework after this date builds on structured tool calls rather than on parsing free text.",
+      "significance": "canonical"
+    },
+    {
+      "id": "llama-2",
+      "title": "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+      "date": "2023-07-18",
+      "type": "open_weights",
+      "company": "Meta",
+      "note": "Meta released Llama 2 with explicit commercial-use rights, co-launched with Microsoft as preferred partner and distributed through Azure. The first major LLM released for free commercial use.",
+      "significance": "major",
+      "why_it_matters": "First major LLM released with explicit commercial-use rights. Legitimised open-weight models for enterprise and product use. The open-weights ecosystem moved from research to production.",
+      "related_family": "Llama",
+      "sources": [
+        {
+          "id": "llama-2-s1",
+          "url": "https://about.fb.com/news/2023/07/llama-2/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Meta's own newsroom post, dated July 18, 2023. about.fb.com is Meta's corporate newsroom."
+      },
+      "evidence_quote": "Today, we're introducing the availability of Llama 2, the next generation of our open source large language model. Llama 2 is free for research and commercial use."
     },
     {
       "id": "iflycode",
@@ -263,7 +553,6 @@
       "type": "product_launch",
       "company": "iFlytek",
       "note": "iFlytek announced iFlyCode 1.0 (星火飞码) at the same press conference as its Spark cognitive model V2.0, an in-editor assistant doing code generation, completion, explanation, error correction and unit-test generation. iFlytek reported that more than 2,000 of its own engineers were already using it.",
-      "significance": "The second Chinese coding assistant to ship, and the one that came bundled with a model launch rather than as a cloud product — iFlytek treated the assistant as the demonstration of Spark V2.0's coding ability. It is also the clearest case in this batch of a lab that never followed the assistant with an agent or a CLI, which is why iFlytek is absent from the 2025-26 harness wave.",
       "sources": [
         {
           "id": "iflycode-s1",
@@ -295,7 +584,9 @@
         "confidence": 70,
         "reason": "Dated by IT之家, timestamped 2023/8/15 17:27:30, whose opening line places the launch at that afternoon's iFlytek press conference; ZOL published corroborating coverage on 2023-08-16 naming the same 15 August conference. iFlytek's own product page at xfyun.cn/solutions/iflycode describes iFlyCode but carries no date, so there is no primary dateline. Recorded as the 1.0 announcement; later versions (2.0, 3.0) were not researched."
       },
-      "evidence_quote": "IT之家 8 月 15 日消息，在今日下午的科大讯飞发布会上，讯飞除了发布星火大模型 V2.0 外，还带来了智能编程助手 iFlyCode 1.0。 (\"IT Home, 15 August: at iFlytek's press conference this afternoon, alongside releasing the Spark large model V2.0, iFlytek also brought the intelligent programming assistant iFlyCode 1.0.\")"
+      "evidence_quote": "IT之家 8 月 15 日消息，在今日下午的科大讯飞发布会上，讯飞除了发布星火大模型 V2.0 外，还带来了智能编程助手 iFlyCode 1.0。 (\"IT Home, 15 August: at iFlytek's press conference this afternoon, alongside releasing the Spark large model V2.0, iFlytek also brought the intelligent programming assistant iFlyCode 1.0.\")",
+      "why_it_matters": "The second Chinese coding assistant to ship, and the one that came bundled with a model launch rather than as a cloud product — iFlytek treated the assistant as the demonstration of Spark V2.0's coding ability. It is also the clearest case in this batch of a lab that never followed the assistant with an agent or a CLI, which is why iFlytek is absent from the 2025-26 harness wave.",
+      "significance": null
     },
     {
       "id": "tongyi-lingma",
@@ -304,7 +595,6 @@
       "type": "product_launch",
       "company": "Alibaba Qwen",
       "note": "Alibaba Cloud unveiled 通义灵码 (Tongyi Lingma), a coding assistant built on its Tongyi code model, at the Apsara Conference in Hangzhou, demonstrating it generating a hundred-odd lines of Python from a one-line request. It supported Java, Python and Go with generation, chat, unit-test generation and code explanation, and the individual tier was free.",
-      "significance": "Alibaba's entry into the Chinese Copilot generation, and the direct ancestor of everything Alibaba later shipped in this space: the Lingma team became Qoder, and Lingma IDE now carries a Qoder CN banner. It is the assistant a Chinese lab kept iterating on longest before replacing it with an agentic product.",
       "sources": [
         {
           "id": "tongyi-lingma-s1",
@@ -336,7 +626,9 @@
         "confidence": 65,
         "reason": "Dated by an Alibaba Cloud developer-community article published 2023-10-31 and headed '2023云栖大会 | 阿里云推出智能编码助手通义灵码', which states the unveiling happened that day at the Hangzhou Apsara Conference; GeekPark carried the same date on 2023-11-02. Held at partially_verified rather than verified because developer.aliyun.com accepts community-submitted posts, so authorship as an Alibaba Cloud announcement could not be confirmed from the page itself. Alibaba's own Lingma documentation gives no launch date: the current Lingma IDE changelog starts at v0.1.0 on 2025-05-29 and links the pre-2025 log only as an archive ('原通义灵码日志（存档）') that could not be read. NOTE the wording is 展示 ('demonstrated/unveiled'), not general availability. COMPANY: recorded as Alibaba Qwen to match this dataset's only Alibaba string; the product ships under the Alibaba Cloud / Tongyi brand, not the Qwen team."
       },
-      "evidence_quote": "10 月 31 日，杭州云栖大会上，阿里云对外展示了一款可自动编写代码的 AI 助手 (\"On 31 October, at the Hangzhou Apsara Conference, Alibaba Cloud publicly unveiled an AI assistant that can write code automatically\")"
+      "evidence_quote": "10 月 31 日，杭州云栖大会上，阿里云对外展示了一款可自动编写代码的 AI 助手 (\"On 31 October, at the Hangzhou Apsara Conference, Alibaba Cloud publicly unveiled an AI assistant that can write code automatically\")",
+      "why_it_matters": "Alibaba's entry into the Chinese Copilot generation, and the direct ancestor of everything Alibaba later shipped in this space: the Lingma team became Qoder, and Lingma IDE now carries a Qoder CN banner. It is the assistant a Chinese lab kept iterating on longest before replacing it with an agentic product.",
+      "significance": null
     },
     {
       "id": "gemini-app",
@@ -345,7 +637,6 @@
       "type": "product_launch",
       "company": "Google DeepMind",
       "note": "Google retired the Bard brand, renamed the assistant Gemini, and shipped it as a mobile app with a paid Advanced tier.",
-      "significance": "The point Google stopped positioning its assistant as an experiment and started selling it. Bard had been the reactive answer to ChatGPT; Gemini was the product line it became.",
       "related_family": "Gemini",
       "sources": [
         {
@@ -361,7 +652,9 @@
         "status": "verified",
         "confidence": 90,
         "reason": "Date confirmed in an archived primary source captured on the day of the announcement. A milestone records a dated event, so it carries no specifications."
-      }
+      },
+      "why_it_matters": "The point Google stopped positioning its assistant as an experiment and started selling it. Bard had been the reactive answer to ChatGPT; Gemini was the product line it became.",
+      "significance": "major"
     },
     {
       "id": "devin",
@@ -370,7 +663,6 @@
       "type": "agent",
       "company": "Cognition",
       "note": "Cognition unveiled Devin, an agent with its own shell, editor and browser, marketed as a teammate that completes engineering tasks end to end rather than as an autocomplete.",
-      "significance": "The first time an agent was positioned as a colleague with a job description rather than a developer tool. It reset what a coding agent was expected to do, and its SWE-bench claims made benchmark performance on real repositories the field's scoreboard.",
       "sources": [
         {
           "id": "devin-s1",
@@ -394,16 +686,17 @@
         "confidence": 75,
         "reason": "Cognition's own announcement is primary but its only date is the numeric dateline '03.12.24', which is ambiguous on its face. SiliconANGLE's launch-day report states it unambiguously — 'UPDATED 19:59 EDT / MARCH 12 2024' — so the date is corroborated by a secondary source rather than inferred. Not verified: that would require the company's own page to state it."
       },
-      "evidence_quote": "Devin is a tireless, skilled teammate, equally ready to build alongside you or independently complete tasks for you to review."
+      "evidence_quote": "Devin is a tireless, skilled teammate, equally ready to build alongside you or independently complete tasks for you to review.",
+      "why_it_matters": "The first time an agent was positioned as a colleague with a job description rather than a developer tool. It reset what a coding agent was expected to do, and its SWE-bench claims made benchmark performance on real repositories the field's scoreboard.",
+      "significance": "major"
     },
     {
       "id": "qwen-agent",
       "title": "Qwen-Agent's first tagged release",
       "date": "2024-04-07",
-      "type": "agent",
+      "type": "harness",
       "company": "Alibaba Qwen",
       "note": "The Qwen team published v0.0.1 of Qwen-Agent, its open framework for building applications on Qwen's function-calling, planning and memory: an agent loop, a tool registry, a code interpreter, RAG and a BrowserQwen Chrome extension, packaged to PyPI the same day.",
-      "significance": "The first agent framework published by a Chinese frontier lab under its own model's name — LangChain's role, but written by the lab that makes the model rather than around it. It is the line from which Alibaba's later first-party harnesses descend, and it predates Qwen Code by fifteen months.",
       "sources": [
         {
           "id": "qwen-agent-s1",
@@ -435,7 +728,9 @@
         "confidence": 75,
         "reason": "The GitHub release v0.0.1 on QwenLM/Qwen-Agent was published 2024-04-07T13:25:21Z, and PyPI records the qwen-agent 0.0.1 sdist uploaded 2024-04-07T13:11:08Z — the lab's own two distribution channels, fourteen minutes apart. CHECKED IT IS THE EARLIEST: the releases endpoint returns 25 releases with no Link header, i.e. a single page, and the oldest is v0.0.1; the tags endpoint returns the same 25 names with no tag below v0.0.1. READ THE TITLE SCOPE: this is the first tagged release, NOT the framework's public debut — the repository was created 2023-09-22T02:24:56Z and Qwen-Agent was usable from source for roughly six months before it was ever tagged or packaged. No dated Alibaba blog post announcing Qwen-Agent could be found; qwenlm.github.io/blog has no Qwen-Agent entry. A record for the September 2023 debut would need a source this research did not find."
       },
-      "evidence_quote": "v0.0.1 — published_at 2024-04-07T13:25:21Z [GitHub API, QwenLM/Qwen-Agent releases]; qwen-agent 0.0.1 upload_time 2024-04-07T13:11:08Z [PyPI JSON API]"
+      "evidence_quote": "v0.0.1 — published_at 2024-04-07T13:25:21Z [GitHub API, QwenLM/Qwen-Agent releases]; qwen-agent 0.0.1 upload_time 2024-04-07T13:11:08Z [PyPI JSON API]",
+      "why_it_matters": "The first agent framework published by a Chinese frontier lab under its own model's name — LangChain's role, but written by the lab that makes the model rather than around it. It is the line from which Alibaba's later first-party harnesses descend, and it predates Qwen Code by fifteen months.",
+      "significance": null
     },
     {
       "id": "eu-ai-act",
@@ -444,7 +739,6 @@
       "type": "policy",
       "company": "European Union",
       "note": "Regulation (EU) 2024/1689 — the first broad statutory regime for AI systems, including obligations that fall on general-purpose model providers.",
-      "significance": "The first time training and releasing a general-purpose model carried statutory duties rather than voluntary commitments. Obligations phase in over years, but this is the date the regime began to exist.",
       "sources": [
         {
           "id": "eu-ai-act-s1",
@@ -459,7 +753,9 @@
         "status": "verified",
         "confidence": 85,
         "reason": "The regulation was published in the Official Journal on 12 July 2024, and its own Article 113 states that it enters into force on the twentieth day following publication — 1 August 2024. Both facts are in the archived primary source; the date here is their sum, not an estimate."
-      }
+      },
+      "why_it_matters": "The first time training and releasing a general-purpose model carried statutory duties rather than voluntary commitments. Obligations phase in over years, but this is the date the regime began to exist.",
+      "significance": "major"
     },
     {
       "id": "replit-agent",
@@ -468,7 +764,6 @@
       "type": "agent",
       "company": "Replit",
       "note": "Replit opened early access to an agent that takes a natural-language description and sets up the environment, writes the code, provisions a database and deploys the result.",
-      "significance": "The first agent that shipped a running application rather than a diff, and the first commercial evidence that agents could carry a business: Replit's revenue growth after this release is what pulled the rest of the industry into agent products.",
       "sources": [
         {
           "id": "replit-agent-s1",
@@ -500,7 +795,35 @@
         "confidence": 55,
         "reason": "Dated by a news article published 5 September 2024 that describes the agent as launched that day and quotes a same-day post. Replit's own announcement is an X post whose dateline could not be read (x.com blocks automated fetches). There is a real tension to resolve: Replit's blog post 'Introducing Replit Agent' is dated 16 September 2024 and opens 'Last week, we launched Replit Agent', which points at the week of 9 September rather than 5 September. Confirm against the X post before treating 5 September as settled."
       },
-      "evidence_quote": "Replit Agent (launched today)"
+      "evidence_quote": "Replit Agent (launched today)",
+      "why_it_matters": "The first agent that shipped a running application rather than a diff, and the first commercial evidence that agents could carry a business: Replit's revenue growth after this release is what pulled the rest of the industry into agent products.",
+      "significance": null
+    },
+    {
+      "id": "o1",
+      "title": "OpenAI o1-preview",
+      "date": "2024-09-12",
+      "type": "architecture",
+      "company": "OpenAI",
+      "note": "OpenAI released o1, the first reasoning model, demonstrating that chain-of-thought inference at test time could dramatically boost performance on math, science, and coding benchmarks — scoring 83% on IMO problems versus GPT-4o's 13%.",
+      "significance": "canonical",
+      "why_it_matters": "Inference-time compute became a new scaling axis. Before o1: bigger model = better. After o1: smarter thinking = better. Every frontier lab subsequently developed reasoning models.",
+      "sources": [
+        {
+          "id": "o1-s1",
+          "url": "https://openai.com/index/introducing-openai-o1-preview/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "OpenAI's own announcement, dated September 12, 2024. openai.com blocks automated fetches."
+      },
+      "evidence_quote": "We've developed a new series of AI models designed to spend more time thinking before they respond."
     },
     {
       "id": "anthropic-computer-use",
@@ -509,7 +832,6 @@
       "type": "architecture",
       "company": "Anthropic",
       "note": "Anthropic put a public beta API in developers' hands that lets Claude look at a screen, move a cursor, click and type — operating software built for people rather than calling an API.",
-      "significance": "The first frontier model offered as a general computer operator. It opened the second track of the agent era: instead of every tool needing an API, the agent uses the interface a human would.",
       "sources": [
         {
           "id": "anthropic-computer-use-s1",
@@ -525,7 +847,9 @@
         "confidence": 90,
         "reason": "Anthropic's own announcement, dated Oct 22, 2024 on the page. Note this post also announces model releases (Claude 3.5 Sonnet upgraded and Claude 3.5 Haiku), which belong in the model dataset; the milestone here is the computer-use capability only. No archived capture recorded; one should be added."
       },
-      "evidence_quote": "We're also introducing a groundbreaking new capability in public beta: computer use."
+      "evidence_quote": "We're also introducing a groundbreaking new capability in public beta: computer use.",
+      "why_it_matters": "The first frontier model offered as a general computer operator. It opened the second track of the agent era: instead of every tool needing an API, the agent uses the interface a human would.",
+      "significance": "major"
     },
     {
       "id": "autoglm",
@@ -534,7 +858,6 @@
       "type": "agent",
       "company": "Zhipu AI",
       "note": "Zhipu AI launched AutoGLM, an agent that operates a phone or a web browser on the user's behalf from a spoken or typed instruction. Its published architecture splits a Planner from a Grounder so that deciding what to do and locating the pixel to tap are separate models — the paper reports 55.2% success on web browsing and 36.2% on Android control.",
-      "significance": "China's answer to computer use, launched three months before OpenAI's Operator and two days after Anthropic's computer-use API. It aimed at the phone rather than the desktop, which is the split that has defined Chinese agent products since: Western agents drive a browser, AutoGLM drove WeChat, Taobao and Meituan.",
       "sources": [
         {
           "id": "autoglm-s1",
@@ -566,7 +889,9 @@
         "confidence": 65,
         "reason": "Dated by Yicai (第一财经), published 2024-10-30, which states 大模型独角兽公司智谱AI于10月25日正式上线AutoGLM新功能 ('the large-model unicorn Zhipu AI officially brought the AutoGLM feature online on 25 October'), with Wallstreetcn carrying the same launch. The AutoGLM paper — 'AutoGLM: Autonomous Foundation Agents for GUIs', submitted to arXiv 2024-10-28 — is a primary source for the system but was posted three days AFTER the launch and does not date it. Coverage also places a first demonstration at CNCC earlier in October 2024, which was not pinned down and is not claimed here. Zhipu's own dated announcement post could not be read. NOT A CODING AGENT: AutoGLM is a GUI-control agent, included because it is Zhipu's agent-era starting point and the Chinese counterpart to Operator and computer use."
       },
-      "evidence_quote": "大模型独角兽公司智谱AI于10月25日正式上线AutoGLM新功能 (\"The large-model unicorn Zhipu AI officially brought the new AutoGLM feature online on 25 October.\")"
+      "evidence_quote": "大模型独角兽公司智谱AI于10月25日正式上线AutoGLM新功能 (\"The large-model unicorn Zhipu AI officially brought the new AutoGLM feature online on 25 October.\")",
+      "why_it_matters": "China's answer to computer use, launched three months before OpenAI's Operator and two days after Anthropic's computer-use API. It aimed at the phone rather than the desktop, which is the split that has defined Chinese agent products since: Western agents drive a browser, AutoGLM drove WeChat, Taobao and Meituan.",
+      "significance": null
     },
     {
       "id": "mcp",
@@ -575,7 +900,6 @@
       "type": "protocol",
       "company": "Anthropic",
       "note": "Anthropic published MCP, an open standard and reference servers for connecting assistants to data sources and tools through one protocol instead of bespoke integrations.",
-      "significance": "The integration layer the agent era had been missing. Within a year it was adopted across competing labs and tools, making it the rare piece of AI infrastructure that became a shared standard rather than a moat.",
       "sources": [
         {
           "id": "mcp-s1",
@@ -591,16 +915,17 @@
         "confidence": 90,
         "reason": "Anthropic's own announcement, dated Nov 25, 2024 on the page. Typed product_launch for lack of a better value in the schema — MCP is a protocol and reference implementation, not a product; 'architecture' was the alternative and reads as model architecture in this dataset. No archived capture recorded; one should be added."
       },
-      "evidence_quote": "Today, we're open-sourcing the Model Context Protocol (MCP), a new standard for connecting AI assistants to the systems where data lives, including content repositories, business tools, and development environments."
+      "evidence_quote": "Today, we're open-sourcing the Model Context Protocol (MCP), a new standard for connecting AI assistants to the systems where data lives, including content repositories, business tools, and development environments.",
+      "why_it_matters": "The integration layer the agent era had been missing. Within a year it was adopted across competing labs and tools, making it the rare piece of AI infrastructure that became a shared standard rather than a moat.",
+      "significance": "canonical"
     },
     {
       "id": "trae-ide",
       "title": "Trae, ByteDance's AI IDE",
       "date": "2025-01-20",
-      "type": "agent",
+      "type": "harness",
       "company": "ByteDance",
       "note": "ByteDance shipped Trae, a VS Code fork with an AI builder mode, free to use and running on other labs' frontier models (Claude 3.5 Sonnet and GPT-4o) rather than ByteDance's own.",
-      "significance": "The first AI-native development environment from a major Chinese platform company, and the earliest Chinese entry in the coding-harness race. Like Manus a month later, it competed on the harness while renting the model, which is the pattern Chinese agent products followed until their own coding models caught up.",
       "sources": [
         {
           "id": "trae-ide-s1",
@@ -632,7 +957,43 @@
         "confidence": 50,
         "reason": "The weakest entry in this batch. 20 January 2025 is stated by several aggregators and repeated across coverage, and Visual Studio Magazine covered the tool as newly shipped on 27 January 2025 — but I could not read a ByteDance page carrying the date. trae.ai's blog index returned no dated posts to an automated fetch, and visualstudiomagazine.com returned 403, so its dateline is from the URL path rather than the page. There is also a real ambiguity the entry does not resolve: the international Trae launched first and a separate Chinese-market build followed later in 2025, and the aibase article used here describes the Chinese-developer version while carrying a January date. Confirm against a ByteDance announcement before publishing."
       },
-      "evidence_quote": "ByteDance recently launched an AI integrated development environment (IDE) called Trae, specifically designed for Chinese developers."
+      "evidence_quote": "ByteDance recently launched an AI integrated development environment (IDE) called Trae, specifically designed for Chinese developers.",
+      "why_it_matters": "The first AI-native development environment from a major Chinese platform company, and the earliest Chinese entry in the coding-harness race. Like Manus a month later, it competed on the harness while renting the model, which is the pattern Chinese agent products followed until their own coding models caught up.",
+      "significance": null
+    },
+    {
+      "id": "deepseek-r1",
+      "title": "DeepSeek-R1",
+      "date": "2025-01-20",
+      "type": "open_weights",
+      "company": "DeepSeek",
+      "note": "DeepSeek released an open-source reasoning model matching OpenAI o1's benchmark performance, under MIT licence, at a fraction of the training cost. NVIDIA lost $589B in market cap on the following trading day.",
+      "significance": "major",
+      "why_it_matters": "First open-source reasoning model to match proprietary performance. Triggered a global reassessment of AI economics. Reasoning capability was no longer a proprietary moat.",
+      "sources": [
+        {
+          "id": "deepseek-r1-s1",
+          "url": "https://www.deepseek.com/en/news/deepseek-r1/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "deepseek-r1-s2",
+          "url": "https://arxiv.org/abs/2501.12948",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 85,
+        "reason": "DeepSeek's own announcement, dated January 20, 2025. The arXiv paper was submitted January 22, 2025. The widely used date is January 20."
+      },
+      "evidence_quote": "Performance on par with OpenAI-o1. Fully open-source model & technical report. Code and models are released under the MIT License."
     },
     {
       "id": "openai-operator",
@@ -641,7 +1002,6 @@
       "type": "agent",
       "company": "OpenAI",
       "note": "A research preview of an agent that drives a browser on the user's behalf — filling forms, ordering things, navigating sites — released to ChatGPT Pro subscribers.",
-      "significance": "The first consumer-facing agent from OpenAI that acted on the open web rather than answering questions. It moved computer-using agents from a developer capability to a subscription product.",
       "sources": [
         {
           "id": "openai-operator-s1",
@@ -657,7 +1017,9 @@
         "confidence": 90,
         "reason": "Dateline 'January 23, 2025' read from a Wayback capture of OpenAI's own announcement taken two days later; the same string appears in the page's own publicationDateText field. openai.com blocks automated fetches, so the live URL was not read."
       },
-      "evidence_quote": "January 23, 2025"
+      "evidence_quote": "January 23, 2025",
+      "why_it_matters": "The first consumer-facing agent from OpenAI that acted on the open web rather than answering questions. It moved computer-using agents from a developer capability to a subscription product.",
+      "significance": null
     },
     {
       "id": "openai-deep-research",
@@ -666,7 +1028,6 @@
       "type": "agent",
       "company": "OpenAI",
       "note": "An agent inside ChatGPT that runs multi-step web research over tens of minutes and returns a cited report rather than a chat answer.",
-      "significance": "Created the research-agent category. Within months Google, Anthropic, Perplexity and xAI had shipped their own, and 'deep research' became a generic product name rather than a brand.",
       "sources": [
         {
           "id": "openai-deep-research-s1",
@@ -682,7 +1043,9 @@
         "confidence": 90,
         "reason": "Dateline 'February 2, 2025' read from a Wayback capture of OpenAI's own announcement taken the next day, above the headline 'Introducing deep research'. openai.com blocks automated fetches, so the live URL was not read."
       },
-      "evidence_quote": "February 2, 2025"
+      "evidence_quote": "February 2, 2025",
+      "why_it_matters": "Created the research-agent category. Within months Google, Anthropic, Perplexity and xAI had shipped their own, and 'deep research' became a generic product name rather than a brand.",
+      "significance": "major"
     },
     {
       "id": "claude-code",
@@ -691,7 +1054,6 @@
       "type": "agent",
       "company": "Anthropic",
       "note": "Anthropic released Claude Code as a limited research preview: an agentic coding tool that works in the terminal, reading and editing a repository and running commands.",
-      "significance": "Established the terminal as the agent's home rather than the IDE, a shape that Google, OpenAI and xAI all copied within eighteen months. It also became the reference harness that later open-source agents were benchmarked against.",
       "sources": [
         {
           "id": "claude-code-s1",
@@ -707,7 +1069,9 @@
         "confidence": 85,
         "reason": "Anthropic's own announcement, dated Feb 24, 2025 on the page. The post's headline subject is the Claude 3.7 Sonnet model release, which belongs in the model dataset; Claude Code is introduced in the same post and is the milestone here. General availability came later (May 2025) and is a separate date if one is wanted. No archived capture recorded; one should be added."
       },
-      "evidence_quote": "Today, we're empowering developers further by introducing Claude Code—our first agentic coding tool—in a limited research preview."
+      "evidence_quote": "Today, we're empowering developers further by introducing Claude Code—our first agentic coding tool—in a limited research preview.",
+      "why_it_matters": "Established the terminal as the agent's home rather than the IDE, a shape that Google, OpenAI and xAI all copied within eighteen months. It also became the reference harness that later open-source agents were benchmarked against.",
+      "significance": "major"
     },
     {
       "id": "manus",
@@ -716,7 +1080,6 @@
       "type": "agent",
       "company": "Butterfly Effect",
       "note": "A general-purpose agent from a Chinese startup, launched invitation-only, that plans and executes long multi-step tasks in a cloud sandbox and returns finished deliverables. It ran on other labs' models rather than its own.",
-      "significance": "Showed that a competitive agent product could be built on top of someone else's frontier model, and that the agent layer was a separate market from the model layer. Its viral launch is also the moment agents became a mass consumer expectation outside the US labs.",
       "sources": [
         {
           "id": "manus-s1",
@@ -732,7 +1095,9 @@
         "confidence": 65,
         "reason": "Dated by Wikipedia, which states the beta launch date plainly. The company's own launch announcement was a video and invite-code rollout rather than a dated blog post, and I found no primary page carrying the date. A contemporaneous news dateline (TechCrunch covered Manus through March 2025) would strengthen this."
       },
-      "evidence_quote": "Manus launched in invitation-only beta on March 6, 2025."
+      "evidence_quote": "Manus launched in invitation-only beta on March 6, 2025.",
+      "why_it_matters": "Showed that a competitive agent product could be built on top of someone else's frontier model, and that the agent layer was a separate market from the model layer. Its viral launch is also the moment agents became a mass consumer expectation outside the US labs.",
+      "significance": null
     },
     {
       "id": "openai-codex-agent",
@@ -741,7 +1106,6 @@
       "type": "agent",
       "company": "OpenAI",
       "note": "OpenAI reused the Codex name for something new: an agent that runs in its own cloud sandbox, works several tasks in parallel against a repository, and returns pull requests.",
-      "significance": "Moved coding agents off the developer's machine. Work being dispatched to a fleet of remote agents rather than supervised in an editor is the shape that OpenAI, Google and GitHub all converged on through 2025.",
       "sources": [
         {
           "id": "openai-codex-agent-s1",
@@ -757,16 +1121,17 @@
         "confidence": 85,
         "reason": "Date 'May 16, 2025' read from the publicationDateText field in a Wayback capture of OpenAI's own announcement taken the next day, under the headline 'Introducing Codex'. openai.com blocks automated fetches, so the live URL was not read. Note this name collides with the 2021 Codex model and with the Codex CLI released in April 2025 — the entry here is the cloud agent."
       },
-      "evidence_quote": "May 16, 2025"
+      "evidence_quote": "May 16, 2025",
+      "why_it_matters": "Moved coding agents off the developer's machine. Work being dispatched to a fleet of remote agents rather than supervised in an editor is the shape that OpenAI, Google and GitHub all converged on through 2025.",
+      "significance": "major"
     },
     {
       "id": "comate-ai-ide",
       "title": "Comate AI IDE",
       "date": "2025-06-23",
-      "type": "agent",
+      "type": "harness",
       "company": "Baidu",
       "note": "At Baidu AI Open Day, vice-president Chen Yang launched Comate AI IDE, a standalone AI-native development environment for 文心快码 rather than an editor plug-in, with multi-agent collaboration, MCP support, one-click conversion of a design file into code and ERNIE 4.0 X1 Turbo built in. Baidu said Comate was by then writing over 43% of its own new code.",
-      "significance": "The moment Baidu stopped shipping a plug-in and shipped an environment — the same move Alibaba made two months later with Qoder and Tencent a month after that. Its distinguishing bet was multimodal input: design-file-to-code as a first-class path, which none of the CLI-shaped Chinese harnesses attempted.",
       "sources": [
         {
           "id": "comate-ai-ide-s1",
@@ -806,16 +1171,17 @@
         "confidence": 75,
         "reason": "Dated by 量子位 (QbitAI), byline 2025-06-23 17:59:11, whose opening line places the launch at that day's Baidu AI Open Day, corroborated by 科技日报 (Science and Technology Daily) on 2025-06-24 and by OSCHINA. Baidu Baike's product chronology gives the same day. Baidu's own developer-centre page for Comate AI IDE exists but was not read for a dateline, so this is media-dated rather than primary-dated. Several reports note 23 June was chosen as Alan Turing's birthday, which is consistent with a deliberately dated launch event."
       },
-      "evidence_quote": "6月23日，百度AI开放日举行，百度智能代码助手文心快码迎来重大突破 …… 百度副总裁陈洋现场发布了文心快码独立AI原生开发环境工具——Comate AI IDE。 (\"On 23 June, Baidu AI Open Day was held … Baidu vice-president Chen Yang launched Wenxin Kuaima's standalone AI-native development environment, Comate AI IDE.\")"
+      "evidence_quote": "6月23日，百度AI开放日举行，百度智能代码助手文心快码迎来重大突破 …… 百度副总裁陈洋现场发布了文心快码独立AI原生开发环境工具——Comate AI IDE。 (\"On 23 June, Baidu AI Open Day was held … Baidu vice-president Chen Yang launched Wenxin Kuaima's standalone AI-native development environment, Comate AI IDE.\")",
+      "why_it_matters": "The moment Baidu stopped shipping a plug-in and shipped an environment — the same move Alibaba made two months later with Qoder and Tencent a month after that. Its distinguishing bet was multimodal input: design-file-to-code as a first-class path, which none of the CLI-shaped Chinese harnesses attempted.",
+      "significance": null
     },
     {
       "id": "gemini-cli",
       "title": "Gemini CLI",
       "date": "2025-06-25",
-      "type": "agent",
+      "type": "harness",
       "company": "Google DeepMind",
       "note": "Google released an Apache-2.0 licensed agent that runs in the terminal against a local codebase, with a free tier for personal Google accounts.",
-      "significance": "The first terminal agent from a frontier lab released as open source with a generous free tier, which turned the agent harness from a paid product into a commodity distribution channel for the underlying model.",
       "sources": [
         {
           "id": "gemini-cli-s1",
@@ -831,16 +1197,17 @@
         "confidence": 90,
         "reason": "Google's own blog post, dated Jun 25, 2025 on the page. Company recorded as Google DeepMind to match the name this dataset already uses for Google entries, though the product shipped under Google Cloud/Labs branding. No archived capture recorded; one should be added."
       },
-      "evidence_quote": "That's why we're introducing Gemini CLI, an open-source AI agent that brings the power of Gemini directly into your terminal."
+      "evidence_quote": "That's why we're introducing Gemini CLI, an open-source AI agent that brings the power of Gemini directly into your terminal.",
+      "why_it_matters": "The first terminal agent from a frontier lab released as open source with a generous free tier, which turned the agent harness from a paid product into a commodity distribution channel for the underlying model.",
+      "significance": null
     },
     {
       "id": "trae-agent",
       "title": "Trae Agent open-sourced",
       "date": "2025-07-04",
-      "type": "agent",
+      "type": "harness",
       "company": "ByteDance",
       "note": "ByteDance's Trae team open-sourced Trae Agent under MIT: the LLM-based software-engineering agent behind its IDE, released as a research-oriented CLI with a pluggable model layer and a published SWE-bench harness.",
-      "significance": "A frontier-scale Chinese lab publishing its production coding agent as a research artifact rather than a product. It gave the open SWE-agent literature a lab-maintained baseline, and it is the earliest of the Chinese first-party harnesses to be released as source rather than as a download.",
       "sources": [
         {
           "id": "trae-agent-s1",
@@ -872,7 +1239,9 @@
         "confidence": 65,
         "reason": "Dated by an aibase article published 4 July 2025 that reports the open-sourcing as happening that day ('Today, Trae ... officially announced the open sourcing of its core component, Trae-Agent'), corroborated by MarkTechPost coverage on 7 July 2025. The GitHub repository was created 13 June 2025 and has no tagged releases, so neither the repo creation date nor a release tag was used. What is missing is ByteDance's own announcement post carrying the date."
       },
-      "evidence_quote": "Today, Trae, the AI-native integrated development environment (IDE) under ByteDance, officially announced the open sourcing of its core component, Trae-Agent, offering a new intelligent programming experience to developers worldwide."
+      "evidence_quote": "Today, Trae, the AI-native integrated development environment (IDE) under ByteDance, officially announced the open sourcing of its core component, Trae-Agent, offering a new intelligent programming experience to developers worldwide.",
+      "why_it_matters": "A frontier-scale Chinese lab publishing its production coding agent as a research artifact rather than a product. It gave the open SWE-agent literature a lab-maintained baseline, and it is the earliest of the Chinese first-party harnesses to be released as source rather than as a download.",
+      "significance": null
     },
     {
       "id": "chatgpt-agent",
@@ -881,7 +1250,6 @@
       "type": "agent",
       "company": "OpenAI",
       "note": "OpenAI merged Operator's browser control and deep research's multi-step reasoning into a single agentic mode inside ChatGPT, with its own virtual computer and terminal.",
-      "significance": "The point the separate agent experiments were folded back into the main product. After this, an agent was a mode of the assistant rather than a distinct thing you went somewhere else to use.",
       "sources": [
         {
           "id": "chatgpt-agent-s1",
@@ -897,7 +1265,9 @@
         "confidence": 85,
         "reason": "Date 'July 17, 2025' read from the publicationDateText field and the page caption in a Wayback capture of OpenAI's own announcement taken four days later. No capture closer to the announcement exists in the Wayback Machine, and openai.com blocks automated fetches, so the live URL was not read."
       },
-      "evidence_quote": "July 17, 2025"
+      "evidence_quote": "July 17, 2025",
+      "why_it_matters": "The point the separate agent experiments were folded back into the main product. After this, an agent was a mode of the assistant rather than a distinct thing you went somewhere else to use.",
+      "significance": null
     },
     {
       "id": "qwen-code",
@@ -906,7 +1276,6 @@
       "type": "agent",
       "company": "Alibaba Qwen",
       "note": "Alibaba open-sourced Qwen Code alongside Qwen3-Coder: an Apache-2.0 terminal coding agent adapted from Google's Gemini CLI, with the prompts and parser reworked for the Qwen3-Coder function-call format.",
-      "significance": "The first frontier-lab harness that was a fork of another frontier lab's harness. Google had released Gemini CLI open-source four weeks earlier; Alibaba took it, retargeted it at its own model and shipped it the same day as the model — which is the moment the open terminal agent became shared infrastructure rather than each lab's own product.",
       "sources": [
         {
           "id": "qwen-code-s1",
@@ -938,16 +1307,17 @@
         "confidence": 80,
         "reason": "Qwen's own blog post announcing Qwen3-Coder introduces Qwen Code in the same post and carries the dateline 'July 22, 2025 · 5 min · 1000 words · Qwen Team'. NOTE A DISAGREEMENT: Alibaba Cloud's own press room and most English coverage date the same launch to 23 July 2025 — plausibly a UTC-versus-China-time or an embargo-versus-blog split. Both are Alibaba pages. 22 July is recorded because it is the date on the technical announcement that actually introduces Qwen Code; a reader comparing against the press release will see one day's offset. The GitHub repository was created 26 June 2025 and its first tagged release is v0.0.2 on 1 August 2025, so neither was used."
       },
-      "evidence_quote": "July 22, 2025 · 5 min · 1000 words · Qwen Team"
+      "evidence_quote": "July 22, 2025 · 5 min · 1000 words · Qwen Team",
+      "why_it_matters": "The first frontier-lab harness that was a fork of another frontier lab's harness. Google had released Gemini CLI open-source four weeks earlier; Alibaba took it, retargeted it at its own model and shipped it the same day as the model — which is the moment the open terminal agent became shared infrastructure rather than each lab's own product.",
+      "significance": null
     },
     {
       "id": "qoder",
       "title": "Qoder public preview",
       "date": "2025-08-21",
-      "type": "agent",
+      "type": "harness",
       "company": "Alibaba Qwen",
       "note": "Alibaba launched Qoder, an agentic coding platform, into free global public preview. It pairs a proprietary Next-Edit-Suggestion model with third-party frontier models — Claude, Gemini and GPT — behind a scheduler that picks one per task, and splits work between an Agent Mode for small edits and a Quest Mode that runs an end-to-end task autonomously.",
-      "significance": "The first Chinese lab to ship a coding agent aimed at developers outside China from day one, and the one that got the scale: reported at 100,000 users in five days and around five million by mid-2026. It is also the batch's clearest admission that the harness and the model are separable — Alibaba's own agentic IDE routes to Anthropic, Google and OpenAI models alongside its own.",
       "sources": [
         {
           "id": "qoder-s1",
@@ -979,16 +1349,17 @@
         "confidence": 70,
         "reason": "The launch press release, issued by Qoder and datelined Singapore, Thursday 21 August 2025, states in its own words that the public preview opened that day. Counted as primary because the release is the company's own statement, with the caveat that it was read on the ACCESS Newswire distribution site rather than on an Alibaba or qoder.com page — qoder.com/blog lists a 'Qoder Introduction' post but renders no publication dates, so the company's own site could not be used to confirm. SCOPE: this dates the free public preview, not general availability or the paid tiers. COMPANY: recorded as Alibaba Qwen to match this dataset's only Alibaba string; Qoder ships under its own brand and descends from the Alibaba Cloud Tongyi Lingma team, not the Qwen model team."
       },
-      "evidence_quote": "Starting today (August 21, 2025), global developers can experience Qoder in public preview for free."
+      "evidence_quote": "Starting today (August 21, 2025), global developers can experience Qoder in public preview for free.",
+      "why_it_matters": "The first Chinese lab to ship a coding agent aimed at developers outside China from day one, and the one that got the scale: reported at 100,000 users in five days and around five million by mid-2026. It is also the batch's clearest admission that the harness and the model are separable — Alibaba's own agentic IDE routes to Anthropic, Google and OpenAI models alongside its own.",
+      "significance": null
     },
     {
       "id": "codebuddy-code",
       "title": "Tencent CodeBuddy Code",
       "date": "2025-09-09",
-      "type": "agent",
+      "type": "harness",
       "company": "Tencent",
       "note": "Tencent Cloud released CodeBuddy Code, a terminal coding agent driving the whole write-debug-test-deploy loop from natural language, and on the same day opened CodeBuddy IDE to public beta. The domestic build runs on DeepSeek with unlimited use; the international build routes to GPT and Gemini. IDE and CLI share one quota.",
-      "significance": "The day Tencent completed the set — plug-in, IDE and CLI — and the first Chinese vendor to hold all three shapes at once. It is the clearest example of a Chinese harness shipped without a matching first-party model in front of it: Tencent has Hunyuan, and pointed its own CLI at DeepSeek anyway.",
       "sources": [
         {
           "id": "codebuddy-code-s1",
@@ -1028,16 +1399,17 @@
         "confidence": 75,
         "reason": "Dated by IT之家, timestamped 2025/9/9 15:14:13, whose opening line says Tencent released CodeBuddy Code 今日 ('today'), and independently by Tencent Cloud's own brand channel post — 9月9日，腾讯云发布全新AI CLI工具CodeBuddy Code — published 2025-09-11. Held at partially_verified rather than verified because that Tencent Cloud text was read on brands.cnblogs.com, a third-party developer site hosting Tencent Cloud's channel, not on a tencent.com page; codebuddy.ai's documentation carries no changelog or dates. Baidu Baike's CodeBuddy chronology gives the same 9 September and places the rest of the line at: assistant generally available 2024-05-22, Craft agent April 2025, CodeBuddy IDE closed beta 2025-07-22, IDE domestic public beta 2025-08-21, CodeBuddy Code 2.0 January 2026 — cited for context only, not as the basis for this date. Note the two sources disagree on which edition of the IDE opened that day: IT之家 says 国际版 (international), the Tencent Cloud post says 公测 without qualifying it, and Baike puts the domestic public beta on 2025-08-21. Only the CLI date is claimed here."
       },
-      "evidence_quote": "IT之家 9 月 9 日消息，今日腾讯发布全新 AI CLI 工具 CodeBuddy Code，并宣布 CodeBuddy IDE 国际版开启公测 (\"IT Home, 9 September: today Tencent released the new AI CLI tool CodeBuddy Code and announced that the international edition of CodeBuddy IDE has entered public beta.\")"
+      "evidence_quote": "IT之家 9 月 9 日消息，今日腾讯发布全新 AI CLI 工具 CodeBuddy Code，并宣布 CodeBuddy IDE 国际版开启公测 (\"IT Home, 9 September: today Tencent released the new AI CLI tool CodeBuddy Code and announced that the international edition of CodeBuddy IDE has entered public beta.\")",
+      "why_it_matters": "The day Tencent completed the set — plug-in, IDE and CLI — and the first Chinese vendor to hold all three shapes at once. It is the clearest example of a Chinese harness shipped without a matching first-party model in front of it: Tencent has Hunyuan, and pointed its own CLI at DeepSeek anyway.",
+      "significance": null
     },
     {
       "id": "kimi-cli",
       "title": "Kimi CLI's first published release",
       "date": "2025-10-21",
-      "type": "agent",
+      "type": "harness",
       "company": "Moonshot AI",
       "note": "Moonshot AI published Kimi CLI, an Apache-2.0 terminal agent written in Python that drives the Kimi models against a local codebase. It was renamed Kimi Code CLI in January 2026 and later rewritten in TypeScript.",
-      "significance": "Moonshot's entry into first-party terminal agents. The date is the earliest release Moonshot published, not the day the tool first existed — the tag is numbered 0.33, so earlier versions shipped untagged and the true first availability is earlier than this record can establish.",
       "sources": [
         {
           "id": "kimi-cli-s1",
@@ -1069,7 +1441,9 @@
         "confidence": 45,
         "reason": "The weakest dating method used in this batch, and stated plainly: the date is the published_at of the earliest GitHub release on Moonshot's own repository (tag 0.33, published 2025-10-21T04:35:46Z). That tag is numbered 0.33, so versions 0.01 through 0.32 existed and were never published as GitHub releases — the true first public availability is earlier than this date, not later. The repository was created 15 October 2025, which is not used. Moonshot's platform changelog mentions Kimi CLI only once, on 2025-10-27 ('更新 kimi cli 支持文档' — 'updated the Kimi CLI support docs'), which corroborates that the tool was public by late October but does not date its launch. I found no Moonshot announcement post. Do not publish this without a company statement; it is included because the alternative is leaving Moonshot's first harness out of the timeline entirely."
       },
-      "evidence_quote": "0.33 — published_at 2025-10-21T04:35:46Z (MoonshotAI/kimi-cli, earliest published GitHub release)"
+      "evidence_quote": "0.33 — published_at 2025-10-21T04:35:46Z (MoonshotAI/kimi-cli, earliest published GitHub release)",
+      "why_it_matters": "Moonshot's entry into first-party terminal agents. The date is the earliest release Moonshot published, not the day the tool first existed — the tag is numbered 0.33, so earlier versions shipped untagged and the true first availability is earlier than this record can establish.",
+      "significance": null
     },
     {
       "id": "openclaw",
@@ -1078,7 +1452,6 @@
       "type": "agent",
       "company": "OpenClaw",
       "note": "Peter Steinberger's self-hosted personal agent — first published in late 2025 under earlier names, renamed Clawdbot then Moltbot then OpenClaw — that runs on the user's own machine and is driven from WhatsApp, Telegram, Discord, Slack or Teams.",
-      "significance": "The first viral consumer agent that was not a lab product: open source, self-hosted, and reached through chat apps people already had. It also made prompt injection and agent permissions a mainstream security story rather than a research concern.",
       "sources": [
         {
           "id": "openclaw-s1",
@@ -1102,7 +1475,9 @@
         "confidence": 75,
         "reason": "The date recorded is the project's own rename announcement, dated 'Jan 29, 2026' on openclaw.ai — a primary source. It is NOT the date the project first appeared: that post says only 'Two months ago, I hacked together a weekend project' and Wikipedia says it was first published in November 2025 under an earlier name, with no day given. If the owner wants the origin rather than the rename dated, this entry needs different evidence. Note also that Wikipedia and Forbes place the OpenClaw rename on 30 January while the project's own post is dated 29 January."
       },
-      "evidence_quote": "Today, I'm excited to announce our new name: OpenClaw"
+      "evidence_quote": "Today, I'm excited to announce our new name: OpenClaw",
+      "why_it_matters": "The first viral consumer agent that was not a lab product: open source, self-hosted, and reached through chat apps people already had. It also made prompt injection and agent permissions a mainstream security story rather than a research concern.",
+      "significance": null
     },
     {
       "id": "hermes-agent",
@@ -1111,7 +1486,6 @@
       "type": "agent",
       "company": "Nous Research",
       "note": "Nous Research released an open-source, model-agnostic agent that runs as a persistent daemon on the user's own infrastructure, keeps memory across sessions and writes reusable skill files from its own experience.",
-      "significance": "The self-improving open-source harness: it made the agent's accumulated memory and skills, rather than the model behind it, the thing that got better over time. It became the fastest-growing open-source agent project of 2026.",
       "sources": [
         {
           "id": "hermes-agent-s1",
@@ -1143,7 +1517,9 @@
         "confidence": 60,
         "reason": "The day comes from a third-party timeline that quotes Nous Research's announcement post; the launch is independently corroborated by MarkTechPost coverage dated 26 February 2026, the day after. Nous Research's own site states only 'released in February 2026' and I could not retrieve the dated announcement post itself (x.com blocks automated fetches). This is an agent harness, distinct from the Hermes 1-4 model family of the same name; the models belong in the release dataset, not here."
       },
-      "evidence_quote": "February 25, 2026: Nous Research drops Hermes Agent on GitHub with a simple tweet: \"Meet Hermes Agent, the open source agent that grows with you.\""
+      "evidence_quote": "February 25, 2026: Nous Research drops Hermes Agent on GitHub with a simple tweet: \"Meet Hermes Agent, the open source agent that grows with you.\"",
+      "why_it_matters": "The self-improving open-source harness: it made the agent's accumulated memory and skills, rather than the model behind it, the thing that got better over time. It became the fastest-growing open-source agent project of 2026.",
+      "significance": null
     },
     {
       "id": "grok-build",
@@ -1152,7 +1528,6 @@
       "type": "agent",
       "company": "xAI",
       "note": "xAI's first agentic coding tool: a terminal-native CLI that runs an autonomous agent against a local codebase, opened in early beta to top-tier subscribers before widening later in May.",
-      "significance": "The last of the frontier labs to ship a coding agent, which is the point at which the terminal harness became table stakes rather than a differentiator.",
       "sources": [
         {
           "id": "grok-build-s1",
@@ -1184,16 +1559,17 @@
         "confidence": 55,
         "reason": "Dated by two independent write-ups that both name 14 May 2026, one of them published the next day. xAI's own announcement was an X post by Elon Musk, which I could not read (x.com blocks automated fetches), so there is no primary dateline. The wider rollout on 25 May 2026 is reported by the same sources and is a separate date if the owner prefers general availability."
       },
-      "evidence_quote": "As of May 14, 2026, that framing is over. xAI shipped Grok Build — a terminal-native, agentic command-line tool"
+      "evidence_quote": "As of May 14, 2026, that framing is over. xAI shipped Grok Build — a terminal-native, agentic command-line tool",
+      "why_it_matters": "The last of the frontier labs to ship a coding agent, which is the point at which the terminal harness became table stakes rather than a differentiator.",
+      "significance": null
     },
     {
       "id": "kimi-code-cli",
       "title": "Kimi Code CLI rewritten and re-released",
       "date": "2026-05-26",
-      "type": "agent",
+      "type": "harness",
       "company": "Moonshot AI",
       "note": "Moonshot AI republished Kimi Code CLI as a new MIT-licensed repository, rewritten from Python to TypeScript, installable without Node.js, with coder, explore and plan subagents that run in isolated contexts. It migrates the configuration and sessions of the older Kimi CLI it replaces.",
-      "significance": "The subagent-with-its-own-context pattern arriving in a Chinese first-party harness, and a relicensing from Apache-2.0 to MIT that removed the last friction from redistributing it. Moonshot's own framing — 'the starting point for next-gen agents' — positions the harness, not the model, as the product.",
       "sources": [
         {
           "id": "kimi-code-cli-s1",
@@ -1225,16 +1601,17 @@
         "confidence": 55,
         "reason": "The date is the published_at of the earliest GitHub release on Moonshot's own MoonshotAI/kimi-code repository (tag @moonshot-ai/kimi-code@0.2.0, 2026-05-26T07:04:28Z); the repository itself was created 2026-05-22, which is not used. MarkTechPost reported the release on 6 June 2026, eleven days later, and Chinaz covered a 'major version upgrade' on 9 June 2026 without giving a date. Moonshot published no announcement post I could find, so there is no company statement of a launch date — only its own dated release artifact. NAMING TRAP: the name 'Kimi Code CLI' was applied to the older Python kimi-cli in January 2026, so a reader searching that name will find two projects and two dates; this record is the TypeScript rewrite, and the separate kimi-cli record is its predecessor."
       },
-      "evidence_quote": "@moonshot-ai/kimi-code@0.2.0 — published_at 2026-05-26T07:04:28Z (MoonshotAI/kimi-code, earliest published GitHub release)"
+      "evidence_quote": "@moonshot-ai/kimi-code@0.2.0 — published_at 2026-05-26T07:04:28Z (MoonshotAI/kimi-code, earliest published GitHub release)",
+      "why_it_matters": "The subagent-with-its-own-context pattern arriving in a Chinese first-party harness, and a relicensing from Apache-2.0 to MIT that removed the last friction from redistributing it. Moonshot's own framing — 'the starting point for next-gen agents' — positions the harness, not the model, as the product.",
+      "significance": null
     },
     {
       "id": "minimax-code",
       "title": "MiniMax Code",
       "date": "2026-05-29",
-      "type": "agent",
+      "type": "harness",
       "company": "MiniMax",
       "note": "MiniMax renamed its desktop agent app to MiniMax Code and added a `minimax` command-line shortcut, turning a general-purpose assistant into a coding harness. Its agent loop was rebuilt on the open-source OpenCode and Pi Agent projects and trained jointly with the MiniMax M3 model released three days later.",
-      "significance": "The clearest case of the harness being treated as part of the model rather than a wrapper around it: MiniMax states that Code was designed for M3 and trained together with M3. It is also the batch's one proprietary Chinese harness — a desktop download, not a repository — built on other people's open harnesses.",
       "sources": [
         {
           "id": "minimax-code-s1",
@@ -1258,16 +1635,17 @@
         "confidence": 70,
         "reason": "MiniMax's own product changelog dates release v3.0.33 to 2026-05-29 and states there that the desktop client was officially renamed MiniMax Code. READ THE SCOPE CAREFULLY: this dates the name, not the product's origin — the same changelog carries earlier entries for 'MiniMax Agent 桌面端' (MiniMax Agent desktop), so the app existed before under another name and this record does not claim otherwise. The alternative date is 2026-06-01, when MiniMax's M3 blog post says '随着 M3 的发布，MiniMax Code 也迎来更新' ('with the release of M3, MiniMax Code has also been updated') and describes the harness as built on OpenCode and Pi Agent — but that post describes an update to something already named, which is why the rename date is used here. MiniMax Code 2.0 followed on 2026-07-16."
       },
-      "evidence_quote": "v3.0.33 — 2026-05-29: 桌面端正式更名为 MiniMax Code，Dock / 任务栏展示新名称，新增 minimax 命令行快捷方式。 (\"The desktop client is officially renamed MiniMax Code; the Dock and taskbar show the new name; a new `minimax` command-line shortcut is added.\")"
+      "evidence_quote": "v3.0.33 — 2026-05-29: 桌面端正式更名为 MiniMax Code，Dock / 任务栏展示新名称，新增 minimax 命令行快捷方式。 (\"The desktop client is officially renamed MiniMax Code; the Dock and taskbar show the new name; a new `minimax` command-line shortcut is added.\")",
+      "why_it_matters": "The clearest case of the harness being treated as part of the model rather than a wrapper around it: MiniMax states that Code was designed for M3 and trained together with M3. It is also the batch's one proprietary Chinese harness — a desktop download, not a repository — built on other people's open harnesses.",
+      "significance": null
     },
     {
       "id": "zcode",
       "title": "ZCode",
       "date": "2026-07-01",
-      "type": "agent",
+      "type": "harness",
       "company": "Zhipu AI",
       "note": "Z.ai released ZCode, a free desktop 'agentic development environment' built around GLM-5.2, on macOS, Windows and Linux, with bring-your-own-key support for third-party models and a 1.5× quota bonus for GLM Coding Plan subscribers.",
-      "significance": "The point a Chinese lab stopped competing on model price and started competing on the harness. Z.ai pitched ZCode directly against Cursor, Claude Code and Copilot and gave the app away to pull developers onto its own coding subscription — the same distribution play Google made with Gemini CLI, run by a lab whose model was the cheaper one.",
       "sources": [
         {
           "id": "zcode-s1",
@@ -1299,16 +1677,17 @@
         "confidence": 60,
         "reason": "Dated by the South China Morning Post, published 6:00pm 2 July 2026, which says Z.ai 'on Wednesday introduced ZCode' — Wednesday of that week is 1 July 2026. Z.ai's own announcement is an X post ('Introducing ZCode, the official development environment for GLM-5.2'), which could not be read because x.com blocks automated fetches, and venturebeat.com returned 403. One caveat found in secondary coverage and not resolved: ZCode's public changelog reportedly shows the app iterating since around 26 June 2026, so 1 July is the announcement, possibly not the first public build. Company recorded as Zhipu AI to match this dataset; the product ships under the Z.ai brand."
       },
-      "evidence_quote": "on Wednesday introduced ZCode [SCMP, published 6:00pm, 2 Jul 2026]"
+      "evidence_quote": "on Wednesday introduced ZCode [SCMP, published 6:00pm, 2 Jul 2026]",
+      "why_it_matters": "The point a Chinese lab stopped competing on model price and started competing on the harness. Z.ai pitched ZCode directly against Cursor, Claude Code and Copilot and gave the app away to pull developers onto its own coding subscription — the same distribution play Google made with Gemini CLI, run by a lab whose model was the cheaper one.",
+      "significance": null
     },
     {
       "id": "deepseek-harness",
       "title": "DeepSeek Harness developer preview",
       "date": "2026-08-13",
-      "type": "agent",
+      "type": "harness",
       "company": "DeepSeek",
       "note": "DeepSeek open-sourced its first first-party agent harness under MIT as a v0.1 developer preview. Built on a dependency-injection core called Cordis, every layer — model adapter, tool registry, session log, sandbox, web UI and the agent loop itself — is a replaceable plugin, and it ships adapters for Anthropic, OpenAI, Bedrock, Azure and Google rather than only DeepSeek's own models.",
-      "significance": "The last of the large Chinese labs to ship a harness, and the one that refused to make it a product: released as a preview, provider-agnostic by design, with DeepSeek's own warning not to build anything load-bearing on it yet. It passed 160,000 GitHub stars within days, making the harness — not the model — DeepSeek's most-starred release.",
       "sources": [
         {
           "id": "deepseek-harness-s1",
@@ -1348,7 +1727,9 @@
         "confidence": 70,
         "reason": "Two independent outlets published same-day coverage of the release on 13 August 2026 — The New Stack (dateline 'August 13th, 2026 at 1:20pm') and CryptoBriefing (byline 'Aug. 13, 2026') — and the deepseek-ai/deepseek-harness repository was created 2026-08-13T11:56:32Z, which corroborates but is not the basis for the date. DeepSeek's own product page at deepseek.com/harness carries no date at all, only a 2026 copyright, so there is no primary dateline. Note the only tagged release, dsh-v0.1.0-rc.7, was published 2026-08-17 — four days after the announcement — and was deliberately not used as the date. Also note this launched alongside DeepSeek-V4-Pro's API GA, which is a model event belonging in the release dataset, not here."
       },
-      "evidence_quote": "August 13th, 2026 at 1:20pm — \"DeepSeek open sources an agent harness where everything is a plugin\" [The New Stack]"
+      "evidence_quote": "August 13th, 2026 at 1:20pm — \"DeepSeek open sources an agent harness where everything is a plugin\" [The New Stack]",
+      "why_it_matters": "The last of the large Chinese labs to ship a harness, and the one that refused to make it a product: released as a preview, provider-agnostic by design, with DeepSeek's own warning not to build anything load-bearing on it yet. It passed 160,000 GitHub stars within days, making the harness — not the model — DeepSeek's most-starred release.",
+      "significance": null
     }
   ]
 }

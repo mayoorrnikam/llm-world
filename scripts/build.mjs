@@ -1341,7 +1341,7 @@ const MILESTONE_LABEL = {
   product_launch: 'Product launch', architecture: 'Architecture',
   context: 'Context length', multimodal: 'Multimodal', open_weights: 'Open weights',
   research: 'Research', policy: 'Policy',
-  agent: 'Agent & harness', protocol: 'Protocol',
+  agent: 'Agent', harness: 'Coding harness', protocol: 'Protocol',
 };
 
 /**
@@ -1365,7 +1365,7 @@ ${crumbs('../../', ['Milestones', '../'], [esc(m.title)])}
 </div>
 
 <p class="doc-lede">${esc(m.note)}</p>
-${m.significance ? `<p class="doc-note">${esc(m.significance)}</p>` : ''}
+${m.why_it_matters ? `<p class="doc-note">${esc(m.why_it_matters)}</p>` : ''}
 
 ${/**
    * The "why this is not a model record" explainer used to sit here. It made
@@ -1384,7 +1384,7 @@ ${/**
 ${m.provenance.reason ? `<p class="doc-reason">${esc(m.provenance.reason)}</p>` : ''}
 ${sourceList(m)}
 
-<p class="doc-cta"><a href="../../timeline/${m.date.slice(0, 4)}/">See what else happened in ${m.date.slice(0, 4)} →</a></p>
+<p class="doc-cta">${byYear.has(m.date.slice(0, 4)) ? `<a href="../../timeline/${m.date.slice(0, 4)}/">See what else happened in ${m.date.slice(0, 4)} →</a>` : ''}</p>
 `;
 
   return page({
@@ -1512,7 +1512,7 @@ ${companyMark(m.company, 'sm')}
 </div>
 </div>
 <p class="ms-note">${esc(m.note)}</p>
-${m.significance ? `<p class="ms-sig">${esc(m.significance)}</p>` : ''}
+${m.why_it_matters ? `<p class="ms-sig">${esc(m.why_it_matters)}</p>` : ''}
 ${milestoneLineBlock(m)}
 <p class="ms-prov">Record status: <span class="prov-badge" data-status="${esc(m.provenance.status)}">${
   esc(PROV_LABEL[m.provenance.status] ?? m.provenance.status)}</span> · confidence ${m.provenance.confidence}/100</p>
