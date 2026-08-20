@@ -118,3 +118,93 @@ jobs:
               --description "A lab documents a model this dataset lacks" --color 1D76DB 2>/dev/null || true
             gh issue create --repo "$REPO" --title "$TITLE" --label discovery --body "$BODY"
           fi
+
+  # ------------------------------------------------------------------ drafts
+  #
+  # The scan opens an ISSUE for everything it finds, because a name is not
+  # evidence. This job is the narrow exception: for an open-weights model with a
+  # Hugging Face card, the card IS a primary source — the lab publishes it,
+  # declares its own licence on it, and it has dated revisions. So the labour
+  # between "noticed" and "reviewable" is mechanical, and mechanical labour is
+  # the only thing that should be automated here.
+  #
+  # WHAT THE BOT CANNOT DO, AND SAYS SO IN THE PR
+  #
+  # The drafted date is when the REPO appeared, not when the lab announced.
+  # hf-bridge is explicit about it and so is the pull request body: a reviewer
+  # replaces the date with the announcement, sets the family, and confirms the
+  # lab name. A record merged with a repo-creation date would be this project
+  # publishing a date no source states, which is the one thing it exists not to
+  # do.
+  #
+  # Once a day, not twice, and three at a time. A review queue that outgrows the
+  # reviewer stops being read, and an unread queue of bot PRs is worse than no
+  # PRs — the backlog issue already taught this repo that lesson once.
+  draft:
+    needs: scan
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '17 6 * * *'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Draft what has a model card
+        id: spec
+        run: |
+          set -o pipefail
+          node scripts/hf-bridge.mjs --limit=3 --spec=draft-spec.json 2>&1 | tee bridge.md
+          ls -1 draft-spec*.json 2>/dev/null | tee spec-files.txt || true
+          test -s spec-files.txt && echo "found=true" >> "$GITHUB_OUTPUT" || echo "found=false" >> "$GITHUB_OUTPUT"
+
+      - name: Add and validate
+        id: apply
+        if: steps.spec.outputs.found == 'true'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          while read -r f; do node scripts/add-model.mjs "$f" --write 2>&1 | tee -a bridge.md; done < spec-files.txt
+          npm run check 2>&1 | tail -30 | tee -a bridge.md
+
+      - name: Open a pull request
+        if: steps.apply.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BRANCH="scan/drafts-$(date -u +%Y%m%d)"
+          TITLE="Drafts from the model-card scan"
+          # One open PR at a time. A second would review the same queue twice.
+          if [ -n "$(gh pr list --state open --search "$TITLE in:title" --json number -q '.[0].number')" ]; then
+            echo "a drafts PR is already open — leaving this run's work for it" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git config user.name "llm-world bot"
+          git config user.email "noreply@github.com"
+          git checkout -b "$BRANCH"
+          rm -f draft-spec*.json spec-files.txt bridge.md scan.md
+          git add data/
+          if git diff --cached --quiet; then
+            echo "nothing to draft" >> "$GITHUB_STEP_SUMMARY"; exit 0
+          fi
+          git commit -m "Draft open-weights records found by the model-card scan
+
+          Drafted from Hugging Face model cards, which are primary sources: the
+          lab publishes the card and declares its licence on it. Every figure is
+          quoted from a card or absent — nothing is estimated.
+
+          The DATE IS PROVISIONAL. It is when the repository appeared, not when
+          the lab announced, and no source states it as a release date. It must
+          be replaced before this is merged."
+          git push -u origin "$BRANCH" --force
+          gh pr create --title "$TITLE" --label discovery \
+            --body "Drafted by the twice-daily scan from Hugging Face model cards.
+
+          **A reviewer must do these before merging — the bot cannot:**
+          - [ ] Replace the release date. The drafted one is when the *repo* appeared. Find the lab's own announcement and use the date it states.
+          - [ ] Set **family**, and confirm the lab name is the one this dataset uses.
+          - [ ] Confirm each card is this model's own card, not a sibling's.
+          - [ ] Check any parameter count is a real count and not a quantised checkpoint's packed byte total.
+
+          A card is a primary source for the licence, the weights and the specs. It is **not** a source for the release date, so these records cannot be **verified** until the announcement is cited." >> "$GITHUB_STEP_SUMMARY"
