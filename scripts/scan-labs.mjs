@@ -34,7 +34,7 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
-import { sourceText } from '../lib/source-text.mjs';
+import { sourceText, sourceHtml, htmlToText } from '../lib/source-text.mjs';
 
 const ALL = process.argv.includes('--all');
 const ONLY = process.argv.find((a) => a.startsWith('--lab='))?.split('=')[1];
@@ -160,9 +160,21 @@ const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
 const flat = (s) => String(s).toLowerCase().replace(/[\s._-]/g, '');
 
 const base = (id) => flat(String(id)
+  // A cloud marketplace prefixes the lab's own id: Bedrock serves
+  // `anthropic.claude-opus-5`, Vertex `google.gemini-3-pro`, and a regional
+  // copy adds `us.` or `eu.` on top. Twenty-one Anthropic "candidates" were
+  // models we already hold, wearing a reseller's prefix.
+  .replace(/^(?:us|eu|apac|global)\./i, '')
+  .replace(/^(?:anthropic|google|meta|amazon|mistral|cohere|ai21|openai|deepseek)\./i, '')
   .replace(/-+$/, '')                        // regex artifacts like "…-4-5-20251001-"
   .replace(/-(?:20\d{6}|\d{4})$/, '')        // -20251001, -2506
   .replace(/-(?:preview|latest|exp)$/, ''));
+
+const releasesByLab = new Map();
+for (const r of data.releases) {
+  if (!releasesByLab.has(r.company)) releasesByLab.set(r.company, []);
+  releasesByLab.get(r.company).push(r);
+}
 
 const trackedByLab = new Map();
 for (const r of data.releases) {
@@ -226,6 +238,212 @@ let seen = [];
 try { seen = JSON.parse(readFileSync(SEEN_FILE, 'utf8')).candidates ?? []; } catch { /* first run */ }
 const seenSet = new Set(seen);
 
+/* ------------------------------------------------- structural extraction
+ *
+ * WHY NOT A NAME PATTERN
+ *
+ * This scan used to build a regex per lab out of the ids it already tracked —
+ * "we hold grok-1 and grok-4-5, so look for grok followed by a version". That
+ * can only ever find more of what we already have. Measured against this
+ * dataset it was worse than it sounds:
+ *
+ *   19 records in our own history opened a product line the pattern could not
+ *      have matched — Gemma, Imagen, Veo, Lyria, Sora, Muse, MAI, QwQ,
+ *      Ministral, Seedream, CogVideoX
+ *   50 of 192 tracked models do not match their own lab's pattern TODAY,
+ *      because it demands a separator then a digit: DeepSeek-R1, GPT-4o,
+ *      Kimi K2, Command R, Nova Micro, Gemma, PaLM, BLOOM. The o-series has no
+ *      stem at all — the code needs two letters and "o1" has one.
+ *
+ * And the same regex invented models out of prose: `gemini youtube article 13`
+ * and `gemini team 5` were both proposed as releases from a blog index.
+ *
+ * So read the page's STRUCTURE instead. A docs index marks each model up as a
+ * code span, a table cell or an option value, because the reader is meant to
+ * copy it into an API call. A news index marks each release up as a headline.
+ * Neither depends on knowing the name in advance, which is the whole point: a
+ * lab is free to call the next one anything it likes.
+ */
+
+/** Tags whose text content is a value the reader is meant to copy. */
+const CODE_SLOT = /<(code|kbd|samp|tt)\b[^>]*>([\s\S]{1,120}?)<\/\1>/gi;
+const CELL_SLOT = /<td\b[^>]*>([\s\S]{1,160}?)<\/td>/gi;
+const OPT_SLOT = /<option\b[^>]*\bvalue\s*=\s*["']([^"']{2,80})["']/gi;
+/**
+ * The payload behind a docs page, which is where the list usually is now.
+ *
+ * A modern docs site is a React app: docs.x.ai renders 427KB of markup with 351
+ * mentions of "grok", no table cells and fourteen code spans, none of them a
+ * model. The actual list is a JS object in a script tag —
+ * `globalThis.__XAI_PUBLIC_MODELS__={"clusterConfigs":[{"languageModels":
+ * [{"name":"grok-4.3",...`. Reading only the visible markup finds nothing,
+ * which reads exactly like a quiet week.
+ *
+ * Both quote styles, because a streamed RSC chunk escapes its own: the same
+ * field arrives as "name":"x" in one script tag and \"name\":\"x\" in the next.
+ */
+const JSON_ID = /\\?"(?:id|model|model_name|modelId|model_id)\\?"\s*:\s*\\?"([^"\\]{2,64})\\?"/gi;
+
+/**
+ * `"name"` is where xAI keeps its models and where everyone keeps everything
+ * else.
+ *
+ * Taking it unconditionally added 131 candidates from Zhipu alone — meta tag
+ * names (`application-name`, `msapplication-tilecolor`) and the docs platform's
+ * own feature flags (`self-serve-sso`, `dashboard-editor-theseus`), all shaped
+ * exactly like ids.
+ *
+ * So the key is only believed when the object around it DESCRIBES a model. An
+ * entry for a served model says what it costs, what it accepts or how much
+ * context it has; a feature flag says `enabled: true`. That test needs no
+ * knowledge of what the model is called, which is the property being defended
+ * here.
+ */
+const JSON_NAME = /\\?"name\\?"\s*:\s*\\?"([^"\\]{2,64})\\?"/gi;
+const MODELISH = /(?:input|output)?modalit|context.?(?:window|length)|max.?(?:output.?)?tokens|token.?price|"?pricing|capabilit|aliases|\\?"version\\?"|knowledge.?cut|training.?cut|parameters?.?count|"?deprecat/i;
+
+/**
+ * API vocabulary, which lives in exactly the same code spans as model ids.
+ *
+ * This is the cost of reading structure instead of a name pattern: a docs page
+ * puts `temperature` and `claude-opus-4-5` in identical markup. The stoplist is
+ * the honest way to pay it — a fixed, inspectable list of words that are never
+ * model names, rather than a pattern that decides in advance what a model may
+ * be called.
+ */
+const API_VOCAB = new Set(`
+temperature top_p top_k max_tokens max_output_tokens stop stop_sequences stream
+messages model models prompt system user assistant tool tools tool_choice role
+content type text image audio video json object array string number boolean null
+true false function functions parameters properties required input output usage
+prompt_tokens completion_tokens total_tokens finish_reason id object created
+choices delta index logprobs seed n frequency_penalty presence_penalty
+response_format api_key authorization bearer post get put delete patch http https
+endpoint url base_url version curl python javascript typescript node npm pip
+error code message status request response header headers body data result
+thinking reasoning reasoning_effort verbosity cache_control ephemeral
+metadata name description schema enum items default example examples
+generatecontent streamgeneratecontent counttokens embedcontent batchembedcontents
+completions chat responses embeddings moderations files batches
+`.trim().split(/\s+/));
+
+/**
+ * Two kinds of token that live in the same fields as model names.
+ *
+ * Framework internals: a Next.js payload puts "viewport", "next.metadata" and
+ * "docs-content" under the same `name` key that holds "grok-4.3".
+ *
+ * Heading slugs: a docs page anchors its sections, so
+ * `which-model-should-i-choose` and `additional-information-regarding-models`
+ * arrive shaped exactly like hyphenated ids. What separates them is English —
+ * no lab has ever named a model with a preposition in it.
+ */
+const FRAMEWORK = /^(?:next[.-]|__|data-|aria-|ms-?application|apple-mobile|og-|twitter-)|mintlify|theme-color|application-name|^(?:viewport|metadata|outlet|robots|favicon|charset|canonical|sitemap|layout|template|locale|theme|slot|root|main|nav|footer|header)$/i;
+
+/**
+ * What a comparison table puts in its other columns.
+ *
+ * Reading <td> is what finds a model list; it also finds every cell beside it.
+ * Anthropic's model table yielded "effort", "high", "no" and "yes" as
+ * candidate models — each one costing a reader exactly as much to check as a
+ * real lead, which is how a discovery list stops being read.
+ */
+const CELL_VALUE = new Set(`
+yes no true false none all any some n/a na tbd unknown unlimited
+high medium low mini micro small large standard basic premium
+effort enabled disabled available unavailable supported unsupported
+beta alpha stable preview legacy deprecated retired new latest current
+input output text image audio video vision tokens token free paid
+max min auto off on default enabled_only only mode modes type
+`.trim().split(/\s+/));
+
+const SLUG_WORDS = new Set(`
+which what why how when where who should would could must can will
+about regarding information additional further more other another
+choose choosing chosen using use used getting get start started
+guide overview reference changelog pricing limits quotas errors faq
+the and for with from into your our their this that these those
+aliases content section page docs doc api comparison migrating migrate
+snippet snippets billing dashboard editor profile sso workflows robotics
+quickstart tutorial example samples pricing peak
+`.trim().split(/\s+/));
+
+/**
+ * Does this token look like something a lab would serve, rather than a word?
+ *
+ * Deliberately permissive about SHAPE and strict about vocabulary. Requiring a
+ * digit is what broke the old pattern — Gemma, PaLM, BLOOM, Whisper and
+ * Command R are all real models with no version number in the name — so shape
+ * is not allowed to be the discriminator here.
+ */
+function looksLikeModelId(raw) {
+  const t = String(raw).trim().replace(/^[`'"([]+|[`'".,;:)\]]+$/g, '');
+  if (t.length < 2 || t.length > 64) return false;
+  if (/\s{2,}|[\n\r]/.test(t)) return false;
+  if (/^https?:|[/\\@{}<>|$]/.test(t)) return false;      // urls, paths, templates
+  if (!/[a-z]/i.test(t)) return false;                     // must have a letter
+  if (/^[\d.]+$/.test(t)) return false;                    // bare versions
+  if (API_VOCAB.has(t.toLowerCase())) return false;
+  if (/^[A-Z_]+$/.test(t) && t.length > 3) return false;   // CONSTANT_NAMES
+  // A model id is one token, or a short display name of at most four words.
+  if (t.split(/\s+/).length > 4) return false;
+  if (FRAMEWORK.test(t)) return false;
+  // A UUID is a content id, never a model name. Cohere's site yields dozens.
+  if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-/i.test(t)) return false;
+  // A month-year is a training cutoff read out of a comparison table.
+  if (/^(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s*\d{0,4}\s*\d*$/i.test(t)) return false;
+  // A <td> holds VALUES as well as ids: "yes", "high", "effort", "200K".
+  if (CELL_VALUE.has(t.toLowerCase())) return false;
+  if (t.toLowerCase().split(/[-_. ]/).some((seg) => SLUG_WORDS.has(seg))) return false;
+  return /^[A-Za-z][\w.\- ]*$/.test(t);
+}
+
+/**
+ * Every candidate identifier a docs page marks up as a value.
+ *
+ * `lab` is passed so the company's own name can be dropped: a payload that
+ * lists models also names the provider, and "xai" arrived as a candidate model
+ * from xAI's own model list.
+ */
+function idsInDocs(html, lab = '') {
+  const own = new Set([flat(lab), flat(lab).replace(/ai$/, ''), flat(lab).split(' ')[0]]
+    .filter((x) => x && x.length >= 2));
+  const out = new Map();
+  const add = (v, weight = 1) => {
+    const t = String(v).replace(/<[^>]*>/g, ' ').replace(/&amp;/g, '&').trim();
+    if (!looksLikeModelId(t)) return;
+    if (own.has(flat(t))) return;
+    const k = t.toLowerCase();
+    out.set(k, (out.get(k) ?? 0) + weight);
+  };
+  for (const m of html.matchAll(CODE_SLOT)) add(m[2]);
+  for (const m of html.matchAll(CELL_SLOT)) add(m[1]);
+  for (const m of html.matchAll(OPT_SLOT)) add(m[1]);
+  // A structured field weighs more than a code span. The repeat rule below
+  // exists to reject ids mentioned once in prose; a "name" inside a payload is
+  // not prose, and xAI lists each model exactly once there.
+  for (const m of html.matchAll(JSON_ID)) add(m[1], 2);
+  for (const m of html.matchAll(JSON_NAME)) {
+    if (MODELISH.test(html.slice(m.index, m.index + 400))) add(m[1], 2);
+  }
+  return out;
+}
+
+/** Headlines from a news index or RSS feed, which is where a NEW line appears. */
+const HEADING = /<(h[1-4]|title)\b[^>]*>([\s\S]{4,160}?)<\/\1>/gi;
+
+function headlinesIn(html) {
+  const out = [];
+  for (const m of html.matchAll(HEADING)) {
+    const t = m[2].replace(/<!\[CDATA\[|\]\]>/g, '')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/&amp;/g, '&').replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+      .replace(/\s+/g, ' ').trim();
+    if (t.length >= 8 && t.length <= 160) out.push(t);
+  }
+  return [...new Set(out)];
+}
+
 /**
  * The channels, taken from the sources this dataset already cites.
  *
@@ -249,6 +467,11 @@ function channels() {
       // Scan the docs INDEX, not one model's page: a per-model URL only ever
       // lists the model already tracked.
       const index = src.url.replace(/\/[^/]*$/, '');
+      // A homepage is not a documentation index. Trimming the last segment off
+      // `https://cohere.com/x` leaves the origin, and cohere.com's marketing
+      // page produced 79 candidates: its integrations list (algolia, asana,
+      // box, bigquery) read exactly like a model list.
+      if (!/^https?:\/\/[^/]+\/.+/.test(index)) continue;
       e.docs.set(index, (e.docs.get(index) ?? 0) + 1);
     }
   }
@@ -264,14 +487,8 @@ function channels() {
      * the page listing them. A lab with two product lines is normal; assuming
      * one was the bug.
      */
-    const counts = new Map();
-    for (const id of e.ids) {
-      const st = /^[a-z]+/.exec(id)?.[0];
-      if (st && st.length >= 2) counts.set(st, (counts.get(st) ?? 0) + 1);
-    }
-    const stems = [...counts.keys()];
-    if (!stems.length) continue;
-    const stem = stems.join('|');
+    // No stem, no pattern, no `continue` when a lab's ids do not start with
+    // letters. The o-series used to disqualify OpenAI's whole channel here.
 
     // The index cited by the most records is the one the lab actually maintains.
     const url = [...e.docs.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
@@ -280,7 +497,6 @@ function channels() {
     out.push({
       lab,
       url,
-      models: new RegExp(`\\b(?:${stem})(?:[-. ][a-z]+){0,2}[-. ][\\d][\\d.]*(?:-[a-z]+)*\\b`, 'gi'),
       post: () => url,
       docs: true,
       // A per-model page, where the lab has a predictable one. This is the only
@@ -297,60 +513,90 @@ function channels() {
     const ids = data.releases.filter((r) => r.company === x.lab).map((r) => r.id);
     // Every stem, as above. Taking ids[0] gave Microsoft "phi" from a Phi
     // record and lost the whole MAI line on the page that lists it.
-    const stem = [...new Set(ids.map((id) => /^[a-z]+/.exec(id)?.[0])
-      .filter((st) => st && st.length >= 2))].join('|');
-    if (!stem) continue;
-    out.push({ lab: x.lab, url: x.url, docs: Boolean(x.docs),
-      models: new RegExp(`\\b(?:${stem})(?:[-. ][a-z]+){0,2}[-. ][\\d][\\d.]*(?:-[a-z]+)*\\b`, 'gi'), post: () => x.url });
+    out.push({ lab: x.lab, url: x.url, docs: Boolean(x.docs), post: () => x.url });
   }
   return out;
 }
 
 const targets = channels().filter((c) => !ONLY || c.lab.toLowerCase() === ONLY.toLowerCase());
 
+/**
+ * A headline is only a lead if it announces something.
+ *
+ * This used to be a NOISE list that excluded "announces", "launches" and
+ * "introduces" — correct when a name pattern was mined out of headline text,
+ * because "Mistral AI raises 1.7B" parsed as a model called `mistral ai raises
+ * 1`. Now the headline IS the lead, so the test inverts: an announcement verb
+ * is the whole signal, and its absence is what makes a headline noise.
+ *
+ * Without it a product blog delivers its staff page. blog.google's Gemini feed
+ * returned "Senior Director", "Contributor" and "Partnerships Lead" as
+ * candidate releases, alongside SAT prep and the state fair.
+ */
+const HEADLINE_SIGNAL = /\b(?:introduc|announc|launch|unveil|releas|debut|ship(?:s|ping)?\b|now available|generally available|meet\s+[A-Z]|open[- ]?sourc|open[- ]?weight|we'?re bringing)/i;
+
+/** Still worth excluding outright: these are never a model release. */
+const HEADLINE_NOISE = /\b(?:raises?|funding|series [A-E]\b|valuation|partners(?:hip)?|acquires?|acquisition|hiring|hires?|joins?|appoints?|promotes?|webinar|conference|summit|podcast|interview|lawsuit|court|settlement|earnings|quarterly)\b/i;
+
 const findings = [];
 const unreachable = [];
 
 for (const c of targets) {
-  const text = await sourceText(c.url, { cache: false });
-  if (!text) { unreachable.push(c); continue; }
+  const html = await sourceHtml(c.url, { cache: false });
+  if (typeof html !== 'string') { unreachable.push(c); continue; }
+  // sourceText's stripped copy is still what alias pairs are read from: those
+  // are a NAME beside an ID in running text, which is prose, not structure.
+  const text = htmlToText(html);
 
-  /**
-   * An identifier mentioned ONCE is prose, not a listing.
-   *
-   * xAI's docs say "logprobs and top_logprobs are not supported by models
-   * grok-4.20 and newer" — a version threshold in an API caveat, and there is
-   * no Grok 4.20. The first version of this scan proposed it as a release. A
-   * model the lab actually serves appears repeatedly: in its card, its heading
-   * and its alias. grok-4.6 appears four times on the same page.
-   */
-  const counts = new Map();
-  for (const m of text.matchAll(c.models)) {
-    const k = m[0].toLowerCase();
-    counts.set(k, (counts.get(k) ?? 0) + 1);
+  let seen = [];
+  let leads = [];
+
+  if (c.docs) {
+    /**
+     * An identifier marked up once may still be prose inside a code span —
+     * xAI's docs say "not supported by models grok-4.20 and newer", and there
+     * is no Grok 4.20. A model the lab actually serves is written down more
+     * than once: in its table row, its heading and its alias.
+     */
+    const counts = idsInDocs(html, c.lab);
+    seen = [...counts.entries()].filter(([, n]) => n > 1).map(([k]) => k);
+  } else {
+    /**
+     * A news index gets headlines, not parsed identifiers.
+     *
+     * Pulling a model name out of "Introducing Muse Spark, our new..." needs to
+     * know what a model name looks like, which is the assumption this rewrite
+     * exists to remove. So the headline IS the lead: a person or an agent reads
+     * it and decides. That is strictly more useful than the tokens the old
+     * pattern produced here, which included `gemini youtube article 13` and
+     * `gemini team 5` — neither of which is a model, both of which cost a
+     * reader the same to check as a real one.
+     */
+    /**
+     * A headline names the LINE, the dataset holds the VARIANT.
+     *
+     * "Introducing Shieldstral." against a tracked `Shieldstral 1.0 3B` shares
+     * no flattened substring, so the announcement of a model we already have
+     * came back as a lead. Matching on the first word of each tracked name is
+     * what connects the two.
+     */
+    const words = new Set((releasesByLab.get(c.lab) ?? [])
+      .flatMap((r) => [r.model, r.id])
+      .map((n) => flat(String(n).split(/[\s\-_.]/)[0]))
+      .filter((w) => w.length >= 4));
+    leads = headlinesIn(html)
+      .filter((h) => h.length >= 14)
+      .filter((h) => HEADLINE_SIGNAL.test(h) && !HEADLINE_NOISE.test(h))
+      .filter((h) => ![...words].some((w) => flat(h).includes(w)));
   }
-  // The repeat rule only applies to DOCUMENTATION. It exists because a docs
-  // page mentions ids in prose — xAI's "not supported by models grok-4.20 and
-  // newer" is an API caveat, not a model — and a model the lab serves appears
-  // in its card, its heading and its alias. A NEWS INDEX is the opposite: each
-  // release appears exactly once, as a headline. Applying the rule there hid
-  // all eight MAI models from a scan pointed straight at the page listing them.
-  // On a news index the stem is also the company name, so a funding headline
-  // matches as readily as a release: "Mistral AI raises 1.7B" parses as a model
-  // called "mistral ai raises 1". These words never appear inside a model id.
-  const HEADLINE_NOISE = /\b(?:raises?|compute|partners?|funding|series|announces?|launches?|introduces?|available|joins?|acquires?|expands?)\b/i;
-  const seen = [...counts.entries()]
-    .filter(([k, n]) => (c.docs ? n > 1 : n >= 1) && !HEADLINE_NOISE.test(k))
-    .map(([k]) => k);
-  // Collapse snapshot ids of the same model to one candidate.
+
+  const aliases = aliasesIn(text);
   const byBase = new Map();
   for (const m of seen) if (!byBase.has(base(m))) byBase.set(base(m), m);
-  // Pages that print a display name beside an API id let us recognise an id we
-  // already track under its human name.
-  const aliases = aliasesIn(text);
   const untracked = [...byBase.values()].filter((m) => !isKnown(c.lab, m, aliases));
   const fresh = BACKLOG ? untracked : untracked.filter((m) => !seenSet.has(base(m)));
-  findings.push({ ...c, seen, fresh, aliases });
+  const freshLeads = BACKLOG ? leads : leads.filter((h) => !seenSet.has(base(h)));
+  findings.push({ ...c, seen, fresh, leads: freshLeads, allLeads: leads, aliases, untracked });
 }
 
 /* -------------------------------------------------------------- report */
@@ -361,22 +607,36 @@ console.log(`## Lab documentation scan\n`);
 // The backlog is what is untracked; `total` is what is untracked AND unreported.
 // Saying "everything is tracked" when thirty models are merely already-reported
 // would be the scan lying about the thing it exists to measure.
-const backlog = findings.reduce((n, f) =>
-  n + f.seen.filter((m) => !isKnown(f.lab, m, f.aliases)).length, 0);
+const backlog = findings.reduce((n, f) => n + (f.untracked?.length ?? 0), 0);
 
 console.log(total
   ? `${total} model${total === 1 ? '' : 's'} newly listed by a lab and not in this dataset. `
     + `Candidates only — each needs the lab's own announcement and an archived snapshot before it becomes a record.\n`
   : backlog
-    ? `Nothing NEW since the last scan. ${backlog} documented model${backlog === 1 ? ' is' : 's are'} `
-      + `still untracked from earlier scans — run with \`--backlog\` to list them.\n`
+    ? `Nothing NEW since the last scan, and ${backlog} documented model${backlog === 1 ? ' is' : 's are'} `
+      + `still untracked from earlier ones. They are listed below.\n`
     : `Nothing new listed, and nothing outstanding. Every model these labs document is tracked.\n`);
 
+/**
+ * When nothing is new, print the BACKLOG rather than one line saying there is
+ * one.
+ *
+ * The seen-list exists so a scan running twice a day does not repeat itself,
+ * and it worked so well that the issue went quiet for six days with 38
+ * documented models outstanding — the report was measuring novelty while the
+ * reader wanted outstanding work. Novelty is a property of the scan; the
+ * backlog is a property of the dataset, and only one of those is worth
+ * anybody's morning.
+ */
+const nothingNew = total === 0;
 for (const f of findings) {
-  if (!f.fresh.length && !ALL) continue;
-  console.log(`**${f.lab}** — ${f.seen.length} documented, ${f.fresh.length} untracked`);
-  for (const m of f.fresh) console.log(`- \`${m}\` — start from ${f.post(m)}`);
-  if (ALL && !f.fresh.length) console.log(`- all ${f.seen.length} already tracked`);
+  const show = nothingNew ? f.untracked : f.fresh;
+  if (!show?.length && !f.leads.length && !ALL) continue;
+  console.log(`**${f.lab}** — ${f.seen.length} documented, ${(f.untracked ?? []).length} untracked`
+    + (nothingNew && show?.length ? ' (backlog)' : ''));
+  for (const m of show ?? []) console.log(`- \`${m}\` — start from ${f.post(m)}`);
+  for (const h of f.leads ?? []) console.log(`- headline: ${h} — ${f.url}`);
+  if (ALL && !show?.length && !f.leads.length) console.log(`- all ${f.seen.length} already tracked`);
   console.log();
 }
 
@@ -406,7 +666,8 @@ if (process.argv.includes('--json')) {
 
 if (process.argv.includes('--record')) {
   const all = [...new Set([...seen,
-    ...findings.flatMap((f) => f.fresh.map((m) => base(m)))])].sort();
+    ...findings.flatMap((f) => f.fresh.map((m) => base(m))),
+    ...findings.flatMap((f) => (f.leads ?? []).map((h) => base(h)))])].sort();
   writeFileSync(SEEN_FILE, JSON.stringify({
     note: 'Docs identifiers already surfaced by scripts/scan-labs.mjs. Presence here '
       + 'means "reported once", never "tracked" — the dataset is the record of what is tracked.',
