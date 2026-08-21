@@ -36,7 +36,21 @@ const OUT = CHECK ? '.build-check' : '.';
 /** Canonical repository, for linking a change to the commit that made it. */
 const REPO_URL = 'https://github.com/mayoorrnikam/llm-world';
 
-const BASE_URL = 'https://mayoorrnikam.github.io/llm-world';
+/**
+ * Where this site lives, overridable so it can move.
+ *
+ * Every internal link in this project is relative, so the pages themselves are
+ * portable to any host or path unchanged. These absolute URLs are not: the
+ * canonical tag, the sitemap, robots.txt and the Dataset structured data all
+ * name one origin. Publish under a new domain without changing them and every
+ * page tells Google the OLD address is the real one, which is the opposite of
+ * moving.
+ *
+ * Set SITE_URL in the deploy environment to move; the default keeps today's
+ * address, so nothing changes for anyone who does not set it.
+ */
+const DEFAULT_SITE = 'https://mayoorrnikam.github.io/llm-world';
+const BASE_URL = (process.env.SITE_URL ?? DEFAULT_SITE).replace(/\/+$/, '');
 
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
 
@@ -235,7 +249,25 @@ const PROV_LABEL = {
 // Two source files, one copy of each thing. The landing page owns the shared
 // header and footer; the timeline owns the logo sprite, because it is the page
 // that renders every company at once. Neither is duplicated.
-const indexHtml = readFileSync('index.html', 'utf8');
+let indexHtml = readFileSync('index.html', 'utf8');
+
+/**
+ * The landing page is authored by hand and served as-is, so it carries its own
+ * canonical tag and Dataset structured data with the address baked in. When
+ * SITE_URL says the site has moved, rewrite them in the published copy — the
+ * homepage is the one page whose canonical matters most, and leaving it
+ * pointing at the old host would undo the move on its own.
+ *
+ * Only under SITE_URL, so a normal build never touches a tracked file.
+ */
+if (process.env.SITE_URL) {
+  const moved = indexHtml.split(DEFAULT_SITE).join(BASE_URL);
+  if (moved !== indexHtml) {
+    indexHtml = moved;
+    writeFileSync('index.html', indexHtml);
+    console.log(`  landing page rewritten to ${BASE_URL}`);
+  }
+}
 const timelineHtml = readFileSync('timeline.html', 'utf8');
 // One copy of the logos, in sprite.svg. Both the generated pages and the
 // landing page read it from there; nothing inlines a second copy.
@@ -2086,7 +2118,7 @@ LLM World and link back. The <strong>code is MIT</strong>. See
 and <a href="https://github.com/mayoorrnikam/llm-world/blob/main/NOTICE">NOTICE</a> for
 exactly what each covers.</p>
 <pre><code>Release dates and metadata from LLM World
-https://mayoorrnikam.github.io/llm-world/ — CC BY 4.0</code></pre>
+${BASE_URL}/ — CC BY 4.0</code></pre>
 
 <h2>What a missing field means</h2>
 <p><strong>Nobody has traced it yet.</strong> Not zero, and not that the model lacks the

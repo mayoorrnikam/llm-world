@@ -54,6 +54,7 @@ import { createInterface } from 'node:readline';
 import { parse, run, answer } from '../lib/query.mjs';
 import { canonicalDate, contextWindow, parameterCount, displayTags } from '../lib/record.mjs';
 
+const SITE = (process.env.SITE_URL ?? 'https://mayoorrnikam.github.io/llm-world').replace(/\/+$/, '');
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const data = JSON.parse(readFileSync(join(ROOT, 'data/llm-releases.json'), 'utf8'));
 const releases = data.releases ?? [];
@@ -109,7 +110,7 @@ const brief = (r) => ({
   capabilities: r.capabilities ?? [],
   modalities: r.modalities ?? null,
   provenance: r.provenance?.status ?? null,
-  url: `https://mayoorrnikam.github.io/llm-world/models/${r.id}/`,
+  url: `${SITE}/models/${r.id}/`,
 });
 
 const full = (r) => ({

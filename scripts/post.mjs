@@ -35,7 +35,7 @@ const arg = (n, d) => {
 const COMPANY = arg('company', 'Anthropic');
 const FIELD = arg('field', 'context_window');
 const OUT = arg('out');
-const SITE = 'https://mayoorrnikam.github.io/llm-world';
+const SITE = (process.env.SITE_URL ?? 'https://mayoorrnikam.github.io/llm-world').replace(/\/+$/, '');
 
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
 
