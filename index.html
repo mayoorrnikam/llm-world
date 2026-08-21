@@ -16,6 +16,63 @@
 <link rel="stylesheet" href="styles.css">
 <script>try{var t=localStorage.getItem('llm-world-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
   <link rel="alternate" type="application/rss+xml" title="LLM World — tracked model releases" href="feed.xml">
+<!-- Structured data. This IS a dataset under a CC BY 4.0 licence, and Google runs a
+     dedicated Dataset Search that reads schema.org/Dataset. Competing for the words
+     "LLM World" against every page about language models is a losing search; being
+     listed as the dataset it is, is not. Regenerate the count from the data if it
+     ever needs to appear here — it deliberately does not, so this cannot go stale. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "LLM World — large language model releases",
+  "alternateName": "LLM World",
+  "description": "A source-backed dataset of large language model releases: release dates, labs, model families, context windows, parameter counts, licences, open-weights status and pricing. Every value is traced to the lab's own announcement, paper, model card or documentation, and fields no lab has published are recorded as not disclosed rather than estimated.",
+  "url": "https://mayoorrnikam.github.io/llm-world/",
+  "sameAs": "https://github.com/mayoorrnikam/llm-world",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "isAccessibleForFree": true,
+  "keywords": [
+    "large language models",
+    "LLM",
+    "model releases",
+    "release dates",
+    "open weights",
+    "context window",
+    "AI models",
+    "model cards",
+    "provenance"
+  ],
+  "creator": {
+    "@type": "Organization",
+    "name": "LLM World",
+    "url": "https://github.com/mayoorrnikam/llm-world"
+  },
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://mayoorrnikam.github.io/llm-world/api/models.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://mayoorrnikam.github.io/llm-world/llm-releases.csv"
+    }
+  ],
+  "measurementTechnique": "Primary-source citation with archived snapshots",
+  "variableMeasured": [
+    "release date",
+    "company",
+    "model family",
+    "context window",
+    "parameter count",
+    "licence",
+    "open weights",
+    "pricing"
+  ]
+}
+</script>
 </head>
 <body class="doc home">
 
