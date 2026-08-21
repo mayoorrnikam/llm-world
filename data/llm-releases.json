@@ -6739,7 +6739,9 @@
           ]
         }
       ],
-      "specifications": {},
+      "specifications": {
+        "language": {}
+      },
       "access": {
         "open_weights": true,
         "license": null
@@ -6768,6 +6770,14 @@
           "authority": "primary",
           "archived_url": "https://archive.md/20251005201008/https://docs.z.ai/guides/vlm/glm-4.5v",
           "retrieved": "2025-10-05"
+        },
+        {
+          "id": "glm-4-5v-s4",
+          "url": "https://docs.z.ai/llms-full.txt",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -7139,6 +7149,14 @@
           "authority": "primary",
           "archived_url": "https://archive.md/20260112194543/https://docs.z.ai/guides/llm/glm-4.6",
           "retrieved": "2026-01-12"
+        },
+        {
+          "id": "glm-4-6-s4",
+          "url": "https://docs.z.ai/llms-full.txt",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -8281,7 +8299,9 @@
           ]
         }
       ],
-      "specifications": {},
+      "specifications": {
+        "language": {}
+      },
       "access": {
         "open_weights": true,
         "license": null
@@ -8310,6 +8330,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20251208114929/https://docs.z.ai/guides/vlm/glm-4.6v",
           "retrieved": "2025-12-08"
+        },
+        {
+          "id": "glm-4-6v-s4",
+          "url": "https://docs.z.ai/llms-full.txt",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -8543,6 +8571,14 @@
           "authority": "primary",
           "archived_url": "https://archive.md/20251222173159/https://docs.z.ai/guides/llm/glm-4.7",
           "retrieved": "2025-12-22"
+        },
+        {
+          "id": "glm-4-7-s4",
+          "url": "https://docs.z.ai/llms-full.txt",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -8747,6 +8783,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260119150010/https://huggingface.co/zai-org/GLM-4.7-Flash",
           "retrieved": "2026-01-19"
+        },
+        {
+          "id": "glm-4-7-flash-s3",
+          "url": "https://docs.z.ai/llms-full.txt",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -9259,6 +9303,14 @@
           "authority": "primary",
           "archived_url": "https://archive.md/20260212034837/https://docs.z.ai/guides/llm/glm-5",
           "retrieved": "2026-02-12"
+        },
+        {
+          "id": "glm-5-s4",
+          "url": "https://docs.z.ai/llms-full.txt",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -9912,6 +9964,14 @@
           "authority": "primary",
           "archived_url": "https://archive.md/20260316015247/https://docs.z.ai/guides/llm/glm-5-turbo",
           "retrieved": "2026-03-16"
+        },
+        {
+          "id": "glm-5-turbo-s3",
+          "url": "https://docs.z.ai/llms-full.txt",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -10189,7 +10249,9 @@
           ]
         }
       ],
-      "specifications": {},
+      "specifications": {
+        "language": {}
+      },
       "access": {
         "open_weights": false,
         "license": null
@@ -10210,6 +10272,14 @@
           "authority": "primary",
           "archived_url": "https://archive.md/20260402035459/https://docs.z.ai/guides/vlm/glm-5v-turbo",
           "retrieved": "2026-04-02"
+        },
+        {
+          "id": "glm-5v-turbo-s3",
+          "url": "https://docs.z.ai/llms-full.txt",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -10345,6 +10415,14 @@
           "authority": "primary",
           "archived_url": "https://archive.md/20260407175312/https://docs.z.ai/guides/llm/glm-5.1",
           "retrieved": "2026-04-07"
+        },
+        {
+          "id": "glm-5-1-s4",
+          "url": "https://docs.z.ai/llms-full.txt",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {

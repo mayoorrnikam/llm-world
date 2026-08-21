@@ -49,6 +49,7 @@ if (process.argv.includes('--limit=0')) process.exit(0);
 
 const ONLY = process.argv.find((a) => a.startsWith('--lab='))?.split('=')[1];
 const SPECS = process.argv.find((a) => a.startsWith('--specs='))?.split('=')[1];
+const QUEUE = process.argv.find((a) => a.startsWith('--queue='))?.split('=')[1];
 
 /** 33MB of Markdown is not worth fetching twice a day to read one table. */
 const MAX_BYTES = 12_000_000;
@@ -268,6 +269,32 @@ if (notes.length) {
  * traces the figure inside it, and only then does the value belong in a record.
  * This writes the file that waits for that.
  */
+/**
+ * The step that unblocks the one above.
+ *
+ * A value cannot be merged until its source is archived, and archive-sources
+ * only asks archive.org to capture URLs that are already in a record's
+ * sources[]. So the corpus has to be CITED before it can be captured, and
+ * citing it asserts nothing: apply-specs adds the source and leaves the field
+ * null, which validates cleanly and raises the R1 warning that marks it as
+ * archive work outstanding.
+ *
+ * Then archive.yml's daily --save run captures it, attribute-facts ties the
+ * figure to the snapshot, and only then is --specs safe to apply. Two days,
+ * no new third-party writes, and no step where the dataset claims something it
+ * cannot show.
+ */
+if (QUEUE && filled.length) {
+  writeFileSync(QUEUE, `${JSON.stringify({
+    results: filled.map((f) => ({
+      id: f.id,
+      sources: [{ field: 'context_window', url: f.url }],
+    })),
+  }, null, 2)}\n`);
+  console.log(`_Wrote ${filled.length} citation(s) to ${QUEUE}, asserting no values. `
+    + `Apply with \`node scripts/apply-specs.mjs ${QUEUE}\` to queue the corpus for archiving._`);
+}
+
 if (SPECS && filled.length) {
   writeFileSync(SPECS, `${JSON.stringify({
     results: filled.map((f) => ({
