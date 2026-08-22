@@ -6776,8 +6776,8 @@
           "url": "https://docs.z.ai/llms-full.txt",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260821052159/https://docs.z.ai/llms-full.txt",
+          "retrieved": "2026-08-21"
         }
       ],
       "provenance": {
@@ -7155,8 +7155,8 @@
           "url": "https://docs.z.ai/llms-full.txt",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260821052159/https://docs.z.ai/llms-full.txt",
+          "retrieved": "2026-08-21"
         }
       ],
       "provenance": {
@@ -8336,8 +8336,8 @@
           "url": "https://docs.z.ai/llms-full.txt",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260821052159/https://docs.z.ai/llms-full.txt",
+          "retrieved": "2026-08-21"
         }
       ],
       "provenance": {
@@ -8789,8 +8789,8 @@
           "url": "https://docs.z.ai/llms-full.txt",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260821052159/https://docs.z.ai/llms-full.txt",
+          "retrieved": "2026-08-21"
         }
       ],
       "provenance": {
@@ -9309,8 +9309,8 @@
           "url": "https://docs.z.ai/llms-full.txt",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260821052159/https://docs.z.ai/llms-full.txt",
+          "retrieved": "2026-08-21"
         }
       ],
       "provenance": {
@@ -9970,8 +9970,8 @@
           "url": "https://docs.z.ai/llms-full.txt",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260821052159/https://docs.z.ai/llms-full.txt",
+          "retrieved": "2026-08-21"
         }
       ],
       "provenance": {
@@ -10421,8 +10421,8 @@
           "url": "https://docs.z.ai/llms-full.txt",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260821052159/https://docs.z.ai/llms-full.txt",
+          "retrieved": "2026-08-21"
         }
       ],
       "provenance": {
@@ -12017,21 +12017,30 @@
           "url": "https://huggingface.co/ornith-ai/Ornith-1.0-397B",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260821051951/https://huggingface.co/ornith-ai/Ornith-1.0-397B",
+          "retrieved": "2026-08-21"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       },
       "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06",
+            "sources": [
+              "ornith-1-0-397b-s2"
+            ]
+          }
+        ],
         "parameter_count": [
           {
             "value": 397000000000,
             "sources": [
-              "ornith-1-0-397b-s1"
+              "ornith-1-0-397b-s1",
+              "ornith-1-0-397b-s2"
             ]
           }
         ]
