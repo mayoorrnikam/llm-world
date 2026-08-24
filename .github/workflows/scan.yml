@@ -155,7 +155,7 @@ jobs:
         id: spec
         run: |
           set -o pipefail
-          node scripts/hf-bridge.mjs --limit=3 --spec=draft-spec.json 2>&1 | tee bridge.md
+          node scripts/hf-bridge.mjs --limit=3 --known-labs --spec=draft-spec.json 2>&1 | tee bridge.md
           ls -1 draft-spec*.json 2>/dev/null | tee spec-files.txt || true
           test -s spec-files.txt && echo "found=true" >> "$GITHUB_OUTPUT" || echo "found=false" >> "$GITHUB_OUTPUT"
 
@@ -166,6 +166,13 @@ jobs:
         run: |
           set -o pipefail
           while read -r f; do node scripts/add-model.mjs "$f" --write 2>&1 | tee -a bridge.md; done < spec-files.txt
+          # --write, and the flag is the whole point. `check` runs update-readme
+          # as a CHECKER and exits 1 on drift — and adding records is exactly
+          # what causes the drift. Without this the job drafted three models
+          # every morning, failed on the README, and threw the work away,
+          # because the pull-request step is gated on this step succeeding.
+          # archive.yml has always regenerated first; this did not.
+          node scripts/update-readme.mjs --write 2>&1 | tail -5 | tee -a bridge.md
           npm run check 2>&1 | tail -30 | tee -a bridge.md
 
       - name: Open a pull request
@@ -184,7 +191,7 @@ jobs:
           git config user.email "noreply@github.com"
           git checkout -b "$BRANCH"
           rm -f draft-spec*.json spec-files.txt bridge.md scan.md
-          git add data/
+          git add data/ README.md
           if git diff --cached --quiet; then
             echo "nothing to draft" >> "$GITHUB_STEP_SUMMARY"; exit 0
           fi

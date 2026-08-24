@@ -35,9 +35,25 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { COMPANY_SLUG } from '../lib/record.mjs';
 import { fetchCatalogue, trackedIndex, bare } from '../lib/catalogue.mjs';
 
 const SPEC = process.argv.find((a) => a.startsWith('--spec='))?.split('=')[1];
+/**
+ * Draft only for labs this project already knows.
+ *
+ * A model from an unknown lab drafts fine and then fails smoke:
+ * checkCompanyLogos() rejects any dataset company missing from COMPANY_SLUG,
+ * and that rule is deliberate — the comment on the map says the fallback
+ * "catches typos rather than quietly absorbing new labs". Adding a lab means
+ * choosing its canonical name, its logo and its colour, which is judgement, not
+ * labour, and this whole pipeline exists to automate only the latter.
+ *
+ * So the unattended path skips them, and they stay in the discovery issue where
+ * hf-new-orgs already lists them. Once a person adds the lab properly, its
+ * drafts flow automatically from the next run.
+ */
+const KNOWN_ONLY = process.argv.includes('--known-labs');
 const LIMIT = Number(process.argv.find((a) => a.startsWith('--limit='))?.split('=')[1] ?? Infinity);
 
 const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
@@ -233,7 +249,26 @@ if (SPEC) {
   // Grouped by lab, because add-model.mjs takes one company per spec file and
   // refuses a family-shaped record holding several sizes.
   const byCompany = new Map();
-  for (const r of draftable) {
+  /**
+   * COMPANY_SLUG, not "is the company non-null".
+   *
+   * The company written to a spec falls back to the Hugging Face org slug, so
+   * `tencent` is a perfectly non-null company that this project has never heard
+   * of — it drafted cleanly, validated cleanly, and then failed smoke, which
+   * rejects any dataset company with no logo. Testing the exact map smoke
+   * tests is the only version of this that cannot drift away from it.
+   */
+  const listed = draftable.filter((r) => {
+    if (!KNOWN_ONLY) return true;
+    return Object.hasOwn(COMPANY_SLUG, r.company ?? r.hf.split('/')[0]);
+  });
+  const dropped = draftable.length - listed.length;
+  if (dropped) {
+    console.log(`\n_Skipped ${dropped} model(s) from labs this project does not track. Adding a lab `
+      + `sets its canonical name, logo and colour, which is a person's call — they are listed in the `
+      + `Hugging Face section of this issue._`);
+  }
+  for (const r of listed) {
     const company = r.company ?? r.hf.split('/')[0];
     if (!byCompany.has(company)) byCompany.set(company, []);
     byCompany.get(company).push({
@@ -267,7 +302,7 @@ if (SPEC) {
     writeFileSync(path, `${JSON.stringify({ company, family: null, models }, null, 2)}\n`);
     written.push(path);
   }
-  console.log(`\n_Wrote ${draftable.length} draft(s) to ${written.length} file(s): ${written.join(', ')}._`);
+  console.log(`\n_Wrote ${listed.length} draft(s) to ${written.length} file(s): ${written.join(', ')}._`);
   console.log('_Every one needs a person: set `family`, replace the repo-creation date with the '
     + 'announcement, and confirm the lab name. Then: `node scripts/add-model.mjs <file>`._');
 }
