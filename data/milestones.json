@@ -617,8 +617,8 @@
           "url": "https://developer.aliyun.com/article/1363818",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260612060115/https://developer.aliyun.com/article/1363818",
+          "retrieved": "2026-06-12"
         },
         {
           "id": "tongyi-lingma-s2",
@@ -992,8 +992,8 @@
           "url": "https://www.deepseek.com/en/news/deepseek-r1/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260819135146/https://deepseek.com/en/news/deepseek-r1/",
+          "retrieved": "2026-08-19"
         },
         {
           "id": "deepseek-r1-s2",
@@ -1592,8 +1592,8 @@
           "url": "https://github.com/MoonshotAI/kimi-code/releases/tag/%40moonshot-ai%2Fkimi-code%400.2.0",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260821052020/https://github.com/MoonshotAI/kimi-code/releases/tag/@moonshot-ai/kimi-code@0.2.0",
+          "retrieved": "2026-08-21"
         },
         {
           "id": "kimi-code-cli-s2",
@@ -1718,8 +1718,8 @@
           "url": "https://cryptobriefing.com/deepseek-harness-open-source-developer-preview/",
           "type": "news",
           "authority": "secondary",
-          "archived_url": null,
-          "retrieved": "2026-08-19"
+          "archived_url": "https://web.archive.org/web/20260820050949/https://cryptobriefing.com/deepseek-harness-open-source-developer-preview/",
+          "retrieved": "2026-08-20"
         },
         {
           "id": "deepseek-harness-s3",
