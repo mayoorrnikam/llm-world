@@ -1,10 +1,12 @@
 {
   "note": "Docs identifiers already surfaced by scripts/scan-labs.mjs. Presence here means \"reported once\", never \"tracked\" — the dataset is the record of what is tracked.",
   "candidates": [
+    "adaptive",
     "announcingaiforcitizens",
     "announcingpixtral12b",
     "claudeformicrosoft365",
     "claudehaiku4",
+    "clock",
     "deepseekv4pro",
     "gemini15flash",
     "gemini15flash002",
