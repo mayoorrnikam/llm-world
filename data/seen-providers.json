@@ -212,6 +212,7 @@
     "qwen36maxpreview",
     "qwen37flash",
     "qwen38b",
+    "qwen38flash",
     "qwen3coder",
     "qwen3coder30ba3binstruct",
     "qwen3coderflash",
