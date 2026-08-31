@@ -4440,8 +4440,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 75,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the technical paper and the official model card. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {
@@ -4455,11 +4455,20 @@
             ]
           }
         ],
+        "context_window": [
+          {
+            "value": 128000,
+            "sources": [
+              "deepseek-v3-s2"
+            ]
+          }
+        ],
         "parameter_count": [
           {
             "value": 671000000000,
             "sources": [
               "deepseek-v3-s1",
+              "deepseek-v3-s2",
               "deepseek-v3-s3"
             ]
           }
