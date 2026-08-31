@@ -16217,6 +16217,54 @@
           }
         ]
       }
+    },
+    {
+      "id": "deepseek-v4-flash-vision-exp",
+      "model": "DeepSeek V4 Flash Vision Exp",
+      "company": "DeepSeek",
+      "family": "DeepSeek V4 Flash Vision Exp",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "DRAFT — date is the Hugging Face repo creation date, not the announcement. Replace before recording. Announcements for this lab have been found at: arxiv.org.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-31",
+          "sources": [
+            "deepseek-v4-flash-vision-exp-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "mit"
+      },
+      "sources": [
+        {
+          "id": "deepseek-v4-flash-vision-exp-s1",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
     }
   ],
   "redirects": [
