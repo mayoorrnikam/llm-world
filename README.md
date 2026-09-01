@@ -18,14 +18,14 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **192** across 22 labs and 33 families, 2022–2026 |
-| **Verified** | 120 (63%) — every value they assert traced to a primary source |
-| **Facts traced to a source** | 149 records carry claim-level evidence |
+| **Releases tracked** | **193** across 22 labs and 33 families, 2022–2026 |
+| **Verified** | 120 (62%) — every value they assert traced to a primary source |
+| **Facts traced to a source** | 150 records carry claim-level evidence |
 | **Fully archived** | 181 records where every source has a snapshot |
-| **Open weights** | 83 (43%) |
+| **Open weights** | 84 (44%) |
 | **Beyond language** | 44 (23%) — 17 image generation · 10 audio · 9 video generation · 7 vision · 1 3d |
 | **Milestones** | 51 dated events that were not model releases |
-| **Most recent** | Ornith-1.5-9B — Ornith, 2026-08-19 |
+| **Most recent** | GLM-5.3-Flash — Zhipu AI, 2026-08-26 |
 | **Dataset updated** | 2026-08-14 |
 
 <sub>Counted from `data/llm-releases.json` by `scripts/update-readme.mjs`. Nothing here is estimated; `npm run check` fails if this table has drifted from the data.</sub>
