@@ -19,7 +19,7 @@ ignores that is describing 2023.
 | | |
 |---|---|
 | **Releases tracked** | **193** across 22 labs and 33 families, 2022–2026 |
-| **Verified** | 120 (62%) — every value they assert traced to a primary source |
+| **Verified** | 121 (63%) — every value they assert traced to a primary source |
 | **Facts traced to a source** | 150 records carry claim-level evidence |
 | **Fully archived** | 181 records where every source has a snapshot |
 | **Open weights** | 84 (44%) |
