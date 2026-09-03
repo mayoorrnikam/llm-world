@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-14",
+  "updated": "2026-09-02",
   "schema_version": "1.6",
   "releases": [
     {
@@ -16291,6 +16291,232 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "id": "claude-fable-5-1",
+      "model": "Claude Fable 5.1",
+      "company": "Anthropic",
+      "family": "Claude",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Anthropic launched Claude Fable 5.1 as the successor to Claude Fable 5 for long-running agentic coding, knowledge work and research. Its API id is claude-fable-5-1, and Anthropic states a 1M token context window by default with 128k maximum output tokens.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-01",
+          "sources": [
+            "claude-fable-5-1-s1",
+            "claude-fable-5-1-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "claude-fable-5-1-s1",
+          "url": "https://platform.claude.com/docs/en/release-notes/api",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-fable-5-1-s2",
+          "url": "https://platform.claude.com/docs/en/about-claude/models",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-fable-5-1-s3",
+          "url": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "claude-mythos-5-1",
+      "model": "Claude Mythos 5.1",
+      "company": "Anthropic",
+      "family": "Claude",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Anthropic launched Claude Mythos 5.1 alongside Claude Fable 5.1, with API id claude-mythos-5-1, for Project Glasswing participants. Anthropic states a 1M token context window by default with 128k maximum output tokens.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-01",
+          "sources": [
+            "claude-mythos-5-1-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "claude-mythos-5-1-s1",
+          "url": "https://platform.claude.com/docs/en/release-notes/api",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-mythos-5-1-s2",
+          "url": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "gemini-3-8-flash",
+      "model": "Gemini 3.8 Flash",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Google made Gemini 3.8 Flash generally available, describing it as its most intelligent Flash model, engineered for long-horizon software engineering, autonomous agents and complex enterprise workflows. Its API endpoint is gemini-3.8-flash.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-02",
+          "sources": [
+            "gemini-3-8-flash-s1",
+            "gemini-3-8-flash-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-3-8-flash-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260826034017/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2026-08-26"
+        },
+        {
+          "id": "gemini-3-8-flash-s2",
+          "url": "https://ai.google.dev/gemini-api/docs/models",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260902150821/https://ai.google.dev/gemini-api/docs/models",
+          "retrieved": "2026-09-02"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "muse-spark-1-3",
+      "model": "Muse Spark 1.3",
+      "company": "Meta AI",
+      "family": "Muse",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Meta released Muse Spark 1.3 in Muse Code and the Meta Model API, reporting improved performance on agentic and coding tasks and, in its own engineering evaluation, ~20% fewer tool calls and ~25% fewer tokens. Previously available reasoning modes shipped on the day, with max reasoning to follow after further safety testing. Meta lists a Muse Spark open-weights release as future roadmap, so this release is not open weights.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-02",
+          "sources": [
+            "muse-spark-1-3-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "muse-spark-1-3-s1",
+          "url": "https://research.meta.ai/blog/introducing-muse-spark-1-3",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260902193756/https://research.meta.ai/blog/introducing-muse-spark-1-3",
+          "retrieved": "2026-09-02"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       }
     }
   ],
