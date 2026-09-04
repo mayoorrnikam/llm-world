@@ -227,11 +227,22 @@ jobs:
           the lab announced, and no source states it as a release date. It must
           be replaced before this is merged: a draft for Qwen3.8-Flash-Next once
           carried a repo date three weeks later than the announcement."
-          git push origin "$BRANCH"
+          # Force ONLY on a branch nobody is reviewing.
+          #
+          # A date-named branch outlives the pull request it was opened for:
+          # scan/drafts-20260904 survived its PR being closed, so a later run the
+          # same day built a fresh branch of that name, diverged, and was
+          # rejected. Force is correct there — the old branch is abandoned.
+          #
+          # It is never correct on the branch of an OPEN pull request, which is
+          # the one a reviewer may have pushed a corrected date to. That work is
+          # the entire point of the review, and force-pushing would erase it.
           if [ "${{ steps.branch.outputs.open }}" = "true" ]; then
+            git push origin "$BRANCH"
             echo "added to the open drafts PR on $BRANCH" >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
+          git push -u origin "$BRANCH" --force
           gh pr create --title "Drafts from the model-card scan" --label discovery \
             --body "Drafted by the twice-daily scan from Hugging Face model cards.
 
