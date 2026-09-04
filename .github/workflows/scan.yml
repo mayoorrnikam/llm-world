@@ -151,6 +151,35 @@ jobs:
         with:
           node-version: '22'
 
+      # Work ON the open PR's branch, not beside it.
+      #
+      # This used to skip entirely while a drafts PR was open, reasoning that a
+      # queue of bot pull requests nobody reads is worse than none. That was the
+      # wrong shape: PR #4 sat unmerged for two days and every morning run
+      # drafted models and then threw them away, because one unmerged PR
+      # silently blocked all drafting for as long as it stayed open.
+      #
+      # Choosing the branch BEFORE drafting also fixes a second thing. hf-bridge
+      # skips models already in the dataset, so running on the branch means
+      # yesterday's drafts count as tracked and today's run proposes only what
+      # is genuinely new, instead of re-drafting the same records.
+      - name: Pick the branch
+        id: branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="Drafts from the model-card scan"
+          EXISTING=$(gh pr list --state open --search "$TITLE in:title" --json headRefName -q '.[0].headRefName')
+          if [ -n "$EXISTING" ]; then
+            git fetch origin "$EXISTING"
+            git checkout "$EXISTING"
+            echo "open=true" >> "$GITHUB_OUTPUT"
+          else
+            git checkout -b "scan/drafts-$(date -u +%Y%m%d)"
+            echo "open=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "name=$(git rev-parse --abbrev-ref HEAD)" >> "$GITHUB_OUTPUT"
+
       - name: Draft what has a model card
         id: spec
         run: |
@@ -175,25 +204,18 @@ jobs:
           node scripts/update-readme.mjs --write 2>&1 | tail -5 | tee -a bridge.md
           npm run check 2>&1 | tail -30 | tee -a bridge.md
 
-      - name: Open a pull request
+      - name: Push, and open the pull request if there is not one
         if: steps.apply.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          BRANCH="scan/drafts-$(date -u +%Y%m%d)"
-          TITLE="Drafts from the model-card scan"
-          # One open PR at a time. A second would review the same queue twice.
-          if [ -n "$(gh pr list --state open --search "$TITLE in:title" --json number -q '.[0].number')" ]; then
-            echo "a drafts PR is already open — leaving this run's work for it" >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
+          BRANCH="${{ steps.branch.outputs.name }}"
           git config user.name "llm-world bot"
           git config user.email "noreply@github.com"
-          git checkout -b "$BRANCH"
           rm -f draft-spec*.json spec-files.txt bridge.md scan.md
           git add data/ README.md
           if git diff --cached --quiet; then
-            echo "nothing to draft" >> "$GITHUB_STEP_SUMMARY"; exit 0
+            echo "nothing new to draft" >> "$GITHUB_STEP_SUMMARY"; exit 0
           fi
           git commit -m "Draft open-weights records found by the model-card scan
 
@@ -203,15 +225,23 @@ jobs:
 
           The DATE IS PROVISIONAL. It is when the repository appeared, not when
           the lab announced, and no source states it as a release date. It must
-          be replaced before this is merged."
-          git push -u origin "$BRANCH" --force
-          gh pr create --title "$TITLE" --label discovery \
+          be replaced before this is merged: a draft for Qwen3.8-Flash-Next once
+          carried a repo date three weeks later than the announcement."
+          git push origin "$BRANCH"
+          if [ "${{ steps.branch.outputs.open }}" = "true" ]; then
+            echo "added to the open drafts PR on $BRANCH" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          gh pr create --title "Drafts from the model-card scan" --label discovery \
             --body "Drafted by the twice-daily scan from Hugging Face model cards.
 
           **A reviewer must do these before merging — the bot cannot:**
-          - [ ] Replace the release date. The drafted one is when the *repo* appeared. Find the lab's own announcement and use the date it states.
+          - [ ] Replace the release date. The drafted one is when the *repo* appeared. Find the lab's own announcement and use the date it states. One draft was three weeks out this way.
           - [ ] Set **family**, and confirm the lab name is the one this dataset uses.
-          - [ ] Confirm each card is this model's own card, not a sibling's.
+          - [ ] Confirm each card is this model's own card, not a sibling's. A draft named Qwen3.8 Flash was built from the card for Qwen3.8-Flash-Next.
+          - [ ] Check the id matches this dataset's convention — hyphens, no dots.
           - [ ] Check any parameter count is a real count and not a quantised checkpoint's packed byte total.
 
-          A card is a primary source for the licence, the weights and the specs. It is **not** a source for the release date, so these records cannot be **verified** until the announcement is cited." >> "$GITHUB_STEP_SUMMARY"
+          A card is a primary source for the licence, the weights and the specs. It is **not** a source for the release date, so these records cannot be **verified** until the announcement is cited.
+
+          Later runs add to this branch rather than opening a second pull request." >> "$GITHUB_STEP_SUMMARY"
