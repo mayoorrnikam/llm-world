@@ -60,6 +60,27 @@ const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
 const tracked = trackedIndex(data.releases);
 
 /**
+ * Every Hugging Face card this dataset already cites.
+ *
+ * catalogue.mjs matches on id and model name and deliberately UNDER-matches,
+ * because a false match publishes a claim about the wrong model. That is the
+ * right trade, and it means a served id can differ from the repo it serves:
+ * the catalogue calls one model `qwen3.8-flash` while its weights live at
+ * `Qwen/Qwen3.8-Flash-Next`, so a record added under the repo's own name was
+ * re-proposed the next morning as though it were new.
+ *
+ * The card URL is not a fuzzy signal. Two records citing the same card are the
+ * same model, so this can be checked exactly — no distance, no prefixes, none
+ * of what that comment rules out.
+ */
+const citedCards = new Set(
+  data.releases.flatMap((r) => (r.sources ?? [])
+    .map((x) => String(x.url ?? '').toLowerCase().replace(/\/+$/, ''))
+    .filter((u) => u.includes('huggingface.co/'))),
+);
+const citesCard = (hf) => citedCards.has(`https://huggingface.co/${String(hf).toLowerCase()}`);
+
+/**
  * The announcement URLs this dataset already cites for each lab.
  *
  * A model card gives the licence and the weights; it does not give the release
@@ -127,7 +148,7 @@ const HINTS = announcementHints(data.releases);
 
 const catalogue = await fetchCatalogue();
 const candidates = catalogue
-  .filter((m) => !tracked.has(bare(m.id)) && m.hugging_face_id)
+  .filter((m) => !tracked.has(bare(m.id)) && m.hugging_face_id && !citesCard(m.hugging_face_id))
   .sort((a, b) => (b.created ?? 0) - (a.created ?? 0))
   .slice(0, LIMIT === Infinity ? undefined : LIMIT);
 
