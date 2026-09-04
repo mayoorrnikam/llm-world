@@ -18,11 +18,11 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **199** across 22 labs and 33 families, 2022–2026 |
+| **Releases tracked** | **200** across 22 labs and 33 families, 2022–2026 |
 | **Verified** | 123 (62%) — every value they assert traced to a primary source |
 | **Facts traced to a source** | 152 records carry claim-level evidence |
 | **Fully archived** | 183 records where every source has a snapshot |
-| **Open weights** | 84 (42%) |
+| **Open weights** | 85 (43%) |
 | **Beyond language** | 44 (22%) — 17 image generation · 10 audio · 9 video generation · 7 vision · 1 3d |
 | **Milestones** | 51 dated events that were not model releases |
 | **Most recent** | GPT-6 Astra — OpenAI, 2026-09-03 |
