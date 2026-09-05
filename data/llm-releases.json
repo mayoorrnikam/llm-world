@@ -16705,8 +16705,8 @@
           "url": "https://openai.com/index/safety-overview-gpt-6-astra/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260904150411/https://openai.com/index/safety-overview-gpt-6-astra/",
+          "retrieved": "2026-09-04"
         },
         {
           "id": "gpt-6-astra-s3",
