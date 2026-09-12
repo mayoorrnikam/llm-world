@@ -18,14 +18,14 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **200** across 22 labs and 33 families, 2022–2026 |
-| **Verified** | 124 (62%) — every value they assert traced to a primary source |
+| **Releases tracked** | **202** across 22 labs and 33 families, 2022–2026 |
+| **Verified** | 124 (61%) — every value they assert traced to a primary source |
 | **Facts traced to a source** | 153 records carry claim-level evidence |
 | **Fully archived** | 186 records where every source has a snapshot |
-| **Open weights** | 85 (43%) |
-| **Beyond language** | 44 (22%) — 17 image generation · 10 audio · 9 video generation · 7 vision · 1 3d |
+| **Open weights** | 86 (43%) |
+| **Beyond language** | 45 (22%) — 17 image generation · 11 audio · 9 video generation · 7 vision · 1 3d |
 | **Milestones** | 51 dated events that were not model releases |
-| **Most recent** | GPT-6 Astra — OpenAI, 2026-09-03 |
+| **Most recent** | DeepSeek-V4.1-Flash — DeepSeek, 2026-09-10 |
 | **Dataset updated** | 2026-09-02 |
 
 <sub>Counted from `data/llm-releases.json` by `scripts/update-readme.mjs`. Nothing here is estimated; `npm run check` fails if this table has drifted from the data.</sub>
