@@ -1746,6 +1746,32 @@
       "evidence_quote": "August 13th, 2026 at 1:20pm — \"DeepSeek open sources an agent harness where everything is a plugin\" [The New Stack]",
       "why_it_matters": "The last of the large Chinese labs to ship a harness, and the one that refused to make it a product: released as a preview, provider-agnostic by design, with DeepSeek's own warning not to build anything load-bearing on it yet. It passed 160,000 GitHub stars within days, making the harness — not the model — DeepSeek's most-starred release.",
       "significance": null
+    },
+    {
+      "id": "sakana-fugu-max",
+      "title": "Sakana Fugu Max and Fugu Ultra v2",
+      "date": "2026-09-11",
+      "type": "product_launch",
+      "company": "Sakana AI",
+      "note": "Sakana AI launched Fugu Max and Fugu Ultra v2, an orchestration layer served through an OpenAI-compatible API that routes each task to the leanest model able to handle it, drawing on a pool of open-weights and specialised models including NVIDIA's Nemotron family. Sakana states the two are not separate products but two axes of one strategy: Max pushes cost efficiency, Ultra v2 pushes maximum capability.",
+      "sources": [
+        {
+          "id": "sakana-fugu-max-s1",
+          "url": "https://sakana.ai/fugu-max-release/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260911052033/https://sakana.ai/fugu-max-release/",
+          "retrieved": "2026-09-11"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 80,
+        "reason": "Sakana AI's own release post, which prints \"September 11, 2026\" beside the headline."
+      },
+      "evidence_quote": "Introducing Fugu Max and Fugu Ultra v2: Orchestrating the Pareto Frontier September 11, 2026",
+      "why_it_matters": "Recorded as a milestone rather than a model because it orchestrates models rather than being one. Sakana calls Max and Ultra v2 models available through its API, but the post describes them routing work across a pool of other models — so a model record would carry a null parameter count, a null context window and a null licence, which is the shape that put ChatGPT and Bard here rather than in the release dataset.",
+      "significance": null
     }
   ]
 }

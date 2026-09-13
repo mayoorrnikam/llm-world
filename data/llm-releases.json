@@ -16277,6 +16277,65 @@
       }
     },
     {
+      "id": "deepseek-v4-flash-vision-exp",
+      "model": "DeepSeek-V4-Flash-Vision-Exp",
+      "company": "DeepSeek",
+      "family": "DeepSeek",
+      "classification": {
+        "primary_type": "vision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "DeepSeek released DeepSeek-V4-Flash-Vision-Exp as an experimental multimodal vision understanding model on the DeepSeek API platform. It was retired on 2026-09-10: the model name is still accepted, but requests are served by DeepSeek-V4.1-Flash and billed at the Flash price.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-21",
+          "sources": [
+            "deepseek-v4-flash-vision-exp-s1",
+            "deepseek-v4-flash-vision-exp-s2"
+          ]
+        },
+        {
+          "type": "retirement",
+          "date": "2026-09-10",
+          "sources": [
+            "deepseek-v4-flash-vision-exp-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "MIT"
+      },
+      "sources": [
+        {
+          "id": "deepseek-v4-flash-vision-exp-s1",
+          "url": "https://api-docs.deepseek.com/updates",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260821045516/https://api-docs.deepseek.com/updates/",
+          "retrieved": "2026-08-21"
+        },
+        {
+          "id": "deepseek-v4-flash-vision-exp-s2",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260831103428/https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
+          "retrieved": "2026-08-31"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "glm-5-3-flash",
       "model": "GLM-5.3-Flash",
       "company": "Zhipu AI",
@@ -16715,6 +16774,135 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260903193434/https://deploymentsafety.openai.com/gpt-6-astra",
           "retrieved": "2026-09-03"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "chatgpt-images-2-5",
+      "model": "ChatGPT Images 2.5",
+      "company": "OpenAI",
+      "family": "GPT-Image",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "OpenAI introduced ChatGPT Images 2.5, which it calls a new state-of-the-art image model with sharper details, more precise editing and faster generation. OpenAI states image generation latency is reduced by up to 50% compared with Images 2.0. Available to all ChatGPT, ChatGPT Work and Codex users across desktop, mobile and web.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-08",
+          "sources": [
+            "chatgpt-images-2-5-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "chatgpt-images-2-5-s1",
+          "url": "https://openai.com/index/introducing-chatgpt-images-2-5/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260908183908/https://openai.com/index/introducing-chatgpt-images-2-5/",
+          "retrieved": "2026-09-08"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "gpt-image-2-5-flare",
+      "model": "GPT-Image-2.5 Flare",
+      "company": "OpenAI",
+      "family": "GPT-Image",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "One of two API models OpenAI introduced alongside ChatGPT Images 2.5. OpenAI states Flare brings the same improvements in quality, editing and speed.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-08",
+          "sources": [
+            "gpt-image-2-5-flare-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-image-2-5-flare-s1",
+          "url": "https://openai.com/index/introducing-chatgpt-images-2-5/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260908183908/https://openai.com/index/introducing-chatgpt-images-2-5/",
+          "retrieved": "2026-09-08"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "gpt-image-2-5-sunburst",
+      "model": "GPT-Image-2.5 Sunburst",
+      "company": "OpenAI",
+      "family": "GPT-Image",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The second API model introduced alongside ChatGPT Images 2.5. OpenAI states Sunburst offers an extra level of precision for detailed creative work, with longer generation times.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-08",
+          "sources": [
+            "gpt-image-2-5-sunburst-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-image-2-5-sunburst-s1",
+          "url": "https://openai.com/index/introducing-chatgpt-images-2-5/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260908183908/https://openai.com/index/introducing-chatgpt-images-2-5/",
+          "retrieved": "2026-09-08"
         }
       ],
       "provenance": {
