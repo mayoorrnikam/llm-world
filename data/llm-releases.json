@@ -16762,16 +16762,16 @@
           "url": "https://api-docs.deepseek.com/updates",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260910074600/https://api-docs.deepseek.com/updates/",
+          "retrieved": "2026-09-10"
         },
         {
           "id": "deepseek-v4-1-flash-s2",
           "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260910055823/https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+          "retrieved": "2026-09-10"
         }
       ],
       "provenance": {
@@ -16813,8 +16813,8 @@
           "url": "https://openai.com/index/introducing-gpt-live-1-in-the-api/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260910170442/https://openai.com/index/introducing-gpt-live-1-in-the-api/",
+          "retrieved": "2026-09-10"
         }
       ],
       "provenance": {
