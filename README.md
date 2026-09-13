@@ -26,7 +26,7 @@ ignores that is describing 2023.
 | **Beyond language** | 49 (24%) — 20 image generation · 11 audio · 9 video generation · 8 vision · 1 3d |
 | **Milestones** | 52 dated events that were not model releases |
 | **Most recent** | DeepSeek-V4.1-Flash — DeepSeek, 2026-09-10 |
-| **Dataset updated** | 2026-09-12 |
+| **Dataset updated** | 2026-09-13 |
 
 <sub>Counted from `data/llm-releases.json` by `scripts/update-readme.mjs`. Nothing here is estimated; `npm run check` fails if this table has drifted from the data.</sub>
 
