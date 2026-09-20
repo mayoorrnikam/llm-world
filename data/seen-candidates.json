@@ -10,6 +10,10 @@
     "claudehaiku4",
     "clock",
     "deepseekv4pro",
+    "doubao",
+    "doubaowork",
+    "edgebench",
+    "feishu",
     "gemini15flash",
     "gemini15flash002",
     "gemini15flash8b",
@@ -80,6 +84,8 @@
     "introducingrobostralnavigate",
     "introducingsearchtoolkit",
     "introducingtribev2:apredictivefoundationmodeltrainedtounderstandhowthehumanbrainprocessescomplexstimuli",
+    "jianying",
+    "jimeng",
     "leanstral:opensourcefoundationfortrustworthyvibecoding",
     "maicode11flash",
     "maicode1flash",
@@ -109,12 +115,14 @@
     "nemotronjun02",
     "nonthinkingmodeonly",
     "productlaunches",
+    "seedstem",
     "textembedding004",
     "thelatestainewsweannouncedinaugust2026",
     "thelatestainewsweannouncedinjuly2026",
     "thinkingtype",
     "unchanged",
     "veo20generate",
-    "veo20generate001"
+    "veo20generate001",
+    "volcengine"
   ]
 }
