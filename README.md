@@ -24,7 +24,7 @@ ignores that is describing 2023.
 | **Fully archived** | 192 records where every source has a snapshot |
 | **Open weights** | 87 (41%) |
 | **Beyond language** | 53 (25%) — 20 image generation · 15 audio · 9 video generation · 8 vision · 1 3d |
-| **Milestones** | 52 dated events that were not model releases |
+| **Milestones** | 53 dated events that were not model releases |
 | **Most recent** | Claude Opus 5.5 — Anthropic, 2026-09-22 |
 | **Dataset updated** | 2026-09-22 |
 
