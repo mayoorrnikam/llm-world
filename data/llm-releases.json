@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-13",
+  "updated": "2026-09-22",
   "schema_version": "1.6",
   "releases": [
     {
@@ -6112,6 +6112,16 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-07-15",
+            "sources": [
+              "cogvideox-3-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -8414,6 +8424,16 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-12-10",
+            "sources": [
+              "glm-asr-2512-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -12683,11 +12703,20 @@
         "parameter_count"
       ],
       "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06-09",
+            "sources": [
+              "claude-fable-5-adocs"
+            ]
+          }
+        ],
         "context_window": [
           {
             "value": 1000000,
             "sources": [
-              "claude-fable-5-s2"
+              "claude-fable-5-s2",
+              "claude-fable-5-adocs"
             ]
           }
         ]
@@ -15053,7 +15082,16 @@
         "confidence": 60,
         "reason": "Cited to the lab's own announcement and official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
-      "evidence": {}
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-05",
+            "sources": [
+              "seedrealtime-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "qwen-3-8-27b",
@@ -15101,6 +15139,16 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "parameter_count": [
+          {
+            "value": 27000000000,
+            "sources": [
+              "qwen-3-8-27b-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -15149,6 +15197,24 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 256000,
+            "sources": [
+              "qwen-3-8-2-4t-a95b-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 2400000000000,
+            "sources": [
+              "qwen-3-8-2-4t-a95b-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -15984,6 +16050,25 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-14",
+            "sources": [
+              "glm-5-3-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "glm-5-3-s1",
+              "glm-5-3-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -16409,6 +16494,92 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "id": "gemini-3-5-transcribe",
+      "model": "Gemini 3.5 Transcribe",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Google made Gemini 3.5 Transcribe (gemini-3.5-transcribe) generally available: a dedicated non-streaming speech-to-text model based on Gemini's audio understanding, with utterance-based language detection across 85+ languages, speaker diarization, word-level timestamps and custom vocabulary biasing up to 1,000 terms.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-26",
+          "sources": [
+            "gemini-3-5-transcribe-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-3-5-transcribe-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "gemini-3-5-transcribe-live",
+      "model": "Gemini 3.5 Transcribe Live",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Released with Gemini 3.5 Transcribe: a low-latency, bidirectional streaming speech-to-text model (gemini-3.5-transcribe-live).",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-26",
+          "sources": [
+            "gemini-3-5-transcribe-live-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-3-5-transcribe-live-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       }
     },
     {
@@ -17061,6 +17232,356 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "id": "gemini-3-8-live",
+      "model": "Gemini 3.8 Live",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning",
+        "function_calling"
+      ],
+      "tags": [],
+      "note": "Google made Gemini 3.8 Live (gemini-3.8-live) generally available: an audio-to-audio model for real-time voice applications through the Live API, the default for low-latency voice agents and dialogue, with interleaved reasoning and asynchronous function calling by default.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-15",
+          "sources": [
+            "gemini-3-8-live-s1",
+            "gemini-3-8-live-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-3-8-live-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-3-8-live-s2",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "gemini-3-8-live-extended-thinking",
+      "model": "Gemini 3.8 Live Extended Thinking",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "Released with Gemini 3.8 Live: a high-reasoning audio-to-audio model (gemini-3.8-live-extended-thinking) that supports background reasoning during live audio interaction.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-15",
+          "sources": [
+            "gemini-3-8-live-extended-thinking-s1",
+            "gemini-3-8-live-extended-thinking-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-3-8-live-extended-thinking-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-3-8-live-extended-thinking-s2",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "grok-4-7",
+      "model": "Grok 4.7",
+      "company": "xAI",
+      "family": "Grok",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning",
+        "agentic",
+        "coding"
+      ],
+      "tags": [],
+      "note": "xAI made Grok 4.7 available on its API as grok-4.7, describing it as its frontier model for coding, agentic tasks and knowledge work. xAI states a 500k context window, text and image inputs with text-only output, and reasoning effort settings of low, medium, high (default) and xhigh.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-21",
+          "sources": [
+            "grok-4-7-s1",
+            "grok-4-7-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 500000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "grok-4-7-s1",
+          "url": "https://docs.x.ai/developers/release-notes",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260918184825/https://docs.x.ai/developers/release-notes",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "id": "grok-4-7-s2",
+          "url": "https://docs.x.ai/developers/grok-4-7",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 500000,
+            "sources": [
+              "grok-4-7-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "claude-opus-5-5",
+      "model": "Claude Opus 5.5",
+      "company": "Anthropic",
+      "family": "Claude",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning",
+        "agentic",
+        "coding"
+      ],
+      "tags": [],
+      "note": "Anthropic launched Claude Opus 5.5 (claude-opus-5-5) for long-running agentic coding and knowledge work, with a 1M token context window by default, 128k max output tokens and always-on adaptive thinking, priced at $4 / $20 per million input / output tokens against $5 / $25 for Claude Opus 5. Available on the Claude API, Amazon Bedrock, Claude Platform on AWS, Google Cloud and Microsoft Foundry.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-22",
+          "sources": [
+            "claude-opus-5-5-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "claude-opus-5-5-s1",
+          "url": "https://platform.claude.com/docs/en/release-notes/api",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "gpt-6-sol",
+      "model": "GPT-6 Sol",
+      "company": "OpenAI",
+      "family": "GPT",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "OpenAI released GPT-6 Sol (gpt-6-sol) alongside GPT-6 Luna, following GPT-6 Astra: reasoning models that accept text and image inputs and generate text through the Responses and Chat Completions APIs. OpenAI positions Sol for everyday work at lower cost than Astra. OpenAI's announcement page carries no date; the date is the one OpenAI's API changelog states.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-22",
+          "sources": [
+            "gpt-6-sol-s1",
+            "gpt-6-sol-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-6-sol-s1",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-6-sol-s2",
+          "url": "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "gpt-6-luna",
+      "model": "GPT-6 Luna",
+      "company": "OpenAI",
+      "family": "GPT",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "Released with GPT-6 Sol: a cheaper GPT-6 reasoning model optimised for fast responses and higher volume, accepting text and image inputs and generating text. OpenAI's announcement page carries no date; the date is the one OpenAI's API changelog states.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-22",
+          "sources": [
+            "gpt-6-luna-s1",
+            "gpt-6-luna-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-6-luna-s1",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gpt-6-luna-s2",
+          "url": "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       }
     }
   ],

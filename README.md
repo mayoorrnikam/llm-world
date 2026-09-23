@@ -18,15 +18,15 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **206** across 22 labs and 34 families, 2022–2026 |
-| **Verified** | 129 (63%) — every value they assert traced to a primary source |
-| **Facts traced to a source** | 158 records carry claim-level evidence |
+| **Releases tracked** | **214** across 22 labs and 34 families, 2022–2026 |
+| **Verified** | 129 (60%) — every value they assert traced to a primary source |
+| **Facts traced to a source** | 165 records carry claim-level evidence |
 | **Fully archived** | 192 records where every source has a snapshot |
-| **Open weights** | 87 (42%) |
-| **Beyond language** | 49 (24%) — 20 image generation · 11 audio · 9 video generation · 8 vision · 1 3d |
+| **Open weights** | 87 (41%) |
+| **Beyond language** | 53 (25%) — 20 image generation · 15 audio · 9 video generation · 8 vision · 1 3d |
 | **Milestones** | 52 dated events that were not model releases |
-| **Most recent** | DeepSeek-V4.1-Flash — DeepSeek, 2026-09-10 |
-| **Dataset updated** | 2026-09-13 |
+| **Most recent** | Claude Opus 5.5 — Anthropic, 2026-09-22 |
+| **Dataset updated** | 2026-09-22 |
 
 <sub>Counted from `data/llm-releases.json` by `scripts/update-readme.mjs`. Nothing here is estimated; `npm run check` fails if this table has drifted from the data.</sub>
 

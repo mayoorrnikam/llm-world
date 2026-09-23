@@ -3,7 +3,7 @@ title: Anthropic held the context window at 200K for 20 months
 question: How has Claude's context window actually changed?
 date: 2026-08-17
 history: Anthropic | context_window
-unverified: allow — Claude Mythos 5.1's 1M context window is stated by Anthropic's own announcement and API release notes, both cited on the record, but neither page has an archived snapshot yet, so attribute-facts cannot tie the figure to one. The daily archive run captures them; remove this line once it has.
+unverified: allow — Claude Opus 5.5's 1M context window, released 2026-09-22, is stated in Anthropic's API release notes, which the record cites, but no archived snapshot yet includes that entry, so attribute-facts cannot tie the figure to one. The daily archive run captures it; remove this line once it has.
 ---
 
 Every lab talks about context windows as though they climb steadily. Anthropic's
