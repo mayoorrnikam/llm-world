@@ -1772,6 +1772,40 @@
       "evidence_quote": "Introducing Fugu Max and Fugu Ultra v2: Orchestrating the Pareto Frontier September 11, 2026",
       "why_it_matters": "Recorded as a milestone rather than a model because it orchestrates models rather than being one. Sakana calls Max and Ultra v2 models available through its API, but the post describes them routing work across a pool of other models — so a model record would carry a null parameter count, a null context window and a null licence, which is the shape that put ChatGPT and Bard here rather than in the release dataset.",
       "significance": null
+    },
+    {
+      "id": "typesafe-jev",
+      "title": "TypeSafe AI introduces System One models with Jev",
+      "date": "2026-09-15",
+      "type": "architecture",
+      "company": "TypeSafe AI",
+      "note": "TypeSafe AI released Jev, which it calls its flagship model and the first \"System One\" model. Instead of generating text one token at a time, Jev takes a state and a set of typed questions and returns every answer in parallel as calibrated probabilities with confidence scores, for software to act on directly. It is served through an API and priced per input token; no weights were released.",
+      "sources": [
+        {
+          "id": "typesafe-jev-s1",
+          "url": "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-09-23"
+        },
+        {
+          "id": "typesafe-jev-s2",
+          "url": "https://docs.typesafe.ai/introduction",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-09-23"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 80,
+        "reason": "TypeSafe AI's own announcement, which prints \"Sep 15, 2026\" above the post."
+      },
+      "evidence_quote": "Sep 15, 2026 Introducing System One Models & Jev",
+      "why_it_matters": "A commercial model that does not generate text. Language models answer by producing tokens, and every structured output built on them is text parsed back into data; Jev answers typed questions directly with probabilities, in one parallel pass. Recorded as a milestone rather than a model release because this dataset's model types describe what a model produces, and none of them describes a decision. Whether the approach lasts is not yet known, so it is unranked.",
+      "significance": null
     }
   ]
 }
