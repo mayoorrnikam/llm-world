@@ -6109,8 +6109,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       },
       "evidence": {
@@ -8421,8 +8421,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       },
       "evidence": {
@@ -8593,22 +8593,42 @@
           "url": "https://mimo.mi.com/docs/en-US/updates/model",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260616040133/https://mimo.mi.com/docs/en-US/updates/model",
+          "retrieved": "2026-06-16"
         },
         {
           "id": "mimo-v2-flash-s2",
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2-Flash",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20251217022202/https://huggingface.co/XiaomiMiMo/MiMo-V2-Flash",
+          "retrieved": "2025-12-17"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2025-12-16",
+            "sources": [
+              "mimo-v2-flash-s1",
+              "mimo-v2-flash-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 262144,
+            "sources": [
+              "mimo-v2-flash-s1",
+              "mimo-v2-flash-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -9049,22 +9069,32 @@
           "url": "https://x.ai/news/grok-imagine-api",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260129105331/https://x.ai/news/grok-imagine-api",
+          "retrieved": "2026-01-29"
         },
         {
           "id": "grok-imagine-video-s2",
           "url": "https://docs.x.ai/developers/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260208020350/https://docs.x.ai/developers/release-notes",
+          "retrieved": "2026-02-08"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-01-28",
+            "sources": [
+              "grok-imagine-video-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -9925,23 +9955,24 @@
           "url": "https://docs.x.ai/developers/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260217134702/https://docs.x.ai/developers/release-notes",
+          "retrieved": "2026-02-17"
         },
         {
           "id": "grok-4-20-s2",
           "url": "https://docs.x.ai/developers/models",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260304091958/https://docs.x.ai/developers/models",
+          "retrieved": "2026-03-04"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "grok-4-20-multi-agent",
@@ -9985,23 +10016,24 @@
           "url": "https://docs.x.ai/developers/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260217134702/https://docs.x.ai/developers/release-notes",
+          "retrieved": "2026-02-17"
         },
         {
           "id": "grok-4-20-multi-agent-s2",
           "url": "https://docs.x.ai/developers/models",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260304091958/https://docs.x.ai/developers/models",
+          "retrieved": "2026-03-04"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "gpt-5-4",
@@ -11194,8 +11226,8 @@
           "url": "https://x.ai/news/grok-stt-and-tts-apis",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260418002920/https://x.ai/news/grok-stt-and-tts-apis",
+          "retrieved": "2026-04-18"
         },
         {
           "id": "grok-stt-s2",
@@ -11207,9 +11239,19 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-04-17",
+            "sources": [
+              "grok-stt-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -11253,8 +11295,8 @@
           "url": "https://x.ai/news/grok-stt-and-tts-apis",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260418002920/https://x.ai/news/grok-stt-and-tts-apis",
+          "retrieved": "2026-04-18"
         },
         {
           "id": "grok-tts-s2",
@@ -11266,9 +11308,19 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-04-17",
+            "sources": [
+              "grok-tts-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -11575,14 +11627,24 @@
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.5",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260427173640/https://huggingface.co/XiaomiMiMo/MiMo-V2.5",
+          "retrieved": "2026-04-27"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "mimo-v2-5-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -11634,14 +11696,32 @@
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260427174214/https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro",
+          "retrieved": "2026-04-27"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "mimo-v2-5-pro-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 1000000000000,
+            "sources": [
+              "mimo-v2-5-pro-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -11678,22 +11758,32 @@
           "url": "https://x.ai/news/grok-voice-think-fast-1",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260423223349/https://x.ai/news/grok-voice-think-fast-1",
+          "retrieved": "2026-04-23"
         },
         {
           "id": "grok-voice-think-fast-1-0-s2",
           "url": "https://docs.x.ai/developers/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260501083732/https://docs.x.ai/developers/release-notes",
+          "retrieved": "2026-05-01"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-04-23",
+            "sources": [
+              "grok-voice-think-fast-1-0-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -11864,14 +11954,32 @@
           "url": "https://huggingface.co/tencent/Hy3-preview",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260424043821/https://huggingface.co/tencent/Hy3-preview",
+          "retrieved": "2026-04-24"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 262144,
+            "sources": [
+              "hy3-preview-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 295000000000,
+            "sources": [
+              "hy3-preview-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -12255,22 +12363,32 @@
           "url": "https://github.com/Tencent-Hunyuan/Hy-MT2",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260521084901/https://github.com/Tencent-Hunyuan/Hy-MT2",
+          "retrieved": "2026-05-21"
         },
         {
           "id": "hy-mt2-1-8b-s2",
           "url": "https://huggingface.co/tencent/Hy-MT2-1.8B",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260521084916/https://huggingface.co/tencent/Hy-MT2-1.8B",
+          "retrieved": "2026-05-21"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-05-21",
+            "sources": [
+              "hy-mt2-1-8b-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -12314,22 +12432,32 @@
           "url": "https://github.com/Tencent-Hunyuan/Hy-MT2",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260521084901/https://github.com/Tencent-Hunyuan/Hy-MT2",
+          "retrieved": "2026-05-21"
         },
         {
           "id": "hy-mt2-7b-s2",
           "url": "https://huggingface.co/tencent/Hy-MT2-7B",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260521205706/https://huggingface.co/tencent/Hy-MT2-7B",
+          "retrieved": "2026-05-21"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-05-21",
+            "sources": [
+              "hy-mt2-7b-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -12373,22 +12501,32 @@
           "url": "https://github.com/Tencent-Hunyuan/Hy-MT2",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260521084901/https://github.com/Tencent-Hunyuan/Hy-MT2",
+          "retrieved": "2026-05-21"
         },
         {
           "id": "hy-mt2-30b-a3b-s2",
           "url": "https://huggingface.co/tencent/Hy-MT2-30B-A3B",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260521205628/https://huggingface.co/tencent/Hy-MT2-30B-A3B",
+          "retrieved": "2026-05-21"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-05-21",
+            "sources": [
+              "hy-mt2-30b-a3b-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -12681,22 +12819,32 @@
           "url": "https://x.ai/news/grok-build-0-1",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260530201923/https://x.ai/news/grok-build-0-1",
+          "retrieved": "2026-05-30"
         },
         {
           "id": "grok-build-0-1-s2",
           "url": "https://docs.x.ai/developers/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260530201148/https://docs.x.ai/developers/release-notes",
+          "retrieved": "2026-05-30"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-05-29",
+            "sources": [
+              "grok-build-0-1-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -13422,14 +13570,24 @@
           "url": "https://x.ai/news/grok-imagine-1-5",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260606151713/https://x.ai/news/grok-imagine-1-5",
+          "retrieved": "2026-06-06"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06-03",
+            "sources": [
+              "grok-imagine-video-1-5-preview-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -13606,8 +13764,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: multilingual: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.” | vision: “All current Claude models support text and image input, text output, multilingual capabilities, and vision.”."
       },
       "undisclosed": [
@@ -13852,30 +14010,40 @@
           "url": "https://x.ai/news/grok-imagine-video-1-5",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260618200828/https://x.ai/news/grok-imagine-video-1-5",
+          "retrieved": "2026-06-18"
         },
         {
           "id": "grok-imagine-video-1-5-s2",
           "url": "https://docs.x.ai/developers/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260616000754/https://docs.x.ai/developers/release-notes",
+          "retrieved": "2026-06-16"
         },
         {
           "id": "grok-imagine-video-1-5-s3",
           "url": "https://x.ai/news/grok-imagine-video-1-5-references",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-09-23"
+          "archived_url": "https://web.archive.org/web/20260801013202/https://x.ai/news/grok-imagine-video-1-5-references",
+          "retrieved": "2026-08-01"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-06-16",
+            "sources": [
+              "grok-imagine-video-1-5-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -14260,24 +14428,24 @@
           "url": "https://www.tencent.com/en-us/articles/2202386.html",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260706191804/https://www.tencent.com/en-us/articles/2202386.html",
+          "retrieved": "2026-07-06"
         },
         {
           "id": "hy3-s2",
           "url": "https://www.tencent.com/tencent-hy3-now-available-globally-extending-practical-ai-across-products-workflows-and-cloud-services/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260828145810/https://www.tencent.com/tencent-hy3-now-available-globally-extending-practical-ai-across-products-workflows-and-cloud-services/",
+          "retrieved": "2026-08-28"
         },
         {
           "id": "hy3-s3",
           "url": "https://huggingface.co/tencent/Hy3",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260706083828/https://huggingface.co/tencent/Hy3",
+          "retrieved": "2026-07-06"
         }
       ],
       "provenance": {
@@ -15599,8 +15767,8 @@
           "url": "https://x.ai/news/grok-voice-think-fast-2",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260730015659/https://x.ai/news/grok-voice-think-fast-2",
+          "retrieved": "2026-07-30"
         },
         {
           "id": "grok-voice-think-fast-2-0-s2",
@@ -15612,9 +15780,19 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-07-29",
+            "sources": [
+              "grok-voice-think-fast-2-0-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -16184,8 +16362,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to the lab's own announcement and official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
@@ -16291,8 +16469,8 @@
           "url": "https://x.ai/news/grok-imagine-image-2",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260808035748/https://x.ai/news/grok-imagine-image-2",
+          "retrieved": "2026-08-08"
         },
         {
           "id": "grok-imagine-image-2-0-s2",
@@ -16304,9 +16482,19 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-07",
+            "sources": [
+              "grok-imagine-image-2-0-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -17205,8 +17393,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       },
       "evidence": {
@@ -17687,15 +17875,16 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260826034017/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2026-08-26"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "gemini-3-5-transcribe-live",
@@ -17730,15 +17919,16 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260826034017/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2026-08-26"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "hy4-preview",
@@ -18365,22 +18555,32 @@
           "url": "https://github.com/Tencent-Hunyuan/AuK",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260913062749/https://github.com/Tencent-Hunyuan/AuK",
+          "retrieved": "2026-09-13"
         },
         {
           "id": "auk-s2",
           "url": "https://huggingface.co/tencent/AuK",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260909040001/https://huggingface.co/tencent/AuK",
+          "retrieved": "2026-09-09"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-09-09",
+            "sources": [
+              "auk-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -18417,22 +18617,32 @@
           "url": "https://github.com/Tencent-Hunyuan/AuK",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260913062749/https://github.com/Tencent-Hunyuan/AuK",
+          "retrieved": "2026-09-13"
         },
         {
           "id": "auk-flash-s2",
           "url": "https://huggingface.co/tencent/AuK-Flash",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260909025955/https://huggingface.co/tencent/AuK-Flash",
+          "retrieved": "2026-09-09"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-09-09",
+            "sources": [
+              "auk-flash-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -18700,16 +18910,16 @@
           "url": "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260915192610/https://typesafe.ai/blog/introducing-system-one-models-and-jev",
+          "retrieved": "2026-09-15"
         },
         {
           "id": "jev-s2",
           "url": "https://docs.typesafe.ai/introduction",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260915201800/https://docs.typesafe.ai/introduction",
+          "retrieved": "2026-09-15"
         },
         {
           "id": "jev-s3",
@@ -18724,7 +18934,8 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "grok-voice-transcribe-2-0",
@@ -18760,16 +18971,16 @@
           "url": "https://x.ai/news/grok-voice-transcribe-2",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260918175927/https://x.ai/news/grok-voice-transcribe-2",
+          "retrieved": "2026-09-18"
         },
         {
           "id": "grok-voice-transcribe-2-0-s2",
           "url": "https://docs.x.ai/developers/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260918184825/https://docs.x.ai/developers/release-notes",
+          "retrieved": "2026-09-18"
         }
       ],
       "provenance": {
@@ -18812,23 +19023,24 @@
           "url": "https://qwen.ai/blog?id=qwen-image-2.1",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260920131507/https://qwen.ai/blog?id=qwen-image-2.1",
+          "retrieved": "2026-09-20"
         },
         {
           "id": "qwen-image-2-1-s2",
           "url": "https://huggingface.co/Qwen/Qwen-Image-2.1",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260920130007/https://huggingface.co/Qwen/Qwen-Image-2.1",
+          "retrieved": "2026-09-20"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "grok-4-7",
@@ -18890,8 +19102,8 @@
           "url": "https://x.ai/news/grok-4-7",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": "2026-09-23"
+          "archived_url": "https://web.archive.org/web/20260921182849/https://x.ai/news/grok-4-7",
+          "retrieved": "2026-09-21"
         }
       ],
       "provenance": {
@@ -19003,8 +19215,8 @@
           "url": "https://developers.openai.com/api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260922191231/https://developers.openai.com/api/docs/changelog",
+          "retrieved": "2026-09-22"
         },
         {
           "id": "gpt-6-sol-s2",
@@ -19019,7 +19231,8 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "gpt-6-luna",
@@ -19062,8 +19275,8 @@
           "url": "https://developers.openai.com/api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260922191231/https://developers.openai.com/api/docs/changelog",
+          "retrieved": "2026-09-22"
         },
         {
           "id": "gpt-6-luna-s2",
@@ -19078,7 +19291,8 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "mimo-v2-6-pro",
@@ -19121,22 +19335,41 @@
           "url": "https://mimo.mi.com/docs/en-US/updates/model",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260922031526/https://mimo.mi.com/docs/en-US/updates/model",
+          "retrieved": "2026-09-22"
         },
         {
           "id": "mimo-v2-6-pro-s2",
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260921231812/https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+          "retrieved": "2026-09-21"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-09-22",
+            "sources": [
+              "mimo-v2-6-pro-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "mimo-v2-6-pro-s1",
+              "mimo-v2-6-pro-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -19180,22 +19413,41 @@
           "url": "https://mimo.mi.com/docs/en-US/updates/model",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260922031526/https://mimo.mi.com/docs/en-US/updates/model",
+          "retrieved": "2026-09-22"
         },
         {
           "id": "mimo-v2-6-flash-s2",
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260921234213/https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+          "retrieved": "2026-09-21"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-09-22",
+            "sources": [
+              "mimo-v2-6-flash-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "mimo-v2-6-flash-s1",
+              "mimo-v2-6-flash-s2"
+            ]
+          }
+        ]
       }
     }
   ],
