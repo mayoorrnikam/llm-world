@@ -1,15 +1,18 @@
 #!/bin/sh
-# Validates the dataset and regenerates pages before anything leaves the machine.
+# Runs the project's one canonical gate before anything leaves the machine.
 # Enable once with:  npm run setup
 #
 # A failure here blocks the push, which is the point: bad data should never
 # reach the published site. Bypass in an emergency with `git push --no-verify`.
+#
+# `npm run check`, not a hand-written list of its steps. This hook used to name
+# validate, build and smoke itself, and `check` grew a fourth step — the README
+# statistics — that the hook never learned about. So a stale README passed here
+# and failed in CI: 854aa70 added a milestone, pushed cleanly, and broke the
+# deploy. archive.yml learned the same lesson the same way. Calling the one gate
+# is the only version of this that cannot drift out of step with it again.
 
 set -e
-echo "pre-push: validating dataset…"
-node scripts/validate-data.mjs
-echo "pre-push: building pages…"
-node scripts/build.mjs
-echo "pre-push: smoke testing…"
-node scripts/smoke-test.mjs
+echo "pre-push: npm run check…"
+npm run check
 echo "pre-push: ok"
