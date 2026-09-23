@@ -381,12 +381,13 @@ const predecessorOf = (r) => releases
   .filter((x) => x.company === r.company && x.id !== r.id && daysBetween(x, r) > 0).at(-1);
 
 /**
- * "What changed" against the previous release in the same FAMILY.
+ * "What changed" against the previous release in the same SERIES.
  *
- * The family predecessor, not the lab's previous release: GPT-4o follows GPT-4,
- * and putting it next to whatever OpenAI happened to ship most recently
- * compares two unrelated products. Families already order by date on the family
- * page, so the same neighbour is used here and the two pages cannot disagree.
+ * The series predecessor from lineageOf(), not the lab's previous release and
+ * not the family's. This used to take the previous record in the family by
+ * date, which compared Claude Opus 5.5 with Claude Mythos 5.1 — a different
+ * product line — and GPT-5.6 Luna with Sol, released the same day. The family
+ * page asks lineageOf() too, so the two pages cannot disagree.
  *
  * Rendered statically. This is a fact about two records that never changes
  * between builds, so it needs no JavaScript — the compare page computes the
@@ -404,7 +405,7 @@ function changedSection(prev, next) {
 
   return `
 <h2>What changed from ${esc(prev.model)}</h2>
-<p class="chart-note">Compared with the previous release in this family. A field
+<p class="chart-note">Compared with the previous release in this series. A field
 appears only when both records state a value — where one does not, it is listed
 as uncomparable rather than dropped, because a gap in our research is not a
 finding about the model.</p>
@@ -907,7 +908,7 @@ ${sourceList(r)}
   x.id === r.id ? `<strong>${esc(x.model)}</strong>` : `<a href="../${esc(x.id)}/">${esc(x.model)}</a>`
 } <span>${fullDate(x)}</span></li>`).join('')}</ol>
 
-${changedSection(fam[idx - 1], r)}
+${changedSection(lineageOf(r, releases).predecessor, r)}
 
 <p class="doc-share">
   <button type="button" class="copy-btn" data-copy="url" hidden>Copy link</button>
@@ -1907,16 +1908,24 @@ function lineageGraph(gens) {
     // releases still separate.
     const lead = prev ? Math.min(120, Math.max(20, Math.round(Math.sqrt(Math.max(days, 0)) * 5))) : 0;
 
-    const edge = prev ? diffRecords(prev.models[prev.models.length - 1], tier.models[0]) : null;
-    const chips = (edge?.changes ?? []).map((c) => c.gained
-      ? `<span class="lin-chip lin-new">first evidenced: ${c.gained.map(tagLabel).map(esc).join(', ')}</span>`
-      : `<span class="lin-chip lin-${esc(c.direction)}">${esc(c.label)} ${esc(c.from)} → ${esc(c.to)}</span>`).join('');
+    // Each card is compared with ITS series predecessor, from lineageOf(). The
+    // rail used to diff a tier against whatever the family shipped just before
+    // it, so a Haiku was "compared" with the Opus released the month earlier.
+    const chipsFor = (r) => {
+      const pred = lineageOf(r, gens).predecessor;
+      if (!pred) return '';
+      const chips = diffRecords(pred, r).changes.map((c) => c.gained
+        ? `<span class="lin-chip lin-new">first evidenced: ${c.gained.map(tagLabel).map(esc).join(', ')}</span>`
+        : `<span class="lin-chip lin-${esc(c.direction)}">${esc(c.label)} ${esc(c.from)} → ${esc(c.to)}</span>`).join('');
+      return chips ? `<p class="lin-changes"><span class="lin-from">from ${esc(pred.model)}</span> ${chips}</p>` : '';
+    };
 
     const cards = tier.models.map((r) => {
       const firsts = (r.capabilities ?? []).filter((c) => firstSeen.get(c) === r.id);
       return `<div class="lin-card">
 <a class="lin-name" href="../../models/${esc(r.id)}/">${esc(r.model)}</a>${modalityMarks(r)}
 ${firsts.length ? `<p class="lin-firsts">${firsts.map((c) => `<span class="lin-chip lin-new">${esc(tagLabel(c))}</span>`).join('')}</p>` : ''}
+${chipsFor(r)}
 </div>`;
     }).join('');
 
@@ -1928,7 +1937,6 @@ ${firsts.length ? `<p class="lin-firsts">${firsts.map((c) => `<span class="lin-c
 ${tier.models.length > 1
   ? `<p class="lin-sibs">${tier.models.length} released the same day</p><div class="lin-cards">${cards}</div>`
   : cards}
-${chips ? `<p class="lin-changes">${chips}</p>` : ''}
 </div></li>`;
   }).join('');
 
@@ -1940,10 +1948,15 @@ ${chips ? `<p class="lin-changes">${chips}</p>` : ''}
 }
 
 function whatChangedSection(gens) {
-  const pairs = gens.slice(1).map((next, i) => {
-    const d = diffRecords(gens[i], next);
-    return { prev: gens[i], next, ...d };
-  });
+  // Each release against its SERIES predecessor (lineageOf), not the record
+  // before it in the family. Pairing consecutive records compared Haiku with
+  // Opus and a text model with the image model shipped before it.
+  const pairs = gens
+    .map((next) => ({ prev: lineageOf(next, gens).predecessor, next }))
+    .filter((p) => p.prev)
+    .map((p) => ({ ...p, ...diffRecords(p.prev, p.next) }));
+  // A family whose every series has one member has no generations to compare.
+  if (!pairs.length) return '';
 
   // A caveat that applies to every pair is a fact about the family, not about
   // any one step. Repeating it fifteen times buries the changes that did happen.

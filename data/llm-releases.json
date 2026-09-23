@@ -1812,7 +1812,7 @@
       "id": "qwen-vl-max",
       "model": "Qwen-VL-Max",
       "company": "Alibaba Qwen",
-      "family": "Qwen",
+      "family": "Qwen-VL",
       "classification": {
         "primary_type": "vision",
         "subtype": null
@@ -4101,7 +4101,7 @@
       "id": "nova-canvas",
       "model": "Nova Canvas",
       "company": "Amazon",
-      "family": "Nova",
+      "family": "Nova Canvas",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -4173,7 +4173,7 @@
       "id": "nova-reel",
       "model": "Nova Reel",
       "company": "Amazon",
-      "family": "Nova",
+      "family": "Nova Reel",
       "classification": {
         "primary_type": "video_generation",
         "subtype": null
@@ -6067,7 +6067,7 @@
       "id": "cogvideox-3",
       "model": "CogVideoX-3",
       "company": "Zhipu AI",
-      "family": "GLM",
+      "family": "CogVideoX",
       "classification": {
         "primary_type": "video_generation",
         "subtype": null
@@ -6301,7 +6301,7 @@
       "id": "qwen-image",
       "model": "Qwen-Image",
       "company": "Alibaba Qwen",
-      "family": "Qwen",
+      "family": "Qwen-Image",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -6739,7 +6739,7 @@
       "id": "glm-4-5v",
       "model": "GLM-4.5V",
       "company": "Zhipu AI",
-      "family": "GLM",
+      "family": "GLM-V",
       "classification": {
         "primary_type": "vision",
         "subtype": null
@@ -6819,7 +6819,7 @@
       "id": "imagen-4",
       "model": "Imagen 4",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Imagen",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -8299,7 +8299,7 @@
       "id": "glm-4-6v",
       "model": "GLM-4.6V",
       "company": "Zhipu AI",
-      "family": "GLM",
+      "family": "GLM-V",
       "classification": {
         "primary_type": "vision",
         "subtype": null
@@ -8379,7 +8379,7 @@
       "id": "glm-asr-2512",
       "model": "GLM-ASR-2512",
       "company": "Zhipu AI",
-      "family": "GLM",
+      "family": "GLM-ASR",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -8770,7 +8770,7 @@
       "id": "glm-image",
       "model": "GLM-Image",
       "company": "Zhipu AI",
-      "family": "GLM",
+      "family": "GLM-Image",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -8913,7 +8913,7 @@
       "id": "minimax-speech-2-8",
       "model": "MiniMax Speech 2.8",
       "company": "MiniMax",
-      "family": "MiniMax",
+      "family": "MiniMax Speech",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -9134,7 +9134,7 @@
       "id": "glm-ocr",
       "model": "GLM-OCR",
       "company": "Zhipu AI",
-      "family": "GLM",
+      "family": "GLM-OCR",
       "classification": {
         "primary_type": "vision",
         "subtype": null
@@ -9476,7 +9476,7 @@
       "id": "seedance-2-0",
       "model": "Seedance 2.0",
       "company": "ByteDance",
-      "family": "Seed",
+      "family": "Seedance",
       "classification": {
         "primary_type": "video_generation",
         "subtype": null
@@ -9519,7 +9519,7 @@
       "id": "seedream-5-0-lite",
       "model": "Seedream 5.0 Lite",
       "company": "ByteDance",
-      "family": "Seed",
+      "family": "Seedream",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -9808,7 +9808,7 @@
       "id": "nano-banana-2",
       "model": "Nano Banana 2",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Nano Banana",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -10382,7 +10382,7 @@
       "id": "lyria-3",
       "model": "Lyria 3",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Lyria",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -10434,7 +10434,7 @@
       "id": "gemini-3-1-flash-live",
       "model": "Gemini 3.1 Flash Live",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Gemini Live",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -10498,7 +10498,7 @@
       "id": "veo-3",
       "model": "Veo 3",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Veo",
       "classification": {
         "primary_type": "video_generation",
         "subtype": null
@@ -10550,7 +10550,7 @@
       "id": "glm-5v-turbo",
       "model": "GLM-5V-Turbo",
       "company": "Zhipu AI",
-      "family": "GLM",
+      "family": "GLM-V",
       "classification": {
         "primary_type": "vision",
         "subtype": null
@@ -10919,7 +10919,7 @@
       "id": "mai-image-2-efficient",
       "model": "MAI-Image-2-Efficient",
       "company": "Microsoft",
-      "family": "MAI",
+      "family": "MAI-Image",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -11487,7 +11487,7 @@
       "id": "seed3d-2-0",
       "model": "Seed3D 2.0",
       "company": "ByteDance",
-      "family": "Seed",
+      "family": "Seed3D",
       "classification": {
         "primary_type": "3d",
         "subtype": null
@@ -12580,7 +12580,7 @@
       "id": "nano-banana-pro",
       "model": "Nano Banana Pro",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Nano Banana",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -13027,7 +13027,7 @@
       "id": "mai-image-2-5",
       "model": "MAI-Image-2.5",
       "company": "Microsoft",
-      "family": "MAI",
+      "family": "MAI-Image",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -13080,7 +13080,7 @@
       "id": "mai-voice-2",
       "model": "MAI-Voice-2",
       "company": "Microsoft",
-      "family": "MAI",
+      "family": "MAI-Voice",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -13133,7 +13133,7 @@
       "id": "mai-transcribe-1-5",
       "model": "MAI-Transcribe-1.5",
       "company": "Microsoft",
-      "family": "MAI",
+      "family": "MAI-Transcribe",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -14098,7 +14098,7 @@
       "id": "gemini-omni-flash",
       "model": "Gemini Omni Flash",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Gemini Omni",
       "classification": {
         "primary_type": "video_generation",
         "subtype": null
@@ -14150,7 +14150,7 @@
       "id": "nano-banana-2-lite",
       "model": "Nano Banana 2 Lite",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Nano Banana",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -14406,7 +14406,7 @@
       "id": "seedream-5-0-pro",
       "model": "Seedream 5.0 Pro",
       "company": "ByteDance",
-      "family": "Seed",
+      "family": "Seedream",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -14847,7 +14847,7 @@
       "id": "qwen-image-3-0",
       "model": "Qwen-Image-3.0",
       "company": "Alibaba Qwen",
-      "family": "Qwen",
+      "family": "Qwen-Image",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -14898,7 +14898,7 @@
       "id": "seed-audio-1-0",
       "model": "Seed Audio 1.0",
       "company": "ByteDance",
-      "family": "Seed",
+      "family": "Seed Audio",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -15175,7 +15175,7 @@
       "id": "mai-image-2-5-pro",
       "model": "MAI-Image-2.5-Pro",
       "company": "Microsoft",
-      "family": "MAI",
+      "family": "MAI-Image",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -15228,7 +15228,7 @@
       "id": "mai-voice-2-flash",
       "model": "MAI-Voice-2-Flash",
       "company": "Microsoft",
-      "family": "MAI",
+      "family": "MAI-Voice",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -15504,7 +15504,7 @@
       "id": "minimax-h3",
       "model": "MiniMax H3",
       "company": "MiniMax",
-      "family": "MiniMax",
+      "family": "MiniMax H",
       "classification": {
         "primary_type": "video_generation",
         "subtype": null
@@ -15621,7 +15621,7 @@
       "id": "gemini-robotics-er-2",
       "model": "Gemini Robotics-ER 2",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Gemini Robotics",
       "classification": {
         "primary_type": "vision",
         "subtype": null
@@ -15673,7 +15673,7 @@
       "id": "seedance-2-5",
       "model": "Seedance 2.5",
       "company": "ByteDance",
-      "family": "Seed",
+      "family": "Seedance",
       "classification": {
         "primary_type": "video_generation",
         "subtype": null
@@ -15852,7 +15852,7 @@
       "id": "flux-3-video",
       "model": "FLUX 3 Video",
       "company": "Black Forest Labs",
-      "family": "FLUX",
+      "family": "FLUX Video",
       "classification": {
         "primary_type": "video_generation",
         "subtype": null
@@ -16141,7 +16141,7 @@
       "id": "seedrealtime",
       "model": "SeedRealtime",
       "company": "ByteDance",
-      "family": "Seed",
+      "family": "SeedRealtime",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -16261,7 +16261,7 @@
       "id": "grok-imagine-image-2-0",
       "model": "Grok Imagine Image 2.0",
       "company": "xAI",
-      "family": "Grok Imagine",
+      "family": "Grok Imagine Image",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -16579,7 +16579,7 @@
       "id": "mai-image-2-6",
       "model": "MAI-Image-2.6",
       "company": "Microsoft",
-      "family": "MAI",
+      "family": "MAI-Image",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null
@@ -17523,7 +17523,7 @@
       "id": "deepseek-v4-flash-vision-exp",
       "model": "DeepSeek-V4-Flash-Vision-Exp",
       "company": "DeepSeek",
-      "family": "DeepSeek",
+      "family": "DeepSeek Vision",
       "classification": {
         "primary_type": "vision",
         "subtype": null
@@ -17658,7 +17658,7 @@
       "id": "gemini-3-5-transcribe",
       "model": "Gemini 3.5 Transcribe",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Gemini Transcribe",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -17701,7 +17701,7 @@
       "id": "gemini-3-5-transcribe-live",
       "model": "Gemini 3.5 Transcribe Live",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Gemini Transcribe",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -18507,7 +18507,7 @@
       "id": "gpt-live-1",
       "model": "GPT-Live-1",
       "company": "OpenAI",
-      "family": "GPT",
+      "family": "GPT-Live",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -18560,7 +18560,7 @@
       "id": "gemini-3-8-live",
       "model": "Gemini 3.8 Live",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Gemini Live",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -18615,7 +18615,7 @@
       "id": "gemini-3-8-live-extended-thinking",
       "model": "Gemini 3.8 Live Extended Thinking",
       "company": "Google DeepMind",
-      "family": "Gemini",
+      "family": "Gemini Live",
       "classification": {
         "primary_type": "audio",
         "subtype": null
@@ -18782,7 +18782,7 @@
       "id": "qwen-image-2-1",
       "model": "Qwen-Image-2.1",
       "company": "Alibaba Qwen",
-      "family": "Qwen",
+      "family": "Qwen-Image",
       "classification": {
         "primary_type": "image_generation",
         "subtype": null

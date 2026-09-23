@@ -2050,6 +2050,13 @@ code, kbd {
   flex-wrap: wrap;
   gap: 4px 6px;
 }
+/* Names the series predecessor a card's changes are measured from, so a chip
+   never reads as a change from whatever the family shipped just before. */
+.lin-from {
+  color: var(--muted);
+  font-size: 0.85em;
+  align-self: center;
+}
 
 .lin-chip {
   font-size: 12px;

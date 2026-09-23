@@ -490,6 +490,34 @@ for (const [prev, owner] of retiredIds) {
   if (seenIds.has(prev)) err(owner, `previous_id "${prev}" collides with a live record`);
 }
 
+// One kind of model per family.
+//
+// Families used to follow brand alone, so "Gemini" held language models beside
+// Nano Banana, Veo, Lyria and the Live voice models, and GLM held its vision,
+// OCR, speech, image and video lines. Lineage is derived from family and date,
+// so every family page and every "What changed" section compared an image model
+// with the text model released before it — a diff of two things that share a
+// logo and nothing else.
+//
+// A new family takes the name of the lab's own product line where one exists:
+// Nano Banana, Veo, Imagen, GLM-V, Seedream, Qwen-Image. Tiers within one kind
+// — Opus beside Sonnet — are separated by seriesOf() in lib/record.mjs rather
+// than by splitting the family, because the lab presents those as one family.
+{
+  const typesByFamily = new Map();
+  for (const r of data.releases) {
+    const t = r.classification?.primary_type ?? 'language';
+    if (!typesByFamily.has(r.family)) typesByFamily.set(r.family, new Map());
+    const m = typesByFamily.get(r.family);
+    m.set(t, [...(m.get(t) ?? []), r.model]);
+  }
+  for (const [family, types] of typesByFamily) {
+    if (types.size < 2) continue;
+    const detail = [...types].map(([t, ms]) => `${t}: ${ms.slice(0, 3).join(', ')}${ms.length > 3 ? '…' : ''}`).join('; ');
+    err(`family ${family}`, `mixes model types (${detail}) — give each kind its own family, named for the lab's product line`);
+  }
+}
+
 // Same rule for declared redirects, which are the other way a URL can be
 // claimed twice. `models/glm-4` pointed at the GLM family while a live glm-4
 // record existed, and because the redirect is written after the model pages it

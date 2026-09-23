@@ -286,6 +286,14 @@ not to be used as a precedent for adding more products.
 A **family** is a lineage the lab itself presents as continuous — `Claude`,
 `Llama`, `Qwen`. Filled on every record.
 
+**One kind of model per family.** Every record in a family shares one
+`primary_type`; the validator rejects a family that mixes them. Families used to
+follow brand alone, so `Gemini` held Nano Banana, Veo, Lyria and the Live voice
+models beside the language models, and every lineage comparison paired an image
+model with the text model released before it. A lab's image, video, speech or
+vision line gets its own family, named for the lab's own product line where one
+exists: `Nano Banana`, `Veo`, `Imagen`, `GLM-V`, `Seedream`, `Qwen-Image`.
+
 Rules:
 
 - **Never infer lineage from names alone** (charter §23). `GPT-OSS` is not the
@@ -293,7 +301,22 @@ Rules:
 - A family is not a release cadence. `Claude 3 Opus` and `Claude 3.5 Sonnet` are
   one family, several generations.
 - Ordering within a family is derived from dates, not from version-number
-  parsing. Version numbers are not reliably ordered across labs.
+  parsing. Version numbers are not reliably ordered across labs. They are used
+  only as a VETO: a release numbered above another cannot be its predecessor.
+  Qwen-Image-2.1 shipped after Qwen-Image-3.0 because they are two lines (open
+  weights and API) sharing a name, and without the veto 2.1 read as 3.0's
+  successor. The veto compares decimals, because xAI numbered Grok 4.20 before
+  Grok 4.5.
+- **Lineage runs within a series, not across the whole family.** A family holds
+  several lines — Claude holds Opus, Sonnet, Haiku, Fable and Mythos — and
+  `seriesOf()` in `lib/record.mjs` separates them by stripping versions, sizes
+  and "preview" from the name: "Claude 3 Opus" and "Claude Opus 4.5" are both
+  the Opus series. This is the one place the name is read, and only to divide a
+  family the dataset already records, never to join two: GPT-OSS stays out of
+  GPT. Within a series, a release is compared with the nearest in size, so a
+  9B follows a 9B and Qwen's 27B is never "upgraded" to its 2.4T; beyond an 8x
+  gap there is no neighbour at all. The first release of a series has no
+  predecessor, and that is shown as none rather than borrowed from another line.
 - Explicit parent pointers are NOT stored. `lineageOf()` in `lib/record.mjs`
   derives predecessor, successor and siblings from `family` and the canonical
   date, both of which are filled on every record. A stored pointer would be a
@@ -302,7 +325,12 @@ Rules:
 - **Same-day releases are siblings, not a succession.** Ordering a family purely
   by date turns GPT-5.6 Sol, Luna and Terra into a three-step chain; they are one
   launch of three sizes. `lineageOf()` returns anything sharing a date as a
-  sibling and never as a predecessor.
+  sibling and never as a predecessor. Siblings span the whole family, because a
+  launch day is a family event; predecessors do not.
+- **Every comparison asks `lineageOf()`.** The Lineage row, the model page's
+  What changed, the family rail and the family's What changed all take their
+  neighbour from it, so no two can disagree. They used to: the model page took
+  the previous record by date and diffed GPT-5.6 Luna against Sol.
 
 Where a lab forks a line — a family that splits into open and closed branches —
 record both under the same family and let the branch show in lineage when it

@@ -50,10 +50,16 @@ the analytics charts, the JSON/CSV export. Adding a release is a JSON edit, neve
 a code change. Schema is documented in README under "Data model (schema 1.6)".
 
 **Lineage is derived, not stored.** `lineageOf()` returns predecessor,
-successor and siblings from `family` and the canonical date. Do not add a
-`predecessor` field — it would be a second copy of a fact already held, and
-records sharing a date are SIBLINGS, not a succession (GPT-5.6 Sol, Luna and
-Terra are one launch of three sizes).
+successor and siblings from `family`, the canonical date and `seriesOf()` —
+the line within the family, read from the name (Opus, not Claude). Do not add a
+`predecessor` or `series` field — each would be a second copy of a fact already
+held. Records sharing a date are SIBLINGS, not a succession (GPT-5.6 Sol, Luna
+and Terra are one launch of three sizes). Every comparison in the build asks
+`lineageOf()`; never take "the previous record in the family" by date.
+
+**A family holds one kind of model.** The validator rejects a family that mixes
+`primary_type`s; a lab's image, video or voice line gets its own family, named
+for the lab's product line (TAXONOMY §8).
 
 **`sourceText()` signals failure with a Symbol, which is truthy.** `if (t)` is
 not a valid guard; use `typeof t === 'string'`. This has caused three separate
