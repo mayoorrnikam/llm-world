@@ -100,17 +100,21 @@ Anthropic removed it. Absence of a capability means "not evidenced", never
 
 Both must agree, which is why the next two points exist.
 
-### `index.html` is the single source for shared chrome and logos
+### `index.html` is the single source for shared chrome; `sprite.svg` for logos
 
 `build.mjs` reads `index.html` at build time and extracts:
 
 - **Header and footer**, verbatim, between the `<!-- shared:header-start -->` /
   `<!-- shared:footer-start -->` marker comments. It rewrites relative links for
   each page's depth and stamps `aria-current="page"` on that page's nav item.
-- **Company logo `<g>` blocks** from the inline SVG sprite, inlining only the
-  logos a given page uses.
+Company logos live in **`sprite.svg`** — one `<g id="ic-<slug>">` per lab, monochrome
+`currentColor` marks from lobe-icons — and `build.mjs` inlines only the logos a
+given page uses. A new lab needs three things: the `<g>` in `sprite.svg`, a
+`COMPANY_SLUG` entry in `lib/record.mjs`, and a `--c-<slug>` token in all three
+colour blocks of `styles.css`. A lab with no legible mark maps to `other` and
+renders a monogram; `checkCompanyLogos()` in smoke fails any lab left unmapped.
 
-**So: to change the nav, footer, or a logo, edit `index.html` only.** Never add a
+**So: to change the nav or footer, edit `index.html` only; to change a logo, edit `sprite.svg` only.** Never add a
 second copy inside `build.mjs`. Two copies drifting apart is a bug this project
 already had and deliberately designed out. If you move the marker comments, the
 build throws.

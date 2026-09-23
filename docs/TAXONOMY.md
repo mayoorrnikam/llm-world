@@ -62,6 +62,7 @@ The discriminator. Every record has exactly one. It answers "what is this model
 | `audio` | Primary output or input is speech, music or general audio. See subtypes. |
 | `3d` | Primary output is a 3D asset, scene or representation. |
 | `world_model` | See §6 — the strictest category, with its own inclusion test. |
+| `decision` | Answers questions posed at request time with typed values and probabilities, instead of generating text. See §6a — it has its own inclusion test. |
 | `unknown` | Evidence is genuinely unclear. Legitimate and preferred over a guess. |
 
 `unknown` is not a failure state. A record classified `unknown` with a good
@@ -202,6 +203,52 @@ record's note — not promoted on the strength of a press release.
 
 **No record currently qualifies, and none should be added until a real candidate
 is tested against this list in public.**
+
+---
+
+## 6a. Decision models — inclusion test
+
+Added in September 2026 for TypeSafe AI's Jev. Every other type here names what
+a model PRODUCES: text, an image, video, audio, a 3D asset. A model that answers
+a question with a typed value and a probability produces none of those, and
+filing it as `language` would count a model that emits no text among the LLMs
+in every chart that splits by type.
+
+A model is classified `decision` **only if the lab's own documentation
+evidences all four**:
+
+1. Its primary output is an **answer of a declared type** — a choice from a set,
+   a boolean, a number, a label — rather than free text.
+2. Each answer comes with a **probability or confidence**, as part of the
+   model's output rather than something read off afterwards.
+3. The answer is **not produced by generating text token by token** and then
+   parsing it.
+4. The **questions and their answer types are supplied at request time.** It is
+   general-purpose, not trained for one fixed set of labels.
+
+Explicitly insufficient, alone or combined:
+
+- A language model with a JSON mode, structured outputs or function calling.
+  Those are capabilities of a text generator (§4), and the answer is still
+  generated as tokens — criterion 3.
+- Token log-probabilities exposed by an API. That is a view of generation, not
+  a different kind of output.
+- **Rerankers and embedding models.** They already score text without
+  generating it, and they stay `language` subtypes (§2): they score or encode
+  for retrieval rather than answer a posed question — criterion 4.
+- A classifier trained for one task — sentiment, moderation, intent. Its label
+  set is fixed at training time — criterion 4.
+- A lab calling its model "System One", or anything else. The name is marketing;
+  the four criteria are what gets tested.
+
+When a record is borderline it is `unknown`, with the ambiguity in its note, the
+same rule §6 applies.
+
+**Qualifying records:** Jev (TypeSafe AI, 2026-09-15). One is enough for a type
+when no other type describes it — the rule the validator states for re-adding
+any type — but it is not enough to call this a trend. Community imitations built
+by fine-tuning a language model (Kev, on Qwen 3.5) are not recorded at all:
+a release needs a lab behind it (§7).
 
 ---
 

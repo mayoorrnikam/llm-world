@@ -33,9 +33,15 @@ const VALID_STATUS = new Set(['verified', 'partially_verified', 'unverified', 'c
 // accept images. Multimodality is a property of `modalities`, which the schema
 // already states exactly, so a type for it would say the same thing twice
 // (TAXONOMY §2). Re-add it only if a model appears that no other type fits.
+//
+// `decision` was ADDED in September 2026, by that same rule: TypeSafe AI's Jev
+// answers typed questions with probabilities instead of generating text, and no
+// other type describes a model that produces no text, image, audio, video or 3D.
+// It has a four-part inclusion test (TAXONOMY §6a) so that an LLM in JSON mode,
+// a reranker or a single-task classifier cannot drift into it.
 const VALID_PRIMARY_TYPE = new Set([
   'language', 'vision', 'image_generation', 'video_generation', 'audio',
-  '3d', 'world_model', 'unknown',
+  '3d', 'world_model', 'decision', 'unknown',
 ]);
 const VALID_SUBTYPE = new Set(['llm', 'slm', 'reasoning', 'embedding', 'reranker']);
 const VALID_MODALITY = new Set(['text', 'image', 'audio', 'video', '3d', 'sensor', 'environment']);
