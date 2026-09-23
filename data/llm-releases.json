@@ -8541,6 +8541,77 @@
       ]
     },
     {
+      "id": "mimo-v2-flash",
+      "model": "MiMo-V2-Flash",
+      "company": "Xiaomi",
+      "family": "MiMo",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Xiaomi released MiMo-V2-Flash with a hybrid architecture using a 1:5 ratio of global attention to sliding-window attention (window size 128), native 32K context and training extended to 256K (262,144 in the published config). Xiaomi's changelog records two later updates, on 2026-01-12 and 2026-02-04, strengthening general and coding performance in Thinking mode.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2025-12-16",
+          "sources": [
+            "mimo-v2-flash-s1",
+            "mimo-v2-flash-s2"
+          ]
+        },
+        {
+          "type": "major_update",
+          "date": "2026-01-12",
+          "sources": [
+            "mimo-v2-flash-s1"
+          ]
+        },
+        {
+          "type": "major_update",
+          "date": "2026-02-04",
+          "sources": [
+            "mimo-v2-flash-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 262144,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "MIT"
+      },
+      "sources": [
+        {
+          "id": "mimo-v2-flash-s1",
+          "url": "https://mimo.mi.com/docs/en-US/updates/model",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "mimo-v2-flash-s2",
+          "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2-Flash",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "glm-4-7",
       "model": "GLM-4.7",
       "company": "Zhipu AI",
@@ -10089,6 +10160,54 @@
       }
     },
     {
+      "id": "mimo-v2-pro",
+      "model": "MiMo-V2-Pro",
+      "company": "Xiaomi",
+      "family": "MiMo",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Xiaomi released MiMo-V2-Pro with a hybrid architecture using a 1:7 ratio of global attention to sliding-window attention, 1T total parameters and 42B active. No weights repository was published alongside it.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-03-18",
+          "sources": [
+            "mimo-v2-pro-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 1000000000000
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mimo-v2-pro-s1",
+          "url": "https://mimo.mi.com/docs/en-US/updates/model",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "lyria-3",
       "model": "Lyria 3",
       "company": "Google DeepMind",
@@ -11126,6 +11245,124 @@
       }
     },
     {
+      "id": "mimo-v2-5",
+      "model": "MiMo-V2.5",
+      "company": "Xiaomi",
+      "family": "MiMo",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "Xiaomi released MiMo-V2.5 with native full-modal perception of images, video, audio and text, a 1M-token context (1,048,576 in the published config) and native agent execution.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-04-23",
+          "sources": [
+            "mimo-v2-5-s1",
+            "mimo-v2-5-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "MIT"
+      },
+      "sources": [
+        {
+          "id": "mimo-v2-5-s1",
+          "url": "https://mimo.mi.com/docs/en-US/updates/model",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "mimo-v2-5-s2",
+          "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.5",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "mimo-v2-5-pro",
+      "model": "MiMo-V2.5-Pro",
+      "company": "Xiaomi",
+      "family": "MiMo",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "Released alongside MiMo-V2.5: 1T total parameters, 42B activated and a 1M-token context (1,048,576 in the published config), aimed at high-intensity agent work.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-04-23",
+          "sources": [
+            "mimo-v2-5-pro-s1",
+            "mimo-v2-5-pro-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": 1000000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "MIT"
+      },
+      "sources": [
+        {
+          "id": "mimo-v2-5-pro-s1",
+          "url": "https://mimo.mi.com/docs/en-US/updates/model",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "mimo-v2-5-pro-s2",
+          "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "deepseek-v4-flash",
       "model": "DeepSeek V4 Flash",
       "company": "DeepSeek",
@@ -11242,6 +11479,66 @@
           "note": "Standard-hours cache-miss input and output as the page read on this date. Cache-hit input and any off-peak discount are priced separately and are not recorded here."
         }
       ]
+    },
+    {
+      "id": "hy3-preview",
+      "model": "Hy3 preview",
+      "company": "Tencent",
+      "family": "Hy",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning",
+        "agentic"
+      ],
+      "tags": [],
+      "note": "Tencent launched and open-sourced Hy3 preview, a Mixture-of-Experts model integrating fast and slow thinking, with 295 billion total parameters, 21 billion activated and a context window of up to 256K tokens (262,144 in the published config). Tencent's GitHub and Hugging Face repositories were created on April 21, three days before the announcement.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-04-24",
+          "sources": [
+            "hy3-preview-s1",
+            "hy3-preview-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 262144,
+          "parameter_count": 295000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "hy3-preview-s1",
+          "url": "https://www.tencent.com/tencent-unveils-hy3-preview-model-enhances-agent-capabilities-and-real-world-usability/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "hy3-preview-s2",
+          "url": "https://huggingface.co/tencent/Hy3-preview",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
     },
     {
       "id": "gemini-3-1-flash-lite",
@@ -11582,6 +11879,183 @@
         "context_window",
         "parameter_count"
       ]
+    },
+    {
+      "id": "hy-mt2-1-8b",
+      "model": "Hy-MT2-1.8B",
+      "company": "Tencent",
+      "family": "Hy",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "multilingual"
+      ],
+      "tags": [],
+      "note": "The smallest of three multilingual translation models Tencent open-sourced together as Hy-MT2 on 2026-05-21.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-05-21",
+          "sources": [
+            "hy-mt2-1-8b-s1",
+            "hy-mt2-1-8b-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "hy-mt2-1-8b-s1",
+          "url": "https://github.com/Tencent-Hunyuan/Hy-MT2",
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "hy-mt2-1-8b-s2",
+          "url": "https://huggingface.co/tencent/Hy-MT2-1.8B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "hy-mt2-7b",
+      "model": "Hy-MT2-7B",
+      "company": "Tencent",
+      "family": "Hy",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "multilingual"
+      ],
+      "tags": [],
+      "note": "One of three multilingual translation models Tencent open-sourced together as Hy-MT2 on 2026-05-21.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-05-21",
+          "sources": [
+            "hy-mt2-7b-s1",
+            "hy-mt2-7b-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "hy-mt2-7b-s1",
+          "url": "https://github.com/Tencent-Hunyuan/Hy-MT2",
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "hy-mt2-7b-s2",
+          "url": "https://huggingface.co/tencent/Hy-MT2-7B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "hy-mt2-30b-a3b",
+      "model": "Hy-MT2-30B-A3B",
+      "company": "Tencent",
+      "family": "Hy",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "multilingual"
+      ],
+      "tags": [],
+      "note": "The largest of three multilingual translation models Tencent open-sourced together as Hy-MT2 on 2026-05-21, a Mixture-of-Experts model by its name.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-05-21",
+          "sources": [
+            "hy-mt2-30b-a3b-s1",
+            "hy-mt2-30b-a3b-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "hy-mt2-30b-a3b-s1",
+          "url": "https://github.com/Tencent-Hunyuan/Hy-MT2",
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "hy-mt2-30b-a3b-s2",
+          "url": "https://huggingface.co/tencent/Hy-MT2-30B-A3B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
     },
     {
       "id": "mistral-medium-3-5",
@@ -13224,6 +13698,82 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260704003755/https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=en",
           "retrieved": "2026-07-04"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "hy3",
+      "model": "Hy3",
+      "company": "Tencent",
+      "family": "Hy",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning",
+        "agentic"
+      ],
+      "tags": [],
+      "note": "Tencent officially launched Hy3, building on Hy3 preview with better performance, stability and cost efficiency: 295 billion total parameters, 21 billion active, and up to 256K context (262,144 in the published config). Tencent made it available globally on 2026-08-05. Hy is the brand formerly known as Hunyuan.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-07-06",
+          "sources": [
+            "hy3-s1",
+            "hy3-s2",
+            "hy3-s3"
+          ]
+        },
+        {
+          "type": "public_availability",
+          "date": "2026-08-05",
+          "sources": [
+            "hy3-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 262144,
+          "parameter_count": 295000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "hy3-s1",
+          "url": "https://www.tencent.com/en-us/articles/2202386.html",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "hy3-s2",
+          "url": "https://www.tencent.com/tencent-hy3-now-available-globally-extending-practical-ai-across-products-workflows-and-cloud-services/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "hy3-s3",
+          "url": "https://huggingface.co/tencent/Hy3",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -16583,6 +17133,66 @@
       }
     },
     {
+      "id": "hy4-preview",
+      "model": "Hy4 preview",
+      "company": "Tencent",
+      "family": "Hy",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "coding",
+        "agentic"
+      ],
+      "tags": [],
+      "note": "Tencent released and open-sourced Hy4 preview for coding, office work and scientific research: 770 billion total parameters, 49 billion active, and a context window Tencent describes as exceeding 1M tokens (1,048,576 in the published config). Available on WorkBuddy, CodeBuddy, Yuanbao and ima, and by API through Tencent Cloud TokenHub and OpenRouter.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-08-28",
+          "sources": [
+            "hy4-preview-s1",
+            "hy4-preview-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": 770000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "hy4-preview-s1",
+          "url": "https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "hy4-preview-s2",
+          "url": "https://huggingface.co/tencent/Hy4-preview",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "claude-fable-5-1",
       "model": "Claude Fable 5.1",
       "company": "Anthropic",
@@ -17114,6 +17724,110 @@
       }
     },
     {
+      "id": "auk",
+      "model": "AuK",
+      "company": "Tencent",
+      "family": "AuK",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Tencent open-sourced AuK, a text-to-speech model, with code and weights publicly available. Its Hugging Face repository was created on 2026-08-18, three weeks before the release.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-09",
+          "sources": [
+            "auk-s1",
+            "auk-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "MIT"
+      },
+      "sources": [
+        {
+          "id": "auk-s1",
+          "url": "https://github.com/Tencent-Hunyuan/AuK",
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "auk-s2",
+          "url": "https://huggingface.co/tencent/AuK",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "auk-flash",
+      "model": "AuK-Flash",
+      "company": "Tencent",
+      "family": "AuK",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Released alongside AuK: Tencent's README records day-zero inference support for both AuK and AuK-Flash on 2026-09-09.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-09",
+          "sources": [
+            "auk-flash-s1",
+            "auk-flash-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "MIT"
+      },
+      "sources": [
+        {
+          "id": "auk-flash-s1",
+          "url": "https://github.com/Tencent-Hunyuan/AuK",
+          "type": "official_repository",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "auk-flash-s2",
+          "url": "https://huggingface.co/tencent/AuK-Flash",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "deepseek-v4-1-flash",
       "model": "DeepSeek-V4.1-Flash",
       "company": "DeepSeek",
@@ -17332,6 +18046,67 @@
           "id": "gemini-3-8-live-extended-thinking-s2",
           "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/",
           "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "jev",
+      "model": "Jev",
+      "company": "TypeSafe AI",
+      "family": "Jev",
+      "classification": {
+        "primary_type": "decision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "TypeSafe AI's first model and, in its words, the first System One model. Jev takes a state and typed questions and returns every answer in parallel as calibrated probabilities with confidence scores, rather than generating text token by token. Served through TypeSafe's API as jev-1.13 and priced per input token; no weights were released. Classified `decision` under TAXONOMY §6a.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-15",
+          "sources": [
+            "jev-s1",
+            "jev-s2",
+            "jev-s3"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "jev-s1",
+          "url": "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "jev-s2",
+          "url": "https://docs.typesafe.ai/introduction",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "jev-s3",
+          "url": "https://docs.typesafe.ai/model-jaggedness/jev-1.13",
+          "type": "official_documentation",
           "authority": "primary",
           "archived_url": null,
           "retrieved": null
@@ -17573,6 +18348,124 @@
           "id": "gpt-6-luna-s2",
           "url": "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
           "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "mimo-v2-6-pro",
+      "model": "MiMo-V2.6-Pro",
+      "company": "Xiaomi",
+      "family": "MiMo",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "Xiaomi's most capable model at release: an omni-modal, trillion-parameter reasoning model for complex projects, long-horizon tasks, cybersecurity and research. Weights are published as MiMo-V2.6-Pro-RL, with a 1,048,576-token context in the config. Xiaomi also serves it as mimo-v2.6-pro-ultraspeed, the same model up to 20x faster — a serving variant, recorded here rather than as a separate model.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-22",
+          "sources": [
+            "mimo-v2-6-pro-s1",
+            "mimo-v2-6-pro-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "MIT"
+      },
+      "sources": [
+        {
+          "id": "mimo-v2-6-pro-s1",
+          "url": "https://mimo.mi.com/docs/en-US/updates/model",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "mimo-v2-6-pro-s2",
+          "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "mimo-v2-6-flash",
+      "model": "MiMo-V2.6-Flash",
+      "company": "Xiaomi",
+      "family": "MiMo",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "Released with MiMo-V2.6-Pro: a full-modality, low-cost reasoning model for high-frequency calls and large-scale professional workloads. Weights are published as MiMo-V2.6-Flash-RL, with a 1,048,576-token context in the config.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-22",
+          "sources": [
+            "mimo-v2-6-flash-s1",
+            "mimo-v2-6-flash-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1048576,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "MIT"
+      },
+      "sources": [
+        {
+          "id": "mimo-v2-6-flash-s1",
+          "url": "https://mimo.mi.com/docs/en-US/updates/model",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "mimo-v2-6-flash-s2",
+          "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+          "type": "official_model_card",
           "authority": "primary",
           "archived_url": null,
           "retrieved": null

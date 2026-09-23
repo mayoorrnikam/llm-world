@@ -66,6 +66,8 @@
   --c-deepseek:   #5b3fc9;
   --c-meta:       #8b45c4;
   --c-moonshot:   #a86bb8;
+
+  --c-tencent:    #b635af;
   --c-zhipu:      #c02f92;
   --c-cohere:     #c04a6e;
   --c-other:      #5b6779;
@@ -137,6 +139,8 @@
     --c-deepseek:   #7c5ce0;
     --c-meta:       #a86ad6;
     --c-moonshot:   #c98fd8;
+
+    --c-tencent:    #d968d4;
     --c-zhipu:      #dc5cb0;
     --c-cohere:     #f07d9e;
     --c-other:      #94a3b8;
@@ -191,6 +195,8 @@
   --c-deepseek:   #7c5ce0;
   --c-meta:       #a86ad6;
   --c-moonshot:   #c98fd8;
+
+  --c-tencent:    #d968d4;
   --c-zhipu:      #dc5cb0;
   --c-cohere:     #f07d9e;
   --c-other:      #94a3b8;

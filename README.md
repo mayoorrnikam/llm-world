@@ -18,12 +18,12 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **214** across 22 labs and 34 families, 2022–2026 |
-| **Verified** | 129 (60%) — every value they assert traced to a primary source |
+| **Releases tracked** | **229** across 25 labs and 38 families, 2022–2026 |
+| **Verified** | 129 (56%) — every value they assert traced to a primary source |
 | **Facts traced to a source** | 165 records carry claim-level evidence |
 | **Fully archived** | 192 records where every source has a snapshot |
-| **Open weights** | 87 (41%) |
-| **Beyond language** | 53 (25%) — 20 image generation · 15 audio · 9 video generation · 8 vision · 1 3d |
+| **Open weights** | 100 (44%) |
+| **Beyond language** | 56 (24%) — 20 image generation · 17 audio · 9 video generation · 8 vision · 1 3d · 1 decision |
 | **Milestones** | 53 dated events that were not model releases |
 | **Most recent** | Claude Opus 5.5 — Anthropic, 2026-09-22 |
 | **Dataset updated** | 2026-09-22 |
