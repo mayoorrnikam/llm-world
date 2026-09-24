@@ -11234,8 +11234,8 @@
           "url": "https://docs.x.ai/developers/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260413113022/https://docs.x.ai/developers/release-notes",
+          "retrieved": "2026-04-13"
         }
       ],
       "provenance": {
@@ -11303,8 +11303,8 @@
           "url": "https://docs.x.ai/developers/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260413113022/https://docs.x.ai/developers/release-notes",
+          "retrieved": "2026-04-13"
         }
       ],
       "provenance": {
@@ -11946,8 +11946,8 @@
           "url": "https://www.tencent.com/tencent-unveils-hy3-preview-model-enhances-agent-capabilities-and-real-world-usability/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260716205033/https://www.tencent.com/tencent-unveils-hy3-preview-model-enhances-agent-capabilities-and-real-world-usability/",
+          "retrieved": "2026-07-16"
         },
         {
           "id": "hy3-preview-s2",
@@ -11959,15 +11959,24 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       },
       "evidence": {
+        "release_date": [
+          {
+            "value": "2026-04-24",
+            "sources": [
+              "hy3-preview-s1"
+            ]
+          }
+        ],
         "context_window": [
           {
             "value": 262144,
             "sources": [
+              "hy3-preview-s1",
               "hy3-preview-s2"
             ]
           }
@@ -11976,6 +11985,7 @@
           {
             "value": 295000000000,
             "sources": [
+              "hy3-preview-s1",
               "hy3-preview-s2"
             ]
           }
@@ -14449,9 +14459,40 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-07-06",
+            "sources": [
+              "hy3-s1",
+              "hy3-s3"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 262144,
+            "sources": [
+              "hy3-s1",
+              "hy3-s2",
+              "hy3-s3"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 295000000000,
+            "sources": [
+              "hy3-s1",
+              "hy3-s2",
+              "hy3-s3"
+            ]
+          }
+        ]
       }
     },
     {
@@ -15775,8 +15816,8 @@
           "url": "https://docs.x.ai/developers/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260725105151/https://docs.x.ai/developers/release-notes",
+          "retrieved": "2026-07-25"
         }
       ],
       "provenance": {
@@ -16477,8 +16518,8 @@
           "url": "https://docs.x.ai/developers/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260806200153/https://docs.x.ai/developers/release-notes",
+          "retrieved": "2026-08-06"
         }
       ],
       "provenance": {
@@ -17980,14 +18021,40 @@
           "url": "https://huggingface.co/tencent/Hy4-preview",
           "type": "official_model_card",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260828064930/https://huggingface.co/tencent/Hy4-preview",
+          "retrieved": "2026-08-28"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-08-28",
+            "sources": [
+              "hy4-preview-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "hy4-preview-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 770000000000,
+            "sources": [
+              "hy4-preview-s2"
+            ]
+          }
+        ]
       }
     },
     {
@@ -18803,8 +18870,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260916144718/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2026-09-16"
         },
         {
           "id": "gemini-3-8-live-s2",
@@ -18816,9 +18883,19 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-09-15",
+            "sources": [
+              "gemini-3-8-live-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -18857,8 +18934,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260916144718/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2026-09-16"
         },
         {
           "id": "gemini-3-8-live-extended-thinking-s2",
@@ -18870,9 +18947,19 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-09-15",
+            "sources": [
+              "gemini-3-8-live-extended-thinking-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -18984,9 +19071,19 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-09-18",
+            "sources": [
+              "grok-voice-transcribe-2-0-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -19094,8 +19191,8 @@
           "url": "https://docs.x.ai/developers/grok-4-7",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260923093909/https://docs.x.ai/developers/grok-4-7",
+          "retrieved": "2026-09-23"
         },
         {
           "id": "grok-4-7-s3",
@@ -19107,16 +19204,26 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       },
       "evidence": {
+        "release_date": [
+          {
+            "value": "2026-09-21",
+            "sources": [
+              "grok-4-7-s2",
+              "grok-4-7-s3"
+            ]
+          }
+        ],
         "context_window": [
           {
             "value": 500000,
             "sources": [
-              "grok-4-7-s1"
+              "grok-4-7-s1",
+              "grok-4-7-s2"
             ]
           }
         ]
@@ -19223,8 +19330,8 @@
           "url": "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260922180252/https://openai.com/index/introducing-gpt-6-sol-and-luna/",
+          "retrieved": "2026-09-22"
         }
       ],
       "provenance": {
@@ -19283,8 +19390,8 @@
           "url": "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260922180252/https://openai.com/index/introducing-gpt-6-sol-and-luna/",
+          "retrieved": "2026-09-22"
         }
       ],
       "provenance": {
