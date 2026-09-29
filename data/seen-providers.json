@@ -102,6 +102,8 @@
     "gpt5mini",
     "gpt5nano",
     "gpt5pro",
+    "gpt61sol",
+    "gpt61solpro",
     "gpt6astrapro",
     "gpt6luna",
     "gpt6lunapro",
