@@ -36,6 +36,7 @@
     "anthropic": "node scripts/anthropic-specs.mjs",
     "docs": "node scripts/gemini-specs.mjs --write && node scripts/xai-specs.mjs --write && node scripts/openai-specs.mjs --write && node scripts/anthropic-specs.mjs --write",
     "mcp": "node mcp/server.mjs",
-    "milestones": "node scripts/verify-milestones.mjs"
+    "milestones": "node scripts/verify-milestones.mjs",
+    "sweep": "node scripts/sweep-changelogs.mjs"
   }
 }

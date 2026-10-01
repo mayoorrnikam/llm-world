@@ -18,7 +18,33 @@ npm run freshness          # weekly staleness + Hugging Face candidate report
 npm run feeds              # labs' own newsroom feeds — the only signal for closed labs
 npm run clean              # delete all generated output
 npm run mcp                # MCP server over the dataset, stdio, zero deps
+npm run sweep              # what each lab DATED in the last 30 days, from its own changelog
 ```
+
+### Updating the dataset ("update LLM World")
+
+Run this sequence rather than re-deriving it. The sweep replaces the discovery
+work that used to cost a session of searching; the web search is a CHECK on the
+sweep, aimed at its stated blind spots — not the primary method.
+
+1. `npm run sweep` — reads eight labs' own dated changelogs and flags each entry
+   `NEW ID?` (prints an API id no record carries), `NEW?` (announces something,
+   names nothing tracked) or `tracked`. Changelogs mix launches with API
+   features: read each flagged line, don't trust the flag.
+2. **Web search the blind spots the sweep prints at the end** — ByteDance, Qwen,
+   Moonshot, MiniMax, Microsoft, and the openai.com / x.ai newsrooms — plus one
+   general "new AI models <month>" search for labs nobody tracks. Trackers are
+   leads only (they misdate: build refreshes, repo dates, merged tier names).
+3. Verify every candidate on the **lab's own page** and take the date it states.
+   Client-rendered pages (qwen.ai/research, minimax.io, x.ai/news, openai.com)
+   need the browser. Never take a Hugging Face repo date as a release date.
+4. Exclude serving tiers of an existing model (Qwen3.8-Max-Prime,
+   MiMo-V2.6-Pro-UltraSpeed) and anything with no lab source yet.
+5. `node scripts/add-model.mjs spec.json --write`, then bump `updated`,
+   `node scripts/update-readme.mjs --write`, and `npm run check`. If a post's
+   `unverified:` reason no longer names what it excuses, the build says so —
+   fix the reason, don't delete the check. Re-read any post's hand-typed figures:
+   prose is not gated.
 
 Research and enrichment tools, none of which write without `--write`:
 
