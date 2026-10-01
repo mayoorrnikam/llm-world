@@ -75,7 +75,7 @@ function toIso(s) {
  */
 const SOURCES = [
   { lab: 'Anthropic', company: 'Anthropic', url: 'https://platform.claude.com/docs/en/release-notes/api', dates: 'long', order: 'after' },
-  { lab: 'Google', company: 'Google DeepMind', url: 'https://ai.google.dev/gemini-api/docs/changelog', dates: 'long', order: 'after' },
+  { lab: 'Google', company: 'Google DeepMind', url: 'https://ai.google.dev/gemini-api/docs/changelog?hl=en', dates: 'long', order: 'after' },
   { lab: 'OpenAI', company: 'OpenAI', url: 'https://developers.openai.com/api/docs/changelog', dates: 'openai', order: 'after' },
   { lab: 'DeepSeek', company: 'DeepSeek', url: 'https://api-docs.deepseek.com/updates', dates: 'iso', order: 'after' },
   { lab: 'Zhipu', company: 'Zhipu AI', url: 'https://docs.z.ai/release-notes', dates: 'iso', order: 'after' },
@@ -224,8 +224,14 @@ for (const src of SOURCES) {
     : await sourceText(src.url, { cache: false });
   if (typeof text !== 'string' || !text.length) { unreadable.push(src); continue; }
 
+  // A page with no dates in it at all was not read, whatever the status code.
+  // ai.google.dev once served this script its changelog in Persian, and the
+  // sweep reported Google as a quiet week.
+  const all = entries(src, text);
+  if (!all.length) { unreadable.push(src); continue; }
+
   const seen = new Set();
-  const fresh = entries(src, text)
+  const fresh = all
     // Changelogs announce FUTURE dates — deprecations, price changes — and a
     // month-precision entry compares on its first day.
     .filter((e) => e.date <= today && (e.date.length === 7 ? `${e.date}-31` : e.date) >= since)

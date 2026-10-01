@@ -31,6 +31,9 @@ sweep, aimed at its stated blind spots — not the primary method.
    `NEW ID?` (prints an API id no record carries), `NEW?` (announces something,
    names nothing tracked) or `tracked`. Changelogs mix launches with API
    features: read each flagged line, don't trust the flag.
+   Then `npm run feeds` — the labs' newsroom RSS. A changelog only covers the
+   API, so a launch that is not on the API yet (Gemini 4 Argon, announced to a
+   restricted programme on Google's blog) appears only here.
 2. **Web search the blind spots the sweep prints at the end** — ByteDance, Qwen,
    Moonshot, MiniMax, Microsoft, and the openai.com / x.ai newsrooms — plus one
    general "new AI models <month>" search for labs nobody tracks. Trackers are

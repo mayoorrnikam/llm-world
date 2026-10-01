@@ -64,6 +64,13 @@ const NO_FEED = [
 /** Titles that read like a model shipping, rather than a hiring post. */
 const RELEASE = /\b(introduc|announc|launch|releas|unveil|present|meet|now available|ship)/i;
 const MODELISH = /\b(model|llm|gpt|claude|gemini|llama|qwen|mistral|phi|grok|nemotron|granite|olmo|command|jamba|solar|exaone|hunyuan|seed|minimax|step|kimi|glm|deepseek)\b/i;
+/**
+ * A line name followed by a version reads as a launch even with no verb in it.
+ * "Gemini 4 Argon: our next era of frontier intelligence" was Google's biggest
+ * release of September 2026, and RELEASE alone dropped it.
+ */
+const VERSIONED = /\b(gpt|claude|gemini|llama|qwen|mistral|phi|grok|nemotron|granite|olmo|jamba|solar|exaone|hunyuan|seed|kimi|glm|deepseek|muse|lyria|veo|imagen|sora)[\s-]?\d/i;
+const launchy = (t) => (RELEASE.test(t) && MODELISH.test(t)) || VERSIONED.test(t);
 
 const strip = (s) => String(s ?? '')
   .replace(/<!\[CDATA\[|\]\]>/g, '')
@@ -148,7 +155,7 @@ for (const [lab, url] of FEEDS) {
     if (!res.ok) { failed.push(`${lab} — HTTP ${res.status}`); continue; }
     const recent = items(await res.text())
       .filter((i) => i.date && i.date >= cutoff)
-      .filter((i) => ALL || (RELEASE.test(i.title) && MODELISH.test(i.title)));
+      .filter((i) => ALL || launchy(i.title));
     for (const i of recent) found.push({ lab, ...i });
   } catch (e) {
     // A feed we could not read is unknown, never "nothing happened".

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-30",
+  "updated": "2026-10-01",
   "schema_version": "1.6",
   "releases": [
     {
@@ -20061,6 +20061,65 @@
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       },
       "evidence": {}
+    },
+    {
+      "id": "gemini-4-argon",
+      "model": "Gemini 4 Argon",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "Google's first Gemini 4 model, announced as its most capable yet. At announcement it was rolling out only to trusted cyber defenders through Google DeepMind's Fairwind Program, with paid API customers and Google AI Ultra subscribers to follow. Google states a 1M-token output limit; it does not state the input context window, and no API model page existed at announcement.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-30",
+          "sources": [
+            "gemini-4-argon-s1",
+            "gemini-4-argon-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-4-argon-s1",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-4-argon-s2",
+          "url": "https://deepmind.google/fairwind-program/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
     }
   ],
   "redirects": [
