@@ -18,15 +18,15 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **242** across 25 labs and 72 families, 2022–2026 |
-| **Verified** | 161 (67%) — every value they assert traced to a primary source |
+| **Releases tracked** | **251** across 25 labs and 75 families, 2022–2026 |
+| **Verified** | 161 (64%) — every value they assert traced to a primary source |
 | **Facts traced to a source** | 191 records carry claim-level evidence |
 | **Fully archived** | 227 records where every source has a snapshot |
-| **Open weights** | 101 (42%) |
-| **Beyond language** | 66 (27%) — 22 audio · 22 image generation · 12 video generation · 8 vision · 1 3d · 1 decision |
+| **Open weights** | 101 (40%) |
+| **Beyond language** | 71 (28%) — 27 audio · 22 image generation · 12 video generation · 8 vision · 1 3d · 1 decision |
 | **Milestones** | 53 dated events that were not model releases |
-| **Most recent** | Claude Opus 5.5 — Anthropic, 2026-09-22 |
-| **Dataset updated** | 2026-09-22 |
+| **Most recent** | GPT-6.1 Sol — OpenAI, 2026-09-29 |
+| **Dataset updated** | 2026-09-30 |
 
 <sub>Counted from `data/llm-releases.json` by `scripts/update-readme.mjs`. Nothing here is estimated; `npm run check` fails if this table has drifted from the data.</sub>
 

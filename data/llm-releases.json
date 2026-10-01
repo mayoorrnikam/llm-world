@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-22",
+  "updated": "2026-09-30",
   "schema_version": "1.6",
   "releases": [
     {
@@ -18218,6 +18218,49 @@
       "evidence": {}
     },
     {
+      "id": "muse-voice-transcribe",
+      "model": "Muse Voice Transcribe",
+      "company": "Meta AI",
+      "family": "Muse Voice",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Meta introduced Muse Voice Transcribe, a speech-to-text model with a live transcription demo on its research site.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-01",
+          "sources": [
+            "muse-voice-transcribe-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "muse-voice-transcribe-s1",
+          "url": "https://research.meta.ai/blog/introducing-muse-voice-transcribe",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "gemini-3-8-flash",
       "model": "Gemini 3.8 Flash",
       "company": "Google DeepMind",
@@ -18467,6 +18510,49 @@
       }
     },
     {
+      "id": "lyria-3-5",
+      "model": "Lyria 3.5",
+      "company": "Google DeepMind",
+      "family": "Lyria",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Google made Lyria 3.5 (lyria-3.5) generally available as the next generation of its music generation model: full-length songs with improved musical coherence, natural vocals, and control over duration and structure.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-03",
+          "sources": [
+            "lyria-3-5-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "lyria-3-5-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "chatgpt-images-2-5",
       "model": "ChatGPT Images 2.5",
       "company": "OpenAI",
@@ -18623,6 +18709,54 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "id": "gpt-rosalind",
+      "model": "GPT-Rosalind",
+      "company": "OpenAI",
+      "family": "GPT",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "OpenAI made GPT-Rosalind (gpt-rosalind-research) generally available through its trusted-access programme, for approved internal life sciences research. The date is general availability as OpenAI's API changelog states it; any earlier limited preview is not recorded here.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-08",
+          "sources": [
+            "gpt-rosalind-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-rosalind-s1",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       }
     },
     {
@@ -19124,6 +19258,119 @@
       }
     },
     {
+      "id": "qwen-3-8-omni-flash",
+      "model": "Qwen3.8-Omni-Flash",
+      "company": "Alibaba Qwen",
+      "family": "Qwen",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "Qwen launched Qwen3.8-Omni-Flash, its next-generation native omnimodal model, aimed at agentic work: planning tasks, calling tools and completing creative work across modalities. The date is the one Qwen's published research index gives (Release, 2026/09/18); the post's own page carried a September 14 date and a [draft] marker when read, and one tracker dated it September 21.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-18",
+          "sources": [
+            "qwen-3-8-omni-flash-s1",
+            "qwen-3-8-omni-flash-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen-3-8-omni-flash-s1",
+          "url": "https://qwen.ai/research",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "qwen-3-8-omni-flash-s2",
+          "url": "https://qwen.ai/blog?id=qwen3.8-omni-flash",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "qwen-3-8-livetranslate",
+      "model": "Qwen3.8-LiveTranslate",
+      "company": "Alibaba Qwen",
+      "family": "Qwen-LiveTranslate",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [
+        "multilingual"
+      ],
+      "tags": [],
+      "note": "Qwen released Qwen3.8-LiveTranslate for real-time simultaneous interpretation, rebuilt on an interleave architecture; Qwen reports average lagging (LAAL) falling from 2.8 to 2.3 seconds. Dated from Qwen's published research index (Release, 2026/09/18).",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-18",
+          "sources": [
+            "qwen-3-8-livetranslate-s1",
+            "qwen-3-8-livetranslate-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "qwen-3-8-livetranslate-s1",
+          "url": "https://qwen.ai/research",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "qwen-3-8-livetranslate-s2",
+          "url": "https://qwen.ai/blog?id=qwen3.8-livetranslate",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "qwen-image-2-1",
       "model": "Qwen-Image-2.1",
       "company": "Alibaba Qwen",
@@ -19592,6 +19839,201 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "id": "gemini-3-8-flash-tts",
+      "model": "Gemini 3.8 Flash TTS",
+      "company": "Google DeepMind",
+      "family": "Gemini TTS",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Google made Gemini 3.8 Flash TTS (gemini-3.8-flash-tts) generally available as its flagship next-generation text-to-speech model, alongside a Voices endpoint in the Gemini API.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-22",
+          "sources": [
+            "gemini-3-8-flash-tts-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-3-8-flash-tts-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "gemini-3-8-flash-lite-tts",
+      "model": "Gemini 3.8 Flash-Lite TTS",
+      "company": "Google DeepMind",
+      "family": "Gemini TTS",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Released with Gemini 3.8 Flash TTS: the lighter of Google's two next-generation text-to-speech models.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-22",
+          "sources": [
+            "gemini-3-8-flash-lite-tts-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-3-8-flash-lite-tts-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "claude-sonnet-5-5",
+      "model": "Claude Sonnet 5.5",
+      "company": "Anthropic",
+      "family": "Claude",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "Anthropic launched Claude Sonnet 5.5 (claude-sonnet-5-5) on the Claude API, Amazon Bedrock, Claude Platform on AWS, Google Cloud and Microsoft Foundry. Anthropic's models table gives it a 1M-token context window, 128K maximum output, adaptive thinking, and pricing of $2 / $10 per million input / output tokens.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-28",
+          "sources": [
+            "claude-sonnet-5-5-s1",
+            "claude-sonnet-5-5-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "claude-sonnet-5-5-s1",
+          "url": "https://platform.claude.com/docs/en/release-notes/api",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "claude-sonnet-5-5-s2",
+          "url": "https://platform.claude.com/docs/en/about-claude/models",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "gpt-6-1-sol",
+      "model": "GPT-6.1 Sol",
+      "company": "OpenAI",
+      "family": "GPT",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "coding"
+      ],
+      "tags": [],
+      "note": "OpenAI released GPT-6.1 Sol (gpt-6.1-sol) in the Responses and Chat Completions APIs, for complex coding and professional work at a lower cost than GPT-6 Astra.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-09-29",
+          "sources": [
+            "gpt-6-1-sol-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-6-1-sol-s1",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       }
     }
   ],
