@@ -18250,14 +18250,24 @@
           "url": "https://research.meta.ai/blog/introducing-muse-voice-transcribe",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260901181222/https://research.meta.ai/blog/introducing-muse-voice-transcribe",
+          "retrieved": "2026-09-01"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-09-01",
+            "sources": [
+              "muse-voice-transcribe-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -18542,14 +18552,24 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260904192757/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2026-09-04"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-09-03",
+            "sources": [
+              "lyria-3-5-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -18749,15 +18769,16 @@
           "url": "https://developers.openai.com/api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260908093131/https://developers.openai.com/api/docs/changelog",
+          "retrieved": "2026-09-08"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "auk",
@@ -19298,23 +19319,24 @@
           "url": "https://qwen.ai/research",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260917021203/https://qwen.ai/research",
+          "retrieved": "2026-09-17"
         },
         {
           "id": "qwen-3-8-omni-flash-s2",
           "url": "https://qwen.ai/blog?id=qwen3.8-omni-flash",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260917230806/https://qwen.ai/blog?id=qwen3.8-omni-flash",
+          "retrieved": "2026-09-17"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "qwen-3-8-livetranslate",
@@ -19352,8 +19374,8 @@
           "url": "https://qwen.ai/research",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260917021203/https://qwen.ai/research",
+          "retrieved": "2026-09-17"
         },
         {
           "id": "qwen-3-8-livetranslate-s2",
@@ -19368,7 +19390,8 @@
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "qwen-image-2-1",
@@ -19874,15 +19897,16 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260921201341/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2026-09-21"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "gemini-3-8-flash-lite-tts",
@@ -19917,15 +19941,16 @@
           "url": "https://ai.google.dev/gemini-api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260921201341/https://ai.google.dev/gemini-api/docs/changelog",
+          "retrieved": "2026-09-21"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "claude-sonnet-5-5",
@@ -20026,15 +20051,16 @@
           "url": "https://developers.openai.com/api/docs/changelog",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260928233209/https://developers.openai.com/api/docs/changelog",
+          "retrieved": "2026-09-28"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     }
   ],
   "redirects": [
