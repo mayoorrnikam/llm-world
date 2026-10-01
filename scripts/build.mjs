@@ -4024,7 +4024,21 @@ function gatePostClaims(post, claims) {
 
   const opt = post.unverified ?? '';
   const reason = /^allow\b[\s—:-]*(.*)$/.exec(opt)?.[1]?.trim();
-  if (reason) return;
+
+  // The reason must NAME every record it excuses. Three times a reason went
+  // stale silently: written for one record, it kept passing the build after
+  // that record was traced and a different, unnamed one took its place — first
+  // Qwen3.8-2.4T for OPT-175B, then Mythos 5.1 for Opus 5.5, then Opus 5.5 for
+  // Sonnet 5.5. A reader was being told something false about what had been
+  // checked. Naming is cheap to verify and impossible to fake by accident.
+  if (reason) {
+    const unnamed = [...new Set(bad.map((c) => c.model))].filter((m) => !reason.includes(m));
+    if (!unnamed.length) return;
+    throw new Error(
+      `content/posts/${post.slug}.md: its unverified reason does not name ${unnamed.join(', ')}, `
+      + 'which it is excusing. Name each record the reason covers, so it cannot go stale silently.',
+    );
+  }
 
   throw new Error(
     `content/posts/${post.slug}.md publishes ${bad.length} claim(s) with no primary source:\n`

@@ -3,20 +3,20 @@ title: Open weights ship less often, and match the frontier anyway
 question: Is AI actually getting more open over time?
 date: 2026-08-17
 openweights: by-year
-unverified: allow — 2022's open-weights frontier, OPT-175B, carries a 2,048-token context window that is not traced to a primary source. It is marked ⚠︎ in the table, and it sits in the earliest row of a comparison whose argument rests on 2024 onward.
+unverified: allow — two frontier values are not yet traced to a primary source, and both are marked ⚠︎ in the table. OPT-175B, 2022's open-weights frontier, carries a 2,048-token context window, in the earliest row of a comparison whose argument rests on 2024 onward. MiMo-V2.5 shares 2026's open-weights frontier at 1,048,576 tokens: Xiaomi's changelog states 1M and its published config states the exact figure, but no archived snapshot yet holds either, so the comparison for 2026 is provisional.
 ---
 
 Ask how open AI is getting and you will usually be shown a count of releases. By
-that measure the answer for 2026 looks grim: thirty-two open-weights releases
-tracked here against sixty-five proprietary ones, the lowest open share on record.
+that measure the answer for 2026 looks grim: the first table below has open
+weights at their smallest share of any year on record.
 
 That number is real, and it is close to meaningless as a scoreboard.
 
-Release count measures how often a lab ships, not how good the models are. The 2026
-proprietary total is concentrated in a handful of labs that publish many increments
-— Google, Microsoft and ByteDance alone account for half of it. Meanwhile Alibaba
-shipped six open and six proprietary releases in the same year, so even sorting
-*labs* into camps does not work.
+Release count measures how often a lab ships, not how good the models are. The
+proprietary side of 2026 is concentrated in a few labs that publish many
+increments, led by Google. Meanwhile Alibaba shipped as many open
+releases as proprietary ones in the same year, so even sorting *labs* into camps
+does not work.
 
 The second table is the one that changes the picture. On context window — the only
 capability this dataset records on both sides of the licence line — the open side
