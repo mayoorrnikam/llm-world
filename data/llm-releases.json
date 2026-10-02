@@ -19382,8 +19382,8 @@
           "url": "https://qwen.ai/blog?id=qwen3.8-livetranslate",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260919083220/https://qwen.ai/blog?id=qwen3.8-livetranslate",
+          "retrieved": "2026-09-19"
         }
       ],
       "provenance": {
@@ -20103,8 +20103,8 @@
           "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260930200646/https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+          "retrieved": "2026-09-30"
         },
         {
           "id": "gemini-4-argon-s2",
@@ -20116,9 +20116,19 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-09-30",
+            "sources": [
+              "gemini-4-argon-s1"
+            ]
+          }
+        ]
       }
     }
   ],
