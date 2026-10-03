@@ -83,16 +83,24 @@ const SOURCES = [
   { lab: 'xAI', company: 'xAI', url: 'https://docs.x.ai/developers/release-notes.md', dates: 'xai-md', order: 'after' },
   { lab: 'Tencent', company: 'Tencent', url: 'https://www.tencent.com/en-us/media/news.html', dates: 'long', order: 'before',
     keep: /\bHy\b|Hy\d|Hunyuan|model|open[- ]sourc|\bAI\b/i },
-  { lab: 'Meta', company: 'Meta AI', url: 'https://research.meta.ai/blog/', dates: 'long', order: 'before' },
+  // The featured post sits above the list with its date BEFORE its title, the
+  // reverse of every list entry, so it took the newest post's date (Muse Spark
+  // 1.3 read as October 2, not September 2). It is not repeated in the list, so
+  // move its date after its title rather than dropping it.
+  { lab: 'Meta', company: 'Meta AI', url: 'https://research.meta.ai/blog/', dates: 'long', order: 'before',
+    rewrite: [new RegExp(`\\bFeatured\\s+(${LONG} \\d{1,2}, 20\\d\\d)\\s+([\\s\\S]*?)\\s+Latest\\b`), 'Featured $2 $1 Latest'] },
+  // Kimi Code's changelog dates each "Model Release" (K2.7 Code, K2.8 Preview);
+  // keep drops the CLI releases between them.
+  { lab: 'Moonshot', company: 'Moonshot AI', url: 'https://www.kimi.com/code/docs/en/kimi-code/whats-new.html', dates: 'long', order: 'after',
+    keep: /\bK\d/ },
 ];
 
-/** Labs this sweep cannot read, said out loud on every run. */
+/** Labs this sweep cannot read, said out loud on every run. [name, why, company] */
 const BLIND = [
-  ['ByteDance', 'seed.bytedance.com is client-rendered'],
-  ['Qwen', 'qwen.ai/blog is client-rendered; each post is readable, the index is not'],
-  ['Moonshot', 'platform.moonshot.ai changelog carries no dates'],
-  ['MiniMax', 'its release notes stopped in 2025'],
-  ['Microsoft', 'microsoft.ai/news carries no dates'],
+  ['ByteDance', 'seed.bytedance.com is client-rendered', 'ByteDance'],
+  ['Qwen', 'qwen.ai/research is client-rendered; the browser reads it, with dates', 'Alibaba Qwen'],
+  ['MiniMax', 'its newsroom carries financial results; launches go to its X account', 'MiniMax'],
+  ['Microsoft', 'microsoft.ai/news is client-rendered and carries no dates', 'Microsoft'],
   ['OpenAI newsroom', 'openai.com refuses bots — products like ChatGPT Images reach it, not the API changelog'],
   ['xAI newsroom', 'x.ai refuses bots — its release notes date only the month'],
 ];
@@ -169,7 +177,13 @@ const data = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
  */
 const words = (s) => String(s).toLowerCase().replace(/[^a-z0-9.]+/g, ' ').replace(/\.(?!\d)/g, ' ').trim();
 const slug = (s) => String(s).toLowerCase().replace(/[._\s]+/g, '-');
-const nameKeys = data.releases.map((r) => [words(r.model), r.model]).filter(([k]) => k.length >= 4);
+// A lab's own changelog drops its brand: Kimi's says "K2.8 Preview". When the
+// word after the brand is a versioned token (k2.8, m3.1), it names the model alone.
+const nameKeys = data.releases.flatMap((r) => {
+  const k = words(r.model);
+  const rest = k.replace(/^\S+ /, '');
+  return [[k, r.model], ...(rest !== k && /^[a-z]+\d/.test(rest) ? [[rest, r.model]] : [])];
+}).filter(([k]) => k.length >= 4);
 const trackedIds = new Set(data.releases.map((r) => slug(r.id)));
 
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -227,7 +241,7 @@ for (const src of SOURCES) {
   // A page with no dates in it at all was not read, whatever the status code.
   // ai.google.dev once served this script its changelog in Persian, and the
   // sweep reported Google as a quiet week.
-  const all = entries(src, text);
+  const all = entries(src, src.rewrite ? text.replace(...src.rewrite) : text);
   if (!all.length) { unreadable.push(src); continue; }
 
   const seen = new Set();
@@ -271,5 +285,23 @@ if (unreadable.length) {
 
 console.log('### Not covered by this sweep — check by web search\n');
 for (const [lab, why] of BLIND) console.log(`- **${lab}** — ${why}`);
+
+// Every lab in the dataset that neither list names. Without this, a lab the
+// sweep was never taught about is not reported as unchecked — it is simply
+// absent, and absence reads as a quiet week. Ten labs were absent that way
+// the day Strands Decider 2B and Nemotron 3 Diarization were missed.
+const named = new Set([...SOURCES.map((s) => s.company), ...BLIND.map((b) => b[2]).filter(Boolean)]);
+const latest = new Map();
+for (const r of data.releases) {
+  if (named.has(r.company)) continue;
+  const d = r.events.find((e) => e.type === 'announcement')?.date ?? r.events.map((e) => e.date).sort()[0];
+  if (!latest.has(r.company) || d > latest.get(r.company)) latest.set(r.company, d);
+}
+if (latest.size) {
+  console.log('\n### Tracked labs no channel here watches\n');
+  console.log([...latest].sort((a, b) => b[1].localeCompare(a[1]))
+    .map(([c, d]) => `${c} (last record ${d})`).join(' · '));
+  console.log('\n`npm run feeds` reads some of these labs\' blogs; search the rest by name.');
+}
 console.log(`\n_${fresh} entr${fresh === 1 ? 'y looks' : 'ies look'} new. Changelogs mix launches with `
   + 'API features, so read each one: a candidate still needs the lab\'s own statement, its date, and a snapshot._');

@@ -79,9 +79,12 @@ the idea was picked up.
 - **Not that Jev is better than a language model.** It does something
   different. Its own documentation sends arithmetic back to ordinary code, and a
   model that produces no text is no help where the output has to be text.
-- **Not a trend.** At the time of writing, Jev is the only model in this
-  dataset that passes the test. One is enough for a type when nothing else
-  describes it; it is not enough to call it a direction for the field.
+- **Not a trend.** When this was written, Jev was the only model in this
+  dataset that passed the test. One is enough for a type when nothing else
+  describes it; it is not enough to call it a direction for the field. On
+  October 1 a second passed: [Strands Decider 2B](../../models/strands-decider-2b/),
+  an open model from Amazon's Strands Labs, whose announcement names Jev as the
+  launch that drew attention to the class. Two is still not a direction.
 - **Not TypeSafe's performance figures.** Its speed and cost comparisons appear
   in coverage of the launch, but this dataset has not verified them, so they
   are not repeated here. Jev is also recorded as a

@@ -18,15 +18,15 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **252** across 25 labs and 75 families, 2022–2026 |
-| **Verified** | 164 (65%) — every value they assert traced to a primary source |
+| **Releases tracked** | **262** across 25 labs and 78 families, 2022–2026 |
+| **Verified** | 164 (63%) — every value they assert traced to a primary source |
 | **Facts traced to a source** | 194 records carry claim-level evidence |
 | **Fully archived** | 236 records where every source has a snapshot |
-| **Open weights** | 101 (40%) |
-| **Beyond language** | 71 (28%) — 27 audio · 22 image generation · 12 video generation · 8 vision · 1 3d · 1 decision |
+| **Open weights** | 103 (39%) |
+| **Beyond language** | 78 (30%) — 32 audio · 23 image generation · 12 video generation · 8 vision · 2 decision · 1 3d |
 | **Milestones** | 53 dated events that were not model releases |
-| **Most recent** | Gemini 4 Argon — Google DeepMind, 2026-09-30 |
-| **Dataset updated** | 2026-10-01 |
+| **Most recent** | MAI-Transcribe-2-Streaming — Microsoft, 2026-10-01 |
+| **Dataset updated** | 2026-10-03 |
 
 <sub>Counted from `data/llm-releases.json` by `scripts/update-readme.mjs`. Nothing here is estimated; `npm run check` fails if this table has drifted from the data.</sub>
 

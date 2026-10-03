@@ -27,7 +27,7 @@ Run this sequence rather than re-deriving it. The sweep replaces the discovery
 work that used to cost a session of searching; the web search is a CHECK on the
 sweep, aimed at its stated blind spots — not the primary method.
 
-1. `npm run sweep` — reads eight labs' own dated changelogs and flags each entry
+1. `npm run sweep` — reads ten labs' own dated changelogs and flags each entry
    `NEW ID?` (prints an API id no record carries), `NEW?` (announces something,
    names nothing tracked) or `tracked`. Changelogs mix launches with API
    features: read each flagged line, don't trust the flag.
@@ -35,9 +35,12 @@ sweep, aimed at its stated blind spots — not the primary method.
    API, so a launch that is not on the API yet (Gemini 4 Argon, announced to a
    restricted programme on Google's blog) appears only here.
 2. **Web search the blind spots the sweep prints at the end** — ByteDance, Qwen,
-   Moonshot, MiniMax, Microsoft, and the openai.com / x.ai newsrooms — plus one
-   general "new AI models <month>" search for labs nobody tracks. Trackers are
-   leads only (they misdate: build refreshes, repo dates, merged tier names).
+   MiniMax, Microsoft, the openai.com / x.ai newsrooms, and every lab under
+   "Tracked labs no channel here watches" (one search per lab, by name) — plus
+   one general "new AI models <month>" search for labs nobody tracks. Trackers
+   are leads only (they misdate: build refreshes, repo dates, merged tier names).
+   A lab with no dated page may still date its launch post on X: a post's ID
+   encodes its UTC timestamp, `((id >> 22) + 1288834974657)` ms.
 3. Verify every candidate on the **lab's own page** and take the date it states.
    Client-rendered pages (qwen.ai/research, minimax.io, x.ai/news, openai.com)
    need the browser. Never take a Hugging Face repo date as a release date.
