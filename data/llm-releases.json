@@ -15090,14 +15090,24 @@
           "url": "https://research.meta.ai/blog/introducing-muse-spark-meta-model-api",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260805194205/https://research.meta.ai/blog/introducing-muse-spark-meta-model-api",
+          "retrieved": "2026-08-05"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-07-09",
+            "sources": [
+              "muse-spark-1-1-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -20664,16 +20674,16 @@
           "url": "https://strandsagents.com/blog/introducing-strands-decider/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261001185944/https://strandsagents.com/blog/introducing-strands-decider/",
+          "retrieved": "2026-10-01"
         },
         {
           "id": "strands-decider-2b-s2",
           "url": "https://github.com/strands-labs/strands-decider",
           "type": "official_repository",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261001231154/https://github.com/strands-labs/strands-decider",
+          "retrieved": "2026-10-01"
         },
         {
           "id": "strands-decider-2b-s3",

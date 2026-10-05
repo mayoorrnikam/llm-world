@@ -19,9 +19,9 @@ ignores that is describing 2023.
 | | |
 |---|---|
 | **Releases tracked** | **262** across 25 labs and 78 families, 2022–2026 |
-| **Verified** | 172 (66%) — every value they assert traced to a primary source |
-| **Facts traced to a source** | 202 records carry claim-level evidence |
-| **Fully archived** | 243 records where every source has a snapshot |
+| **Verified** | 173 (66%) — every value they assert traced to a primary source |
+| **Facts traced to a source** | 203 records carry claim-level evidence |
+| **Fully archived** | 245 records where every source has a snapshot |
 | **Open weights** | 103 (39%) |
 | **Beyond language** | 78 (30%) — 32 audio · 23 image generation · 12 video generation · 8 vision · 2 decision · 1 3d |
 | **Milestones** | 53 dated events that were not model releases |
