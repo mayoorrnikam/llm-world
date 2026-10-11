@@ -18,15 +18,15 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **262** across 25 labs and 78 families, 2022–2026 |
-| **Verified** | 173 (66%) — every value they assert traced to a primary source |
+| **Releases tracked** | **274** across 27 labs and 83 families, 2022–2026 |
+| **Verified** | 173 (63%) — every value they assert traced to a primary source |
 | **Facts traced to a source** | 203 records carry claim-level evidence |
 | **Fully archived** | 245 records where every source has a snapshot |
-| **Open weights** | 103 (39%) |
-| **Beyond language** | 78 (30%) — 32 audio · 23 image generation · 12 video generation · 8 vision · 2 decision · 1 3d |
-| **Milestones** | 53 dated events that were not model releases |
-| **Most recent** | MAI-Transcribe-2-Streaming — Microsoft, 2026-10-01 |
-| **Dataset updated** | 2026-10-03 |
+| **Open weights** | 110 (40%) |
+| **Beyond language** | 87 (32%) — 33 audio · 24 image generation · 12 video generation · 9 decision · 8 vision · 1 3d |
+| **Milestones** | 55 dated events that were not model releases |
+| **Most recent** | Microsoft-Decision-1 — Microsoft, 2026-10-09 |
+| **Dataset updated** | 2026-10-10 |
 
 <sub>Counted from `data/llm-releases.json` by `scripts/update-readme.mjs`. Nothing here is estimated; `npm run check` fails if this table has drifted from the data.</sub>
 

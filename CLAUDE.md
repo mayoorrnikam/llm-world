@@ -46,6 +46,13 @@ sweep, aimed at its stated blind spots — not the primary method.
    need the browser. Never take a Hugging Face repo date as a release date.
 4. Exclude serving tiers of an existing model (Qwen3.8-Max-Prime,
    MiMo-V2.6-Pro-UltraSpeed) and anything with no lab source yet.
+   **Decision models** (sweep `DECISION ·`, or a feed title naming decisions)
+   are `primary_type: decision` only if the lab's page evidences all four
+   parts of TAXONOMY §6a; most are a Qwen or LFM base with a readout head. A
+   new endpoint serving a tracked LLM (OpenAI's Decisions API on GPT-6 Luna)
+   is not a new model. Hobby fine-tunes with no lab behind them (Kev, Julia,
+   Vev) are not recorded. **Agent products** (Grok Bot, OpenAI dots) are
+   `agent` milestones in data/milestones.json, never model records.
 5. `node scripts/add-model.mjs spec.json --write`, then bump `updated`,
    `node scripts/update-readme.mjs --write`, and `npm run check`. If a post's
    `unverified:` reason no longer names what it excuses, the build says so —

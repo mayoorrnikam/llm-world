@@ -30,20 +30,26 @@ const ALL = process.argv.includes('--all');
 
 /** Verified 2026-08-10: each returns real <item>/<entry> elements. */
 const FEEDS = [
-  ['OpenAI', 'https://openai.com/news/rss.xml'],
+  ['OpenAI', 'https://openai.com/news/rss.xml', { introducing: true }],
   // Two feeds, because Google splits its own announcements and the model
   // releases are NOT in the DeepMind one. "Introducing Gemini 3.7 Flash"
   // published to /innovation-and-ai/models-and-research/gemini-models/, which
   // surfaces in the Gemini product feed; the DeepMind feed that day carried a
   // roundtable piece instead. Gemini 3.6 Flash went the same way. Watching only
   // DeepMind means watching the section Gemini releases do not appear in.
-  ['Google DeepMind', 'https://blog.google/products/gemini/rss/'],
+  ['Google DeepMind', 'https://blog.google/products/gemini/rss/', { introducing: true }],
   ['Google DeepMind', 'https://blog.google/technology/google-deepmind/rss/'],
-  ['Mistral AI', 'https://mistral.ai/rss.xml'],
+  ['Mistral AI', 'https://mistral.ai/rss.xml', { introducing: true }],
   ['Alibaba Qwen', 'https://qwenlm.github.io/blog/index.xml'],
   ['NVIDIA', 'https://developer.nvidia.com/blog/feed'],
   ['Microsoft Azure', 'https://azure.microsoft.com/en-us/blog/feed/'],
   ['Microsoft Research', 'https://www.microsoft.com/en-us/research/feed/'],
+  // Microsoft-Decision-1 was announced on these two, not on microsoft.ai or Azure's blog.
+  ['Microsoft Foundry', 'https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=azure-ai-foundry-blog'],
+  ['Microsoft', 'https://commandline.microsoft.com/feed/'],
+  ['Cloudflare', 'https://blog.cloudflare.com/rss/'],
+  ['Allen Institute for AI', 'https://allenai.org/rss.xml'],
+  ['Amazon', 'https://www.amazon.science/index.rss'],
   ['Apple ML', 'https://machinelearning.apple.com/rss.xml'],
   ['Meta Engineering', 'https://engineering.fb.com/feed/'],
   ['Together AI', 'https://www.together.ai/blog/rss.xml'],
@@ -56,7 +62,7 @@ const FEEDS = [
  */
 const NO_FEED = [
   'Anthropic', 'xAI', 'DeepSeek', 'Cohere', 'Zhipu / Z.ai', 'Moonshot AI',
-  'AI21 Labs', 'Allen Institute (Ai2)', 'ByteDance Seed', 'Tencent',
+  'AI21 Labs', 'ByteDance Seed', 'Tencent',
   'IBM Research', 'TII (Falcon)', 'Upstage', 'LG AI Research', 'Baidu',
   'MiniMax', 'StepFun', 'Arcee AI', 'Sarvam AI',
 ];
@@ -70,7 +76,25 @@ const MODELISH = /\b(model|llm|gpt|claude|gemini|llama|qwen|mistral|phi|grok|nem
  * release of September 2026, and RELEASE alone dropped it.
  */
 const VERSIONED = /\b(gpt|claude|gemini|llama|qwen|mistral|phi|grok|nemotron|granite|olmo|jamba|solar|exaone|hunyuan|seed|kimi|glm|deepseek|muse|lyria|veo|imagen|sora)[\s-]?\d/i;
-const launchy = (t) => (RELEASE.test(t) && MODELISH.test(t)) || VERSIONED.test(t);
+/**
+ * Decision models (TAXONOMY §6a) arrive under names no list above anticipates —
+ * Microsoft-Decision-1, Clef, d1, pplx-decider — and often from labs this
+ * project does not track, so the shape of the title is the only signal.
+ */
+const DECIDES = /\bdecision(?:s)?\b|\bdecider\b|\bsystem[- ]one\b|\bclassification model/i;
+/**
+ * Every family this dataset already records, so a new member of a tracked line
+ * is caught whatever its title says: "Introducing Clef-omni …" names no word
+ * the lists above know, but Clef is a family here.
+ */
+const FAMILY = (() => {
+  const d = JSON.parse(readFileSync('data/llm-releases.json', 'utf8'));
+  const names = [...new Set(d.releases.map((r) => String(r.family)))].filter((f) => f.length >= 2);
+  const esc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`(?:^|[^a-z0-9])(?:${names.map(esc).join('|')})(?![a-z])`, 'i');
+})();
+const launchy = (t) => (RELEASE.test(t) && FAMILY.test(t)) || (RELEASE.test(t) && MODELISH.test(t)) || VERSIONED.test(t) || (RELEASE.test(t) && DECIDES.test(t))
+  || /\bdecision model/i.test(t);
 
 const strip = (s) => String(s ?? '')
   .replace(/<!\[CDATA\[|\]\]>/g, '')
@@ -145,7 +169,13 @@ const cutoff = Date.now() - DAYS * 86400000;
 const found = [];
 const failed = [];
 
-for (const [lab, url] of FEEDS) {
+/**
+ * `introducing: true` marks a feed that is almost all launches, where any
+ * "Introducing …" title is worth a look. "Introducing dots" — OpenAI's
+ * always-on agents — names no model and no release verb the filter knows, and
+ * was dropped. On Cloudflare's or Amazon's blog the same rule would be noise.
+ */
+for (const [lab, url, opts = {}] of FEEDS) {
   try {
     const res = await fetch(url, {
       redirect: 'follow',
@@ -155,7 +185,7 @@ for (const [lab, url] of FEEDS) {
     if (!res.ok) { failed.push(`${lab} — HTTP ${res.status}`); continue; }
     const recent = items(await res.text())
       .filter((i) => i.date && i.date >= cutoff)
-      .filter((i) => ALL || launchy(i.title));
+      .filter((i) => ALL || launchy(i.title) || (opts.introducing && /^introducing\b/i.test(i.title)));
     for (const i of recent) found.push({ lab, ...i });
   } catch (e) {
     // A feed we could not read is unknown, never "nothing happened".

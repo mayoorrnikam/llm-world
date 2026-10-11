@@ -109,7 +109,10 @@ const BLIND = [
 function entries(src, text) {
   const out = [];
   const push = (date, from, to) => {
-    const body = text.slice(from, to).replace(/\s+/g, ' ').trim().slice(0, 260);
+    // The whole entry is matched; only the printed line is shortened. Cutting
+    // the entry at 260 characters hid Claude Haiku 5.5, launched in the second
+    // paragraph of a day whose first was a price change.
+    const body = text.slice(from, to).replace(/\s+/g, ' ').trim().slice(0, 4000);
     // A date inside a sentence ("served until September 30, 2026. To get
     // started…") is not an entry heading, and a table of contents repeats each
     // heading with nothing after it. Neither is a release.
@@ -221,6 +224,12 @@ function newIds(text) {
 }
 
 /** A headline that announces something and names nothing we hold. */
+/**
+ * A decision model (TAXONOMY §6a) is the one type the other flags miss: it is
+ * often served from a new endpoint (/v1/decisions) by a model already tracked,
+ * so the entry reads "tracked". Flag the shape, not the name.
+ */
+const DECIDES = /\bdecision (?:model|api)s?\b|\/v1\/(?:decisions|systemone)\b|\btyped answers?\b|\bsystem[- ]one\b|\bdecider\b/i;
 const ANNOUNCES = /\b(?:introduc\w*|launch\w*|releas\w*|now available|generally available)\b/i;
 
 /* ------------------------------------------------------------------- run */
@@ -272,7 +281,9 @@ for (const r of results) {
       : e.tracked.length ? `tracked: ${e.tracked.join(', ')}`
         : looksNew ? 'NEW? announces something, names no tracked model' : 'no model named';
     if (e.newIds.length || looksNew) fresh++;
-    console.log(`- ${e.date}  [${hint}]  ${e.text}`);
+    const kind = DECIDES.test(e.text) ? 'DECISION · ' : '';
+    if (kind && !e.newIds.length && !looksNew) fresh++;
+    console.log(`- ${e.date}  [${kind}${hint}]  ${e.text.slice(0, 260)}`);
   }
   console.log();
 }

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-03",
+  "updated": "2026-10-10",
   "schema_version": "1.6",
   "releases": [
     {
@@ -20708,6 +20708,611 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "id": "clef",
+      "model": "Clef",
+      "company": "Cloudflare",
+      "family": "Clef",
+      "classification": {
+        "primary_type": "decision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Cloudflare's open decision model, served on Workers AI. A frozen Qwen3.8-27B with low-rank adapters and a routing head: questions and answer types arrive with each request, and it scores the valid answers in one prefill pass, returning typed answers with probabilities rather than generating text.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-01",
+          "sources": [
+            "clef-s1",
+            "clef-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "clef-s1",
+          "url": "https://blog.cloudflare.com/clef-decision-models/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "clef-s2",
+          "url": "https://huggingface.co/Cloudflare/clef",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "clef-flash",
+      "model": "Clef-flash",
+      "company": "Cloudflare",
+      "family": "Clef",
+      "classification": {
+        "primary_type": "decision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The faster sibling of Clef for latency-critical decisions, built the same way on Qwen3.5-9B.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-01",
+          "sources": [
+            "clef-flash-s1",
+            "clef-flash-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "clef-flash-s1",
+          "url": "https://blog.cloudflare.com/clef-decision-models/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "clef-flash-s2",
+          "url": "https://huggingface.co/Cloudflare/clef-flash",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "pplx-decider-v1-27b",
+      "model": "pplx-decider-v1-27b",
+      "company": "Perplexity",
+      "family": "pplx-decider",
+      "classification": {
+        "primary_type": "decision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The open-weights model behind Perplexity's Decisions API. Given a state of text, JSON or images and 1 to 128 typed questions per request (yes/no, choice, score), it returns a probability for each answer and does not write text. Perplexity's changelog later names pplx-decider-v1.1-27b as its replacement.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-01",
+          "sources": [
+            "pplx-decider-v1-27b-s1",
+            "pplx-decider-v1-27b-s2",
+            "pplx-decider-v1-27b-s3"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "pplx-decider-v1-27b-s1",
+          "url": "https://x.com/perplexitydevs/status/2105725598882832414",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "pplx-decider-v1-27b-s2",
+          "url": "https://docs.perplexity.ai/docs/decisions/quickstart",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "pplx-decider-v1-27b-s3",
+          "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1-27b",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "nova-2-5-sonic",
+      "model": "Nova 2.5 Sonic",
+      "company": "Amazon",
+      "family": "Nova Sonic",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Amazon's speech-to-speech model for real-time voice agents, generally available in Amazon Bedrock in four regions. Amazon describes improved reasoning, instruction following, tool calling and latency over Nova 2 Sonic, which this dataset does not yet record.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-05",
+          "sources": [
+            "nova-2-5-sonic-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "nova-2-5-sonic-s1",
+          "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-nova-2.5-sonic/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "nano-banana-2-1",
+      "model": "Nano Banana 2.1",
+      "company": "Google DeepMind",
+      "family": "Nano Banana",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Google's high-efficiency image generation and conversational editing model, released generally available as gemini-nano-banana-2.1. Google describes it as an update to Nano Banana 2 (gemini-3.1-flash-image).",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-06",
+          "sources": [
+            "nano-banana-2-1-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "nano-banana-2-1-s1",
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "embeddinggemma-2",
+      "model": "EmbeddingGemma 2",
+      "company": "Google DeepMind",
+      "family": "Gemma",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "embedding"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Google's open-weights multimodal embedding model: 740M parameters mapping text, images, video frames and audio into one vector space, built to run on device. A text-only subset loads alone.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-06",
+          "sources": [
+            "embeddinggemma-2-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 740000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "embeddinggemma-2-s1",
+          "url": "https://developers.googleblog.com/google-ai-edge-with-embeddinggemma-2/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "mistral-large-4",
+      "model": "Mistral Large 4",
+      "company": "Mistral AI",
+      "family": "Mistral",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A natively multimodal mixture-of-experts model with 1 trillion total and 52 billion active parameters, released as a public preview API on Mistral Studio. Mistral said it would release the weights by the end of the month; none were public at announcement.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-06",
+          "sources": [
+            "mistral-large-4-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 1000000000000
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "mistral-large-4-s1",
+          "url": "https://mistral.ai/news/mistral-large-4/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "claude-haiku-5-5",
+      "model": "Claude Haiku 5.5",
+      "company": "Anthropic",
+      "family": "Claude",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "Anthropic's model tuned for high-volume, latency-sensitive work, released on the Claude API, Amazon Bedrock, Google Cloud and Microsoft Foundry with a 1M-token context window, 128k max output tokens and adaptive thinking. Its API id is claude-haiku-5-5.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-07",
+          "sources": [
+            "claude-haiku-5-5-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "claude-haiku-5-5-s1",
+          "url": "https://platform.claude.com/docs/en/release-notes/api",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "d1-3b",
+      "model": "d1-3B",
+      "company": "Liquid AI",
+      "family": "d1",
+      "classification": {
+        "primary_type": "decision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "An open-weights decision model built from LFM2.5-VL-3B. It takes text and images with typed questions supplied at request time (yes/no, choice, score) and answers in a single forward pass with probabilities and a confidence, generating no tokens.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-07",
+          "sources": [
+            "d1-3b-s1",
+            "d1-3b-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "LFM-1.0"
+      },
+      "sources": [
+        {
+          "id": "d1-3b-s1",
+          "url": "https://huggingface.co/blog/LiquidAI/open-d1",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "d1-3b-s2",
+          "url": "https://huggingface.co/LiquidAI/d1-3B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "d1-omni-600m",
+      "model": "d1-omni-600M",
+      "company": "Liquid AI",
+      "family": "d1",
+      "classification": {
+        "primary_type": "decision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The experimental small sibling of d1-3B, about 600M parameters, built from LFM2.5-Encoder-350M. It answers typed questions about text with images or audio in a single forward pass.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-07",
+          "sources": [
+            "d1-omni-600m-s1",
+            "d1-omni-600m-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "LFM-1.0"
+      },
+      "sources": [
+        {
+          "id": "d1-omni-600m-s1",
+          "url": "https://huggingface.co/blog/LiquidAI/open-d1",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "d1-omni-600m-s2",
+          "url": "https://huggingface.co/LiquidAI/d1-omni-600M",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "microsoft-decision-1",
+      "model": "Microsoft-Decision-1",
+      "company": "Microsoft",
+      "family": "Microsoft-Decision",
+      "classification": {
+        "primary_type": "decision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A decision model from Microsoft's Office of the CTO, in public preview in Microsoft Foundry. Post-trained from Qwen3.5-9B for single-pass decision scoring: given yes/no, multiple-choice, rating or rubric options with a request, it returns a calibrated probability for each option rather than generated text. Microsoft says later versions will be rebased on OpenAI and MAI models. No weights were published.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-09",
+          "sources": [
+            "microsoft-decision-1-s1",
+            "microsoft-decision-1-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "microsoft-decision-1-s1",
+          "url": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/introducing-microsoft-decision-1-in-microsoft-foundry-for-decision-and-classific/4562742",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "microsoft-decision-1-s2",
+          "url": "https://commandline.microsoft.com/microsoft-decision-1-model-foundry/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "clef-omni",
+      "model": "Clef-omni",
+      "company": "Cloudflare",
+      "family": "Clef",
+      "classification": {
+        "primary_type": "decision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A multimodal Clef that answers typed questions about audio, video, images and text together. Announced with a faster Clef and a cheaper Clef-flash.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-09",
+          "sources": [
+            "clef-omni-s1",
+            "clef-omni-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "Apache-2.0"
+      },
+      "sources": [
+        {
+          "id": "clef-omni-s1",
+          "url": "https://blog.cloudflare.com/clef-faster-cheaper-multimodal/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "clef-omni-s2",
+          "url": "https://huggingface.co/Cloudflare/clef-omni",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       }
     }
   ],

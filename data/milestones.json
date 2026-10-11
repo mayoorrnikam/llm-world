@@ -1698,6 +1698,32 @@
       "significance": null
     },
     {
+      "id": "grok-bot",
+      "title": "Grok Bot",
+      "date": "2026-08-11",
+      "type": "agent",
+      "company": "xAI",
+      "note": "xAI launched Grok Bot in beta: always-on agents that share a cloud computer of their own, sign into the apps and websites a team already uses, remember past work and keep going without a prompt, returning when something needs approval. Available to SuperGrok and Cursor subscribers on desktop and iOS, with its own usage allowance.",
+      "sources": [
+        {
+          "id": "grok-bot-s1",
+          "url": "https://x.ai/news/introducing-grok-bot",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-10-10"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 80,
+        "reason": "xAI's own announcement, which prints \"Aug 11, 2026\" above the post."
+      },
+      "evidence_quote": "Aug 11, 2026 Introducing Grok Bot",
+      "why_it_matters": "The shift from an agent you prompt to one that persists: Grok Bot has a computer, a memory and work that starts without being asked. It is a product built on Grok models, not a model, so it is recorded as an agent milestone.",
+      "significance": null
+    },
+    {
       "id": "deepseek-harness",
       "title": "DeepSeek Harness developer preview",
       "date": "2026-08-13",
@@ -1805,6 +1831,32 @@
       },
       "evidence_quote": "Sep 15, 2026 Introducing System One Models & Jev",
       "why_it_matters": "A commercial model that does not generate text. Language models answer by producing tokens, and every structured output built on them is text parsed back into data; Jev answers typed questions directly with probabilities, in one parallel pass. Recorded as a milestone rather than a model release because this dataset's model types describe what a model produces, and none of them describes a decision. Whether the approach lasts is not yet known, so it is unranked.",
+      "significance": null
+    },
+    {
+      "id": "openai-dots",
+      "title": "OpenAI dots",
+      "date": "2026-09-29",
+      "type": "agent",
+      "company": "OpenAI",
+      "note": "OpenAI introduced dots, always-on agents powered by GPT-6 Astra, at DevDay 2026. Each has its own cloud computer, learns from feedback, connects to over 4,000 apps through plugins and is reached through ChatGPT, Slack or Teams. Rolled out first to Pro, Business Premium and Enterprise plans in eligible markets.",
+      "sources": [
+        {
+          "id": "openai-dots-s1",
+          "url": "https://openai.com/index/introducing-dots",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": "2026-10-10"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 80,
+        "reason": "OpenAI's own announcement, dated September 29, 2026."
+      },
+      "evidence_quote": "September 29, 2026 Introducing dots",
+      "why_it_matters": "OpenAI's version of the persistent agent, seven weeks after xAI's Grok Bot. Like Grok Bot it runs on a model already recorded here (GPT-6 Astra), so it is an agent milestone rather than a model release.",
       "significance": null
     }
   ]
