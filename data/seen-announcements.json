@@ -1,0 +1,24 @@
+{
+  "note": "Announcements candidates.mjs has reported. Reported, not tracked.",
+  "seen": [
+    "sweep|Google|2026-10-08|gemini 3.7 flash deprecation : gemini-3.7-flash is deprecated and has been replaced by gemini-3.8-flash . all requests t",
+    "sweep|Google|2026-10-06|gemini nano banana 2.1 generally available (ga) : released gemini nano banana 2.1 ( gemini-nano-banana-2.1 ), the latest",
+    "sweep|OpenAI|2026-10-06|oct 6 feature gpt-6-luna v1/decisions released the decisions api in beta with gpt-6-luna . turn text and images into typ",
+    "sweep|OpenAI|2026-10-06|oct 6 update simplified api usage tiers from five to three: build, launch, and grow. organizations automatically upgrade",
+    "sweep|xAI|2026-10|grok-voice-transcribe-1.0 end of life",
+    "feed|https://commandline.microsoft.com/microsoft-decision-1-model-foundry/",
+    "feed|https://blog.cloudflare.com/clef-faster-cheaper-multimodal/",
+    "feed|https://openai.com/index/asana-browser-agent",
+    "feed|https://huggingface.co/blog/LiquidAI/open-d1",
+    "feed|https://openai.com/index/gpt-6-for-everyone",
+    "feed|https://mistral.ai/news/mistral-large-4/",
+    "feed|https://openai.com/index/practical-guide-building-gpt-6",
+    "feed|https://blog.cloudflare.com/clef-decision-models/",
+    "feed|https://allenai.org/blog/olmocore3",
+    "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+    "feed|https://openai.com/index/introducing-gpt-6-1-sol",
+    "feed|https://openai.com/index/introducing-dots",
+    "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-flash-developers/",
+    "feed|https://openai.com/index/basis-tax-workbook-with-astra"
+  ]
+}

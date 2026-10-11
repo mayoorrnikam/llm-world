@@ -220,7 +220,10 @@ function newIds(text) {
     .map((id) => slug(id).replace(/-(?:20\d{6}|\d{4})$/, ''))
     .filter((id) => !trackedIds.has(id))
     // "mimo-v2.6" from "MiMo-V2.6 Series" is a prefix of tracked ids, not a model.
-    .filter((id) => ![...trackedIds].some((k) => k.startsWith(`${id}-`)));
+    .filter((id) => ![...trackedIds].some((k) => k.startsWith(`${id}-`)))
+    // A lab prefix on a tracked id is that model: gemini-nano-banana-2-1 is
+    // the record nano-banana-2-1.
+    .filter((id) => ![...trackedIds].some((k) => id.endsWith(`-${k}`)));
 }
 
 /** A headline that announces something and names nothing we hold. */
@@ -260,7 +263,15 @@ for (const src of SOURCES) {
     .filter((e) => e.date <= today && (e.date.length === 7 ? `${e.date}-31` : e.date) >= since)
     .filter((e) => !src.keep || src.keep.test(e.text))
     .filter((e) => { const k = `${e.date}|${e.text.slice(0, 80)}`; if (seen.has(k)) return false; seen.add(k); return true; })
-    .map((e) => ({ ...e, tracked: tracked(e.text), newIds: newIds(e.text) }));
+    .map((e) => ({ ...e, tracked: tracked(e.text), newIds: newIds(e.text) }))
+    // The same verdict the report prints, carried in the JSON so a caller
+    // (candidates.mjs, the daily workflow) does not re-derive it.
+    .map((e) => ({
+      ...e,
+      flag: e.newIds.length ? 'new-id'
+        : DECIDES.test(e.text) ? 'decision'
+          : !e.tracked.length && ANNOUNCES.test(e.text) ? 'new' : null,
+    }));
   results.push({ lab: src.lab, company: src.company, url: src.url, entries: fresh });
 }
 

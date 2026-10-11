@@ -5,6 +5,7 @@
  *   node scripts/check-feeds.mjs             recent items worth a look
  *   node scripts/check-feeds.mjs --days=30   widen the window
  *   node scripts/check-feeds.mjs --all       every item, not just matches
+ *   node scripts/check-feeds.mjs --json      the same, as JSON (candidates.mjs reads it)
  *
  * The second discovery channel, next to check-freshness.mjs, and it answers a
  * different question. Hugging Face tells us a lab published weights; a feed
@@ -218,6 +219,11 @@ for (const [name, url] of NEWSLETTERS) {
 
 found.sort((a, b) => b.date - a.date);
 novel.sort((a, b) => b.date - a.date);
+
+if (process.argv.includes('--json')) {
+  console.log(JSON.stringify({ days: DAYS, found, novel, failed, noFeed: NO_FEED }, null, 2));
+  process.exit(0);
+}
 
 console.log(`## Lab newsroom feeds — last ${DAYS} days\n`);
 if (!found.length) {

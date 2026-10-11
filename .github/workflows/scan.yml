@@ -73,10 +73,13 @@ jobs:
           node scripts/follow-up.mjs >> scan.md 2>&1 || true
           echo '```' >> scan.md
           cat scan.md
-          # Any channel having something to act on opens the issue. Keying only
-          # on the docs scan would have hidden a served-but-untracked model, and
-          # a value disagreeing with what is served, behind a quiet docs day.
-          if grep -qE 'newly listed by a lab|not tracked — [1-9]|is served — [1-9]|with a model card' scan.md; then
+          # Only something NEW comments on the issue. This used to key on
+          # standing counts too ("differs from what is served — 6", "15 with a
+          # model card"), which are true every run, so the issue took the same
+          # backlog twice a day until it had 100 comments and Claude Haiku 5.5
+          # sat unread in one of them. Standing backlog is what --backlog is
+          # for; daily news is candidates.yml's job.
+          if grep -qE 'newly listed by a lab|Served but not tracked — [1-9]' scan.md; then
             echo "found=true" >> "$GITHUB_OUTPUT"
           else
             echo "found=false" >> "$GITHUB_OUTPUT"

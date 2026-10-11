@@ -19,11 +19,15 @@ npm run feeds              # labs' own newsroom feeds — the only signal for cl
 npm run clean              # delete all generated output
 npm run mcp                # MCP server over the dataset, stdio, zero deps
 npm run sweep              # what each lab DATED in the last 30 days, from its own changelog
+npm run candidates         # sweep + feeds, only what has not been reported before (daily in CI)
 ```
 
 ### Updating the dataset ("update LLM World")
 
-Run this sequence rather than re-deriving it. The sweep replaces the discovery
+Start from the newest open issue labelled `candidates`: `candidates.yml` runs
+`npm run candidates` every morning and opens one issue per day with news, each
+lead reported once. Tick items off there as they are added or rejected. Then
+run this sequence rather than re-deriving it. The sweep replaces the discovery
 work that used to cost a session of searching; the web search is a CHECK on the
 sweep, aimed at its stated blind spots — not the primary method.
 
