@@ -172,7 +172,10 @@ async function examine(r) {
   let failures = 0;
   for (const s of archived) {
     const t = await sourceText(s.archived_url);
-    if (t) texts.push(t); else failures++;
+    // sourceText() signals failure with a Symbol, which is truthy — `if (t)`
+    // lets it through and matchAll() crashes downstream. Test the type,
+    // not the truthiness (METHODOLOGY: the same trap has crashed three tools).
+    if (typeof t === 'string') texts.push(t); else failures++;
   }
 
   done++;

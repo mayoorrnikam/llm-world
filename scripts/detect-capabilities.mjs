@@ -240,7 +240,8 @@ async function examine(r) {
   let failures = 0;
   for (const s of archived) {
     const t = await sourceText(s.archived_url);
-    if (t) texts.push(t); else failures++;
+    // sourceText() failure is a Symbol (truthy) — test the type, not truthiness.
+    if (typeof t === 'string') texts.push(t); else failures++;
   }
 
   done++;
@@ -314,7 +315,8 @@ async function backfill(r) {
   const texts = [];
   for (const s of archived) {
     const t = await sourceText(s.archived_url);
-    if (t) texts.push(t);
+    // sourceText() failure is a Symbol (truthy) — test the type, not truthiness.
+    if (typeof t === 'string') texts.push(t);
   }
 
   done++;
