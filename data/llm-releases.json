@@ -21051,15 +21051,16 @@
           "url": "https://developers.googleblog.com/google-ai-edge-with-embeddinggemma-2/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261006172426/https://developers.googleblog.com/google-ai-edge-with-embeddinggemma-2/",
+          "retrieved": "2026-10-06"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
-      }
+      },
+      "evidence": {}
     },
     {
       "id": "mistral-large-4",
@@ -21099,14 +21100,32 @@
           "url": "https://mistral.ai/news/mistral-large-4/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261006132643/https://mistral.ai/news/mistral-large-4/",
+          "retrieved": "2026-10-06"
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-06",
+            "sources": [
+              "mistral-large-4-s1"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 1000000000000,
+            "sources": [
+              "mistral-large-4-s1"
+            ]
+          }
+        ]
       }
     },
     {
@@ -21317,8 +21336,8 @@
           "url": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/introducing-microsoft-decision-1-in-microsoft-foundry-for-decision-and-classific/4562742",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261009193331/https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/introducing-microsoft-decision-1-in-microsoft-foundry-for-decision-and-classific/4562742",
+          "retrieved": "2026-10-09"
         },
         {
           "id": "microsoft-decision-1-s2",
