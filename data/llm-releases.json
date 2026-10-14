@@ -21425,6 +21425,63 @@
           }
         ]
       }
+    },
+    {
+      "id": "lfm-2.5-24b-a2b",
+      "model": "LFM2.5-24B-A2B",
+      "company": "LiquidAI",
+      "family": "LFM2.5-24B-A2B",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "DRAFT — date is the Hugging Face repo creation date, not the announcement. Replace before recording.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-12",
+          "sources": [
+            "lfm-2.5-24b-a2b-s1",
+            "lfm-2.5-24b-a2b-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 23971585280
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "other"
+      },
+      "sources": [
+        {
+          "id": "lfm-2.5-24b-a2b-s1",
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "lfm-2.5-24b-a2b-s2",
+          "url": "https://arxiv.org/abs/2511.23404",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
     }
   ],
   "redirects": [
