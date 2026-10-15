@@ -1,0 +1,30 @@
+name: Check
+
+# The gate a pull request must pass before it can merge into main.
+#
+# main is protected: every change — a person's, an agent's, or Claude's —
+# arrives as a pull request, and the branch ruleset requires this job. It runs
+# the same `npm run check` as the pre-push hook (validate → build → smoke), on
+# every pull request with no path filter: a required check that a docs-only PR
+# never triggers would block that PR forever.
+#
+# The scheduled bots (archive, scan, candidates, milestones) commit state to
+# main directly; the ruleset lets GitHub Actions bypass it for exactly that.
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: validate → build → smoke
+        run: npm run check
