@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-10",
+  "updated": "2026-10-15",
   "schema_version": "1.6",
   "releases": [
     {
@@ -342,7 +342,10 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "audio",
+        "multilingual"
+      ],
       "tags": [],
       "note": "OpenAI's speech recognition model, released with open weights and inference code.",
       "events": [
@@ -372,7 +375,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: audio: “static [&>div]:h-full\"> Research Products Safety Company September 21, 2022 Introducing Whisper We’ve trained and are open-sourcing a neural net called Whisper that approaches huma” | multilingual: “Whisper is an automatic speech recognition (ASR) system trained on 680,000 hours of multilingual and multitask supervised data collected from the web.”."
       },
       "evidence": {
         "release_date": [
@@ -383,7 +386,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "license"
+      ]
     },
     {
       "id": "llama-1",
@@ -2740,7 +2746,9 @@
           "text"
         ]
       },
-      "capabilities": [],
+      "capabilities": [
+        "coding"
+      ],
       "tags": [],
       "note": "An efficient 236B MoE with 21B active parameters that made DeepSeek a global open-model force.",
       "events": [
@@ -2784,7 +2792,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Every value this record asserts — date (2024-05-06), context window (128K) and parameter count (236B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Every value this record asserts — date (2024-05-06), context window (128K) and parameter count (236B) — was found in an archived primary source, checked 2026-08-10. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Capabilities evidenced from the primary sources: coding: “As illustrated, DeepSeek-V2 demonstrates considerable proficiency in LiveCodeBench, achieving a Pass@1 score that surpasses several other sophisticated models.”."
       },
       "evidence": {
         "release_date": [
@@ -6307,7 +6315,9 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "image_generation"
+      ],
       "tags": [],
       "note": "Alibaba's open image generation model, built around native text rendering inside generated images.",
       "events": [
@@ -6337,7 +6347,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there. Capabilities evidenced from the primary sources: image_generation: “Strong Cross-Benchmark Performance : Evaluated on multiple public benchmarks, Qwen-Image consistently outperforms existing models across diverse generation and editing tasks, estab”."
       },
       "evidence": {
         "release_date": [
@@ -6744,7 +6754,15 @@
         "primary_type": "vision",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "A 100B-scale open vision reasoning model covering a broad range of visual tasks including video.",
@@ -6763,7 +6781,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "sources": [
         {
@@ -6802,7 +6820,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there."
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Licence from the model card's own license field on zai-org/GLM-4.5V. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on zai-org/GLM-4.5V."
       },
       "evidence": {
         "release_date": [
@@ -6864,7 +6882,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be traced: every archived snapshot of those sources predates the release — the newest is 2025-06-05, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2025-08-14 would settle it."
       }
     },
     {
@@ -7142,7 +7160,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "sources": [
         {
@@ -7181,7 +7199,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Licence from the model card's own license field on zai-org/GLM-4.6."
       },
       "evidence": {
         "release_date": [
@@ -7234,7 +7252,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       }
     },
     {
@@ -7292,7 +7310,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "pricing": [
         {
@@ -8304,7 +8322,15 @@
         "primary_type": "vision",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "The 4.6-generation multimodal model, with improved vision understanding.",
@@ -8323,7 +8349,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "sources": [
         {
@@ -8362,7 +8388,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there."
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Licence from the model card's own license field on zai-org/GLM-4.6V. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on zai-org/GLM-4.6V."
       },
       "evidence": {
         "release_date": [
@@ -8550,7 +8576,10 @@
         "subtype": "llm"
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "agentic"
+      ],
       "tags": [],
       "note": "Xiaomi released MiMo-V2-Flash with a hybrid architecture using a 1:5 ratio of global attention to sliding-window attention (window size 128), native 32K context and training extended to 256K (262,144 in the published config). Xiaomi's changelog records two later updates, on 2026-01-12 and 2026-02-04, strengthening general and coding performance in Thinking mode.",
       "events": [
@@ -8608,7 +8637,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Capabilities evidenced from the primary sources: coding: “mimo-v2-flash-0204 mimo-v2-flash-0112 mimo-v2-flash SWE-Bench Verified Non-Thinking 73.” | agentic: “Post-Training Technical Highlights MiMo-V2-Flash leverages a post-training pipeline designed to maximize reasoning and agentic capabilities through innovative distillation and rein”."
       },
       "evidence": {
         "release_date": [
@@ -8665,7 +8694,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "sources": [
         {
@@ -8704,7 +8733,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there."
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Licence from the model card's own license field on zai-org/GLM-4.7."
       },
       "evidence": {
         "release_date": [
@@ -8795,7 +8824,14 @@
         "primary_type": "image_generation",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "image"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "An image generation model built on a multimodal architecture and trained on domestic compute.",
@@ -8812,7 +8848,7 @@
       "specifications": {},
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "sources": [
         {
@@ -8843,7 +8879,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to official documentation and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Licence from the model card's own license field on zai-org/GLM-Image. Modalities from the model card's own pipeline_tag \"text-to-image\" on zai-org/GLM-Image."
       },
       "evidence": {}
     },
@@ -8885,7 +8921,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "sources": [
         {
@@ -8916,7 +8952,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Licence from the model card's own license field on zai-org/GLM-4.7-Flash."
       },
       "evidence": {
         "release_date": [
@@ -9169,7 +9205,14 @@
         "primary_type": "vision",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "A compact optical character recognition model built on Zhipu's own CogViT.",
@@ -9186,7 +9229,7 @@
       "specifications": {},
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "sources": [
         {
@@ -9217,7 +9260,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to official documentation and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Licence from the model card's own license field on zai-org/GLM-OCR. Modalities from the model card's own pipeline_tag \"image-to-text\" on zai-org/GLM-OCR."
       },
       "evidence": {}
     },
@@ -9416,7 +9459,21 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 1.75,
+            "output": 14
+          },
+          "currency": "USD",
+          "observed_on": "2026-02-26",
+          "sources": [
+            "gpt-5-3-codex-s2"
+          ]
+        }
+      ]
     },
     {
       "id": "glm-5",
@@ -9459,7 +9516,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "sources": [
         {
@@ -9498,7 +9555,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Cited to official documentation and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. The primary source states the model is text-only. Licence from the model card's own license field on zai-org/GLM-5."
       },
       "evidence": {}
     },
@@ -9628,7 +9685,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "Apache-2.0"
       },
       "sources": [
         {
@@ -9651,7 +9708,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 80,
-        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Licence from the model card's own license field on Qwen/Qwen3.5-397B-A17B."
       },
       "evidence": {
         "context_window": [
@@ -9970,9 +10027,13 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "grok-4-20-multi-agent",
@@ -10031,9 +10092,13 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "gpt-5-4",
@@ -10150,7 +10215,10 @@
         "subtype": "llm"
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "reasoning"
+      ],
       "tags": [],
       "note": "A 120B open hybrid Mamba-Transformer MoE for agentic reasoning, with a one-million-token context.",
       "events": [
@@ -10192,7 +10260,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there. Capabilities evidenced from the primary sources: coding: “For instance, in software development, simple merge requests can be addressed by Nemotron 3 Nano while complex coding tasks that require deeper understanding of the code base can b” | reasoning: “Open training and evaluation infrastructure NVIDIA publishes development techniques and tools, giving researchers and enterprises the flexibility to customize Nemotron 3 Super or b”."
       },
       "evidence": {
         "release_date": [
@@ -10280,7 +10348,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       }
     },
     {
@@ -10477,7 +10545,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be traced: every archived snapshot of those sources predates the release — the newest is 2025-06-05, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2026-03-25 would settle it."
       }
     },
     {
@@ -10541,7 +10609,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       }
     },
     {
@@ -10654,7 +10722,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       }
     },
     {
@@ -10758,7 +10826,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "MIT"
       },
       "sources": [
         {
@@ -10797,7 +10865,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
+        "reason": "Cited to official documentation and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present. Licence from the model card's own license field on zai-org/GLM-5.1."
       },
       "evidence": {
         "release_date": [
@@ -11593,7 +11661,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       }
     },
     {
@@ -11950,7 +12018,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "reasoning",
         "agentic"
@@ -11998,7 +12073,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
         "release_date": [
@@ -12104,7 +12179,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "pricing": [
         {
@@ -12436,7 +12511,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "hy-mt2-7b",
@@ -12505,7 +12584,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "hy-mt2-30b-a3b",
@@ -12574,7 +12657,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "mistral-medium-3-5",
@@ -12649,6 +12736,20 @@
           "score": 77.6,
           "evaluation_type": "vendor_reported",
           "reported_on": "2026-05-22",
+          "sources": [
+            "mistral-medium-3-5-s1"
+          ]
+        }
+      ],
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 1.5,
+            "output": 7.5
+          },
+          "currency": "USD",
+          "observed_on": "2026-05-21",
           "sources": [
             "mistral-medium-3-5-s1"
           ]
@@ -12821,7 +12922,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       }
     },
     {
@@ -12833,10 +12934,21 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "coding",
-        "agentic"
+        "agentic",
+        "function_calling",
+        "structured_output",
+        "reasoning"
       ],
       "tags": [],
       "note": "xAI's coding model trained for agentic coding workflows, made available on the xAI API as grok-build-0.1 after early access. It is the model; Grok Build, the coding agent it powers, is recorded as a milestone.",
@@ -12852,7 +12964,7 @@
       ],
       "specifications": {
         "language": {
-          "context_window": null,
+          "context_window": 256000,
           "parameter_count": null
         }
       },
@@ -12876,12 +12988,28 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260530201148/https://docs.x.ai/developers/release-notes",
           "retrieved": "2026-05-30"
+        },
+        {
+          "id": "grok-build-0-1-xdocs",
+          "url": "https://docs.x.ai/developers/models.md",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "grok-build-0-1-xmodel",
+          "url": "https://docs.x.ai/developers/models/grok-build-0.1",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
-        "status": "verified",
+        "status": "partially_verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Downgraded: context_window comes from the lab's documentation, but attribute-facts could not read an archived snapshot that states it, so the figure is not yet traced to a quoted sentence. reconcile-status upgrades it once attribute-facts succeeds."
       },
       "evidence": {
         "release_date": [
@@ -13281,7 +13409,9 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "speech_generation"
+      ],
       "tags": [],
       "note": "Multilingual text-to-speech with voice cloning.",
       "events": [
@@ -13311,7 +13441,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there. Capabilities evidenced from the primary sources: speech_generation: “com LinkedIn Instagram X Off Accessibility Mode Off Accessibility Mode Copilot --> Models Introducing MAI-Voice-2 Superintelligence team June 2, 2026 Models Superintelligence team ”."
       },
       "evidence": {
         "release_date": [
@@ -14103,7 +14233,10 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "agentic"
+      ],
       "tags": [],
       "note": "Mistral's document-understanding model, reading page images into structured text.",
       "events": [
@@ -14133,7 +14266,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there. Capabilities evidenced from the primary sources: coding: “Pricing Plans API pricing For enterprises Services Delivery methodology Model customization Industries Financial services Public sector & government Manufacturing Use cases Use cas” | agentic: “Benchmarks “We benchmarked Mistral OCR 4 against the leading agentic document parsers across a chart and figure dense financial QA dataset and reached equivalent accuracy at roughl”."
       },
       "evidence": {
         "release_date": [
@@ -14422,7 +14555,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       }
     },
     {
@@ -14530,7 +14663,21 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 0.1288,
+            "output": 0.5336
+          },
+          "currency": "USD",
+          "observed_on": "2026-08-28",
+          "sources": [
+            "hy3-s2"
+          ]
+        }
+      ]
     },
     {
       "id": "muse-image",
@@ -14542,7 +14689,13 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "image_generation",
+        "reasoning",
+        "coding",
+        "agentic",
+        "tool_use"
+      ],
       "tags": [],
       "note": "Meta Superintelligence Labs' first image generation model, launched in the Meta AI app, meta.ai, Instagram Stories in the US and WhatsApp in some countries. It works as an agent, calling search and coding tools and refining its own output. Announced alongside a preview of Muse Video, which was not yet available.",
       "events": [
@@ -14572,7 +14725,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Capabilities evidenced from the primary sources: image_generation: “Muse Image is our most advanced image generation model yet: it follows instructions faithfully, edits with precision, composes from multiple references, and draws on Instagram for ” | reasoning: “Muse Image: Agentic Image Generation Instead of directly mapping prompts to images, Muse Image operates as an agent: it invokes search and coding tools to improve accuracy, self-re” | coding: “Muse Image: Agentic Image Generation Instead of directly mapping prompts to images, Muse Image operates as an agent: it invokes search and coding tools to improve accuracy, self-re” | agentic: “Muse Image: Agentic Image Generation Instead of directly mapping prompts to images, Muse Image operates as an agent: it invokes search and coding tools to improve accuracy, self-re” | tool_use: “Tool Use We provide Muse Image with access to tools to enhance its agentic capabilities.”."
       },
       "evidence": {
         "release_date": [
@@ -15108,7 +15261,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "kimi-k3",
@@ -15512,7 +15669,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "pricing": [
         {
@@ -15646,7 +15803,10 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "multilingual",
+        "image_generation"
+      ],
       "tags": [],
       "note": "A multimodal backbone for image, video and audio, released into early access with weights promised later.",
       "events": [
@@ -15676,7 +15836,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there. Capabilities evidenced from the primary sources: multilingual: “b]:font-medium [&>strong]:font-medium\">While still in development, FLUX 3 Video is already particularly strong in capturing human facial expressions, associating sounds with physic” | image_generation: “(“FLUX 3 Video”) b]:font-medium [&>strong]:font-medium\">Action prediction through selected research and commercial partners, beginning with mimic robotics(“FLUX-mimic and FLUX 3 Ac”."
       },
       "evidence": {
         "release_date": [
@@ -16168,7 +16328,15 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Qwen introduced Qwen3.8-Flash-Next as the first open-weight release under a new architecture aimed at cost efficiency, combining Gated DeltaNet and Gated Attention with Qwen Sparse Attention and a Gated Residual stream. Qwen states a 125B-parameter main model supplemented by an additional 51B N-gram embeddings, with 6B parameters activated per token, and reports training cost around one ninth of Qwen3.7-Plus.",
@@ -16190,7 +16358,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "qwen-community-1.0"
       },
       "sources": [
         {
@@ -16213,9 +16381,13 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on Qwen/Qwen3.8-Flash-Next."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "flux-3-video",
@@ -16227,7 +16399,9 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "video_generation"
+      ],
       "tags": [],
       "note": "Generation of clips up to 20 seconds at HD and Full HD, with audio created alongside the video.",
       "events": [
@@ -16257,7 +16431,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there. Capabilities evidenced from the primary sources: video_generation: “b]:font-medium [&>strong]:font-medium\"> FLUX 3 Video provides a SOTA Video Experience b]:font-medium [&>strong]:font-medium\">FLUX 3 Video provides SOTA capabilities in both text-to”."
       },
       "evidence": {
         "release_date": [
@@ -16400,7 +16574,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "lfm1.0"
       },
       "sources": [
         {
@@ -16423,7 +16597,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to the lab's own announcement and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
+        "reason": "Cited to the lab's own announcement and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only. Licence from the model card's own license_name field on LiquidAI/LFM2.5-2.6B."
       },
       "evidence": {
         "release_date": [
@@ -16577,7 +16751,15 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "The 27B open-weight model of the Qwen3.8 generation, released under Apache 2.0.",
@@ -16613,7 +16795,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the official model card. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on Qwen/Qwen3.8-27B."
       },
       "evidence": {
         "parameter_count": [
@@ -16718,7 +16900,7 @@
       },
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "qwen3.8-max"
       },
       "sources": [
         {
@@ -16733,7 +16915,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Licence from the model card's own license_name field on Qwen/Qwen3.8-2.4T-A95B."
       },
       "evidence": {
         "context_window": [
@@ -17094,6 +17276,21 @@
       },
       "undisclosed": [
         "parameter_count"
+      ],
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 12.5,
+            "output": 75
+          },
+          "currency": "USD",
+          "observed_on": "2026-10-15",
+          "sources": [
+            "gpt-5-6-cyber-odocs"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
       ]
     },
     {
@@ -17875,7 +18072,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {
         "context_window": [
@@ -17907,7 +18104,15 @@
         "primary_type": "vision",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "DeepSeek released DeepSeek-V4-Flash-Vision-Exp as an experimental multimodal vision understanding model on the DeepSeek API platform. It was retired on 2026-09-10: the model name is still accepted, but requests are served by DeepSeek-V4.1-Flash and billed at the Flash price.",
@@ -17954,7 +18159,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on deepseek-ai/DeepSeek-V4-Flash-Vision-Exp."
       },
       "evidence": {}
     },
@@ -17967,7 +18172,15 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Z.AI released GLM-5.3-Flash with native visual capabilities for observing interfaces, rendering results and interaction feedback, and a hybrid architecture combining linear and sparse attention with 320B total parameters and 18B activated.",
@@ -18012,7 +18225,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on zai-org/GLM-5.3-Flash."
       },
       "evidence": {
         "release_date": [
@@ -18073,7 +18286,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {}
     },
@@ -18117,7 +18330,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {}
     },
@@ -18217,7 +18430,9 @@
         "subtype": "llm"
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "agentic"
+      ],
       "tags": [],
       "note": "Anthropic launched Claude Fable 5.1 as the successor to Claude Fable 5 for long-running agentic coding, knowledge work and research. Its API id is claude-fable-5-1, and Anthropic states a 1M token context window by default with 128k maximum output tokens.",
       "events": [
@@ -18269,7 +18484,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation and the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {}
     },
@@ -18326,7 +18541,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation and the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {}
     },
@@ -18392,8 +18607,23 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "reasoning",
+        "function_calling",
+        "structured_output",
+        "agentic"
+      ],
       "tags": [],
       "note": "Google made Gemini 3.8 Flash generally available, describing it as its most intelligent Flash model, engineered for long-horizon software engineering, autonomous agents and complex enterprise workflows. Its API endpoint is gemini-3.8-flash.",
       "events": [
@@ -18408,7 +18638,7 @@
       ],
       "specifications": {
         "language": {
-          "context_window": null,
+          "context_window": 1048576,
           "parameter_count": null
         }
       },
@@ -18432,12 +18662,20 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260902150821/https://ai.google.dev/gemini-api/docs/models",
           "retrieved": "2026-09-02"
+        },
+        {
+          "id": "gemini-3-8-flash-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
-        "status": "verified",
+        "status": "partially_verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Downgraded: context_window comes from the lab's documentation, but attribute-facts could not read an archived snapshot that states it, so the figure is not yet traced to a quoted sentence. reconcile-status upgrades it once attribute-facts succeeds."
       },
       "evidence": {
         "release_date": [
@@ -18517,8 +18755,23 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "reasoning",
+        "function_calling",
+        "structured_output",
+        "agentic"
+      ],
       "tags": [],
       "note": "Google launched Gemini 3.8 Flash Cyber, which it calls its most advanced cyber model, through the Fairwind Program — a limited-access programme for governments and trusted partners — paired with its CodeMender harness to find, verify and fix vulnerabilities. It is not generally available and does not appear in the public Gemini API model list.",
       "events": [
@@ -18532,7 +18785,7 @@
       ],
       "specifications": {
         "language": {
-          "context_window": null,
+          "context_window": 1048576,
           "parameter_count": null
         }
       },
@@ -18548,12 +18801,20 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260902180846/https://blog.google/innovation-and-ai/technology/safety-security/fairwind-program/",
           "retrieved": "2026-09-02"
+        },
+        {
+          "id": "gemini-3-8-flash-cyber-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
-        "status": "verified",
+        "status": "partially_verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Downgraded: context_window comes from the lab's documentation, but attribute-facts could not read an archived snapshot that states it, so the figure is not yet traced to a quoted sentence. reconcile-status upgrades it once attribute-facts succeeds."
       },
       "evidence": {
         "release_date": [
@@ -18575,8 +18836,20 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "structured_output",
+        "function_calling",
+        "reasoning"
+      ],
       "tags": [],
       "note": "OpenAI introduced GPT-6 Astra, which it describes as its most intelligent and aligned model and state of the art on computer use, browsing, software engineering, cybersecurity, science and professional work. It rolled out first to a limited set of organizations, with ChatGPT Plus, Pro, Business and Enterprise, the API, Azure and Bedrock to follow. OpenAI's own announcement page carries no date; the date here is the one OpenAI's news index prints against the accompanying safety overview and system card.",
       "events": [
@@ -18592,7 +18865,7 @@
       ],
       "specifications": {
         "language": {
-          "context_window": null,
+          "context_window": 1050000,
           "parameter_count": null
         }
       },
@@ -18624,12 +18897,20 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260903193434/https://deploymentsafety.openai.com/gpt-6-astra",
           "retrieved": "2026-09-03"
+        },
+        {
+          "id": "gpt-6-astra-odocs",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       }
     },
     {
@@ -18800,7 +19081,15 @@
         "primary_type": "image_generation",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "One of two API models OpenAI introduced alongside ChatGPT Images 2.5. OpenAI states Flare brings the same improvements in quality, editing and speed.",
@@ -18826,6 +19115,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260908183908/https://openai.com/index/introducing-chatgpt-images-2-5/",
           "retrieved": "2026-09-08"
+        },
+        {
+          "id": "gpt-image-2-5-flare-odocs",
+          "url": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -18853,7 +19150,15 @@
         "primary_type": "image_generation",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "The second API model introduced alongside ChatGPT Images 2.5. OpenAI states Sunburst offers an extra level of precision for detailed creative work, with longer generation times.",
@@ -18879,6 +19184,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260908183908/https://openai.com/index/introducing-chatgpt-images-2-5/",
           "retrieved": "2026-09-08"
+        },
+        {
+          "id": "gpt-image-2-5-sunburst-odocs",
+          "url": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -18906,7 +19219,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "OpenAI made GPT-Rosalind (gpt-rosalind-research) generally available through its trusted-access programme, for approved internal life sciences research. The date is general availability as OpenAI's API changelog states it; any earlier limited preview is not recorded here.",
@@ -18942,9 +19262,12 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "auk",
@@ -18955,8 +19278,17 @@
         "primary_type": "audio",
         "subtype": null
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
+      "capabilities": [
+        "speech_generation"
+      ],
       "tags": [],
       "note": "Tencent open-sourced AuK, a text-to-speech model, with code and weights publicly available. Its Hugging Face repository was created on 2026-08-18, three weeks before the release.",
       "events": [
@@ -18995,7 +19327,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Modalities from the model card's own pipeline_tag \"text-to-speech\" on tencent/AuK. Capabilities evidenced from the primary sources: speech_generation: “toml View all files Repository files navigation README Code of conduct Contributing License More items AuK: An Open-Source Foundational Model for Speech Generation and Editing 💻 T”."
       },
       "evidence": {
         "release_date": [
@@ -19017,7 +19349,14 @@
         "primary_type": "audio",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Released alongside AuK: Tencent's README records day-zero inference support for both AuK and AuK-Flash on 2026-09-09.",
@@ -19057,7 +19396,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Modalities from the model card's own pipeline_tag \"text-to-speech\" on tencent/AuK-Flash."
       },
       "evidence": {
         "release_date": [
@@ -19079,7 +19418,15 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "DeepSeek released DeepSeek-V4.1-Flash, which it describes as the smallest model in a new architecture family, with native multimodal visual understanding and an architecture designed for a higher capability ceiling, faster inference and higher throughput. It is served on the DeepSeek API as deepseek-flash. DeepSeek also retired deepseek-v4-flash-vision-exp on the same day, with its requests now served by this model.",
@@ -19124,7 +19471,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on deepseek-ai/DeepSeek-V4.1-Flash."
       },
       "evidence": {
         "release_date": [
@@ -19136,7 +19483,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "gpt-live-1",
@@ -19147,8 +19498,19 @@
         "primary_type": "audio",
         "subtype": null
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "audio",
+          "text"
+        ],
+        "output": [
+          "audio",
+          "text"
+        ]
+      },
+      "capabilities": [
+        "function_calling"
+      ],
       "tags": [],
       "note": "OpenAI introduced GPT-Live-1 in the API for building natural voice experiences.",
       "events": [
@@ -19260,7 +19622,17 @@
         "primary_type": "audio",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text",
+          "audio"
+        ]
+      },
       "capabilities": [
         "reasoning",
         "function_calling"
@@ -19298,6 +19670,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260915174107/https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/",
           "retrieved": "2026-09-15"
+        },
+        {
+          "id": "gemini-3-8-live-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -19325,9 +19705,20 @@
         "primary_type": "audio",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text",
+          "audio"
+        ]
+      },
       "capabilities": [
-        "reasoning"
+        "reasoning",
+        "function_calling"
       ],
       "tags": [],
       "note": "Released with Gemini 3.8 Live: a high-reasoning audio-to-audio model (gemini-3.8-live-extended-thinking) that supports background reasoning during live audio interaction.",
@@ -19362,6 +19753,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260915174107/https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/",
           "retrieved": "2026-09-15"
+        },
+        {
+          "id": "gemini-3-8-live-extended-thinking-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -19390,7 +19789,9 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "function_calling"
+      ],
       "tags": [],
       "note": "TypeSafe AI's first model and, in its words, the first System One model. Jev takes a state and typed questions and returns every answer in parallel as calibrated probabilities with confidence scores, rather than generating text token by token. Served through TypeSafe's API as jev-1.13 and priced per input token; no weights were released. Classified `decision` under TAXONOMY §6a.",
       "events": [
@@ -19438,7 +19839,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Capabilities evidenced from the primary sources: function_calling: “Think of Jev as a frontier-intelligence function call: unstructured state in, typed probabilistic decisions out.”."
       },
       "evidence": {}
     },
@@ -19451,7 +19852,14 @@
         "primary_type": "audio",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "xAI introduced Grok Voice Transcribe 2.0, available on its API as grok-voice-transcribe-2.0 alongside the earlier 1.0.",
@@ -19491,7 +19899,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
         "release_date": [
@@ -19513,7 +19921,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "agentic"
       ],
@@ -19560,9 +19975,13 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be traced: every archived snapshot of those sources predates the release — the newest is 2026-09-17, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2026-09-18 would settle it. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "qwen-3-8-livetranslate",
@@ -19573,7 +19992,14 @@
         "primary_type": "audio",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "multilingual"
       ],
@@ -19615,7 +20041,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. No image, audio or video capability appears anywhere in the primary sources, which labs advertise prominently when present."
       },
       "evidence": {}
     },
@@ -19628,7 +20054,14 @@
         "primary_type": "image_generation",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "image"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Qwen open-sourced Qwen-Image-2.1, a unified text-to-image generation and image editing model built for efficiency, with mixed-granularity attention and prefix KV-cache reuse. Qwen states 7B parameters in its visual generation component (32 single-stream DiT layers); that is one component, not the whole model, so no total parameter count is recorded. Numbered below Qwen-Image-3.0 but released after it: this is Qwen's open-weight image line, where 3.0 is served by API.",
@@ -19645,7 +20078,7 @@
       "specifications": {},
       "access": {
         "open_weights": true,
-        "license": null
+        "license": "qwen-research"
       },
       "sources": [
         {
@@ -19668,7 +20101,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement and the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities from the model card's own pipeline_tag \"text-to-image\" on Qwen/Qwen-Image-2.1."
       },
       "evidence": {}
     },
@@ -19681,11 +20114,21 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "reasoning",
         "agentic",
-        "coding"
+        "coding",
+        "function_calling",
+        "structured_output"
       ],
       "tags": [],
       "note": "xAI made Grok 4.7 available on its API as grok-4.7, describing it as its frontier model for coding, agentic tasks and knowledge work. xAI states a 500k context window, text and image inputs with text-only output, and reasoning effort settings of low, medium, high (default) and xhigh. The date is from xAI's newsroom post of 2026-09-21; the release notes list Grok 4.7 under September without a day.",
@@ -19734,6 +20177,22 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260921182849/https://x.ai/news/grok-4-7",
           "retrieved": "2026-09-21"
+        },
+        {
+          "id": "grok-4-7-xdocs",
+          "url": "https://docs.x.ai/developers/models.md",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "grok-4-7-xmodel",
+          "url": "https://docs.x.ai/developers/models/grok-4.7",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -19760,7 +20219,32 @@
             ]
           }
         ]
-      }
+      },
+      "benchmarks": [
+        {
+          "name": "HealthBench",
+          "score": 56.7,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-09-21",
+          "sources": [
+            "grok-4-7-s3"
+          ]
+        }
+      ],
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 2,
+            "output": 6
+          },
+          "currency": "USD",
+          "observed_on": "2026-09-23",
+          "sources": [
+            "grok-4-7-s2"
+          ]
+        }
+      ]
     },
     {
       "id": "claude-opus-5-5",
@@ -19823,7 +20307,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
         "reasoning"
       ],
@@ -19870,9 +20361,12 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation and the lab's own announcement. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gpt-6-luna",
@@ -19883,9 +20377,19 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "reasoning"
+        "reasoning",
+        "structured_output",
+        "function_calling"
       ],
       "tags": [],
       "note": "Released with GPT-6 Sol: a cheaper GPT-6 reasoning model optimised for fast responses and higher volume, accepting text and image inputs and generating text. OpenAI's announcement page carries no date; the date is the one OpenAI's API changelog states.",
@@ -19901,7 +20405,7 @@
       ],
       "specifications": {
         "language": {
-          "context_window": null,
+          "context_window": 1050000,
           "parameter_count": null
         }
       },
@@ -19925,12 +20429,20 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260922180252/https://openai.com/index/introducing-gpt-6-sol-and-luna/",
           "retrieved": "2026-09-22"
+        },
+        {
+          "id": "gpt-6-luna-odocs",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation and the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {}
     },
@@ -20099,7 +20611,14 @@
         "primary_type": "audio",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Google made Gemini 3.8 Flash TTS (gemini-3.8-flash-tts) generally available as its flagship next-generation text-to-speech model, alongside a Voices endpoint in the Gemini API.",
@@ -20125,12 +20644,20 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260921201341/https://ai.google.dev/gemini-api/docs/changelog",
           "retrieved": "2026-09-21"
+        },
+        {
+          "id": "gemini-3-8-flash-tts-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be traced: every archived snapshot of those sources predates the release — the newest is 2026-09-21, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2026-09-22 would settle it."
       },
       "evidence": {}
     },
@@ -20143,7 +20670,14 @@
         "primary_type": "audio",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Released with Gemini 3.8 Flash TTS: the lighter of Google's two next-generation text-to-speech models.",
@@ -20169,12 +20703,20 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260921201341/https://ai.google.dev/gemini-api/docs/changelog",
           "retrieved": "2026-09-21"
+        },
+        {
+          "id": "gemini-3-8-flash-lite-tts-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date could not be traced: every archived snapshot of those sources predates the release — the newest is 2026-09-21, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2026-09-22 would settle it."
       },
       "evidence": {}
     },
@@ -20204,7 +20746,7 @@
       "specifications": {},
       "access": {
         "open_weights": true,
-        "license": "OpenMDW-1.1"
+        "license": "OpenMDW License 1.1"
       },
       "sources": [
         {
@@ -20297,7 +20839,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
       "evidence": {}
     },
@@ -20369,9 +20911,20 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "coding"
+        "coding",
+        "structured_output",
+        "function_calling",
+        "reasoning"
       ],
       "tags": [],
       "note": "OpenAI released GPT-6.1 Sol (gpt-6.1-sol) in the Responses and Chat Completions APIs, for complex coding and professional work at a lower cost than GPT-6 Astra.",
@@ -20386,7 +20939,7 @@
       ],
       "specifications": {
         "language": {
-          "context_window": null,
+          "context_window": 1050000,
           "parameter_count": null
         }
       },
@@ -20402,12 +20955,20 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260928233209/https://developers.openai.com/api/docs/changelog",
           "retrieved": "2026-09-28"
+        },
+        {
+          "id": "gpt-6-1-sol-odocs",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to official documentation. Not verified because the release date and the context window could not be traced: every archived snapshot of those sources predates the release — the newest is 2026-09-28, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2026-09-29 would settle it."
       },
       "evidence": {}
     },
@@ -20420,9 +20981,22 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [
-        "reasoning"
+        "reasoning",
+        "function_calling",
+        "structured_output",
+        "agentic"
       ],
       "tags": [],
       "note": "Google's first Gemini 4 model, announced as its most capable yet. At announcement it was rolling out only to trusted cyber defenders through Google DeepMind's Fairwind Program, with paid API customers and Google AI Ultra subscribers to follow. Google states a 1M-token output limit; it does not state the input context window, and no API model page existed at announcement.",
@@ -20433,6 +21007,20 @@
           "sources": [
             "gemini-4-argon-s1",
             "gemini-4-argon-s2"
+          ]
+        },
+        {
+          "type": "api_availability",
+          "date": "2026-10-13",
+          "sources": [
+            "gemini-4-argon-s3"
+          ]
+        },
+        {
+          "type": "public_availability",
+          "date": "2026-10-13",
+          "sources": [
+            "gemini-4-argon-s4"
           ]
         }
       ],
@@ -20462,6 +21050,30 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20260929123717/https://deepmind.google/fairwind-program/",
           "retrieved": "2026-09-29"
+        },
+        {
+          "id": "gemini-4-argon-s3",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-4-argon/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "gemini-4-argon-s4",
+          "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-4-argon-availability/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261013160816/https://blog.google/innovation-and-ai/products/gemini-app/gemini-4-argon-availability/",
+          "retrieved": "2026-10-13"
+        },
+        {
+          "id": "gemini-4-argon-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -20720,7 +21332,10 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "agentic",
+        "video"
+      ],
       "tags": [],
       "note": "Cloudflare's open decision model, served on Workers AI. A frozen Qwen3.8-27B with low-rank adapters and a routing head: questions and answer types arrive with each request, and it scores the valid answers in one prefill pass, returning typed answers with probabilities rather than generating text.",
       "events": [
@@ -20759,7 +21374,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Capabilities evidenced from the primary sources: agentic: “How fine-tuning can extend the capabilities of Clef We heard a lot of internal use cases that required fine-tuning our Clef model to be built into our agentic workflows at Cloudfla” | video: “co/Cloudflare/clef Clef Model Files Usage Jev / SystemOne API Images and video Input format Results Decision Index Workflow evals License Clef Announcement: Clef decision models on”."
       },
       "evidence": {
         "release_date": [
@@ -20783,7 +21398,9 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "video"
+      ],
       "tags": [],
       "note": "The faster sibling of Clef for latency-critical decisions, built the same way on Qwen3.5-9B.",
       "events": [
@@ -20822,7 +21439,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Capabilities evidenced from the primary sources: video: “Clef-Flash Model Files Usage Jev / SystemOne API Images and video Input format Results Decision Index Workflow evals License Clef-Flash Announcement: Clef decision models on the Cl”."
       },
       "evidence": {
         "release_date": [
@@ -20969,8 +21586,21 @@
         "primary_type": "image_generation",
         "subtype": null
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "image",
+          "text"
+        ]
+      },
+      "capabilities": [
+        "reasoning",
+        "image_generation"
+      ],
       "tags": [],
       "note": "Google's high-efficiency image generation and conversational editing model, released generally available as gemini-nano-banana-2.1. Google describes it as an update to Nano Banana 2 (gemini-3.1-flash-image).",
       "events": [
@@ -20995,6 +21625,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20261006162120/https://ai.google.dev/gemini-api/docs/changelog",
           "retrieved": "2026-10-06"
+        },
+        {
+          "id": "nano-banana-2-1-gdocs",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=en",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
         }
       ],
       "provenance": {
@@ -21022,8 +21660,17 @@
         "primary_type": "language",
         "subtype": "embedding"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "video"
+      ],
       "tags": [],
       "note": "Google's open-weights multimodal embedding model: 740M parameters mapping text, images, video frames and audio into one vector space, built to run on device. A text-only subset loads alone.",
       "events": [
@@ -21058,9 +21705,13 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Cited to the lab's own announcement. Not verified because the release date and the parameter count could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. The primary source states the model is text-only. Capabilities evidenced from the primary sources: video: “6, 2026 Google AI Edge Team Android ML Team Share Facebook Twitter LinkedIn Mail Today, Google DeepMind launched EmbeddingGemma 2 , a best-in-class for its size, open-weight, multi”."
       },
-      "evidence": {}
+      "evidence": {},
+      "undisclosed": [
+        "context_window",
+        "license"
+      ]
     },
     {
       "id": "mistral-large-4",
@@ -21072,7 +21723,10 @@
         "subtype": "llm"
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "coding",
+        "agentic"
+      ],
       "tags": [],
       "note": "A natively multimodal mixture-of-experts model with 1 trillion total and 52 billion active parameters, released as a public preview API on Mistral Studio. Mistral said it would release the weights by the end of the month; none were public at announcement.",
       "events": [
@@ -21107,7 +21761,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Capabilities evidenced from the primary sources: coding: “Human Evaluation We ran an internal evaluation in which expert annotators across coding, computer-aided design (CAD), finance, mathematics and physics compared Mistral Large 4 with” | agentic: “Mistral Large 4 New Open-weight hybrid instruct-and-reasoning MoE with multimodal input; unifies instruction, reasoning, and agentic capabilities in a single model, state-of-the-ar”."
       },
       "evidence": {
         "release_date": [
@@ -21126,7 +21780,21 @@
             ]
           }
         ]
-      }
+      },
+      "benchmarks": [
+        {
+          "name": "Terminal-Bench",
+          "score": 28.3,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-10-06",
+          "sources": [
+            "mistral-large-4-s1"
+          ]
+        }
+      ],
+      "undisclosed": [
+        "context_window"
+      ]
     },
     {
       "id": "claude-haiku-5-5",
@@ -21188,7 +21856,9 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "vision"
+      ],
       "tags": [],
       "note": "An open-weights decision model built from LFM2.5-VL-3B. It takes text and images with typed questions supplied at request time (yes/no, choice, score) and answers in a single forward pass with probabilities and a confidence, generating no tokens.",
       "events": [
@@ -21227,7 +21897,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Capabilities evidenced from the primary sources: vision: “6B • Updated about 2 hours ago • 28 • 21 Spaces mentioned in this article 1 Running on L4 3 System One Arcade 🟣 3 Ten camera, drawing and text demos of d1-3B More from this author”."
       },
       "evidence": {
         "release_date": [
@@ -21312,7 +21982,9 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "multilingual"
+      ],
       "tags": [],
       "note": "A decision model from Microsoft's Office of the CTO, in public preview in Microsoft Foundry. Post-trained from Qwen3.5-9B for single-pass decision scoring: given yes/no, multiple-choice, rating or rubric options with a request, it returns a calibrated probability for each option rather than generated text. Microsoft says later versions will be rebased on OpenAI and MAI models. No weights were published.",
       "events": [
@@ -21351,7 +22023,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Capabilities evidenced from the primary sources: multilingual: “That’s why we evaluated Microsoft-Decision-1 across dozens of benchmarks kept blinded from training, spanning routing, ranking, long context, multilingual and out-of-distribution t”."
       },
       "evidence": {
         "release_date": [
@@ -21374,7 +22046,10 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "video",
+        "vision"
+      ],
       "tags": [],
       "note": "A multimodal Clef that answers typed questions about audio, video, images and text together. Announced with a faster Clef and a cheaper Clef-flash.",
       "events": [
@@ -21413,7 +22088,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Capabilities evidenced from the primary sources: video: “Today, we’re releasing Clef-omni, which takes in audio and video input alongside text and image.” | vision: “Clef-omni takes audio, video, image, and text input Our new Clef-omni model is able to take audio, video, image, and text input.”."
       },
       "evidence": {
         "release_date": [
@@ -21424,6 +22099,440 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "id": "muse-wonder",
+      "model": "Muse Wonder",
+      "company": "Meta AI",
+      "family": "Muse",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic",
+        "coding"
+      ],
+      "tags": [],
+      "note": "Meta Superintelligence Labs' first frontier model, announced with Muse Wonder Full as its most capable models, built for personal and professional agentic tasks. Available at announcement through the Meta Model API and Muse Code. No weights were published.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-12",
+          "sources": [
+            "muse-wonder-s1",
+            "muse-wonder-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "muse-wonder-s1",
+          "url": "https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261012223110/https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
+          "retrieved": "2026-10-12"
+        },
+        {
+          "id": "muse-wonder-s2",
+          "url": "https://research.meta.ai/blog/muse-wonder",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there. Capabilities evidenced from the primary sources: agentic: “mp4 Takeaways Meta is introducing Muse Wonder and Muse Wonder Full, our most capable models to date, built to deliver state-of-the-art performance on personal and professional agen” | coding: “Muse Wonder and Muse Wonder Full bring that capability to expert domains including law, finance, and health, along with frontier coding performance for people building everything f”."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-12",
+            "sources": [
+              "muse-wonder-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "muse-wonder-full",
+      "model": "Muse Wonder Full",
+      "company": "Meta AI",
+      "family": "Muse",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic",
+        "coding"
+      ],
+      "tags": [],
+      "note": "Announced alongside Muse Wonder as a separately named model. At announcement it was available only to Muse Code subscribers, not through the Meta Model API. Meta's posts do not say how it differs from Muse Wonder.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-12",
+          "sources": [
+            "muse-wonder-full-s1",
+            "muse-wonder-full-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "muse-wonder-full-s1",
+          "url": "https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261012223110/https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
+          "retrieved": "2026-10-12"
+        },
+        {
+          "id": "muse-wonder-full-s2",
+          "url": "https://research.meta.ai/blog/muse-wonder",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there. Capabilities evidenced from the primary sources: agentic: “mp4 Takeaways Meta is introducing Muse Wonder and Muse Wonder Full, our most capable models to date, built to deliver state-of-the-art performance on personal and professional agen” | coding: “Muse Wonder and Muse Wonder Full bring that capability to expert domains including law, finance, and health, along with frontier coding performance for people building everything f”."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-12",
+            "sources": [
+              "muse-wonder-full-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "grok-voice-3-0",
+      "model": "Grok Voice 3.0",
+      "company": "xAI",
+      "family": "Grok Voice",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "xAI's speech-to-speech model, available in the API at launch at the same price as its predecessor. xAI says it already powers conversations across Tesla and SpaceX.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-14",
+          "sources": [
+            "grok-voice-3-0-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "grok-voice-3-0-s1",
+          "url": "https://x.ai/news/grok-voice-3",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261014164929/https://x.ai/news/grok-voice-3",
+          "retrieved": "2026-10-14"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-14",
+            "sources": [
+              "grok-voice-3-0-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "nemotron-3-5-super-vl",
+      "model": "Nemotron 3.5 Super VL",
+      "company": "NVIDIA",
+      "family": "Nemotron",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "An open-weights multimodal mixture-of-experts model, 120B total and 12B active parameters, for text, image, document and video understanding with reasoning and tool use. NVIDIA says it was distilled from Nemotron 3 Ultra; base, post-trained and NVFP4 checkpoints were released.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-15",
+          "sources": [
+            "nemotron-3-5-super-vl-s1",
+            "nemotron-3-5-super-vl-s2",
+            "nemotron-3-5-super-vl-s3"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 120000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "OpenMDW License 1.1"
+      },
+      "sources": [
+        {
+          "id": "nemotron-3-5-super-vl-s1",
+          "url": "https://developer.nvidia.com/blog/nvidia-nemotron-3-5-super-vl-powers-specialized-agents-with-multimodal-reasoning/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015155204/https://developer.nvidia.com/blog/nvidia-nemotron-3-5-super-vl-powers-specialized-agents-with-multimodal-reasoning/",
+          "retrieved": "2026-10-15"
+        },
+        {
+          "id": "nemotron-3-5-super-vl-s2",
+          "url": "https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015191910/https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/",
+          "retrieved": "2026-10-15"
+        },
+        {
+          "id": "nemotron-3-5-super-vl-s3",
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015145418/https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+          "retrieved": "2026-10-15"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Cited to the lab's own announcement and the official model card, and every value it asserts was found there. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-15",
+            "sources": [
+              "nemotron-3-5-super-vl-s1",
+              "nemotron-3-5-super-vl-s2",
+              "nemotron-3-5-super-vl-s3"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 120000000000,
+            "sources": [
+              "nemotron-3-5-super-vl-s1",
+              "nemotron-3-5-super-vl-s2",
+              "nemotron-3-5-super-vl-s3"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "nemotron-3-5-bolt-74b-a9b",
+      "model": "Nemotron 3.5 Bolt 74B-A9B",
+      "company": "NVIDIA",
+      "family": "Nemotron",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "An open vision-language mixture-of-experts model, 74B total and 9B active parameters, built for local agentic work and packed into 24GB with 2-bit quantization-aware training. NVIDIA announced a smaller Bolt E4B alongside it for October 23.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-15",
+          "sources": [
+            "nemotron-3-5-bolt-74b-a9b-s1",
+            "nemotron-3-5-bolt-74b-a9b-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 74000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "OpenMDW License 1.1"
+      },
+      "sources": [
+        {
+          "id": "nemotron-3-5-bolt-74b-a9b-s1",
+          "url": "https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015191910/https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/",
+          "retrieved": "2026-10-15"
+        },
+        {
+          "id": "nemotron-3-5-bolt-74b-a9b-s2",
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015150640/https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16",
+          "retrieved": "2026-10-15"
+        }
+      ],
+      "provenance": {
+        "status": "verified",
+        "confidence": 90,
+        "reason": "Cited to the lab's own announcement and the official model card, and every value it asserts was found there. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-15",
+            "sources": [
+              "nemotron-3-5-bolt-74b-a9b-s1",
+              "nemotron-3-5-bolt-74b-a9b-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 74000000000,
+            "sources": [
+              "nemotron-3-5-bolt-74b-a9b-s1",
+              "nemotron-3-5-bolt-74b-a9b-s2"
+            ]
+          }
+        ]
+      },
+      "undisclosed": [
+        "context_window"
+      ]
+    },
+    {
+      "id": "muse-spark-open",
+      "model": "Muse Spark Open",
+      "company": "Meta AI",
+      "family": "Muse",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The open-weights version of Muse Spark, with additional safety post-training for open release: 816B total and 42B active parameters, natively multimodal, with a 1M-token context window. Weights are published by meta-models on Hugging Face under the Muse Model License, which limits commercial use.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-15",
+          "sources": [
+            "muse-spark-open-s1",
+            "muse-spark-open-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": 816000000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "Muse Model License"
+      },
+      "sources": [
+        {
+          "id": "muse-spark-open-s1",
+          "url": "https://research.meta.ai/blog/muse-spark-open",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        },
+        {
+          "id": "muse-spark-open-s2",
+          "url": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       }
     }
   ],

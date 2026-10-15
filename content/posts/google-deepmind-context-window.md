@@ -3,6 +3,7 @@ title: Google's context window has held at ~1M since December 2024
 question: How did Gemini get to a million tokens?
 date: 2026-08-17
 history: Google DeepMind | context_window
+unverified: allow — Gemini 3.8 Flash Cyber's 1,048,576-token context window comes from Google's model documentation, cited on the record, but attribute-facts has not yet read an archived snapshot that states it. Remove this line once it is traced.
 ---
 
 Google has the longest run of records here, and the most jumps: the context window

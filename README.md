@@ -18,15 +18,15 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **274** across 27 labs and 83 families, 2022–2026 |
-| **Verified** | 183 (67%) — every value they assert traced to a primary source |
-| **Facts traced to a source** | 213 records carry claim-level evidence |
-| **Fully archived** | 256 records where every source has a snapshot |
-| **Open weights** | 110 (40%) |
-| **Beyond language** | 87 (32%) — 33 audio · 24 image generation · 12 video generation · 9 decision · 8 vision · 1 3d |
+| **Releases tracked** | **280** across 27 labs and 83 families, 2022–2026 |
+| **Verified** | 185 (66%) — every value they assert traced to a primary source |
+| **Facts traced to a source** | 218 records carry claim-level evidence |
+| **Fully archived** | 244 records where every source has a snapshot |
+| **Open weights** | 113 (40%) |
+| **Beyond language** | 88 (31%) — 34 audio · 24 image generation · 12 video generation · 9 decision · 8 vision · 1 3d |
 | **Milestones** | 55 dated events that were not model releases |
-| **Most recent** | Microsoft-Decision-1 — Microsoft, 2026-10-09 |
-| **Dataset updated** | 2026-10-10 |
+| **Most recent** | Nemotron 3.5 Super VL — NVIDIA, 2026-10-15 |
+| **Dataset updated** | 2026-10-15 |
 
 <sub>Counted from `data/llm-releases.json` by `scripts/update-readme.mjs`. Nothing here is estimated; `npm run check` fails if this table has drifted from the data.</sub>
 
