@@ -160,7 +160,13 @@ const EXPLICIT_TEXT_ONLY = [
 
 
 
-const targets = data.releases.filter((r) => r.modalities == null).slice(0, LIMIT);
+// Decision models answer with typed values, not text (TAXONOMY §6a), and their
+// sources describe the base model's inputs and the API's prose — this read
+// every Clef as text-to-text. Their modalities stay null until the schema has
+// a way to say "outputs a decision".
+const targets = data.releases
+  .filter((r) => r.modalities == null && r.classification?.primary_type !== 'decision')
+  .slice(0, LIMIT);
 console.log(`${targets.length} records without modalities\n`);
 
 const textOnly = [], flagged = [], unreadable = [], declaredHits = [], partial = [];

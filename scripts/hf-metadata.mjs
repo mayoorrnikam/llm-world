@@ -122,7 +122,10 @@ for (const { r, repo } of targets) {
   }
 
   const tag = meta?.pipeline_tag;
-  const m = tag ? PIPELINE[tag] : undefined;
+  // A decision model's card carries its BASE model's pipeline tag: Clef is a
+  // Qwen torso tagged "image-text-to-text", but it emits typed answers, not
+  // text (TAXONOMY §6a). Reading the tag recorded every Clef as text-out.
+  const m = tag && r.classification?.primary_type !== 'decision' ? PIPELINE[tag] : undefined;
   if (m && r.modalities == null) {
     if (WRITE) {
       r.modalities = { input: [...m.input], output: [...m.output] };

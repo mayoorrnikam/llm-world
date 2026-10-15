@@ -43,6 +43,8 @@ const FEEDS = [
   ['Mistral AI', 'https://mistral.ai/rss.xml', { introducing: true }],
   ['Alibaba Qwen', 'https://qwenlm.github.io/blog/index.xml'],
   ['NVIDIA', 'https://developer.nvidia.com/blog/feed'],
+  // Nemotron 3.5 Bolt was announced here, not on the developer blog.
+  ['NVIDIA', 'https://blogs.nvidia.com/feed/'],
   ['Microsoft Azure', 'https://azure.microsoft.com/en-us/blog/feed/'],
   ['Microsoft Research', 'https://www.microsoft.com/en-us/research/feed/'],
   // Microsoft-Decision-1 was announced on these two, not on microsoft.ai or Azure's blog.
@@ -69,7 +71,7 @@ const NO_FEED = [
 ];
 
 /** Titles that read like a model shipping, rather than a hiring post. */
-const RELEASE = /\b(introduc|announc|launch|releas|unveil|present|meet|now available|ship)/i;
+const RELEASE = /\b(introduc|announc|launch|releas|unveil|present|meet|now available|ship|expand|debut|arriv)/i;
 const MODELISH = /\b(model|llm|gpt|claude|gemini|llama|qwen|mistral|phi|grok|nemotron|granite|olmo|command|jamba|solar|exaone|hunyuan|seed|minimax|step|kimi|glm|deepseek)\b/i;
 /**
  * A line name followed by a version reads as a launch even with no verb in it.

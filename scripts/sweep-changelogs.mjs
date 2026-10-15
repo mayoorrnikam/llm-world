@@ -188,9 +188,32 @@ const nameKeys = data.releases.flatMap((r) => {
   return [[k, r.model], ...(rest !== k && /^[a-z]+\d/.test(rest) ? [[rest, r.model]] : [])];
 }).filter(([k]) => k.length >= 4);
 const trackedIds = new Set(data.releases.map((r) => slug(r.id)));
+/**
+ * A newsroom headline that names a tracked FAMILY but no tracked model is
+ * almost always a new member of it. "Muse Wonder: A Frontier Model For …"
+ * has no launch verb, so ANNOUNCES missed it; "Muse" is a family here. Used
+ * for news indexes only — API changelogs name families in every entry.
+ */
+const familyRe = new RegExp(`(?:^| )(?:${[...new Set(data.releases.map((r) => words(r.family)))]
+  .filter((f) => f.length >= 3).map((f) => f.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})(?= |$)`);
 
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const nameRe = new Map(nameKeys.map(([k]) => [k, new RegExp(`(?:^| )${esc(k)}(?= |$)`)]));
+
+/**
+ * The name an "Introducing X" line introduces, when it is not a tracked
+ * model's exact name. Name matching alone read "Introducing Muse Spark Open,
+ * the most capable US open-weight model" as tracked: Muse Spark, because the
+ * old name sits inside the new one. A trailing number was caught (Sonnet 5 vs
+ * 5.5); a trailing word was not.
+ */
+const exactNames = new Set(nameKeys.map(([k]) => k));
+function introduces(text) {
+  const m = /\bintroduc(?:ing|es)\s+(?:the\s+|our\s+)?([^,:;.!?()]{3,60}?)(?=\s*(?:[,:;!?()]|\.\s|\s[-–—]\s|\s(?:with|and|for|on|in|to|as|now|from|that|which|is|our)\b|$))/i.exec(text);
+  if (!m) return null;
+  const name = words(m[1]);
+  return name && !exactNames.has(name) && /[a-z]/.test(name) ? m[1].trim() : null;
+}
 
 /** Records an entry names, by display name. A hint, not a verdict. */
 function tracked(text) {
@@ -268,9 +291,12 @@ for (const src of SOURCES) {
     // (candidates.mjs, the daily workflow) does not re-derive it.
     .map((e) => ({
       ...e,
+      introduces: introduces(e.text),
       flag: e.newIds.length ? 'new-id'
         : DECIDES.test(e.text) ? 'decision'
-          : !e.tracked.length && ANNOUNCES.test(e.text) ? 'new' : null,
+          : introduces(e.text) && e.tracked.length ? 'new'
+          : !e.tracked.length && (ANNOUNCES.test(e.text)
+            || (src.order === 'before' && familyRe.test(words(e.text)))) ? 'new' : null,
     }));
   results.push({ lab: src.lab, company: src.company, url: src.url, entries: fresh });
 }
@@ -287,8 +313,9 @@ for (const r of results) {
   console.log(`**${r.lab}** — ${r.url}`);
   for (const e of r.entries.sort((a, b) => b.date.localeCompare(a.date))) {
     // An untracked API id outranks any name match: the entry is about that id.
-    const looksNew = !e.newIds.length && !e.tracked.length && ANNOUNCES.test(e.text);
+    const looksNew = e.flag === 'new';
     const hint = e.newIds.length ? `NEW ID? ${e.newIds.join(', ')}`
+      : e.introduces && e.flag === 'new' ? `NEW? introduces "${e.introduces}", not a tracked name`
       : e.tracked.length ? `tracked: ${e.tracked.join(', ')}`
         : looksNew ? 'NEW? announces something, names no tracked model' : 'no model named';
     if (e.newIds.length || looksNew) fresh++;

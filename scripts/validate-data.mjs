@@ -82,6 +82,36 @@ try {
   process.exit(1);
 }
 
+/**
+ * Both data files are written by one serializer — JSON.stringify(x, null, 2)
+ * through lib/dataset.mjs — and must read back byte for byte. An agent that
+ * rewrote the file with Python's json.dump turned every "—" into "\u2014":
+ * 238 changed lines in a commit that added two records, burying the two
+ * records that mattered in a diff nobody could review.
+ */
+const canonical = (file) => {
+  const text = readFileSync(file, 'utf8');
+  if (text !== `${JSON.stringify(JSON.parse(text), null, 2)}\n`) {
+    err(`<${file}>`, 'not in canonical form — write it through lib/dataset.mjs (saveDataset), '
+      + 'never by hand or with another language\'s JSON writer');
+  }
+};
+try { canonical(FILE); canonical('data/milestones.json'); } catch { /* parse errors are reported below */ }
+
+/**
+ * A Wayback capture time is when archive.org fetched the page, to the second.
+ * "20261012000000" is a date with the time left as zeros — a placeholder that
+ * claims a capture nobody checked exists. Wayback redirects it to the nearest
+ * real capture, so the link still opens, which is why only this catches it.
+ */
+const PLACEHOLDER_CAPTURE = /web\.archive\.org\/web\/\d{8}000000\//;
+const checkArchive = (id, s) => {
+  if (s.archived_url && PLACEHOLDER_CAPTURE.test(s.archived_url)) {
+    err(id, `source "${s.id}" cites a placeholder capture time (${s.archived_url.match(/web\/(\d+)/)[1]}) — `
+      + 'use the real snapshot URL from archive-sources.mjs, or leave archived_url null');
+  }
+};
+
 const releases = data.releases ?? [];
 if (!releases.length) {
   console.error('FATAL: no releases in dataset');
@@ -251,6 +281,7 @@ for (const r of releases) {
         err(id, `same snapshot cited twice under different ids: ${s.archived_url}`);
       } else { seenUrls.add(s.url); if (s.archived_url) seenArchives.add(s.archived_url); }
 
+      checkArchive(id, s);
       if (!VALID_SOURCE_TYPE.has(s.type)) err(id, `unknown source type "${s.type}"`);
       if (!VALID_AUTHORITY.has(s.authority)) err(id, `unknown source authority "${s.authority}"`);
       if (s.authority === 'discovery') {
@@ -624,6 +655,7 @@ for (const m of milestones) {
     err(id, 'milestone has no sources — every milestone requires evidence');
   } else for (const s of m.sources) {
     if (!/^https?:\/\//.test(s.url ?? '')) err(id, `source url must be http(s): ${s.url}`);
+    checkArchive(id, s);
     if (!VALID_SOURCE_TYPE.has(s.type)) err(id, `unknown source type "${s.type}"`);
     if (!VALID_AUTHORITY.has(s.authority)) err(id, `unknown source authority "${s.authority}"`);
   }

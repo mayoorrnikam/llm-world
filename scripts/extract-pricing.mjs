@@ -63,11 +63,31 @@ for (const r of pending.slice(0, LIMIT)) {
   let hit = null;
   let failed = false;
 
+  // A price counts only where the page names THIS model just before it. A
+  // changelog or pricing table lists many models, and the first price on the
+  // page belongs to whichever came first: every GPT-6 record once got $4/$20
+  // that way, GPT-6.1 Sol from a snapshot taken the day before it existed.
+  const names = [r.model, r.id, r.id.replace(/-(\d+)-(\d+)(?=-|$)/g, '-$1.$2')]
+    .map((n) => n.toLowerCase());
+  const windows = (text) => {
+    const t = text.toLowerCase();
+    const out = [];
+    for (const n of names) {
+      for (let i = t.indexOf(n); i !== -1; i = t.indexOf(n, i + 1)) {
+        // Not a prefix of a longer name: "gpt-6-sol" inside "gpt-6-sol-mini".
+        if (/[a-z0-9.]/.test(t[i + n.length] ?? '') && !/\.\s/.test(t.slice(i + n.length, i + n.length + 2))) continue;
+        out.push(text.slice(i, i + n.length + 400));
+      }
+    }
+    return out;
+  };
+
   for (const s of archived) {
     const text = await sourceText(s.archived_url);
-    if (text === FAILED) { failed = true; break; }
+    if (text === FAILED || typeof text !== 'string') { failed = true; break; }
+    for (const w of windows(text)) {
     for (const p of PRICE_PATTERNS) {
-      const m = p.exec(text);
+      const m = p.exec(w);
       if (!m) continue;
       const input = Number(m[1]), output = Number(m[2]);
       // A model whose output costs less than its input is possible but rare
@@ -75,6 +95,8 @@ for (const r of pending.slice(0, LIMIT)) {
       if (!(input > 0) || !(output > 0) || output < input) continue;
       hit = { input, output, source: s.id, quote: m[0].trim().slice(0, 90) };
       break;
+    }
+    if (hit) break;
     }
     if (hit) break;
     await sleep(1200);

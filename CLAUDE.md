@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**Other agents (Hermes, OpenClaw, Codex) follow AGENTS.md**, which states the
+non-negotiable rules for dataset updates and the pull-request format. They
+apply to Claude too.
+
 ## Commands
 
 ```bash
@@ -61,7 +65,9 @@ sweep, aimed at its stated blind spots — not the primary method.
    `node scripts/update-readme.mjs --write`, and `npm run check`. If a post's
    `unverified:` reason no longer names what it excuses, the build says so —
    fix the reason, don't delete the check. Re-read any post's hand-typed figures:
-   prose is not gated.
+   prose is not gated. Before committing, read
+   `node scripts/diff-records.mjs origin/main` — it lists every record and
+   field the change touched and every provenance status that moved.
 
 Research and enrichment tools, none of which write without `--write`:
 
