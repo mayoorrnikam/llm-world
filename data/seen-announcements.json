@@ -25,6 +25,10 @@
     "feed|https://blog.google/innovation-and-ai/products/gemini-app/gemini-4-argon-availability/",
     "feed|https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-4-argon/",
     "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
-    "sweep|Anthropic|2026-10-14| weve launched opentelemetry export in beta, so you can trace messages api requests and claude managed agents sessions "
+    "sweep|Anthropic|2026-10-14| weve launched opentelemetry export in beta, so you can trace messages api requests and claude managed agents sessions ",
+    "sweep|Meta|2026-10-14|accelerating scientific research in health data science with muse models",
+    "feed|https://developer.nvidia.com/blog/nvidia-nemotron-3-5-super-vl-powers-specialized-agents-with-multimodal-reasoning/",
+    "feed|https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/",
+    "feed|https://mistral.ai/news/timestral/"
   ]
 }
