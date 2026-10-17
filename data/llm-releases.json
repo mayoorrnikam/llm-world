@@ -13002,8 +13002,8 @@
           "url": "https://docs.x.ai/developers/models/grok-build-0.1",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260529174515/https://docs.x.ai/developers/models/grok-build-0.1",
+          "retrieved": "2026-05-29"
         }
       ],
       "provenance": {
@@ -19217,8 +19217,8 @@
           "url": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260911103529/https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+          "retrieved": "2026-09-11"
         }
       ],
       "provenance": {
@@ -19703,8 +19703,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260902165843/https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=en",
+          "retrieved": "2026-09-02"
         }
       ],
       "provenance": {
@@ -21117,8 +21117,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261016092109/https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=en",
+          "retrieved": "2026-10-16"
         }
       ],
       "provenance": {
@@ -21676,8 +21676,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261007112112/https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=en",
+          "retrieved": "2026-10-07"
         }
       ],
       "provenance": {
