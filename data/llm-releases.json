@@ -21482,6 +21482,54 @@
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       }
+    },
+    {
+      "id": "deepseek-v4.1-flash-1017",
+      "model": "DeepSeek V4.1 Flash 1017",
+      "company": "DeepSeek",
+      "family": "DeepSeek V4.1 Flash 1017",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "DRAFT — date is the Hugging Face repo creation date, not the announcement. Replace before recording. Announcements for this lab have been found at: arxiv.org.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-17",
+          "sources": [
+            "deepseek-v4.1-flash-1017-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "mit"
+      },
+      "sources": [
+        {
+          "id": "deepseek-v4.1-flash-1017-s1",
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
     }
   ],
   "redirects": [
