@@ -29,6 +29,7 @@
     "sweep|Meta|2026-10-14|accelerating scientific research in health data science with muse models",
     "feed|https://developer.nvidia.com/blog/nvidia-nemotron-3-5-super-vl-powers-specialized-agents-with-multimodal-reasoning/",
     "feed|https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/",
-    "feed|https://mistral.ai/news/timestral/"
+    "feed|https://mistral.ai/news/timestral/",
+    "sweep|DeepSeek|2026-10-17|​ opening up the in-house search api ​ deepseeks web and api search capabilities are powered by our in-house deepseek se"
   ]
 }
