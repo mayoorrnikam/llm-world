@@ -30,6 +30,8 @@
     "feed|https://developer.nvidia.com/blog/nvidia-nemotron-3-5-super-vl-powers-specialized-agents-with-multimodal-reasoning/",
     "feed|https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/",
     "feed|https://mistral.ai/news/timestral/",
-    "sweep|DeepSeek|2026-10-17|​ opening up the in-house search api ​ deepseeks web and api search capabilities are powered by our in-house deepseek se"
+    "sweep|DeepSeek|2026-10-17|​ opening up the in-house search api ​ deepseeks web and api search capabilities are powered by our in-house deepseek se",
+    "feed|https://blog.cloudflare.com/clairic-extraction-model/",
+    "feed|https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/now-in-foundry-meta-muse-spark-open-nvidia-nemotron-3-5-super-vl/ba-p/4565899"
   ]
 }
