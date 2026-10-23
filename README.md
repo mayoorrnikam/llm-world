@@ -18,12 +18,12 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **276** across 28 labs and 85 families, 2022–2026 |
+| **Releases tracked** | **277** across 28 labs and 86 families, 2022–2026 |
 | **Verified** | 183 (66%) — every value they assert traced to a primary source |
 | **Facts traced to a source** | 213 records carry claim-level evidence |
 | **Fully archived** | 256 records where every source has a snapshot |
-| **Open weights** | 112 (41%) |
-| **Beyond language** | 87 (32%) — 33 audio · 24 image generation · 12 video generation · 9 decision · 8 vision · 1 3d |
+| **Open weights** | 113 (41%) |
+| **Beyond language** | 87 (31%) — 33 audio · 24 image generation · 12 video generation · 9 decision · 8 vision · 1 3d |
 | **Milestones** | 55 dated events that were not model releases |
 | **Most recent** | DeepSeek V4.1 Flash 1017 — DeepSeek, 2026-10-17 |
 | **Dataset updated** | 2026-10-10 |
