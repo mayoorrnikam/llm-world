@@ -37,6 +37,11 @@
     "feed|https://blogs.nvidia.com/blog/confidential-computing-model-builders-infrastructure/",
     "feed|https://openai.com/index/terminal-x",
     "sweep|Anthropic|2026-10-21| weve released api version 2026-10-21 . migrating to api version 2026-10-21 shows how to upgrade. weve released new ver",
-    "feed|https://blog.google/products-and-platforms/products/gemini/gemini-4-argon-builders/"
+    "feed|https://blog.google/products-and-platforms/products/gemini/gemini-4-argon-builders/",
+    "sweep|OpenAI|2026-10-26|oct 26 feature gpt-6.1-terra v1/responses v1/chat/completions released gpt-6.1 terra , a fast, efficient model for visua",
+    "feed|https://blog.cloudflare.com/kv-cache-exposure-remediation/",
+    "feed|https://openai.com/index/greptile-code-review-codex-astra",
+    "feed|https://openai.com/index/gpt-6-1-sol-coderabbit-code-security",
+    "feed|https://openai.com/index/introducing-gpt-6-1-terra"
   ]
 }
