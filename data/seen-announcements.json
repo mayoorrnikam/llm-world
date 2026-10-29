@@ -46,6 +46,10 @@
     "sweep|Google|2026-10-27|gemini api cli ( gemini-api ) beta : released the gemini api cli ( gemini-api ), a stateless, zero-dependency command-li",
     "feed|https://blog.google/innovation-and-ai/models-and-research/google-deepmind/introducing-genie-4/",
     "feed|https://blog.google/products-and-platforms/products/gemini/gemini-4-argon-in-action/",
-    "feed|https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/gpt-6-1-terra-now-generally-available-in-microsoft-foundry-build/ba-p/4567769"
+    "feed|https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/gpt-6-1-terra-now-generally-available-in-microsoft-foundry-build/ba-p/4567769",
+    "sweep|Moonshot|2026-10-28|​ prevent your computer from sleeping ​ enable sleep prevention under settings → general to keep the computer from going",
+    "feed|https://huggingface.co/blog/anydecisionmodel",
+    "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+    "feed|https://huggingface.co/blog/nvidia/nemotron-transcribe-granary"
   ]
 }
