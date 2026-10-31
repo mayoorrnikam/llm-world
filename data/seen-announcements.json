@@ -53,6 +53,7 @@
     "feed|https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
     "sweep|Anthropic|2026-10-29| we’ve launched the usage and cost analytics api in beta with the analytics-usage-cost-2026-08-24 beta header. its /v1/",
     "sweep|Google|2026-10-30|computer use generally available (ga) : released the computer use tool to general availability (ga) across the interacti",
-    "feed|https://blog.google/innovation-and-ai/products/gemini-app/edit-files-directly/"
+    "feed|https://blog.google/innovation-and-ai/products/gemini-app/edit-files-directly/",
+    "sweep|OpenAI|2026-10-30|oct 30 feature gpt-6-rosalind released gpt-6 rosalind , bringing specialized biological reasoning with scientific tool u"
   ]
 }
