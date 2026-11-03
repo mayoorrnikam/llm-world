@@ -55,6 +55,9 @@
     "sweep|Google|2026-10-30|computer use generally available (ga) : released the computer use tool to general availability (ga) across the interacti",
     "feed|https://blog.google/innovation-and-ai/products/gemini-app/edit-files-directly/",
     "sweep|OpenAI|2026-10-30|oct 30 feature gpt-6-rosalind released gpt-6 rosalind , bringing specialized biological reasoning with scientific tool u",
-    "feed|https://openai.com/index/grid-protectors-program"
+    "feed|https://openai.com/index/grid-protectors-program",
+    "sweep|Google|2026-11-02|{% id=11-02-2026 %} * **gemini 2.5 pro deprecation**: [`gemini-2.5-pro`](/docs/models/gemini-2.5-pro) is [deprecated](/d",
+    "sweep|Google|2026-10-30|{% id=10-30-2026 %} * **computer use generally available (ga)**: released the [computer use](/docs/computer-use) tool to",
+    "feed|https://allenai.org/blog/nextcloud"
   ]
 }
