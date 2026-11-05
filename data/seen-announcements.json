@@ -58,6 +58,10 @@
     "feed|https://openai.com/index/grid-protectors-program",
     "sweep|Google|2026-11-02|{% id=11-02-2026 %} * **gemini 2.5 pro deprecation**: [`gemini-2.5-pro`](/docs/models/gemini-2.5-pro) is [deprecated](/d",
     "sweep|Google|2026-10-30|{% id=10-30-2026 %} * **computer use generally available (ga)**: released the [computer use](/docs/computer-use) tool to",
-    "feed|https://allenai.org/blog/nextcloud"
+    "feed|https://allenai.org/blog/nextcloud",
+    "sweep|Google|2026-11-05|{% id=11-05-2026 %} * **expanded office and opendocument file support**: the gemini api now accepts powerpoint 97-2003 (",
+    "sweep|OpenAI|2026-11-04|nov 4 feature gpt-image-2.6-sunburst gpt-image-2.6-flare v1/images/generations v1/images/edits released gpt-image-2.6 su",
+    "feed|https://openai.com/index/introducing-images-2-6",
+    "feed|https://openai.com/index/devrev-enterprise-self-service"
   ]
 }
