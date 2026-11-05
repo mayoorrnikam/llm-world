@@ -21587,6 +21587,54 @@
         "confidence": 60,
         "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
       }
+    },
+    {
+      "id": "kimi-k3.1-pro",
+      "model": "Kimi K3.1 Pro",
+      "company": "Moonshot AI",
+      "family": "Kimi K3.1 Pro",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "DRAFT — date is the Hugging Face repo creation date, not the announcement. Replace before recording. Announcements for this lab have been found at: moonshotai.github.io.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-02",
+          "sources": [
+            "kimi-k3.1-pro-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "other"
+      },
+      "sources": [
+        {
+          "id": "kimi-k3.1-pro-s1",
+          "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
     }
   ],
   "redirects": [
