@@ -62,6 +62,8 @@
     "sweep|Google|2026-11-05|{% id=11-05-2026 %} * **expanded office and opendocument file support**: the gemini api now accepts powerpoint 97-2003 (",
     "sweep|OpenAI|2026-11-04|nov 4 feature gpt-image-2.6-sunburst gpt-image-2.6-flare v1/images/generations v1/images/edits released gpt-image-2.6 su",
     "feed|https://openai.com/index/introducing-images-2-6",
-    "feed|https://openai.com/index/devrev-enterprise-self-service"
+    "feed|https://openai.com/index/devrev-enterprise-self-service",
+    "sweep|Google|2026-11-05|{% id=11-05-2026 %} * **gemini omni 1.2 flash generally available (ga)**: released [gemini omni 1.2 flash](/docs/models/",
+    "sweep|OpenAI|2026-11-05|nov 5 feature gpt-6-cyber use gpt-6-cyber to investigate vulnerabilities, reproduce them in an authorized test environme"
   ]
 }
