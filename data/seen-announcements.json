@@ -64,6 +64,8 @@
     "feed|https://openai.com/index/introducing-images-2-6",
     "feed|https://openai.com/index/devrev-enterprise-self-service",
     "sweep|Google|2026-11-05|{% id=11-05-2026 %} * **gemini omni 1.2 flash generally available (ga)**: released [gemini omni 1.2 flash](/docs/models/",
-    "sweep|OpenAI|2026-11-05|nov 5 feature gpt-6-cyber use gpt-6-cyber to investigate vulnerabilities, reproduce them in an authorized test environme"
+    "sweep|OpenAI|2026-11-05|nov 5 feature gpt-6-cyber use gpt-6-cyber to investigate vulnerabilities, reproduce them in an authorized test environme",
+    "sweep|Google|2026-11-06|{% id=11-06-2026 %} * **gemini embedding 2 preview deprecation**: [`gemini-embedding-2-preview`](/docs/models/gemini-emb",
+    "sweep|Meta|2026-11-06|latest bringing specialized models to muse and meta ai"
   ]
 }
