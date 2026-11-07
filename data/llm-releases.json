@@ -21589,6 +21589,54 @@
       }
     },
     {
+      "id": "lfm-3-1.7b",
+      "model": "LFM3-1.7B",
+      "company": "LiquidAI",
+      "family": "LFM3-1.7B",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "DRAFT — date is the Hugging Face repo creation date, not the announcement. Replace before recording.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-23",
+          "sources": [
+            "lfm-3-1.7b-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": 1728801536
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": "other"
+      },
+      "sources": [
+        {
+          "id": "lfm-3-1.7b-s1",
+          "url": "https://huggingface.co/LiquidAI/LFM3-1.7B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
       "id": "kimi-k3.1-pro",
       "model": "Kimi K3.1 Pro",
       "company": "Moonshot AI",

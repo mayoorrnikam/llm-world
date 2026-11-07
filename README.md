@@ -18,11 +18,11 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **278** across 28 labs and 87 families, 2022–2026 |
+| **Releases tracked** | **279** across 28 labs and 88 families, 2022–2026 |
 | **Verified** | 183 (66%) — every value they assert traced to a primary source |
 | **Facts traced to a source** | 213 records carry claim-level evidence |
 | **Fully archived** | 256 records where every source has a snapshot |
-| **Open weights** | 114 (41%) |
+| **Open weights** | 115 (41%) |
 | **Beyond language** | 87 (31%) — 33 audio · 24 image generation · 12 video generation · 9 decision · 8 vision · 1 3d |
 | **Milestones** | 55 dated events that were not model releases |
 | **Most recent** | Kimi K3.1 Pro — Moonshot AI, 2026-11-02 |
