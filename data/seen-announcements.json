@@ -67,6 +67,10 @@
     "sweep|OpenAI|2026-11-05|nov 5 feature gpt-6-cyber use gpt-6-cyber to investigate vulnerabilities, reproduce them in an authorized test environme",
     "sweep|Google|2026-11-06|{% id=11-06-2026 %} * **gemini embedding 2 preview deprecation**: [`gemini-embedding-2-preview`](/docs/models/gemini-emb",
     "sweep|Meta|2026-11-06|latest bringing specialized models to muse and meta ai",
-    "sweep|Tencent|2026-11-04|featured corporate +3 more tencent launches hy4, joining the ranks of the world’s leading open-source ai models"
+    "sweep|Tencent|2026-11-04|featured corporate +3 more tencent launches hy4, joining the ranks of the world’s leading open-source ai models",
+    "sweep|Anthropic|2026-11-09| we’ve launched claude fable 5.2 ( claude-fable-5-2 ), built for demanding reasoning and long-horizon agentic work. cla",
+    "sweep|Meta|2026-11-09|latest introducing our smallest, most efficient model: muse ember",
+    "sweep|Meta|2026-11-06|bringing specialized models to muse and meta ai",
+    "feed|https://huggingface.co/blog/decision"
   ]
 }
