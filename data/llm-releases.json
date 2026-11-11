@@ -13019,6 +13019,14 @@
               "grok-build-0-1-s1"
             ]
           }
+        ],
+        "context_window": [
+          {
+            "value": 256000,
+            "sources": [
+              "grok-build-0-1-xdocs"
+            ]
+          }
         ]
       },
       "pricing": [
@@ -18717,6 +18725,15 @@
               "gemini-3-8-flash-s2"
             ]
           }
+        ],
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "gemini-3-8-flash-s2",
+              "gemini-3-8-flash-gdocs"
+            ]
+          }
         ]
       },
       "undisclosed": [
@@ -18861,6 +18878,14 @@
             "value": "2026-09-02",
             "sources": [
               "gemini-3-8-flash-cyber-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1048576,
+            "sources": [
+              "gemini-3-8-flash-cyber-gdocs"
             ]
           }
         ]
@@ -20543,7 +20568,16 @@
         "confidence": 60,
         "reason": "Cited to official documentation and the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
-      "evidence": {},
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1050000,
+            "sources": [
+              "gpt-6-luna-odocs"
+            ]
+          }
+        ]
+      },
       "pricing": [
         {
           "unit": "per_million_tokens",
@@ -20958,7 +20992,16 @@
         "confidence": 60,
         "reason": "Cited to the lab's own announcement and official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
-      "evidence": {}
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-09-27",
+            "sources": [
+              "minimax-m3-1-flash-preview-s1"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "claude-sonnet-5-5",
@@ -21087,7 +21130,16 @@
         "confidence": 60,
         "reason": "Cited to official documentation. Not verified because the release date and the context window could not be traced: every archived snapshot of those sources predates the release — the newest is 2026-09-28, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2026-09-29 would settle it."
       },
-      "evidence": {},
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1050000,
+            "sources": [
+              "gpt-6-1-sol-odocs"
+            ]
+          }
+        ]
+      },
       "pricing": [
         {
           "unit": "per_million_tokens",
