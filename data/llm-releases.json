@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-15",
+  "updated": "2026-11-10",
   "schema_version": "1.6",
   "releases": [
     {
@@ -12994,22 +12994,22 @@
           "url": "https://docs.x.ai/developers/models.md",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260616001005/https://docs.x.ai/developers/models.md",
+          "retrieved": "2026-06-16"
         },
         {
           "id": "grok-build-0-1-xmodel",
           "url": "https://docs.x.ai/developers/models/grok-build-0.1",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260529174515/https://docs.x.ai/developers/models/grok-build-0.1",
+          "retrieved": "2026-05-29"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Downgraded: context_window comes from the lab's documentation, but attribute-facts could not read an archived snapshot that states it, so the figure is not yet traced to a quoted sentence. reconcile-status upgrades it once attribute-facts succeeds."
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Downgraded: context_window comes from the lab's documentation, but attribute-facts could not read an archived snapshot that states it, so the figure is not yet traced to a quoted sentence. reconcile-status upgrades it once attribute-facts succeeds."
       },
       "evidence": {
         "release_date": [
@@ -13020,7 +13020,25 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 1,
+            "output": 2
+          },
+          "currency": "USD",
+          "observed_on": "2026-10-29",
+          "sources": [
+            "grok-build-0-1-xdocs"
+          ],
+          "note": "Base tier. xAI bills a higher rate for prompts at or above 200k tokens."
+        }
+      ],
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "ornith-1-0-9b",
@@ -17867,8 +17885,8 @@
           "url": "https://x.com/ornith_/status/2090074077084127302",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260820192151/https://x.com/ornith_/status/2090074077084127302",
+          "retrieved": "2026-08-20"
         }
       ],
       "provenance": {
@@ -17965,8 +17983,8 @@
           "url": "https://x.com/ornith_/status/2090074077084127302",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260820192151/https://x.com/ornith_/status/2090074077084127302",
+          "retrieved": "2026-08-20"
         }
       ],
       "provenance": {
@@ -18065,8 +18083,8 @@
           "url": "https://x.com/ornith_/status/2090074077084127302",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260820192151/https://x.com/ornith_/status/2090074077084127302",
+          "retrieved": "2026-08-20"
         }
       ],
       "provenance": {
@@ -18210,8 +18228,8 @@
           "url": "https://docs.z.ai/release-notes",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://archive.md/20260817055142/https://docs.z.ai/release-notes",
+          "retrieved": "2026-08-17"
         },
         {
           "id": "glm-5-3-flash-s2",
@@ -18255,7 +18273,14 @@
         "primary_type": "audio",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Google made Gemini 3.5 Transcribe (gemini-3.5-transcribe) generally available: a dedicated non-streaming speech-to-text model based on Gemini's audio understanding, with utterance-based language detection across 85+ languages, speaker diarization, word-level timestamps and custom vocabulary biasing up to 1,000 terms.",
@@ -18286,7 +18311,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {}
     },
@@ -18299,7 +18324,14 @@
         "primary_type": "audio",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Released with Gemini 3.5 Transcribe: a low-latency, bidirectional streaming speech-to-text model (gemini-3.5-transcribe-live).",
@@ -18330,7 +18362,7 @@
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
-        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {}
     },
@@ -18668,14 +18700,14 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260920203323/https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=en",
+          "retrieved": "2026-09-20"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Downgraded: context_window comes from the lab's documentation, but attribute-facts could not read an archived snapshot that states it, so the figure is not yet traced to a quoted sentence. reconcile-status upgrades it once attribute-facts succeeds."
+        "reason": "Cited to official documentation. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Downgraded: context_window comes from the lab's documentation, but attribute-facts could not read an archived snapshot that states it, so the figure is not yet traced to a quoted sentence. reconcile-status upgrades it once attribute-facts succeeds."
       },
       "evidence": {
         "release_date": [
@@ -18686,7 +18718,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "muse-spark-1-3",
@@ -18744,7 +18779,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "gemini-3-8-flash-cyber",
@@ -18807,14 +18846,14 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260920203323/https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=en",
+          "retrieved": "2026-09-20"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Downgraded: context_window comes from the lab's documentation, but attribute-facts could not read an archived snapshot that states it, so the figure is not yet traced to a quoted sentence. reconcile-status upgrades it once attribute-facts succeeds."
+        "reason": "Cited to the lab's own announcement and official documentation. Not verified because the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Downgraded: context_window comes from the lab's documentation, but attribute-facts could not read an archived snapshot that states it, so the figure is not yet traced to a quoted sentence. reconcile-status upgrades it once attribute-facts succeeds."
       },
       "evidence": {
         "release_date": [
@@ -18825,7 +18864,10 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gpt-6-astra",
@@ -18903,15 +18945,30 @@
           "url": "https://developers.openai.com/api/docs/models/gpt-6-astra",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260903200629/https://developers.openai.com/api/docs/models/gpt-6-astra",
+          "retrieved": "2026-09-03"
         }
       ],
       "provenance": {
         "status": "partially_verified",
         "confidence": 60,
         "reason": "Cited to the lab's own announcement and official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 10,
+            "output": 50
+          },
+          "currency": "USD",
+          "observed_on": "2026-10-29",
+          "sources": [
+            "gpt-6-astra-odocs"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
+      ]
     },
     {
       "id": "lyria-3-5",
@@ -18922,7 +18979,14 @@
         "primary_type": "audio",
         "subtype": null
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "Google made Lyria 3.5 (lyria-3.5) generally available as the next generation of its music generation model: full-length songs with improved musical coherence, natural vocals, and control over duration and structure.",
@@ -18953,7 +19017,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
         "release_date": [
@@ -18976,7 +19040,9 @@
         "subtype": null
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "audio"
+      ],
       "tags": [],
       "note": "Microsoft AI's second-generation speech recognition model, transcribing 60 languages with speaker diarization, word-level timestamps and keyword biasing. Available in Microsoft Foundry, the MAI Playground and OpenRouter.",
       "events": [
@@ -19006,7 +19072,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Capabilities evidenced from the primary sources: audio: “Blog Featured stories The latest breakthroughs and updates from within our team MAI-Transcribe-2 is the fastest, most accurate and cheapest speech recognition model in the world 4 ”."
       },
       "evidence": {
         "release_date": [
@@ -19121,8 +19187,8 @@
           "url": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260911142739/https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "retrieved": "2026-09-11"
         }
       ],
       "provenance": {
@@ -19139,7 +19205,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 5,
+            "output": 30
+          },
+          "currency": "USD",
+          "observed_on": "2026-10-29",
+          "sources": [
+            "gpt-image-2-5-flare-odocs"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
+      ]
     },
     {
       "id": "gpt-image-2-5-sunburst",
@@ -19190,8 +19271,8 @@
           "url": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260911103529/https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+          "retrieved": "2026-09-11"
         }
       ],
       "provenance": {
@@ -19208,7 +19289,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 5,
+            "output": 30
+          },
+          "currency": "USD",
+          "observed_on": "2026-10-29",
+          "sources": [
+            "gpt-image-2-5-sunburst-odocs"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
+      ]
     },
     {
       "id": "gpt-rosalind",
@@ -19676,8 +19772,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260902165843/https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=en",
+          "retrieved": "2026-09-02"
         }
       ],
       "provenance": {
@@ -19759,8 +19855,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261017085357/https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=en",
+          "retrieved": "2026-10-17"
         }
       ],
       "provenance": {
@@ -20183,16 +20279,16 @@
           "url": "https://docs.x.ai/developers/models.md",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260922053741/https://docs.x.ai/developers/models.md",
+          "retrieved": "2026-09-22"
         },
         {
           "id": "grok-4-7-xmodel",
           "url": "https://docs.x.ai/developers/models/grok-4.7",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260922230859/https://docs.x.ai/developers/models/grok-4.7",
+          "retrieved": "2026-09-22"
         }
       ],
       "provenance": {
@@ -20244,6 +20340,9 @@
             "grok-4-7-s2"
           ]
         }
+      ],
+      "undisclosed": [
+        "parameter_count"
       ]
     },
     {
@@ -20435,8 +20534,8 @@
           "url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260922184004/https://developers.openai.com/api/docs/models/gpt-6-luna",
+          "retrieved": "2026-09-22"
         }
       ],
       "provenance": {
@@ -20444,7 +20543,25 @@
         "confidence": 60,
         "reason": "Cited to official documentation and the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
-      "evidence": {}
+      "evidence": {},
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 0.1,
+            "output": 0.5
+          },
+          "currency": "USD",
+          "observed_on": "2026-10-29",
+          "sources": [
+            "gpt-6-luna-odocs"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
+      ],
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "mimo-v2-6-pro",
@@ -20650,8 +20767,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260924121428/https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=en",
+          "retrieved": "2026-09-24"
         }
       ],
       "provenance": {
@@ -20709,8 +20826,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261005100921/https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=en",
+          "retrieved": "2026-10-05"
         }
       ],
       "provenance": {
@@ -20824,8 +20941,8 @@
           "url": "https://x.com/MiniMax_AI/status/2104256406786547800",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261015015306/https://x.com/MiniMax_AI/status/2104256406786547800",
+          "retrieved": "2026-10-15"
         },
         {
           "id": "minimax-m3-1-flash-preview-s2",
@@ -20961,8 +21078,8 @@
           "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20260929170906/https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "retrieved": "2026-09-29"
         }
       ],
       "provenance": {
@@ -20970,7 +21087,25 @@
         "confidence": 60,
         "reason": "Cited to official documentation. Not verified because the release date and the context window could not be traced: every archived snapshot of those sources predates the release — the newest is 2026-09-28, captured before the page announced it — so the archived copy does not contain the figure. A capture from on or after 2026-09-29 would settle it."
       },
-      "evidence": {}
+      "evidence": {},
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 2,
+            "output": 10
+          },
+          "currency": "USD",
+          "observed_on": "2026-10-29",
+          "sources": [
+            "gpt-6-1-sol-odocs"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
+      ],
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gemini-4-argon",
@@ -21056,8 +21191,8 @@
           "url": "https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-4-argon/",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261013164421/https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-4-argon/",
+          "retrieved": "2026-10-13"
         },
         {
           "id": "gemini-4-argon-s4",
@@ -21072,8 +21207,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261014070306/https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=en",
+          "retrieved": "2026-10-14"
         }
       ],
       "provenance": {
@@ -21090,7 +21225,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "mai-transcribe-2-streaming",
@@ -21578,6 +21717,168 @@
       }
     },
     {
+      "id": "beam",
+      "model": "Beam",
+      "company": "Reflection AI",
+      "family": "Beam",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "coding",
+        "agentic",
+        "reasoning",
+        "tool_use"
+      ],
+      "tags": [],
+      "note": "Reflection AI's first open-weight model: a sparse mixture-of-experts with 501.3B total and 23.4B active parameters across 256 experts, pretrained on 23.8 trillion tokens and midtrained to a one-million-token effective context. Text in, text out; the lab states it is not multimodal. Announced 5 October 2026 with weights promised under Apache 2.0 later that month, and a separate post dated 16 October says it became available.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-05",
+          "sources": [
+            "beam-s1",
+            "beam-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": 501300000000
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "beam-s1",
+          "url": "https://reflection.ai/blog/introducing-beam",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261005194517/https://reflection.ai/blog/introducing-beam",
+          "retrieved": "2026-10-05"
+        },
+        {
+          "id": "beam-s2",
+          "url": "https://reflection.ai/beam-model-card",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261016132156/https://reflection.ai/beam-model-card",
+          "retrieved": "2026-10-16"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only. Capabilities evidenced from the primary sources: coding: “Beam is a sparse Mixture-of-Experts model with 501 billion total parameters, 23 billion active, built for coding, reasoning, and agentic workloads.” | agentic: “Beam is a sparse Mixture-of-Experts model with 501 billion total parameters, 23 billion active, built for coding, reasoning, and agentic workloads.” | reasoning: “Users can control this tradeoff through Beam’s reasoning effort parameter: lower settings favor shorter responses, while higher settings allow longer reasoning to improve performan” | tool_use: “Together, these demos illustrate the breadth of tasks Beam can tackle by combining reasoning, coding, and tool use.”."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-05",
+            "sources": [
+              "beam-s1"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "beam-s1",
+              "beam-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 501300000000,
+            "sources": [
+              "beam-s1",
+              "beam-s2"
+            ]
+          }
+        ]
+      },
+      "benchmarks": [
+        {
+          "name": "SWE-bench Verified",
+          "score": 81.6,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-10-05",
+          "sources": [
+            "beam-s2"
+          ]
+        },
+        {
+          "name": "SWE-bench",
+          "score": 78.3,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-10-05",
+          "sources": [
+            "beam-s2"
+          ]
+        },
+        {
+          "name": "LiveCodeBench",
+          "score": 88.3,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-10-05",
+          "sources": [
+            "beam-s2"
+          ]
+        },
+        {
+          "name": "GPQA Diamond",
+          "score": 90.6,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-10-05",
+          "sources": [
+            "beam-s2"
+          ]
+        },
+        {
+          "name": "AIME",
+          "score": 97.7,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-10-05",
+          "sources": [
+            "beam-s2"
+          ]
+        },
+        {
+          "name": "SciCode",
+          "score": 49.2,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-10-05",
+          "sources": [
+            "beam-s2"
+          ]
+        },
+        {
+          "name": "IFBench",
+          "score": 79.6,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-10-05",
+          "sources": [
+            "beam-s2"
+          ]
+        }
+      ]
+    },
+    {
       "id": "nano-banana-2-1",
       "model": "Nano Banana 2.1",
       "company": "Google DeepMind",
@@ -21631,8 +21932,8 @@
           "url": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=en",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261007112112/https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=en",
+          "retrieved": "2026-10-07"
         }
       ],
       "provenance": {
@@ -22151,8 +22452,8 @@
           "url": "https://research.meta.ai/blog/muse-wonder",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261012164825/https://research.meta.ai/blog/muse-wonder",
+          "retrieved": "2026-10-12"
         }
       ],
       "provenance": {
@@ -22169,7 +22470,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "muse-wonder-full",
@@ -22221,8 +22526,8 @@
           "url": "https://research.meta.ai/blog/muse-wonder",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261012164825/https://research.meta.ai/blog/muse-wonder",
+          "retrieved": "2026-10-12"
         }
       ],
       "provenance": {
@@ -22239,7 +22544,11 @@
             ]
           }
         ]
-      }
+      },
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
     },
     {
       "id": "grok-voice-3-0",
@@ -22487,8 +22796,20 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
-      "capabilities": [],
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "agentic",
+        "coding",
+        "reasoning"
+      ],
       "tags": [],
       "note": "The open-weights version of Muse Spark, with additional safety post-training for open release: 816B total and 42B active parameters, natively multimodal, with a 1M-token context window. Weights are published by meta-models on Hugging Face under the Muse Model License, which limits commercial use.",
       "events": [
@@ -22517,13 +22838,1223 @@
           "url": "https://research.meta.ai/blog/muse-spark-open",
           "type": "official_announcement",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261015165925/https://research.meta.ai/blog/muse-spark-open",
+          "retrieved": "2026-10-15"
         },
         {
           "id": "muse-spark-open-s2",
           "url": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B",
           "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015170519/https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B",
+          "retrieved": "2026-10-15"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and the official model card, and every value it asserts was found there. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on meta-models/Muse-Spark-Open-816B-A42B. Capabilities evidenced from the primary sources: agentic: “Introducing Muse Spark Open, The Most Capable US Open‑Weight Model to Date | Meta AI Research Skip to main content AI Research AI Developers Try Muse Introducing Muse Spark Open, T” | coding: “Built for coding and agentic work, Muse Spark Open is natively multimodal.” | reasoning: “For Muse Spark Open we use xhigh reasoning effort, temperature = 1.”."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-15",
+            "sources": [
+              "muse-spark-open-s1",
+              "muse-spark-open-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "muse-spark-open-s1",
+              "muse-spark-open-s2"
+            ]
+          }
+        ],
+        "parameter_count": [
+          {
+            "value": 816000000000,
+            "sources": [
+              "muse-spark-open-s1",
+              "muse-spark-open-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "timestral-5m",
+      "model": "Timestral-5M",
+      "company": "Mistral AI",
+      "family": "Timestral",
+      "classification": {
+        "primary_type": "unknown",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "One of four sizes in Mistral's first family of time-series foundation models, at 5M parameters. Delivers probabilistic multivariate forecasts over 21 quantiles, taking past-only and known-future covariates, and runs on CPU without a GPU. Classified unknown: TAXONOMY 2 has no type whose primary output is a numeric forecast, and 6a decision fails criterion 4 because the task is fixed at training time rather than posed per request. Mistral states a context length of 32,768 time steps, which is not a token context window, so no context_window is recorded.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-15",
+          "sources": [
+            "timestral-5m-s1",
+            "timestral-5m-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "Modified MIT"
+      },
+      "sources": [
+        {
+          "id": "timestral-5m-s1",
+          "url": "https://mistral.ai/news/timestral/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015151021/https://mistral.ai/news/timestral/",
+          "retrieved": "2026-10-15"
+        },
+        {
+          "id": "timestral-5m-s2",
+          "url": "https://docs.mistral.ai/models/timestral-1-0",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015200221/https://docs.mistral.ai/models/timestral-1-0",
+          "retrieved": "2026-10-15"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and official documentation, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-15",
+            "sources": [
+              "timestral-5m-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "timestral-28m",
+      "model": "Timestral-28M",
+      "company": "Mistral AI",
+      "family": "Timestral",
+      "classification": {
+        "primary_type": "unknown",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "One of four sizes in Mistral's first family of time-series foundation models, at 28M parameters. Delivers probabilistic multivariate forecasts over 21 quantiles, taking past-only and known-future covariates, and runs on CPU without a GPU. Classified unknown: TAXONOMY 2 has no type whose primary output is a numeric forecast, and 6a decision fails criterion 4 because the task is fixed at training time rather than posed per request. Mistral states a context length of 32,768 time steps, which is not a token context window, so no context_window is recorded.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-15",
+          "sources": [
+            "timestral-28m-s1",
+            "timestral-28m-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "Modified MIT"
+      },
+      "sources": [
+        {
+          "id": "timestral-28m-s1",
+          "url": "https://mistral.ai/news/timestral/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015151021/https://mistral.ai/news/timestral/",
+          "retrieved": "2026-10-15"
+        },
+        {
+          "id": "timestral-28m-s2",
+          "url": "https://docs.mistral.ai/models/timestral-1-0",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015200221/https://docs.mistral.ai/models/timestral-1-0",
+          "retrieved": "2026-10-15"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and official documentation, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-15",
+            "sources": [
+              "timestral-28m-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "timestral-123m",
+      "model": "Timestral-123M",
+      "company": "Mistral AI",
+      "family": "Timestral",
+      "classification": {
+        "primary_type": "unknown",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "One of four sizes in Mistral's first family of time-series foundation models, at 123M parameters. Delivers probabilistic multivariate forecasts over 21 quantiles, taking past-only and known-future covariates, and runs on CPU without a GPU. Classified unknown: TAXONOMY 2 has no type whose primary output is a numeric forecast, and 6a decision fails criterion 4 because the task is fixed at training time rather than posed per request. Mistral states a context length of 32,768 time steps, which is not a token context window, so no context_window is recorded.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-15",
+          "sources": [
+            "timestral-123m-s1",
+            "timestral-123m-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "Modified MIT"
+      },
+      "sources": [
+        {
+          "id": "timestral-123m-s1",
+          "url": "https://mistral.ai/news/timestral/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015151021/https://mistral.ai/news/timestral/",
+          "retrieved": "2026-10-15"
+        },
+        {
+          "id": "timestral-123m-s2",
+          "url": "https://docs.mistral.ai/models/timestral-1-0",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015200221/https://docs.mistral.ai/models/timestral-1-0",
+          "retrieved": "2026-10-15"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and official documentation, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-15",
+            "sources": [
+              "timestral-123m-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "timestral-209m",
+      "model": "Timestral-209M",
+      "company": "Mistral AI",
+      "family": "Timestral",
+      "classification": {
+        "primary_type": "unknown",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "One of four sizes in Mistral's first family of time-series foundation models, at 209M parameters. Delivers probabilistic multivariate forecasts over 21 quantiles, taking past-only and known-future covariates, and runs on CPU without a GPU. Classified unknown: TAXONOMY 2 has no type whose primary output is a numeric forecast, and 6a decision fails criterion 4 because the task is fixed at training time rather than posed per request. Mistral states a context length of 32,768 time steps, which is not a token context window, so no context_window is recorded.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-15",
+          "sources": [
+            "timestral-209m-s1",
+            "timestral-209m-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": true,
+        "license": "Modified MIT"
+      },
+      "sources": [
+        {
+          "id": "timestral-209m-s1",
+          "url": "https://mistral.ai/news/timestral/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015151021/https://mistral.ai/news/timestral/",
+          "retrieved": "2026-10-15"
+        },
+        {
+          "id": "timestral-209m-s2",
+          "url": "https://docs.mistral.ai/models/timestral-1-0",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261015200221/https://docs.mistral.ai/models/timestral-1-0",
+          "retrieved": "2026-10-15"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and official documentation, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-15",
+            "sources": [
+              "timestral-209m-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "clairic",
+      "model": "Clairic",
+      "company": "Cloudflare",
+      "family": "Clairic",
+      "classification": {
+        "primary_type": "decision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Cloudflare's first extraction model, served on Workers AI as @cf/cloudflare/clairic. A request carries a state - text plus up to four optional images - and a map of typed fields; the model answers with values extracted from the input, computed from it, or forecast beyond it, and Cloudflare says it does not generate text answers. Estimates and forecasts carry a median and an 80% interval. Classified decision on TAXONOMY 6a criteria 1, 2 and 4; criterion 3 is implied by that statement but not described, and Cloudflare's System One framing is marketing rather than evidence. Weights are promised open but were not released at announcement.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-19",
+          "sources": [
+            "clairic-s1",
+            "clairic-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "clairic-s1",
+          "url": "https://blog.cloudflare.com/clairic-extraction-model/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261019175100/https://blog.cloudflare.com/clairic-extraction-model/",
+          "retrieved": "2026-10-19"
+        },
+        {
+          "id": "clairic-s2",
+          "url": "https://developers.cloudflare.com/workers-ai/models/clairic/",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261019215211/https://developers.cloudflare.com/workers-ai/models/clairic/",
+          "retrieved": "2026-10-19"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and official documentation, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-19",
+            "sources": [
+              "clairic-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "kimi-k3-1-pro",
+      "model": "Kimi K3.1 Pro",
+      "company": "Moonshot AI",
+      "family": "Kimi",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "Moonshot's first K3.1 model, which the lab calls its most capable 3T-class model to date, with a one-million-token context window and improvements in coding, 3D creation and financial research. It supports thinking mode only; disabling thinking returns an error. Kimi K3.1 Pro Highspeed, announced on the same day, is described as the same model quality at roughly 2-3x the speed, so it is a serving tier rather than a separate release and is not recorded.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-23",
+          "sources": [
+            "kimi-k3-1-pro-s1",
+            "kimi-k3-1-pro-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "kimi-k3-1-pro-s1",
+          "url": "https://www.kimi.com/code/docs/en/kimi-code/whats-new.html",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261022141535/https://www.kimi.com/code/docs/en/kimi-code/whats-new.html",
+          "retrieved": "2026-10-22"
+        },
+        {
+          "id": "kimi-k3-1-pro-s2",
+          "url": "https://www.kimi.ai/blog/kimi-k3-1-pro",
+          "type": "technical_paper",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261023171150/https://www.kimi.ai/blog/kimi-k3-1-pro",
+          "retrieved": "2026-10-23"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the technical paper. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "kimi-k3-1-pro-s1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gpt-6-1-terra",
+      "model": "GPT-6.1 Terra",
+      "company": "OpenAI",
+      "family": "GPT",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "structured_output",
+        "function_calling",
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "API id gpt-6.1-terra. OpenAI describes it as a fast, efficient model for visual reasoning, precise computer use, and clear, natural writing.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-26",
+          "sources": [
+            "gpt-6-1-terra-s1",
+            "gpt-6-1-terra-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1050000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-6-1-terra-s1",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261027122439/https://developers.openai.com/api/docs/changelog",
+          "retrieved": "2026-10-27"
+        },
+        {
+          "id": "gpt-6-1-terra-s2",
+          "url": "https://openai.com/index/introducing-gpt-6-1-terra",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261026180514/https://openai.com/index/introducing-gpt-6-1-terra/",
+          "retrieved": "2026-10-26"
+        },
+        {
+          "id": "gpt-6-1-terra-odocs",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261026180204/https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+          "retrieved": "2026-10-26"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {},
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 1,
+            "output": 5
+          },
+          "currency": "USD",
+          "observed_on": "2026-11-11",
+          "sources": [
+            "gpt-6-1-terra-odocs"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
+      ],
+      "undisclosed": [
+        "parameter_count"
+      ]
+    },
+    {
+      "id": "genie-4",
+      "model": "Genie 4",
+      "company": "Google DeepMind",
+      "family": "Genie",
+      "classification": {
+        "primary_type": "unknown",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "A real-time interactive world simulator that generates pixel-level environments with native audio, steered by keyboard navigation, camera control and natural-language edits. Classified unknown, not world_model, under TAXONOMY 6. Criterion 2 is evidenced - DeepMind says you can set an event in motion and Genie 4 simulates what happens next, and the limitations section discusses object permanence drifting, which presupposes environment state being maintained. Criterion 3 is evidenced by the stated purpose of training environments for robots and agents. Criterion 1 is not: the page describes pixel-level output but never states what the model represents internally, and 6 directs a borderline record to unknown rather than promotion on a press release. Research preview for trusted testers only.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-27",
+          "sources": [
+            "genie-4-s1",
+            "genie-4-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "genie-4-s1",
+          "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261027160732/https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+          "retrieved": "2026-10-27"
+        },
+        {
+          "id": "genie-4-s2",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/introducing-genie-4/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261027175855/https://blog.google/innovation-and-ai/models-and-research/google-deepmind/introducing-genie-4/",
+          "retrieved": "2026-10-27"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-27",
+            "sources": [
+              "genie-4-s1",
+              "genie-4-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gemini-4-carbon",
+      "model": "Gemini 4 Carbon",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Google's next frontier model after Gemini 4 Argon, led by cybersecurity and long-horizon work. Not generally available at announcement: access is staged through the Fairwind Program, starting with a subset of cyber defenders before developers and consumers.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-28",
+          "sources": [
+            "gemini-4-carbon-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-4-carbon-s1",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261028170245/https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+          "retrieved": "2026-10-28"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-28",
+            "sources": [
+              "gemini-4-carbon-s1"
+            ]
+          }
+        ]
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 2,
+            "output": 10
+          },
+          "currency": "USD",
+          "observed_on": "2026-10-28",
+          "sources": [
+            "gemini-4-carbon-s1"
+          ]
+        }
+      ],
+      "undisclosed": [
+        "context_window",
+        "parameter_count"
+      ]
+    },
+    {
+      "id": "nemotron-3-5-transcribe",
+      "model": "Nemotron 3.5 Transcribe",
+      "company": "NVIDIA",
+      "family": "Nemotron Transcribe",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": {
+        "input": [
+          "audio",
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "An open-weight promptable speech model for transcription, diarization, translation and audio question answering. Transcribes 40 languages, translates 31 to or from English and attributes speakers in 13. Built for recorded audio rather than live streaming. NVIDIA states about 4B of its 30B parameters are active per token; the repository listing shows 34B, and the page does not reconcile the two, so no parameter count is recorded.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-28",
+          "sources": [
+            "nemotron-3-5-transcribe-s1",
+            "nemotron-3-5-transcribe-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {}
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "nemotron-3-5-transcribe-s1",
+          "url": "https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261028151840/https://huggingface.co/blog/nvidia/nemotron-transcribe-granary",
+          "retrieved": "2026-10-28"
+        },
+        {
+          "id": "nemotron-3-5-transcribe-s2",
+          "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+          "type": "official_model_card",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261028161841/https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+          "retrieved": "2026-10-28"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement and the official model card, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-10-28",
+            "sources": [
+              "nemotron-3-5-transcribe-s1",
+              "nemotron-3-5-transcribe-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gpt-6-rosalind",
+      "model": "GPT-6 Rosalind",
+      "company": "OpenAI",
+      "family": "GPT",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "API id gpt-6-rosalind. OpenAI describes it as bringing specialised biological reasoning with scientific tool use to complex life sciences research. Access is limited to organisations approved for Rosalind Research through the trusted-access programme, for internal research by authorised users. Distinct from GPT-Rosalind (gpt-rosalind-research), recorded separately in September 2026.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-10-30",
+          "sources": [
+            "gpt-6-rosalind-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-6-rosalind-s1",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261029123158/https://developers.openai.com/api/docs/changelog",
+          "retrieved": "2026-10-29"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation. the release date could not be traced yet: this release is 12 days old and archive.org has not captured the announcement since it went up. That is a wait, not a gap — re-running the archive pass will settle it. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {},
+      "undisclosed": [
+        "parameter_count"
+      ]
+    },
+    {
+      "id": "gpt-image-2-6-sunburst",
+      "model": "GPT-Image-2.6 Sunburst",
+      "company": "OpenAI",
+      "family": "GPT-Image",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "API id gpt-image-2.6-sunburst. Image generation and editing with adjustable complexity, SVG generation and animated GIF generation.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-04",
+          "sources": [
+            "gpt-image-2-6-sunburst-s1",
+            "gpt-image-2-6-sunburst-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-image-2-6-sunburst-s1",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261104072538/https://developers.openai.com/api/docs/changelog",
+          "retrieved": "2026-11-04"
+        },
+        {
+          "id": "gpt-image-2-6-sunburst-s2",
+          "url": "https://openai.com/index/introducing-images-2-6",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261104233638/https://openai.com/index/introducing-images-2-6/",
+          "retrieved": "2026-11-04"
+        },
+        {
+          "id": "gpt-image-2-6-sunburst-odocs",
+          "url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-11-04",
+            "sources": [
+              "gpt-image-2-6-sunburst-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gpt-image-2-6-flare",
+      "model": "GPT-Image-2.6 Flare",
+      "company": "OpenAI",
+      "family": "GPT-Image",
+      "classification": {
+        "primary_type": "image_generation",
+        "subtype": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "API id gpt-image-2.6-flare. Image generation and editing with adjustable complexity, SVG generation and animated GIF generation.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-04",
+          "sources": [
+            "gpt-image-2-6-flare-s1",
+            "gpt-image-2-6-flare-s2"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-image-2-6-flare-s1",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261104072538/https://developers.openai.com/api/docs/changelog",
+          "retrieved": "2026-11-04"
+        },
+        {
+          "id": "gpt-image-2-6-flare-s2",
+          "url": "https://openai.com/index/introducing-images-2-6",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261104233638/https://openai.com/index/introducing-images-2-6/",
+          "retrieved": "2026-11-04"
+        },
+        {
+          "id": "gpt-image-2-6-flare-odocs",
+          "url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the lab's own announcement, and every value it asserts was found there."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-11-04",
+            "sources": [
+              "gpt-image-2-6-flare-s2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "hy4",
+      "model": "Hy4",
+      "company": "Tencent",
+      "family": "Hy",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Tencent's full Hy4 release, following the Hy4 preview it open-sourced in August 2026. Tencent's newsroom headline describes it as joining the ranks of the world's leading open-source AI models. Only the newsroom listing could be read: the article body was not retrievable, and the Hugging Face repository answered 401, so no parameter count, context window or licence is recorded.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-04",
+          "sources": [
+            "hy4-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": true,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "hy4-s1",
+          "url": "https://www.tencent.com/en-us/media/news.html",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20260620125247/https://www.tencent.com/en-us/media/news.html",
+          "retrieved": "2026-06-20"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to the lab's own announcement. the release date could not be traced yet: this release is 7 days old and archive.org has not captured the announcement since it went up. That is a wait, not a gap — re-running the archive pass will settle it."
+      },
+      "evidence": {},
+      "undisclosed": [
+        "context_window",
+        "license",
+        "parameter_count"
+      ]
+    },
+    {
+      "id": "gpt-6-cyber",
+      "model": "GPT-6-Cyber",
+      "company": "OpenAI",
+      "family": "GPT",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "structured_output",
+        "function_calling",
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "API id gpt-6-cyber. OpenAI positions it to investigate vulnerabilities, reproduce them in an authorised test environment and verify fixes, with a Daybreak setup step before the first request.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-05",
+          "sources": [
+            "gpt-6-cyber-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1050000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-6-cyber-s1",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261105004449/https://developers.openai.com/api/docs/changelog",
+          "retrieved": "2026-11-05"
+        },
+        {
+          "id": "gpt-6-cyber-odocs",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
+    },
+    {
+      "id": "gemini-omni-1-2-flash",
+      "model": "Gemini Omni 1.2 Flash",
+      "company": "Google DeepMind",
+      "family": "Gemini Omni",
+      "classification": {
+        "primary_type": "video_generation",
+        "subtype": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "video"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "API id gemini-omni-1.2-flash. Generally available with up to 15-second video generation and conversational editing; first and last frame interpolation runs 3 to 10 seconds, and per-turn extension 3 to 10 seconds up to a total of 30 seconds. Video output priced at $12.00 per million tokens, which Google describes as 30% less than before.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-05",
+          "sources": [
+            "gemini-omni-1-2-flash-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {}
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-omni-1-2-flash-s1",
+          "url": "https://aistudio.google.com/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261105040940/https://aistudio.google.com/docs/changelog",
+          "retrieved": "2026-11-05"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {}
+    },
+    {
+      "id": "claude-fable-5-2",
+      "model": "Claude Fable 5.2",
+      "company": "Anthropic",
+      "family": "Claude",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "Built for demanding reasoning and long-horizon agentic work, with always-on adaptive thinking and 128k maximum output tokens. Priced at $8 per million input tokens and $40 per million output, down from $10 and $50 for Claude Fable 5.1. A fast mode offers up to 2.5x higher output throughput at double the price.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-09",
+          "sources": [
+            "claude-fable-5-2-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "claude-fable-5-2-s1",
+          "url": "https://platform.claude.com/docs/en/release-notes/api",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "claude-mythos-5-2",
+      "model": "Claude Mythos 5.2",
+      "company": "Anthropic",
+      "family": "Claude",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "The same capabilities as Claude Fable 5.2, offered only to organisations verified through Anthropic's verification programmes such as the Cyber Verification Program. Always-on adaptive thinking, 128k maximum output tokens, $8 per million input tokens and $40 per million output.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-09",
+          "sources": [
+            "claude-mythos-5-2-s1"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "claude-mythos-5-2-s1",
+          "url": "https://platform.claude.com/docs/en/release-notes/api",
+          "type": "official_documentation",
           "authority": "primary",
           "archived_url": null,
           "retrieved": null

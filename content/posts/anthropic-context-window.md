@@ -3,7 +3,7 @@ title: Anthropic held the context window at 200K for 20 months
 question: How has Claude's context window actually changed?
 date: 2026-08-17
 history: Anthropic | context_window
-unverified: allow — the 1M context windows of Claude Sonnet 5.5 (released 2026-09-28) and Claude Haiku 5.5 (2026-10-07) are stated in Anthropic's API release notes, cited on each record, but attribute-facts has not yet tied either figure to an archived snapshot. Remove this line once both are traced.
+unverified: allow — Claude Mythos 5.2's 1M context window (released 2026-11-09) is stated in Anthropic's API release notes, cited on the record, but attribute-facts has not yet tied the figure to an archived snapshot. Claude Sonnet 5.5 and Claude Haiku 5.5 were named here before and are now traced. Remove this line once Mythos 5.2 is traced too.
 ---
 
 Every lab talks about context windows as though they climb steadily. Anthropic's
