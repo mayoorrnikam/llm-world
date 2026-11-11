@@ -18,15 +18,15 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **299** across 28 labs and 88 families, 2022–2026 |
-| **Verified** | 185 (62%) — every value they assert traced to a primary source |
-| **Facts traced to a source** | 234 records carry claim-level evidence |
-| **Fully archived** | 281 records where every source has a snapshot |
-| **Open weights** | 120 (40%) |
-| **Beyond language** | 98 (33%) — 35 audio · 26 image generation · 13 video generation · 10 decision · 8 vision · 5 unknown · 1 3d |
+| **Releases tracked** | **302** across 29 labs and 89 families, 2022–2026 |
+| **Verified** | 185 (61%) — every value they assert traced to a primary source |
+| **Facts traced to a source** | 236 records carry claim-level evidence |
+| **Fully archived** | 284 records where every source has a snapshot |
+| **Open weights** | 121 (40%) |
+| **Beyond language** | 98 (32%) — 35 audio · 26 image generation · 13 video generation · 10 decision · 8 vision · 5 unknown · 1 3d |
 | **Milestones** | 55 dated events that were not model releases |
-| **Most recent** | Claude Fable 5.2 — Anthropic, 2026-11-09 |
-| **Dataset updated** | 2026-11-10 |
+| **Most recent** | ERNIE 5.5 Flash Preview — Baidu, 2026-11-11 |
+| **Dataset updated** | 2026-11-11 |
 
 <sub>Counted from `data/llm-releases.json` by `scripts/update-readme.mjs`. Nothing here is estimated; `npm run check` fails if this table has drifted from the data.</sub>
 
