@@ -71,6 +71,9 @@
     "sweep|Anthropic|2026-11-09| we’ve launched claude fable 5.2 ( claude-fable-5-2 ), built for demanding reasoning and long-horizon agentic work. cla",
     "sweep|Meta|2026-11-09|latest introducing our smallest, most efficient model: muse ember",
     "sweep|Meta|2026-11-06|bringing specialized models to muse and meta ai",
-    "feed|https://huggingface.co/blog/decision"
+    "feed|https://huggingface.co/blog/decision",
+    "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/multimodal-knowledge-agent-benchmark/",
+    "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+    "feed|https://openai.com/index/introducing-businesses-chatgpt"
   ]
 }
