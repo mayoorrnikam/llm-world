@@ -23848,8 +23848,8 @@
           "url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261111120942/https://developers.openai.com/api/docs/models/gpt-image-2.6-flare",
+          "retrieved": "2026-11-11"
         }
       ],
       "provenance": {
@@ -23980,8 +23980,8 @@
           "url": "https://developers.openai.com/api/docs/models/gpt-6-cyber",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261106125137/https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "retrieved": "2026-11-06"
         }
       ],
       "provenance": {
@@ -23989,7 +23989,16 @@
         "confidence": 60,
         "reason": "Cited to official documentation. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
-      "evidence": {}
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1050000,
+            "sources": [
+              "gpt-6-cyber-odocs"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gemini-omni-1-2-flash",
