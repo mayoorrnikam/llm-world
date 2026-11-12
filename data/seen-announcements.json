@@ -74,6 +74,7 @@
     "feed|https://huggingface.co/blog/decision",
     "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/multimodal-knowledge-agent-benchmark/",
     "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
-    "feed|https://openai.com/index/introducing-businesses-chatgpt"
+    "feed|https://openai.com/index/introducing-businesses-chatgpt",
+    "sweep|Google|2026-11-11|{% id=11-11-2026 %} * **gemini decision and the decisions api**: released [gemini decision](/docs/models/gemini-decision"
   ]
 }
