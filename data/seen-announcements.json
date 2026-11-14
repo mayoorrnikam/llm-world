@@ -85,6 +85,9 @@
     "feed|https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
     "feed|https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/",
     "feed|https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-4-hydrogen/",
-    "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
+    "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+    "sweep|Anthropic|2026-11-12|we’ve launched self-hosted claude managed agents . you run the whole managed agents service, not only self-hosted sandbo",
+    "feed|https://openai.com/index/introducing-chatgpt-wallet",
+    "feed|https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/"
   ]
 }
