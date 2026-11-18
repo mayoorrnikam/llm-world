@@ -18,14 +18,14 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **279** across 28 labs and 88 families, 2022–2026 |
-| **Verified** | 183 (66%) — every value they assert traced to a primary source |
+| **Releases tracked** | **280** across 28 labs and 89 families, 2022–2026 |
+| **Verified** | 183 (65%) — every value they assert traced to a primary source |
 | **Facts traced to a source** | 213 records carry claim-level evidence |
 | **Fully archived** | 256 records where every source has a snapshot |
-| **Open weights** | 115 (41%) |
+| **Open weights** | 116 (41%) |
 | **Beyond language** | 87 (31%) — 33 audio · 24 image generation · 12 video generation · 9 decision · 8 vision · 1 3d |
 | **Milestones** | 55 dated events that were not model releases |
-| **Most recent** | Kimi K3.1 Pro — Moonshot AI, 2026-11-02 |
+| **Most recent** | Hy4 flash — Tencent, 2026-11-17 |
 | **Dataset updated** | 2026-10-10 |
 
 <sub>Counted from `data/llm-releases.json` by `scripts/update-readme.mjs`. Nothing here is estimated; `npm run check` fails if this table has drifted from the data.</sub>
