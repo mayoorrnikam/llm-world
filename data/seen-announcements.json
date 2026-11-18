@@ -90,6 +90,12 @@
     "feed|https://openai.com/index/introducing-chatgpt-wallet",
     "feed|https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/",
     "sweep|Tencent|2026-11-16|events news back careers 简 en 繁 close all news all corporate stories events filter search corporate innovation +2 more t",
-    "feed|https://openai.com/index/introducing-openai-for-chile"
+    "feed|https://openai.com/index/introducing-openai-for-chile",
+    "sweep|Anthropic|2026-11-17|we’ve launched linked billing in beta with the user-profiles-billing-2026-10-01 beta header. your customers can now pay ",
+    "sweep|OpenAI|2026-11-17|nov 17 feature gpt-6.2-astra gpt-6.2-sol v1/responses v1/chat/completions use gpt-6.2 astra for demanding reasoning and ",
+    "sweep|OpenAI|2026-11-17|nov 17 feature gpt-6.2-astra gpt-6.2-sol gpt-6.1-terra gpt-6-luna v1/responses choose a two-hour or eight-hour backgroun",
+    "feed|https://blog.google/products-and-platforms/products/gemini/gemini-4-carbon-builders/",
+    "feed|https://openai.com/index/introducing-gpt-6-2-astra-sol",
+    "feed|https://openai.com/index/introducing-chatgpt-for-sales"
   ]
 }
