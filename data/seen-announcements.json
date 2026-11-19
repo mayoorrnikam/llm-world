@@ -96,6 +96,12 @@
     "sweep|OpenAI|2026-11-17|nov 17 feature gpt-6.2-astra gpt-6.2-sol gpt-6.1-terra gpt-6-luna v1/responses choose a two-hour or eight-hour backgroun",
     "feed|https://blog.google/products-and-platforms/products/gemini/gemini-4-carbon-builders/",
     "feed|https://openai.com/index/introducing-gpt-6-2-astra-sol",
-    "feed|https://openai.com/index/introducing-chatgpt-for-sales"
+    "feed|https://openai.com/index/introducing-chatgpt-for-sales",
+    "sweep|Google|2026-11-18|{% id=11-18-2026 %} * **gemini 4 neon (`gemini-4-neon`) generally available (ga)**: released [gemini 4 neon](/docs/model",
+    "sweep|Tencent|2026-11-16|corporate innovation +2 more tencent launches hy4 flash to power high-speed, cost-efficient ai deployment for everyday w",
+    "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+    "feed|https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/introducing-gpt-image-2-6-flare-and-sunburst-in-microsoft/ba-p/4573002",
+    "feed|https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/introducing-microsoft-decision-1-1-build-faster-more-efficient/ba-p/4573877",
+    "feed|https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/"
   ]
 }
