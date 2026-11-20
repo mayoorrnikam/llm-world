@@ -102,6 +102,7 @@
     "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
     "feed|https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/introducing-gpt-image-2-6-flare-and-sunburst-in-microsoft/ba-p/4573002",
     "feed|https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/introducing-microsoft-decision-1-1-build-faster-more-efficient/ba-p/4573877",
-    "feed|https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/"
+    "feed|https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/",
+    "feed|https://huggingface.co/blog/harness-adapters-at-scale"
   ]
 }
