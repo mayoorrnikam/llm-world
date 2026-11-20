@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11",
+  "updated": "2026-11-19",
   "schema_version": "1.6",
   "releases": [
     {
@@ -23447,6 +23447,13 @@
             "genie-4-s1",
             "genie-4-s2"
           ]
+        },
+        {
+          "type": "public_availability",
+          "date": "2026-11-18",
+          "sources": [
+            "genie-4-s3"
+          ]
         }
       ],
       "specifications": {},
@@ -23470,6 +23477,14 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20261027175855/https://blog.google/innovation-and-ai/models-and-research/google-deepmind/introducing-genie-4/",
           "retrieved": "2026-10-27"
+        },
+        {
+          "id": "genie-4-s3",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261118185136/https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/",
+          "retrieved": "2026-11-18"
         }
       ],
       "provenance": {
@@ -23499,7 +23514,9 @@
         "subtype": "llm"
       },
       "modalities": null,
-      "capabilities": [],
+      "capabilities": [
+        "vision"
+      ],
       "tags": [],
       "note": "Google's next frontier model after Gemini 4 Argon, led by cybersecurity and long-horizon work. Not generally available at announcement: access is staged through the Fairwind Program, starting with a subset of cyber defenders before developers and consumers.",
       "events": [
@@ -23508,6 +23525,13 @@
           "date": "2026-10-28",
           "sources": [
             "gemini-4-carbon-s1"
+          ]
+        },
+        {
+          "type": "public_availability",
+          "date": "2026-11-10",
+          "sources": [
+            "gemini-4-carbon-s2"
           ]
         }
       ],
@@ -23529,12 +23553,20 @@
           "authority": "primary",
           "archived_url": "https://web.archive.org/web/20261028170245/https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
           "retrieved": "2026-10-28"
+        },
+        {
+          "id": "gemini-4-carbon-s2",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261110160741/https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+          "retrieved": "2026-11-10"
         }
       ],
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Cited to the lab's own announcement, and every value it asserts was found there."
+        "reason": "Cited to the lab's own announcement, and every value it asserts was found there. Capabilities evidenced from the primary sources: vision: “Higher-precision knowledge work, artifact generation, and data analysis Across legal, finance, and enterprise operations, Gemini 4 Carbon combines frontier visual understanding, re”."
       },
       "evidence": {
         "release_date": [
@@ -23866,7 +23898,22 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 5,
+            "output": 30
+          },
+          "currency": "USD",
+          "observed_on": "2026-11-20",
+          "sources": [
+            "gpt-image-2-6-flare-odocs"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
+      ]
     },
     {
       "id": "hy4",
@@ -23998,7 +24045,25 @@
             ]
           }
         ]
-      }
+      },
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 20,
+            "output": 100
+          },
+          "currency": "USD",
+          "observed_on": "2026-11-20",
+          "sources": [
+            "gpt-6-cyber-odocs"
+          ],
+          "note": "Base rate. Prompts above 272K tokens are billed at 2x input and 1.5x output."
+        }
+      ],
+      "undisclosed": [
+        "parameter_count"
+      ]
     },
     {
       "id": "gemini-omni-1-2-flash",
@@ -24330,7 +24395,14 @@
         "primary_type": "language",
         "subtype": "llm"
       },
-      "modalities": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "capabilities": [],
       "tags": [],
       "note": "280B total parameters with 14B active and a one-million-token context, served through Baidu's Qianfan platform. Baidu calls it an intermediate checkpoint from post-training, so capabilities may change before the official release, and says the weights will be open-sourced under Apache 2.0 soon - they are not downloadable yet, so this record is proprietary until they land.",
@@ -24366,7 +24438,7 @@
       "provenance": {
         "status": "verified",
         "confidence": 90,
-        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
         "release_date": [
@@ -24394,6 +24466,505 @@
           }
         ]
       }
+    },
+    {
+      "id": "gemini-decision-1",
+      "model": "Gemini Decision 1",
+      "company": "Google DeepMind",
+      "family": "Gemini Decision",
+      "classification": {
+        "primary_type": "decision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Released with the Decisions API for fast, calibrated binary, categorical and rubric decisions across text, images, audio, video and PDFs, returning answers with zero output tokens. Classified decision on all four TAXONOMY 6a criteria: the answer carries a declared type, it is calibrated rather than read off afterwards, zero output tokens means it is not generated token by token, and the questions and their answer types arrive with each request.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-11",
+          "sources": [
+            "gemini-decision-1-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-decision-1-s1",
+          "url": "https://aistudio.google.com/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261111103314/https://aistudio.google.com/docs/changelog",
+          "retrieved": "2026-11-11"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
+    },
+    {
+      "id": "gemini-4-hydrogen",
+      "model": "Gemini 4 Hydrogen",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [],
+      "tags": [],
+      "note": "API id gemini-4-hydrogen. Released generally available for everyday coding and agentic workflows, with an added xhigh thinking level, and the default model for the Antigravity agent in Gemini Managed Agents. Priced at $1.50 per million input tokens and $7.50 per million output, with a free tier.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-12",
+          "sources": [
+            "gemini-4-hydrogen-s1",
+            "gemini-4-hydrogen-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": null,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-4-hydrogen-s1",
+          "url": "https://aistudio.google.com/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261112062026/https://aistudio.google.com/docs/changelog",
+          "retrieved": "2026-11-12"
+        },
+        {
+          "id": "gemini-4-hydrogen-s2",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261112180305/https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+          "retrieved": "2026-11-12"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-11-12",
+            "sources": [
+              "gemini-4-hydrogen-s2"
+            ]
+          }
+        ]
+      },
+      "benchmarks": [
+        {
+          "name": "HealthBench",
+          "score": 0.4,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-11-12",
+          "sources": [
+            "gemini-4-hydrogen-s2"
+          ]
+        }
+      ],
+      "pricing": [
+        {
+          "unit": "per_million_tokens",
+          "rates": {
+            "input": 1.5,
+            "output": 7.5
+          },
+          "currency": "USD",
+          "observed_on": "2026-11-12",
+          "sources": [
+            "gemini-4-hydrogen-s2"
+          ]
+        }
+      ],
+      "undisclosed": [
+        "parameter_count"
+      ]
+    },
+    {
+      "id": "gpt-6-2-astra",
+      "model": "GPT-6.2 Astra",
+      "company": "OpenAI",
+      "family": "GPT",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "structured_output",
+        "function_calling",
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "API id gpt-6.2-astra. OpenAI positions it for demanding reasoning and coding tasks. Available on the Responses API and Chat Completions, with tool calling requiring the Responses API.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-17",
+          "sources": [
+            "gpt-6-2-astra-s1",
+            "gpt-6-2-astra-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1050000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-6-2-astra-s1",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261116164556/https://developers.openai.com/api/docs/changelog",
+          "retrieved": "2026-11-16"
+        },
+        {
+          "id": "gpt-6-2-astra-s2",
+          "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261117174742/https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+          "retrieved": "2026-11-17"
+        },
+        {
+          "id": "gpt-6-2-astra-odocs",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
+    },
+    {
+      "id": "gpt-6-2-sol",
+      "model": "GPT-6.2 Sol",
+      "company": "OpenAI",
+      "family": "GPT",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "structured_output",
+        "function_calling",
+        "reasoning"
+      ],
+      "tags": [],
+      "note": "API id gpt-6.2-sol. OpenAI positions it for everyday coding and agent workflows. Available on the Responses API and Chat Completions, with tool calling requiring the Responses API.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-17",
+          "sources": [
+            "gpt-6-2-sol-s1",
+            "gpt-6-2-sol-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1050000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-6-2-sol-s1",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261116164556/https://developers.openai.com/api/docs/changelog",
+          "retrieved": "2026-11-16"
+        },
+        {
+          "id": "gpt-6-2-sol-s2",
+          "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261117174742/https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+          "retrieved": "2026-11-17"
+        },
+        {
+          "id": "gpt-6-2-sol-odocs",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
+    },
+    {
+      "id": "gemini-4-neon",
+      "model": "Gemini 4 Neon",
+      "company": "Google DeepMind",
+      "family": "Gemini",
+      "classification": {
+        "primary_type": "language",
+        "subtype": "llm"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "capabilities": [
+        "agentic"
+      ],
+      "tags": [],
+      "note": "API id gemini-4-neon. Google describes frontier-level intelligence with fast end-to-end task completion across software engineering, knowledge work and science, with four thinking levels and long decode up to 1M tokens. Priced at $3.00 per million input tokens and $15.00 per million output.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-18",
+          "sources": [
+            "gemini-4-neon-s1",
+            "gemini-4-neon-s2"
+          ]
+        }
+      ],
+      "specifications": {
+        "language": {
+          "context_window": 1000000,
+          "parameter_count": null
+        }
+      },
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gemini-4-neon-s1",
+          "url": "https://aistudio.google.com/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261118035707/https://aistudio.google.com/docs/changelog",
+          "retrieved": "2026-11-18"
+        },
+        {
+          "id": "gemini-4-neon-s2",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261118213752/https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+          "retrieved": "2026-11-18"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation and the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
+      },
+      "evidence": {
+        "release_date": [
+          {
+            "value": "2026-11-18",
+            "sources": [
+              "gemini-4-neon-s2"
+            ]
+          }
+        ],
+        "context_window": [
+          {
+            "value": 1000000,
+            "sources": [
+              "gemini-4-neon-s1",
+              "gemini-4-neon-s2"
+            ]
+          }
+        ]
+      },
+      "benchmarks": [
+        {
+          "name": "Terminal-Bench",
+          "score": 70.5,
+          "evaluation_type": "vendor_reported",
+          "reported_on": "2026-11-18",
+          "sources": [
+            "gemini-4-neon-s2"
+          ]
+        }
+      ],
+      "undisclosed": [
+        "parameter_count"
+      ]
+    },
+    {
+      "id": "microsoft-decision-1-1",
+      "model": "Microsoft-Decision-1.1",
+      "company": "Microsoft",
+      "family": "Microsoft-Decision",
+      "classification": {
+        "primary_type": "decision",
+        "subtype": null
+      },
+      "modalities": null,
+      "capabilities": [],
+      "tags": [],
+      "note": "Generally available in Microsoft Foundry, built on Gemma 4 26B A4 with decision-specific post-training and a custom inference engine. Returns the probability of yes for a boolean, or one selected option and its distribution for a choice, and accepts images in decision instructions. Microsoft reports an average accuracy of 78.8% across 102 benchmarks and more than 385,000 held-out questions, and more than twice the speed of Microsoft-Decision-1. Input priced from $0.042 per million tokens with output included at no extra charge.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-18",
+          "sources": [
+            "microsoft-decision-1-1-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "microsoft-decision-1-1-s1",
+          "url": "https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/introducing-microsoft-decision-1-1-build-faster-more-efficient/ba-p/4573877",
+          "type": "official_announcement",
+          "authority": "primary",
+          "archived_url": null,
+          "retrieved": null
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Newly added. Sources are not archived and no value has been traced to one yet — run `npm run enrich`."
+      }
+    },
+    {
+      "id": "gpt-live-1-1",
+      "model": "GPT-Live-1.1",
+      "company": "OpenAI",
+      "family": "GPT-Live",
+      "classification": {
+        "primary_type": "audio",
+        "subtype": null
+      },
+      "modalities": {
+        "input": [
+          "audio",
+          "text"
+        ],
+        "output": [
+          "audio",
+          "text"
+        ]
+      },
+      "capabilities": [
+        "function_calling"
+      ],
+      "tags": [],
+      "note": "API id gpt-live-1.1. OpenAI states it improves pronunciation, accent consistency and transcription in multilingual voice conversations, and that it drops into an existing Live session configuration.",
+      "events": [
+        {
+          "type": "announcement",
+          "date": "2026-11-19",
+          "sources": [
+            "gpt-live-1-1-s1"
+          ]
+        }
+      ],
+      "specifications": {},
+      "access": {
+        "open_weights": false,
+        "license": null
+      },
+      "sources": [
+        {
+          "id": "gpt-live-1-1-s1",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official_documentation",
+          "authority": "primary",
+          "archived_url": "https://web.archive.org/web/20261119032803/https://developers.openai.com/api/docs/changelog",
+          "retrieved": "2026-11-19"
+        }
+      ],
+      "provenance": {
+        "status": "partially_verified",
+        "confidence": 60,
+        "reason": "Cited to official documentation. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
+      },
+      "evidence": {}
     }
   ],
   "redirects": [

@@ -18,15 +18,15 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **302** across 29 labs and 89 families, 2022–2026 |
-| **Verified** | 204 (68%) — every value they assert traced to a primary source |
-| **Facts traced to a source** | 239 records carry claim-level evidence |
-| **Fully archived** | 287 records where every source has a snapshot |
-| **Open weights** | 121 (40%) |
-| **Beyond language** | 98 (32%) — 35 audio · 26 image generation · 13 video generation · 10 decision · 8 vision · 5 unknown · 1 3d |
+| **Releases tracked** | **309** across 29 labs and 90 families, 2022–2026 |
+| **Verified** | 204 (66%) — every value they assert traced to a primary source |
+| **Facts traced to a source** | 241 records carry claim-level evidence |
+| **Fully archived** | 291 records where every source has a snapshot |
+| **Open weights** | 121 (39%) |
+| **Beyond language** | 101 (33%) — 36 audio · 26 image generation · 13 video generation · 12 decision · 8 vision · 5 unknown · 1 3d |
 | **Milestones** | 55 dated events that were not model releases |
-| **Most recent** | ERNIE 5.5 Flash Preview — Baidu, 2026-11-11 |
-| **Dataset updated** | 2026-11-11 |
+| **Most recent** | GPT-Live-1.1 — OpenAI, 2026-11-19 |
+| **Dataset updated** | 2026-11-19 |
 
 <sub>Counted from `data/llm-releases.json` by `scripts/update-readme.mjs`. Nothing here is estimated; `npm run check` fails if this table has drifted from the data.</sub>
 
