@@ -24570,8 +24570,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to official documentation and the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
@@ -24680,8 +24680,8 @@
           "url": "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261117194520/https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+          "retrieved": "2026-11-17"
         }
       ],
       "provenance": {
@@ -24689,7 +24689,16 @@
         "confidence": 60,
         "reason": "Cited to official documentation and the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
-      "evidence": {}
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1050000,
+            "sources": [
+              "gpt-6-2-astra-odocs"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gpt-6-2-sol",
@@ -24758,8 +24767,8 @@
           "url": "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
           "type": "official_documentation",
           "authority": "primary",
-          "archived_url": null,
-          "retrieved": null
+          "archived_url": "https://web.archive.org/web/20261117194520/https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+          "retrieved": "2026-11-17"
         }
       ],
       "provenance": {
@@ -24767,7 +24776,16 @@
         "confidence": 60,
         "reason": "Cited to official documentation and the lab's own announcement. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from."
       },
-      "evidence": {}
+      "evidence": {
+        "context_window": [
+          {
+            "value": 1050000,
+            "sources": [
+              "gpt-6-2-sol-odocs"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "gemini-4-neon",
@@ -24830,8 +24848,8 @@
         }
       ],
       "provenance": {
-        "status": "partially_verified",
-        "confidence": 60,
+        "status": "verified",
+        "confidence": 90,
         "reason": "Cited to official documentation and the lab's own announcement, and every value it asserts was found there. Modalities recorded as text-to-text. The primary source states the model is text-only."
       },
       "evidence": {
