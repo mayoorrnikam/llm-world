@@ -105,6 +105,9 @@
     "feed|https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/",
     "feed|https://huggingface.co/blog/harness-adapters-at-scale",
     "feed|https://openai.com/business/customer-stories/hebbia",
-    "feed|https://www.together.ai/blog/qwen4-max"
+    "feed|https://www.together.ai/blog/qwen4-max",
+    "sweep|OpenAI|2026-11-24|nov 24 feature gpt-6.2-astra-healthcare gpt-6.2-sol-healthcare gpt-6-astra-healthcare gpt-6.1-sol-healthcare v1/response",
+    "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-neon-builders/",
+    "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-hydrogen-builders/"
   ]
 }
