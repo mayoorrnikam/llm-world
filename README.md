@@ -18,11 +18,11 @@ ignores that is describing 2023.
 
 | | |
 |---|---|
-| **Releases tracked** | **280** across 28 labs and 89 families, 2022–2026 |
+| **Releases tracked** | **281** across 28 labs and 90 families, 2022–2026 |
 | **Verified** | 183 (65%) — every value they assert traced to a primary source |
 | **Facts traced to a source** | 213 records carry claim-level evidence |
 | **Fully archived** | 256 records where every source has a snapshot |
-| **Open weights** | 116 (41%) |
+| **Open weights** | 117 (42%) |
 | **Beyond language** | 87 (31%) — 33 audio · 24 image generation · 12 video generation · 9 decision · 8 vision · 1 3d |
 | **Milestones** | 55 dated events that were not model releases |
 | **Most recent** | Hy4 flash — Tencent, 2026-11-17 |
