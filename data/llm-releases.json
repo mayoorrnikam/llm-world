@@ -16823,16 +16823,7 @@
         "confidence": 60,
         "reason": "Cited to the official model card. Not verified because the release date and the context window could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Modalities from the model card's own pipeline_tag \"image-text-to-text\" on Qwen/Qwen3.8-27B."
       },
-      "evidence": {
-        "parameter_count": [
-          {
-            "value": 27000000000,
-            "sources": [
-              "qwen-3-8-27b-s1"
-            ]
-          }
-        ]
-      }
+      "evidence": {}
     },
     {
       "id": "grok-imagine-image-2-0",
@@ -16943,24 +16934,7 @@
         "confidence": 60,
         "reason": "Cited to the official model card. Not verified because the release date could not be found in any cited primary source — the value may be correct, but this dataset cannot yet show where it came from. Licence from the model card's own license_name field on Qwen/Qwen3.8-2.4T-A95B."
       },
-      "evidence": {
-        "context_window": [
-          {
-            "value": 256000,
-            "sources": [
-              "qwen-3-8-2-4t-a95b-s1"
-            ]
-          }
-        ],
-        "parameter_count": [
-          {
-            "value": 2400000000000,
-            "sources": [
-              "qwen-3-8-2-4t-a95b-s1"
-            ]
-          }
-        ]
-      }
+      "evidence": {}
     },
     {
       "id": "muse-glimmer",
