@@ -110,6 +110,9 @@
     "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-neon-builders/",
     "feed|https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-hydrogen-builders/",
     "feed|https://blog.google/innovation-and-ai/models-and-research/google-deepmind/humanitys-first-exam/",
-    "feed|https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities"
+    "feed|https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+    "feed|https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+    "feed|https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+    "feed|https://www.together.ai/blog/distilling-kimi-into-qwen"
   ]
 }
